@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050510; overflow: hidden; font-family: 'Inter', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, #080820 0%, #0d0d2a 40%, #080818 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,180,41,0.18), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,160,0.1), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: #f0b429; letter-spacing: 8px; margin-bottom: 40px; }
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: #6CB4EE; letter-spacing: 6px; margin-bottom: 80px; }
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(240,180,41,0.15), rgba(240,180,41,0.25));
+  border: 2px solid rgba(240,180,41,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: #FFA040; letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(240,180,41,0.1);
+}
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: #FFFFFF; letter-spacing: -4px; }
+.main-title .orange { font-size: 220px; font-weight: 900; color: #f0b429; letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(240,180,41,0.4), 0 0 160px rgba(240,180,41,0.15); }
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, #f0b429, #00e5a0); margin-bottom: 80px; }
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: #6CB4EE; letter-spacing: 4px; margin-bottom: 100px; }
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: rgba(20,20,50,0.85);
+  border: 2px solid rgba(240,180,41,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card .num { font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 120px;
+  font-weight: 700; color: #FFA040; line-height: 1; }
+.card .label { font-size: 52px; color: #8899BB; margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+  <div class="date">2026年5月20日</div>
+  <div class="scene-label">GitHub 热门项目</div>
+  <div class="badge">GitHub 今日榜单</div>
+  <div class="main-title">
+    <span class="white">AI智能体</span><br>
+    <span class="orange">直接霸榜</span>
+  </div>
+  <div class="divider"></div>
+  <div class="data-subtitle">8 个热门项目 · AI 占六席</div>
+  <div class="cards">
+    <div class="card">
+      <div class="num">+3973</div>
+      <div class="label">今日最高涨星</div>
+    </div>
+    <div class="card">
+      <div class="num">198K</div>
+      <div class="label">最高总星数</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>
+window.__hf = { duration: 1, seek: function(t) {} };
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+window.__timelines["cover"] = tl;
+</script>
+</body>
+</html>

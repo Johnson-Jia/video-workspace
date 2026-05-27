@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+:root {
+  --bg-dark: #04040f;
+  --bg-mid: #0a0a28;
+  --accent-warm: #f5a623;
+  --accent-cool: #00e5a0;
+  --accent-blue: #3b7dff;
+  --text-primary: #ffffff;
+  --text-secondary: #9090b0;
+  --text-muted: #606080;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.clip {
+  position: absolute; top: 0; left: 0;
+  width: 1080px; height: 1920px; overflow: hidden;
+}
+.scene-wrap {
+  position: absolute; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 120px 80px; gap: 28px;
+}
+.bg-grad {
+  position: absolute; width: 100%; height: 100%; z-index: 0;
+}
+.bg-grid {
+  position: absolute; width: 100%; height: 100%; z-index: 1;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none;
+}
+.glow {
+  position: absolute; border-radius: 50%; filter: blur(160px); z-index: 1; pointer-events: none;
+}
+.scene-content {
+  position: relative; z-index: 2; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+
+/* Typography */
+.hero-num { font-family: 'Inter', sans-serif; font-weight: 900; color: #fff; letter-spacing: -4px; }
+.scene-title { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; font-weight: 800; color: #fff; letter-spacing: -1px; text-align: center; }
+.scene-sub { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; font-weight: 500; text-align: center; }
+.body-text { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; color: var(--text-secondary); }
+
+/* Badges & Tags */
+.badge {
+  display: inline-block; padding: 10px 28px; border-radius: 24px;
+  font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 24px; font-weight: 600;
+}
+.tag-pill {
+  display: inline-block; padding: 12px 28px; border-radius: 28px;
+  font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 22px; font-weight: 500;
+}
+
+/* Feature rows */
+.feat-row {
+  display: flex; align-items: center; gap: 20px; width: 100%;
+  padding: 22px 28px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+}
+.feat-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; flex-shrink: 0;
+}
+.feat-name { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 28px; font-weight: 600; color: #fff; }
+.feat-desc { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 22px; color: var(--text-secondary); margin-top: 4px; }
+
+/* Stat cards */
+.stat-card {
+  padding: 28px 32px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+  text-align: center; width: 100%;
+}
+.stat-num {
+  font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -2px; font-size: 72px;
+}
+.stat-label {
+  font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 26px; color: var(--text-secondary); margin-top: 8px;
+}
+
+/* Persona cards */
+.persona-card {
+  width: 100%; padding: 24px 28px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+}
+.persona-title { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 30px; font-weight: 700; color: #fff; }
+.persona-desc { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 24px; color: var(--text-secondary); margin-top: 8px; }
+
+/* Divider */
+.divider { width: 80px; height: 4px; border-radius: 2px; }
+
+/* Flow items */
+.flow-step {
+  display: flex; align-items: center; gap: 16px; width: 100%;
+  padding: 18px 24px; border-radius: 12px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+}
+.flow-num {
+  width: 40px; height: 40px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 700; flex-shrink: 0;
+}
+.flow-text { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 26px; color: #fff; }
+
+/* Spec list */
+.spec-item {
+  display: flex; align-items: center; gap: 20px; width: 100%;
+  padding: 20px 24px; border-radius: 12px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+}
+.spec-label { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 24px; color: var(--text-secondary); min-width: 200px; }
+.spec-value { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 26px; font-weight: 600; color: #fff; }
+
+/* Deploy option */
+.deploy-opt {
+  width: 100%; padding: 24px 28px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+  display: flex; align-items: center; gap: 20px;
+}
+.deploy-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; flex-shrink: 0;
+}
+.deploy-title { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 28px; font-weight: 600; color: #fff; }
+.deploy-desc { font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 22px; color: var(--text-secondary); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div data-composition-id="main" data-start="0" data-duration="181.51" data-width="1080" data-height="1920">
+
+  <audio id="narration-audio" data-start="0" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm-audio" data-start="0" data-track-index="2" data-volume="0.04" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ===== S1: hook (0 - 2.26) ===== -->
+  <div class="clip" id="s1" data-start="0" data-duration="2.26">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #0a0618 0%, #1a0c2a 50%, #0a0618 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 600px; height: 600px; background: #f5a623; opacity: 0.22; top: 400px; left: -100px;"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.18; bottom: 300px; right: -80px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(245,166,35,0.15); color: #f5a623; font-size: 22px;">开源 AI 项目</div>
+        <div class="hero-num" style="font-size: 140px;">20,000<span style="color: #f5a623;">★</span></div>
+        <div style="font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 48px; font-weight: 600; color: var(--text-secondary); margin-top: 12px;">三个月达成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S2: what (2.26 - 11.45) ===== -->
+  <div class="clip" id="s2" data-start="2.26" data-duration="9.19">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0e0a28 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #f5a623; opacity: 0.15; top: 200px; right: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.12; bottom: 200px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">AI 桌面助手</div>
+        <div class="scene-title" style="font-size: 80px;">OpenHuman</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div class="scene-sub" style="font-size: 36px; color: #fff; max-width: 800px; line-height: 1.5;">开源 AI 桌面助手平台</div>
+        <div class="body-text" style="font-size: 28px; max-width: 800px; line-height: 1.6; text-align: center;">不是普通的聊天机器人，而是能记住你、理解你、甚至替你开会的智能体</div>
+        <div style="display: flex; gap: 16px; margin-top: 12px;">
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">开源免费</div>
+          <div class="tag-pill" style="background: rgba(245,166,35,0.12); color: #f5a623;">跨平台</div>
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #3b7dff;">本地运行</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S3: how (11.45 - 28.80) ===== -->
+  <div class="clip" id="s3" data-start="11.45" data-duration="17.35">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #08082a 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 600px; height: 600px; background: #00e5a0; opacity: 0.16; top: 100px; right: -120px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.10; bottom: 100px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(0,229,160,0.15); color: #00e5a0;">核心技术</div>
+        <div class="scene-title" style="font-size: 64px;">记忆树</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px; margin-top: 8px;">
+          <div class="flow-step"><div class="flow-num" style="background: rgba(0,229,160,0.2); color: #00e5a0;">1</div><div class="flow-text">连接邮箱、日历、代码库、聊天记录</div></div>
+          <div class="flow-step"><div class="flow-num" style="background: rgba(0,229,160,0.2); color: #00e5a0;">2</div><div class="flow-text">每 20 分钟自动同步</div></div>
+          <div class="flow-step"><div class="flow-num" style="background: rgba(0,229,160,0.2); color: #00e5a0;">3</div><div class="flow-text">压缩为知识图谱存本地</div></div>
+          <div class="flow-step"><div class="flow-num" style="background: rgba(0,229,160,0.2); color: #00e5a0;">4</div><div class="flow-text">从零到比你还了解你，只要几分钟</div></div>
+        </div>
+        <div class="body-text" style="font-size: 24px; margin-top: 12px;">灵感来自 AI 大神 Karpathy 的知识库工作流</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S4: agents (28.80 - 40.87) ===== -->
+  <div class="clip" id="s4" data-start="28.80" data-duration="12.07">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0828 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.15; top: 300px; left: -80px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.10; bottom: 200px; right: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="stat-num" style="color: #00e5a0; font-size: 80px;">18</div>
+        <div class="scene-title" style="font-size: 48px;">个专业 Agent</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(0,229,160,0.15);">🔍</div>
+            <div><div class="feat-name">研究员</div><div class="feat-desc">搜索整理信息</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(59,125,255,0.15);">📋</div>
+            <div><div class="feat-name">规划师</div><div class="feat-desc">制定执行方案</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(245,166,35,0.15);">⚡</div>
+            <div><div class="feat-name">代码执行器</div><div class="feat-desc">直接运行代码</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(255,100,100,0.15);">💡</div>
+            <div><div class="feat-name">评论家</div><div class="feat-desc">发现问题和改进点</div></div>
+          </div>
+        </div>
+        <div class="body-text" style="font-size: 24px;">多 Agent 协同工作，像一个完整的 AI 团队</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S5: channels (40.87 - 52.49) ===== -->
+  <div class="clip" id="s5" data-start="40.87" data-duration="11.62">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0a30 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #3b7dff; opacity: 0.16; top: 200px; right: -80px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.10; bottom: 300px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">杀手功能</div>
+        <div class="scene-title" style="font-size: 56px;">消息聚合</div>
+        <div class="scene-sub" style="font-size: 32px; color: #3b7dff;">20+ 渠道统一收发</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px;">
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">WhatsApp</div>
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">Telegram</div>
+          <div class="tag-pill" style="background: rgba(114,137,218,0.15); color: #7289da;">Discord</div>
+          <div class="tag-pill" style="background: rgba(245,166,35,0.12); color: #f5a623;">Slack</div>
+          <div class="tag-pill" style="background: rgba(255,255,255,0.08); color: #ccc;">iMessage</div>
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">微信</div>
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">钉钉</div>
+        </div>
+        <div style="margin-top: 12px; padding: 20px 28px; border-radius: 14px; background: rgba(59,125,255,0.08); border: 1px solid rgba(59,125,255,0.15); width: 100%;">
+          <div class="body-text" style="font-size: 26px; text-align: center; color: #fff;">一个界面管理所有对话</div>
+          <div class="body-text" style="font-size: 24px; text-align: center; margin-top: 8px;">AI 还能自动回复</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S6: integrations (52.49 - 63.72) ===== -->
+  <div class="clip" id="s6" data-start="52.49" data-duration="11.23">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #08102a 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.15; top: 300px; left: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #f5a623; opacity: 0.08; bottom: 200px; right: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="stat-num" style="color: #00e5a0; font-size: 100px;">118</div>
+        <div class="scene-title" style="font-size: 48px;">第三方集成</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;">
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">Gmail</div>
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">GitHub</div>
+          <div class="tag-pill" style="background: rgba(245,166,35,0.12); color: #f5a623;">Notion</div>
+          <div class="tag-pill" style="background: rgba(255,255,255,0.08); color: #ccc;">Google Calendar</div>
+        </div>
+        <div style="margin-top: 16px; padding: 20px 28px; border-radius: 14px; background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.12); width: 100%; text-align: center;">
+          <div style="font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 28px; font-weight: 600; color: #fff;">一键授权绑定</div>
+          <div style="font-family: 'Inter', 'PingFang SC', sans-serif; font-size: 24px; color: var(--text-secondary); margin-top: 6px;">数据自动同步，AI 助手立刻拥有你的工作上下文</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S7: voice-meet (63.72 - 75.17) ===== -->
+  <div class="clip" id="s7" data-start="63.72" data-duration="11.45">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0c0828 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #3b7dff; opacity: 0.16; top: 200px; right: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.10; bottom: 300px; left: -80px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">语音能力</div>
+        <div class="scene-title" style="font-size: 56px;">能听也能说</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(59,125,255,0.15);">🎙</div>
+            <div><div class="feat-name">Whisper 语音识别</div><div class="feat-desc">听懂你说的每一句话</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(0,229,160,0.15);">🔊</div>
+            <div><div class="feat-name">Piper 语音合成</div><div class="feat-desc">用声音回应你</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(245,166,35,0.15);">👥</div>
+            <div><div class="feat-name">虚拟形象开会</div><div class="feat-desc">替你参加视频会议</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(255,255,255,0.08);">🧠</div>
+            <div><div class="feat-name">实时对话理解</div><div class="feat-desc">听懂会议内容并做出反应</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S8: memory (75.17 - 86.81) ===== -->
+  <div class="clip" id="s8" data-start="75.17" data-duration="11.64">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0a2e 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.16; top: 300px; left: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.08; bottom: 200px; right: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(0,229,160,0.15); color: #00e5a0;">知识管理</div>
+        <div class="scene-title" style="font-size: 56px;">不只是存储</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(0,229,160,0.15);">🔎</div>
+            <div><div class="feat-name">向量搜索</div><div class="feat-desc">语义级精准检索</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(59,125,255,0.15);">🕸</div>
+            <div><div class="feat-name">知识图谱</div><div class="feat-desc">关联一切信息</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(245,166,35,0.15);">🌳</div>
+            <div><div class="feat-name">树状摘要</div><div class="feat-desc">层层提炼要点</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(255,255,255,0.08);">🔒</div>
+            <div><div class="feat-name">本地加密存储</div><div class="feat-desc">数据安全不泄露</div></div>
+          </div>
+        </div>
+        <div class="body-text" style="font-size: 24px; margin-top: 8px;">支持导出 Obsidian 格式笔记库</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S9: tokenjuice (86.81 - 99.03) ===== -->
+  <div class="clip" id="s9" data-start="86.81" data-duration="12.22">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #10082a 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #f5a623; opacity: 0.16; top: 200px; right: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.08; bottom: 200px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(245,166,35,0.15); color: #f5a623;">省钱技术</div>
+        <div class="scene-title" style="font-size: 64px;">TokenJuice</div>
+        <div class="scene-sub" style="font-size: 30px; color: var(--text-secondary);">API 费用压缩引擎</div>
+        <div class="divider" style="background: #f5a623;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="flow-step"><div class="flow-num" style="background: rgba(245,166,35,0.2); color: #f5a623;">1</div><div class="flow-text">HTML 转 Markdown</div></div>
+          <div class="flow-step"><div class="flow-num" style="background: rgba(245,166,35,0.2); color: #f5a623;">2</div><div class="flow-text">长链接缩短</div></div>
+          <div class="flow-step"><div class="flow-num" style="background: rgba(245,166,35,0.2); color: #f5a623;">3</div><div class="flow-text">重复内容去重</div></div>
+        </div>
+        <div class="stat-card" style="margin-top: 12px; border-color: rgba(245,166,35,0.2); background: rgba(245,166,35,0.05);">
+          <div class="stat-num" style="color: #f5a623; font-size: 80px;">80%</div>
+          <div class="stat-label" style="color: #f5a623;">最高节省 API 费用</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S10: usecases (99.03 - 112.76) ===== -->
+  <div class="clip" id="s10" data-start="99.03" data-duration="13.73">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0a28 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.14; top: 100px; left: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.10; bottom: 100px; right: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(0,229,160,0.15); color: #00e5a0;">应用场景</div>
+        <div class="scene-title" style="font-size: 56px;">谁能用？</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 16px;">
+          <div class="persona-card" style="border-left: 4px solid #00e5a0;">
+            <div class="persona-title" style="color: #00e5a0;">程序员</div>
+            <div class="persona-desc">管代码和文档，AI 自动理解项目上下文</div>
+          </div>
+          <div class="persona-card" style="border-left: 4px solid #3b7dff;">
+            <div class="persona-title" style="color: #3b7dff;">客服团队</div>
+            <div class="persona-desc">聚合所有渠道消息，统一回复</div>
+          </div>
+          <div class="persona-card" style="border-left: 4px solid #f5a623;">
+            <div class="persona-title" style="color: #f5a623;">个人用户</div>
+            <div class="persona-desc">全能 AI 助手：知识管理、会议代理、定时任务</div>
+          </div>
+        </div>
+        <div style="padding: 16px 28px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); width: 100%; text-align: center;">
+          <div class="body-text" style="font-size: 26px; color: #fff;">一个应用全搞定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S11: arch (112.76 - 126.73) ===== -->
+  <div class="clip" id="s11" data-start="112.76" data-duration="13.97">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #080c2e 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 550px; height: 550px; background: #3b7dff; opacity: 0.16; top: 200px; left: -120px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.08; bottom: 300px; right: -80px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">架构设计</div>
+        <div class="scene-title" style="font-size: 52px;">71 个独立域模块</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div class="scene-sub" style="font-size: 26px; color: var(--text-secondary);">每个模块统一结构</div>
+        <div style="width: 100%; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">操作逻辑</div>
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">持久化</div>
+          <div class="tag-pill" style="background: rgba(245,166,35,0.12); color: #f5a623;">类型定义</div>
+          <div class="tag-pill" style="background: rgba(255,255,255,0.08); color: #ccc;">RPC 接口</div>
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">事件订阅</div>
+        </div>
+        <div style="margin-top: 16px; width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(59,125,255,0.15);">🔌</div>
+            <div><div class="feat-name">事件总线通信</div><div class="feat-desc">跨模块消息传递</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(0,229,160,0.15);">🛡</div>
+            <div><div class="feat-name">类型安全</div><div class="feat-desc">新增功能不用改其他模块</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S12: techstack (126.73 - 136.14) ===== -->
+  <div class="clip" id="s12" data-start="126.73" data-duration="9.41">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0c0820 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.16; top: 200px; right: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #f5a623; opacity: 0.08; bottom: 300px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(0,229,160,0.15); color: #00e5a0;">技术栈</div>
+        <div class="scene-title" style="font-size: 56px;">硬核技术</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 16px;">
+          <div class="stat-card" style="border-color: rgba(245,166,35,0.2);">
+            <div style="font-family: 'Inter', sans-serif; font-size: 44px; font-weight: 800; color: #f5a623;">Rust</div>
+            <div class="stat-label">核心编写 · 2200+ 源文件</div>
+          </div>
+          <div class="stat-card" style="border-color: rgba(59,125,255,0.2);">
+            <div style="font-family: 'Inter', sans-serif; font-size: 44px; font-weight: 800; color: #3b7dff;">React + Tauri</div>
+            <div class="stat-label">现代前端框架</div>
+          </div>
+          <div style="display: flex; gap: 16px; width: 100%;">
+            <div class="stat-card" style="flex: 1; border-color: rgba(0,229,160,0.2);">
+              <div style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: #00e5a0;">Mac</div>
+            </div>
+            <div class="stat-card" style="flex: 1; border-color: rgba(59,125,255,0.2);">
+              <div style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: #3b7dff;">Windows</div>
+            </div>
+            <div class="stat-card" style="flex: 1; border-color: rgba(245,166,35,0.2);">
+              <div style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: #f5a623;">Linux</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S13: deploy (136.14 - 147.88) ===== -->
+  <div class="clip" id="s13" data-start="136.14" data-duration="11.74">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0a2a 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #3b7dff; opacity: 0.14; top: 200px; left: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.10; bottom: 200px; right: -80px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">灵活部署</div>
+        <div class="scene-title" style="font-size: 56px;">三种方式</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 16px;">
+          <div class="deploy-opt">
+            <div class="deploy-icon" style="background: rgba(0,229,160,0.15);">📦</div>
+            <div><div class="deploy-title">安装包</div><div class="deploy-desc">双击就能用，适合普通用户</div></div>
+          </div>
+          <div class="deploy-opt">
+            <div class="deploy-icon" style="background: rgba(59,125,255,0.15);">🐳</div>
+            <div><div class="deploy-title">Docker</div><div class="deploy-desc">一键部署无头服务</div></div>
+          </div>
+          <div class="deploy-opt">
+            <div class="deploy-icon" style="background: rgba(245,166,35,0.15);">⚙</div>
+            <div><div class="deploy-title">二次开发</div><div class="deploy-desc">克隆仓库，一条命令启动</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S14: hardware (147.88 - 160.29) ===== -->
+  <div class="clip" id="s14" data-start="147.88" data-duration="12.41">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #08102a 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.14; top: 200px; right: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #3b7dff; opacity: 0.08; bottom: 200px; left: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(0,229,160,0.15); color: #00e5a0;">硬件需求</div>
+        <div class="scene-title" style="font-size: 56px;">门槛很低</div>
+        <div class="divider" style="background: #00e5a0;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="spec-item">
+            <div class="spec-label">基础功能</div>
+            <div class="spec-value">4G 内存</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">本地大模型</div>
+            <div class="spec-value" style="color: #f5a623;">8G 显存 GPU</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">语音识别</div>
+            <div class="spec-value">AVX2 CPU</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Mac 用户</div>
+            <div class="spec-value" style="color: #00e5a0;">Metal 加速</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S15: privacy (160.29 - 173.73) ===== -->
+  <div class="clip" id="s15" data-start="160.29" data-duration="13.44">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #04040f 0%, #0a0828 50%, #04040f 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #3b7dff; opacity: 0.16; top: 300px; left: -100px;"></div>
+    <div class="glow" style="width: 400px; height: 400px; background: #00e5a0; opacity: 0.08; bottom: 200px; right: -60px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(59,125,255,0.15); color: #3b7dff;">隐私为底线</div>
+        <div class="scene-title" style="font-size: 56px;">数据完全不出电脑</div>
+        <div class="divider" style="background: #3b7dff;"></div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(59,125,255,0.15);">🔒</div>
+            <div><div class="feat-name">本地存储</div><div class="feat-desc">所有数据不上传云端</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(0,229,160,0.15);">🖥</div>
+            <div><div class="feat-name">本地大模型</div><div class="feat-desc">数据完全不出电脑</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon" style="background: rgba(245,166,35,0.15);">📜</div>
+            <div><div class="feat-name">GPL 开源协议</div><div class="feat-desc">代码完全透明</div></div>
+          </div>
+        </div>
+        <div class="stat-card" style="margin-top: 12px; border-color: rgba(59,125,255,0.2); background: rgba(59,125,255,0.05);">
+          <div class="stat-num" style="color: #3b7dff; font-size: 72px;">78</div>
+          <div class="stat-label" style="color: #3b7dff;">位贡献者共同维护</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S16: cta (173.73 - 181.51) ===== -->
+  <div class="clip" id="s16" data-start="173.73" data-duration="7.78">
+    <div class="bg-grad" style="background: linear-gradient(180deg, #0a0618 0%, #1a0c2a 50%, #0a0618 100%);"></div>
+    <div class="bg-grid"></div>
+    <div class="glow" style="width: 600px; height: 600px; background: #f5a623; opacity: 0.20; top: 300px; left: -120px;"></div>
+    <div class="glow" style="width: 500px; height: 500px; background: #00e5a0; opacity: 0.14; bottom: 200px; right: -100px;"></div>
+    <div class="scene-wrap">
+      <div class="scene-content">
+        <div class="badge" style="background: rgba(245,166,35,0.15); color: #f5a623;">开源免费</div>
+        <div class="scene-title" style="font-size: 72px; text-shadow: 0 0 40px rgba(245,166,35,0.4);">v0.54</div>
+        <div class="scene-sub" style="font-size: 36px; color: #fff;">快速迭代中</div>
+        <div class="divider" style="background: #f5a623;"></div>
+        <div class="scene-sub" style="font-size: 32px; color: #00e5a0;">关注我，每天发现好项目</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px;">
+          <div class="tag-pill" style="background: rgba(245,166,35,0.12); color: #f5a623;">#GitHub</div>
+          <div class="tag-pill" style="background: rgba(0,229,160,0.12); color: #00e5a0;">#开源</div>
+          <div class="tag-pill" style="background: rgba(59,125,255,0.12); color: #8ab4ff;">#AI</div>
+          <div class="tag-pill" style="background: rgba(255,255,255,0.08); color: #ccc;">#智能体</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({ paused: true });
+window.__timelines["main"] = tl;
+</script>
+<script>window.__hf = { duration: 181.51, seek: function(t) {} };</script>
+</body>
+</html>

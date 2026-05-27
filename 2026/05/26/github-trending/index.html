@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Trending 2026-05-26</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap');
+
+:root {
+  --bg-dark: #060612;
+  --bg-mid: #0a0a20;
+  --accent-warm: #F0B429;
+  --accent-cool: #00D4FF;
+  --accent-purple: #8B5CF6;
+  --accent-red: #EF4444;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0c0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.composition { position: relative; width: 1080px; height: 1920px; }
+.clip { position: absolute; width: 1080px; height: 1920px; top: 0; left: 0; overflow: hidden; }
+.scene-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.layer-bg { position: absolute; inset: 0; z-index: 1; }
+.layer-fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.layer-content { position: relative; z-index: 3; height: 100%; }
+.phase { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 180px 80px 220px 80px; }
+
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, -80px) scale(1.1); }
+  66% { transform: translate(-120px, 60px) scale(0.9); }
+}
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.9; transform: scale(1.3); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes driftOuter {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(180px, -120px); }
+  66% { transform: translate(-150px, 100px); }
+}
+@keyframes driftInner {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -80px) scale(1.1); }
+}
+@keyframes rainSway {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(40px); opacity: 0.3; }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.35; }
+}
+
+/* Hook */
+.s-hook .layer-bg { background: linear-gradient(160deg, #0a0818 0%, #1a1030 40%, #0d0820 100%); }
+.s-hook .glow-warm { position:absolute; top:20%; left:15%; width:500px; height:500px; border-radius:50%; background:#F0B429; opacity:0.25; filter:blur(140px); }
+.s-hook .glow-cool { position:absolute; bottom:25%; right:10%; width:400px; height:400px; border-radius:50%; background:#8B5CF6; opacity:0.18; filter:blur(120px); }
+.s-hook .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(240,180,41,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.03) 1px,transparent 1px); background-size:40px 40px; }
+.s-hook .hook-content { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:180px 80px 220px 80px; }
+.s-hook .hook-number { font-size:200px; font-weight:900; color:#F0B429; text-shadow:0 0 80px rgba(240,180,41,0.5),0 0 160px rgba(240,180,41,0.2); font-family:'JetBrains Mono',monospace; line-height:1; }
+.s-hook .hook-unit { font-size:72px; font-weight:800; color:#F0B429; text-shadow:0 0 40px rgba(240,180,41,0.4); margin-top:-10px; }
+.s-hook .hook-sub { font-size:48px; font-weight:700; color:#fff; text-shadow:0 2px 20px rgba(0,0,0,0.5); margin-top:30px; }
+
+/* ProjectFullCard */
+.project-full-card { position:relative; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:180px 80px 220px 80px; }
+.pfc-glow { position:absolute; border-radius:50%; filter:blur(140px); pointer-events:none; }
+.pfc-glow-warm { width:500px; height:500px; opacity:0.2; background:var(--accent-warm); top:300px; left:-80px; }
+.pfc-glow-cool { width:400px; height:400px; opacity:0.15; background:var(--accent-cool); bottom:400px; right:-60px; }
+.pfc-grid { position:absolute; width:100%; height:100%; pointer-events:none; }
+.pfc-category { font-size:28px; font-weight:600; margin-bottom:60px; }
+.pfc-main { display:flex; align-items:center; gap:40px; width:100%; margin-bottom:60px; }
+.pfc-rank { font-size:120px; font-weight:900; color:var(--accent-warm); text-shadow:0 0 60px rgba(240,180,41,0.4); flex-shrink:0; min-width:140px; text-align:center; }
+.pfc-info { flex:1; display:flex; flex-direction:column; gap:12px; }
+.pfc-name { font-size:56px; font-weight:800; color:#fff; font-family:'JetBrains Mono',monospace; }
+.pfc-desc { font-size:32px; color:var(--text-secondary); line-height:1.4; }
+.pfc-lang { display:inline-block; font-size:22px; font-weight:600; color:var(--accent-cool); background:rgba(0,180,255,0.12); padding:4px 16px; border-radius:12px; margin-top:4px; width:fit-content; }
+.pfc-stars { font-size:36px; font-weight:800; color:var(--accent-warm); text-shadow:0 0 30px rgba(240,180,41,0.3); flex-shrink:0; text-align:right; white-space:nowrap; }
+.pfc-selling { font-size:32px; font-weight:600; margin-bottom:24px; text-align:center; }
+.pfc-commentary { font-size:28px; color:var(--text-secondary); text-align:center; }
+.pfc-star-total { font-size:24px; font-weight:600; color:var(--accent-purple); text-align:center; margin-top:8px; }
+
+/* ECC */
+.s-ecc .layer-bg { background:linear-gradient(160deg, #0a0620 0%, #14082a 40%, #080418 100%); }
+.s-ecc .glow-warm { position:absolute; top:25%; left:10%; width:450px; height:450px; border-radius:50%; background:#F0B429; opacity:0.2; filter:blur(130px); }
+.s-ecc .glow-cool { position:absolute; bottom:30%; right:5%; width:500px; height:500px; border-radius:50%; background:#8B5CF6; opacity:0.22; filter:blur(140px); }
+.s-ecc .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(139,92,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.04) 1px,transparent 1px); background-size:40px 40px; }
+
+/* taste-skill */
+.s-taste .layer-bg { background:linear-gradient(160deg, #0a0818 0%, #1a1028 40%, #0d0a18 100%); }
+.s-taste .glow-warm { position:absolute; top:30%; left:20%; width:450px; height:450px; border-radius:50%; background:#F0B429; opacity:0.22; filter:blur(130px); }
+.s-taste .glow-cool { position:absolute; bottom:20%; right:15%; width:400px; height:400px; border-radius:50%; background:#00D4FF; opacity:0.15; filter:blur(120px); }
+.s-taste .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px); background-size:40px 40px; }
+
+/* gstack */
+.s-gstack .layer-bg { background:linear-gradient(160deg, #100820 0%, #1a1030 50%, #0a0618 100%); }
+.s-gstack .glow-warm { position:absolute; top:20%; left:10%; width:500px; height:500px; border-radius:50%; background:#F0B429; opacity:0.25; filter:blur(140px); }
+.s-gstack .glow-cool { position:absolute; bottom:25%; right:10%; width:400px; height:400px; border-radius:50%; background:#00D4FF; opacity:0.18; filter:blur(120px); }
+.s-gstack .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(240,180,41,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.04) 1px,transparent 1px); background-size:40px 40px; }
+
+/* ai-engineering-and-more */
+.s-engi .layer-bg { background:linear-gradient(160deg, #060a18 0%, #0a1428 40%, #040810 100%); }
+.s-engi .glow-warm { position:absolute; top:25%; left:15%; width:450px; height:450px; border-radius:50%; background:#00D4FF; opacity:0.2; filter:blur(130px); }
+.s-engi .glow-cool { position:absolute; bottom:20%; right:10%; width:400px; height:400px; border-radius:50%; background:#F0B429; opacity:0.18; filter:blur(120px); }
+.s-engi .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px); background-size:40px 40px; }
+.phase-hero-title { font-size:48px; font-weight:800; color:#fff; text-align:center; text-shadow:0 2px 20px rgba(0,0,0,0.5); margin-bottom:30px; }
+.phase-hero-num { font-size:100px; font-weight:900; color:#F0B429; text-align:center; text-shadow:0 0 60px rgba(240,180,41,0.4); font-family:'JetBrains Mono',monospace; }
+.phase-hero-sub { font-size:32px; color:var(--text-secondary); text-align:center; margin-top:20px; }
+.phase-hero-tag { font-size:22px; font-weight:600; color:var(--accent-cool); background:rgba(0,180,255,0.12); padding:6px 20px; border-radius:12px; margin-top:20px; }
+.phase-header { font-size:44px; font-weight:700; color:var(--accent-cool); margin-bottom:36px; letter-spacing:2px; text-align:center; }
+.phase-items { width:85%; display:flex; flex-direction:column; gap:20px; }
+.phase-item { display:flex; align-items:center; gap:20px; }
+.item-num { font-size:28px; font-weight:700; color:var(--accent-warm); min-width:50px; }
+.item-text { font-size:32px; color:#fff; }
+
+/* CTA */
+.s-cta .layer-bg { background:linear-gradient(160deg, #0a0818 0%, #141028 40%, #080614 100%); }
+.s-cta .glow-center { position:absolute; top:35%; left:25%; width:600px; height:600px; border-radius:50%; background:#F0B429; opacity:0.2; filter:blur(150px); animation:glowPulse 6s ease-in-out infinite; }
+.s-cta .glow-cool { position:absolute; bottom:30%; right:15%; width:350px; height:350px; border-radius:50%; background:#00D4FF; opacity:0.15; filter:blur(120px); }
+.s-cta .grid-bg { position:absolute; width:100%; height:100%; background-image:linear-gradient(rgba(240,180,41,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.03) 1px,transparent 1px); background-size:40px 40px; }
+.s-cta .cta-content { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:180px 80px 220px 80px; }
+.cta-title { font-size:72px; font-weight:900; color:#fff; text-shadow:0 0 40px rgba(240,180,41,0.3); margin-bottom:30px; }
+.cta-sub { font-size:40px; color:var(--text-secondary); margin-bottom:40px; }
+.cta-tags { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+.cta-tag { font-size:24px; font-weight:600; color:var(--accent-warm); background:rgba(240,180,41,0.12); padding:8px 24px; border-radius:20px; }
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+  <audio id="narration" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto" data-start="0"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.13" src="bgm.wav" preload="auto" loop data-start="0"></audio>
+
+  <!-- SCENE 1: HOOK (0 - 2.88s) -->
+  <div class="clip s-hook" data-start="0" data-duration="2.88">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-warm"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.7),transparent);transform-origin:top center;transform:rotate(0deg) scaleY(1);opacity:0.6;animation:rayPulse 4s ease-in-out infinite 0.3s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.6),transparent);transform-origin:top center;transform:rotate(60deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 0.6s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.65),transparent);transform-origin:top center;transform:rotate(120deg) scaleY(1);opacity:0.55;animation:rayPulse 4s ease-in-out infinite 0.9s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.6),transparent);transform-origin:top center;transform:rotate(180deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 1.2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.55),transparent);transform-origin:top center;transform:rotate(240deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 1.5s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(45,90%,60%,0.5),transparent);transform-origin:top center;transform:rotate(300deg) scaleY(1);opacity:0.45;animation:rayPulse 4s ease-in-out infinite 1.8s"></div>
+        <div style="position:absolute;top:35%;left:60%;width:10px;height:10px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.9;box-shadow:0 0 8px hsla(45,95%,70%,0.6);animation:starTwinkle 2.5s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:65%;left:35%;width:12px;height:12px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.85;box-shadow:0 0 10px hsla(45,95%,70%,0.5);animation:starTwinkle 3s ease-in-out infinite 0.8s"></div>
+        <div style="position:absolute;top:28%;left:25%;width:8px;height:8px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.9;box-shadow:0 0 6px hsla(45,95%,70%,0.5);animation:starTwinkle 2s ease-in-out infinite 1.5s"></div>
+        <div style="position:absolute;top:72%;left:70%;width:10px;height:10px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.85;box-shadow:0 0 8px hsla(45,95%,70%,0.5);animation:starTwinkle 2.8s ease-in-out infinite 0.4s"></div>
+      </div>
+      <div class="layer-content">
+        <div class="hook-content">
+          <div class="hook-number">192K</div>
+          <div class="hook-unit">★</div>
+          <div class="hook-sub">一个十九万星的项目冲上日榜</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 2: ECC (2.88 - 13.34s) -->
+  <div class="clip s-ecc" data-start="2.88" data-duration="10.46">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-warm"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:20%;left:30%;width:200px;height:200px;border-radius:50%;background:hsl(270,80%,50%);opacity:0.18;filter:blur(50px);animation:orbDrift 25s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:60%;left:65%;width:160px;height:160px;border-radius:50%;background:hsl(45,90%,55%);opacity:0.15;filter:blur(45px);animation:orbDrift 30s ease-in-out infinite 4s"></div>
+        <div style="position:absolute;top:80%;left:15%;width:180px;height:180px;border-radius:50%;background:hsl(260,70%,55%);opacity:0.20;filter:blur(55px);animation:orbDrift 22s ease-in-out infinite 8s"></div>
+      </div>
+      <div class="layer-content">
+        <div class="project-full-card">
+          <div class="pfc-grid" style="background-image:linear-gradient(rgba(139,92,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+          <div class="pfc-glow pfc-glow-warm"></div>
+          <div class="pfc-glow pfc-glow-cool" style="background:#8B5CF6"></div>
+          <div class="pfc-category" style="color:#8B5CF6">Agent 巨型加速</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">1</div>
+            <div class="pfc-info">
+              <div class="pfc-name">ECC</div>
+              <div class="pfc-desc">AI Agent 性能优化系统 · 技能+记忆+安全</div>
+              <div class="pfc-lang">JavaScript</div>
+            </div>
+            <div class="pfc-stars">+2,052 ★</div>
+          </div>
+          <div class="pfc-selling" style="color:#8B5CF6">技能记忆 · 安全策略 · 多平台兼容</div>
+          <div class="pfc-commentary">十九万星还在加速，离谱</div>
+          <div class="pfc-star-total">192,278 ★ 总星</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 3: taste-skill (13.34 - 24.07s) -->
+  <div class="clip s-taste" data-start="13.34" data-duration="10.73">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-warm"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:15%;left:70%;animation:driftOuter 26s ease-in-out infinite 2s"><div style="width:14px;height:14px;border-radius:50%;background:hsl(45,85%,60%);opacity:0.5;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 1s"></div></div>
+        <div style="position:absolute;top:35%;left:25%;animation:driftOuter 22s ease-in-out infinite 5s"><div style="width:18px;height:18px;border-radius:50%;background:hsl(200,80%,55%);opacity:0.45;filter:blur(2px);animation:driftInner 9s ease-in-out infinite 3s"></div></div>
+        <div style="position:absolute;top:55%;left:80%;animation:driftOuter 28s ease-in-out infinite 0s"><div style="width:12px;height:12px;border-radius:50%;background:hsl(45,80%,65%);opacity:0.5;filter:blur(1px);animation:driftInner 11s ease-in-out infinite 2s"></div></div>
+        <div style="position:absolute;top:70%;left:40%;animation:driftOuter 24s ease-in-out infinite 7s"><div style="width:16px;height:16px;border-radius:50%;background:hsl(190,75%,50%);opacity:0.4;filter:blur(3px);animation:driftInner 8s ease-in-out infinite 0s"></div></div>
+        <div style="position:absolute;top:25%;left:55%;animation:driftOuter 20s ease-in-out infinite 3s"><div style="width:10px;height:10px;border-radius:50%;background:hsl(45,90%,70%);opacity:0.55;filter:blur(1px);animation:driftInner 12s ease-in-out infinite 4s"></div></div>
+        <div style="position:absolute;top:80%;left:20%;animation:driftOuter 27s ease-in-out infinite 6s"><div style="width:20px;height:20px;border-radius:50%;background:hsl(210,70%,55%);opacity:0.4;filter:blur(2px);animation:driftInner 9s ease-in-out infinite 1s"></div></div>
+        <div style="position:absolute;top:45%;left:15%;animation:driftOuter 23s ease-in-out infinite 1s"><div style="width:14px;height:14px;border-radius:50%;background:hsl(45,85%,55%);opacity:0.5;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 5s"></div></div>
+        <div style="position:absolute;top:60%;left:60%;animation:driftOuter 25s ease-in-out infinite 4s"><div style="width:11px;height:11px;border-radius:50%;background:hsl(195,80%,50%);opacity:0.45;filter:blur(1px);animation:driftInner 11s ease-in-out infinite 2s"></div></div>
+        <div style="position:absolute;top:10%;left:45%;animation:driftOuter 29s ease-in-out infinite 8s"><div style="width:15px;height:15px;border-radius:50%;background:hsl(45,80%,60%);opacity:0.48;filter:blur(2px);animation:driftInner 8s ease-in-out infinite 0s"></div></div>
+        <div style="position:absolute;top:85%;left:75%;animation:driftOuter 21s ease-in-out infinite 3s"><div style="width:13px;height:13px;border-radius:50%;background:hsl(200,75%,55%);opacity:0.42;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 3s"></div></div>
+      </div>
+      <div class="layer-content">
+        <div class="project-full-card">
+          <div class="pfc-grid" style="background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+          <div class="pfc-glow pfc-glow-warm"></div>
+          <div class="pfc-glow pfc-glow-cool" style="background:#00D4FF"></div>
+          <div class="pfc-category" style="color:#00D4FF">审美觉醒</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">2</div>
+            <div class="pfc-info">
+              <div class="pfc-name">taste-skill</div>
+              <div class="pfc-desc">让AI有品味 · 告别无聊通用输出</div>
+              <div class="pfc-lang">Shell</div>
+            </div>
+            <div class="pfc-stars">+542 ★</div>
+          </div>
+          <div class="pfc-selling" style="color:#00D4FF">消灭套路 · 提升品味 · 告别废话</div>
+          <div class="pfc-commentary">给AI上审美课，挺前卫</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 4: gstack (24.07 - 34.20s) -->
+  <div class="clip s-gstack" data-start="24.07" data-duration="10.13">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-warm"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.8),transparent);transform-origin:top center;transform:rotate(0deg) scaleY(1);opacity:0.7;animation:rayPulse 3s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.7),transparent);transform-origin:top center;transform:rotate(45deg) scaleY(1);opacity:0.6;animation:rayPulse 3s ease-in-out infinite 0.4s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.75),transparent);transform-origin:top center;transform:rotate(90deg) scaleY(1);opacity:0.65;animation:rayPulse 3s ease-in-out infinite 0.8s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.7),transparent);transform-origin:top center;transform:rotate(135deg) scaleY(1);opacity:0.6;animation:rayPulse 3s ease-in-out infinite 1.2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.8),transparent);transform-origin:top center;transform:rotate(180deg) scaleY(1);opacity:0.7;animation:rayPulse 3s ease-in-out infinite 0.2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.65),transparent);transform-origin:top center;transform:rotate(225deg) scaleY(1);opacity:0.55;animation:rayPulse 3s ease-in-out infinite 0.6s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.7),transparent);transform-origin:top center;transform:rotate(270deg) scaleY(1);opacity:0.6;animation:rayPulse 3s ease-in-out infinite 1.0s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(45,90%,60%,0.6),transparent);transform-origin:top center;transform:rotate(315deg) scaleY(1);opacity:0.5;animation:rayPulse 3s ease-in-out infinite 1.4s"></div>
+        <div style="position:absolute;top:30%;left:55%;width:12px;height:12px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.9;box-shadow:0 0 10px hsla(45,95%,70%,0.6);animation:starTwinkle 2s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:70%;left:40%;width:14px;height:14px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.85;box-shadow:0 0 12px hsla(45,95%,70%,0.5);animation:starTwinkle 2.5s ease-in-out infinite 0.5s"></div>
+        <div style="position:absolute;top:25%;left:30%;width:10px;height:10px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.9;box-shadow:0 0 8px hsla(45,95%,70%,0.5);animation:starTwinkle 3s ease-in-out infinite 1s"></div>
+        <div style="position:absolute;top:75%;left:65%;width:11px;height:11px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.88;box-shadow:0 0 9px hsla(45,95%,70%,0.5);animation:starTwinkle 2.2s ease-in-out infinite 1.5s"></div>
+        <div style="position:absolute;top:50%;left:80%;width:10px;height:10px;border-radius:50%;background:hsl(45,95%,75%);opacity:0.85;box-shadow:0 0 8px hsla(45,95%,70%,0.5);animation:starTwinkle 2.8s ease-in-out infinite 0.3s"></div>
+      </div>
+      <div class="layer-content">
+        <div class="project-full-card">
+          <div class="pfc-grid" style="background-image:linear-gradient(rgba(240,180,41,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+          <div class="pfc-glow pfc-glow-warm"></div>
+          <div class="pfc-glow pfc-glow-cool" style="background:#00D4FF"></div>
+          <div class="pfc-category" style="color:#F0B429">一人军团</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">3</div>
+            <div class="pfc-info">
+              <div class="pfc-name">gstack</div>
+              <div class="pfc-desc">YC总装的AI编程配置 · 23角色虚拟团队</div>
+              <div class="pfc-lang">TypeScript</div>
+            </div>
+            <div class="pfc-stars">+600 ★</div>
+          </div>
+          <div class="pfc-selling">CEO+设计师+QA · 23角色 · 名人同款</div>
+          <div class="pfc-commentary">一个人的AI团队，效率拉满</div>
+          <div class="pfc-star-total">102,432 ★ 总星</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 5: ai-engineering-and-more (34.20 - 50.81s, PHASE MODE) -->
+  <div class="clip s-engi" data-start="34.20" data-duration="16.61">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-warm"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:10%;left:12%;width:2px;height:280px;background:linear-gradient(transparent,hsla(190,80%,55%,0.5),transparent);opacity:0.5;box-shadow:0 0 6px hsla(190,80%,55%,0.3);animation:rainSway 14s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:20%;left:28%;width:2px;height:320px;background:linear-gradient(transparent,hsla(200,75%,50%,0.45),transparent);opacity:0.45;box-shadow:0 0 6px hsla(200,75%,50%,0.25);animation:rainSway 18s ease-in-out infinite 3s"></div>
+        <div style="position:absolute;top:5%;left:45%;width:3px;height:250px;background:linear-gradient(transparent,hsla(185,80%,55%,0.5),transparent);opacity:0.5;box-shadow:0 0 6px hsla(185,80%,55%,0.3);animation:rainSway 16s ease-in-out infinite 1s"></div>
+        <div style="position:absolute;top:15%;left:60%;width:2px;height:350px;background:linear-gradient(transparent,hsla(210,75%,50%,0.4),transparent);opacity:0.4;box-shadow:0 0 6px hsla(210,75%,50%,0.25);animation:rainSway 20s ease-in-out infinite 5s"></div>
+        <div style="position:absolute;top:25%;left:75%;width:2px;height:280px;background:linear-gradient(transparent,hsla(195,80%,55%,0.5),transparent);opacity:0.5;box-shadow:0 0 6px hsla(195,80%,55%,0.3);animation:rainSway 15s ease-in-out infinite 2s"></div>
+        <div style="position:absolute;top:35%;left:88%;width:3px;height:300px;background:linear-gradient(transparent,hsla(200,75%,50%,0.45),transparent);opacity:0.45;box-shadow:0 0 6px hsla(200,75%,50%,0.25);animation:rainSway 17s ease-in-out infinite 7s"></div>
+        <div style="position:absolute;top:40%;left:5%;width:2px;height:260px;background:linear-gradient(transparent,hsla(190,80%,55%,0.5),transparent);opacity:0.5;box-shadow:0 0 6px hsla(190,80%,55%,0.3);animation:rainSway 19s ease-in-out infinite 4s"></div>
+        <div style="position:absolute;top:8%;left:52%;width:2px;height:340px;background:linear-gradient(transparent,hsla(180,80%,55%,0.45),transparent);opacity:0.45;box-shadow:0 0 6px hsla(180,80%,55%,0.25);animation:rainSway 16s ease-in-out infinite 6s"></div>
+        <div style="position:absolute;top:30%;left:35%;width:2px;height:300px;background:linear-gradient(transparent,hsla(200,75%,50%,0.5),transparent);opacity:0.5;box-shadow:0 0 6px hsla(200,75%,50%,0.3);animation:rainSway 18s ease-in-out infinite 8s"></div>
+        <div style="position:absolute;top:18%;left:70%;width:3px;height:270px;background:linear-gradient(transparent,hsla(195,80%,55%,0.4),transparent);opacity:0.4;box-shadow:0 0 6px hsla(195,80%,55%,0.25);animation:rainSway 15s ease-in-out infinite 9s"></div>
+      </div>
+      <div class="layer-content" style="height:100%">
+        <div class="phase phase-1">
+          <div class="phase-hero-title">ai-engineering-from-scratch</div>
+          <div class="phase-hero-num">+3,167</div>
+          <div class="phase-hero-sub">从零手搓AI工程，今日涨了三千多星</div>
+          <div class="phase-hero-tag">Python · 18.4K ★ · Fork 3,136</div>
+        </div>
+        <div class="phase phase-2">
+          <div class="phase-header">速报</div>
+          <div class="phase-items">
+            <div class="phase-item">
+              <span class="item-num">01</span>
+              <span class="item-text">Anthropic-Cybersecurity-Skills</span>
+            </div>
+            <div class="phase-item">
+              <span class="item-num"></span>
+              <span class="item-text">七百五十四个AI安全技能 · 26个安全域</span>
+            </div>
+            <div class="phase-item">
+              <span class="item-num">02</span>
+              <span class="item-text">Understand-Anything</span>
+            </div>
+            <div class="phase-item">
+              <span class="item-num"></span>
+              <span class="item-text">今日又涨了五千六百星 +5,625 ★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 6: CTA (50.81 - 53.74s) -->
+  <div class="clip s-cta" data-start="50.81" data-duration="2.93">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div class="glow-center"></div>
+        <div class="glow-cool"></div>
+        <div class="grid-bg"></div>
+      </div>
+      <div class="layer-fx">
+        <div style="position:absolute;top:30%;left:40%;width:220px;height:220px;border-radius:50%;background:hsl(45,90%,55%);opacity:0.2;filter:blur(60px);animation:orbDrift 20s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:55%;left:25%;width:180px;height:180px;border-radius:50%;background:hsl(200,80%,50%);opacity:0.15;filter:blur(50px);animation:orbDrift 25s ease-in-out infinite 3s"></div>
+        <div style="position:absolute;top:70%;left:60%;width:160px;height:160px;border-radius:50%;background:hsl(45,85%,60%);opacity:0.18;filter:blur(45px);animation:orbDrift 22s ease-in-out infinite 6s"></div>
+      </div>
+      <div class="layer-content">
+        <div class="cta-content">
+          <div class="cta-title">关注我，每天更新热门项目</div>
+          <div class="cta-sub">GitHub星探</div>
+          <div class="cta-tags">
+            <div class="cta-tag">AI Agent</div>
+            <div class="cta-tag">开发者工具</div>
+            <div class="cta-tag">网络安全</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 53.74, seek: function(t) {} };
+
+var tl = gsap.timeline({paused: true});
+
+// SCENE 1: HOOK (0 - 2.88)
+tl.from('.s-hook .hook-number', {opacity:0, scale:0.3, duration:0.4, ease:'back.out(1.5)'}, 0.1)
+  .from('.s-hook .hook-unit', {opacity:0, y:30, duration:0.3, ease:'power3.out'}, 0.4)
+  .from('.s-hook .hook-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.6);
+
+// SCENE 2: ECC (2.88 - 13.34)
+tl.from('.s-ecc .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 2.98)
+  .from('.s-ecc .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 3.08)
+  .from('.s-ecc .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 3.18)
+  .from('.s-ecc .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 3.38)
+  .from('.s-ecc .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 3.58)
+  .from('.s-ecc .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 3.18)
+  .from('.s-ecc .pfc-selling', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 3.68)
+  .from('.s-ecc .pfc-commentary', {opacity:0, duration:0.3, ease:'power3.out'}, 3.88)
+  .from('.s-ecc .pfc-star-total', {opacity:0, duration:0.3, ease:'power3.out'}, 4.08);
+
+// SCENE 3: taste-skill (13.34 - 24.07)
+tl.from('.s-taste .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 13.44)
+  .from('.s-taste .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 13.54)
+  .from('.s-taste .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 13.64)
+  .from('.s-taste .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 13.84)
+  .from('.s-taste .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 14.04)
+  .from('.s-taste .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 13.64)
+  .from('.s-taste .pfc-selling', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 14.14)
+  .from('.s-taste .pfc-commentary', {opacity:0, duration:0.3, ease:'power3.out'}, 14.34);
+
+// SCENE 4: gstack (24.07 - 34.20)
+tl.from('.s-gstack .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 24.17)
+  .from('.s-gstack .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 24.27)
+  .from('.s-gstack .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 24.37)
+  .from('.s-gstack .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 24.57)
+  .from('.s-gstack .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 24.77)
+  .from('.s-gstack .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 24.37)
+  .from('.s-gstack .pfc-selling', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 24.87)
+  .from('.s-gstack .pfc-commentary', {opacity:0, duration:0.3, ease:'power3.out'}, 25.07)
+  .from('.s-gstack .pfc-star-total', {opacity:0, duration:0.3, ease:'power3.out'}, 25.27);
+
+// SCENE 5: ai-engineering-and-more (34.20 - 50.81, PHASE MODE)
+tl.from('.s-engi .phase-1 .phase-hero-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 34.30)
+  .from('.s-engi .phase-1 .phase-hero-num', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 34.40)
+  .from('.s-engi .phase-1 .phase-hero-sub', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 34.70)
+  .from('.s-engi .phase-1 .phase-hero-tag', {opacity:0, duration:0.2, ease:'power3.out'}, 34.90);
+
+// Phase 2 init hidden via GSAP .set()
+tl.set('.s-engi .phase-2', {opacity: 0}, 34.20);
+
+// Phase 1->2 transition at BP1=11.63s = 34.20+11.63 = 45.83
+tl.to('.s-engi .phase-1', {opacity: 0, duration: 0.3}, 45.83)
+  .to('.s-engi .phase-2', {opacity: 1, duration: 0.4}, 46.13);
+
+tl.from('.s-engi .phase-2 .phase-header', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 46.13)
+  .from('.s-engi .phase-2 .phase-item', {opacity:0, x:-15, duration:0.25, ease:'power3.out', stagger:0.15}, 46.33);
+
+// SCENE 6: CTA (50.81 - 53.74)
+tl.from('.s-cta .cta-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 50.91)
+  .from('.s-cta .cta-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 51.21)
+  .from('.s-cta .cta-tag', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)', stagger:0.1}, 51.41);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

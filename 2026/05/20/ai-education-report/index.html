@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;background:#080818;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif}
+.root{position:relative;width:1080px;height:1920px}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1080px;height:1920px;overflow:hidden}
+audio{display:none}
+
+/* Shared background layers */
+.bg{position:absolute;width:100%;height:100%;pointer-events:none}
+.bg-grad{background:linear-gradient(180deg,#080818 0%,#101030 50%,#080818 100%)}
+.bg-grad-alt{background:linear-gradient(180deg,#0a0a20 0%,#141438 50%,#0a0a20 100%)}
+.bg-grad-warm{background:linear-gradient(180deg,#0e0a18 0%,#1a1030 50%,#0e0a18 100%)}
+.grid{position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(80,140,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(80,140,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none}
+
+/* Content wrapper */
+.sw{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:200px 80px}
+
+/* Typography */
+.hero{font-size:100px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1.2;text-align:center}
+.hero .ac{color:#f0b429}
+.hero .ac2{color:#5090ff}
+.sub{font-size:44px;font-weight:600;color:#a0b8e0;margin-top:32px;text-align:center}
+.label{font-size:28px;font-weight:700;color:#5090ff;text-transform:uppercase;letter-spacing:4px;margin-bottom:24px}
+.title{font-size:56px;font-weight:800;color:#fff;line-height:1.3;text-align:center;margin-bottom:40px}
+.title .ac{color:#f0b429}
+.title .ac2{color:#50c8ff}
+.body{font-size:32px;color:#b0c0d8;line-height:1.6;text-align:center;max-width:900px}
+
+/* Cards */
+.cards{display:flex;flex-direction:column;gap:20px;width:100%;max-width:920px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(80,140,255,0.15);border-radius:16px;padding:24px 32px;display:flex;align-items:flex-start;gap:20px}
+.card-num{font-size:36px;font-weight:900;color:#f0b429;min-width:48px}
+.card-body{flex:1}
+.card-title{font-size:30px;font-weight:700;color:#fff;margin-bottom:6px}
+.card-desc{font-size:24px;color:#8a9ab8;line-height:1.5}
+.card-tag{display:inline-block;font-size:20px;color:#5090ff;background:rgba(80,144,255,0.12);border-radius:20px;padding:4px 16px;margin-top:8px}
+
+/* Big numbers */
+.big-nums{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+.big-num{text-align:center;min-width:240px}
+.big-num .val{font-size:72px;font-weight:900;color:#f0b429;line-height:1}
+.big-num .unit{font-size:28px;color:#5090ff;margin-top:8px}
+
+/* Mini cards (compact) */
+.minis{display:flex;flex-direction:column;gap:16px;width:100%;max-width:920px}
+.mini{border-left:4px solid #5090ff;background:rgba(80,144,255,0.05);padding:16px 24px;display:flex;align-items:center;gap:16px}
+.mini-icon{font-size:28px;color:#f0b429;min-width:36px}
+.mini-text{font-size:26px;color:#c0d0e8;line-height:1.4}
+
+/* Comparison table */
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;width:100%;max-width:920px}
+.compare-cell{background:rgba(255,255,255,0.03);border:1px solid rgba(80,140,255,0.1);border-radius:12px;padding:20px;text-align:center}
+.compare-cell .ch{font-size:22px;font-weight:700;color:#5090ff;margin-bottom:12px}
+.compare-cell .cv{font-size:24px;color:#e0e8f0;line-height:1.5}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:16px;width:100%;max-width:920px}
+.step{display:flex;gap:20px;align-items:flex-start}
+.step-num{font-size:36px;font-weight:900;color:#f0b429;min-width:60px;text-align:center}
+.step-content{flex:1}
+.step-title{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-desc{font-size:22px;color:#8a9ab8;line-height:1.5}
+
+/* Risk items */
+.risk-item{display:flex;gap:16px;align-items:flex-start;padding:12px 0}
+.risk-dot{width:12px;height:12px;border-radius:50%;background:#f0b429;margin-top:10px;flex-shrink:0}
+.risk-text{font-size:24px;color:#c0d0e8;line-height:1.5}
+
+/* Tags */
+.tags{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:40px}
+.tag{font-size:24px;color:#5090ff;background:rgba(80,144,255,0.1);border:1px solid rgba(80,144,255,0.2);border-radius:24px;padding:8px 24px}
+
+/* Scene-specific glows */
+.glow-warm{background:#f0b429;opacity:0.12;width:600px;height:600px;top:400px;right:-100px}
+.glow-cool{background:#5090ff;opacity:0.15;width:500px;height:500px;bottom:200px;left:-80px}
+.glow-center{background:#5090ff;opacity:0.2;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)}
+</style>
+</head>
+<body>
+<div class="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+  <audio id="narration" data-track-index="1" data-start="0" data-duration="631.584" data-volume="1" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-start="0" data-duration="634.550" data-volume="0.04" src="bgm.wav" preload="auto"></audio>
+
+  <!-- S0: Hook -->
+  <div class="clip" data-start="0" data-duration="5.78">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">AI 原生教育</div>
+      <div class="hero" style="text-shadow:0 0 60px rgba(240,180,41,0.5)">成本降到<br><span class="ac">接近零</span></div>
+      <div class="sub">一对一辅导的边际成本革命</div>
+    </div>
+  </div>
+
+  <!-- S1: Pain 1 -->
+  <div class="clip" data-start="5.78" data-duration="44.21">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">痛点分析</div>
+      <div class="title">传统教育的<span class="ac">三大顽疾</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-num">1</div><div class="card-body"><div class="card-title">知识碎片化</div><div class="card-desc">找资源的时间比学习还多，数十篇博客、多个不连贯视频，学习效率极低</div></div></div>
+        <div class="card"><div class="card-num">2</div><div class="card-body"><div class="card-title">个性化指导太贵</div><div class="card-desc">K12辅导每小时200-500元，编程一对一每小时300-800元，高质量反馈是奢侈品</div></div></div>
+        <div class="card"><div class="card-num">3</div><div class="card-body"><div class="card-title">教学进度一刀切</div><div class="card-desc">一个老师面对几十个学生，进度快的无聊，进度慢的跟不上</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: Pain 2 -->
+  <div class="clip" data-start="49.99" data-duration="48.98">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">替代方案</div>
+      <div class="title">现有方案满意度<span class="ac">普遍不高</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-num">A</div><div class="card-body"><div class="card-title">线下培训班</div><div class="card-desc">价格高、进度标准化、无法因材施教，净推荐值仅20-30</div></div></div>
+        <div class="card"><div class="card-num">B</div><div class="card-body"><div class="card-title">在线录播课</div><div class="card-desc">完课率仅5%-15%，本质是标准化产品的数字化分发</div></div></div>
+        <div class="card"><div class="card-num">C</div><div class="card-body"><div class="card-title">真人一对一</div><div class="card-desc">效果最好但成本最高，优质导师极度稀缺</div></div></div>
+        <div class="card"><div class="card-num">D</div><div class="card-body"><div class="card-title">自学</div><div class="card-desc">零成本但效率最低，缺乏即时反馈，容易半途而废</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Pain 3 - What if -->
+  <div class="clip" data-start="98.97" data-duration="24.58">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-center" style="background:#f0b429;opacity:0.15"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">反向思考</div>
+      <div class="title">如果AI教育产品<span class="ac">消失了</span></div>
+      <div class="minis">
+        <div class="mini"><div class="mini-icon">!</div><div class="mini-text">即时性丧失：从秒级响应回到小时甚至天级等待</div></div>
+        <div class="mini"><div class="mini-icon">!</div><div class="mini-text">个性化消失：重新适应一刀切的标准化教学</div></div>
+        <div class="mini"><div class="mini-icon">!</div><div class="mini-text">成本飙升：一对一辅导从平民化回到奢侈品</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">习惯了更高效的学习方式，就很难再回去</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: Market -->
+  <div class="clip" data-start="123.55" data-duration="29.28">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">全球市场</div>
+      <div class="title">AI教育<span class="ac">爆发式增长</span></div>
+      <div class="big-nums">
+        <div class="big-num"><div class="val">$75B</div><div class="unit">2025年市场规模</div></div>
+        <div class="big-num"><div class="val">$106B</div><div class="unit">2026年预测</div></div>
+        <div class="big-num"><div class="val">40.9%</div><div class="unit">年复合增长率</div></div>
+      </div>
+      <div class="body" style="margin-top:32px">生成式AI教育产品预计2028年达到8910亿元</div>
+    </div>
+  </div>
+
+  <!-- S5: China market -->
+  <div class="clip" data-start="152.83" data-duration="25.18">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">中国市场</div>
+      <div class="title"><span class="ac2">1200亿</span> 到 <span class="ac2">2500亿</span></div>
+      <div class="big-nums">
+        <div class="big-num"><div class="val">1200亿</div><div class="unit">2025年市场规模</div></div>
+        <div class="big-num"><div class="val">2500亿</div><div class="unit">2027年预测</div></div>
+        <div class="big-num"><div class="val">50%+</div><div class="unit">成人职业培训增速</div></div>
+      </div>
+      <div class="body" style="margin-top:24px">成人职业培训是增长最快的赛道，受技能迭代和职场焦虑双重驱动</div>
+    </div>
+  </div>
+
+  <!-- S6: Trends -->
+  <div class="clip" data-start="178.01" data-duration="28.10">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">六大趋势</div>
+      <div class="title">关键趋势<span class="ac">一览</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-num">1</div><div class="card-body"><div class="card-title">个性化学习</div><div class="card-desc">AI动态调整内容难度，因材施教</div></div></div>
+        <div class="card"><div class="card-num">2</div><div class="card-body"><div class="card-title">生成式内容</div><div class="card-desc">自动出题、生成材料、评估报告</div></div></div>
+        <div class="card"><div class="card-num">3</div><div class="card-body"><div class="card-title">多模态交互</div><div class="card-desc">语音、图像、视频结合的沉浸式教学</div></div></div>
+        <div class="card"><div class="card-num">4</div><div class="card-body"><div class="card-title">Agent化学习</div><div class="card-desc">AI主动规划路径并持续跟踪进度</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7: Compete 1 -->
+  <div class="clip" data-start="206.11" data-duration="30.22">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">竞争格局</div>
+      <div class="title">第一拨：<span class="ac2">传统平台AI化</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">得到App</div><div class="card-desc">核心仍是名家课程分发，AI只是辅助工具，转型速度偏慢</div><div class="card-tag">知识付费</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">Coursera</div><div class="card-desc">已推出AI辅导，但商业模式仍以证书和学位为核心</div><div class="card-tag">MOOC</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">Udemy</div><div class="card-desc">引入AI搜索建议，但内容质量参差不齐的问题未解决</div><div class="card-tag">Marketplace</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S8: Compete 2 -->
+  <div class="clip" data-start="236.33" data-duration="31.44">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">竞争格局</div>
+      <div class="title">第二拨：<span class="ac">AI教育创业公司</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">Duolingo</div><div class="card-desc">全球用户超5亿，Max订阅集成AI，语言学习从被动做题升级为主动对话</div><div class="card-tag">5亿+用户</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">Khanmigo</div><div class="card-desc">不会直接给答案的AI导师，苏格拉底式提问引导思考，覆盖多学科</div><div class="card-tag">AI导师</div></div></div>
+      </div>
+      <div class="body" style="margin-top:24px;color:#f0b429">两个产品证明了AI教育可以同时实现用户增长和商业化</div>
+    </div>
+  </div>
+
+  <!-- S9: Compete 3 -->
+  <div class="clip" data-start="267.77" data-duration="36.22">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-cool"></div>
+    <div class="glow glow-warm" style="opacity:0.08"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">竞争格局</div>
+      <div class="title">第三拨：<span class="ac2">大厂布局</span> + 创业机会</div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">百度文心教育</div><div class="card-desc">智能批改、AI助教，NLP技术强但产品化能力弱</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">阿里通义教育</div><div class="card-desc">通过钉钉布局企业培训，C端品牌认知不足</div></div></div>
+      </div>
+      <div class="title" style="font-size:36px;margin-top:24px;margin-bottom:16px">中小创业者<span class="ac">三条路</span></div>
+      <div class="minis">
+        <div class="mini"><div class="mini-icon">1</div><div class="mini-text">垂直领域深度定制</div></div>
+        <div class="mini"><div class="mini-icon">2</div><div class="mini-text">本地化和语言优势</div></div>
+        <div class="mini"><div class="mini-icon">3</div><div class="mini-text">私域社群 + AI辅导组合</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10: Open Source 1 - DeepTutor -->
+  <div class="clip" data-start="303.99" data-duration="39.41">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">开源项目</div>
+      <div class="title">DeepTutor <span class="ac2">24K Stars</span></div>
+      <div class="body" style="margin-bottom:24px">Agent原生架构，39天达成1万星，增速最快的AI教育开源项目</div>
+      <div class="minis">
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">智能对话问答 — 多轮上下文理解</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">深度解题模式 — 分步骤引导</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">自动测验生成 — 基于内容动态出题</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">深度研究模式 — 文献调研辅助</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">数学动画生成 — 抽象概念可视化</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">知识可视化 — 图谱和流程图</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11: Open Source 2 - Mr. Ranedeer -->
+  <div class="clip" data-start="343.40" data-duration="34.27">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">开源项目</div>
+      <div class="title">Mr. Ranedeer <span class="ac">30K Stars</span></div>
+      <div class="body" style="margin-bottom:24px">纯提示词工程方案，零代码使用，导入对话AI即可用</div>
+      <div class="cards">
+        <div class="card"><div class="card-num">1</div><div class="card-body"><div class="card-title">个性化学习计划生成</div><div class="card-desc">根据目标和水平生成定制化路径</div></div></div>
+        <div class="card"><div class="card-num">2</div><div class="card-body"><div class="card-title">苏格拉底式提问教学</div><div class="card-desc">不直接给答案，引导学习者自己发现</div></div></div>
+        <div class="card"><div class="card-num">3</div><div class="card-body"><div class="card-title">自动测验生成</div><div class="card-desc">布鲁姆分类法 + 间隔重复策略</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S12: Open Source 3 - OpenTutorAI + Compare -->
+  <div class="clip" data-start="377.67" data-duration="29.64">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">开源项目</div>
+      <div class="title">OpenTutorAI-CE + <span class="ac2">三项目对比</span></div>
+      <div class="compare">
+        <div class="compare-cell"><div class="ch">DeepTutor</div><div class="cv">技术架构<br><span style="color:#f0b429;font-weight:700">最先进</span><br>Agent原生</div></div>
+        <div class="compare-cell"><div class="ch">Mr. Ranedeer</div><div class="cv">上手门槛<br><span style="color:#f0b429;font-weight:700">最低</span><br>零代码</div></div>
+        <div class="compare-cell"><div class="ch">OpenTutorAI</div><div class="cv">商业化<br><span style="color:#f0b429;font-weight:700">最近</span><br>完整框架</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13: Business 1 -->
+  <div class="clip" data-start="407.31" data-duration="40.66">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">商业化路径</div>
+      <div class="title">路径一：<span class="ac">AI职业技能辅导</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">目标市场</div><div class="card-desc">编程、设计、金融、医学等热门职业技能培训</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">核心差异化</div><div class="card-desc">垂直领域专业知识图谱 + 题库，集成代码沙箱等工具</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">收入模式</div><div class="card-desc">订阅制：个人99-299元/月，企业版500-2000元/人/年</div></div></div>
+      </div>
+      <div class="big-nums" style="margin-top:24px">
+        <div class="big-num"><div class="val" style="font-size:48px">2-3月</div><div class="unit">MVP周期</div></div>
+        <div class="big-num"><div class="val" style="font-size:48px">DeepTutor</div><div class="unit">技术底座</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S14: Business 2 -->
+  <div class="clip" data-start="447.97" data-duration="32.28">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">商业化路径</div>
+      <div class="title">路径二：<span class="ac2">企业培训AI Agent</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">产品形态</div><div class="card-desc">SaaS模式，集成钉钉/飞书/企业微信</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">核心能力</div><div class="card-desc">岗位定制培训、效果量化看板、合规自动追踪</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">计费方式</div><div class="card-desc">按企业人数：10-50元/人/月</div></div></div>
+      </div>
+      <div class="body" style="margin-top:20px">4个月签约3-5家付费客户，8个月形成可复制销售流程</div>
+    </div>
+  </div>
+
+  <!-- S15: Business 3 -->
+  <div class="clip" data-start="480.25" data-duration="30.53">
+    <div class="bg bg-grad-alt"></div>
+    <div class="glow glow-warm"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">商业化路径</div>
+      <div class="title">路径三：<span class="ac">学习路径SaaS</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-body"><div class="card-title">产品定位</div><div class="card-desc">API/SaaS服务，与现有教育平台集成</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">核心能力</div><div class="card-desc">知识图谱精准规划路径、自适应测评、学习效果预警</div></div></div>
+        <div class="card"><div class="card-body"><div class="card-title">定价策略</div><div class="card-desc">月费999-9999元，支持白标授权品牌化部署</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S16: Risks -->
+  <div class="clip" data-start="510.78" data-duration="42.24">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-center" style="background:#ff4060;opacity:0.08"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">风险评估</div>
+      <div class="title">五大风险与<span class="ac">应对策略</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-num">1</div><div class="card-body"><div class="card-title">效果验证周期长</div><div class="card-desc">需要3-12个月，建立过程指标体系作为短期代理</div></div></div>
+        <div class="card"><div class="card-num">2</div><div class="card-body"><div class="card-title">完课率低</div><div class="card-desc">行业通病5%-15%，引入游戏化和微学习设计</div></div></div>
+        <div class="card"><div class="card-num">3</div><div class="card-body"><div class="card-title">K12政策风险</div><div class="card-desc">双减政策不确定性，聚焦成人职业培训赛道</div></div></div>
+        <div class="card"><div class="card-num">4</div><div class="card-body"><div class="card-title">AI幻觉问题</div><div class="card-desc">教育场景错误知识危害极大，结合RAG锚定权威知识库</div></div></div>
+        <div class="card"><div class="card-num">5</div><div class="card-body"><div class="card-title">大厂竞争</div><div class="card-desc">深耕垂直领域建立深度壁垒</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S17: Action Plan -->
+  <div class="clip" data-start="553.02" data-duration="41.09">
+    <div class="bg bg-grad"></div>
+    <div class="glow glow-cool"></div>
+    <div class="glow glow-warm" style="opacity:0.08"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">落地实操</div>
+      <div class="title"><span class="ac2">12周</span>行动计划</div>
+      <div class="timeline">
+        <div class="step"><div class="step-num">1-2</div><div class="step-content"><div class="step-title">选定技术路线</div><div class="step-desc">推荐DeepTutor，完成本地部署和功能体验，理解架构和扩展点</div></div></div>
+        <div class="step"><div class="step-num">3-4</div><div class="step-content"><div class="step-title">确定垂直领域</div><div class="step-desc">推荐编程教育或金融考证，构建领域知识图谱和题库</div></div></div>
+        <div class="step"><div class="step-num">5-8</div><div class="step-content"><div class="step-title">开发MVP</div><div class="step-desc">聚焦AI辅导+自适应测评+进度追踪，招募50-100名种子用户内测</div></div></div>
+        <div class="step"><div class="step-num">9-12</div><div class="step-content"><div class="step-title">迭代验证</div><div class="step-desc">基于反馈优化体验和留存率，验证付费意愿，准备正式上线</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S18: Summary -->
+  <div class="clip" data-start="594.11" data-duration="30.96">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="label">核心结论</div>
+      <div class="hero" style="font-size:72px;text-shadow:0 0 40px rgba(240,180,41,0.4)">个性化教育<br><span class="ac">平民化</span></div>
+      <div class="body" style="margin-top:32px">一对一辅导边际成本降至接近零，数千亿级市场机遇</div>
+      <div class="minis" style="margin-top:28px">
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">技术首选：DeepTutor（Agent原生架构）</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">快速验证：Mr. Ranedeer（零代码上手）</div></div>
+        <div class="mini"><div class="mini-icon">*</div><div class="mini-text">企业交付：OpenTutorAI-CE（完整框架）</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S19: CTA -->
+  <div class="clip" data-start="625.07" data-duration="6.48">
+    <div class="bg bg-grad-warm"></div>
+    <div class="glow glow-center" style="background:#5090ff;opacity:0.2"></div>
+    <div class="grid"></div>
+    <div class="sw">
+      <div class="title" style="margin-bottom:24px">GitHub星探<br><span class="ac2" style="font-size:40px">专注AI商业分析</span></div>
+      <div class="tags">
+        <div class="tag">#AI教育</div>
+        <div class="tag">#开源项目</div>
+        <div class="tag">#商业分析</div>
+        <div class="tag">#深度解读</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.__timelines = {};
+window.__timelines['main'] = {
+  duration: function() { return 631.55; },
+  pause: function() {},
+  play: function() {},
+  seek: function(t) {},
+  time: function() { return 0; },
+  kill: function() {},
+  progress: function() { return 0; },
+  totalDuration: function() { return 631.55; }
+};
+window.__hf = {
+  duration: 631.55,
+  seek: function(t) {},
+  timelines: window.__timelines
+};
+</script>
+</body>
+</html>

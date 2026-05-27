@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#080818;
+  --bg-mid:#12122e;
+  --accent-warm:#f0b429;
+  --accent-cool:#00e5a0;
+  --accent-cool2:#4da8da;
+  --text-primary:#ffffff;
+  --text-secondary:#a0a0c0;
+  --card-bg:rgba(255,255,255,0.04);
+  --card-border:rgba(255,255,255,0.08);
+}
+body{
+  width:1080px;height:1920px;overflow:hidden;
+  font-family:'Noto Sans JP','Inter',sans-serif;
+  background:var(--bg-dark);
+}
+.composition{position:relative;width:1080px;height:1920px}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px}
+.scene-wrap{
+  position:absolute;width:1080px;height:1920px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:100px 60px;
+}
+
+/* ====== Background layers ====== */
+.bg-grad{position:absolute;width:100%;height:100%;z-index:0}
+.glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0}
+.grid-bg{
+  position:absolute;width:100%;height:100%;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,160,0.03) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;z-index:0;
+}
+.content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center}
+
+/* ====== Shared components ====== */
+.badge{
+  font-size:24px;font-weight:700;color:var(--accent-cool);
+  padding:8px 24px;background:rgba(0,229,160,0.1);
+  border:1px solid rgba(0,229,160,0.25);
+  border-radius:30px;letter-spacing:2px;margin-bottom:28px;
+}
+.badge-warm{
+  color:var(--accent-warm);background:rgba(240,180,41,0.1);
+  border-color:rgba(240,180,41,0.3);
+}
+.stitle{font-size:48px;font-weight:800;color:#fff;text-align:center;line-height:1.3;margin-bottom:20px}
+.sdesc{font-size:28px;color:var(--text-secondary);text-align:center;line-height:1.6;max-width:900px}
+
+.stat-row{display:flex;gap:24px;margin:16px 0}
+.stat-box{
+  text-align:center;padding:16px 28px;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:14px;min-width:140px;
+}
+.stat-num{font-size:52px;font-weight:900;line-height:1}
+.stat-num.cool{color:var(--accent-cool)}
+.stat-num.warm{color:var(--accent-warm)}
+.stat-label{font-size:22px;color:var(--text-secondary);margin-top:4px}
+
+.card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:14px;padding:18px 22px;width:100%;
+}
+.card-row{display:flex;gap:16px;width:100%}
+
+.tag{padding:6px 16px;border-radius:14px;font-size:20px;display:inline-block}
+.tag-cool{background:rgba(0,229,160,0.1);color:var(--accent-cool)}
+.tag-warm{background:rgba(240,180,41,0.1);color:var(--accent-warm)}
+.tag-dim{background:rgba(255,255,255,0.04);color:var(--text-secondary)}
+
+.icon-num{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:900;flex-shrink:0;
+}
+.icon-cool{background:rgba(0,229,160,0.15);color:var(--accent-cool)}
+.icon-warm{background:rgba(240,180,41,0.15);color:var(--accent-warm)}
+
+.divider-line{
+  width:900px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent-cool),var(--accent-warm),transparent);
+  margin:20px 0;opacity:0.3;
+}
+
+/* ====== Scene 1: Hook ====== */
+.s-hook .bg-grad{background:linear-gradient(180deg,#080818 0%,#1a1040 50%,#080818 100%)}
+.hook-top-bar{
+  display:flex;gap:16px;align-items:center;margin-bottom:40px;
+}
+.hook-pill{
+  padding:10px 28px;border-radius:50px;font-size:26px;font-weight:700;
+  letter-spacing:2px;
+}
+.hook-title{
+  font-size:120px;font-weight:900;text-align:center;line-height:1.15;
+  text-shadow:0 0 80px rgba(240,180,41,0.5);
+}
+.hook-title .w{color:var(--accent-warm)}
+.hook-title .c{color:var(--accent-cool)}
+.hook-sub{font-size:36px;color:var(--text-secondary);text-align:center;margin-top:24px;letter-spacing:4px}
+.hook-stats{display:flex;gap:32px;margin-top:40px}
+.hook-stat{
+  text-align:center;padding:20px 36px;
+  background:rgba(240,180,41,0.06);border:1px solid rgba(240,180,41,0.2);
+  border-radius:16px;
+}
+.hook-stat .n{font-size:64px;font-weight:900;color:var(--accent-warm)}
+.hook-stat .l{font-size:24px;color:var(--text-secondary);margin-top:4px}
+
+/* ====== Scene 2: What ====== */
+.what-header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.what-name{font-size:42px;font-weight:800;color:var(--accent-warm)}
+.what-dims{display:flex;gap:20px;margin:20px 0}
+.what-dim{
+  text-align:center;padding:24px 32px;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;flex:1;
+}
+.what-dim .n{font-size:64px;font-weight:900;color:var(--accent-cool)}
+.what-dim .l{font-size:24px;color:var(--text-secondary);margin-top:6px}
+.what-agents{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin-top:20px;max-width:960px;
+}
+.what-agent{
+  font-size:18px;padding:6px 14px;border-radius:10px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  color:var(--text-secondary);
+}
+.what-agent.highlight{color:var(--accent-cool);border-color:rgba(0,229,160,0.2);background:rgba(0,229,160,0.05)}
+
+/* ====== Scene 3: How ====== */
+.layer-list{display:flex;flex-direction:column;gap:10px;width:900px;margin-top:16px}
+.layer-item{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 24px;border-radius:14px;
+  transition:background 0.2s;
+}
+.layer-item:nth-child(1){background:rgba(0,229,160,0.12);border-left:4px solid var(--accent-cool)}
+.layer-item:nth-child(2){background:rgba(0,229,160,0.09);border-left:4px solid rgba(0,229,160,0.7)}
+.layer-item:nth-child(3){background:rgba(0,229,160,0.07);border-left:4px solid rgba(0,229,160,0.5)}
+.layer-item:nth-child(4){background:rgba(0,229,160,0.05);border-left:4px solid rgba(0,229,160,0.35)}
+.layer-item:nth-child(5){background:rgba(0,229,160,0.03);border-left:4px solid rgba(0,229,160,0.2)}
+.layer-num{font-size:36px;font-weight:900;color:var(--accent-cool);min-width:44px}
+.layer-title{font-size:26px;color:#fff;font-weight:600}
+.layer-desc{font-size:20px;color:var(--text-secondary);margin-left:auto;max-width:280px;text-align:right}
+.layer-example{
+  width:900px;margin-top:16px;padding:16px 24px;
+  background:rgba(240,180,41,0.05);border:1px solid rgba(240,180,41,0.15);
+  border-radius:12px;text-align:center;
+  font-size:22px;color:var(--text-secondary);line-height:1.5;
+}
+.layer-example span{color:var(--accent-warm);font-weight:600}
+
+/* ====== Scene 4: Capabilities ====== */
+.cap-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:960px;margin:16px 0}
+.cap-card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;
+  width:460px;
+}
+.cap-num{font-size:40px;font-weight:900;color:var(--accent-cool);min-width:56px}
+.cap-label{font-size:24px;color:#fff;line-height:1.3}
+.cap-sub{font-size:18px;color:var(--text-secondary)}
+.platform-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:960px;margin-top:8px}
+.ptag{
+  padding:10px 20px;border-radius:14px;font-size:22px;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+}
+.ptag-cool{background:rgba(0,229,160,0.08);color:var(--accent-cool);border:1px solid rgba(0,229,160,0.2)}
+.ptag-warm{background:rgba(240,180,41,0.08);color:var(--accent-warm);border:1px solid rgba(240,180,41,0.2)}
+.ptag-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* ====== Scene 5: Use Cases ====== */
+.uc-list{display:flex;flex-direction:column;gap:12px;width:940px;margin-top:12px}
+.uc-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px 24px;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:14px;
+  border-left:4px solid var(--accent-warm);
+}
+.uc-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(240,180,41,0.12);font-size:20px;flex-shrink:0;
+}
+.uc-info{flex:1}
+.uc-name{font-size:28px;font-weight:700;color:var(--accent-warm);margin-bottom:4px}
+.uc-desc{font-size:22px;color:var(--text-secondary);line-height:1.4}
+.uc-tag{font-size:18px;padding:3px 10px;border-radius:8px;background:rgba(0,229,160,0.08);color:var(--accent-cool);margin-top:6px;display:inline-block}
+
+/* ====== Scene 6: Tech ====== */
+.tools-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:960px;margin:12px 0}
+.tool{
+  padding:10px 20px;border-radius:12px;font-size:21px;font-weight:600;
+  background:var(--card-bg);border:1px solid var(--card-border);color:#fff;
+}
+.matrix-row{display:flex;gap:14px;width:940px;margin-top:12px}
+.matrix-item{
+  flex:1;padding:16px;text-align:center;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:12px;
+}
+.matrix-name{font-size:22px;font-weight:700;color:var(--accent-cool);margin-bottom:4px}
+.matrix-desc{font-size:18px;color:var(--text-secondary)}
+
+/* ====== Scene 7: Compare ====== */
+.vs-container{display:flex;gap:24px;margin-top:16px;width:960px}
+.vs-col{
+  flex:1;padding:28px;border-radius:18px;
+  display:flex;flex-direction:column;align-items:center;
+}
+.vs-col.left{background:rgba(255,255,255,0.03);border:1px solid rgba(160,160,192,0.15)}
+.vs-col.right{background:rgba(240,180,41,0.04);border:1px solid rgba(240,180,41,0.2)}
+.vs-label{font-size:26px;font-weight:700;margin-bottom:16px}
+.vs-stars{font-size:56px;font-weight:900}
+.vs-origin{font-size:22px;color:var(--text-secondary);margin-top:4px}
+.vs-metrics{display:flex;flex-direction:column;gap:8px;margin-top:16px;width:100%}
+.vs-metric{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03)}
+.vs-metric-name{font-size:22px;color:var(--text-secondary)}
+.vs-metric-val{font-size:24px;font-weight:700}
+.vs-vs{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:36px;font-weight:900;color:var(--accent-warm);
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(240,180,41,0.15);border:2px solid rgba(240,180,41,0.3);
+  display:flex;align-items:center;justify-content:center;z-index:2;
+}
+
+/* ====== Scene 8: CTA ====== */
+.cta-title{
+  font-size:80px;font-weight:900;color:#fff;text-align:center;line-height:1.3;
+  text-shadow:0 0 40px rgba(240,180,41,0.4);
+}
+.cta-sub{font-size:36px;color:var(--accent-cool);margin-top:24px;text-align:center}
+.cta-keywords{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;justify-content:center;max-width:800px;
+}
+.cta-kw{
+  font-size:24px;padding:12px 24px;border-radius:14px;
+  border:1px solid var(--card-border);color:var(--text-secondary);
+  background:var(--card-bg);
+}
+.cta-bottom{
+  margin-top:40px;display:flex;gap:24px;align-items:center;
+}
+.cta-chip{
+  padding:14px 32px;border-radius:14px;font-size:26px;font-weight:700;
+}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-duration="64.71" data-width="1080" data-height="1920">
+  <audio id="narration" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto" data-start="0"></audio>
+
+  <!-- ========== 1. HOOK (0 ~ 2.88s) ========== -->
+  <div class="clip s-hook" data-start="0" data-duration="2.88">
+    <div class="scene-wrap">
+      <div class="bg-grad"></div>
+      <div class="glow" style="width:700px;height:700px;background:var(--accent-warm);opacity:0.3;top:300px;left:-100px"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:900px;right:-80px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="hook-top-bar">
+          <div class="hook-pill" style="background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.3);color:var(--accent-cool)">AI 智能体角色库</div>
+          <div class="hook-pill" style="background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);color:var(--accent-warm)">开源项目</div>
+        </div>
+        <div class="hook-title"><span class="w">10万</span>Star<br><span class="c">中文版反超原版</span></div>
+        <div class="hook-sub">agency-agents 生态系统深度解析</div>
+        <div class="hook-stats">
+          <div class="hook-stat"><div class="n">103K</div><div class="l">上游 Star</div></div>
+          <div class="hook-stat"><div class="n">215</div><div class="l">中文版角色</div></div>
+          <div class="hook-stat"><div class="n">18</div><div class="l">个部门</div></div>
+          <div class="hook-stat"><div class="n">17</div><div class="l">种工具</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. WHAT (2.88 ~ 11.16s) ========== -->
+  <div class="clip s-what" data-start="2.88" data-duration="8.28">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0f1a2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.15;top:300px;right:-60px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-warm);opacity:0.08;bottom:400px;left:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="badge">项目定义</div>
+        <div class="what-header">
+          <div class="what-name">agency-agents</div>
+          <div style="font-size:22px;padding:6px 16px;border-radius:8px;background:rgba(0,229,160,0.1);color:var(--accent-cool)">即插即用</div>
+        </div>
+        <div class="stitle">AI 智能体角色库</div>
+        <div class="what-dims">
+          <div class="what-dim"><div class="n">215</div><div class="l">专家角色</div></div>
+          <div class="what-dim"><div class="n">18</div><div class="l">部门</div></div>
+          <div class="what-dim"><div class="n">17</div><div class="l">工具支持</div></div>
+          <div class="what-dim"><div class="n">50</div><div class="l">中国原创</div></div>
+        </div>
+        <div class="sdesc" style="margin-bottom:12px">不是通用模板，是真正的专家系统</div>
+        <div class="divider-line"></div>
+        <div style="font-size:20px;color:var(--text-secondary);margin-bottom:10px">部分角色预览</div>
+        <div class="what-agents">
+          <span class="what-agent highlight">抖音运营师</span>
+          <span class="what-agent highlight">高考志愿顾问</span>
+          <span class="what-agent">数据分析师</span>
+          <span class="what-agent">安全工程师</span>
+          <span class="what-agent highlight">养殖档案核对员</span>
+          <span class="what-agent">产品经理</span>
+          <span class="what-agent">UX 研究员</span>
+          <span class="what-agent highlight">政务售前顾问</span>
+          <span class="what-agent">财务分析师</span>
+          <span class="what-agent">内容创作者</span>
+          <span class="what-agent">供应链策略师</span>
+          <span class="what-agent highlight">直播主播教练</span>
+          <span class="what-agent">短视频剪辑师</span>
+          <span class="what-agent">法务合规员</span>
+          <span class="what-agent">SEO 专家</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 3. HOW (11.16 ~ 20.52s) ========== -->
+  <div class="clip s-how" data-start="11.16" data-duration="9.36">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#101228 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:400px;left:-100px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="badge">设计原理</div>
+        <div class="stitle">五层设计框架</div>
+        <div class="sdesc" style="margin-bottom:12px">不说你是专家，而是定义你怎么思考、怎么做事</div>
+        <div class="layer-list">
+          <div class="layer-item">
+            <div class="layer-num">1</div>
+            <div class="layer-title">身份人设</div>
+            <div class="layer-desc">独特个性和沟通风格</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-num">2</div>
+            <div class="layer-title">核心使命</div>
+            <div class="layer-desc">做什么、不做什么</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-num">3</div>
+            <div class="layer-title">关键规则</div>
+            <div class="layer-desc">领域硬约束</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-num">4</div>
+            <div class="layer-title">交付物定义</div>
+            <div class="layer-desc">含代码示例</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-num">5</div>
+            <div class="layer-title">成功指标</div>
+            <div class="layer-desc">可量化的质量标准</div>
+          </div>
+        </div>
+        <div class="layer-example">
+          比如 <span>数据分析师</span> 的使命是"将原始数据转化为可操作的业务洞察"<br>
+          交付物包含 <span>仪表盘 + 统计分析 + 战略建议</span>，而不是模糊的"数据分析"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 4. CAPABILITIES (20.52 ~ 31.68s) ========== -->
+  <div class="clip s-capabilities" data-start="20.52" data-duration="11.16">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0d1525 50%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-cool);opacity:0.18;top:200px;right:-120px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-warm);opacity:0.1;bottom:300px;left:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="badge badge-warm">核心能力</div>
+        <div class="stitle">中文版新增 50 个原创角色</div>
+        <div class="cap-grid">
+          <div class="cap-card">
+            <div class="cap-num">18</div>
+            <div><div class="cap-label">个部门全覆盖</div><div class="cap-sub">工程/产品/市场/运营/HR...</div></div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-num">17</div>
+            <div><div class="cap-label">种编程工具</div><div class="cap-sub">Claude Code/Cursor/Copilot...</div></div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-num">6</div>
+            <div><div class="cap-label">个中国平台运营</div><div class="cap-sub">抖音/小红书/私域/B站/快手/微博</div></div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-num">3</div>
+            <div><div class="cap-label">个全新部门</div><div class="cap-sub">HR人力/法务合规/供应链</div></div>
+          </div>
+        </div>
+        <div class="divider-line"></div>
+        <div style="font-size:22px;color:var(--text-secondary);margin-bottom:12px">中国互联网运营场景全覆盖</div>
+        <div class="platform-tags">
+          <div class="ptag ptag-cool"><span class="ptag-dot" style="background:var(--accent-cool)"></span>抖音运营</div>
+          <div class="ptag ptag-cool"><span class="ptag-dot" style="background:var(--accent-cool)"></span>小红书种草</div>
+          <div class="ptag ptag-cool"><span class="ptag-dot" style="background:var(--accent-cool)"></span>私域流量</div>
+          <div class="ptag ptag-warm"><span class="ptag-dot" style="background:var(--accent-warm)"></span>直播电商</div>
+          <div class="ptag ptag-warm"><span class="ptag-dot" style="background:var(--accent-warm)"></span>微信运营</div>
+          <div class="ptag ptag-warm"><span class="ptag-dot" style="background:var(--accent-warm)"></span>B站策略</div>
+          <div class="ptag ptag-cool"><span class="ptag-dot" style="background:var(--accent-cool)"></span>快手增长</div>
+          <div class="ptag ptag-warm"><span class="ptag-dot" style="background:var(--accent-warm)"></span>微博热搜</div>
+          <div class="ptag ptag-cool"><span class="ptag-dot" style="background:var(--accent-cool)"></span>知识付费</div>
+          <div class="ptag ptag-warm"><span class="ptag-dot" style="background:var(--accent-warm)"></span>高考志愿</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 5. USE CASES (31.68 ~ 44.38s) ========== -->
+  <div class="clip s-usecases" data-start="31.68" data-duration="12.70">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#1a0f2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:300px;left:-80px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.1;bottom:300px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="badge badge-warm">全球独一无二</div>
+        <div class="stitle">中国原创特色场景</div>
+        <div class="uc-list">
+          <div class="uc-item">
+            <div class="uc-icon" style="color:var(--accent-warm)">牛</div>
+            <div class="uc-info">
+              <div class="uc-name">养殖档案核对员</div>
+              <div class="uc-desc">自动审计兽药、饲料、免疫记录，FIFO 复核批号</div>
+              <div class="uc-tag">畜牧业数字化</div>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-icon" style="color:var(--accent-cool)">考</div>
+            <div class="uc-info">
+              <div class="uc-name">高考志愿填报顾问</div>
+              <div class="uc-desc">精通平行志愿、院校专业组、冲稳保策略</div>
+              <div class="uc-tag">教育</div>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-icon" style="color:var(--accent-warm)">政</div>
+            <div class="uc-info">
+              <div class="uc-name">政务数字化售前顾问</div>
+              <div class="uc-desc">政策解读、方案设计、标书编写、等保密评信创</div>
+              <div class="uc-tag">ToG 数字化</div>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-icon" style="color:var(--accent-cool)">工</div>
+            <div class="uc-info">
+              <div class="uc-name">上位机工程师</div>
+              <div class="uc-desc">Qt/QML、Modbus/CAN 工业协议、实时数据可视化</div>
+              <div class="uc-tag">工业自动化</div>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-icon" style="color:var(--accent-warm)">发</div>
+            <div class="uc-info">
+              <div class="uc-name">发票管理专家</div>
+              <div class="uc-desc">增值税专票/普票管理、金税系统、三单匹配、税务合规</div>
+              <div class="uc-tag">财税合规</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 6. TECH (44.38 ~ 52.35s) ========== -->
+  <div class="clip s-tech" data-start="44.38" data-duration="7.97">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0f1a2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:300px;right:-80px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-warm);opacity:0.08;bottom:400px;left:-80px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="badge">技术生态</div>
+        <div class="stitle" style="margin-bottom:8px">17 种工具 + 产品矩阵</div>
+        <div class="sdesc" style="margin-bottom:12px">支持主流编程工具一键安装</div>
+        <div class="tools-grid">
+          <div class="tool" style="border-color:rgba(0,229,160,0.3);color:var(--accent-cool)">Claude Code</div>
+          <div class="tool">Cursor</div>
+          <div class="tool">Copilot</div>
+          <div class="tool">Gemini CLI</div>
+          <div class="tool">Windsurf</div>
+          <div class="tool">Aider</div>
+          <div class="tool">Trae</div>
+          <div class="tool">Codex CLI</div>
+          <div class="tool">DeerFlow</div>
+          <div class="tool">Kiro</div>
+          <div class="tool">Qwen Code</div>
+          <div class="tool">Augment</div>
+        </div>
+        <div class="divider-line"></div>
+        <div style="font-size:22px;font-weight:700;color:var(--accent-cool);margin-bottom:10px">6 个项目组成完整产品矩阵</div>
+        <div class="matrix-row">
+          <div class="matrix-item"><div class="matrix-name">角色库</div><div class="matrix-desc">215 个专家</div></div>
+          <div class="matrix-item"><div class="matrix-name">编排引擎</div><div class="matrix-desc">多智能体协作</div></div>
+          <div class="matrix-item"><div class="matrix-name">方法论</div><div class="matrix-desc">最佳实践</div></div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-item"><div class="matrix-name">教程</div><div class="matrix-desc">新手入门</div></div>
+          <div class="matrix-item"><div class="matrix-name">安全工具</div><div class="matrix-desc">审计防护</div></div>
+          <div class="matrix-item"><div class="matrix-name">中文版</div><div class="matrix-desc">本土化扩展</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 7. COMPARE (52.35 ~ 60.39s) ========== -->
+  <div class="clip s-compare" data-start="52.35" data-duration="8.04">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#12122e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:250px;left:-100px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.12;bottom:250px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="content" style="position:relative">
+        <div class="badge">上游 vs 中文版</div>
+        <div class="stitle" style="margin-bottom:8px">数据全面对比</div>
+        <div class="vs-container">
+          <div class="vs-col left">
+            <div class="vs-label" style="color:var(--text-secondary)">上游（原版）</div>
+            <div class="vs-stars" style="color:#fff">103K</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-top:2px">Star · Reddit 起家 · 7天破万Star</div>
+            <div class="vs-metrics">
+              <div class="vs-metric"><span class="vs-metric-name">角色数</span><span class="vs-metric-val" style="color:var(--text-secondary)">184</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">部门数</span><span class="vs-metric-val" style="color:var(--text-secondary)">15</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">工具数</span><span class="vs-metric-val" style="color:var(--text-secondary)">11</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">翻译</span><span class="vs-metric-val" style="color:var(--text-secondary)">英文</span></div>
+            </div>
+          </div>
+          <div class="vs-vs">VS</div>
+          <div class="vs-col right">
+            <div class="vs-label" style="color:var(--accent-warm)">中文版</div>
+            <div class="vs-stars" style="color:var(--accent-warm)">12.4K</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-top:2px">Star · 100% 翻译 · 本土化扩展</div>
+            <div class="vs-metrics">
+              <div class="vs-metric"><span class="vs-metric-name">角色数</span><span class="vs-metric-val" style="color:var(--accent-cool)">215</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">部门数</span><span class="vs-metric-val" style="color:var(--accent-cool)">18</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">工具数</span><span class="vs-metric-val" style="color:var(--accent-cool)">17</span></div>
+              <div class="vs-metric"><span class="vs-metric-name">新增部门</span><span class="vs-metric-val" style="color:var(--accent-warm)">+3</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 8. CTA (60.39 ~ 64.71s) ========== -->
+  <div class="clip s-cta" data-start="60.39" data-duration="4.32">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#1a1040 50%,#080818 100%)"></div>
+      <div class="glow" style="width:700px;height:700px;background:var(--accent-warm);opacity:0.25;top:300px;left:190px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.15;bottom:300px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="content">
+        <div class="cta-title">开源免费<br><span style="color:var(--accent-warm)">值得试试</span></div>
+        <div class="cta-sub">关注获取更多好项目</div>
+        <div class="cta-bottom">
+          <div class="cta-chip" style="background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.3);color:var(--accent-cool)">215 个角色</div>
+          <div class="cta-chip" style="background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);color:var(--accent-warm)">17 种工具</div>
+          <div class="cta-chip" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-secondary)">即插即用</div>
+        </div>
+        <div class="cta-keywords">
+          <div class="cta-kw">#GitHub</div>
+          <div class="cta-kw">#开源</div>
+          <div class="cta-kw">#AI</div>
+          <div class="cta-kw">#智能体</div>
+          <div class="cta-kw">#程序员</div>
+          <div class="cta-kw">#科技</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+
+// Hook (0~2.88)
+tl.from('.s-hook .hook-top-bar', {opacity:0, y:-20, duration:0.3, ease:'power3.out'}, 0.05)
+  .from('.s-hook .hook-title', {opacity:0, scale:0.8, duration:0.4, ease:'power3.out'}, 0.2)
+  .from('.s-hook .hook-sub', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 0.5)
+  .from('.s-hook .hook-stats .hook-stat', {opacity:0, y:20, duration:0.25, stagger:0.08, ease:'power3.out'}, 0.7)
+
+// What (2.88~11.16)
+  .from('.s-what .badge', {opacity:0, y:-15, duration:0.25, ease:'power3.out'}, 3.0)
+  .from('.s-what .what-header', {opacity:0, x:-30, duration:0.25, ease:'power3.out'}, 3.15)
+  .from('.s-what .what-dims .what-dim', {opacity:0, y:20, duration:0.25, stagger:0.1, ease:'power3.out'}, 3.3)
+  .from('.s-what .what-agents', {opacity:0, duration:0.3, ease:'power3.out'}, 4.0)
+
+// How (11.16~20.52)
+  .from('.s-how .badge', {opacity:0, y:-15, duration:0.25, ease:'power3.out'}, 11.3)
+  .from('.s-how .stitle', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 11.45)
+  .from('.s-how .layer-item', {opacity:0, x:-30, duration:0.25, stagger:0.1, ease:'power3.out'}, 11.7)
+  .from('.s-how .layer-example', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 13.5)
+
+// Capabilities (20.52~31.68)
+  .from('.s-capabilities .badge', {opacity:0, y:-15, duration:0.25, ease:'power3.out'}, 20.7)
+  .from('.s-capabilities .cap-card', {opacity:0, y:20, duration:0.25, stagger:0.1, ease:'power3.out'}, 21.0)
+  .from('.s-capabilities .platform-tags', {opacity:0, duration:0.3, ease:'power3.out'}, 22.0)
+
+// Use Cases (31.68~44.38)
+  .from('.s-usecases .badge', {opacity:0, y:-15, duration:0.25, ease:'power3.out'}, 31.8)
+  .from('.s-usecases .uc-item', {opacity:0, x:-40, duration:0.3, stagger:0.15, ease:'power3.out'}, 32.0)
+
+// Tech (44.38~52.35)
+  .from('.s-tech .badge', {opacity:0, y:-15, duration:0.25, ease:'power3.out'}, 44.5)
+  .from('.s-tech .tools-grid .tool', {opacity:0, scale:0.8, duration:0.15, stagger:0.04, ease:'power3.out'}, 44.8)
+  .from('.s-tech .matrix-row', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 46.0)
+
+// Compare (52.35~60.39)
+  .from('.s-compare .vs-col.left', {opacity:0, x:-40, duration:0.35, ease:'power3.out'}, 52.5)
+  .from('.s-compare .vs-vs', {opacity:0, scale:0, duration:0.3, ease:'back.out(2)'}, 52.8)
+  .from('.s-compare .vs-col.right', {opacity:0, x:40, duration:0.35, ease:'power3.out'}, 53.0)
+
+// CTA (60.39~64.71)
+  .from('.s-cta .cta-title', {opacity:0, scale:0.85, duration:0.35, ease:'power3.out'}, 60.5)
+  .from('.s-cta .cta-sub', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 60.8)
+  .from('.s-cta .cta-bottom', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 61.0)
+  .from('.s-cta .cta-keywords', {opacity:0, duration:0.3, ease:'power3.out'}, 61.3);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

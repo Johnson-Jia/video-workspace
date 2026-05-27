@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0f1724;
+        font-family: 'Inter', sans-serif;
+        color: #f0f4f8;
+      }
+
+      .clip {
+        position: absolute;
+        top: 0; left: 0;
+        width: 1080px;
+        height: 1920px;
+      }
+
+      /* Scene 0: Hook */
+      .hook-bg {
+        width: 100%; height: 100%;
+        background: radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.15) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 70%, rgba(123,58,237,0.1) 0%, transparent 50%),
+                    #0f1724;
+      }
+
+      .github-icon {
+        position: absolute;
+        top: 200px; left: 50%;
+        transform: translateX(-50%);
+        width: 140px; height: 140px;
+      }
+      .github-icon img { width: 100%; height: 100%; filter: brightness(0) invert(1) opacity(0.9); }
+
+      .hook-number {
+        position: absolute;
+        top: 400px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 180px;
+        font-weight: 900;
+        color: #00d4ff;
+        text-shadow: 0 0 60px rgba(0,212,255,0.5), 0 0 120px rgba(0,212,255,0.2);
+        text-align: center;
+        line-height: 1;
+      }
+
+      .hook-star {
+        font-size: 72px;
+        color: #ff6b35;
+        vertical-align: super;
+      }
+
+      .hook-subtitle {
+        position: absolute;
+        top: 620px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 44px;
+        font-weight: 700;
+        text-align: center;
+        white-space: nowrap;
+        color: #f0f4f8;
+      }
+
+      .hook-tag {
+        position: absolute;
+        top: 700px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 30px;
+        font-weight: 500;
+        color: #94a3b8;
+        text-align: center;
+      }
+
+      .hook-date {
+        position: absolute;
+        top: 780px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 28px;
+        color: #7c3aed;
+        font-weight: 600;
+        padding: 10px 30px;
+        border: 2px solid rgba(124,58,237,0.4);
+        border-radius: 30px;
+        background: rgba(124,58,237,0.1);
+      }
+
+      /* Card styles */
+      .card-container {
+        position: absolute;
+        top: 160px; left: 48px;
+        width: 984px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        background: rgba(26, 35, 50, 0.9);
+        border: 1px solid rgba(0,212,255,0.15);
+        border-radius: 20px;
+        padding: 28px 32px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        backdrop-filter: blur(10px);
+      }
+
+      .card-rank {
+        font-size: 48px;
+        font-weight: 900;
+        min-width: 60px;
+        text-align: center;
+      }
+
+      .card-info { flex: 1; }
+
+      .card-name {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .card-desc {
+        font-size: 26px;
+        color: #94a3b8;
+        line-height: 1.4;
+      }
+
+      .card-stars {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ff6b35;
+        white-space: nowrap;
+      }
+
+      .card-lang {
+        font-size: 22px;
+        color: #00d4ff;
+        padding: 4px 14px;
+        background: rgba(0,212,255,0.1);
+        border-radius: 12px;
+        white-space: nowrap;
+      }
+
+      /* Section title */
+      .section-title {
+        position: absolute;
+        top: 80px; left: 48px;
+        font-size: 44px;
+        font-weight: 800;
+        padding: 12px 32px;
+        border-radius: 16px;
+        border-left: 6px solid;
+      }
+
+      .section-title .emoji {
+        margin-right: 12px;
+      }
+
+      /* CTA */
+      .cta-bg {
+        width: 100%; height: 100%;
+        background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.2) 0%, transparent 70%),
+                    #0f1724;
+      }
+
+      .cta-github {
+        position: absolute;
+        top: 360px; left: 50%;
+        transform: translateX(-50%);
+        width: 200px; height: 200px;
+      }
+      .cta-github img { width: 100%; height: 100%; filter: brightness(0) invert(1) opacity(0.8); }
+
+      .cta-title {
+        position: absolute;
+        top: 620px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 52px;
+        font-weight: 800;
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      .cta-subtitle {
+        position: absolute;
+        top: 800px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 36px;
+        color: #94a3b8;
+        text-align: center;
+      }
+
+      .cta-actions {
+        position: absolute;
+        top: 920px; left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .cta-btn {
+        font-size: 32px;
+        font-weight: 700;
+        padding: 18px 48px;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .cta-like {
+        background: linear-gradient(135deg, #ff6b35, #ff4757);
+        color: #fff;
+      }
+
+      .cta-follow {
+        background: linear-gradient(135deg, #7c3aed, #2563eb);
+        color: #fff;
+      }
+
+      .cta-tags {
+        position: absolute;
+        top: 1080px; left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 900px;
+      }
+
+      .cta-tag {
+        font-size: 24px;
+        color: #94a3b8;
+        padding: 8px 20px;
+        border: 1px solid rgba(148,163,184,0.3);
+        border-radius: 20px;
+      }
+
+      /* Decorative particles */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="35" data-width="1080" data-height="1920">
+
+    <!-- ==================== Scene 0: Hook (0-4s) ==================== -->
+    <div id="scene-hook" class="clip" data-start="0" data-duration="4" data-track-index="1">
+      <div class="hook-bg"></div>
+
+      <!-- Decorative particles -->
+      <div class="particle" style="top:100px;left:120px;width:8px;height:8px;background:#00d4ff;"></div>
+      <div class="particle" style="top:300px;right:80px;width:6px;height:6px;background:#7c3aed;"></div>
+      <div class="particle" style="top:600px;left:200px;width:10px;height:10px;background:#ff6b35;"></div>
+      <div class="particle" style="top:900px;right:160px;width:7px;height:7px;background:#00d4ff;"></div>
+      <div class="particle" style="top:1100px;left:400px;width:5px;height:5px;background:#10b981;"></div>
+
+      <div class="github-icon" id="hook-icon">
+        <img src="assets/icons/github.svg" alt="GitHub">
+      </div>
+
+      <div class="hook-number" id="hook-num">332<span class="hook-star">&#9733;</span></div>
+
+      <div class="hook-subtitle" id="hook-title">今日 GitHub 涨星最快的 9 个项目</div>
+
+      <div class="hook-tag" id="hook-tag">第一名一天 332 颗星</div>
+
+      <div class="hook-date">2026-05-12 DAILY TRENDING</div>
+    </div>
+
+    <!-- ==================== Scene 1: Learning Resources (4-12s) ==================== -->
+    <div id="scene-learn" class="clip" data-start="4" data-duration="8" data-track-index="1">
+      <div style="width:100%;height:100%;background:linear-gradient(170deg, #0f1724 0%, #0d2137 100%);"></div>
+
+      <div class="section-title" id="learn-title" style="border-color:#10b981;background:rgba(16,185,129,0.08);color:#10b981;">
+        <span class="emoji">&#128218;</span> 学习资源
+      </div>
+
+      <div class="card-container" id="learn-cards" style="top:180px;">
+        <div class="card" style="border-color:rgba(16,185,129,0.3);">
+          <div class="card-rank" style="color:#10b981;">#1</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#10b981;">ossu/computer-science</div>
+            <div class="card-desc">完全免费的计算机科学自学路径</div>
+          </div>
+          <div class="card-lang">--</div>
+          <div class="card-stars">&#11088; 332</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(16,185,129,0.2);">
+          <div class="card-rank" style="color:#10b981;">#3</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#10b981;">build-your-own-x</div>
+            <div class="card-desc">造轮子学编程！从零实现经典项目</div>
+          </div>
+          <div class="card-lang">Markdown</div>
+          <div class="card-stars">&#11088; 182</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(16,185,129,0.2);">
+          <div class="card-rank" style="color:#10b981;">#5</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#10b981;">awesome</div>
+            <div class="card-desc">GitHub 最强资源合集</div>
+          </div>
+          <div class="card-lang">--</div>
+          <div class="card-stars">&#11088; 167</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Scene 2: AI Projects (12-19s) ==================== -->
+    <div id="scene-ai" class="clip" data-start="12" data-duration="7" data-track-index="2">
+      <div style="width:100%;height:100%;background:radial-gradient(ellipse at 50% 40%, rgba(124,58,237,0.15) 0%, transparent 60%),linear-gradient(170deg, #0f1724 0%, #1a1030 100%);"></div>
+
+      <div class="section-title" id="ai-title" style="border-color:#7c3aed;background:rgba(124,58,237,0.08);color:#7c3aed;">
+        <span class="emoji">&#129302;</span> AI 项目霸榜
+      </div>
+
+      <div class="card-container" id="ai-cards" style="top:200px;gap:28px;">
+        <div class="card" style="border-color:rgba(124,58,237,0.3);padding:36px 32px;">
+          <div class="card-rank" style="color:#7c3aed;font-size:56px;">#6</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#c084fc;font-size:38px;">frdel/agent-zero</div>
+            <div class="card-desc" style="font-size:30px;">新一代 AI 智能体框架<br>支持自定义工具链和多轮推理</div>
+          </div>
+          <div class="card-lang" style="background:rgba(124,58,237,0.15);color:#c084fc;">Python</div>
+          <div class="card-stars">&#11088; 163</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(124,58,237,0.2);padding:36px 32px;">
+          <div class="card-rank" style="color:#7c3aed;font-size:56px;">#7</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#c084fc;font-size:38px;">PuLID</div>
+            <div class="card-desc" style="font-size:30px;">对比对齐实现 ID 定制化<br>AI 人像生成的精准控制方案</div>
+          </div>
+          <div class="card-lang" style="background:rgba(124,58,237,0.15);color:#c084fc;">Python</div>
+          <div class="card-stars">&#11088; 149</div>
+        </div>
+      </div>
+
+      <!-- AI decorative glow -->
+      <div style="position:absolute;bottom:300px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,transparent 70%);border-radius:50%;"></div>
+    </div>
+
+    <!-- ==================== Scene 3: Dev Tools (19-29s) ==================== -->
+    <div id="scene-tools" class="clip" data-start="19" data-duration="10" data-track-index="3">
+      <div style="width:100%;height:100%;background:linear-gradient(170deg, #0f1724 0%, #0f1a2e 100%);"></div>
+
+      <div class="section-title" id="tools-title" style="border-color:#00d4ff;background:rgba(0,212,255,0.08);color:#00d4ff;">
+        <span class="emoji">&#128736;</span> 开发工具
+      </div>
+
+      <div class="card-container" id="tools-cards" style="top:180px;gap:18px;">
+        <div class="card" style="border-color:rgba(0,212,255,0.2);">
+          <div class="card-rank" style="color:#00d4ff;">#2</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#00d4ff;">krayin/laravel-crm</div>
+            <div class="card-desc">免费开源 Laravel CRM 系统</div>
+          </div>
+          <div class="card-lang">PHP</div>
+          <div class="card-stars">&#11088; 234</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(255,107,53,0.2);">
+          <div class="card-rank" style="color:#ff6b35;">#4</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#ff6b35;">GDevelop</div>
+            <div class="card-desc">拖拽创建 2D/3D 游戏引擎</div>
+          </div>
+          <div class="card-lang">JavaScript</div>
+          <div class="card-stars">&#11088; 180</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(16,185,129,0.2);">
+          <div class="card-rank" style="color:#10b981;">#8</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#10b981;">free-for-dev</div>
+            <div class="card-desc">开发者免费资源大全</div>
+          </div>
+          <div class="card-lang">HTML</div>
+          <div class="card-stars">&#11088; 110</div>
+        </div>
+
+        <div class="card" style="border-color:rgba(255,107,53,0.15);">
+          <div class="card-rank" style="color:#ff6b35;">#9</div>
+          <div class="card-info">
+            <div class="card-name" style="color:#ff6b35;">valkey</div>
+            <div class="card-desc">Redis 开源替代方案</div>
+          </div>
+          <div class="card-lang">C</div>
+          <div class="card-stars">&#11088; 69</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Scene 4: CTA (29-35s) ==================== -->
+    <div id="scene-cta" class="clip" data-start="29" data-duration="6" data-track-index="4">
+      <div class="cta-bg"></div>
+
+      <div class="cta-github" id="cta-icon">
+        <img src="assets/icons/github.svg" alt="GitHub">
+      </div>
+
+      <div class="cta-title" id="cta-title">
+        点赞收藏<br>明天继续带你刷 GitHub
+      </div>
+
+      <div class="cta-subtitle" id="cta-sub">关注我，每日开源项目精选</div>
+
+      <div class="cta-actions" id="cta-actions">
+        <div class="cta-btn cta-like">&#10084;&#65039; 点赞</div>
+        <div class="cta-btn cta-follow">&#43; 关注</div>
+      </div>
+
+      <div class="cta-tags" id="cta-tags">
+        <div class="cta-tag">#GitHub热门</div>
+        <div class="cta-tag">#程序员</div>
+        <div class="cta-tag">#开源</div>
+        <div class="cta-tag">#每日推荐</div>
+      </div>
+    </div>
+
+    </div><!-- end #root -->
+
+    <!-- ==================== GSAP Timelines ==================== -->
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+
+      // Hook scene (0-4s)
+      tl.from("#hook-icon", { opacity: 0, scale: 0.5, duration: 0.4, ease: "power3.out" }, 0)
+        .from("#hook-num", { opacity: 0, scale: 0.3, duration: 0.5, ease: "back.out(1.7)" }, 0.2)
+        .from("#hook-title", { opacity: 0, y: 40, duration: 0.35, ease: "power3.out" }, 0.6)
+        .from("#hook-tag", { opacity: 0, y: 30, duration: 0.3, ease: "power3.out" }, 0.9)
+        .from(".hook-date", { opacity: 0, y: 20, duration: 0.3, ease: "power3.out" }, 1.2)
+        .from("#scene-hook .particle", { opacity: 0, scale: 0, stagger: 0.1, duration: 0.3, ease: "power3.out" }, 0.3);
+
+      // Learning resources (4-12s)
+      tl.from("#learn-title", { opacity: 0, x: -60, duration: 0.35, ease: "power3.out" }, 4)
+        .from("#learn-cards .card", { opacity: 0, x: -80, stagger: 0.25, duration: 0.35, ease: "power3.out" }, 4.2);
+
+      // AI projects (12-19s)
+      tl.from("#ai-title", { opacity: 0, x: -60, duration: 0.35, ease: "power3.out" }, 12)
+        .from("#ai-cards .card", { opacity: 0, x: -80, stagger: 0.3, duration: 0.35, ease: "power3.out" }, 12.2);
+
+      // Dev tools (19-29s)
+      tl.from("#tools-title", { opacity: 0, x: -60, duration: 0.35, ease: "power3.out" }, 19)
+        .from("#tools-cards .card", { opacity: 0, x: -80, stagger: 0.2, duration: 0.35, ease: "power3.out" }, 19.2);
+
+      // CTA (29-35s)
+      tl.from("#cta-icon", { opacity: 0, scale: 0.3, duration: 0.4, ease: "power3.out" }, 29)
+        .from("#cta-title", { opacity: 0, y: 40, duration: 0.35, ease: "power3.out" }, 29.3)
+        .from("#cta-sub", { opacity: 0, y: 30, duration: 0.3, ease: "power3.out" }, 29.6)
+        .from("#cta-actions .cta-btn", { opacity: 0, scale: 0.7, stagger: 0.2, duration: 0.35, ease: "back.out(1.7)" }, 29.8)
+        .from("#cta-tags .cta-tag", { opacity: 0, y: 20, stagger: 0.1, duration: 0.25, ease: "power3.out" }, 30.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  :root {
+    --bg-dark: #0a0e1a;
+    --bg-mid: #111827;
+    --accent: #60a5fa;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(96,165,250,0.2);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg-dark); overflow: hidden; }
+
+  .scene {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px; height: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .scene-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-mid) 100%);
+  }
+
+  .scene-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%);
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0 60px; }
+
+  .grid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px; height: 1920px;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 0;
+  }
+  .grid line { stroke: #60a5fa; stroke-width: 1; }
+
+  .hook-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    letter-spacing: 6px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  .hook-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 200px;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(251,191,36,0.3);
+  }
+  .hook-star {
+    font-size: 80px;
+    color: var(--amber);
+    margin-left: 10px;
+  }
+  .hook-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    color: var(--text-primary);
+    font-weight: 900;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .hook-sub .accent { color: var(--accent); }
+  .hook-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    letter-spacing: 3px;
+  }
+
+  .project-card {
+    width: 960px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .project-rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .rank-badge {
+    background: linear-gradient(135deg, var(--accent), #3b82f6);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 30px;
+    letter-spacing: 2px;
+  }
+  .rank-badge.green { background: linear-gradient(135deg, var(--green), #10b981); }
+  .rank-badge.amber { background: linear-gradient(135deg, var(--amber), #f59e0b); }
+  .project-lang {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.06);
+    padding: 6px 18px;
+    border-radius: 20px;
+  }
+  .project-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+    word-break: break-all;
+  }
+  .project-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .project-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--amber);
+  }
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    color: var(--text-secondary);
+  }
+
+  .cta-divider {
+    width: 160px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 40px 0;
+  }
+  .cta-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .cta-tags {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cta-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    color: var(--accent);
+    background: rgba(96,165,250,0.1);
+    border: 1px solid rgba(96,165,250,0.3);
+    padding: 10px 28px;
+    border-radius: 30px;
+  }
+</style>
+</head>
+<body>
+
+<div data-composition-id="github-trending" data-width="1080" data-height="1920" data-start="0" data-duration="33">
+
+  <!-- Scene 1: Hook (0-4s) -->
+  <div class="scene clip" data-start="0" data-duration="4">
+    <div class="scene-bg"></div>
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+      <line x1="0" y1="480" x2="1080" y2="480"/>
+      <line x1="0" y1="960" x2="1080" y2="960"/>
+      <line x1="0" y1="1440" x2="1080" y2="1440"/>
+    </svg>
+    <div class="content">
+      <div class="hook-label">今日涨星最快</div>
+      <div style="display:flex;align-items:baseline;">
+        <div class="hook-number">3132</div>
+        <div class="hook-star">★</div>
+      </div>
+      <div class="hook-sub">今天 <span class="accent">GitHub</span> 涨星最快的项目</div>
+      <div class="hook-date">2026-05-16</div>
+    </div>
+  </div>
+
+  <!-- Scene 2: mattpocock/skills (4-12s) -->
+  <div class="scene clip" data-start="4" data-duration="8">
+    <div class="scene-bg"></div>
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+    </svg>
+    <div class="content">
+      <div class="project-rank">
+        <div class="rank-badge amber">TOP 1</div>
+        <div class="project-lang">Shell · 工程师工具</div>
+      </div>
+      <div class="project-card" style="margin-top:30px;">
+        <div class="project-name">mattpocock/<br>skills</div>
+        <div class="project-desc">工程师实战技能包，Claude 技能集合，一天涨星超三千</div>
+        <div class="project-stats">
+          <div class="stat">
+            <div class="stat-value">+3,132</div>
+            <div class="stat-label">今日新增</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">84.9K</div>
+            <div class="stat-label">总星数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: RuView (12-19s) -->
+  <div class="scene clip" data-start="12" data-duration="7">
+    <div class="scene-bg"></div>
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+    </svg>
+    <div class="content">
+      <div class="project-rank">
+        <div class="rank-badge">TOP 2</div>
+        <div class="project-lang">Rust · 空间感知</div>
+      </div>
+      <div class="project-card" style="margin-top:30px;">
+        <div class="project-name">ruvnet/<br>RuView</div>
+        <div class="project-desc">WiFi 信号实现空间感知，不需要摄像头，用无线电波"看见"空间</div>
+        <div class="project-stats">
+          <div class="stat">
+            <div class="stat-value">+1,859</div>
+            <div class="stat-label">今日新增</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">57.5K</div>
+            <div class="stat-label">总星数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: superpowers + openhuman (19-27s) -->
+  <div class="scene clip" data-start="19" data-duration="8">
+    <div class="scene-bg"></div>
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+    </svg>
+    <div class="content">
+      <div class="project-rank">
+        <div class="rank-badge green">TOP 3</div>
+        <div class="project-lang">Shell · 智能体框架</div>
+      </div>
+      <div class="project-card" style="margin-top:30px;">
+        <div class="project-name">obra/<br>superpowers</div>
+        <div class="project-desc">智能体技能框架，19 万星，为 AI 智能体赋予超能力</div>
+        <div class="project-stats">
+          <div class="stat">
+            <div class="stat-value">+1,648</div>
+            <div class="stat-label">今日新增</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">192.8K</div>
+            <div class="stat-label">总星数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 5: supertonic + CTA (27-33s) -->
+  <div class="scene clip" data-start="27" data-duration="6">
+    <div class="scene-bg"></div>
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+    </svg>
+    <div class="content">
+      <div class="project-rank">
+        <div class="rank-badge">TOP 5</div>
+        <div class="project-lang">Swift · 语音合成</div>
+      </div>
+      <div class="project-card" style="margin-top:30px;">
+        <div class="project-name">supertone-inc/<br>supertonic</div>
+        <div class="project-desc">端上多语言语音合成引擎，实时运行，低延迟</div>
+        <div class="project-stats">
+          <div class="stat">
+            <div class="stat-value">+719</div>
+            <div class="stat-label">今日新增</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">6.0K</div>
+            <div class="stat-label">总星数</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-divider"></div>
+      <div class="cta-hint">关注我<br>每天发现最火开源项目</div>
+      <div class="cta-tags">
+        <div class="cta-tag">#GitHub热门</div>
+        <div class="cta-tag">#开源</div>
+        <div class="cta-tag">#程序员</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+window.__timelines["github-trending"] = tl;
+</script>
+</body>
+</html>

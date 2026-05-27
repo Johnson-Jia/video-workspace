@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050510; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, #080818 0%, #0c0c28 35%, #0a0a20 70%, #060614 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+/* 双色光晕 */
+.glow-warm {
+  position: absolute; width: 1600px; height: 1600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);
+  filter: blur(220px); top: -300px; left: -500px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1300px; height: 1300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(60,100,180,0.12), transparent 70%);
+  filter: blur(200px); bottom: -250px; right: -400px; pointer-events: none;
+}
+
+/* 第1层：中文日期 */
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: #D4AF37; letter-spacing: 8px; margin-bottom: 40px; }
+
+/* 第2层：胶囊徽章 */
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.25));
+  border: 2px solid rgba(212,175,55,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: #E8C547; letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(212,175,55,0.1);
+}
+
+/* 第3层：主标题（双色） */
+.main-title { position: relative; text-align: center; line-height: 1.15; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: #FFFFFF; letter-spacing: -4px; }
+.main-title .gold { font-size: 220px; font-weight: 900; color: #D4AF37; letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(212,175,55,0.4), 0 0 160px rgba(212,175,55,0.15); }
+
+/* 第4层：渐变分隔线 */
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, #D4AF37, #3C64B4); margin-bottom: 80px; }
+
+/* 第5层：副标题 */
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: #7BA4D4; letter-spacing: 4px; margin-bottom: 100px; text-align: center; }
+
+/* 第6层：双数据卡片 */
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: rgba(15,15,40,0.85);
+  border: 2px solid rgba(212,175,55,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; color: #E8C547; line-height: 1; }
+.card .label { font-size: 52px; color: #8899BB; margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+
+  <!-- 第1层：中文日期 -->
+  <div class="date">2026年5月20日</div>
+  <!-- 第2层：胶囊徽章 -->
+  <div class="badge">银发经济深度报告</div>
+  <!-- 第3层：主标题（双色） -->
+  <div class="main-title">
+    <span class="white">49万亿赛道</span><br>
+    <span class="gold">几乎没人做</span>
+  </div>
+  <!-- 第4层：渐变分隔线 -->
+  <div class="divider"></div>
+  <!-- 第5层：副标题 -->
+  <div class="data-subtitle">3亿老人 · 智能产品 · 商业蓝海</div>
+  <!-- 第6层：双数据卡片 -->
+  <div class="cards">
+    <div class="card">
+      <div class="num">49万亿</div>
+      <div class="label">2050年市场规模</div>
+    </div>
+    <div class="card">
+      <div class="num">1.2亿</div>
+      <div class="label">独居老人待服务</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

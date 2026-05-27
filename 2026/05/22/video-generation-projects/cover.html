@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050510; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, #080820 0%, #0d0d2a 40%, #080818 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,180,41,0.2), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,160,0.12), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+.grid-bg {
+  position: absolute; width: 100%; height: 100%;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+/* 1 - date */
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: #f0b429; letter-spacing: 8px; margin-bottom: 40px; }
+
+/* 2 - scene label */
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: #a0a0c0; letter-spacing: 6px; margin-bottom: 80px; }
+
+/* 3 - badge */
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(240,180,41,0.15), rgba(240,180,41,0.25));
+  border: 2px solid rgba(240,180,41,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: #f0b429; letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(240,180,41,0.1);
+}
+
+/* 4 - main title */
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: #FFFFFF; letter-spacing: -4px; }
+.main-title .orange { font-size: 220px; font-weight: 900; color: #f0b429; letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(240,180,41,0.4), 0 0 160px rgba(240,180,41,0.15); }
+
+/* 5 - divider */
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, #f0b429, #00e5a0); margin-bottom: 80px; }
+
+/* 6 - data subtitle */
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: #a0a0c0; letter-spacing: 4px; margin-bottom: 100px; }
+
+/* 7 - dual cards */
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: rgba(20,20,50,0.85);
+  border: 2px solid rgba(0,229,160,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; color: #00e5a0; line-height: 1; }
+.card .label { font-size: 52px; color: #8899BB; margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+  <div class="grid-bg"></div>
+
+  <!-- 1 date -->
+  <div class="date">2026年5月22日</div>
+  <!-- 2 scene label -->
+  <div class="scene-label">开源专题</div>
+  <!-- 3 badge -->
+  <div class="badge">视频制作工具盘点</div>
+  <!-- 4 main title -->
+  <div class="main-title">
+    <span class="white">用代码</span><br>
+    <span class="orange">做视频</span>
+  </div>
+  <!-- 5 divider -->
+  <div class="divider"></div>
+  <!-- 6 data subtitle -->
+  <div class="data-subtitle">3 个开源项目 · 三条技术路线</div>
+  <!-- 7 dual cards -->
+  <div class="cards">
+    <div class="card">
+      <div class="num">3</div>
+      <div class="label">开源项目</div>
+    </div>
+    <div class="card">
+      <div class="num">4000+</div>
+      <div class="label">最大提交量</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

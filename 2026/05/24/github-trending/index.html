@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>GitHub 今日热门 2026-05-24</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a1a;
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+:root {
+  --bg-dark: #0a0a1a;
+  --bg-mid: #080828;
+  --accent-warm: #FF8C32;
+  --accent-cool: #00D4FF;
+  --accent-blue: #0088CC;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0c0;
+}
+
+.composition { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.clip { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; }
+.scene-wrap { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 120px 90px 240px 36px; }
+
+/* Three-layer architecture */
+.layer-bg { position: absolute; inset: 0; z-index: 1; }
+.layer-fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.layer-content { position: relative; z-index: 3; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* Glows */
+.glow { position: absolute; border-radius: 50%; filter: blur(140px); }
+.glow-warm { background: var(--accent-warm); }
+.glow-cool { background: var(--accent-cool); }
+
+/* Grid overlay */
+.grid-overlay { position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none; }
+
+/* === FX particles === */
+.fx-particle { position: absolute; border-radius: 50%; opacity: 0.4; }
+.fx-float { animation: fxFloat 6s ease-in-out infinite; }
+.fx-drift { animation: fxDrift 8s ease-in-out infinite; }
+.fx-pulse { animation: fxPulse 4s ease-in-out infinite; }
+
+@keyframes fxFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-80px) scale(1.2); }
+}
+@keyframes fxDrift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -40px); }
+  50% { transform: translate(-20px, -60px); }
+  75% { transform: translate(10px, -30px); }
+}
+@keyframes fxPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+@keyframes fxBurst {
+  0% { opacity: 0.6; transform: scale(0.5); }
+  100% { opacity: 0; transform: scale(2.5); }
+}
+
+/* === Hook scene === */
+.hook-title { font-size: 110px; font-weight: 900; color: #fff;
+  text-align: center; line-height: 1.2; text-shadow: 0 0 80px rgba(255,140,50,0.5); }
+.hook-subtitle { font-size: 42px; font-weight: 600; color: var(--accent-cool);
+  margin-top: 40px; letter-spacing: 4px; }
+.hook-badge { font-size: 28px; font-weight: 700; color: var(--accent-warm);
+  background: rgba(255,140,50,0.15); padding: 12px 32px; border-radius: 16px;
+  margin-top: 60px; border: 1px solid rgba(255,140,50,0.3); }
+
+/* === Project card phases === */
+.phase { position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; }
+
+/* Phase 1: Project card */
+.pfc-category { font-size: 26px; font-weight: 600; color: var(--accent-cool);
+  margin-bottom: 50px; letter-spacing: 2px; }
+.pfc-main { display: flex; align-items: center; gap: 40px; width: 100%; margin-bottom: 50px; }
+.pfc-rank { font-size: 120px; font-weight: 900; color: var(--accent-warm);
+  text-shadow: 0 0 60px rgba(255,140,50,0.4); flex-shrink: 0; min-width: 140px; text-align: center; }
+.pfc-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.pfc-name { font-size: 48px; font-weight: 800; color: #fff;
+  font-family: 'JetBrains Mono', monospace; word-break: break-all; }
+.pfc-desc { font-size: 30px; color: var(--text-secondary); line-height: 1.4; }
+.pfc-lang { display: inline-block; font-size: 20px; font-weight: 600;
+  color: var(--accent-cool); background: rgba(0,212,255,0.12);
+  padding: 4px 16px; border-radius: 12px; margin-top: 4px; width: fit-content; }
+.pfc-stars { font-size: 34px; font-weight: 800; color: var(--accent-warm);
+  text-shadow: 0 0 30px rgba(255,140,50,0.3); flex-shrink: 0; text-align: right; white-space: nowrap; }
+.pfc-total { font-size: 22px; color: var(--text-secondary); margin-top: 4px; text-align: right; }
+
+/* Phase 2: Selling + commentary */
+.sell-label { font-size: 24px; font-weight: 600; color: var(--accent-cool);
+  letter-spacing: 2px; margin-bottom: 30px; }
+.sell-points { font-size: 40px; font-weight: 700; color: #fff;
+  text-align: center; line-height: 1.5; margin-bottom: 50px; }
+.sell-divider { width: 120px; height: 3px; background: linear-gradient(90deg, transparent, var(--accent-warm), transparent);
+  margin-bottom: 40px; }
+.sell-comment { font-size: 34px; color: var(--accent-warm);
+  text-align: center; font-style: italic; }
+
+/* === CTA scene === */
+.cta-title { font-size: 88px; font-weight: 900; color: #fff;
+  text-align: center; line-height: 1.2; text-shadow: 0 0 60px rgba(255,140,50,0.4); }
+.cta-subtitle { font-size: 38px; color: var(--text-secondary); margin-top: 40px; text-align: center; }
+.cta-tags { display: flex; gap: 16px; margin-top: 60px; flex-wrap: wrap; justify-content: center; }
+.cta-tag { font-size: 24px; font-weight: 600; color: var(--accent-cool);
+  background: rgba(0,212,255,0.1); padding: 10px 24px; border-radius: 14px;
+  border: 1px solid rgba(0,212,255,0.2); }
+
+/* Topic 5 special: dual project */
+.dual-project { width: 100%; }
+.dual-row { display: flex; align-items: center; gap: 30px; width: 100%; margin-bottom: 40px; }
+.dual-rank { font-size: 90px; font-weight: 900; color: var(--accent-warm);
+  text-shadow: 0 0 50px rgba(255,140,50,0.4); flex-shrink: 0; min-width: 110px; text-align: center; }
+.dual-info { flex: 1; }
+.dual-name { font-size: 40px; font-weight: 800; color: #fff;
+  font-family: 'JetBrains Mono', monospace; }
+.dual-desc { font-size: 26px; color: var(--text-secondary); margin-top: 6px; line-height: 1.3; }
+.dual-stars { font-size: 28px; font-weight: 700; color: var(--accent-warm); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+  <!-- Audio tracks -->
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.13" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ═══ Scene 0: Hook (0 - 3.34s) ═══ -->
+  <div class="clip s-hook" data-start="0" data-duration="3.34">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #0a0a1a 0%, #1a0a00 50%, #0a0a1a 100%);">
+        <div class="glow glow-warm" style="width:600px;height:600px;opacity:0.25;top:400px;left:-100px;"></div>
+        <div class="glow glow-cool" style="width:500px;height:500px;opacity:0.2;bottom:300px;right:-80px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-pulse" style="width:20px;height:20px;background:#FF8C32;top:15%;left:20%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-float" style="width:14px;height:14px;background:#00D4FF;top:25%;right:25%;animation-delay:0.5s;"></div>
+        <div class="fx-particle fx-drift" style="width:18px;height:18px;background:#FF8C32;bottom:30%;left:30%;animation-delay:1s;"></div>
+        <div class="fx-particle fx-pulse" style="width:12px;height:12px;background:#00D4FF;top:60%;right:15%;animation-delay:1.5s;"></div>
+        <div class="fx-particle fx-float" style="width:16px;height:16px;background:#FF8C32;top:70%;left:15%;animation-delay:0.8s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="hook-title">涨星直接炸了</div>
+        <div class="hook-subtitle">六个项目冲上热榜</div>
+        <div class="hook-badge">GitHub 今日热门</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 1: Topic1 - karpathy-skills (3.34 - 15.77s) ═══ -->
+  <div class="clip s-topic1" data-start="3.34" data-duration="12.43">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #080828 0%, #0a0a1a 100%);">
+        <div class="glow glow-cool" style="width:450px;height:450px;opacity:0.2;top:350px;left:-60px;"></div>
+        <div class="glow glow-warm" style="width:350px;height:350px;opacity:0.12;bottom:400px;right:-40px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-float" style="width:10px;height:10px;background:#00D4FF;top:20%;left:15%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-drift" style="width:14px;height:14px;background:#00D4FF;top:40%;right:20%;animation-delay:0.7s;"></div>
+        <div class="fx-particle fx-pulse" style="width:12px;height:12px;background:#0088CC;bottom:25%;left:25%;animation-delay:1.2s;"></div>
+      </div>
+      <div class="layer-content">
+        <!-- Phase 1: Project card -->
+        <div class="phase phase-1">
+          <div class="pfc-category">Karpathy 秘籍</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">1</div>
+            <div class="pfc-info">
+              <div class="pfc-name">andrej-karpathy-skills</div>
+              <div class="pfc-desc">一个 CLAUDE.md 让 AI 编程助手变强</div>
+              <div class="pfc-lang">CLAUDE.md</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pfc-stars">+3372</div>
+              <div class="pfc-total">149560 总星</div>
+            </div>
+          </div>
+        </div>
+        <!-- Phase 2: Selling + commentary -->
+        <div class="phase phase-2">
+          <div class="sell-label">核心卖点</div>
+          <div class="sell-points">零配置 · 全平台兼容 · 立竿见影</div>
+          <div class="sell-divider"></div>
+          <div class="sell-comment">一天涨三千星，开发者用脚投票</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 2: Topic2 - codegraph (15.77 - 27.77s) ═══ -->
+  <div class="clip s-topic2" data-start="15.77" data-duration="12.0">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #080820 0%, #0a0a1a 100%);">
+        <div class="glow glow-cool" style="width:400px;height:400px;opacity:0.18;top:400px;right:-50px;"></div>
+        <div class="glow glow-warm" style="width:300px;height:300px;opacity:0.1;bottom:500px;left:-40px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-drift" style="width:12px;height:12px;background:#00D4FF;top:15%;right:30%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-float" style="width:10px;height:10px;background:#0088CC;top:50%;left:20%;animation-delay:0.4s;"></div>
+        <div class="fx-particle fx-pulse" style="width:16px;height:16px;background:#00D4FF;bottom:35%;right:15%;animation-delay:0.9s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="pfc-category">代码透视镜</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">2</div>
+            <div class="pfc-info">
+              <div class="pfc-name">codegraph</div>
+              <div class="pfc-desc">预索引代码知识图谱 · 不读代码理解项目</div>
+              <div class="pfc-lang">TypeScript</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pfc-stars">+2434</div>
+              <div class="pfc-total">19361 总星</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="sell-label">核心卖点</div>
+          <div class="sell-points">预索引 · 本地运行 · 省 Token</div>
+          <div class="sell-divider"></div>
+          <div class="sell-comment">涨星近两千五，效率工具真需求</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 3: Topic3 - Understand-Anything (27.77 - 41.45s) ═══ -->
+  <div class="clip s-topic3" data-start="27.77" data-duration="13.68">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #0a0a1a 0%, #001030 100%);">
+        <div class="glow glow-cool" style="width:500px;height:500px;opacity:0.22;top:300px;left:-80px;"></div>
+        <div class="glow glow-warm" style="width:350px;height:350px;opacity:0.12;bottom:350px;right:-50px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-float" style="width:14px;height:14px;background:#00D4FF;top:10%;left:25%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-drift" style="width:10px;height:10px;background:#FF8C32;top:35%;right:18%;animation-delay:0.3s;"></div>
+        <div class="fx-particle fx-pulse" style="width:12px;height:12px;background:#00D4FF;top:55%;left:12%;animation-delay:0.6s;"></div>
+        <div class="fx-particle fx-float" style="width:8px;height:8px;background:#0088CC;bottom:20%;right:30%;animation-delay:1s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="pfc-category">知识图谱生成器</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">3</div>
+            <div class="pfc-info">
+              <div class="pfc-name">Understand-Anything</div>
+              <div class="pfc-desc">代码库变成可交互知识图谱</div>
+              <div class="pfc-lang">TypeScript</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pfc-stars">+2331</div>
+              <div class="pfc-total">21402 总星</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="sell-label">核心卖点</div>
+          <div class="sell-points">可交互 · 多平台支持 · 实时问答</div>
+          <div class="sell-divider"></div>
+          <div class="sell-comment">两天累计两万星，速度惊人</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 4: Topic4 - presenton (41.45 - 52.71s) ═══ -->
+  <div class="clip s-topic4" data-start="41.45" data-duration="11.26">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #0a0818 0%, #0a0a1a 100%);">
+        <div class="glow glow-cool" style="width:380px;height:380px;opacity:0.18;top:450px;right:-40px;"></div>
+        <div class="glow glow-warm" style="width:320px;height:320px;opacity:0.14;bottom:450px;left:-50px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-drift" style="width:12px;height:12px;background:#00D4FF;top:18%;left:22%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-pulse" style="width:10px;height:10px;background:#FF8C32;top:45%;right:22%;animation-delay:0.5s;"></div>
+        <div class="fx-particle fx-float" style="width:14px;height:14px;background:#0088CC;bottom:28%;left:18%;animation-delay:1.1s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="pfc-category">AI 演示文稿</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">4</div>
+            <div class="pfc-info">
+              <div class="pfc-name">presenton</div>
+              <div class="pfc-desc">一句话生成专业演示文稿</div>
+              <div class="pfc-lang">TypeScript</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pfc-stars">+335</div>
+              <div class="pfc-total">6331 总星</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="sell-label">核心卖点</div>
+          <div class="sell-points">开源免费 · API 可调用 · 一键生成</div>
+          <div class="sell-divider"></div>
+          <div class="sell-comment">新上榜就冲上来了</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 5: Topic5 - LongLive + claude-plugins (52.71 - 65.96s) ═══ -->
+  <div class="clip s-topic5" data-start="52.71" data-duration="13.25">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #0a0a1a 0%, #100820 50%, #0a0a1a 100%);">
+        <div class="glow glow-warm" style="width:500px;height:500px;opacity:0.2;top:300px;left:-80px;"></div>
+        <div class="glow glow-cool" style="width:450px;height:450px;opacity:0.18;bottom:350px;right:-60px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-pulse" style="width:18px;height:18px;background:#FF8C32;top:12%;right:20%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-float" style="width:14px;height:14px;background:#00D4FF;top:30%;left:15%;animation-delay:0.4s;"></div>
+        <div class="fx-particle fx-drift" style="width:16px;height:16px;background:#FF8C32;bottom:30%;right:18%;animation-delay:0.8s;"></div>
+        <div class="fx-particle fx-pulse" style="width:10px;height:10px;background:#00D4FF;top:55%;left:25%;animation-delay:1.2s;"></div>
+        <div class="fx-particle fx-float" style="width:12px;height:12px;background:#FF8C32;top:75%;right:25%;animation-delay:0.2s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="pfc-category">NVIDIA 长视频</div>
+          <div class="pfc-main">
+            <div class="pfc-rank">5</div>
+            <div class="pfc-info">
+              <div class="pfc-name">LongLive</div>
+              <div class="pfc-desc">NVFP4 量化实时长视频生成</div>
+              <div class="pfc-lang">Python</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pfc-stars">+79</div>
+              <div class="pfc-total">1797 总星</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="dual-project">
+            <div class="sell-label">NVIDIA 出手</div>
+            <div class="sell-points" style="font-size:34px;">实时生成 · NVFP4 量化 · 并行推理</div>
+            <div class="sell-divider"></div>
+            <div class="dual-row">
+              <div class="dual-rank" style="font-size:70px;color:var(--accent-cool);">+</div>
+              <div class="dual-info">
+                <div class="dual-name">claude-plugins-official</div>
+                <div class="dual-desc">连续两天霸榜 · 又涨两千星</div>
+              </div>
+              <div class="dual-stars">+2172</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 6: CTA (65.96 - 69.1s) ═══ -->
+  <div class="clip s-cta" data-start="65.96" data-duration="3.14">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background: linear-gradient(160deg, #0a0a1a 0%, #1a0a00 50%, #0a0a1a 100%);">
+        <div class="glow glow-warm" style="width:600px;height:600px;opacity:0.25;top:400px;left:-100px;"></div>
+        <div class="glow glow-cool" style="width:400px;height:400px;opacity:0.15;bottom:400px;right:-60px;"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-particle fx-pulse" style="width:16px;height:16px;background:#FF8C32;top:20%;left:20%;animation-delay:0s;"></div>
+        <div class="fx-particle fx-float" style="width:12px;height:12px;background:#00D4FF;top:40%;right:25%;animation-delay:0.3s;"></div>
+        <div class="fx-particle fx-drift" style="width:14px;height:14px;background:#FF8C32;bottom:30%;left:30%;animation-delay:0.6s;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="cta-title">关注我<br>每天更新</div>
+        <div class="cta-subtitle">GitHub 热门项目</div>
+        <div class="cta-tags">
+          <span class="cta-tag">GitHub热门</span>
+          <span class="cta-tag">开源</span>
+          <span class="cta-tag">AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 69.1, seek: function(t) {} };
+
+const tl = gsap.timeline({paused: true});
+
+// Phase breakpoints (content-aligned, not time-even)
+// topic1 (12.43s): break at "今天涨了" ~65% of text → 8.1s
+// topic2 (12.0s): break at "本地运行" ~50% → 6.0s
+// topic3 (13.68s): break at "支持Claude Code" ~63% → 8.6s
+// topic4 (11.26s): break at "Gamma的开源" ~58% → 6.5s
+// topic5 (13.25s): break at "最后" ~68% → 9.0s
+
+// ── Hook (start: 0) ──
+tl.from('.s-hook .hook-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 0.1)
+  .from('.s-hook .hook-subtitle', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.5)
+  .from('.s-hook .hook-badge', {opacity:0, scale:0.8, duration:0.3, ease:'back.out(2)'}, 0.8);
+
+// ── Topic1 (start: 3.34) ──
+tl.from('.s-topic1 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 3.44)
+  .from('.s-topic1 .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 3.54)
+  .from('.s-topic1 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 3.64)
+  .from('.s-topic1 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 3.84)
+  .from('.s-topic1 .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 4.04)
+  .from('.s-topic1 .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 3.64)
+  .from('.s-topic1 .pfc-total', {opacity:0, duration:0.3, ease:'power3.out'}, 3.94)
+  // Phase 2 init
+  .set('.s-topic1 .phase-2', {opacity: 0}, 3.34)
+  // Phase 1→2 at 8.1s after scene start = 11.44
+  .to('.s-topic1 .phase-1', {opacity: 0, duration: 0.3}, 11.44)
+  .to('.s-topic1 .phase-2', {opacity: 1, duration: 0.4}, 11.74)
+  .from('.s-topic1 .sell-label', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 11.84)
+  .from('.s-topic1 .sell-points', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 12.04)
+  .from('.s-topic1 .sell-divider', {opacity:0, scaleX:0, duration:0.3, ease:'power3.out'}, 12.24)
+  .from('.s-topic1 .sell-comment', {opacity:0, duration:0.3, ease:'power3.out'}, 12.44);
+
+// ── Topic2 (start: 15.77) ──
+tl.from('.s-topic2 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 15.87)
+  .from('.s-topic2 .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 15.97)
+  .from('.s-topic2 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 16.07)
+  .from('.s-topic2 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 16.27)
+  .from('.s-topic2 .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 16.47)
+  .from('.s-topic2 .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 16.07)
+  .from('.s-topic2 .pfc-total', {opacity:0, duration:0.3, ease:'power3.out'}, 16.37)
+  .set('.s-topic2 .phase-2', {opacity: 0}, 15.77)
+  .to('.s-topic2 .phase-1', {opacity: 0, duration: 0.3}, 21.77)
+  .to('.s-topic2 .phase-2', {opacity: 1, duration: 0.4}, 22.07)
+  .from('.s-topic2 .sell-label', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 22.17)
+  .from('.s-topic2 .sell-points', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 22.37)
+  .from('.s-topic2 .sell-divider', {opacity:0, scaleX:0, duration:0.3, ease:'power3.out'}, 22.57)
+  .from('.s-topic2 .sell-comment', {opacity:0, duration:0.3, ease:'power3.out'}, 22.77);
+
+// ── Topic3 (start: 27.77) ──
+tl.from('.s-topic3 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 27.87)
+  .from('.s-topic3 .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 27.97)
+  .from('.s-topic3 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 28.07)
+  .from('.s-topic3 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 28.27)
+  .from('.s-topic3 .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 28.47)
+  .from('.s-topic3 .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 28.07)
+  .from('.s-topic3 .pfc-total', {opacity:0, duration:0.3, ease:'power3.out'}, 28.37)
+  .set('.s-topic3 .phase-2', {opacity: 0}, 27.77)
+  .to('.s-topic3 .phase-1', {opacity: 0, duration: 0.3}, 36.37)
+  .to('.s-topic3 .phase-2', {opacity: 1, duration: 0.4}, 36.67)
+  .from('.s-topic3 .sell-label', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 36.77)
+  .from('.s-topic3 .sell-points', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 36.97)
+  .from('.s-topic3 .sell-divider', {opacity:0, scaleX:0, duration:0.3, ease:'power3.out'}, 37.17)
+  .from('.s-topic3 .sell-comment', {opacity:0, duration:0.3, ease:'power3.out'}, 37.37);
+
+// ── Topic4 (start: 41.45) ──
+tl.from('.s-topic4 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 41.55)
+  .from('.s-topic4 .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 41.65)
+  .from('.s-topic4 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 41.75)
+  .from('.s-topic4 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 41.95)
+  .from('.s-topic4 .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 42.15)
+  .from('.s-topic4 .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 41.75)
+  .from('.s-topic4 .pfc-total', {opacity:0, duration:0.3, ease:'power3.out'}, 42.05)
+  .set('.s-topic4 .phase-2', {opacity: 0}, 41.45)
+  .to('.s-topic4 .phase-1', {opacity: 0, duration: 0.3}, 47.95)
+  .to('.s-topic4 .phase-2', {opacity: 1, duration: 0.4}, 48.25)
+  .from('.s-topic4 .sell-label', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 48.35)
+  .from('.s-topic4 .sell-points', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 48.55)
+  .from('.s-topic4 .sell-divider', {opacity:0, scaleX:0, duration:0.3, ease:'power3.out'}, 48.75)
+  .from('.s-topic4 .sell-comment', {opacity:0, duration:0.3, ease:'power3.out'}, 48.95);
+
+// ── Topic5 (start: 52.71) ──
+tl.from('.s-topic5 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 52.81)
+  .from('.s-topic5 .pfc-rank', {opacity:0, scale:0.5, duration:0.4, ease:'back.out(1.5)'}, 52.91)
+  .from('.s-topic5 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 53.01)
+  .from('.s-topic5 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 53.21)
+  .from('.s-topic5 .pfc-lang', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 53.41)
+  .from('.s-topic5 .pfc-stars', {opacity:0, x:20, duration:0.3, ease:'power3.out'}, 53.01)
+  .from('.s-topic5 .pfc-total', {opacity:0, duration:0.3, ease:'power3.out'}, 53.31)
+  .set('.s-topic5 .phase-2', {opacity: 0}, 52.71)
+  .to('.s-topic5 .phase-1', {opacity: 0, duration: 0.3}, 61.71)
+  .to('.s-topic5 .phase-2', {opacity: 1, duration: 0.4}, 62.01)
+  .from('.s-topic5 .sell-label', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 62.11)
+  .from('.s-topic5 .sell-points', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 62.31)
+  .from('.s-topic5 .sell-divider', {opacity:0, scaleX:0, duration:0.3, ease:'power3.out'}, 62.51)
+  .from('.s-topic5 .dual-row', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 62.71);
+
+// ── CTA (start: 65.96) ──
+tl.from('.s-cta .cta-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 66.06)
+  .from('.s-cta .cta-subtitle', {opacity:0, duration:0.3, ease:'power3.out'}, 66.46)
+  .from('.s-cta .cta-tag', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)', stagger:0.1}, 66.66);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

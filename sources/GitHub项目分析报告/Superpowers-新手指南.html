@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superpowers 新手指南 — AI 编程方法论完全手册</title>
+<style>
+  :root {
+    --primary: #6C5CE7;
+    --primary-dark: #5A4BD1;
+    --primary-light: #F0EDFF;
+    --success: #00B894;
+    --success-light: #E6FFF7;
+    --warning: #FDCB6E;
+    --warning-light: #FFF9E6;
+    --danger: #E17055;
+    --danger-light: #FFF0EC;
+    --info: #0984E3;
+    --info-light: #EBF5FF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--gray-800); line-height:1.8; background:var(--gray-50);
+  }
+  #progress-bar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--primary), #a29bfe); z-index:9999; transition:width .15s; }
+  #sidebar {
+    position:fixed; top:0; left:0; width:280px; height:100vh;
+    background:#fff; border-right:1px solid var(--gray-200);
+    overflow-y:auto; z-index:100; padding:20px 0; transition: transform .3s;
+  }
+  #sidebar .logo { padding:0 24px 20px; border-bottom:1px solid var(--gray-200); }
+  #sidebar .logo .logo-icon { font-size:28px; margin-bottom:4px; }
+  #sidebar .logo .logo-text { font-size:18px; font-weight:700; color:var(--primary); }
+  #sidebar .logo small { display:block; font-size:12px; font-weight:400; color:var(--gray-600); margin-top:2px; }
+  #sidebar nav { padding:12px 0; }
+  #sidebar nav a { display:block; padding:8px 24px; color:var(--gray-700); text-decoration:none; font-size:14px; transition:all .15s; border-left:3px solid transparent; }
+  #sidebar nav a:hover { background:var(--gray-50); color:var(--primary); }
+  #sidebar nav a.active { background:var(--primary-light); color:var(--primary); border-left-color:var(--primary); font-weight:600; }
+  #sidebar nav .nav-group { padding:8px 24px 4px; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--gray-300); font-weight:700; }
+  #main { margin-left:280px; max-width:900px; padding:40px 48px 120px; }
+  #back-top { position:fixed; bottom:30px; right:30px; width:44px; height:44px; background:var(--primary); color:#fff; border:none; border-radius:50%; cursor:pointer; font-size:20px; box-shadow:var(--shadow-lg); opacity:0; transition:opacity .3s; z-index:200; }
+  #back-top.show { opacity:1; }
+  h1 { font-size:32px; font-weight:800; margin-bottom:8px; color:var(--gray-900); }
+  h1 .emoji { margin-right:8px; }
+  h2 { font-size:26px; font-weight:700; margin:48px 0 20px; color:var(--gray-900); border-bottom:2px solid var(--primary-light); padding-bottom:8px; }
+  h3 { font-size:20px; font-weight:600; margin:32px 0 14px; color:var(--gray-800); }
+  h4 { font-size:17px; font-weight:600; margin:24px 0 10px; color:var(--gray-700); }
+  p { margin-bottom:14px; }
+  a { color:var(--primary); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  strong { color:var(--gray-900); }
+  ul, ol { margin:10px 0 16px 24px; }
+  li { margin-bottom:6px; }
+  code { background:var(--gray-100); padding:2px 6px; border-radius:4px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; color:var(--danger); }
+  pre { background:var(--gray-900); color:#E5E7EB; padding:18px 20px; border-radius:var(--radius); overflow-x:auto; margin:14px 0 18px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; line-height:1.7; position:relative; }
+  pre code { background:none; color:inherit; padding:0; font-size:inherit; }
+  .copy-btn { position:absolute; top:8px; right:8px; background:rgba(255,255,255,.12); color:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px; transition:all .15s; }
+  .copy-btn:hover { background:rgba(255,255,255,.25); color:#fff; }
+  .callout { padding:16px 20px; border-radius:var(--radius); margin:16px 0; border-left:4px solid; }
+  .callout p { margin-bottom:8px; }
+  .callout p:last-child { margin-bottom:0; }
+  .callout-title { font-weight:700; margin-bottom:6px; }
+  .callout-info { background:var(--info-light); border-color:var(--info); }
+  .callout-info .callout-title { color:var(--info); }
+  .callout-success { background:var(--success-light); border-color:var(--success); }
+  .callout-success .callout-title { color:var(--success); }
+  .callout-warning { background:var(--warning-light); border-color:var(--warning); }
+  .callout-warning .callout-title { color:var(--danger); }
+  .callout-danger { background:var(--danger-light); border-color:var(--danger); }
+  .callout-danger .callout-title { color:var(--danger); }
+  .step { background:#fff; border-radius:var(--radius); padding:24px; margin:16px 0; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .step-number { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; font-size:15px; margin-right:10px; flex-shrink:0; }
+  .step-title { display:flex; align-items:center; font-size:17px; font-weight:600; color:var(--gray-900); margin-bottom:12px; }
+  .tabs { margin:16px 0; }
+  .tab-buttons { display:flex; border-bottom:2px solid var(--gray-200); flex-wrap:wrap; }
+  .tab-btn { padding:10px 16px; background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-2px; cursor:pointer; font-size:13px; font-weight:500; color:var(--gray-600); transition:all .15s; white-space:nowrap; }
+  .tab-btn:hover { color:var(--primary); }
+  .tab-btn.active { color:var(--primary); border-bottom-color:var(--primary); font-weight:600; }
+  .tab-content { display:none; padding:16px 0; }
+  .tab-content.active { display:block; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:14px; }
+  th { background:var(--gray-100); text-align:left; padding:10px 14px; font-weight:600; border:1px solid var(--gray-200); }
+  td { padding:10px 14px; border:1px solid var(--gray-200); }
+  tr:nth-child(even) { background:var(--gray-50); }
+  .checklist { list-style:none; margin-left:0; }
+  .checklist li { padding:6px 0 6px 30px; position:relative; }
+  .checklist li::before { content:"\2610"; position:absolute; left:0; top:6px; font-size:16px; color:var(--gray-300); }
+  .faq-item { border:1px solid var(--gray-200); border-radius:var(--radius); margin:8px 0; overflow:hidden; }
+  .faq-q { padding:14px 20px; cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; background:#fff; transition:background .15s; }
+  .faq-q:hover { background:var(--gray-50); }
+  .faq-q .arrow { transition:transform .3s; font-size:12px; color:var(--gray-600); }
+  .faq-q.open .arrow { transform:rotate(180deg); }
+  .faq-a { padding:0 20px; max-height:0; overflow:hidden; transition:all .3s; background:var(--gray-50); }
+  .faq-a.open { padding:16px 20px; max-height:1000px; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin:16px 0; }
+  .card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .card h4 { margin:0 0 8px; }
+  .card p { font-size:14px; color:var(--gray-600); margin:0; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; }
+  .badge-purple { background:var(--primary-light); color:var(--primary); }
+  .badge-green { background:var(--success-light); color:var(--success); }
+  .flow { text-align:center; margin:20px 0; }
+  .flow-step { display:inline-block; background:var(--primary); color:#fff; padding:10px 18px; border-radius:var(--radius); font-weight:600; font-size:13px; margin:4px 0; }
+  .flow-arrow { display:inline-block; color:var(--gray-400); font-size:20px; margin:0 4px; vertical-align:middle; }
+  .skill-card { background:#fff; border-radius:var(--radius); padding:20px 24px; margin:12px 0; box-shadow:var(--shadow); border-left:4px solid var(--primary); }
+  .skill-card h4 { margin:0 0 6px; color:var(--primary-dark); }
+  .skill-card p { font-size:14px; color:var(--gray-600); margin:0; }
+  .skill-card .skill-tag { display:inline-block; background:var(--primary-light); color:var(--primary); padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; margin-right:4px; }
+  .harness-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin:16px 0; }
+  .harness-card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid var(--gray-200); text-align:center; transition:transform .15s; }
+  .harness-card:hover { transform:translateY(-2px); }
+  .harness-card .harness-icon { font-size:36px; margin-bottom:8px; }
+  .harness-card h4 { margin:0 0 4px; font-size:15px; }
+  .harness-card p { font-size:13px; color:var(--gray-600); margin:4px 0; }
+  .harness-card .badge { margin-top:6px; }
+  .workflow-timeline { position:relative; padding-left:40px; margin:20px 0; }
+  .workflow-timeline::before { content:''; position:absolute; left:15px; top:0; bottom:0; width:3px; background:linear-gradient(to bottom, var(--primary), #a29bfe); border-radius:2px; }
+  .workflow-item { position:relative; margin-bottom:24px; }
+  .workflow-item::before { content:''; position:absolute; left:-33px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--primary); border:3px solid #fff; box-shadow:0 0 0 2px var(--primary); z-index:1; }
+  .workflow-item h4 { font-size:16px; margin:0 0 4px; color:var(--gray-900); }
+  .workflow-item p { font-size:14px; color:var(--gray-600); margin:0; }
+  .workflow-item .wf-skill { font-size:12px; color:var(--primary); font-weight:600; }
+  @media(max-width:900px) {
+    #sidebar { transform:translateX(-100%); }
+    #sidebar.open { transform:translateX(0); }
+    #main { margin-left:0; padding:24px 20px 80px; }
+    #menu-toggle { display:block !important; }
+  }
+  #menu-toggle { display:none; position:fixed; top:12px; left:12px; z-index:101; background:var(--primary); color:#fff; border:none; padding:8px 12px; border-radius:var(--radius); cursor:pointer; font-size:18px; }
+  @media print { #sidebar, #progress-bar, #back-top, #menu-toggle, .copy-btn { display:none !important; } #main { margin-left:0; padding:0; } pre { border:1px solid #ddd; } }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
+
+<div id="sidebar">
+  <div class="logo">
+    <div class="logo-icon">&#9889;</div>
+    <div class="logo-text">Superpowers</div>
+    <small>新手指南 v5.1.0</small>
+  </div>
+  <nav>
+    <div class="nav-group">认识项目</div>
+    <a href="#overview">项目概览</a>
+    <a href="#architecture">架构与原理</a>
+    <div class="nav-group">安装配置</div>
+    <a href="#install">安装 Superpowers</a>
+    <a href="#verify">验证安装</a>
+    <div class="nav-group">核心概念</div>
+    <a href="#skills">技能系统详解</a>
+    <a href="#workflow">开发工作流</a>
+    <a href="#philosophy">核心理念</a>
+    <div class="nav-group">技能手册</div>
+    <a href="#skill-brainstorming">头脑风暴</a>
+    <a href="#skill-tdd">测试驱动开发</a>
+    <a href="#skill-debugging">系统化调试</a>
+    <a href="#skill-plans">计划编写</a>
+    <a href="#skill-subagent">子代理开发</a>
+    <a href="#skill-review">代码审查</a>
+    <a href="#skill-worktree">Git Worktree</a>
+    <a href="#skill-verify">完成验证</a>
+    <a href="#skill-writing">编写技能</a>
+    <div class="nav-group">进阶</div>
+    <a href="#contributing">贡献指南</a>
+    <a href="#custom-skills">自定义技能</a>
+    <a href="#faq">常见问题 FAQ</a>
+    <a href="#troubleshoot">故障排查</a>
+  </nav>
+</div>
+
+<div id="main">
+
+<!-- ==================== 第一章 ==================== -->
+<h2 id="overview">第一章：项目概览</h2>
+
+<h3>Superpowers 是什么？</h3>
+<p>Superpowers 是一套<strong>完整的 AI 编程方法论系统</strong>，以插件形式安装在你的编程 AI 代理（如 Claude Code、Codex CLI、Gemini CLI 等）中。它不是框架、不是库、不是命令行工具 &mdash; 它是一组精心设计的<strong>技能（Skills）</strong>，让你的 AI 代理从"随便写写代码"变成"遵循专业软件工程方法论"。</p>
+
+<p>简单说：安装 Superpowers 之后，你的 AI 编程助手会自动：</p>
+<ul>
+  <li>在写代码之前先跟你<strong>讨论需求和设计</strong></li>
+  <li>严格遵循 <strong>TDD（测试驱动开发）</strong>流程</li>
+  <li>按计划<strong>分派子代理</strong>并行执行任务</li>
+  <li>完成后自动<strong>代码审查</strong>和<strong>验证</strong></li>
+</ul>
+
+<div class="callout callout-success">
+  <p class="callout-title">一句话理解</p>
+  <p>Superpowers = 给你的 AI 编程代理装上"专业软件工程师的方法论大脑"。</p>
+</div>
+
+<h3>项目关键信息</h3>
+<table>
+  <tr><th>属性</th><th>值</th></tr>
+  <tr><td>项目名称</td><td>Superpowers</td></tr>
+  <tr><td>当前版本</td><td>v5.1.0（2026-04-30 发布）</td></tr>
+  <tr><td>作者</td><td>Jesse Vincent / <a href="https://primeradiant.com" target="_blank">Prime Radiant</a></td></tr>
+  <tr><td>开源协议</td><td>MIT License</td></tr>
+  <tr><td>语言</td><td>Markdown（技能定义）+ Shell（Hooks 脚本）</td></tr>
+  <tr><td>外部依赖</td><td><strong>零依赖</strong>（设计原则）</td></tr>
+  <tr><td>支持的 AI 代理</td><td>Claude Code、Codex CLI/App、Gemini CLI、OpenCode、Cursor、GitHub Copilot CLI、Factory Droid</td></tr>
+  <tr><td>技能数量</td><td>14 个核心技能</td></tr>
+</table>
+
+<h3>安装流程总览</h3>
+<div class="flow">
+  <div class="flow-step">1. 选择你的 AI 代理</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">2. 一行命令安装插件</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">3. 验证安装成功</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">4. 开始使用</div>
+</div>
+<p style="text-align:center;font-size:13px;color:var(--gray-600);">就是这么简单，通常只需 1 分钟</p>
+
+<h3>安装前检查清单</h3>
+<ul class="checklist">
+  <li>已安装至少一个支持的 AI 编程代理（Claude Code / Codex / Gemini CLI / OpenCode / Cursor 等）</li>
+  <li>你的项目已初始化 Git 仓库（推荐，部分技能需要 Git）</li>
+  <li>了解基本的软件工程概念（测试、分支、代码审查）</li>
+</ul>
+
+<!-- ==================== 第二章 ==================== -->
+<h2 id="architecture">第二章：架构与原理</h2>
+
+<h3>2.1 核心架构</h3>
+<p>Superpowers 由三个核心组件构成：</p>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>Skills（技能）</h4>
+    <p>14 个 Markdown 文件，定义了 AI 代理在各种场景下的行为规范。每个技能包含触发条件、执行步骤、检查清单。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>Hooks（钩子）</h4>
+    <p>SessionStart 钩子在会话启动时自动注入 <code>using-superpowers</code> 技能内容，确保 AI 代理从第一刻起就知道如何使用技能系统。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--info);">
+    <h4>Plugin Config（插件配置）</h4>
+    <p>为每个 AI 代理平台提供标准的插件注册文件（plugin.json），让代理能发现和加载 Superpowers。</p>
+  </div>
+</div>
+
+<h3>2.2 工作原理</h3>
+<div class="workflow-timeline">
+  <div class="workflow-item">
+    <h4>会话启动</h4>
+    <p>SessionStart 钩子自动执行，将 <code>using-superpowers</code> 技能内容注入到 AI 代理的系统提示中</p>
+    <span class="wf-skill">Hook &rarr; using-superpowers</span>
+  </div>
+  <div class="workflow-item">
+    <h4>技能发现</h4>
+    <p>AI 代理了解到有 14 个可用技能，以及每个技能的触发条件。在执行任何任务前，它会检查是否有相关技能</p>
+    <span class="wf-skill">using-superpowers &rarr; Skill Tool</span>
+  </div>
+  <div class="workflow-item">
+    <h4>技能加载</h4>
+    <p>当检测到适用场景，AI 代理通过 Skill Tool 加载对应技能的完整内容</p>
+    <span class="wf-skill">Skill Tool &rarr; 具体技能 SKILL.md</span>
+  </div>
+  <div class="workflow-item">
+    <h4>技能执行</h4>
+    <p>AI 代理严格按照技能定义的步骤执行，不跳步、不省略</p>
+    <span class="wf-skill">按 SKILL.md 中的步骤逐一执行</span>
+  </div>
+</div>
+
+<h3>2.3 项目目录结构</h3>
+<pre><code>superpowers/
+├── skills/                      # 核心技能目录（14 个技能）
+│   ├── brainstorming/           # 头脑风暴 - 设计探索
+│   ├── test-driven-development/ # 测试驱动开发
+│   ├── systematic-debugging/    # 系统化调试
+│   ├── writing-plans/           # 编写实现计划
+│   ├── executing-plans/         # 执行计划
+│   ├── subagent-driven-development/ # 子代理驱动开发
+│   ├── dispatching-parallel-agents/ # 并行代理调度
+│   ├── using-git-worktrees/     # Git Worktree 隔离
+│   ├── requesting-code-review/  # 请求代码审查
+│   ├── receiving-code-review/   # 接收代码审查反馈
+│   ├── verification-before-completion/ # 完成前验证
+│   ├── finishing-a-development-branch/ # 完成分支开发
+│   ├── writing-skills/          # 编写新技能
+│   └── using-superpowers/       # 入门引导（自动注入）
+├── hooks/                       # 钩子脚本
+│   ├── session-start            # 会话启动钩子
+│   ├── hooks.json               # Claude Code 钩子配置
+│   └── hooks-cursor.json        # Cursor 钩子配置
+├── .claude-plugin/              # Claude Code 插件配置
+├── .codex-plugin/               # Codex 插件配置
+├── .cursor-plugin/              # Cursor 插件配置
+├── .opencode/                   # OpenCode 插件配置
+├── docs/                        # 文档
+├── scripts/                     # 构建脚本
+├── tests/                       # 测试
+├── CLAUDE.md                    # Claude Code 项目说明
+├── GEMINI.md                    # Gemini CLI 项目说明
+└── gemini-extension.json        # Gemini 扩展配置</code></pre>
+
+<h3>2.4 零依赖设计</h3>
+<div class="callout callout-info">
+  <p class="callout-title">为什么零依赖很重要？</p>
+  <p>Superpowers 的设计哲学是<strong>零外部依赖</strong>。所有技能都是纯 Markdown 文件，所有逻辑都通过 AI 代理的原生能力执行。这意味着：</p>
+  <ul>
+    <li>安装即用，无需安装 Node.js / Python / 任何运行时</li>
+    <li>不会与你的项目依赖冲突</li>
+    <li>维护者拒绝引入第三方依赖的 PR（这是硬性规则）</li>
+  </ul>
+</div>
+
+<!-- ==================== 第三章 ==================== -->
+<h2 id="install">第三章：安装 Superpowers</h2>
+
+<p>Superpowers 的安装方式取决于你使用的 AI 编程代理。请选择你使用的代理：</p>
+
+<div class="harness-grid">
+  <div class="harness-card" style="border-top:3px solid var(--primary);">
+    <div class="harness-icon">&#x1F4BB;</div>
+    <h4>Claude Code</h4>
+    <p>Anthropic 官方 CLI</p>
+    <span class="badge badge-green">官方市场</span>
+  </div>
+  <div class="harness-card" style="border-top:3px solid #10A37F;">
+    <div class="harness-icon">&#x1F916;</div>
+    <h4>Codex CLI / App</h4>
+    <p>OpenAI 编程代理</p>
+    <span class="badge badge-green">官方市场</span>
+  </div>
+  <div class="harness-card" style="border-top:3px solid #4285F4;">
+    <div class="harness-icon">&#x2728;</div>
+    <h4>Gemini CLI</h4>
+    <p>Google AI 编程工具</p>
+    <span class="badge badge-purple">扩展</span>
+  </div>
+  <div class="harness-card" style="border-top:3px solid #FF6B6B;">
+    <div class="harness-icon">&#x1F680;</div>
+    <h4>OpenCode</h4>
+    <p>开源编程代理</p>
+    <span class="badge badge-purple">插件</span>
+  </div>
+  <div class="harness-card" style="border-top:3px solid var(--success);">
+    <div class="harness-icon">&#x1F5A5;</div>
+    <h4>Cursor</h4>
+    <p>AI 编程 IDE</p>
+    <span class="badge badge-purple">市场</span>
+  </div>
+  <div class="harness-card" style="border-top:3px solid var(--warning);">
+    <div class="harness-icon">&#x1F4E1;</div>
+    <h4>Copilot CLI</h4>
+    <p>GitHub 命令行助手</p>
+    <span class="badge badge-purple">市场</span>
+  </div>
+</div>
+
+<h3>3.1 Claude Code 安装</h3>
+
+<div class="callout callout-success">
+  <p class="callout-title">推荐方式：官方插件市场</p>
+  <p>Superpowers 已上架 Anthropic 官方插件市场，这是最简单的安装方式。</p>
+</div>
+
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(event,'cc-official')">官方市场（推荐）</button>
+    <button class="tab-btn" onclick="switchTab(event,'cc-marketplace')">Superpowers 市场</button>
+  </div>
+  <div class="tab-content active" id="cc-official">
+    <div class="step">
+      <div class="step-title"><span class="step-number">1</span>在 Claude Code 中执行</div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>/plugin install superpowers@claude-plugins-official</code></pre>
+      <p>就这么一行命令。安装完成后重启 Claude Code 即可生效。</p>
+    </div>
+  </div>
+  <div class="tab-content" id="cc-marketplace">
+    <div class="step">
+      <div class="step-title"><span class="step-number">1</span>注册 Superpowers 市场</div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>/plugin marketplace add obra/superpowers-marketplace</code></pre>
+    </div>
+    <div class="step">
+      <div class="step-title"><span class="step-number">2</span>从市场安装</div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>/plugin install superpowers@superpowers-marketplace</code></pre>
+    </div>
+  </div>
+</div>
+
+<h3>3.2 Codex CLI 安装</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>打开插件搜索</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>/plugins</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>搜索并安装</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>superpowers</code></pre>
+  <p>在搜索结果中选择 <code>superpowers</code>，点击 <strong>Install Plugin</strong>。</p>
+</div>
+
+<h3>3.3 Codex App 安装</h3>
+<div class="step">
+  <ol>
+    <li>打开 Codex App</li>
+    <li>在侧边栏点击 <strong>Plugins</strong></li>
+    <li>在 Coding 分类中找到 <strong>Superpowers</strong></li>
+    <li>点击 <strong>+</strong> 按钮并按提示操作</li>
+  </ol>
+</div>
+
+<h3>3.4 Gemini CLI 安装</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装扩展</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>gemini extensions install https://github.com/obra/superpowers</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>后续更新</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>gemini extensions update superpowers</code></pre>
+</div>
+
+<h3>3.5 OpenCode 安装</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>编辑配置文件</div>
+  <p>在你的 <code>opencode.json</code>（全局或项目级）中添加：</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>{
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
+}</code></pre>
+</div>
+<div class="callout callout-info">
+  <p>OpenCode 使用独立的插件系统。即使你在其他 AI 代理中已安装 Superpowers，OpenCode 也需要单独安装一次。</p>
+</div>
+
+<h3>3.6 Cursor 安装</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>在 Agent Chat 中安装</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>/add-plugin superpowers</code></pre>
+  <p>或者在插件市场中搜索 "superpowers" 并安装。</p>
+</div>
+
+<h3>3.7 GitHub Copilot CLI 安装</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册市场并安装</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 注册市场
+copilot plugin marketplace add obra/superpowers-marketplace
+
+# 安装插件
+copilot plugin install superpowers@superpowers-marketplace</code></pre>
+</div>
+
+<h3>3.8 Factory Droid 安装</h3>
+<div class="step">
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 注册市场
+droid plugin marketplace add https://github.com/obra/superpowers
+
+# 安装插件
+droid plugin install superpowers@superpowers</code></pre>
+</div>
+
+<!-- ==================== 第四章 ==================== -->
+<h2 id="verify">第四章：验证安装</h2>
+
+<h3>4.1 快速验证法</h3>
+<p>安装完成后，打开你的 AI 编程代理，发送以下消息进行测试：</p>
+
+<div class="step">
+  <div class="step-title">测试命令</div>
+  <pre><code>告诉我你的 superpowers</code></pre>
+  <p>如果安装成功，AI 代理会回复关于其技能系统的详细说明。</p>
+</div>
+
+<h3>4.2 实战验证法（推荐）</h3>
+<p>用这个经典的测试消息来验证技能是否自动触发：</p>
+
+<div class="step">
+  <div class="step-title">验收测试</div>
+  <pre><code>我们来做一个 React 待办列表</code></pre>
+  <p>如果安装正确，AI 代理会在写任何代码之前<strong>自动触发 brainstorming 技能</strong>，开始向你提问关于需求和设计的问题。</p>
+  <div class="callout callout-warning">
+    <p class="callout-title">这是关键验收标准</p>
+    <p>如果 AI 代理直接开始写代码，而没有先讨论需求，说明 Superpowers <strong>没有正确加载</strong>。请检查安装步骤。</p>
+  </div>
+</div>
+
+<h3>4.3 多代理用户注意</h3>
+<div class="callout callout-info">
+  <p class="callout-title">每个代理需要单独安装</p>
+  <p>如果你同时使用 Claude Code 和 Codex，需要在两个代理中分别安装 Superpowers。它们的插件系统是独立的。</p>
+</div>
+
+<!-- ==================== 第五章 ==================== -->
+<h2 id="skills">第五章：技能系统详解</h2>
+
+<p>Superpowers 的核心是 14 个技能。每个技能都是一个 Markdown 文件，定义了<strong>什么时候触发</strong>、<strong>按什么步骤执行</strong>、<strong>检查清单是什么</strong>。</p>
+
+<h3>技能分类</h3>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>设计类</h4>
+    <p><strong>brainstorming</strong> &mdash; 在动手写代码前，通过苏格拉底式提问帮你理清需求</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>计划类</h4>
+    <p><strong>writing-plans</strong> &mdash; 将设计拆解为 2-5 分钟的小任务<br><strong>executing-plans</strong> &mdash; 按批次执行计划</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--info);">
+    <h4>执行类</h4>
+    <p><strong>subagent-driven-development</strong> &mdash; 子代理并行执行<br><strong>dispatching-parallel-agents</strong> &mdash; 调度独立任务</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--warning);">
+    <h4>质量类</h4>
+    <p><strong>test-driven-development</strong> &mdash; RED-GREEN-REFACTOR<br><strong>systematic-debugging</strong> &mdash; 4 阶段根因分析<br><strong>verification-before-completion</strong> &mdash; 完成前强制验证</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--danger);">
+    <h4>协作类</h4>
+    <p><strong>requesting-code-review</strong> &mdash; 请求代码审查<br><strong>receiving-code-review</strong> &mdash; 接收审查反馈<br><strong>finishing-a-development-branch</strong> &mdash; 完成分支</p>
+  </div>
+  <div class="card" style="border-top:3px solid #636e72;">
+    <h4>工具类</h4>
+    <p><strong>using-git-worktrees</strong> &mdash; Git Worktree 隔离<br><strong>writing-skills</strong> &mdash; 编写自定义技能<br><strong>using-superpowers</strong> &mdash; 入门引导</p>
+  </div>
+</div>
+
+<h3>技能触发机制</h3>
+<div class="callout callout-danger">
+  <p class="callout-title">重要：技能是强制工作流，不是建议</p>
+  <p>Superpowers 的技能会在适用场景<strong>自动触发</strong>。AI 代理在执行任何任务前都会检查是否有相关技能。这不是可选的参考文档，而是<strong>必须遵循的方法论</strong>。</p>
+</div>
+
+<p>触发判断遵循"1% 原则"：如果某个技能<strong>哪怕只有 1% 的可能适用</strong>，AI 代理就必须先加载该技能，确认是否需要执行。</p>
+
+<!-- ==================== 第六章 ==================== -->
+<h2 id="workflow">第六章：开发工作流</h2>
+
+<p>以下是使用 Superpowers 的典型开发工作流，从想法到交付的完整过程：</p>
+
+<div class="workflow-timeline">
+  <div class="workflow-item">
+    <h4>Step 1：头脑风暴（brainstorming）</h4>
+    <p>你提出一个想法，AI 代理自动触发头脑风暴技能。通过苏格拉底式提问，帮你澄清需求、探索方案、形成设计文档。</p>
+    <span class="wf-skill">自动触发 &mdash; 在任何创造性工作之前</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 2：创建隔离环境（using-git-worktrees）</h4>
+    <p>设计确认后，AI 代理自动创建一个隔离的 Git Worktree 分支，避免污染主分支。</p>
+    <span class="wf-skill">自动触发 &mdash; 设计批准后</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 3：编写实现计划（writing-plans）</h4>
+    <p>将设计拆解为一系列 2-5 分钟的小任务，每个任务都有明确的文件路径、完整代码和验证步骤。</p>
+    <span class="wf-skill">自动触发 &mdash; 设计批准后</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 4：执行实现（subagent-driven-development）</h4>
+    <p>为每个任务分派一个全新的子代理执行。每完成一个任务后进行两阶段审查（规范合规 + 代码质量）。</p>
+    <span class="wf-skill">自动触发 &mdash; 计划就绪后</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 5：测试驱动开发（test-driven-development）</h4>
+    <p>在实现过程中，严格执行 RED-GREEN-REFACTOR 循环：先写失败测试 &rarr; 看到测试失败 &rarr; 写最小实现代码 &rarr; 看到测试通过。</p>
+    <span class="wf-skill">自动触发 &mdash; 实现任何功能时</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 6：代码审查（requesting-code-review）</h4>
+    <p>任务之间和完成时，自动进行代码审查。按严重级别报告问题，关键问题会阻止继续推进。</p>
+    <span class="wf-skill">自动触发 &mdash; 任务完成时</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 7：完成验证（verification-before-completion）</h4>
+    <p>所有测试通过后，AI 代理强制运行验证命令并确认输出，然后才能声明任务完成。</p>
+    <span class="wf-skill">自动触发 &mdash; 声明完成之前</span>
+  </div>
+  <div class="workflow-item">
+    <h4>Step 8：完成分支（finishing-a-development-branch）</h4>
+    <p>验证测试通过后，提供选项：合并到主分支 / 创建 PR / 保留分支 / 放弃更改。</p>
+    <span class="wf-skill">自动触发 &mdash; 任务全部完成时</span>
+  </div>
+</div>
+
+<div class="callout callout-success">
+  <p class="callout-title">你不需要记住这些步骤</p>
+  <p>Superpowers 的技能会<strong>自动触发</strong>。你只需要跟 AI 代理正常对话，它会自动在正确的时机执行正确的工作流。上面的流程图只是帮你理解背后的原理。</p>
+</div>
+
+<!-- ==================== 第七章 ==================== -->
+<h2 id="philosophy">第七章：核心理念</h2>
+
+<p>Superpowers 的设计遵循四个核心理念：</p>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>测试驱动开发</h4>
+    <p><strong>先写测试，永远先写测试。</strong>任何在测试之前写的代码都会被删除。这不是建议，是强制规则。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>系统化 &gt; 临时</h4>
+    <p><strong>流程 &gt; 猜测。</strong>遇到 Bug 时不是随意修改代码，而是遵循 4 阶段根因分析流程。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--info);">
+    <h4>复杂性降低</h4>
+    <p><strong>简洁是首要目标。</strong>遵循 YAGNI（你不会需要它）原则，不做过度设计。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--warning);">
+    <h4>证据 &gt; 声明</h4>
+    <p><strong>验证后再宣布成功。</strong>"测试通过了"不算成功，AI 代理必须亲自运行验证命令并确认输出。</p>
+  </div>
+</div>
+
+<div class="callout callout-warning">
+  <p class="callout-title">TDD 不是可选项</p>
+  <p>在 Superpowers 的工作流中，测试驱动开发是<strong>强制执行</strong>的。如果你尝试让 AI 代理先写实现代码再写测试，它会拒绝并告诉你"先写测试"。</p>
+</div>
+
+<!-- ==================== 第八章：技能手册 ==================== -->
+<h2 id="skill-brainstorming">第八章：技能手册 &mdash; 头脑风暴</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">设计</span><span class="skill-tag">必用</span>
+  <h4>brainstorming</h4>
+  <p>在任何创造性工作（创建功能、构建组件、添加功能、修改行为）之前<strong>必须使用</strong>。</p>
+</div>
+
+<h3>它做什么？</h3>
+<p>当你说"我想做一个 XXX 功能"时，AI 代理不会立即开始写代码，而是通过一系列问题帮你：</p>
+<ul>
+  <li>澄清你<strong>真正想要什么</strong></li>
+  <li>探索<strong>不同的实现方案</strong></li>
+  <li>识别<strong>潜在风险和边缘情况</strong></li>
+  <li>形成<strong>清晰的设计文档</strong></li>
+</ul>
+
+<h3>使用场景</h3>
+<table>
+  <tr><th>场景</th><th>AI 代理的行为</th></tr>
+  <tr><td>你说"做一个登录页面"</td><td>触发 brainstorming，问你用什么认证方式、需要社交登录吗、密码策略等</td></tr>
+  <tr><td>你说"修复这个 Bug"</td><td>触发 systematic-debugging，先定位根因再修</td></tr>
+  <tr><td>你说"重构这段代码"</td><td>触发 brainstorming，确认重构目标和范围</td></tr>
+</table>
+
+<h3>使用示例</h3>
+<div class="step">
+  <div class="step-title">你只需要这样说</div>
+  <pre><code>我想给应用添加一个暗黑模式</code></pre>
+  <p>AI 代理会自动触发 brainstorming 技能，开始向你提问。</p>
+</div>
+
+<!-- ==================== 第九章 ==================== -->
+<h2 id="skill-tdd">第九章：技能手册 &mdash; 测试驱动开发</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">质量</span><span class="skill-tag">强制</span>
+  <h4>test-driven-development</h4>
+  <p>在实现任何功能或修复任何 Bug 之前触发。强制执行 RED-GREEN-REFACTOR 循环。</p>
+</div>
+
+<h3>TDD 循环</h3>
+<div class="flow">
+  <div class="flow-step" style="background:var(--danger);">RED：写失败测试</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step" style="background:var(--warning);">看到测试失败</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step" style="background:var(--success);">GREEN：写最小实现</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step" style="background:var(--success);">看到测试通过</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step" style="background:var(--primary);">REFACTOR：重构</div>
+</div>
+
+<h3>关键规则</h3>
+<div class="callout callout-danger">
+  <p class="callout-title">在测试之前写的代码会被删除</p>
+  <p>如果你不小心先写了实现代码，AI 代理会：</p>
+  <ol>
+    <li>将实现代码<strong>暂存（stash）</strong></li>
+    <li>先写<strong>测试</strong></li>
+    <li>确认测试<strong>失败</strong>（RED）</li>
+    <li>恢复实现代码，确认测试<strong>通过</strong>（GREEN）</li>
+    <li>进行<strong>重构</strong></li>
+  </ol>
+</div>
+
+<!-- ==================== 第十章 ==================== -->
+<h2 id="skill-debugging">第十章：技能手册 &mdash; 系统化调试</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">质量</span><span class="skill-tag">调试</span>
+  <h4>systematic-debugging</h4>
+  <p>遇到任何 Bug、测试失败或意外行为时触发。<strong>在提出修复方案之前</strong>必须先完成根因分析。</p>
+</div>
+
+<h3>4 阶段根因分析流程</h3>
+<table>
+  <tr><th>阶段</th><th>名称</th><th>做什么</th></tr>
+  <tr><td>1</td><td>复现</td><td>确认问题可以被稳定复现</td></tr>
+  <tr><td>2</td><td>定位</td><td>通过日志、断点等手段找到根因</td></tr>
+  <tr><td>3</td><td>修复</td><td>针对根因编写修复代码（先写测试！）</td></tr>
+  <tr><td>4</td><td>防御</td><td>添加回归测试，防止问题再次发生</td></tr>
+</table>
+
+<div class="callout callout-warning">
+  <p class="callout-title">禁止"试试看"式修复</p>
+  <p>AI 代理不会说"可能是这个原因，我先改改试试"。它必须先<strong>证明根因</strong>，然后才能修复。</p>
+</div>
+
+<!-- ==================== 第十一章 ==================== -->
+<h2 id="skill-plans">第十一章：技能手册 &mdash; 计划编写与执行</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">计划</span><span class="skill-tag">设计后</span>
+  <h4>writing-plans</h4>
+  <p>将设计文档拆解为具体的实现计划。每个任务 2-5 分钟可完成，包含精确的文件路径、完整代码和验证步骤。</p>
+</div>
+
+<h3>计划的质量标准</h3>
+<p>一个好的 Superpowers 计划像一份"给热情但缺乏判断力的初级工程师的说明书"：</p>
+<ul>
+  <li>每个任务都有<strong>精确的文件路径</strong></li>
+  <li>包含<strong>完整的代码</strong>（不是伪代码或占位符）</li>
+  <li>每个任务都有<strong>验证步骤</strong></li>
+  <li>任务之间有明确的<strong>依赖关系</strong></li>
+  <li>遵循 <strong>YAGNI</strong>（你不会需要它）和 <strong>DRY</strong>（不要重复自己）原则</li>
+</ul>
+
+<div class="skill-card" style="border-left-color:var(--info);">
+  <span class="skill-tag">执行</span><span class="skill-tag">计划后</span>
+  <h4>executing-plans</h4>
+  <p>按批次执行计划，在每个批次完成后设置检查点，等待你的确认再继续。</p>
+</div>
+
+<!-- ==================== 第十二章 ==================== -->
+<h2 id="skill-subagent">第十二章：技能手册 &mdash; 子代理开发</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">执行</span><span class="skill-tag">核心</span>
+  <h4>subagent-driven-development</h4>
+  <p>为计划中的每个任务分派一个全新的子代理执行。包含两阶段审查：规范合规性 + 代码质量。</p>
+</div>
+
+<h3>工作方式</h3>
+<div class="workflow-timeline">
+  <div class="workflow-item">
+    <h4>分派子代理</h4>
+    <p>主代理为当前任务创建一个全新的子代理，给它完整的任务描述和上下文。</p>
+  </div>
+  <div class="workflow-item">
+    <h4>子代理执行</h4>
+    <p>子代理独立完成任务（遵循 TDD、验证等技能）。</p>
+  </div>
+  <div class="workflow-item">
+    <h4>第一阶段审查：规范合规</h4>
+    <p>检查子代理的产出是否符合计划中的规格要求。</p>
+  </div>
+  <div class="workflow-item">
+    <h4>第二阶段审查：代码质量</h4>
+    <p>检查代码的可维护性、安全性和性能。</p>
+  </div>
+  <div class="workflow-item">
+    <h4>继续下一个任务</h4>
+    <p>审查通过后，分派下一个任务的子代理。</p>
+  </div>
+</div>
+
+<div class="callout callout-info">
+  <p class="callout-title">Claude 可以自主工作数小时</p>
+  <p>使用子代理驱动开发，Claude 经常可以自主工作 2 小时以上而不偏离计划。你只需要审批设计和计划，然后让它自己干。</p>
+</div>
+
+<h3>并行调度</h3>
+<div class="skill-card" style="border-left-color:var(--success);">
+  <span class="skill-tag">执行</span><span class="skill-tag">并行</span>
+  <h4>dispatching-parallel-agents</h4>
+  <p>当有 2 个以上<strong>互相独立</strong>的任务时，可以同时分派多个子代理并行工作。</p>
+</div>
+
+<p>并行调度的前提条件：</p>
+<ul>
+  <li>任务之间<strong>没有依赖关系</strong></li>
+  <li>任务之间<strong>没有文件重叠</strong></li>
+  <li>并行带来的收益<strong>值得</strong>额外的协调开销</li>
+</ul>
+
+<!-- ==================== 第十三章 ==================== -->
+<h2 id="skill-review">第十三章：技能手册 &mdash; 代码审查</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">协作</span><span class="skill-tag">质量门</span>
+  <h4>requesting-code-review</h4>
+  <p>在完成任务、实现重大功能或合并前触发。验证工作是否满足需求。</p>
+</div>
+
+<h3>审查流程</h3>
+<table>
+  <tr><th>阶段</th><th>检查内容</th></tr>
+  <tr><td>规范合规</td><td>是否实现了计划中的所有要求？是否有遗漏？</td></tr>
+  <tr><td>代码质量</td><td>可维护性、安全性、性能、命名规范</td></tr>
+  <tr><td>测试覆盖</td><td>是否有足够的测试？边缘情况是否覆盖？</td></tr>
+</table>
+
+<div class="skill-card" style="border-left-color:var(--danger);">
+  <span class="skill-tag">协作</span><span class="skill-tag">反馈</span>
+  <h4>receiving-code-review</h4>
+  <p>收到代码审查反馈后触发。要求技术严谨和验证，而不是盲目同意和实施。</p>
+</div>
+
+<div class="callout callout-warning">
+  <p class="callout-title">不是盲目接受反馈</p>
+  <p>Superpowers 的代码审查反馈处理要求 AI 代理<strong>独立思考</strong>。如果反馈不明确或技术上有疑问，AI 代理会主动质疑而不是盲目执行。</p>
+</div>
+
+<!-- ==================== 第十四章 ==================== -->
+<h2 id="skill-worktree">第十四章：技能手册 &mdash; Git Worktree</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">工具</span><span class="skill-tag">隔离</span>
+  <h4>using-git-worktrees</h4>
+  <p>在开始需要隔离的功能开发或执行实现计划之前触发。创建隔离的 Git Worktree 工作空间。</p>
+</div>
+
+<h3>工作方式</h3>
+<ol>
+  <li>检测当前是否已在 Worktree 中（避免重复创建）</li>
+  <li>优先使用 AI 代理的原生 Worktree 工具（如 Codex 的内置功能）</li>
+  <li>回退到 <code>git worktree</code> 命令</li>
+  <li>所有 Worktree 创建在 <code>.worktrees/</code> 目录下（可追踪来源）</li>
+</ol>
+
+<div class="callout callout-info">
+  <p class="callout-title">v5.1.0 改进</p>
+  <p>从 v5.1.0 开始，Worktree 创建前会<strong>先征得你的同意</strong>，不再静默创建。同时修复了多个跨平台兼容性问题。</p>
+</div>
+
+<div class="skill-card" style="border-left-color:var(--success);">
+  <span class="skill-tag">工具</span><span class="skill-tag">完成</span>
+  <h4>finishing-a-development-branch</h4>
+  <p>所有任务完成、测试通过后触发。提供四个选项：</p>
+</div>
+
+<table>
+  <tr><th>选项</th><th>说明</th></tr>
+  <tr><td>合并到主分支</td><td>自动 merge 并清理 Worktree</td></tr>
+  <tr><td>创建 Pull Request</td><td>推送分支并创建 PR</td></tr>
+  <tr><td>保留分支</td><td>保留当前状态，稍后处理</td></tr>
+  <tr><td>放弃更改</td><td>删除分支和 Worktree</td></tr>
+</table>
+
+<!-- ==================== 第十五章 ==================== -->
+<h2 id="skill-verify">第十五章：技能手册 &mdash; 完成验证</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">质量</span><span class="skill-tag">门禁</span>
+  <h4>verification-before-completion</h4>
+  <p>在声明任务完成、修复成功或测试通过之前触发。<strong>证据先于断言，永远如此。</strong></p>
+</div>
+
+<h3>验证清单</h3>
+<ul class="checklist">
+  <li>所有测试命令已执行并确认输出（不是"应该通过了"）</li>
+  <li>功能在真实环境中验证（不是单元测试通过就完事）</li>
+  <li>没有引入回归（其他功能仍然正常工作）</li>
+  <li>边缘情况已测试</li>
+</ul>
+
+<div class="callout callout-danger">
+  <p class="callout-title">"测试通过了" 不等于 "完成了"</p>
+  <p>AI 代理不能说"我运行了测试，应该没问题"。它必须<strong>实际运行验证命令</strong>，查看输出，并确认结果符合预期。</p>
+</div>
+
+<!-- ==================== 第十六章 ==================== -->
+<h2 id="skill-writing">第十六章：技能手册 &mdash; 编写技能</h2>
+
+<div class="skill-card">
+  <span class="skill-tag">元技能</span><span class="skill-tag">扩展</span>
+  <h4>writing-skills</h4>
+  <p>创建新技能、编辑现有技能或验证技能是否正常工作。包含完整的测试方法论。</p>
+</div>
+
+<h3>技能文件结构</h3>
+<p>每个技能都是一个目录，包含一个 <code>SKILL.md</code> 文件：</p>
+<pre><code>skills/my-custom-skill/
+└── SKILL.md</code></pre>
+
+<h3>SKILL.md 格式</h3>
+<pre><code>---
+name: my-custom-skill
+description: "一句话描述技能的用途和触发条件"
+---
+
+# 技能内容
+
+（详细的步骤说明、检查清单、行为规范）</code></pre>
+
+<!-- ==================== 第十七章 ==================== -->
+<h2 id="contributing">第十七章：贡献指南</h2>
+
+<p>如果你想为 Superpowers 项目贡献代码，请仔细阅读以下规则：</p>
+
+<div class="callout callout-danger">
+  <p class="callout-title">PR 拒绝率 94%</p>
+  <p>这个项目的 PR 拒绝率极高，主要原因是 AI 代理提交的低质量 PR。提交前请务必确认你的 PR 符合以下所有要求。</p>
+</div>
+
+<h3>17.1 贡献流程</h3>
+<ol>
+  <li>Fork 仓库</li>
+  <li>切换到 <code>dev</code> 分支</li>
+  <li>创建你的工作分支</li>
+  <li>遵循 <code>writing-skills</code> 技能开发和测试变更</li>
+  <li>填写完整的 PR 模板</li>
+</ol>
+
+<h3>17.2 不会被接受的内容</h3>
+<table>
+  <tr><th>类型</th><th>说明</th></tr>
+  <tr><td>第三方依赖</td><td>Superpowers 是零依赖项目，不引入任何外部依赖</td></tr>
+  <tr><td>技能"合规"重写</td><td>不能为了"符合文档规范"而重写技能内容</td></tr>
+  <tr><td>项目特定配置</td><td>只服务于特定项目/团队的配置不属于核心</td></tr>
+  <tr><td>批量 PR</td><td>不要一次性针对多个 Issue 提交 PR</td></tr>
+  <tr><td>推测性修复</td><td>"可能有问题"不是问题陈述，必须有真实场景</td></tr>
+  <tr><td>领域特定技能</td><td>只服务特定领域的技能应发布为独立插件</td></tr>
+  <tr><td>捏造内容</td><td>包含虚假声明或捏造功能描述的 PR 会被立即关闭</td></tr>
+</table>
+
+<h3>17.3 PR 必须包含的内容</h3>
+<ul class="checklist">
+  <li>完整的 PR 模板（每个部分都填写真实内容）</li>
+  <li>搜索过已有的 PR（开放的和关闭的）</li>
+  <li>描述了真实存在的问题（不是理论上的）</li>
+  <li>确认变更属于核心（不是领域特定的）</li>
+  <li>人工审查了完整的 diff</li>
+</ul>
+
+<!-- ==================== 第十八章 ==================== -->
+<h2 id="custom-skills">第十八章：自定义技能</h2>
+
+<p>如果 Superpowers 的核心技能不能满足你的需求，你可以创建自定义技能。</p>
+
+<h3>18.1 技能存放位置</h3>
+
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(event,'custom-claude')">Claude Code</button>
+    <button class="tab-btn" onclick="switchTab(event,'custom-opencode')">OpenCode</button>
+    <button class="tab-btn" onclick="switchTab(event,'custom-other')">其他</button>
+  </div>
+  <div class="tab-content active" id="custom-claude">
+    <pre><code># 全局自定义技能（所有项目可用）
+~/.claude/skills/my-skill/SKILL.md
+
+# 项目级自定义技能（仅当前项目可用）
+.claude/skills/my-skill/SKILL.md</code></pre>
+  </div>
+  <div class="tab-content" id="custom-opencode">
+    <pre><code># OpenCode 自定义技能
+~/.config/opencode/skills/my-skill/SKILL.md</code></pre>
+  </div>
+  <div class="tab-content" id="custom-other">
+    <p>大多数 AI 编程代理都支持在项目或用户目录下放置自定义技能文件。请参考你使用的代理的文档。</p>
+  </div>
+</div>
+
+<h3>18.2 创建自定义技能的步骤</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>创建技能目录</div>
+  <pre><code>mkdir -p ~/.claude/skills/my-custom-skill</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>编写 SKILL.md</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>---
+name: my-custom-skill
+description: "描述这个技能的用途和触发条件"
+---
+
+# My Custom Skill
+
+## When to Use
+（什么场景下触发这个技能）
+
+## Steps
+（具体的执行步骤）
+
+## Checklist
+（完成后的检查清单）</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>重启 AI 代理</div>
+  <p>重启后，新技能会自动被 <code>using-superpowers</code> 发现并注册。</p>
+</div>
+
+<div class="callout callout-warning">
+  <p class="callout-title">旧版本迁移</p>
+  <p>如果你之前将自定义技能放在 <code>~/.config/superpowers/skills/</code>，需要迁移到 <code>~/.claude/skills/</code>。旧位置已不再被读取。</p>
+</div>
+
+<!-- ==================== 第十九章 ==================== -->
+<h2 id="faq">第十九章：常见问题 FAQ</h2>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q1：Superpowers 是免费的吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>是的，完全免费且开源。</strong> Superpowers 采用 MIT 协议发布。你可以在任何项目中免费使用。如果觉得有帮助，可以考虑 <a href="https://github.com/sponsors/obra" target="_blank">赞助作者</a>。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q2：安装后 AI 代理直接写代码，没有先讨论需求？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>这说明 Superpowers <strong>没有正确加载</strong>。请检查：</p>
+    <ol>
+      <li>确认安装命令执行成功</li>
+      <li>重启 AI 代理（完全退出再打开）</li>
+      <li>使用验收测试验证：<code>我们来做一个 React 待办列表</code></li>
+      <li>如果还不行，检查插件市场是否正常连接</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q3：我能在多个 AI 代理中使用吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>可以。</strong> Superpowers 支持 Claude Code、Codex CLI/App、Gemini CLI、OpenCode、Cursor、GitHub Copilot CLI 和 Factory Droid。但每个代理需要<strong>单独安装</strong>。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q4：Superpowers 会影响 AI 代理的性能吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>影响很小。SessionStart 钩子会在启动时注入 <code>using-superpowers</code> 技能内容（增加系统提示长度），但每个具体技能只在需要时才加载。零依赖设计意味着没有运行时开销。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q5：可以禁用某个技能吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>目前没有官方的禁用单个技能的机制。如果你不想使用某个技能（比如不想用 TDD），可以在对话中明确告诉 AI 代理跳过。但注意：技能是设计为<strong>强制工作流</strong>的，绕过它们可能会降低输出质量。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q6：如何更新到最新版本？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>更新方式取决于你的 AI 代理：</p>
+    <ul>
+      <li><strong>Claude Code</strong>：通常自动更新。或执行 <code>/plugin update superpowers</code></li>
+      <li><strong>Gemini CLI</strong>：<code>gemini extensions update superpowers</code></li>
+      <li><strong>Codex</strong>：通过插件界面检查更新</li>
+      <li><strong>OpenCode</strong>：更新 <code>opencode.json</code> 中的版本引用</li>
+    </ul>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q7：Superpowers 和普通 AI 编程有什么区别？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <table>
+      <tr><th>对比项</th><th>没有 Superpowers</th><th>有 Superpowers</th></tr>
+      <tr><td>写代码前</td><td>直接写</td><td>先讨论需求和设计</td></tr>
+      <tr><td>测试</td><td>写完代码再补测试</td><td>先写测试，再写实现</td></tr>
+      <tr><td>Bug 修复</td><td>猜测原因，改改试试</td><td>系统化根因分析</td></tr>
+      <tr><td>任务执行</td><td>一个人从头做到尾</td><td>分派子代理并行执行</td></tr>
+      <tr><td>代码审查</td><td>没有自动审查</td><td>两阶段自动审查</td></tr>
+      <tr><td>完成标准</td><td>"应该没问题"</td><td>必须运行验证命令确认</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q8：我需要什么编程水平才能使用？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>Superpowers 本身<strong>不需要你写代码</strong>，但它理解的概念（测试、分支、代码审查）是软件工程基础知识。如果你：</p>
+    <ul>
+      <li><strong>会使用 AI 编程代理</strong> &rarr; 就能使用 Superpowers</li>
+      <li><strong>了解 Git 基础</strong> &rarr; 能更好地利用 Worktree 和分支管理技能</li>
+      <li><strong>了解 TDD 概念</strong> &rarr; 能更好地理解 AI 代理的工作方式</li>
+    </ul>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q9：技能里的 "human partner" 是什么意思？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><code>human partner</code>（人类伙伴）是 Superpowers 对用户的称呼。这是项目 deliberate（深思熟虑）的用词选择，代表 AI 代理和用户之间的<strong>协作关系</strong>，而不是简单的"服务者-被服务者"关系。在技能内容中不应替换为 "user" 或其他词。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q10：如何获取帮助或报告问题？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ul>
+      <li><strong>GitHub Issues</strong>：<a href="https://github.com/obra/superpowers/issues" target="_blank">github.com/obra/superpowers/issues</a></li>
+      <li><strong>Discord 社区</strong>：<a href="https://discord.gg/35wsABTejz" target="_blank">加入 Discord</a> 获取社区支持和交流</li>
+      <li><strong>版本公告</strong>：<a href="https://primeradiant.com/superpowers/" target="_blank">订阅更新通知</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== 第二十章 ==================== -->
+<h2 id="troubleshoot">第二十章：故障排查速查表</h2>
+<table>
+  <tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr>
+  <tr><td>AI 代理不触发技能</td><td>插件未正确安装</td><td>重新执行安装命令 + 重启代理</td></tr>
+  <tr><td>AI 代理直接写代码</td><td>Superpowers 未加载</td><td>用验收测试验证（第 4 章）</td></tr>
+  <tr><td>插件安装失败</td><td>网络/市场问题</td><td>检查网络连接；尝试其他市场</td></tr>
+  <tr><td>旧版本技能还在生效</td><td>缓存未清理</td><td>清除代理缓存 + 重启</td></tr>
+  <tr><td>自定义技能不被发现</td><td>存放位置错误</td><td>确认放在正确目录（第 18 章）</td></tr>
+  <tr><td>Worktree 创建失败</td><td>Git 仓库状态异常</td><td>检查 <code>git status</code>；确保工作区干净</td></tr>
+  <tr><td>子代理行为异常</td><td>上下文丢失</td><td>这是正常的；每个子代理都是全新会话</td></tr>
+  <tr><td>TDD 被跳过</td><td>代理忽略了技能</td><td>在对话中明确要求遵循 TDD</td></tr>
+  <tr><td>多个代理版本冲突</td><td>分别安装了不同版本</td><td>每个代理单独更新到最新版本</td></tr>
+  <tr><td>Cursor 插件不加载</td><td>市场索引未刷新</td><td>重启 Cursor；检查插件市场</td></tr>
+</table>
+
+<br><br>
+<div style="text-align:center; padding:40px; color:var(--gray-600); border-top:2px solid var(--gray-200); margin-top:48px;">
+  <p style="font-size:18px; font-weight:600; color:var(--gray-800);">恭喜！你已经掌握了 Superpowers 的完整使用方法。</p>
+  <p>现在，打开你的 AI 编程代理，安装 Superpowers，然后告诉它你想做什么。剩下的交给它。</p>
+  <p style="font-size:13px; margin-top:20px;">Superpowers v5.1.0 | 新手指南 | 2026-05</p>
+</div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('back-top').classList.toggle('show', h.scrollTop > 400);
+  document.querySelectorAll('#main h2[id]').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < 120 && rect.bottom > 0) {
+      document.querySelectorAll('#sidebar nav a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector('#sidebar nav a[href="#' + el.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+});
+document.getElementById('back-top').innerHTML = '&uarr;';
+document.getElementById('back-top').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+function switchTab(e, id) {
+  const parent = e.target.closest('.tabs');
+  parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function toggleFaq(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+function copyCode(btn) {
+  const code = btn.parentElement.querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    btn.textContent = '已复制!';
+    setTimeout(() => btn.textContent = '复制', 2000);
+  });
+}
+</script>
+
+</body>
+</html>

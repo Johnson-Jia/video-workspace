@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden;
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #0a0f1e; }
+  .wrap { width: 1080px; height: 1920px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; position: relative; }
+  .grid-bg { position: absolute; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+    background-size: 40px 40px; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; }
+  .glow1 { width: 600px; height: 600px; background: rgba(59,130,246,0.15); top: 200px; left: -100px; }
+  .glow2 { width: 500px; height: 500px; background: rgba(6,182,212,0.12); bottom: 300px; right: -80px; }
+  .glow3 { width: 400px; height: 400px; background: rgba(245,158,11,0.1); top: 800px; right: 100px; }
+  .week-label { font-size: 42px; color: #06b6d4; font-weight: 700; z-index:1; margin-bottom: 20px; }
+  .title { font-size: 88px; color: #ffffff; font-weight: 900; z-index:1;
+    text-align: center; line-height: 1.2; margin-bottom: 60px; }
+  .title span { color: #3b82f6; }
+  .cards { display: flex; flex-direction: column; gap: 24px; z-index:1; margin-bottom: 60px; }
+  .card { display: flex; align-items: center; gap: 24px; width: 880px;
+    padding: 24px 32px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
+  .card-rank { font-family: 'JetBrains Mono', monospace; font-size: 48px;
+    color: #f59e0b; font-weight: 900; min-width: 80px; text-align: center; }
+  .card-info { flex: 1; }
+  .card-name { font-family: 'JetBrains Mono', monospace; font-size: 28px;
+    color: #3b82f6; font-weight: 700; }
+  .card-desc { font-size: 22px; color: #94a3b8; margin-top: 4px; }
+  .card-stars { font-family: 'JetBrains Mono', monospace; font-size: 32px;
+    color: #f59e0b; font-weight: 800; white-space: nowrap; }
+  .stats { font-size: 32px; color: #64748b; z-index:1; }
+  .stats span { color: #10b981; font-weight: 700; }
+  .keyword { font-size: 36px; color: #ef4444; font-weight: 800; z-index:1;
+    margin-top: 30px; letter-spacing: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="grid-bg"></div>
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+  <div class="glow glow3"></div>
+  <div class="week-label">2025年5月第4周</div>
+  <div class="title">GitHub 热门<span>开源项目</span>盘点</div>
+  <div class="keyword">#AGENT 统治了一切</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-rank">#1</div>
+      <div class="card-info">
+        <div class="card-name">coding agents</div>
+        <div class="card-desc">5个项目 · AI编程Agent最卷赛道</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-rank">#2</div>
+      <div class="card-info">
+        <div class="card-name">skill frameworks</div>
+        <div class="card-desc">4个项目 · superpowers 20万+★</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-rank">#3</div>
+      <div class="card-info">
+        <div class="card-name">innovation</div>
+        <div class="card-desc">6个项目 · 端侧AI+万物Agent化</div>
+      </div>
+    </div>
+  </div>
+  <div class="stats"><span>17</span> 个项目 · <span>4</span> 大赛道 · <span>1</span> 个关键词</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #080818; overflow: hidden; }
+
+  .clip { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; overflow: hidden; }
+
+  /* ====== HOOK ====== */
+  #hook {
+    background: linear-gradient(180deg, #080818 0%, #12122e 50%, #080818 100%);
+  }
+  #hook .bg-grid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(240,180,41,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,180,41,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  #hook .glow1 {
+    position: absolute; width: 500px; height: 500px;
+    background: #f0b429; border-radius: 50%; filter: blur(140px);
+    opacity: 0.25; top: 250px; right: -80px;
+  }
+  #hook .glow2 {
+    position: absolute; width: 400px; height: 400px;
+    background: #00e5a0; border-radius: 50%; filter: blur(140px);
+    opacity: 0.2; bottom: 350px; left: -60px;
+  }
+  #hook .content {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  #hook .badge {
+    background: rgba(240,180,41,0.12); border: 1px solid rgba(240,180,41,0.3);
+    color: #f0b429; font-family: 'Inter', sans-serif;
+    font-size: 26px; font-weight: 600; padding: 10px 28px;
+    border-radius: 30px; margin-bottom: 36px;
+  }
+  #hook .title {
+    font-family: 'Inter', sans-serif; font-size: 82px; font-weight: 900;
+    color: #fff; text-align: center; line-height: 1.15; letter-spacing: -2px;
+  }
+  #hook .title .accent { color: #f0b429; }
+  #hook .line {
+    width: 160px; height: 5px; margin-top: 36px; margin-bottom: 36px;
+    background: linear-gradient(90deg, #f0b429, #00e5a0); border-radius: 3px;
+  }
+  #hook .sub {
+    font-family: 'Inter', sans-serif; font-size: 40px; font-weight: 700;
+    color: #00e5a0; text-align: center;
+  }
+  #hook .stat-row { display: flex; gap: 20px; margin-top: 40px; }
+  #hook .stat-box {
+    background: rgba(18,18,46,0.85); border: 1px solid rgba(240,180,41,0.15);
+    border-radius: 14px; padding: 18px 32px; text-align: center;
+  }
+  #hook .stat-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700; color: #f0b429;
+  }
+  #hook .stat-label {
+    font-family: 'Inter', sans-serif; font-size: 22px; color: #8892b0; margin-top: 4px;
+  }
+
+  /* ====== HOT3 ====== */
+  #hot3 {
+    background: linear-gradient(180deg, #080818 0%, #0e0e24 50%, #080818 100%);
+  }
+  #hot3 .bg-grid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(240,180,41,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,180,41,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  #hot3 .content {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0 60px;
+  }
+  #hot3 .scene-title {
+    font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700;
+    color: #f0b429; margin-bottom: 32px;
+  }
+  .project-card {
+    width: 900px; background: rgba(18,18,46,0.9);
+    border: 1px solid rgba(240,180,41,0.15); border-radius: 16px;
+    padding: 28px 32px; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .project-card .rank {
+    font-family: 'JetBrains Mono', monospace; font-size: 42px; font-weight: 700;
+    color: #f0b429; min-width: 60px; text-align: center;
+  }
+  .project-card .info { flex: 1; }
+  .project-card .name {
+    font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 700; color: #fff;
+  }
+  .project-card .desc {
+    font-family: 'Inter', sans-serif; font-size: 26px; color: #8892b0; margin-top: 6px;
+  }
+  .project-card .stars {
+    font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700;
+    color: #00e5a0; min-width: 140px; text-align: right;
+  }
+  .project-card .lang-badge {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 20px; color: #f0b429; background: rgba(240,180,41,0.1);
+    padding: 4px 12px; border-radius: 8px; margin-top: 6px;
+  }
+
+  /* ====== MORE5 ====== */
+  #more5 {
+    background: linear-gradient(180deg, #080818 0%, #0e0e24 50%, #080818 100%);
+  }
+  #more5 .bg-grid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  #more5 .content {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0 60px;
+  }
+  #more5 .scene-title {
+    font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700;
+    color: #00e5a0; margin-bottom: 28px;
+  }
+  .mini-card {
+    width: 900px; background: rgba(18,18,46,0.85);
+    border: 1px solid rgba(0,229,160,0.12); border-radius: 12px;
+    padding: 18px 28px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .mini-card .rank {
+    font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700;
+    color: #00e5a0; min-width: 44px; text-align: center;
+  }
+  .mini-card .info { flex: 1; }
+  .mini-card .name {
+    font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; color: #fff;
+  }
+  .mini-card .desc {
+    font-family: 'Inter', sans-serif; font-size: 22px; color: #8892b0; margin-top: 4px;
+  }
+  .mini-card .stars {
+    font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600;
+    color: #f0b429; min-width: 100px; text-align: right;
+  }
+
+  /* ====== CTA ====== */
+  #cta {
+    background: linear-gradient(180deg, #080818 0%, #12122e 50%, #080818 100%);
+  }
+  #cta .bg-grid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(240,180,41,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,180,41,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  #cta .glow {
+    position: absolute; width: 500px; height: 500px;
+    background: #f0b429; border-radius: 50%; filter: blur(160px);
+    opacity: 0.2; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  #cta .content {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  #cta .cta-title {
+    font-family: 'Inter', sans-serif; font-size: 72px; font-weight: 900;
+    color: #fff; text-align: center; line-height: 1.2;
+  }
+  #cta .cta-title .accent { color: #f0b429; }
+  #cta .cta-sub {
+    font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 600;
+    color: #00e5a0; margin-top: 24px; text-align: center;
+  }
+  #cta .tags { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+  #cta .tag {
+    background: rgba(18,18,46,0.9); border: 1px solid rgba(240,180,41,0.2);
+    color: #8892b0; font-family: 'Inter', sans-serif;
+    font-size: 22px; padding: 8px 20px; border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div data-composition-id="daily" data-width="1080" data-height="1920" data-start="0">
+  <audio id="narration-audio" src="narration.mp3" data-start="0" data-duration="30.78" data-track-index="0" data-volume="1"></audio>
+
+  <!-- clip 0: hook -->
+  <div class="clip" id="hook" data-start="0" data-duration="4.10">
+    <div class="bg-grid"></div>
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+    <div class="content">
+      <div class="badge" id="hook-badge">2026.05.17</div>
+      <div class="title" id="hook-title">今日 <span class="accent">GitHub</span><br>热门开源项目</div>
+      <div class="line" id="hook-line"></div>
+      <div class="sub" id="hook-sub">AI 工具直接霸榜</div>
+      <div class="stat-row" id="hook-stats">
+        <div class="stat-box">
+          <div class="stat-num">8</div>
+          <div class="stat-label">热门项目</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">AI 相关</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- clip 1: hot3 -->
+  <div class="clip" id="hot3" data-start="4.10" data-duration="10.99">
+    <div class="bg-grid"></div>
+    <div class="content">
+      <div class="scene-title" id="hot3-title">TOP 3 涨星榜</div>
+      <div class="project-card" id="card1">
+        <div class="rank">1</div>
+        <div class="info">
+          <div class="name">openhuman</div>
+          <div class="desc">个人 AI 超级大脑，本地运行</div>
+          <div class="lang-badge">Rust</div>
+        </div>
+        <div class="stars">+1549</div>
+      </div>
+      <div class="project-card" id="card2">
+        <div class="rank">2</div>
+        <div class="info">
+          <div class="name">superpowers</div>
+          <div class="desc">AI 代理技能框架 · 194K Star</div>
+          <div class="lang-badge">Shell</div>
+        </div>
+        <div class="stars">+1305</div>
+      </div>
+      <div class="project-card" id="card3">
+        <div class="rank">3</div>
+        <div class="info">
+          <div class="name">RuView</div>
+          <div class="desc">WiFi 信号检测人体，零摄像头</div>
+          <div class="lang-badge">Rust</div>
+        </div>
+        <div class="stars">+1010</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- clip 2: more5 -->
+  <div class="clip" id="more5" data-start="15.09" data-duration="12.55">
+    <div class="bg-grid"></div>
+    <div class="content">
+      <div class="scene-title" id="more5-title">更多热门项目</div>
+      <div class="mini-card" id="mc1">
+        <div class="rank">4</div>
+        <div class="info">
+          <div class="name">supertonic</div>
+          <div class="desc">本地多语言语音合成</div>
+        </div>
+        <div class="stars">+749</div>
+      </div>
+      <div class="mini-card" id="mc2">
+        <div class="rank">5</div>
+        <div class="info">
+          <div class="name">scientific-skills</div>
+          <div class="desc">科研分析 AI 代理</div>
+        </div>
+        <div class="stars">+673</div>
+      </div>
+      <div class="mini-card" id="mc3">
+        <div class="rank">6</div>
+        <div class="info">
+          <div class="name">codegraph</div>
+          <div class="desc">代码知识图谱</div>
+        </div>
+        <div class="stars">+416</div>
+      </div>
+      <div class="mini-card" id="mc4">
+        <div class="rank">7</div>
+        <div class="info">
+          <div class="name">bun</div>
+          <div class="desc">高性能 JS 运行时 · 91K Star</div>
+        </div>
+        <div class="stars">+397</div>
+      </div>
+      <div class="mini-card" id="mc5">
+        <div class="rank">8</div>
+        <div class="info">
+          <div class="name">Open-Gen-AI</div>
+          <div class="desc">开源 AI 视频/图像生成</div>
+        </div>
+        <div class="stars">+317</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- clip 3: cta -->
+  <div class="clip" id="cta" data-start="27.64" data-duration="3.14">
+    <div class="bg-grid"></div>
+    <div class="glow"></div>
+    <div class="content">
+      <div class="cta-title" id="cta-title">关注我<br><span class="accent">每天更新</span></div>
+      <div class="cta-sub" id="cta-sub">GitHub 热门项目</div>
+      <div class="tags" id="cta-tags">
+        <div class="tag">#GitHub</div>
+        <div class="tag">#开源</div>
+        <div class="tag">#AI</div>
+        <div class="tag">#程序员</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+
+const tl = gsap.timeline({paused: true});
+
+// Hook animations (starts at t=0)
+tl.from('#hook-badge', {opacity: 0, y: -30, duration: 0.3, ease: 'power3.out'}, 0.1)
+  .from('#hook-title', {opacity: 0, y: 40, duration: 0.35, ease: 'power3.out'}, 0.3)
+  .from('#hook-line', {opacity: 0, scaleX: 0, duration: 0.3, ease: 'power3.out'}, 0.55)
+  .from('#hook-sub', {opacity: 0, y: 20, duration: 0.3, ease: 'power3.out'}, 0.7)
+  .from('#hook-stats', {opacity: 0, y: 30, duration: 0.3, ease: 'power3.out'}, 0.9)
+
+// Hot3 animations (starts at t=4.10)
+  .from('#hot3-title', {opacity: 0, y: -20, duration: 0.3, ease: 'power3.out'}, 4.2)
+  .from('#card1', {opacity: 0, x: -60, duration: 0.3, ease: 'power3.out'}, 4.4)
+  .from('#card2', {opacity: 0, x: -60, duration: 0.3, ease: 'power3.out'}, 4.6)
+  .from('#card3', {opacity: 0, x: -60, duration: 0.3, ease: 'power3.out'}, 4.8)
+
+// More5 animations (starts at t=15.09)
+  .from('#more5-title', {opacity: 0, y: -20, duration: 0.3, ease: 'power3.out'}, 15.2)
+  .from('#mc1', {opacity: 0, x: -50, duration: 0.25, ease: 'power3.out'}, 15.35)
+  .from('#mc2', {opacity: 0, x: -50, duration: 0.25, ease: 'power3.out'}, 15.5)
+  .from('#mc3', {opacity: 0, x: -50, duration: 0.25, ease: 'power3.out'}, 15.65)
+  .from('#mc4', {opacity: 0, x: -50, duration: 0.25, ease: 'power3.out'}, 15.8)
+  .from('#mc5', {opacity: 0, x: -50, duration: 0.25, ease: 'power3.out'}, 15.95)
+
+// CTA animations (starts at t=27.64)
+  .from('#cta-title', {opacity: 0, scale: 0.8, duration: 0.35, ease: 'power3.out'}, 27.7)
+  .from('#cta-sub', {opacity: 0, y: 20, duration: 0.3, ease: 'power3.out'}, 28.0)
+  .from('#cta-tags .tag', {opacity: 0, y: 20, duration: 0.25, stagger: 0.15, ease: 'power3.out'}, 28.2);
+
+window.__timelines["daily"] = tl;
+</script>
+</body>
+</html>

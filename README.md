@@ -43,19 +43,6 @@ env-check → content → design → narration → audio + assets(并行) → vi
 
 毕竟，AI 不会累，但让 AI 干活的人会。你的每一杯，都是下一个开源项目的燃料。
 
-<table>
-  <tr>
-    <td align="center">
-      <strong>支付宝</strong><br/>
-      <img src="sources/images/ali_pay_qrcode.jpg" width="200" alt="支付宝">
-    </td>
-    <td align="center">
-      <strong>微信</strong><br/>
-      <img src="sources/images/wechat_pay_qrcode.png" width="200" alt="微信">
-    </td>
-  </tr>
-</table>
-
 ## 视频模式
 
 | 模式 | 触发条件 | 时长 | 场景数 | 说明 |
@@ -226,6 +213,25 @@ git lfs install
 
 - **[ClipForge](https://github.com/Johnson-Jia/video-clipforge)** — Claude Code 技能，负责视频编排和制作
 - **[HyperFrames](https://github.com/heygen-com/hyperframes)** — HTML 视频渲染引擎
+
+## 支持作者
+
+如果这些视频或素材对你有帮助，欢迎请创作者喝杯咖啡续命 ☕
+
+毕竟，AI 不会累，但让 AI 干活的人会。你的每一杯，都是下一个开源项目的燃料。
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>支付宝</strong><br/>
+      <img src="sources/images/ali_pay_qrcode.jpg" width="200" alt="支付宝">
+    </td>
+    <td align="center">
+      <strong>微信</strong><br/>
+      <img src="sources/images/wechat_pay_qrcode.png" width="200" alt="微信">
+    </td>
+  </tr>
+</table>
 
 ## License
 

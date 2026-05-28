@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;background:#0a0a1a;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;color:#fff}
+
+:root{
+  --bg-dark:#0a0a1a;
+  --bg-mid:#0d1b2a;
+  --accent-cyan:#00f0ff;
+  --accent-gold:#ffb800;
+  --accent-purple:#a855f7;
+  --text-primary:#ffffff;
+  --text-secondary:#8892b0;
+  --card-bg:rgba(255,255,255,0.06);
+  --card-border:rgba(255,255,255,0.1);
+}
+
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden}
+
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden}
+.scene-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.layer-bg{position:absolute;inset:0;z-index:0}
+.layer-fx{position:absolute;inset:0;z-index:1;pointer-events:none}
+.layer-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:180px 80px 260px 80px}
+
+.glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.3}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,240,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,0.03) 1px,transparent 1px);background-size:60px 60px}
+
+.hero-title{font-size:96px;font-weight:900;line-height:1.15;letter-spacing:-2px}
+.hero-sub{font-size:42px;font-weight:600;color:var(--accent-cyan);margin-top:24px}
+.stat-num{font-size:88px;font-weight:900;color:var(--accent-cyan);line-height:1}
+.stat-label{font-size:32px;color:var(--text-secondary);margin-top:8px}
+
+.section-title{font-size:64px;font-weight:800;line-height:1.2;margin-bottom:36px;text-align:center}
+.body-text{font-size:40px;line-height:1.6;color:var(--text-secondary);text-align:center}
+
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:32px 36px;margin-bottom:20px}
+.card-title{font-size:36px;font-weight:700;margin-bottom:8px}
+.card-desc{font-size:28px;color:var(--text-secondary);line-height:1.4}
+.card-tag{display:inline-block;background:rgba(0,240,255,0.15);color:var(--accent-cyan);padding:6px 16px;border-radius:8px;font-size:24px;margin-top:12px}
+
+.compare-row{display:flex;align-items:center;padding:20px 0;border-bottom:1px solid var(--card-border)}
+.compare-label{font-size:28px;color:var(--text-secondary);width:200px}
+.compare-val{font-size:32px;font-weight:700;flex:1;text-align:center}
+.compare-win{color:var(--accent-gold)}
+
+.layer-diagram{display:flex;flex-direction:column;gap:16px;max-width:800px;margin:0 auto}
+.layer-item{padding:28px 32px;border-radius:16px;border-left:6px solid}
+.layer-1{background:rgba(220,53,69,0.12);border-left-color:#dc3545}
+.layer-2{background:rgba(212,146,11,0.12);border-left-color:#d4920b}
+.layer-3{background:rgba(45,154,92,0.12);border-left-color:#2d9a5c}
+.layer-name{font-size:32px;font-weight:700;margin-bottom:6px}
+.layer-detail{font-size:26px;color:var(--text-secondary);line-height:1.4}
+
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.feature-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:28px;text-align:center}
+.feature-icon{font-size:48px;margin-bottom:8px}
+.feature-name{font-size:30px;font-weight:700;margin-bottom:4px}
+.feature-desc{font-size:24px;color:var(--text-secondary)}
+
+.cta-title{font-size:72px;font-weight:900;text-align:center;line-height:1.3}
+.cta-sub{font-size:38px;text-align:center;color:var(--accent-gold);margin-top:32px;font-weight:600}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px}
+.tag{display:inline-block;padding:8px 20px;border-radius:20px;font-size:26px;font-weight:600}
+.tag-cyan{background:rgba(0,240,255,0.15);color:var(--accent-cyan)}
+.tag-gold{background:rgba(255,184,0,0.15);color:var(--accent-gold)}
+.tag-purple{background:rgba(168,85,247,0.15);color:var(--accent-purple)}
+
+.install-cmd{background:rgba(0,0,0,0.5);border:1px solid var(--accent-cyan);border-radius:12px;padding:24px 32px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:32px;color:var(--accent-cyan);text-align:center;margin:20px auto;max-width:700px}
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+
+<audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio id="bgm" data-track-index="2" data-volume="0.15" data-start="0" data-duration="46.824" src="bgm.wav" preload="auto"></audio>
+
+<!-- Scene 1: Hook (0 - 4.464s) -->
+<div class="clip s-hook" data-start="0" data-duration="4.464">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:radial-gradient(ellipse at 50% 40%, #1a0a3e 0%, #0a0a1a 70%)">
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-cyan);top:20%;left:50%;transform:translateX(-50%)"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-gold);bottom:25%;right:10%"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="hero-sub" style="font-size:36px;color:var(--accent-gold);letter-spacing:4px;margin-bottom:20px">SOURCE CODE LEAKED</div>
+      <div class="hero-title" style="text-align:center">Claude Code<br><span style="color:var(--accent-cyan)">源码泄露</span></div>
+      <div style="display:flex;gap:40px;margin-top:48px">
+        <div style="text-align:center"><div class="stat-num" style="color:var(--accent-gold)">51万</div><div class="stat-label">代码行数</div></div>
+        <div style="text-align:center"><div class="stat-num">1987</div><div class="stat-label">源文件</div></div>
+        <div style="text-align:center"><div class="stat-num" style="color:var(--accent-purple)">53</div><div class="stat-label">内置工具</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 2: What (4.464 - 8.808s) -->
+<div class="clip s-what" data-start="4.464" data-duration="4.344">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:linear-gradient(135deg, #0a0a1a 0%, #0d1b2a 100%)">
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cyan);top:15%;left:-10%"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="color:var(--text-secondary);font-size:36px;margin-bottom:12px">不是补全工具</div>
+      <div class="section-title" style="font-size:56px">是终端里<span style="color:var(--accent-cyan)">自主运行</span>的<br>AI编程代理</div>
+      <div class="tag-row" style="margin-top:32px">
+        <span class="tag tag-cyan">读代码</span>
+        <span class="tag tag-cyan">改文件</span>
+        <span class="tag tag-cyan">跑测试</span>
+        <span class="tag tag-cyan">建PR</span>
+        <span class="tag tag-gold">自然语言驱动</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 3: Architecture (8.808 - 14.832s) -->
+<div class="clip s-arch" data-start="8.808" data-duration="6.024">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:linear-gradient(160deg, #0a0a1a 0%, #001a33 100%)">
+      <div class="glow" style="width:500px;height:500px;background:#0066cc;bottom:10%;right:-5%"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="font-size:48px;margin-bottom:40px"><span style="color:var(--accent-cyan)">架构规模</span>曝光</div>
+      <div style="display:flex;gap:24px;justify-content:center">
+        <div class="card" style="text-align:center;flex:1">
+          <div style="font-size:56px;font-weight:900;color:var(--accent-cyan)">1,987</div>
+          <div style="font-size:28px;color:var(--text-secondary);margin-top:8px">源文件</div>
+        </div>
+        <div class="card" style="text-align:center;flex:1">
+          <div style="font-size:56px;font-weight:900;color:var(--accent-gold)">53</div>
+          <div style="font-size:28px;color:var(--text-secondary);margin-top:8px">内置工具</div>
+        </div>
+        <div class="card" style="text-align:center;flex:1">
+          <div style="font-size:56px;font-weight:900;color:var(--accent-purple)">87</div>
+          <div style="font-size:28px;color:var(--text-secondary);margin-top:8px">斜杠命令</div>
+        </div>
+      </div>
+      <div class="tag-row" style="margin-top:28px">
+        <span class="tag tag-cyan">React + Ink</span>
+        <span class="tag tag-gold">MCP协议</span>
+        <span class="tag tag-purple">TypeScript</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 4: Hidden Features (14.832 - 22.872s) -->
+<div class="clip s-hidden" data-start="14.832" data-duration="8.040">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:radial-gradient(ellipse at 50% 50%, #1a002e 0%, #0a0a1a 70%)">
+      <div class="glow" style="width:700px;height:700px;background:var(--accent-purple);top:10%;left:50%;transform:translateX(-50%)"></div>
+      <div class="glow" style="width:300px;height:300px;background:var(--accent-gold);bottom:15%;left:15%"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="font-size:48px;margin-bottom:32px"><span style="color:var(--accent-gold)">七个隐藏功能</span>曝光</div>
+      <div class="feature-grid" style="width:100%">
+        <div class="feature-card">
+          <div class="feature-icon">🦆</div>
+          <div class="feature-name" style="color:var(--accent-gold)">BUDDY</div>
+          <div class="feature-desc">18种虚拟宠物<br>五级稀有度</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌙</div>
+          <div class="feature-name" style="color:var(--accent-purple)">KAIROS</div>
+          <div class="feature-desc">永不关机的Claude<br>自动做梦整理记忆</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">☁️</div>
+          <div class="feature-name" style="color:var(--accent-cyan)">ULTRAPLAN</div>
+          <div class="feature-desc">云端深度规划<br>30分钟独立研究</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-name" style="color:var(--text-primary)">Coordinator</div>
+          <div class="feature-desc">多Agent编排<br>禁止甩锅式委派</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 5: Three-Layer Gating (22.872 - 31.272s) -->
+<div class="clip s-gating" data-start="22.872" data-duration="8.400">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:linear-gradient(180deg, #0a0a1a 0%, #1a0a0a 100%)">
+      <div class="glow" style="width:500px;height:500px;background:#dc3545;top:10%;right:-10%;opacity:0.2"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-gold);bottom:15%;left:10%;opacity:0.2"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="font-size:44px;margin-bottom:32px">外部用户只看到<span style="color:var(--accent-gold)">精简版</span></div>
+      <div class="layer-diagram">
+        <div class="layer-item layer-1">
+          <div class="layer-name" style="color:#dc3545">第一层：编译时 feature()</div>
+          <div class="layer-detail">50个开关，Bun DCE死代码消除，外部版直接删除</div>
+        </div>
+        <div class="layer-item layer-2">
+          <div class="layer-name" style="color:#d4920b">第二层：USER_TYPE 硬编码</div>
+          <div class="layer-detail">ant(内部) vs external(外部)，200+处条件检查</div>
+        </div>
+        <div class="layer-item layer-3">
+          <div class="layer-name" style="color:#2d9a5c">第三层：GrowthBook 远程开关</div>
+          <div class="layer-detail">tengu_* 前缀，运行时动态控制，支持灰度发布</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 6: Competitive (31.272 - 37.272s) -->
+<div class="clip s-compare" data-start="31.272" data-duration="6.000">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:linear-gradient(135deg, #0a0a1a 0%, #0d1b2a 100%)">
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cyan);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="font-size:44px;margin-bottom:36px">对比 Cursor 和 Copilot</div>
+      <div style="width:100%;max-width:820px">
+        <div class="compare-row">
+          <div class="compare-label">自主性</div>
+          <div class="compare-val compare-win">Claude Code</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">MCP原生</div>
+          <div class="compare-val compare-win">Claude Code</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">多Agent</div>
+          <div class="compare-val compare-win">Claude Code</div>
+        </div>
+        <div class="compare-row" style="border:none">
+          <div class="compare-label">社区评分</div>
+          <div class="compare-val" style="color:var(--accent-gold);font-size:48px">9/10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 7: How to Install (37.272 - 41.760s) -->
+<div class="clip s-howto" data-start="37.272" data-duration="4.488">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:linear-gradient(135deg, #0a1a0a 0%, #0a0a1a 100%)">
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cyan);bottom:20%;left:20%"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="section-title" style="font-size:44px;margin-bottom:28px">一条命令<span style="color:var(--accent-cyan)">安装</span></div>
+      <div class="install-cmd">curl -fsSL https://claude.ai/install.sh | bash</div>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:24px">
+        <span class="tag tag-cyan">VS Code</span>
+        <span class="tag tag-cyan">JetBrains</span>
+        <span class="tag tag-gold">Web</span>
+      </div>
+      <div style="font-size:32px;color:var(--text-secondary);text-align:center;margin-top:24px">$20 - $200/月</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 8: CTA (41.760 - 46.824s) -->
+<div class="clip s-cta" data-start="41.760" data-duration="5.064">
+  <div class="scene-wrap">
+    <div class="layer-bg" style="background:radial-gradient(ellipse at 50% 50%, #1a1a0a 0%, #0a0a1a 70%)">
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-gold);top:30%;left:50%;transform:translateX(-50%);opacity:0.25"></div>
+      <div class="grid-bg"></div>
+    </div>
+    <div class="layer-fx"></div>
+    <div class="layer-content" style="align-items:center">
+      <div class="cta-title">护城河不是模型<br>是<span style="color:var(--accent-gold)">51万行</span>编排代码</div>
+      <div class="cta-sub">关注我，下期教你配置使用</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 46.824, seek: function(t) {} };
+
+const tl = gsap.timeline({paused: true});
+
+var S = [
+  {s:0, d:4.464},
+  {s:4.464, d:4.344},
+  {s:8.808, d:6.024},
+  {s:14.832, d:8.040},
+  {s:22.872, d:8.400},
+  {s:31.272, d:6.000},
+  {s:37.272, d:4.488},
+  {s:41.760, d:5.064}
+];
+
+var scenes = ['.s-hook','.s-what','.s-arch','.s-hidden','.s-gating','.s-compare','.s-howto','.s-cta'];
+
+S.forEach(function(sc, i) {
+  var el = scenes[i];
+  tl.from(el + ' .layer-content > *', {opacity:0, y:30, duration:0.4, ease:'power3.out', stagger:0.12}, sc.s + 0.2);
+});
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

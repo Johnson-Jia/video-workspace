@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-mid: #0d1525;
+  --accent-cool: #00D4FF;
+  --accent-warm: #FF8C32;
+  --text-primary: #FFFFFF;
+  --text-secondary: #8899AA;
+  --glow-warm: rgba(255, 140, 50, 0.15);
+  --glow-cool: rgba(0, 212, 255, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+.composition {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+}
+
+.clip {
+  position: absolute;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+/* === 三层架构 === */
+.layer-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.layer-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.layer-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+}
+
+/* === Phase 通用 === */
+.phase {
+  position: absolute;
+  inset: 0;
+  padding: 180px 80px 220px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* === 背景渐变 === */
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 50%, #0a1220 100%);
+}
+
+/* === 光晕 === */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+}
+.glow-warm {
+  width: 500px;
+  height: 500px;
+  background: var(--glow-warm);
+  top: -100px;
+  left: -100px;
+}
+.glow-cool {
+  width: 450px;
+  height: 450px;
+  background: var(--glow-cool);
+  bottom: 200px;
+  right: -80px;
+}
+
+/* === 网格底纹 === */
+.grid-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* === 特效层元素 === */
+.fx-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* === Hook 场景特殊样式 === */
+.s-hook .big-number {
+  font-size: 140px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-shadow: 0 0 60px rgba(255,140,50,0.4);
+}
+.s-hook .big-number .accent {
+  color: var(--accent-warm);
+}
+.s-hook .sub-text {
+  font-size: 48px;
+  color: var(--text-secondary);
+  margin-top: 30px;
+  letter-spacing: 4px;
+}
+
+/* === 通用内容卡片 === */
+.content-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 40px 48px;
+  backdrop-filter: blur(10px);
+}
+
+.card-title {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--accent-cool);
+}
+
+.card-body {
+  font-size: 36px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.card-body .highlight {
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+/* === 门控层级卡片 === */
+.gate-layer {
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  padding: 28px 36px;
+  margin-bottom: 16px;
+  border-left: 5px solid;
+}
+.gate-layer.l1 { border-left-color: #FF4444; }
+.gate-layer.l2 { border-left-color: var(--accent-warm); }
+.gate-layer.l3 { border-left-color: #44CC88; }
+
+.gate-layer .layer-num {
+  font-size: 28px;
+  font-weight: 800;
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+.gate-layer .layer-title {
+  font-size: 34px;
+  font-weight: 700;
+}
+.gate-layer .layer-desc {
+  font-size: 26px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+/* === 隐藏功能卡片 === */
+.feature-pill {
+  display: inline-block;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.25);
+  border-radius: 30px;
+  padding: 14px 32px;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 8px;
+  color: var(--accent-cool);
+}
+.feature-pill.warm {
+  background: rgba(255,140,50,0.1);
+  border-color: rgba(255,140,50,0.25);
+  color: var(--accent-warm);
+}
+
+/* === 对比表格 === */
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 28px;
+}
+.compare-table th {
+  background: rgba(0,212,255,0.08);
+  padding: 20px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent-cool);
+  border-bottom: 2px solid rgba(0,212,255,0.2);
+}
+.compare-table td {
+  padding: 18px 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-primary);
+}
+.compare-table .winner {
+  color: #44CC88;
+  font-weight: 700;
+}
+.compare-table .dim {
+  color: var(--text-secondary);
+}
+
+/* === 洞察卡片 === */
+.insight-card {
+  background: linear-gradient(135deg, rgba(255,140,50,0.08) 0%, rgba(0,212,255,0.08) 100%);
+  border: 1px solid rgba(255,140,50,0.2);
+  border-radius: 24px;
+  padding: 60px 48px;
+  text-align: center;
+}
+.insight-card .insight-label {
+  font-size: 32px;
+  color: var(--accent-warm);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.insight-card .insight-text {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.insight-card .insight-text .accent {
+  color: var(--accent-warm);
+}
+
+/* === CTA === */
+.cta-text {
+  font-size: 48px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* === 数据标签 === */
+.data-badge {
+  display: inline-block;
+  background: rgba(255,140,50,0.15);
+  border: 1px solid rgba(255,140,50,0.3);
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--accent-warm);
+  margin: 4px;
+}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0">
+
+  <!-- 旁白音轨 -->
+  <audio data-track-index="1" data-volume="1" src="narration.mp3" preload="auto"></audio>
+  <!-- BGM 音轨 -->
+  <audio data-track-index="2" data-volume="0.06" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ===== Scene 0: HOOK (5s) ===== -->
+  <div class="clip s-hook" data-start="0" data-duration="4.56">
+    <div class="layer-bg">
+      <div class="bg-gradient"></div>
+      <div class="glow glow-warm"></div>
+      <div class="glow glow-cool"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:200px;height:200px;background:rgba(255,140,50,0.06);top:300px;right:100px;"></div>
+      <div class="fx-particle" style="width:150px;height:150px;background:rgba(0,212,255,0.05);bottom:500px;left:50px;"></div>
+      <div class="fx-particle" style="width:100px;height:100px;background:rgba(255,140,50,0.04);top:800px;right:200px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="big-number"><span class="accent">51</span>万行源码</div>
+        <div class="big-number" style="font-size:100px;margin-top:20px;"><span class="accent">53</span>个工具 · <span class="accent">7</span>个隐藏功能</div>
+        <div class="sub-text">Claude Code 源码泄露深度解析</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 1: WHAT (8s) ===== -->
+  <div class="clip s-what" data-start="4.56" data-duration="10.92">
+    <div class="layer-bg">
+      <div class="bg-gradient"></div>
+      <div class="glow glow-cool" style="top:200px;left:50px;bottom:auto;right:auto;"></div>
+      <div class="glow glow-warm" style="bottom:100px;right:50px;top:auto;left:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:180px;height:180px;background:rgba(0,212,255,0.06);top:400px;left:80px;"></div>
+      <div class="fx-particle" style="width:120px;height:120px;background:rgba(255,140,50,0.05);bottom:600px;right:120px;"></div>
+      <div class="fx-particle" style="width:80px;height:80px;background:rgba(0,212,255,0.04);top:1000px;left:300px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="card-title" style="font-size:36px;color:var(--text-secondary);margin-bottom:16px;">它是什么？</div>
+        <div class="content-card" style="margin-bottom:24px;">
+          <div class="card-title" style="margin-bottom:16px;">不是代码补全</div>
+          <div class="card-body">是终端里运行的<span class="highlight">自主编程代理</span></div>
+        </div>
+        <div class="content-card">
+          <div class="card-body" style="font-size:32px;line-height:1.8;">
+            <div>📂 理解整个代码库</div>
+            <div>✏️ 自己编辑文件</div>
+            <div>⚡ 运行测试和命令</div>
+            <div>🔀 创建 PR、编排 Agent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 2: PROBLEM (8s) ===== -->
+  <div class="clip s-problem" data-start="15.48" data-duration="9.096">
+    <div class="layer-bg">
+      <div class="bg-gradient" style="background:linear-gradient(160deg, #0a0e1a 0%, #1a0a0a 50%, #0a1220 100%);"></div>
+      <div class="glow glow-warm" style="width:600px;height:600px;top:200px;right:-200px;left:auto;"></div>
+      <div class="glow glow-cool" style="bottom:300px;left:-100px;right:auto;top:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:220px;height:220px;background:rgba(255,68,68,0.06);top:500px;right:100px;"></div>
+      <div class="fx-particle" style="width:160px;height:160px;background:rgba(255,140,50,0.05);bottom:400px;left:100px;"></div>
+      <div class="fx-particle" style="width:100px;height:100px;background:rgba(0,212,255,0.04);top:900px;right:300px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="card-title" style="color:var(--accent-warm);font-size:40px;">⚠️ 你用的是精简版</div>
+        <div style="font-size:38px;line-height:1.7;margin:30px 0;">
+          外部版经过<span class="highlight" style="color:var(--accent-warm);">三层门控</span>过滤<br>
+          大量高级功能对外部用户<span class="highlight" style="color:#FF4444;">不可用</span>
+        </div>
+        <div class="content-card" style="border-color:rgba(255,140,50,0.2);">
+          <div class="card-body" style="font-size:30px;color:var(--text-secondary);">
+            泄露方式：npm 包 source map 未排除<br>
+            <span style="color:var(--accent-warm);">cli.js.map → sourcesContent</span><br>
+            → 1,987 个 TypeScript 文件
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 3: HOW - 三层门控 (10s) ===== -->
+  <div class="clip s-how" data-start="24.576" data-duration="14.352">
+    <div class="layer-bg">
+      <div class="bg-gradient"></div>
+      <div class="glow glow-warm" style="top:100px;left:-50px;bottom:auto;right:auto;"></div>
+      <div class="glow glow-cool" style="bottom:200px;right:-50px;top:auto;left:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:180px;height:180px;background:rgba(0,212,255,0.05);top:300px;right:150px;"></div>
+      <div class="fx-particle" style="width:140px;height:140px;background:rgba(255,140,50,0.04);bottom:500px;left:80px;"></div>
+      <div class="fx-particle" style="width:100px;height:100px;background:rgba(68,204,136,0.05);top:900px;left:250px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="card-title" style="margin-bottom:20px;">三层功能门控体系</div>
+
+        <div class="gate-layer l1">
+          <div class="layer-num">LAYER 1</div>
+          <div class="layer-title" style="color:#FF4444;">编译时 feature()</div>
+          <div class="layer-desc">50 个开关，关闭的代码直接删除，无法逆向</div>
+        </div>
+
+        <div class="gate-layer l2">
+          <div class="layer-num">LAYER 2</div>
+          <div class="layer-title" style="color:var(--accent-warm);">USER_TYPE 硬编码</div>
+          <div class="layer-desc">200+ 处检查 · ant vs external</div>
+        </div>
+
+        <div class="gate-layer l3">
+          <div class="layer-num">LAYER 3</div>
+          <div class="layer-title" style="color:#44CC88;">GrowthBook 远程 A/B</div>
+          <div class="layer-desc">tengu_* 动态控制 · 灰度发布</div>
+        </div>
+
+        <div style="text-align:center;margin-top:24px;font-size:28px;color:var(--text-secondary);">
+          内部 GrowthBook 刷新：<span style="color:var(--accent-cool);font-weight:700;">20 分钟</span>
+          &nbsp;vs&nbsp;
+          外部：<span style="color:var(--accent-warm);font-weight:700;">6 小时</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 4: EVIDENCE - 隐藏功能 (10s) ===== -->
+  <div class="clip s-evidence" data-start="38.928" data-duration="13.416">
+    <div class="layer-bg">
+      <div class="bg-gradient" style="background:linear-gradient(160deg, #0d0a1a 0%, #0a1525 50%, #0d1520 100%);"></div>
+      <div class="glow glow-cool" style="width:550px;height:550px;top:100px;left:50px;bottom:auto;right:auto;"></div>
+      <div class="glow glow-warm" style="width:500px;height:500px;bottom:150px;right:0;top:auto;left:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:200px;height:200px;background:rgba(0,212,255,0.06);top:400px;left:100px;"></div>
+      <div class="fx-particle" style="width:160px;height:160px;background:rgba(255,140,50,0.05);bottom:300px;right:80px;"></div>
+      <div class="fx-particle" style="width:120px;height:120px;background:rgba(124,58,237,0.06);top:800px;right:250px;"></div>
+      <div class="fx-particle" style="width:80px;height:80px;background:rgba(0,212,255,0.04);top:1100px;left:200px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="card-title" style="font-size:40px;margin-bottom:24px;">7 大隐藏功能</div>
+
+        <div class="content-card" style="margin-bottom:16px;border-color:rgba(255,140,50,0.2);">
+          <div class="card-body" style="font-size:32px;">
+            <span style="font-size:40px;">🐾</span> <span class="highlight">BUDDY</span> — AI 电子宠物<br>
+            <span style="font-size:26px;color:var(--text-secondary);">18种宠物 · 5个稀有度 · 防作弊确定性生成</span>
+          </div>
+        </div>
+
+        <div class="content-card" style="margin-bottom:16px;border-color:rgba(0,212,255,0.2);">
+          <div class="card-body" style="font-size:32px;">
+            <span style="font-size:40px;">🌙</span> <span style="color:var(--accent-cool);font-weight:700;">KAIROS</span> — 永不关机<br>
+            <span style="font-size:26px;color:var(--text-secondary);">关闭终端仍在后台运行 · 自动做梦整理记忆</span>
+          </div>
+        </div>
+
+        <div class="content-card" style="border-color:rgba(124,58,237,0.2);">
+          <div class="card-body" style="font-size:32px;">
+            <span style="font-size:40px;">☁️</span> <span style="color:#A855F7;font-weight:700;">ULTRAPLAN</span> — 云端深度规划<br>
+            <span style="font-size:26px;color:var(--text-secondary);">Opus 模型独立研究 30 分钟 · 完全内部限定</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;text-align:center;">
+          <div class="feature-pill">Coordinator 多Agent</div>
+          <div class="feature-pill warm">Bridge 远程控制</div>
+          <div class="feature-pill">Voice 语音</div>
+          <div class="feature-pill warm">Proactive 主动</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 5: COMPARISON (8s) ===== -->
+  <div class="clip s-compare" data-start="52.344" data-duration="9.744">
+    <div class="layer-bg">
+      <div class="bg-gradient"></div>
+      <div class="glow glow-cool" style="top:300px;right:0;left:auto;bottom:auto;"></div>
+      <div class="glow glow-warm" style="bottom:400px;left:0;right:auto;top:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:160px;height:160px;background:rgba(0,212,255,0.05);top:500px;left:100px;"></div>
+      <div class="fx-particle" style="width:120px;height:120px;background:rgba(255,140,50,0.04);bottom:600px;right:150px;"></div>
+      <div class="fx-particle" style="width:90px;height:90px;background:rgba(68,204,136,0.04);top:900px;right:200px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase">
+        <div class="card-title" style="margin-bottom:20px;">竞品对比</div>
+        <table class="compare-table">
+          <tr>
+            <th></th>
+            <th style="color:var(--accent-warm);">Claude Code</th>
+            <th>Cursor</th>
+            <th>Copilot</th>
+          </tr>
+          <tr>
+            <td style="text-align:left;font-weight:600;">形态</td>
+            <td class="winner">CLI 代理</td>
+            <td class="dim">AI IDE</td>
+            <td class="dim">插件</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;font-weight:600;">自主性</td>
+            <td class="winner">高 Agentic</td>
+            <td>中</td>
+            <td class="dim">低 补全</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;font-weight:600;">MCP 协议</td>
+            <td class="winner">原生 ✓</td>
+            <td class="dim">✗</td>
+            <td class="dim">✗</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;font-weight:600;">多 Agent</td>
+            <td class="winner">支持 ✓</td>
+            <td class="dim">✗</td>
+            <td class="dim">✗</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;font-weight:600;">价格/月</td>
+            <td style="color:var(--accent-warm);">$20-200</td>
+            <td>$16-20</td>
+            <td class="winner">$10</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 6: TAKEAWAY (6s) ===== -->
+  <div class="clip s-takeaway" data-start="62.088" data-duration="9.624">
+    <div class="layer-bg">
+      <div class="bg-gradient" style="background:linear-gradient(135deg, #1a0e0a 0%, #0a1525 50%, #0d0a1a 100%);"></div>
+      <div class="glow glow-warm" style="width:600px;height:600px;top:200px;left:50%;margin-left:-300px;bottom:auto;right:auto;"></div>
+      <div class="glow glow-cool" style="width:400px;height:400px;bottom:300px;left:50%;margin-left:-200px;top:auto;right:auto;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:200px;height:200px;background:rgba(255,140,50,0.07);top:400px;left:100px;"></div>
+      <div class="fx-particle" style="width:150px;height:150px;background:rgba(0,212,255,0.06);bottom:500px;right:100px;"></div>
+      <div class="fx-particle" style="width:100px;height:100px;background:rgba(255,140,50,0.04);top:900px;right:300px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase" style="justify-content:center;align-items:center;">
+        <div class="insight-card">
+          <div class="insight-label">核心洞察</div>
+          <div class="insight-text">
+            AI 编程工具的护城河<br>
+            不是<span class="accent">底层模型</span><br>
+            而是 <span class="accent">51 万行编排代码</span>
+          </div>
+          <div style="margin-top:30px;">
+            <div class="data-badge">Harness > Model</div>
+            <div class="data-badge">上下文管理</div>
+            <div class="data-badge">工具编排</div>
+            <div class="data-badge">记忆系统</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scene 7: CTA (3s) ===== -->
+  <div class="clip s-cta" data-start="71.712" data-duration="2.976">
+    <div class="layer-bg">
+      <div class="bg-gradient"></div>
+      <div class="glow glow-cool" style="top:50%;left:50%;margin:-200px 0 0 -200px;bottom:auto;right:auto;width:400px;height:400px;"></div>
+      <div class="grid-texture"></div>
+    </div>
+    <div class="layer-fx">
+      <div class="fx-particle" style="width:120px;height:120px;background:rgba(0,212,255,0.05);top:600px;left:200px;"></div>
+      <div class="fx-particle" style="width:80px;height:80px;background:rgba(255,140,50,0.04);bottom:700px;right:200px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase" style="justify-content:center;align-items:center;">
+        <div class="cta-text">关注我<br><span style="font-size:36px;color:var(--accent-cool);">更多开源深度解析</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+
+// Hook 场景入场
+tl.from('.s-hook .big-number', {opacity:0, y:40, duration:0.4, ease:'power3.out', stagger:0.15}, 0.1)
+  .from('.s-hook .sub-text', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.5);
+
+// What 场景入场
+tl.from('.s-what .card-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 4.56)
+  .from('.s-what .content-card', {opacity:0, y:30, duration:0.3, ease:'power3.out', stagger:0.12}, 4.71);
+
+// Problem 场景入场
+tl.from('.s-problem .card-title', {opacity:0, x:-30, duration:0.3, ease:'power3.out'}, 15.48)
+  .from('.s-problem .content-card', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 15.68);
+
+// How 场景入场 — 三层门控依次出现
+tl.from('.s-how .card-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 24.576)
+  .from('.s-how .gate-layer', {opacity:0, x:-40, duration:0.35, ease:'power3.out', stagger:0.2}, 24.726);
+
+// Evidence 场景入场 — 隐藏功能卡片
+tl.from('.s-evidence .card-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 38.928)
+  .from('.s-evidence .content-card', {opacity:0, y:25, duration:0.3, ease:'power3.out', stagger:0.15}, 39.078)
+  .from('.s-evidence .feature-pill', {opacity:0, scale:0.8, duration:0.25, ease:'back.out(1.5)', stagger:0.08}, 39.528);
+
+// Compare 场景入场
+tl.from('.s-compare .card-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 52.344)
+  .from('.s-compare .compare-table tr', {opacity:0, y:15, duration:0.2, ease:'power3.out', stagger:0.1}, 52.494);
+
+// Takeaway 场景入场
+tl.from('.s-takeaway .insight-card', {opacity:0, scale:0.9, duration:0.5, ease:'power3.out'}, 62.088)
+  .from('.s-takeaway .data-badge', {opacity:0, y:10, duration:0.2, ease:'power3.out', stagger:0.08}, 62.388);
+
+// CTA 场景入场
+tl.from('.s-cta .cta-text', {opacity:0, y:20, duration:0.4, ease:'power3.out'}, 71.712);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

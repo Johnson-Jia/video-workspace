@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI对企业培训行业冲击深度解析</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+:root {
+  --bg: #080818;
+  --accent-cool: #06B6D4;
+  --accent-warm: #F59E0B;
+  --accent-green: #10B981;
+  --accent-blue: #3B82F6;
+  --accent-purple: #8B5CF6;
+  --accent-rose: #F43F5E;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --text-dim: #6B7280;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1080px; height:1920px; background:var(--bg); color:var(--text-primary); font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif; overflow:hidden; position:relative; }
+
+.scene-wrap { position:absolute; top:0; left:0; width:1080px; height:1920px; overflow:hidden; }
+.layer-bg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; }
+.layer-fx { position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none; }
+.layer-content { position:absolute; top:0; left:0; width:100%; height:100%; z-index:3; padding:140px 80px 180px 80px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+
+.phase { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:140px 80px 180px 80px; }
+
+.grid-bg { width:100%; height:100%; background-image:linear-gradient(rgba(6,182,212,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,0.03) 1px,transparent 1px); background-size:48px 48px; }
+.glow { position:absolute; border-radius:50%; filter:blur(160px); pointer-events:none; }
+.glow-cyan { background:var(--accent-cool); }
+.glow-amber { background:var(--accent-warm); }
+.glow-purple { background:var(--accent-purple); }
+.glow-green { background:var(--accent-green); }
+.glow-blue { background:var(--accent-blue); }
+
+/* HeroCard */
+.hero-card { position:relative; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:180px 80px 220px 80px; }
+.hero-badge { font-size:28px; font-weight:600; padding:8px 28px; border-radius:20px; margin-bottom:40px; }
+.hero-badge-amber { color:var(--accent-warm); background:rgba(245,158,11,0.15); }
+.hero-badge-cyan { color:var(--accent-cool); background:rgba(6,182,212,0.15); }
+.hero-title { font-size:96px; font-weight:900; line-height:1.2; text-align:center; letter-spacing:-1px; }
+.hero-title .accent-amber { color:var(--accent-warm); }
+.hero-title .accent-cyan { color:var(--accent-cool); }
+.hero-title .accent-purple { color:var(--accent-purple); }
+.hero-sub { font-size:44px; font-weight:600; margin-top:40px; color:var(--accent-cool); }
+.hero-big-num { font-size:200px; font-weight:900; line-height:1; }
+.hero-label { font-size:36px; color:var(--text-secondary); margin-top:20px; }
+
+/* NumGrid */
+.numgrid-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.numgrid-title { font-size:40px; font-weight:900; margin-bottom:16px; }
+.numgrid-subtitle { font-size:20px; color:var(--text-secondary); text-align:center; line-height:1.6; margin-bottom:40px; }
+.num-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; }
+.num-item { background:rgba(17,24,39,0.6); border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:32px 24px; text-align:center; }
+.num-val { font-size:56px; font-weight:900; line-height:1; }
+.cyan { color:var(--accent-cool); }
+.amber { color:var(--accent-warm); }
+.green { color:var(--accent-green); }
+.purple { color:var(--accent-purple); }
+.blue { color:var(--accent-blue); }
+.rose { color:var(--accent-rose); }
+.num-desc { font-size:18px; color:var(--text-secondary); margin-top:10px; }
+
+/* MarketBars */
+.mbars-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.mbars-title { font-size:36px; font-weight:900; margin-bottom:12px; text-align:center; }
+.mbars-white { color:var(--text-primary); }
+.mbars-accent { background:linear-gradient(135deg,var(--accent-cool),var(--accent-green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.mbars-sub { font-size:18px; color:var(--text-dim); margin-bottom:40px; }
+.mbars-group { width:100%; display:flex; flex-direction:column; gap:28px; }
+.mbar-row { display:flex; flex-direction:column; gap:8px; }
+.mbar-header { display:flex; justify-content:space-between; align-items:baseline; }
+.mbar-label { font-size:20px; font-weight:700; color:var(--text-primary); }
+.mbar-year { font-size:16px; color:var(--text-dim); font-weight:400; margin-left:8px; }
+.mbar-value { font-size:22px; font-weight:900; }
+.mbar-cyan { color:var(--accent-cool); }
+.mbar-amber { color:var(--accent-warm); }
+.mbar-track { width:100%; height:32px; background:rgba(255,255,255,0.04); border-radius:10px; overflow:hidden; }
+.mbar-fill { height:100%; border-radius:10px; display:flex; align-items:center; justify-content:flex-end; padding-right:14px; font-size:15px; font-weight:800; color:white; width:0%; }
+.fill-cyan { background:linear-gradient(90deg,rgba(6,182,212,0.2),var(--accent-cool)); }
+.fill-amber { background:linear-gradient(90deg,rgba(245,158,11,0.2),var(--accent-warm)); }
+.fill-green { background:linear-gradient(90deg,rgba(16,185,129,0.2),var(--accent-green)); }
+.fill-purple { background:linear-gradient(90deg,rgba(139,92,246,0.2),var(--accent-purple)); }
+
+/* BulletList */
+.bullet-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.bullet-title { font-size:40px; font-weight:900; margin-bottom:16px; text-align:center; }
+.bullet-sub { font-size:18px; color:var(--text-dim); margin-bottom:36px; }
+.bullet-list { width:100%; display:flex; flex-direction:column; gap:20px; }
+.bullet-item { display:flex; align-items:center; gap:20px; background:rgba(17,24,39,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:16px; padding:24px 28px; }
+.bullet-num { font-size:36px; font-weight:900; min-width:60px; text-align:center; }
+.bullet-text { flex:1; }
+.bullet-name { font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+.bullet-desc { font-size:16px; color:var(--text-secondary); }
+
+/* CompareSplit */
+.compare-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.compare-title { font-size:36px; font-weight:900; margin-bottom:12px; }
+.compare-sub { font-size:18px; color:var(--text-dim); margin-bottom:32px; }
+.compare-split { display:flex; width:100%; gap:0; }
+.compare-col { flex:1; display:flex; flex-direction:column; padding:32px; border-radius:20px; }
+.compare-left { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); }
+.compare-right { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); }
+.compare-header { font-size:28px; font-weight:800; margin-bottom:28px; text-align:center; padding-bottom:16px; border-bottom:2px solid rgba(255,255,255,0.08); }
+.compare-header-red { color:#EF4444; }
+.compare-header-green { color:var(--accent-green); }
+.compare-items { display:flex; flex-direction:column; gap:12px; }
+.compare-item { display:flex; align-items:center; gap:12px; font-size:18px; color:var(--text-secondary); }
+.compare-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dot-red { background:#EF4444; }
+.dot-green { background:var(--accent-green); }
+.compare-vs { display:flex; align-items:center; justify-content:center; width:60px; font-size:24px; font-weight:900; color:var(--accent-warm); }
+
+/* ScoreCompare */
+.sc-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.sc-badge { font-size:18px; font-weight:700; background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(6,182,212,0.25)); border:2px solid rgba(6,182,212,0.4); border-radius:100px; padding:10px 36px; color:var(--accent-cool); letter-spacing:4px; margin-bottom:32px; }
+.sc-title { font-size:44px; font-weight:900; margin-bottom:16px; }
+.sc-accent { color:var(--accent-warm); }
+.sc-cards { display:flex; gap:24px; width:100%; margin-bottom:28px; }
+.sc-card { flex:1; background:rgba(20,20,50,0.85); border-radius:24px; padding:36px 28px; text-align:center; border:2px solid rgba(255,255,255,0.08); position:relative; }
+.sc-card.winner { border-color:rgba(16,185,129,0.3); background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(20,20,50,0.85)); }
+.sc-win-tag { position:absolute; top:-12px; right:24px; background:var(--accent-green); color:#000; font-size:12px; font-weight:900; padding:4px 14px; border-radius:6px; }
+.sc-number { font-size:60px; font-weight:900; letter-spacing:-1px; }
+.sc-label { font-size:18px; color:var(--text-secondary); margin-top:8px; }
+.sc-stats { display:flex; gap:16px; width:100%; }
+.sc-stat { flex:1; border-radius:14px; padding:16px; text-align:center; }
+.sc-stat-green { background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.15); }
+.sc-stat-red { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.1); }
+.sc-stat-val { font-size:24px; font-weight:900; }
+.sc-stat-green .sc-stat-val { color:var(--accent-green); }
+.sc-stat-red .sc-stat-val { color:#EF4444; }
+.sc-stat-desc { font-size:14px; color:var(--text-dim); margin-top:4px; }
+
+/* DataViz */
+.dv-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.dv-title { font-size:36px; font-weight:900; margin-bottom:12px; text-align:center; }
+.dv-sub { font-size:18px; color:var(--text-dim); margin-bottom:36px; }
+.dv-card { width:100%; background:rgba(17,24,39,0.5); border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:32px; margin-bottom:20px; }
+.dv-row { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.dv-row:last-child { margin-bottom:0; }
+.dv-label { font-size:20px; color:var(--text-secondary); width:160px; }
+.dv-track { flex:1; height:20px; border-radius:10px; background:rgba(255,255,255,0.05); overflow:hidden; }
+.dv-fill { height:100%; border-radius:10px; width:0%; }
+.dv-value { font-size:20px; font-weight:800; width:80px; text-align:right; }
+
+/* Spectrum */
+.spectrum-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.spectrum-heading { font-size:36px; font-weight:900; margin-bottom:12px; text-align:center; line-height:1.3; }
+.spectrum-accent { background:linear-gradient(135deg,var(--accent-purple),var(--accent-rose)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.spectrum-sub { font-size:18px; color:var(--text-dim); margin-bottom:32px; }
+.spectrum-strip { display:flex; height:24px; border-radius:12px; overflow:hidden; gap:3px; width:100%; margin-bottom:16px; }
+.spectrum-strip .sp { height:100%; border-radius:8px; }
+.sp-1 { flex:1; background:var(--accent-green); opacity:0.4; }
+.sp-2 { flex:1.5; background:var(--accent-cool); opacity:0.6; }
+.sp-3 { flex:2; background:var(--accent-blue); opacity:0.8; }
+.sp-4 { flex:2.5; background:var(--accent-purple); }
+.spectrum-labels { display:flex; justify-content:space-between; width:100%; margin-bottom:12px; }
+.spectrum-labels span { font-size:14px; color:var(--text-secondary); }
+.spectrum-ends { display:flex; justify-content:space-between; width:100%; }
+.spectrum-low { font-size:14px; color:var(--accent-green); }
+.spectrum-high { font-size:14px; color:var(--accent-purple); }
+.spectrum-bars { width:100%; display:flex; flex-direction:column; gap:20px; margin-top:28px; }
+.spec-row { display:flex; align-items:center; gap:14px; }
+.spec-label { font-size:18px; font-weight:700; width:140px; text-align:right; }
+.spec-track { flex:1; height:32px; background:rgba(255,255,255,0.03); border-radius:8px; overflow:hidden; }
+.spec-fill { height:100%; border-radius:8px; width:0%; }
+.spec-pct { font-size:18px; font-weight:800; width:60px; }
+.spec-desc { font-size:14px; color:var(--text-dim); width:100px; }
+
+/* RecStrip */
+.rec-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.rec-heading { font-size:36px; font-weight:900; margin-bottom:12px; text-align:center; }
+.rec-accent { background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.rec-sub { font-size:18px; color:var(--text-dim); margin-bottom:32px; }
+.rec-stack { width:100%; display:flex; flex-direction:column; gap:14px; margin-bottom:24px; }
+.rec-item { display:flex; align-items:center; gap:20px; border-radius:16px; padding:24px 28px; border:2px solid rgba(255,255,255,0.04); }
+.rec-high { background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.15); }
+.rec-mid { background:rgba(245,158,11,0.04); border-color:rgba(245,158,11,0.1); }
+.rec-low { background:rgba(16,185,129,0.04); border-color:rgba(16,185,129,0.1); }
+.rec-icon { font-size:36px; }
+.rec-text { flex:1; }
+.rec-name { font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+.rec-desc { font-size:16px; color:var(--text-dim); }
+.rec-score { font-size:28px; font-weight:900; text-align:right; }
+.score-danger { color:var(--accent-rose); }
+.score-warn { color:var(--accent-warm); }
+.score-ok { color:var(--accent-green); }
+
+/* VerdictBox */
+.vb-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.vb-icon { font-size:72px; margin-bottom:28px; }
+.vb-heading { font-size:40px; font-weight:900; margin-bottom:36px; background:linear-gradient(135deg,var(--accent-cool),var(--accent-blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.vb-box { width:100%; background:rgba(6,182,212,0.05); border:1px solid rgba(6,182,212,0.12); border-left:6px solid var(--accent-cool); border-radius:0 20px 20px 0; padding:32px 40px; font-size:24px; line-height:1.8; color:var(--text-secondary); margin-bottom:32px; }
+.vb-box strong { color:var(--text-primary); }
+.vb-box .hl { color:var(--accent-warm); font-weight:700; }
+.vb-tags { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.vtag { font-size:18px; font-weight:600; padding:10px 22px; border-radius:10px; }
+.vtag-cyan { background:rgba(6,182,212,0.1); color:var(--accent-cool); border:1px solid rgba(6,182,212,0.15); }
+.vtag-amber { background:rgba(245,158,11,0.1); color:var(--accent-warm); border:1px solid rgba(245,158,11,0.15); }
+.vtag-green { background:rgba(16,185,129,0.1); color:var(--accent-green); border:1px solid rgba(16,185,129,0.15); }
+.vtag-purple { background:rgba(139,92,246,0.1); color:var(--accent-purple); border:1px solid rgba(139,92,246,0.15); }
+
+/* Timeline (for S17) */
+.tl-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+.tl-title { font-size:40px; font-weight:900; margin-bottom:36px; }
+.tl-steps { width:100%; display:flex; flex-direction:column; gap:24px; }
+.tl-step { display:flex; align-items:flex-start; gap:24px; background:rgba(17,24,39,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:20px; padding:28px 32px; }
+.tl-num { font-size:48px; font-weight:900; min-width:70px; text-align:center; }
+.tl-body { flex:1; }
+.tl-name { font-size:24px; font-weight:700; color:var(--text-primary); margin-bottom:8px; }
+.tl-desc { font-size:18px; color:var(--text-secondary); line-height:1.6; }
+.tl-data { font-size:16px; color:var(--accent-warm); font-weight:600; margin-top:8px; }
+
+/* Scene number watermark */
+.scene-num { position:absolute; bottom:60px; left:80px; font-size:18px; font-weight:700; color:rgba(255,255,255,0.15); z-index:10; }
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+<audio data-track-index="1" data-volume="1" src="narration.mp3" preload="auto"></audio>
+<audio data-track-index="2" data-volume="0.13" src="bgm.wav" preload="auto"></audio>
+
+<!-- S1: Hook (0 - 7.15) -->
+<div id="s1" class="scene-wrap" data-start="0" data-duration="7.15">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-amber" style="width:600px;height:600px;opacity:0.2;top:400px;left:-100px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="hero-card">
+      <div class="hero-badge hero-badge-amber">AI vs 企业培训</div>
+      <div class="hero-title"><span class="accent-amber">四千亿美元</span>市场<br>正在被AI<span class="accent-purple">从骨子里重构</span></div>
+      <div class="hero-sub">不是消失 / 是游戏规则彻底改写</div>
+    </div>
+  </div>
+  <div class="scene-num">01 / 19</div>
+</div>
+
+<!-- S2: Market (7.15 - 43.15) -->
+<div class="scene-wrap" data-start="7.15" data-duration="36.0">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-cyan" style="width:500px;height:500px;opacity:0.15;top:300px;right:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s2-p1" style="padding:140px 80px 180px 80px">
+      <div class="mbars-wrap">
+        <div class="mbars-title"><span class="mbars-white">全球企业培训市场</span> <span class="mbars-accent">稳步增长</span></div>
+        <div class="mbars-sub">2025 vs 2030 市场规模对比</div>
+        <div class="mbars-group">
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">全球培训市场 <span class="mbar-year">2025</span></div><div class="mbar-value mbar-cyan">$4,175 亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="77">77%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">全球培训市场 <span class="mbar-year">2030</span></div><div class="mbar-value mbar-cyan">$5,413 亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="100">CAGR 5.3%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">在线学习 <span class="mbar-year">2022</span></div><div class="mbar-value mbar-amber">$2,455 亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="53">53%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">在线学习 <span class="mbar-year">2027</span></div><div class="mbar-value mbar-amber">$4,626 亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="100">CAGR 13%+</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s2-p2" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">市场增长核心数据</div>
+        <div class="numgrid-subtitle">在线学习四年翻一倍 / 企业培训需求永恒不变</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val cyan">$4,626亿</div><div class="num-desc">2027 在线学习市场</div></div>
+          <div class="num-item"><div class="num-val amber">13%+</div><div class="num-desc">在线学习年复合增速</div></div>
+          <div class="num-item"><div class="num-val green">$5,413亿</div><div class="num-desc">2030 全球培训市场</div></div>
+          <div class="num-item"><div class="num-val purple">5.3%</div><div class="num-desc">培训市场年均增速</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s2-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading">关键洞察</div>
+        <div class="vb-box">
+          企业需要培训的<strong>本质需求</strong>从来没有改变过。<br>但增长最快的不是大盘数据，而是 <span class="hl">AI 培训细分赛道</span>，它的增速把传统培训远远甩在身后。
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-cyan">需求永恒不变</div>
+          <div class="vtag vtag-amber">AI 细分远超传统</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">02 / 19</div>
+</div>
+
+<!-- S3: AI Boom (43.15 - 78.33) -->
+<div class="scene-wrap" data-start="43.15" data-duration="35.18">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-green" style="width:600px;height:600px;opacity:0.18;bottom:400px;left:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s3-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">AI 培训细分市场爆发</div>
+        <div class="numgrid-subtitle">增速是传统培训的整整 4 倍</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val green">21.7%</div><div class="num-desc">AI培训 CAGR</div></div>
+          <div class="num-item"><div class="num-val amber">828%</div><div class="num-desc">AI培训软件销售增长</div></div>
+          <div class="num-item"><div class="num-val cyan">$32亿</div><div class="num-desc">AI学习管理系统市场</div></div>
+          <div class="num-item"><div class="num-val purple">4x</div><div class="num-desc">增速倍数(vs传统)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s3-p2" style="padding:140px 80px 180px 80px">
+      <div class="mbars-wrap">
+        <div class="mbars-title"><span class="mbars-white">AI 培训</span> <span class="mbars-accent">爆发式增长</span></div>
+        <div class="mbars-sub">2023-2027 关键赛道增速对比</div>
+        <div class="mbars-group">
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">企业AI培训 <span class="mbar-year">2023</span></div><div class="mbar-value mbar-cyan">$8亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="32">32%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">企业AI培训 <span class="mbar-year">2027</span></div><div class="mbar-value mbar-cyan">$25亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="100">3x</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">学习体验平台 <span class="mbar-year">2023</span></div><div class="mbar-value mbar-amber">$15.7亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="17">17%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">学习体验平台 <span class="mbar-year">2027</span></div><div class="mbar-value mbar-amber">$90.2亿</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="100">CAGR 33.8%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s3-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🚀</div>
+        <div class="vb-heading">全新独立赛道</div>
+        <div class="vb-box">
+          这已经不是改良，是一个<span class="hl">全新的独立赛道</span>正在形成。<br>而且<strong>增速远超所有人预期</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">03 / 19</div>
+</div>
+
+<!-- S4: Paradox (78.33 - 110.71) -->
+<div class="scene-wrap" data-start="78.33" data-duration="32.38">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-amber" style="width:700px;height:700px;opacity:0.2;top:200px;left:100px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s4-p1" style="padding:140px 80px 180px 80px">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;text-align:center">
+        <div class="hero-badge hero-badge-amber" style="margin-bottom:60px">核心矛盾</div>
+        <div class="hero-big-num amber">25%</div>
+        <div class="hero-label" style="font-size:32px">的员工认为企业培训有效果</div>
+        <div style="font-size:28px;color:var(--accent-rose);font-weight:700;margin-top:40px">75% 觉得培训没用</div>
+      </div>
+    </div>
+    <div class="phase" id="s4-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">⚠️</div>
+        <div class="vb-heading">致命矛盾</div>
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          企业花<span class="hl">数千亿美元</span>在培训上，但员工不买账。<br>AI 不是在一个健康的系统上锦上添花，而是在一个<strong>效果严重赤字的领域</strong>，提供了全新的解法。
+        </div>
+        <div class="vb-tags">
+          <div class="vtag" style="background:rgba(244,63,94,0.1);color:var(--accent-rose);border:1px solid rgba(244,63,94,0.15)">效果赤字</div>
+          <div class="vtag vtag-amber">AI 是加速器</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s4-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent">危机本质</div>
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          培训行业面临的<strong>不是 AI 的威胁</strong>，<br>而是<span class="hl">自身效果不足的危机</span>被 AI 彻底暴露了。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">04 / 19</div>
+</div>
+
+<!-- S5: Overview (110.71 - 141.45) -->
+<div class="scene-wrap" data-start="110.71" data-duration="30.74">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-blue" style="width:500px;height:500px;opacity:0.15;bottom:300px;right:-50px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s5-p1" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-title" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent">AI 重构企业培训的五个维度</div>
+        <div class="bullet-sub">每一个都不是小修小补，而是范式级变化</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-num cyan">01</div><div class="bullet-text"><div class="bullet-name">内容生产革命</div><div class="bullet-desc">效率提升 500%</div></div></div>
+          <div class="bullet-item"><div class="bullet-num green">02</div><div class="bullet-text"><div class="bullet-name">学习模式转变</div><div class="bullet-desc">从推送到好奇驱动</div></div></div>
+          <div class="bullet-item"><div class="bullet-num amber">03</div><div class="bullet-text"><div class="bullet-name">个性化学习体验</div><div class="bullet-desc">保留率提升 30%</div></div></div>
+          <div class="bullet-item"><div class="bullet-num purple">04</div><div class="bullet-text"><div class="bullet-name">AI 教练与模拟训练</div><div class="bullet-desc">全天候不间断</div></div></div>
+          <div class="bullet-item"><div class="bullet-num rose">05</div><div class="bullet-text"><div class="bullet-name">数据驱动效果评估</div><div class="bullet-desc">质的飞跃</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s5-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">⚡</div>
+        <div class="vb-heading">范式级变化</div>
+        <div class="vb-box">
+          每一个维度都<strong>不是小修小补</strong>，而是范式级变化。<br>接下来逐个拆解，先从变化最猛烈的<span class="hl">内容生产</span>开始。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">05 / 19</div>
+</div>
+
+<!-- S6: Content Revolution (141.45 - 177.86) -->
+<div class="scene-wrap" data-start="141.45" data-duration="36.41">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-cyan" style="width:500px;height:500px;opacity:0.15;top:300px;left:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s6-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">维度一：内容生产革命</div>
+        <div class="numgrid-subtitle">AI 辅助做课效率提升 500% / 考试效率提升 400%</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val cyan">30%</div><div class="num-desc">培训内容将由 AI 创建</div></div>
+          <div class="num-item"><div class="num-val green">58%</div><div class="num-desc">培训师投资 AI 工具</div></div>
+          <div class="num-item"><div class="num-val amber">500%</div><div class="num-desc">做课效率提升</div></div>
+          <div class="num-item"><div class="num-val purple">20-30%</div><div class="num-desc">成本节约</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s6-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🔄</div>
+        <div class="vb-heading">生产范式转移</div>
+        <div class="vb-box">
+          传统模式开发一门课程需要<strong>数周</strong>，<br>AI 辅助下只需<span class="hl">数小时</span>。<br>内容生产正从人力密集型变成 AI 原生型。
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-cyan">数周 → 数小时</div>
+          <div class="vtag vtag-amber">人力 → AI原生</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s6-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent">淘汰警告</div>
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          不会用 AI 做课的培训师，<br>就像<span class="hl">不会用搜索引擎的研究员</span>一样，<br><strong>注定被淘汰</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">06 / 19</div>
+</div>
+
+<!-- S7: Learning Mode (177.86 - 215.2) -->
+<div class="scene-wrap" data-start="177.86" data-duration="37.34">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-purple" style="width:600px;height:600px;opacity:0.15;bottom:200px;right:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s7-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-purple),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">维度二：学习模式转变</div>
+        <div class="numgrid-subtitle">AI 对话工具 5 天破百万 / 现在超过 10 亿用户</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val purple">10亿+</div><div class="num-desc">AI 工具总用户</div></div>
+          <div class="num-item"><div class="num-val cyan">4亿</div><div class="num-desc">周活跃用户</div></div>
+          <div class="num-item"><div class="num-val green">5天</div><div class="num-desc">破百万用户</div></div>
+          <div class="num-item"><div class="num-val amber">数个数量级</div><div class="num-desc">超越传统 LMS</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s7-p2" style="padding:140px 80px 180px 80px">
+      <div class="compare-wrap">
+        <div class="compare-title" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent">学习范式对比</div>
+        <div class="compare-sub">从推送式到好奇心驱动</div>
+        <div class="compare-split">
+          <div class="compare-col compare-left">
+            <div class="compare-header compare-header-red">传统培训</div>
+            <div class="compare-items">
+              <div class="compare-item"><div class="compare-dot dot-red"></div>固定课程内容</div>
+              <div class="compare-item"><div class="compare-dot dot-red"></div>线性学习路径</div>
+              <div class="compare-item"><div class="compare-dot dot-red"></div>一刀切推送</div>
+              <div class="compare-item"><div class="compare-dot dot-red"></div>学习者被动接受</div>
+            </div>
+          </div>
+          <div class="compare-vs">VS</div>
+          <div class="compare-col compare-right">
+            <div class="compare-header compare-header-green">AI 驱动学习</div>
+            <div class="compare-items">
+              <div class="compare-item"><div class="compare-dot dot-green"></div>随时提问获取答案</div>
+              <div class="compare-item"><div class="compare-dot dot-green"></div>按需深入追问</div>
+              <div class="compare-item"><div class="compare-dot dot-green"></div>完全个性化路径</div>
+              <div class="compare-item"><div class="compare-dot dot-green"></div>好奇心驱动循环</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s7-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">💡</div>
+        <div class="vb-heading">传统课件危机</div>
+        <div class="vb-box" style="border-left-color:var(--accent-warm)">
+          开发定制学习系统成本在 <span class="hl">3万到50万美元</span>，<br>但如果学习者根本不用，<strong>这些投资还合理吗？</strong>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s7-p4" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">结论</div>
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          行业媒体说得很直接：<br><strong>传统课件正日益变得不必要</strong>。<br>固定课程、线性学习路径，正面临被<span class="hl">完全取代</span>的风险。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">07 / 19</div>
+</div>
+
+<!-- S8: Compare (215.2 - 249.98) -->
+<div class="scene-wrap" data-start="215.2" data-duration="34.78">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-green" style="width:500px;height:500px;opacity:0.15;top:200px;left:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s8-p1" style="padding:140px 80px 180px 80px">
+      <div class="sc-wrap">
+        <div class="sc-badge">HEAD TO HEAD</div>
+        <div class="sc-title"><span class="sc-accent">传统 LMS</span> vs <span style="color:var(--accent-green)">AI 学习</span></div>
+        <div class="sc-cards">
+          <div class="sc-card">
+            <div class="sc-number" style="color:var(--text-dim)">LMS</div>
+            <div class="sc-label">固定课程 / 线性路径</div>
+            <div class="sc-label">一刀切 / 被动接受</div>
+          </div>
+          <div class="sc-card winner">
+            <div class="sc-win-tag">WIN</div>
+            <div class="sc-number green">AI</div>
+            <div class="sc-label">即时提问 / 按需深入</div>
+            <div class="sc-label">完全个性化 / 主动探索</div>
+          </div>
+        </div>
+        <div class="sc-stats">
+          <div class="sc-stat sc-stat-green"><div class="sc-stat-val">88%</div><div class="sc-stat-desc">偏好新平台</div></div>
+          <div class="sc-stat sc-stat-green"><div class="sc-stat-val">42%</div><div class="sc-stat-desc">正在替换</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s8-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading">行动紧迫</div>
+        <div class="vb-box">
+          这场替代<strong>不是会不会的问题，而是多快的问题</strong>。<br>如果你还在犹豫要不要拥抱 AI，<span class="hl">你的竞争对手已经在行动了</span>。
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-green">88% 偏好 AI</div>
+          <div class="vtag vtag-amber">42% 已替换</div>
+          <div class="vtag" style="background:rgba(244,63,94,0.1);color:var(--accent-rose);border:1px solid rgba(244,63,94,0.15)">对手在行动</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s8-p3" style="padding:140px 80px 180px 80px">
+      <div class="mbars-wrap">
+        <div class="mbars-title"><span class="mbars-white">替代速度</span> <span class="mbars-accent">数据说话</span></div>
+        <div class="mbars-sub">企业从传统 LMS 迁移到 AI 平台的速度</div>
+        <div class="mbars-group">
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">偏好 AI 学习平台</div><div class="mbar-value mbar-cyan">88%</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="88">88%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">寻求升级或替换</div><div class="mbar-value mbar-amber">42%</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="42">42%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">08 / 19</div>
+</div>
+
+<!-- S9: Personalization (249.98 - 284.71) -->
+<div class="scene-wrap" data-start="249.98" data-duration="34.73">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-cyan" style="width:500px;height:500px;opacity:0.15;bottom:300px;right:-50px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s9-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">维度三：个性化学习</div>
+        <div class="numgrid-subtitle">一刀切的时代彻底结束了</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val green">+30%</div><div class="num-desc">员工保留率提升</div></div>
+          <div class="num-item"><div class="num-val cyan">+40%</div><div class="num-desc">知识保留率提升</div></div>
+          <div class="num-item"><div class="num-val amber">78%</div><div class="num-desc">偏好 AI 路径</div></div>
+          <div class="num-item"><div class="num-val purple">+57%</div><div class="num-desc">效率提升</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s9-p2" style="padding:140px 80px 180px 80px">
+      <div class="dv-wrap">
+        <div class="dv-title" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">学习者偏好数据</div>
+        <div class="dv-sub">员工用数据告诉你他们想要什么</div>
+        <div class="dv-card">
+          <div class="dv-row"><div class="dv-label">偏好 AI 个性化</div><div class="dv-track"><div class="dv-fill" data-width="81" style="background:linear-gradient(90deg,rgba(6,182,212,0.3),var(--accent-cool))"></div></div><div class="dv-value cyan">81%</div></div>
+          <div class="dv-row"><div class="dv-label">偏好 AI 路径</div><div class="dv-track"><div class="dv-fill" data-width="78" style="background:linear-gradient(90deg,rgba(16,185,129,0.3),var(--accent-green))"></div></div><div class="dv-value green">78%</div></div>
+          <div class="dv-row"><div class="dv-label">希望相关培训</div><div class="dv-track"><div class="dv-fill" data-width="91" style="background:linear-gradient(90deg,rgba(245,158,11,0.3),var(--accent-warm))"></div></div><div class="dv-value amber">91%</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s9-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🎯</div>
+        <div class="vb-heading">结论</div>
+        <div class="vb-box">
+          不提供个性化体验的培训产品，<br>将在效果竞争中被淘汰。<br><strong>不是慢慢被淘汰，是<span class="hl">很快</span>。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">09 / 19</div>
+</div>
+
+<!-- S10: AI Coach (284.71 - 315.14) -->
+<div class="scene-wrap" data-start="284.71" data-duration="30.43">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-blue" style="width:500px;height:500px;opacity:0.15;top:300px;left:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s10-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">维度四：AI 教练与模拟</div>
+        <div class="numgrid-subtitle">全天候个性化陪练 / 以前不可能的事</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val cyan">80%</div><div class="num-desc">咨询自动应答</div></div>
+          <div class="num-item"><div class="num-val green">+35%</div><div class="num-desc">技能获取提升</div></div>
+          <div class="num-item"><div class="num-val amber">66%</div><div class="num-desc">探索 AI+VR/AR</div></div>
+          <div class="num-item"><div class="num-val purple">24/7</div><div class="num-desc">全天候陪练</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s10-p2" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-title" style="background:linear-gradient(135deg,var(--accent-blue),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">国内 AI 教练方案</div>
+        <div class="bullet-sub">头部厂商纷纷推出智能体</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-num blue">AI</div><div class="bullet-text"><div class="bullet-name">AI 陪练智能体</div><div class="bullet-desc">已商用落地</div></div></div>
+          <div class="bullet-item"><div class="bullet-num cyan">AI</div><div class="bullet-text"><div class="bullet-name">AI 教练方案</div><div class="bullet-desc">基于混合大模型</div></div></div>
+          <div class="bullet-item"><div class="bullet-num green">VR</div><div class="bullet-text"><div class="bullet-name">模拟训练场景</div><div class="bullet-desc">沉浸式技能练习</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s10-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🤖</div>
+        <div class="vb-heading">增量创新</div>
+        <div class="vb-box">
+          这是真正的<strong>增量创新</strong>，<br>不是简单替代人工，而是创造了<span class="hl">以前根本不存在的训练方式</span>。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">10 / 19</div>
+</div>
+
+<!-- S11: Data-driven (315.14 - 348.55) -->
+<div class="scene-wrap" data-start="315.14" data-duration="33.41">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-green" style="width:500px;height:500px;opacity:0.15;top:300px;right:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s11-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">维度五：数据驱动评估</div>
+        <div class="numgrid-subtitle">从拍脑袋决策变成数据驱动</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val cyan">85%</div><div class="num-desc">预测培训需求准确率</div></div>
+          <div class="num-item"><div class="num-val green">+65%</div><div class="num-desc">投资回报提升</div></div>
+          <div class="num-item"><div class="num-val amber">78%</div><div class="num-desc">认为AI对决策至关重要</div></div>
+          <div class="num-item"><div class="num-val purple">+72%</div><div class="num-desc">效率提升</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s11-p2" style="padding:140px 80px 180px 80px">
+      <div class="compare-wrap">
+        <div class="compare-title" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">评估方式质变</div>
+        <div class="compare-split">
+          <div class="compare-col compare-left">
+            <div class="compare-header compare-header-red">传统评估</div>
+            <div class="compare-items">
+              <div class="compare-item"><div class="compare-dot dot-red"></div>课后问卷</div>
+              <div class="compare-item"><div class="compare-dot dot-red"></div>滞后反馈</div>
+              <div class="compare-item"><div class="compare-dot dot-red"></div>拍脑袋决策</div>
+            </div>
+          </div>
+          <div class="compare-vs">VS</div>
+          <div class="compare-col compare-right">
+            <div class="compare-header compare-header-green">AI 驱动评估</div>
+            <div class="compare-items">
+              <div class="compare-item"><div class="compare-dot dot-green"></div>实时数据洞察</div>
+              <div class="compare-item"><div class="compare-dot dot-green"></div>预测性分析</div>
+              <div class="compare-item"><div class="compare-dot dot-green"></div>可操作建议</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s11-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">📊</div>
+        <div class="vb-heading">个体化学习洞察</div>
+        <div class="vb-box">
+          你能看到每个员工的<span class="hl">学习进度</span>、<span class="hl">技能缺口</span>、和<span class="hl">提升路径</span>，<br>这在<strong>传统模式下是不可能的</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">11 / 19</div>
+</div>
+
+<!-- S12: Spectrum (348.55 - 388.37) CLIMAX -->
+<div class="scene-wrap" data-start="348.55" data-duration="39.82">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-purple" style="width:700px;height:700px;opacity:0.2;top:100px;left:50px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s12-p1" style="padding:140px 80px 180px 80px">
+      <div class="spectrum-wrap">
+        <div class="spectrum-heading"><span style="color:var(--text-primary)">AI 冲击</span> <span class="spectrum-accent">整体光谱</span></div>
+        <div class="spectrum-sub">四个层级递进 / 从轻度变化到颠覆替代</div>
+        <div class="spectrum-strip">
+          <span class="sp sp-1"></span><span class="sp sp-2"></span><span class="sp sp-3"></span><span class="sp sp-4"></span>
+        </div>
+        <div class="spectrum-labels"><span>培训内容</span><span>培训方式</span><span>培训师资</span><span>培训工具</span></div>
+        <div class="spectrum-ends"><span class="spectrum-low">轻度变化</span><span class="spectrum-high">颠覆替代</span></div>
+        <div class="spectrum-bars">
+          <div class="spec-row"><div class="spec-label" style="color:#10B981">培训内容</div><div class="spec-track"><div class="spec-fill" data-width="30" style="background:linear-gradient(90deg,rgba(16,185,129,0.3),#10B981)"></div></div><div class="spec-pct" style="color:#10B981">30%</div><div class="spec-desc">轻度变化</div></div>
+          <div class="spec-row"><div class="spec-label" style="color:#06B6D4">培训方式</div><div class="spec-track"><div class="spec-fill" data-width="55" style="background:linear-gradient(90deg,rgba(6,182,212,0.3),#06B6D4)"></div></div><div class="spec-pct" style="color:#06B6D4">55%</div><div class="spec-desc">中度影响</div></div>
+          <div class="spec-row"><div class="spec-label" style="color:#3B82F6">培训师资</div><div class="spec-track"><div class="spec-fill" data-width="75" style="background:linear-gradient(90deg,rgba(59,130,246,0.3),#3B82F6)"></div></div><div class="spec-pct" style="color:#3B82F6">75%</div><div class="spec-desc">深度重构</div></div>
+          <div class="spec-row"><div class="spec-label" style="color:#8B5CF6">培训工具</div><div class="spec-track"><div class="spec-fill" data-width="95" style="background:linear-gradient(90deg,rgba(139,92,246,0.3),#8B5CF6)"></div></div><div class="spec-pct" style="color:#8B5CF6">95%</div><div class="spec-desc">颠覆替代</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s12-p2" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-title" style="background:linear-gradient(135deg,var(--accent-purple),var(--accent-rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent">四层级详解</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-num green">30%</div><div class="bullet-text"><div class="bullet-name">培训内容 — AI 改变制作方式</div><div class="bullet-desc">员工仍需核心技能，AI 只改变了制作方式</div></div></div>
+          <div class="bullet-item"><div class="bullet-num cyan">55%</div><div class="bullet-text"><div class="bullet-name">培训方式 — 个性化路径</div><div class="bullet-desc">从固定课程到 AI 个性化路径，模式在变</div></div></div>
+          <div class="bullet-item"><div class="bullet-num blue">75%</div><div class="bullet-text"><div class="bullet-name">培训师资 — 角色重构</div><div class="bullet-desc">从课程交付者变成战略能力构建者</div></div></div>
+          <div class="bullet-item"><div class="bullet-num purple">95%</div><div class="bullet-text"><div class="bullet-name">培训工具 — 平台替换</div><div class="bullet-desc">传统系统被 AI 原生平台大规模替换</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s12-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">⚡</div>
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-purple),var(--accent-rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent">工具层首当其冲</div>
+        <div class="vb-box" style="border-left-color:var(--accent-purple)">
+          从左到右，冲击层层递进。<br>越接近工具层，<span class="hl">替代越彻底</span>。<br>这就是为什么 <strong>42% 的企业已经在替换</strong>他们的学习管理系统。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">12 / 19</div>
+</div>
+
+<!-- S13: Disrupted (388.37 - 418.78) -->
+<div class="scene-wrap" data-start="388.37" data-duration="30.41">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-amber" style="width:500px;height:500px;opacity:0.15;top:300px;left:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s13-p1" style="padding:140px 80px 180px 80px">
+      <div class="rec-wrap">
+        <div class="rec-heading"><span style="color:var(--text-primary)">谁在被</span> <span class="rec-accent">冲击</span></div>
+        <div class="rec-sub">从传统平台到标准化课程</div>
+        <div class="rec-stack">
+          <div class="rec-item rec-high"><div class="rec-icon">🚫</div><div class="rec-text"><div class="rec-name">标准化通用课程</div><div class="rec-desc">冲击极高 / 学习者直接用 AI 绕过</div></div><div class="rec-score score-danger">致命</div></div>
+          <div class="rec-item rec-mid"><div class="rec-icon">⚠️</div><div class="rec-text"><div class="rec-name">传统线性 LMS</div><div class="rec-desc">42% 企业在替换 / 冲击高</div></div><div class="rec-score score-warn">高</div></div>
+          <div class="rec-item rec-mid"><div class="rec-icon">⚠️</div><div class="rec-text"><div class="rec-name">纯内容外包商</div><div class="rec-desc">AI 自动生成内容削弱外包需求</div></div><div class="rec-score score-warn">高</div></div>
+          <div class="rec-item rec-low"><div class="rec-icon">✅</div><div class="rec-text"><div class="rec-name">AI 原生平台</div><div class="rec-desc">反向受益 / 33.8% 增速证明</div></div><div class="rec-score score-ok">受益</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s13-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🔄</div>
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent">团队重塑</div>
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          培训团队也在重塑：<br>从管理培训平台的人，变成<span class="hl">用 AI 构建组织能力</span>的人。<br><strong>这不是选择题，是生存题。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">13 / 19</div>
+</div>
+
+<!-- S14: L&D Shift (418.78 - 451.18) -->
+<div class="scene-wrap" data-start="418.78" data-duration="32.4">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-blue" style="width:500px;height:500px;opacity:0.15;bottom:300px;right:-50px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s14-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-blue),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">L&D 从业者变化</div>
+        <div class="numgrid-subtitle">培训领导者正在拥抱 AI</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val cyan">71%</div><div class="num-desc">已拥抱 AI</div></div>
+          <div class="num-item"><div class="num-val amber">49%</div><div class="num-desc">高管担忧技能缺口</div></div>
+          <div class="num-item"><div class="num-val green">88%</div><div class="num-desc">关注员工保留</div></div>
+          <div class="num-item"><div class="num-val purple">51%</div><div class="num-desc">优秀组织 AI 领先</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s14-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">👔</div>
+        <div class="vb-heading">角色演变</div>
+        <div class="vb-box">
+          学习机会是排名第一的<span class="hl">保留策略</span>。<br>培训领导者正从课程交付者，<br>演变为<strong>战略业务伙伴</strong>。
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-cyan">课程交付者</div>
+          <div class="vtag" style="font-size:24px">→</div>
+          <div class="vtag vtag-amber">战略业务伙伴</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s14-p3" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">核心结论</div>
+        <div class="vb-box">
+          未来不缺会做课的人，<br>缺的是能用<span class="hl">AI 构建组织能力</span>的人。<br><strong>这个转变，现在就在发生。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">14 / 19</div>
+</div>
+
+<!-- S15: China Market (451.18 - 478.88) -->
+<div class="scene-wrap" data-start="451.18" data-duration="27.7">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-amber" style="width:500px;height:500px;opacity:0.15;top:400px;left:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s15-p1" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-title" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent">中国战场白热化</div>
+        <div class="bullet-sub">头部厂商全面 AI 化</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-num amber">AI</div><div class="bullet-text"><div class="bullet-name">AI 学习平台</div><div class="bullet-desc">做课效率提升 500%</div></div></div>
+          <div class="bullet-item"><div class="bullet-num cyan">AI</div><div class="bullet-text"><div class="bullet-name">AI 专家与 AI 教练</div><div class="bullet-desc">混合大模型 / 已商用</div></div></div>
+          <div class="bullet-item"><div class="bullet-num green">50%+</div><div class="bullet-text"><div class="bullet-name">企业已部署 AI</div><div class="bullet-desc">主流平台全面接入</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s15-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">⏰</div>
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent">窗口期警示</div>
+        <div class="vb-box" style="border-left-color:var(--accent-warm)">
+          竞争焦点早已不是是否采用 AI，<br>而是<span class="hl">谁的 AI 能力更强、落地更快</span>。<br>窗口期可能只有<strong>两到三年</strong>，错过就很难再追上。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">15 / 19</div>
+</div>
+
+<!-- S16: Risks (478.88 - 518.7) -->
+<div class="scene-wrap" data-start="478.88" data-duration="39.82">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-amber" style="width:600px;height:600px;opacity:0.2;top:200px;right:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s16-p1" style="padding:140px 80px 180px 80px">
+      <div class="numgrid-wrap">
+        <div class="numgrid-title" style="background:linear-gradient(135deg,var(--accent-rose),var(--accent-warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent">不拥抱 AI 的五大风险</div>
+        <div class="numgrid-subtitle">每条都很致命 / 不是预测，是正在发生的事实</div>
+        <div class="num-grid">
+          <div class="num-item"><div class="num-val rose">5x</div><div class="num-desc">效率劣势 / AI 做课快 5 倍</div></div>
+          <div class="num-item"><div class="num-val amber">+40%</div><div class="num-desc">效果劣势 / 保留率差距</div></div>
+          <div class="num-item"><div class="num-val cyan">94%</div><div class="num-desc">人才流失 / 看重学习发展</div></div>
+          <div class="num-item"><div class="num-val purple">+65%</div><div class="num-desc">回报劣势 / AI 整合回报提升</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s16-p2" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-title" style="color:var(--accent-rose)">五大致命风险</div>
+        <div class="bullet-list">
+          <div class="bullet-item" style="border-color:rgba(244,63,94,0.15)"><div class="bullet-num rose">01</div><div class="bullet-text"><div class="bullet-name">效率劣势</div><div class="bullet-desc">AI 原生平台做课快 5 倍，传统无竞争力</div></div></div>
+          <div class="bullet-item" style="border-color:rgba(245,158,11,0.15)"><div class="bullet-num amber">02</div><div class="bullet-text"><div class="bullet-name">效果劣势</div><div class="bullet-desc">AI 个性化保留率提升 40%，培训时间缩短 20%</div></div></div>
+          <div class="bullet-item" style="border-color:rgba(6,182,212,0.15)"><div class="bullet-num cyan">03</div><div class="bullet-text"><div class="bullet-name">人才流失</div><div class="bullet-desc">94% 员工说投资学习发展会留更久</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s16-p3" style="padding:140px 80px 180px 80px">
+      <div class="bullet-wrap">
+        <div class="bullet-list">
+          <div class="bullet-item" style="border-color:rgba(139,92,246,0.15)"><div class="bullet-num purple">04</div><div class="bullet-text"><div class="bullet-name">学习者绕过</div><div class="bullet-desc">员工已用 AI 自学，你不提供同等体验，他们用脚投票</div></div></div>
+          <div class="bullet-item" style="border-color:rgba(16,185,129,0.15)"><div class="bullet-num green">05</div><div class="bullet-text"><div class="bullet-name">回报劣势</div><div class="bullet-desc">65% 的组织 AI 整合后回报提升，不做就落后</div></div></div>
+        </div>
+      </div>
+      <div class="vb-wrap" style="margin-top:28px">
+        <div class="vb-box" style="border-left-color:var(--accent-rose)">
+          这五条<strong>不是预测</strong>，<br>是<span class="hl">正在发生的事实</span>。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">16 / 19</div>
+</div>
+
+<!-- S17: Framework (518.7 - 552.08) -->
+<div class="scene-wrap" data-start="518.7" data-duration="33.38">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-green" style="width:500px;height:500px;opacity:0.15;top:300px;left:-60px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s17-p1" style="padding:140px 80px 180px 80px">
+      <div class="tl-wrap">
+        <div class="tl-title" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">企业行动框架</div>
+        <div class="tl-steps">
+          <div class="tl-step"><div class="tl-num cyan">01</div><div class="tl-body"><div class="tl-name">评估现状</div><div class="tl-desc">培训系统还在用传统模式吗？内容生产效率如何？先摸清家底。</div></div></div>
+          <div class="tl-step"><div class="tl-num green">02</div><div class="tl-body"><div class="tl-name">试点 AI</div><div class="tl-desc">从一个场景切入，比如 AI 辅助做课，或者引入 AI 陪练。</div><div class="tl-data">48% 的企业计划增加 AI 预算超过 25%</div></div></div>
+          <div class="tl-step"><div class="tl-num amber">03</div><div class="tl-body"><div class="tl-name">规模化</div><div class="tl-desc">先跑起来再优化。别等完美方案，先行动。</div><div class="tl-data">70% 的企业预计将 AI 整合到培训中</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s17-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🚀</div>
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-green),var(--accent-cool));-webkit-background-clip:text;-webkit-text-fill-color:transparent">行动号召</div>
+        <div class="vb-box">
+          <strong>完美是行动的敌人</strong>，<br>在 AI 时代尤其如此。<br><span class="hl">别等完美方案，先行动。</span>
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-cyan">48% 增加预算</div>
+          <div class="vtag vtag-green">70% 整合 AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">17 / 19</div>
+</div>
+
+<!-- S18: Action Data (552.08 - 580.35) -->
+<div class="scene-wrap" data-start="552.08" data-duration="28.27">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-cyan" style="width:600px;height:600px;opacity:0.18;top:200px;right:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="phase" id="s18-p1" style="padding:140px 80px 180px 80px">
+      <div class="mbars-wrap">
+        <div class="mbars-title"><span class="mbars-white">三个关键决策数据</span></div>
+        <div class="mbars-sub">趋势已经非常明确</div>
+        <div class="mbars-group">
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">企业将整合 AI</div><div class="mbar-value mbar-cyan">70%</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-cyan" data-width="70">70%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">认为 AI 对未来培训至关重要</div><div class="mbar-value mbar-amber">76%</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-amber" data-width="76">76%</div></div>
+          </div>
+          <div class="mbar-row">
+            <div class="mbar-header"><div class="mbar-label">计划增加 AI 培训投资</div><div class="mbar-value mbar-green">73%</div></div>
+            <div class="mbar-track"><div class="mbar-fill fill-green" data-width="73">73%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase" id="s18-p2" style="padding:140px 80px 180px 80px">
+      <div class="vb-wrap">
+        <div class="vb-icon">🔑</div>
+        <div class="vb-heading" style="background:linear-gradient(135deg,var(--accent-cool),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">核心结论</div>
+        <div class="vb-box">
+          真正的护城河不是培训软件本身，<br>而是你用 <span class="hl">AI 满足企业能力建设需求</span>的速度和质量。<br><br><strong>需求不会变，但满足需求的规则已经改写。</strong>
+        </div>
+        <div class="vb-tags">
+          <div class="vtag vtag-cyan">需求不变</div>
+          <div class="vtag vtag-amber">规则已改</div>
+          <div class="vtag vtag-green">今天就行动</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-num">18 / 19</div>
+</div>
+
+<!-- S19: CTA (580.35 - 588.08) -->
+<div id="s19" class="scene-wrap" data-start="580.35" data-duration="7.73">
+  <div class="layer-bg"><div class="grid-bg"></div><div class="glow glow-cyan" style="width:600px;height:600px;opacity:0.2;top:300px;left:-80px"></div></div>
+  <div class="layer-fx"></div>
+  <div class="layer-content" style="padding:0">
+    <div class="hero-card">
+      <div class="hero-badge hero-badge-cyan">AI 行业深度分析</div>
+      <div class="hero-title" style="font-size:80px"><span class="accent-cyan">需求不变</span><br><span class="accent-purple">规则已改</span></div>
+      <div class="hero-sub" style="font-size:36px">关注 / 获取更多 AI 行业深度分析</div>
+    </div>
+  </div>
+  <div class="scene-num">19 / 19</div>
+</div>
+
+<script>
+window.__timelines = {};
+var tl = gsap.timeline({ paused: true });
+
+// Phase switching helper
+function phaseGroup(id, sceneStart, phases) {
+  var dur = 0;
+  var n = phases.length;
+  // Get scene duration from DOM
+  var el = document.querySelector('[data-start="' + sceneStart + '"]');
+  var sceneDur = el ? parseFloat(el.getAttribute('data-duration')) : 10;
+  var phaseDur = sceneDur / n;
+
+  // Set first phase visible
+  tl.set('#' + id + '-p1', {opacity: 1}, sceneStart);
+  for (var i = 2; i <= n; i++) {
+    tl.set('#' + id + '-p' + i, {opacity: 0}, sceneStart);
+  }
+
+  // Phase transitions
+  for (var i = 1; i <= n; i++) {
+    var t = sceneStart + (i - 1) * phaseDur;
+    // Fade in current phase
+    if (i > 1) {
+      tl.to('#' + id + '-p' + (i-1), {opacity: 0, duration: 0.4}, t);
+      tl.to('#' + id + '-p' + i, {opacity: 1, duration: 0.4}, t);
+    }
+  }
+}
+
+// S1 Hook
+tl.from('#s1 .hero-badge', {opacity:0, y:30, duration:0.3, ease:'power3.out'}, 0.1)
+  .from('#s1 .hero-title', {opacity:0, scale:0.8, duration:0.4, ease:'back.out(1.2)'}, 0.2)
+  .from('#s1 .hero-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.5);
+
+// S2 Market - 3 phases
+phaseGroup('s2', 7.15, 3);
+tl.from('#s2-p1 .mbars-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 7.2);
+tl.from('#s2-p1 .mbar-row', {opacity:0, x:-20, duration:0.3, stagger:0.08, ease:'power3.out'}, 7.4);
+document.querySelectorAll('#s2-p1 .mbar-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.8, ease:'power2.out'}, 7.6);
+});
+tl.from('#s2-p2 .numgrid-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 19.2);
+tl.from('#s2-p2 .num-item', {opacity:0, scale:0.85, duration:0.4, ease:'back.out(1.2)', stagger:{each:0.08, from:'center'}}, 19.5);
+tl.from('#s2-p3 .vb-heading', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 31.2);
+tl.from('#s2-p3 .vb-box', {opacity:0, x:-40, duration:0.5, ease:'power3.out'}, 31.4);
+tl.from('#s2-p3 .vtag', {opacity:0, y:15, duration:0.3, stagger:0.08}, 31.8);
+
+// S3 AI Boom - 3 phases
+phaseGroup('s3', 43.15, 3);
+tl.from('#s3-p1 .numgrid-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 43.2);
+tl.from('#s3-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, ease:'back.out(1.2)', stagger:{each:0.08, from:'center'}}, 43.5);
+tl.from('#s3-p2 .mbars-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 54.8);
+tl.from('#s3-p2 .mbar-row', {opacity:0, x:-20, duration:0.3, stagger:0.08}, 55.1);
+document.querySelectorAll('#s3-p2 .mbar-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.8, ease:'power2.out'}, 55.3);
+});
+tl.from('#s3-p3 .vb-heading', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 66.5);
+tl.from('#s3-p3 .vb-box', {opacity:0, x:-40, duration:0.5, ease:'power3.out'}, 66.7);
+
+// S4 Paradox - 3 phases
+phaseGroup('s4', 78.33, 3);
+tl.from('#s4-p1 .hero-big-num', {opacity:0, scale:0.5, duration:0.5, ease:'back.out(1.5)'}, 78.4);
+tl.from('#s4-p2 .vb-heading', {opacity:0, y:20, duration:0.3}, 89.1);
+tl.from('#s4-p2 .vb-box', {opacity:0, x:-40, duration:0.5, ease:'power3.out'}, 89.3);
+tl.from('#s4-p3 .vb-heading', {opacity:0, y:20, duration:0.3}, 99.9);
+tl.from('#s4-p3 .vb-box', {opacity:0, x:-40, duration:0.5, ease:'power3.out'}, 100.1);
+
+// S5 Overview - 2 phases
+phaseGroup('s5', 110.71, 2);
+tl.from('#s5-p1 .bullet-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 110.8);
+tl.from('#s5-p1 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1, ease:'power3.out'}, 111.1);
+tl.from('#s5-p2 .vb-heading', {opacity:0, y:20, duration:0.3}, 126);
+tl.from('#s5-p2 .vb-box', {opacity:0, x:-40, duration:0.5, ease:'power3.out'}, 126.2);
+
+// S6 Content - 3 phases
+phaseGroup('s6', 141.45, 3);
+tl.from('#s6-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 141.5);
+tl.from('#s6-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, ease:'back.out(1.2)', stagger:{each:0.08, from:'center'}}, 141.8);
+tl.from('#s6-p2 .vb-heading', {opacity:0, y:20, duration:0.3}, 153.6);
+tl.from('#s6-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 153.8);
+tl.from('#s6-p3 .vb-heading', {opacity:0, y:20, duration:0.3}, 165.7);
+tl.from('#s6-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 165.9);
+
+// S7 Learning - 4 phases
+phaseGroup('s7', 177.86, 4);
+tl.from('#s7-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 177.9);
+tl.from('#s7-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 178.2);
+tl.from('#s7-p2 .compare-title', {opacity:0, duration:0.3}, 187.2);
+tl.from('#s7-p2 .compare-col', {opacity:0, x:-30, duration:0.4, stagger:0.15}, 187.5);
+tl.from('#s7-p3 .vb-heading', {opacity:0, y:20, duration:0.3}, 196.5);
+tl.from('#s7-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 196.7);
+tl.from('#s7-p4 .vb-heading', {opacity:0, y:20, duration:0.3}, 205.9);
+tl.from('#s7-p4 .vb-box', {opacity:0, x:-40, duration:0.5}, 206.1);
+
+// S8 Compare - 3 phases
+phaseGroup('s8', 215.2, 3);
+tl.from('#s8-p1 .sc-badge', {opacity:0, scale:0.8, duration:0.3, ease:'back.out(1.5)'}, 215.3);
+tl.from('#s8-p1 .sc-title', {opacity:0, duration:0.3}, 215.5);
+tl.from('#s8-p1 .sc-card', {opacity:0, y:30, duration:0.4, stagger:0.15}, 215.7);
+tl.from('#s8-p1 .sc-win-tag', {opacity:0, scale:0, duration:0.3, ease:'back.out(2)'}, 216.2);
+tl.from('#s8-p1 .sc-stat', {opacity:0, y:20, duration:0.3, stagger:0.1}, 216.4);
+tl.from('#s8-p2 .vb-heading', {opacity:0, y:20, duration:0.3}, 226.8);
+tl.from('#s8-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 227);
+tl.from('#s8-p3 .mbars-title', {opacity:0, y:20, duration:0.3}, 238.4);
+tl.from('#s8-p3 .mbar-row', {opacity:0, x:-20, duration:0.3, stagger:0.1}, 238.7);
+document.querySelectorAll('#s8-p3 .mbar-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.8, ease:'power2.out'}, 238.9);
+});
+
+// S9 Personal - 3 phases
+phaseGroup('s9', 249.98, 3);
+tl.from('#s9-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 250);
+tl.from('#s9-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 250.3);
+tl.from('#s9-p2 .dv-title', {opacity:0, y:20, duration:0.3}, 261.6);
+tl.from('#s9-p2 .dv-row', {opacity:0, x:-20, duration:0.3, stagger:0.1}, 261.9);
+document.querySelectorAll('#s9-p2 .dv-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.6, ease:'power2.out'}, 262.1);
+});
+tl.from('#s9-p3 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 273.3);
+tl.from('#s9-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 273.5);
+
+// S10 Coach - 3 phases
+phaseGroup('s10', 284.71, 3);
+tl.from('#s10-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 284.8);
+tl.from('#s10-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 285.1);
+tl.from('#s10-p2 .bullet-title', {opacity:0, y:20, duration:0.3}, 294.8);
+tl.from('#s10-p2 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1}, 295.1);
+tl.from('#s10-p3 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 304.9);
+tl.from('#s10-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 305.1);
+
+// S11 Data - 3 phases
+phaseGroup('s11', 315.14, 3);
+tl.from('#s11-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 315.2);
+tl.from('#s11-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 315.5);
+tl.from('#s11-p2 .compare-title', {opacity:0, duration:0.3}, 326.3);
+tl.from('#s11-p2 .compare-col', {opacity:0, x:-30, duration:0.4, stagger:0.15}, 326.5);
+tl.from('#s11-p3 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 337.4);
+tl.from('#s11-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 337.6);
+
+// S12 Spectrum - 3 phases (CLIMAX)
+phaseGroup('s12', 348.55, 3);
+tl.from('#s12-p1 .spectrum-heading', {opacity:0, y:20, duration:0.3}, 348.6);
+tl.from('#s12-p1 .spectrum-strip .sp', {scaleX:0, duration:0.6, stagger:0.08, transformOrigin:'left center'}, 348.9);
+tl.from('#s12-p1 .spec-row', {opacity:0, x:-20, duration:0.3, stagger:0.1}, 349.2);
+document.querySelectorAll('#s12-p1 .spec-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.7, ease:'power2.out'}, 349.4);
+});
+tl.from('#s12-p2 .bullet-title', {opacity:0, y:20, duration:0.3}, 361.8);
+tl.from('#s12-p2 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1}, 362.1);
+tl.from('#s12-p3 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 375.1);
+tl.from('#s12-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 375.3);
+
+// S13 Disrupted - 2 phases
+phaseGroup('s13', 388.37, 2);
+tl.from('#s13-p1 .rec-heading', {opacity:0, y:20, duration:0.3}, 388.4);
+tl.from('#s13-p1 .rec-item', {opacity:0, x:-30, duration:0.4, stagger:0.12}, 388.7);
+tl.from('#s13-p1 .rec-score', {opacity:0, scale:0.5, duration:0.3, ease:'back.out(2)', stagger:0.12}, 389);
+tl.from('#s13-p2 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 403.6);
+tl.from('#s13-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 403.8);
+
+// S14 L&D Shift - 3 phases
+phaseGroup('s14', 418.78, 3);
+tl.from('#s14-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 418.8);
+tl.from('#s14-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 419.1);
+tl.from('#s14-p2 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 429.6);
+tl.from('#s14-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 429.8);
+tl.from('#s14-p2 .vtag', {opacity:0, y:15, duration:0.3, stagger:0.08}, 430.2);
+tl.from('#s14-p3 .vb-heading', {opacity:0, y:20, duration:0.3}, 440.5);
+tl.from('#s14-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 440.7);
+
+// S15 China - 2 phases
+phaseGroup('s15', 451.18, 2);
+tl.from('#s15-p1 .bullet-title', {opacity:0, y:20, duration:0.3}, 451.2);
+tl.from('#s15-p1 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1}, 451.5);
+tl.from('#s15-p2 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 465);
+tl.from('#s15-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 465.2);
+
+// S16 Risks - 3 phases
+phaseGroup('s16', 478.88, 3);
+tl.from('#s16-p1 .numgrid-title', {opacity:0, y:20, duration:0.3}, 478.9);
+tl.from('#s16-p1 .num-item', {opacity:0, scale:0.85, duration:0.4, stagger:{each:0.08, from:'center'}}, 479.2);
+tl.from('#s16-p2 .bullet-title', {opacity:0, y:20, duration:0.3}, 492.2);
+tl.from('#s16-p2 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1}, 492.5);
+tl.from('#s16-p3 .bullet-item', {opacity:0, x:-30, duration:0.3, stagger:0.1}, 505.5);
+tl.from('#s16-p3 .vb-box', {opacity:0, x:-40, duration:0.5}, 506);
+
+// S17 Framework - 2 phases
+phaseGroup('s17', 518.7, 2);
+tl.from('#s17-p1 .tl-title', {opacity:0, y:20, duration:0.3}, 518.8);
+tl.from('#s17-p1 .tl-step', {opacity:0, x:-30, duration:0.3, stagger:0.15}, 519.1);
+tl.from('#s17-p2 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 535.3);
+tl.from('#s17-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 535.5);
+tl.from('#s17-p2 .vtag', {opacity:0, y:15, duration:0.3, stagger:0.08}, 535.9);
+
+// S18 Action - 2 phases
+phaseGroup('s18', 552.08, 2);
+tl.from('#s18-p1 .mbars-title', {opacity:0, y:20, duration:0.3}, 552.1);
+tl.from('#s18-p1 .mbar-row', {opacity:0, x:-20, duration:0.3, stagger:0.1}, 552.4);
+document.querySelectorAll('#s18-p1 .mbar-fill').forEach(function(bar) {
+  tl.to(bar, {width: bar.getAttribute('data-width') + '%', duration: 0.8, ease:'power2.out'}, 552.6);
+});
+tl.from('#s18-p2 .vb-icon', {opacity:0, scale:0, duration:0.4, ease:'back.out(1.5)'}, 566.2);
+tl.from('#s18-p2 .vb-box', {opacity:0, x:-40, duration:0.5}, 566.4);
+tl.from('#s18-p2 .vtag', {opacity:0, y:15, duration:0.3, stagger:0.08}, 566.8);
+
+// S19 CTA
+tl.from('#s19 .hero-badge', {opacity:0, y:30, duration:0.3, ease:'power3.out'}, 580.4)
+  .from('#s19 .hero-title', {opacity:0, scale:0.8, duration:0.4, ease:'back.out(1.2)'}, 580.5)
+  .from('#s19 .hero-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 580.8);
+
+window.__timelines["main"] = tl;
+window.__hf = { duration: 588.08, seek: function(t) { tl.time(t, false); } };
+</script>
+</div>
+</body>
+</html>

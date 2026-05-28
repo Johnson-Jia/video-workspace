@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Trending 2026-05-28</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#080818;
+  --bg-mid:#001a33;
+  --accent-warm:#FF8C32;
+  --accent-warm-soft:#FFA040;
+  --accent-cool:#00D4FF;
+  --accent-cool-mid:#0088CC;
+  --text-white:#FFFFFF;
+  --text-muted:#8899BB;
+  --text-secondary:#a0a0c0;
+  --card-bg:rgba(20,20,50,0.85);
+}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg-dark);font-family:'Inter',sans-serif;color:var(--text-white)}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden}
+
+/* Background glow */
+.bg-glow{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.bg-glow .warm{position:absolute;top:-20%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(255,140,50,0.12) 0%,transparent 70%);border-radius:50%}
+.bg-glow .cool{position:absolute;bottom:-20%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(0,212,255,0.10) 0%,transparent 70%);border-radius:50%}
+.scene-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 80px 220px 80px}
+
+/* Hook */
+.s-hook .hook-number{font-size:200px;font-weight:900;color:var(--accent-warm);text-shadow:0 0 80px rgba(255,140,50,0.4);line-height:1}
+.s-hook .hook-unit{font-size:64px;font-weight:700;color:var(--accent-warm-soft);margin-top:-10px}
+.s-hook .hook-sub{font-size:44px;font-weight:600;color:var(--text-secondary);text-align:center;max-width:900px;margin-top:30px}
+.s-hook .hook-badge{display:inline-block;background:rgba(0,212,255,0.15);border:2px solid rgba(0,212,255,0.4);border-radius:40px;padding:12px 40px;font-size:36px;font-weight:700;color:var(--accent-cool);margin-top:24px}
+
+/* Project card */
+.project-card{display:flex;flex-direction:column;align-items:center}
+.pfc-category{font-size:28px;font-weight:700;color:var(--accent-cool);margin-bottom:20px;letter-spacing:2px}
+.pfc-name{font-size:68px;font-weight:900;color:var(--text-white);text-align:center;margin-bottom:10px}
+.pfc-desc{font-size:36px;color:var(--text-muted);text-align:center;margin-bottom:24px;max-width:880px}
+.pfc-meta{display:flex;align-items:center;gap:24px;margin-bottom:20px}
+.pfc-lang{background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);border-radius:24px;padding:8px 24px;font-size:28px;font-weight:600;color:var(--accent-cool)}
+.pfc-stars{font-size:36px;font-weight:800;color:var(--accent-warm)}
+.pfc-selling{font-size:28px;color:var(--accent-cool-mid);text-align:center;margin-bottom:12px;letter-spacing:1px}
+.pfc-commentary{font-size:26px;color:var(--text-secondary);text-align:center;font-style:italic}
+
+/* Dual project */
+.dual-projects{width:920px;display:flex;flex-direction:column;gap:0}
+.dual-row{display:flex;gap:20px;width:100%}
+.mini-card{flex:1;background:var(--card-bg);border-radius:20px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;border:1px solid rgba(0,212,255,0.15)}
+.mini-card .mc-tag{font-size:26px;font-weight:700;color:var(--accent-cool);margin-bottom:10px}
+.mini-card .mc-name{font-size:42px;font-weight:800;color:var(--text-white);text-align:center;margin-bottom:8px}
+.mini-card .mc-desc{font-size:24px;color:var(--text-muted);text-align:center;margin-bottom:14px}
+.mini-card .mc-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.mini-card .mc-lang{background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.25);border-radius:18px;padding:4px 16px;font-size:22px;font-weight:600;color:var(--accent-cool)}
+.mini-card .mc-stars{font-size:28px;font-weight:800;color:var(--accent-warm)}
+.mini-card .mc-selling{font-size:22px;color:var(--accent-cool-mid);text-align:center}
+
+/* CTA */
+.s-cta .cta-title{font-size:52px;font-weight:900;color:var(--accent-cool);text-align:center;margin-bottom:24px}
+.s-cta .cta-sub{font-size:38px;font-weight:500;color:var(--text-muted);text-align:center}
+.s-cta .cta-badge{display:inline-block;background:linear-gradient(135deg,var(--accent-warm),var(--accent-warm-soft));border-radius:40px;padding:16px 48px;font-size:34px;font-weight:800;color:var(--bg-dark);margin-top:28px}
+
+/* Character */
+.char-overlay{position:absolute;bottom:80px;right:80px;width:120px;height:140px;z-index:10}
+.char-head{width:64px;height:64px;background:var(--accent-cool);border-radius:50%;margin:0 auto;position:relative}
+.char-eye{width:10px;height:10px;background:var(--bg-dark);border-radius:50%;position:absolute;top:24px}
+.char-eye.l{left:14px}.char-eye.r{right:14px}
+.char-mouth{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:18px;height:6px;border-bottom:3px solid var(--bg-dark);border-radius:0 0 8px 8px}
+.char-body-block{width:48px;height:60px;background:var(--accent-cool);border-radius:0 0 24px 24px;margin:4px auto 0}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+  <audio id="narration" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto" data-start="0"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.06" src="bgm.wav" preload="auto" loop data-start="0"></audio>
+
+  <!-- SCENE 1: HOOK (0 - 4.99s) -->
+  <div id="scene-hook" class="clip s-hook" data-start="0" data-duration="4.99">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="hook-number">4466</div>
+      <div class="hook-unit">颗星 · 单日最高</div>
+      <div class="hook-sub">今天 GitHub 涨星炸了，大部分是全新项目</div>
+      <div class="hook-badge">GitHub 今日热门</div>
+    </div>
+  </div>
+
+  <!-- SCENE 2: TOPIC1 — Understand-Anything (4.99 - 11.71s) -->
+  <div id="scene-topic1" class="clip" data-start="4.99" data-duration="6.72">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="project-card">
+        <div class="pfc-category">知识图谱霸主 · 连续霸榜</div>
+        <div class="pfc-name">Understand-Anything</div>
+        <div class="pfc-desc">代码变可交互知识图谱</div>
+        <div class="pfc-meta">
+          <span class="pfc-lang">TypeScript</span>
+          <span class="pfc-stars">+4466 ★</span>
+        </div>
+        <div class="pfc-selling">代码可视化 · 交互探索 · 多工具兼容</div>
+        <div class="pfc-commentary">连续霸榜，四天涨了一万四千星</div>
+      </div>
+    </div>
+    <div class="char-overlay">
+      <div class="char-head"><div class="char-eye l"></div><div class="char-eye r"></div><div class="char-mouth"></div></div>
+      <div class="char-body-block"></div>
+    </div>
+  </div>
+
+  <!-- SCENE 3: TOPIC2 — MoneyPrinterTurbo (11.71 - 22.51s) -->
+  <div id="scene-topic2" class="clip" data-start="11.71" data-duration="10.8">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="project-card">
+        <div class="pfc-category">AI 印钞机</div>
+        <div class="pfc-name">MoneyPrinterTurbo</div>
+        <div class="pfc-desc">AI 大模型一键生成高清短视频</div>
+        <div class="pfc-meta">
+          <span class="pfc-lang">Python</span>
+          <span class="pfc-stars">+1737 ★</span>
+        </div>
+        <div class="pfc-selling">一键生成 · AI驱动 · 高清输出</div>
+        <div class="pfc-commentary">名字就是梦想，一天涨了一千七百星</div>
+      </div>
+    </div>
+    <div class="char-overlay">
+      <div class="char-head"><div class="char-eye l" style="width:14px;height:5px;border-radius:3px;top:28px"></div><div class="char-eye r" style="width:14px;height:5px;border-radius:3px;top:28px"></div><div class="char-mouth" style="width:22px;height:10px;border-bottom-width:3px;border-radius:0 0 11px 11px;bottom:12px"></div></div>
+      <div class="char-body-block"></div>
+    </div>
+  </div>
+
+  <!-- SCENE 4: TOPIC3 — FreeDomain + superpowers (22.51 - 35.90s) -->
+  <div id="scene-topic3" class="clip" data-start="22.51" data-duration="13.39">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="dual-projects">
+        <div class="dual-row">
+          <div class="mini-card">
+            <div class="mc-tag">白嫖万岁</div>
+            <div class="mc-name">FreeDomain</div>
+            <div class="mc-desc">免费域名，人人可用</div>
+            <div class="mc-meta">
+              <span class="mc-lang">HTML</span>
+              <span class="mc-stars">+2223 ★</span>
+            </div>
+            <div class="mc-selling">完全免费 · 即申即用 · 十六万用户</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-tag">AI 技能王</div>
+            <div class="mc-name">superpowers</div>
+            <div class="mc-desc">AI 代理技能框架</div>
+            <div class="mc-meta">
+              <span class="mc-lang">Shell</span>
+              <span class="mc-stars">+1680 ★</span>
+            </div>
+            <div class="mc-selling">单文件注入 · 跨平台兼容 · 二十万星</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="char-overlay">
+      <div class="char-head" style="background:var(--accent-warm)"><div class="char-eye l" style="background:var(--accent-warm-soft);width:12px;height:12px;top:22px"></div><div class="char-eye r" style="background:var(--accent-warm-soft);width:12px;height:12px;top:22px"></div><div class="char-mouth" style="width:24px;height:12px;border-bottom:none;background:var(--bg-dark);border-radius:0 0 12px 12px;bottom:12px"></div></div>
+      <div class="char-body-block" style="background:var(--accent-warm)"></div>
+    </div>
+  </div>
+
+  <!-- SCENE 5: TOPIC4 — heretic + twenty (35.90 - 46.77s) -->
+  <div id="scene-topic4" class="clip" data-start="35.90" data-duration="10.87">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="dual-projects">
+        <div class="dual-row">
+          <div class="mini-card">
+            <div class="mc-tag">模型解放</div>
+            <div class="mc-name">heretic</div>
+            <div class="mc-desc">全自动移除 LLM 审查限制</div>
+            <div class="mc-meta">
+              <span class="mc-lang">Python</span>
+              <span class="mc-stars">+219 ★</span>
+            </div>
+            <div class="mc-selling">全自动 · 无需微调 · 即插即用</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-tag">开源 CRM</div>
+            <div class="mc-name">twenty</div>
+            <div class="mc-desc">开源 Salesforce 替代品，为 AI 设计</div>
+            <div class="mc-meta">
+              <span class="mc-lang">TypeScript</span>
+              <span class="mc-stars">+520 ★</span>
+            </div>
+            <div class="mc-selling">开源替代 · AI原生 · 四万七千星</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="char-overlay">
+      <div class="char-head"><div class="char-eye l" style="width:8px;height:8px;top:26px"></div><div class="char-eye r" style="width:8px;height:8px;top:26px"></div><div class="char-mouth" style="width:14px;height:2px;border-bottom:none;background:var(--bg-dark);border-radius:0;bottom:18px"></div></div>
+      <div class="char-body-block"></div>
+    </div>
+  </div>
+
+  <!-- SCENE 6: CTA (46.77 - 51.09s) -->
+  <div id="scene-cta" class="clip s-cta" data-start="46.77" data-duration="4.32">
+    <div class="bg-glow"><div class="warm"></div><div class="cool"></div></div>
+    <div class="scene-content">
+      <div class="cta-title">今天新项目特别多</div>
+      <div class="cta-badge">关注 GitHub 星探</div>
+      <div class="cta-sub">每天带你刷开源</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 51.09, seek: function(t) {} };
+
+var tl = gsap.timeline({paused: true});
+
+// SCENE 1: HOOK
+tl.from('.s-hook .hook-number', {opacity:0, scale:0.3, duration:0.4, ease:'back.out(1.5)'}, 0.1)
+  .from('.s-hook .hook-unit', {opacity:0, y:30, duration:0.3, ease:'power3.out'}, 0.4)
+  .from('.s-hook .hook-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.6)
+  .from('.s-hook .hook-badge', {opacity:0, scale:0.8, duration:0.2, ease:'back.out(2)'}, 0.8);
+
+// SCENE 2: TOPIC1 — Understand-Anything
+tl.from('#scene-topic1 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 5.09)
+  .from('#scene-topic1 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 5.19)
+  .from('#scene-topic1 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 5.39)
+  .from('#scene-topic1 .pfc-meta', {opacity:0, duration:0.3, ease:'power3.out'}, 5.59)
+  .from('#scene-topic1 .pfc-selling', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 5.79)
+  .from('#scene-topic1 .pfc-commentary', {opacity:0, duration:0.3, ease:'power3.out'}, 5.99)
+  .from('#scene-topic1 .char-overlay', {opacity:0, x:30, duration:0.3, ease:'power3.out'}, 5.49);
+
+// SCENE 3: TOPIC2 — MoneyPrinterTurbo
+tl.from('#scene-topic2 .pfc-category', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 11.81)
+  .from('#scene-topic2 .pfc-name', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 11.91)
+  .from('#scene-topic2 .pfc-desc', {opacity:0, duration:0.3, ease:'power3.out'}, 12.11)
+  .from('#scene-topic2 .pfc-meta', {opacity:0, duration:0.3, ease:'power3.out'}, 12.31)
+  .from('#scene-topic2 .pfc-selling', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 12.51)
+  .from('#scene-topic2 .pfc-commentary', {opacity:0, duration:0.3, ease:'power3.out'}, 12.71)
+  .from('#scene-topic2 .char-overlay', {opacity:0, x:30, duration:0.3, ease:'power3.out'}, 12.21);
+
+// SCENE 4: TOPIC3 — FreeDomain + superpowers (13.39s, phase mode)
+tl.from('#scene-topic3 .dual-row .mini-card:first-child', {opacity:0, x:-30, duration:0.4, ease:'power3.out'}, 22.61)
+  .from('#scene-topic3 .dual-row .mini-card:last-child', {opacity:0, x:30, duration:0.4, ease:'power3.out'}, 22.81)
+  .from('#scene-topic3 .char-overlay', {opacity:0, scale:0.5, duration:0.3, ease:'back.out(2)'}, 23.21);
+
+// SCENE 5: TOPIC4 — heretic + twenty (10.87s)
+tl.from('#scene-topic4 .dual-row .mini-card:first-child', {opacity:0, x:-30, duration:0.4, ease:'power3.out'}, 36.0)
+  .from('#scene-topic4 .dual-row .mini-card:last-child', {opacity:0, x:30, duration:0.4, ease:'power3.out'}, 36.2)
+  .from('#scene-topic4 .char-overlay', {opacity:0, scale:0.5, duration:0.3, ease:'back.out(2)'}, 36.6);
+
+// SCENE 6: CTA
+tl.from('.s-cta .cta-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 46.87)
+  .from('.s-cta .cta-badge', {opacity:0, scale:0.8, duration:0.3, ease:'back.out(2)'}, 47.17)
+  .from('.s-cta .cta-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 47.47);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

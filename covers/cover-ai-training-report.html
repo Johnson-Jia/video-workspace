@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI企业培训行业报告封面</title>
+<style>
+:root {
+  --bg-deep: #070b14;
+  --accent-blue: #3B82F6;
+  --accent-cyan: #06B6D4;
+  --accent-green: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-red: #EF4444;
+  --accent-purple: #8B5CF6;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --text-dim: #6B7280;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1920px; height: 1080px;
+  font-family: -apple-system, 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background layers */
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.bg-gradient {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 900px 700px at 15% 80%, rgba(59,130,246,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 800px 600px at 85% 20%, rgba(139,92,246,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 400px at 50% 50%, rgba(6,182,212,0.04) 0%, transparent 70%);
+}
+
+/* Floating nodes — represents "network/data" */
+.node {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(59,130,246,0.15);
+}
+.node::after {
+  content: ''; position: absolute; border-radius: 50%;
+  background: rgba(59,130,246,0.3);
+}
+.node-1 { width: 200px; height: 200px; top: 60px; right: 180px; }
+.node-1::after { width: 6px; height: 6px; top: 30px; left: 50px; }
+.node-2 { width: 320px; height: 320px; bottom: -80px; right: -40px; border-color: rgba(139,92,246,0.1); }
+.node-2::after { width: 8px; height: 8px; bottom: 80px; left: 60px; background: rgba(139,92,246,0.3); }
+.node-3 { width: 140px; height: 140px; top: 140px; left: 60px; border-color: rgba(6,182,212,0.1); }
+.node-4 { width: 80px; height: 80px; bottom: 180px; left: 200px; border-color: rgba(16,185,129,0.12); }
+
+/* Connection lines */
+.lines {
+  position: absolute; inset: 0; overflow: hidden; opacity: 0.12;
+}
+.line {
+  position: absolute; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  transform-origin: left center;
+}
+.line-1 { top: 200px; left: 100px; width: 400px; transform: rotate(25deg); }
+.line-2 { top: 350px; right: 200px; width: 300px; transform: rotate(-15deg); background: linear-gradient(90deg, transparent, var(--accent-purple), transparent); }
+.line-3 { bottom: 250px; left: 300px; width: 350px; transform: rotate(40deg); background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); }
+
+/* Layout */
+.container {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  padding: 64px 96px 56px;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 36px;
+}
+.report-type {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 600; color: var(--accent-blue);
+  text-transform: uppercase; letter-spacing: 3px;
+}
+.report-type .icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.date-tag {
+  font-size: 14px; color: var(--text-dim);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 20px; border-radius: 8px;
+}
+
+/* Main content */
+.main {
+  flex: 1; display: flex; gap: 72px; align-items: center;
+}
+
+/* Left: text */
+.left { flex: 1.1; }
+.title {
+  font-size: 72px; font-weight: 900; line-height: 1.2;
+  margin-bottom: 12px;
+}
+.title .line1 { color: var(--text-primary); }
+.title .line2 {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.title .line3 {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 22px; color: var(--text-secondary);
+  line-height: 1.7; margin-top: 24px; margin-bottom: 40px;
+}
+.subtitle strong { color: var(--accent-amber); font-weight: 700; }
+
+/* Verdict box */
+.verdict {
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.15);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 28px; margin-bottom: 36px;
+  font-size: 18px; line-height: 1.8; color: var(--text-secondary);
+}
+.verdict strong { color: var(--text-primary); }
+.verdict .highlight {
+  color: var(--accent-amber); font-weight: 700;
+}
+
+/* Tags */
+.tags { display: flex; gap: 12px; flex-wrap: wrap; }
+.tag {
+  font-size: 14px; font-weight: 600;
+  padding: 8px 18px; border-radius: 8px;
+}
+.tag-blue { background: rgba(59,130,246,0.1); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.15); }
+.tag-cyan { background: rgba(6,182,212,0.1); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.15); }
+.tag-green { background: rgba(16,185,129,0.1); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.15); }
+.tag-amber { background: rgba(245,158,11,0.1); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.15); }
+.tag-purple { background: rgba(139,92,246,0.1); color: var(--accent-purple); border: 1px solid rgba(139,92,246,0.15); }
+
+/* Right: data cards */
+.right { width: 540px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; }
+
+.data-card {
+  background: rgba(17,24,39,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 28px 32px;
+  backdrop-filter: blur(10px);
+}
+.data-card.highlight-card {
+  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(6,182,212,0.04));
+  border-color: rgba(59,130,246,0.15);
+}
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-title { font-size: 13px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
+.card-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+}
+.badge-up { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+.badge-hot { background: rgba(239,68,68,0.12); color: var(--accent-red); }
+
+.card-body { display: flex; align-items: baseline; gap: 12px; }
+.card-number { font-size: 48px; font-weight: 900; line-height: 1; }
+.card-number.blue { color: var(--accent-blue); }
+.card-number.cyan { color: var(--accent-cyan); }
+.card-number.green { color: var(--accent-green); }
+.card-unit { font-size: 18px; color: var(--text-dim); font-weight: 600; }
+.card-desc { font-size: 14px; color: var(--text-secondary); margin-top: 8px; }
+
+/* Spectrum bar */
+.spectrum {
+  margin-top: 8px; display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px;
+}
+.spectrum span { height: 100%; }
+.spec-1 { flex: 1; background: var(--accent-green); opacity: 0.4; }
+.spec-2 { flex: 1.5; background: var(--accent-cyan); opacity: 0.6; }
+.spec-3 { flex: 2; background: var(--accent-blue); opacity: 0.8; }
+.spec-4 { flex: 3; background: var(--accent-purple); }
+.spectrum-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+.spectrum-labels span { font-size: 11px; color: var(--text-dim); }
+
+/* Bottom bar */
+.bottom-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 32px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.sources {
+  display: flex; gap: 24px;
+}
+.source {
+  font-size: 12px; color: var(--text-dim);
+  display: flex; align-items: center; gap: 6px;
+}
+.source .dot { width: 5px; height: 5px; border-radius: 50%; }
+.dot-blue { background: var(--accent-blue); }
+.dot-green { background: var(--accent-green); }
+.dot-amber { background: var(--accent-amber); }
+.dot-purple { background: var(--accent-purple); }
+.bottom-note {
+  font-size: 12px; color: var(--text-dim);
+  display: flex; align-items: center; gap: 8px;
+}
+.pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green);
+  box-shadow: 0 0 8px rgba(16,185,129,0.5);
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-gradient"></div>
+<div class="lines">
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  <div class="line line-3"></div>
+</div>
+<div class="node node-1"></div>
+<div class="node node-2"></div>
+<div class="node node-3"></div>
+<div class="node node-4"></div>
+
+<div class="container">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="report-type">
+      <div class="icon">📊</div>
+      深度分析报告
+    </div>
+    <div class="date-tag">报告日期：2026-05-28 &nbsp;|&nbsp; 基于 2024-2026 全球数据</div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Left -->
+    <div class="left">
+      <div class="title">
+        <div class="line1">AI 对企业培训行业</div>
+        <div class="line2">不是"增强"，是"重构"</div>
+        <div class="line3">需求不变，规则已变</div>
+      </div>
+      <div class="subtitle">
+        全球培训市场 <strong>$5,413 亿</strong> 持续增长，但 AI 培训细分赛道增速 <strong>4 倍</strong>于传统<br>
+        42% 企业正替换传统 LMS，ChatGPT 以 <strong>4 亿周活</strong>成为最大"隐形培训平台"<br>
+        <strong>不拥抱 AI 的企业，将在效率、效果、人才保留上全面落后</strong>
+      </div>
+      <div class="verdict">
+        核心结论：AI 不会消灭<strong>企业需要培训</strong>这个需求，但正在从根本上重构满足需求的方式——<br>
+        从产品层、生产层、平台层到 L&D 职能层，<span class="highlight">需求不变，但游戏规则已经改变</span>。
+      </div>
+      <div class="tags">
+        <div class="tag tag-blue">📈 全球市场 $4,175 亿</div>
+        <div class="tag tag-cyan">🤖 AI 培训 CAGR 21.7%</div>
+        <div class="tag tag-green">🎯 71% L&D 已拥抱 AI</div>
+        <div class="tag tag-amber">⚠️ 42% 企业替换 LMS</div>
+        <div class="tag tag-purple">🇨🇳 中国市场验证</div>
+      </div>
+    </div>
+
+    <!-- Right: Data cards -->
+    <div class="right">
+      <div class="data-card highlight-card">
+        <div class="card-header">
+          <div class="card-title">AI 培训市场增速 vs 传统培训</div>
+          <div class="card-badge badge-hot">4× 增速差</div>
+        </div>
+        <div style="display:flex;gap:24px;align-items:flex-end;">
+          <div>
+            <div class="card-number blue">21.7%</div>
+            <div class="card-desc">AI 培训 CAGR (至 2033)</div>
+          </div>
+          <div style="font-size:28px;color:var(--text-dim);padding-bottom:8px;">vs</div>
+          <div>
+            <div class="card-number cyan">5.3%</div>
+            <div class="card-desc">传统培训 CAGR (至 2030)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-card">
+        <div class="card-header">
+          <div class="card-title">冲击光谱：从轻度变化到颠覆替代</div>
+          <div class="card-badge badge-up">5 个层级</div>
+        </div>
+        <div class="spectrum">
+          <span class="spec-1"></span>
+          <span class="spec-2"></span>
+          <span class="spec-3"></span>
+          <span class="spec-4"></span>
+        </div>
+        <div class="spectrum-labels">
+          <span>培训什么</span>
+          <span>怎么培训</span>
+          <span>谁来培训</span>
+          <span>用什么工具</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:12px;">
+          <span style="font-size:11px;color:var(--accent-green)">← 轻度变化</span>
+          <span style="font-size:11px;color:var(--accent-purple)">颠覆式替代 →</span>
+        </div>
+      </div>
+
+      <div class="data-card">
+        <div class="card-header">
+          <div class="card-title">关键数据矩阵</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div class="card-number green" style="font-size:36px;">500%</div>
+            <div class="card-desc">AI 做课效率提升</div>
+          </div>
+          <div>
+            <div class="card-number cyan" style="font-size:36px;">80%</div>
+            <div class="card-desc">咨询由 AI 自动回答</div>
+          </div>
+          <div>
+            <div class="card-number blue" style="font-size:36px;">40%</div>
+            <div class="card-desc">知识保留率提升</div>
+          </div>
+          <div>
+            <div class="card-number" style="font-size:36px;color:var(--accent-amber);">25%</div>
+            <div class="card-desc">仅 1/4 员工认为培训有效</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <div class="sources">
+      <div class="source"><div class="dot dot-blue"></div> Research and Markets</div>
+      <div class="source"><div class="dot dot-green"></div> LinkedIn 2025 报告</div>
+      <div class="source"><div class="dot dot-amber"></div> Verified Market Research</div>
+      <div class="source"><div class="dot dot-purple"></div> Chief Learning Officer</div>
+    </div>
+    <div class="bottom-note">
+      <div class="pulse"></div>
+      基于事实，拒绝虚幻构思 &nbsp;|&nbsp; 8 大权威数据源交叉验证
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

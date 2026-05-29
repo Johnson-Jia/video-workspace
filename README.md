@@ -33,36 +33,36 @@
 
 ### 每日热门 · GitHub Trending
 
-| 日期 | 作品 | |
-|:---|:---|:---:|
-| 5月28日 | GitHub 每日热门 | <img src="2026/05/28/github-trending/cover.png" width="120"> |
-| 5月27日 | GitHub 每日热门 | <img src="2026/05/27/github-trending/cover.png" width="120"> |
-| 5月26日 | GitHub 每日热门 | <img src="2026/05/26/github-trending/cover.png" width="120"> |
+| 日期 | 作品 |
+|:---|:---|
+| 5月28日 | [GitHub 每日热门](2026/05/28/github-trending/) |
+| 5月27日 | [GitHub 每日热门](2026/05/27/github-trending/) |
+| 5月26日 | [GitHub 每日热门](2026/05/26/github-trending/) |
 
 ### 周度汇总 · Weekly
 
-| 日期 | 作品 | |
-|:---|:---|:---:|
-| 5月25日 | GitHub 周度热门汇总 | <img src="2026/05/25/github-trending-weekly/cover.png" width="120"> |
+| 日期 | 作品 |
+|:---|:---|
+| 5月25日 | [GitHub 周度热门汇总](2026/05/25/github-trending-weekly/) |
 
 ### 深度解析
 
-| 日期 | 作品 | |
-|:---|:---|:---:|
-| 5月28日 | AI 对企业培训行业的冲击 | <img src="2026/05/28/ai-training-impact/cover.png" width="120"> |
-| 5月28日 | GLM vs Qwen 大模型对比 | <img src="2026/05/28/glm-vs-qwen-compare/cover.png" width="120"> |
-| 5月27日 | Claude Code 深度解析 | <img src="2026/05/27/claude-code-deep-dive/cover.png" width="120"> |
-| 5月26日 | 代码知识图谱工具对比 | <img src="2026/05/26/code-knowledge-graph-compare/cover.png" width="120"> |
-| 5月25日 | AI 硬件与可穿戴设备 | <img src="2026/05/25/ai-hardware-wearable/cover.png" width="120"> |
-| 5月23日 | Service as Software 长视频 | <img src="2026/05/23/service-as-software/cover.png" width="120"> |
+| 日期 | 作品 |
+|:---|:---|
+| 5月28日 | [AI 对企业培训行业的冲击](2026/05/28/ai-training-impact/) |
+| 5月28日 | [GLM vs Qwen 大模型对比](2026/05/28/glm-vs-qwen-compare/) |
+| 5月27日 | [Claude Code 深度解析](2026/05/27/claude-code-deep-dive/) |
+| 5月26日 | [代码知识图谱工具对比](2026/05/26/code-knowledge-graph-compare/) |
+| 5月25日 | [AI 硬件与可穿戴设备](2026/05/25/ai-hardware-wearable/) |
+| 5月23日 | [Service as Software 长视频](2026/05/23/service-as-software/) |
 
 ### 开源亮点
 
-| 日期 | 作品 | |
-|:---|:---|:---:|
-| 5月22日 | 即时零售深度调研 | <img src="2026/05/22/instant-retail-deep-dive/cover.png" width="120"> |
-| 5月22日 | 视频生成开源项目盘点 | <img src="2026/05/22/video-generation-projects/cover.png" width="120"> |
-| 5月17日 | RuView：WiFi 穿墙感知 | <img src="2026/05/17/ruview/cover.png" width="120"> |
+| 日期 | 作品 |
+|:---|:---|
+| 5月22日 | [即时零售深度调研](2026/05/22/instant-retail-deep-dive/) |
+| 5月22日 | [视频生成开源项目盘点](2026/05/22/video-generation-projects/) |
+| 5月17日 | [RuView：WiFi 穿墙感知](2026/05/17/ruview/) |
 
 > 查看 [`2026/`](2026/) 目录浏览全部 39 条视频。
 

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.clip{position:absolute;inset:0;opacity:0}
+.layer-bg,.layer-fx,.layer-content{position:absolute;inset:0;pointer-events:none}
+.layer-content{pointer-events:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:180px 80px 220px 80px}
+.scene-wrap{width:100%;max-width:920px;position:relative}
+
+/* Phase system */
+.phase{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:180px 80px 220px 80px}
+.phase.active{display:flex}
+.phase-inner{width:100%;max-width:920px}
+
+/* Typography */
+.hero-title{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:96px;font-weight:900;line-height:1.15;color:#fff;letter-spacing:-1px}
+.hero-sub{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:42px;font-weight:700;color:#FFB800;line-height:1.3}
+.body-title{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1.25}
+.body-text{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:36px;font-weight:400;color:#c0c0d8;line-height:1.6}
+.body-accent{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:40px;font-weight:700;line-height:1.4}
+.tag-pill{display:inline-block;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:32px;font-weight:600;padding:8px 20px;border-radius:100px;margin:4px}
+
+/* Glow effects */
+.glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none}
+
+/* Grid background */
+.grid-bg{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);background-size:40px 40px}
+
+/* Grad text utility */
+.grad-text{background-clip:text;-webkit-background-clip:text;color:transparent}
+
+/* Scan line animation */
+@keyframes scanLine{0%{top:-2px}100%{top:100%}}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.5),transparent);animation:scanLine 4s linear infinite}
+
+/* Data item row */
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.data-label{font-size:32px;color:#a0a0c0;font-weight:500}
+.data-value{font-size:34px;font-weight:700;color:#fff}
+
+/* Compare columns */
+.compare-cols{display:flex;gap:32px;width:100%}
+.compare-col{flex:1;padding:24px;border-radius:16px}
+
+/* Separator line */
+.sep-line{width:80px;height:4px;border-radius:2px;margin:16px 0}
+
+/* List item */
+.list-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.list-num{font-size:32px;font-weight:800;min-width:40px;color:#FFB800}
+.list-text{font-size:32px;color:#c0c0d8;line-height:1.5;font-weight:500}
+
+/* Floating elements */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="235.96">
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.21" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ==================== S1: HOOK ==================== -->
+  <div class="clip" id="s1" data-start="0.00" data-duration="12.89">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a 0%,#0d0d2b 50%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(255,184,0,.35);top:5%;left:-10%"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,212,255,.2);bottom:10%;right:-5%"></div>
+      <div class="grid-bg"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,.4) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s1-ring1" style="position:absolute;width:400px;height:400px;border:2px solid rgba(255,184,0,.15);border-radius:50%;top:15%;left:50%;margin-left:-200px"></div>
+      <div id="s1-ring2" style="position:absolute;width:600px;height:600px;border:1px solid rgba(0,212,255,.1);border-radius:50%;top:10%;left:50%;margin-left:-300px"></div>
+      <div class="scan-line" style="animation-delay:0s"></div>
+    </div>
+    <div class="layer-content">
+      <div style="text-align:center">
+        <div style="font-size:32px;font-weight:600;color:#FFB800;letter-spacing:6px;margin-bottom:24px;text-transform:uppercase" id="s1-label">OPEN SOURCE DEEP DIVE</div>
+        <div class="hero-title grad-text" id="s1-title" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:110px">
+          81,164 ★
+        </div>
+        <div style="margin:24px auto;width:100px;height:3px;background:linear-gradient(90deg,#FFB800,#00D4FF);border-radius:2px" id="s1-sep"></div>
+        <div class="hero-sub" id="s1-sub" style="font-size:48px;color:#fff">
+          PaddleOCR
+        </div>
+        <div class="body-text" id="s1-desc" style="margin-top:20px;font-size:34px;color:#a0a0c0">
+          6年打磨 · 427位开发者 · PaddlePaddle
+        </div>
+        <div class="body-text" id="s1-hook" style="margin-top:32px;font-size:38px;color:#FFB800;font-weight:700">
+          它不只是文字识别
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S2: WHAT ==================== -->
+  <div class="clip" id="s2" data-start="12.89" data-duration="21.41">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080818 0%,#0a1628 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,136,204,.25);top:0;left:30%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,255,136,.1);bottom:20%;right:0"></div>
+      <div class="grid-bg" style="opacity:0.03"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(0,136,204,.08) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s2-dot1" style="position:absolute;width:8px;height:8px;background:#00D4FF;border-radius:50%;top:25%;left:15%;opacity:.6"></div>
+      <div id="s2-dot2" style="position:absolute;width:6px;height:6px;background:#00FF88;border-radius:50%;top:60%;right:20%;opacity:.5"></div>
+      <div id="s2-dot3" style="position:absolute;width:10px;height:10px;background:#FFB800;border-radius:50%;bottom:30%;left:25%;opacity:.4"></div>
+    </div>
+    <!-- Phase 1: 破除误解 -->
+    <div class="phase" id="s2-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;font-weight:600;color:#00D4FF;letter-spacing:4px;margin-bottom:28px" id="s2-label">BEYOND OCR</div>
+        <div class="body-title grad-text" id="s2-title" style="background-image:linear-gradient(135deg,#00D4FF,#00FF88);font-size:64px">
+          不只是文字识别
+        </div>
+        <div class="sep-line" id="s2-sep" style="background:linear-gradient(90deg,#00D4FF,#00FF88);margin:24px auto"></div>
+        <div class="body-text" id="s2-text" style="font-size:34px">
+          它是一个完整的文档AI引擎
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: 六大能力 -->
+    <div class="phase" id="s2-p2">
+      <div class="phase-inner">
+        <div style="text-align:center;margin-bottom:36px">
+          <div class="body-title" id="s2-p2-title" style="color:#fff;font-size:48px">六大核心能力</div>
+        </div>
+        <div id="s2-caps" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">
+          <div class="tag-pill s2-cap" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3)">文字识别</div>
+          <div class="tag-pill s2-cap" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3)">文档版面解析</div>
+          <div class="tag-pill s2-cap" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)">表格提取</div>
+          <div class="tag-pill s2-cap" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3)">公式识别</div>
+          <div class="tag-pill s2-cap" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3)">印章检测</div>
+          <div class="tag-pill s2-cap" style="background:rgba(255,140,50,.15);color:#FF8C32;border:1px solid rgba(255,140,50,.3)">AI对话理解</div>
+        </div>
+        <div id="s2-summary" style="text-align:center;margin-top:40px">
+          <div class="body-text" style="font-size:36px;color:#fff;font-weight:600">完整的文档AI生态</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S3: HOW ==================== -->
+  <div class="clip" id="s3" data-start="34.30" data-duration="32.86">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(200deg,#0a0a1a 0%,#0a1832 40%,#0d0d2b 100%)"></div>
+      <div class="glow" style="width:550px;height:550px;background:rgba(0,212,255,.2);top:-5%;right:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(123,47,190,.15);bottom:5%;left:-5%"></div>
+      <div class="grid-bg" style="opacity:0.025"></div>
+      <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 50%,transparent 0,transparent 60px,rgba(0,212,255,.02) 61px,transparent 62px)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s3-line1" style="position:absolute;width:2px;height:200px;background:linear-gradient(180deg,transparent,#00D4FF,transparent);top:20%;left:20%;opacity:.3"></div>
+      <div id="s3-line2" style="position:absolute;width:2px;height:150px;background:linear-gradient(180deg,transparent,#7B2FBE,transparent);bottom:25%;right:25%;opacity:.3"></div>
+      <div id="s3-pulse" style="position:absolute;width:300px;height:300px;border:1px solid rgba(0,212,255,.1);border-radius:50%;top:35%;left:50%;margin-left:-150px"></div>
+    </div>
+    <!-- Phase 1: 管线概念 -->
+    <div class="phase" id="s3-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#00D4FF;font-weight:600;letter-spacing:4px;margin-bottom:20px" id="s3-arch">ARCHITECTURE</div>
+        <div class="body-title grad-text" id="s3-title" style="background-image:linear-gradient(135deg,#00D4FF,#7B2FBE);font-size:58px">
+          管线编排
+        </div>
+        <div class="sep-line" id="s3-sep" style="background:linear-gradient(90deg,#00D4FF,#7B2FBE);margin:20px auto"></div>
+        <div class="body-text" id="s3-desc" style="font-size:34px;margin-top:16px">
+          像工厂流水线一样<br>每条管线由专业模型串联
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: 10管线13模型 -->
+    <div class="phase" id="s3-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div style="display:flex;gap:40px;justify-content:center;margin-bottom:32px">
+          <div id="s3-num1" style="text-align:center">
+            <div class="grad-text" style="background-image:linear-gradient(135deg,#00D4FF,#00FF88);font-size:80px;font-weight:900;font-family:'Inter',sans-serif">10</div>
+            <div style="font-size:32px;color:#a0a0c0;margin-top:8px">条管线</div>
+          </div>
+          <div id="s3-num2" style="text-align:center">
+            <div class="grad-text" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:80px;font-weight:900;font-family:'Inter',sans-serif">13</div>
+            <div style="font-size:32px;color:#a0a0c0;margin-top:8px">类模型</div>
+          </div>
+        </div>
+        <div id="s3-pipelines" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+          <div class="tag-pill s3-pipe" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.25);font-size:32px">文字识别</div>
+          <div class="tag-pill s3-pipe" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.25);font-size:32px">文档解析</div>
+          <div class="tag-pill s3-pipe" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.25);font-size:32px">表格识别</div>
+          <div class="tag-pill s3-pipe" style="background:rgba(123,47,190,.12);color:#B366FF;border:1px solid rgba(123,47,190,.25);font-size:32px">公式识别</div>
+          <div class="tag-pill s3-pipe" style="background:rgba(255,140,50,.12);color:#FF8C32;border:1px solid rgba(255,140,50,.25);font-size:32px">印章识别</div>
+          <div class="tag-pill s3-pipe" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.25);font-size:32px">图表解析</div>
+        </div>
+        <div id="s3-key" style="margin-top:36px;padding:20px 32px;background:rgba(255,184,0,.08);border-left:4px solid #FFB800;border-radius:0 12px 12px 0;text-align:left">
+          <div style="font-size:36px;font-weight:700;color:#FFB800">模型可换，管线不变</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 3: 可插拔引擎 -->
+    <div class="phase" id="s3-p3">
+      <div class="phase-inner" style="text-align:center">
+        <div class="body-title" id="s3-p3-title" style="font-size:44px;color:#fff;margin-bottom:28px">推理引擎可插拔</div>
+        <div id="s3-engines" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:32px">
+          <div class="tag-pill s3-eng" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3);font-size:32px;font-weight:700;padding:12px 28px">Paddle</div>
+          <div class="tag-pill s3-eng" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3);font-size:32px;font-weight:700;padding:12px 28px">PyTorch</div>
+          <div class="tag-pill s3-eng" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3);font-size:32px;font-weight:700;padding:12px 28px">vLLM</div>
+          <div class="tag-pill s3-eng" style="background:rgba(123,47,190,.15);color:#B366FF;border:1px solid rgba(123,47,190,.3);font-size:32px;font-weight:700;padding:12px 28px">llama.cpp</div>
+        </div>
+        <div id="s3-switch" style="font-size:34px;color:#a0a0c0">想用哪个用哪个，无缝切换</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S4: CAP-V5 ==================== -->
+  <div class="clip" id="s4" data-start="67.16" data-duration="23.26">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a1a 0%,#1a0f05 40%,#0d0d2b 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(255,184,0,.3);top:-10%;left:-5%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(255,140,50,.12);bottom:15%;right:-5%"></div>
+      <div class="grid-bg" style="opacity:0.03"></div>
+      <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 45deg at 50% 50%,transparent 0deg,rgba(255,184,0,.02) 5deg,transparent 10deg)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s4-spark1" style="position:absolute;width:4px;height:4px;background:#FFB800;border-radius:50%;top:20%;right:15%;opacity:.7"></div>
+      <div id="s4-spark2" style="position:absolute;width:6px;height:6px;background:#FF8C32;border-radius:50%;bottom:35%;left:20%;opacity:.5"></div>
+      <div id="s4-ring" style="position:absolute;width:200px;height:200px;border:1px solid rgba(255,184,0,.1);border-radius:50%;top:30%;right:10%"></div>
+    </div>
+    <!-- Phase 1: PP-OCRv5 -->
+    <div class="phase" id="s4-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#FFB800;font-weight:600;letter-spacing:4px;margin-bottom:16px" id="s4-label">PP-OCRv5</div>
+        <div class="hero-title grad-text" id="s4-title" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:72px">
+          100+ 种语言
+        </div>
+        <div class="sep-line" id="s4-sep" style="background:linear-gradient(90deg,#FFB800,#FF8C32);margin:20px auto"></div>
+        <div id="s4-feats" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px">
+          <div class="tag-pill s4-tag" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)">中英日韩混合识别</div>
+          <div class="tag-pill s4-tag" style="background:rgba(255,140,50,.15);color:#FF8C32;border:1px solid rgba(255,140,50,.3)">中文精度业界领先</div>
+          <div class="tag-pill s4-tag" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)">准确率 +13%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: CPU即跑 -->
+    <div class="phase" id="s4-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div class="body-title" id="s4-p2-title" style="font-size:52px;color:#fff;margin-bottom:32px">零门槛</div>
+        <div id="s4-stats" style="display:flex;flex-direction:column;gap:20px;align-items:center">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(0,255,136,.15);display:flex;align-items:center;justify-content:center;font-size:32px;color:#00FF88">✓</div>
+            <div style="font-size:36px;color:#fff;font-weight:600">无需 GPU</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(0,212,255,.15);display:flex;align-items:center;justify-content:center;font-size:32px;color:#00D4FF">✓</div>
+            <div style="font-size:36px;color:#fff;font-weight:600">CPU 流畅运行</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,184,0,.15);display:flex;align-items:center;justify-content:center;font-size:32px;color:#FFB800">✓</div>
+            <div style="font-size:36px;color:#fff;font-weight:600">内存占用 100MB</div>
+          </div>
+        </div>
+        <div id="s4-cmd" style="margin-top:36px;padding:16px 24px;background:rgba(255,255,255,.06);border-radius:12px;font-family:'Courier New',monospace;font-size:32px;color:#00FF88">
+          pip install paddleocr
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S5: CAP-VL ==================== -->
+  <div class="clip" id="s5" data-start="90.42" data-duration="22.39">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(225deg,#0a0a1a 0%,#0a1a32 40%,#080818 100%)"></div>
+      <div class="glow" style="width:700px;height:700px;background:rgba(0,212,255,.25);top:-15%;left:50%;margin-left:-350px"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,255,136,.1);bottom:10%;right:-5%"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(0,212,255,.06) 0%,transparent 50%)"></div>
+      <div class="grid-bg" style="opacity:0.025"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s5-wave1" style="position:absolute;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.3),transparent);top:30%"></div>
+      <div id="s5-wave2" style="position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.2),transparent);top:65%"></div>
+      <div id="s5-orb" style="position:absolute;width:120px;height:120px;background:radial-gradient(circle,rgba(0,212,255,.15),transparent);border-radius:50%;top:15%;right:15%"></div>
+    </div>
+    <!-- Phase 1: VL-1.6 SOTA -->
+    <div class="phase" id="s5-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#00D4FF;font-weight:600;letter-spacing:4px;margin-bottom:16px" id="s5-label">PaddleOCR-VL-1.6</div>
+        <div class="hero-title grad-text" id="s5-title" style="background-image:linear-gradient(135deg,#00D4FF,#00FF88);font-size:88px">
+          96.33%
+        </div>
+        <div id="s5-sub" style="font-size:32px;color:#00D4FF;margin-top:12px;font-weight:600">OmniDocBench SOTA</div>
+        <div class="sep-line" id="s5-sep" style="background:linear-gradient(90deg,#00D4FF,#00FF88);margin:24px auto"></div>
+        <div id="s5-info" style="font-size:34px;color:#c0c0d8;line-height:1.6">
+          0.9B 参数视觉语言模型<br>超越所有开源和闭源方案
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: PDF→Markdown -->
+    <div class="phase" id="s5-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div class="body-title" id="s5-p2-title" style="font-size:48px;color:#fff;margin-bottom:28px">PDF → Markdown</div>
+        <div id="s5-flow" style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:32px">
+          <div style="padding:16px 24px;background:rgba(255,184,0,.1);border:1px solid rgba(255,184,0,.3);border-radius:12px;font-size:32px;color:#FFB800;font-weight:600">PDF</div>
+          <div style="font-size:36px;color:#00D4FF">→</div>
+          <div style="padding:16px 24px;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);border-radius:12px;font-size:32px;color:#00FF88;font-weight:600">Markdown</div>
+        </div>
+        <div id="s5-details" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+          <div class="tag-pill" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.25)">表格 ✓</div>
+          <div class="tag-pill" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.25)">公式 ✓</div>
+          <div class="tag-pill" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.25)">层级 ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S6: CAP-STRUCT ==================== -->
+  <div class="clip" id="s6" data-start="112.81" data-duration="24.17">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080818 0%,#0d1a2a 50%,#0a0a1a 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,255,136,.2);top:5%;right:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,136,204,.12);bottom:20%;left:-5%"></div>
+      <div style="position:absolute;inset:0;opacity:0.03;background-image:repeating-radial-gradient(circle at 30% 40%,transparent 0,transparent 40px,rgba(0,255,136,.03) 41px,transparent 42px)"></div>
+      <div class="grid-bg" style="opacity:0.03"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s6-grid1" style="position:absolute;width:2px;height:100%;left:30%;background:linear-gradient(180deg,transparent,rgba(0,255,136,.1),transparent)"></div>
+      <div id="s6-grid2" style="position:absolute;width:2px;height:100%;left:70%;background:linear-gradient(180deg,transparent,rgba(0,212,255,.1),transparent)"></div>
+      <div id="s6-corner" style="position:absolute;width:80px;height:80px;border-right:2px solid rgba(0,255,136,.15);border-bottom:2px solid rgba(0,255,136,.15);top:25%;right:10%"></div>
+    </div>
+    <!-- Phase 1: 五大区域 -->
+    <div class="phase" id="s6-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#00FF88;font-weight:600;letter-spacing:4px;margin-bottom:16px" id="s6-label">PP-StructureV3</div>
+        <div class="body-title" id="s6-title" style="font-size:52px;color:#fff;margin-bottom:24px">五大区域 · 分而治之</div>
+        <div id="s6-zones" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+          <div class="tag-pill s6-zone" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3);font-size:32px;font-weight:600;padding:10px 24px">标题</div>
+          <div class="tag-pill s6-zone" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3);font-size:32px;font-weight:600;padding:10px 24px">段落</div>
+          <div class="tag-pill s6-zone" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3);font-size:32px;font-weight:600;padding:10px 24px">表格→Excel</div>
+          <div class="tag-pill s6-zone" style="background:rgba(123,47,190,.15);color:#B366FF;border:1px solid rgba(123,47,190,.3);font-size:32px;font-weight:600;padding:10px 24px">公式→LaTeX</div>
+          <div class="tag-pill s6-zone" style="background:rgba(255,140,50,.15);color:#FF8C32;border:1px solid rgba(255,140,50,.3);font-size:32px;font-weight:600;padding:10px 24px">印章识别</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: 全能力 -->
+    <div class="phase" id="s6-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s6-features" style="display:flex;flex-direction:column;gap:20px;align-items:center">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(255,184,0,.15);display:flex;align-items:center;justify-content:center;font-size:32px;color:#FFB800">✓</div>
+            <div style="font-size:34px;color:#fff;font-weight:600">有线/无线表格全覆盖</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,212,255,.15);display:flex;align-items:center;justify-content:center;font-size:32px;color:#00D4FF">✓</div>
+            <div style="font-size:34px;color:#fff;font-weight:600">扫描件歪斜自动矫正</div>
+          </div>
+        </div>
+        <div id="s6-unique" style="margin-top:40px;padding:20px 28px;background:rgba(0,255,136,.08);border-left:4px solid #00FF88;border-radius:0 12px 12px 0;text-align:left">
+          <div style="font-size:32px;font-weight:700;color:#00FF88">开源唯一：表格 + 公式 + 印章<br>三合一全覆盖</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S7: ECOSYSTEM ==================== -->
+  <div class="clip" id="s7" data-start="136.98" data-duration="26.09">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d0d2b 0%,#0a0a1a 30%,#1a0f05 70%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(255,184,0,.25);top:5%;left:-10%"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,212,255,.18);bottom:0;right:-5%"></div>
+      <div class="grid-bg" style="opacity:0.04"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,184,0,.04),transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s7-burst1" style="position:absolute;width:6px;height:6px;background:#FFB800;border-radius:50%;top:18%;left:12%;opacity:.6"></div>
+      <div id="s7-burst2" style="position:absolute;width:8px;height:8px;background:#00D4FF;border-radius:50%;top:55%;right:15%;opacity:.5"></div>
+      <div id="s7-burst3" style="position:absolute;width:5px;height:5px;background:#00FF88;border-radius:50%;bottom:28%;left:22%;opacity:.7"></div>
+      <div id="s7-burst4" style="position:absolute;width:4px;height:4px;background:#FF8C32;border-radius:50%;top:40%;left:80%;opacity:.4"></div>
+    </div>
+    <!-- Phase 1: SDK生态 -->
+    <div class="phase" id="s7-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#FFB800;font-weight:600;letter-spacing:4px;margin-bottom:16px" id="s7-label">ECOSYSTEM</div>
+        <div class="body-title grad-text" id="s7-title" style="background-image:linear-gradient(135deg,#FFB800,#00D4FF);font-size:56px">
+          一整条生态链
+        </div>
+        <div class="sep-line" id="s7-sep" style="background:linear-gradient(90deg,#FFB800,#00D4FF);margin:20px auto"></div>
+        <div id="s7-sdks" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:20px">
+          <div class="tag-pill s7-sdk" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3);font-size:32px;font-weight:600;padding:10px 22px">MCP Server</div>
+          <div class="tag-pill s7-sdk" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3);font-size:32px;font-weight:600;padding:10px 22px">LangChain</div>
+          <div class="tag-pill s7-sdk" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3);font-size:32px;font-weight:600;padding:10px 22px">浏览器 SDK</div>
+          <div class="tag-pill s7-sdk" style="background:rgba(123,47,190,.15);color:#B366FF;border:1px solid rgba(123,47,190,.3);font-size:32px;font-weight:600;padding:10px 22px">Go SDK</div>
+          <div class="tag-pill s7-sdk" style="background:rgba(255,140,50,.15);color:#FF8C32;border:1px solid rgba(255,140,50,.3);font-size:32px;font-weight:600;padding:10px 22px">TypeScript SDK</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: 全场景打通 -->
+    <div class="phase" id="s7-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div class="hero-title grad-text" id="s7-big" style="background-image:linear-gradient(135deg,#FFB800,#00D4FF);font-size:64px">
+          10+ 部署方式
+        </div>
+        <div id="s7-platforms" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px">
+          <div class="tag-pill s7-plat" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.2)">浏览器</div>
+          <div class="tag-pill s7-plat" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.2)">服务器</div>
+          <div class="tag-pill s7-plat" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.2)">CPU</div>
+          <div class="tag-pill s7-plat" style="background:rgba(123,47,190,.12);color:#B366FF;border:1px solid rgba(123,47,190,.2)">GPU</div>
+          <div class="tag-pill s7-plat" style="background:rgba(255,140,50,.12);color:#FF8C32;border:1px solid rgba(255,140,50,.2)">NPU</div>
+          <div class="tag-pill s7-plat" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.2)">Android</div>
+          <div class="tag-pill s7-plat" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.2)">iOS</div>
+          <div class="tag-pill s7-plat" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.2)">Docker</div>
+        </div>
+        <div id="s7-slogan" style="margin-top:36px;font-size:38px;font-weight:700;color:#fff">
+          全场景打通
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S8: COMPARISON ==================== -->
+  <div class="clip" id="s8" data-start="163.07" data-duration="29.35">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080818 0%,#0d0d2b 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,136,204,.2);top:-5%;left:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(255,184,0,.1);bottom:10%;right:-5%"></div>
+      <div class="grid-bg" style="opacity:0.025"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s8-div" style="position:absolute;width:2px;height:60%;top:20%;left:50%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.08),transparent)"></div>
+      <div id="s8-dot1" style="position:absolute;width:6px;height:6px;background:#00D4FF;border-radius:50%;top:30%;left:25%;opacity:.5"></div>
+      <div id="s8-dot2" style="position:absolute;width:6px;height:6px;background:#FFB800;border-radius:50%;bottom:35%;right:25%;opacity:.5"></div>
+    </div>
+    <!-- Phase 1: 竞品对比 -->
+    <div class="phase" id="s8-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#00D4FF;font-weight:600;letter-spacing:4px;margin-bottom:20px" id="s8-label">VS COMPETITORS</div>
+        <div class="compare-cols" id="s8-compare">
+          <div class="compare-col" style="background:rgba(100,100,100,.08);border:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:32px;color:#888;font-weight:700;margin-bottom:16px">Tesseract</div>
+            <div style="font-size:32px;color:#666;line-height:1.8">纯文字识别<br>无表格/公式/版面<br>中文效果差</div>
+          </div>
+          <div class="compare-col" style="background:rgba(100,100,100,.08);border:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:32px;color:#888;font-weight:700;margin-bottom:16px">EasyOCR</div>
+            <div style="font-size:32px;color:#666;line-height:1.8">精度不错<br>生态单薄<br>仅 Python 包</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: PaddleOCR优势 -->
+    <div class="phase" id="s8-p2">
+      <div class="phase-inner" style="text-align:center">
+        <div class="body-title grad-text" id="s8-title" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:52px">
+          PaddleOCR 领先在哪？
+        </div>
+        <div id="s8-wins" style="margin-top:28px;display:flex;flex-direction:column;gap:16px;align-items:center">
+          <div class="data-row s8-win" style="width:85%;border-color:rgba(255,184,0,.15)">
+            <span class="data-label" style="color:#a0a0c0">中文精度</span>
+            <span class="data-value" style="color:#FFB800">碾压级</span>
+          </div>
+          <div class="data-row s8-win" style="width:85%;border-color:rgba(0,255,136,.15)">
+            <span class="data-label" style="color:#a0a0c0">表格/公式</span>
+            <span class="data-value" style="color:#00FF88">独一无二</span>
+          </div>
+          <div class="data-row s8-win" style="width:85%;border-color:rgba(0,212,255,.15)">
+            <span class="data-label" style="color:#a0a0c0">部署方式</span>
+            <span class="data-value" style="color:#00D4FF">10+</span>
+          </div>
+          <div class="data-row s8-win" style="width:85%;border-color:rgba(123,47,190,.15)">
+            <span class="data-label" style="color:#a0a0c0">生态集成</span>
+            <span class="data-value" style="color:#B366FF">最完整</span>
+          </div>
+        </div>
+        <div id="s8-verdict" style="margin-top:28px;font-size:36px;font-weight:700;color:#fff">
+          不只是工具，是生态
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S9: USECASES ==================== -->
+  <div class="clip" id="s9" data-start="192.42" data-duration="29.52">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a1a 0%,#0d1a28 40%,#0a0a1a 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,136,204,.18);top:-5%;right:-10%"></div>
+      <div class="glow" style="width:350px;height:350px;background:rgba(255,184,0,.12);bottom:15%;left:-5%"></div>
+      <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 70% 30%,transparent 0,transparent 80px,rgba(0,136,204,.015) 81px,transparent 82px)"></div>
+      <div class="grid-bg" style="opacity:0.02"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s9-float1" style="position:absolute;width:80px;height:80px;border:1px solid rgba(0,212,255,.08);border-radius:50%;top:22%;left:8%"></div>
+      <div id="s9-float2" style="position:absolute;width:60px;height:60px;border:1px solid rgba(255,184,0,.08);border-radius:50%;bottom:25%;right:12%"></div>
+      <div class="scan-line" style="animation-delay:2s;opacity:.3"></div>
+    </div>
+    <!-- Phase 1: RAG -->
+    <div class="phase" id="s9-p1" style="display:flex">
+      <div class="phase-inner" style="text-align:center">
+        <div style="font-size:32px;color:#00D4FF;font-weight:600;letter-spacing:4px;margin-bottom:20px" id="s9-label">USE CASES</div>
+        <div class="body-title grad-text" id="s9-title" style="background-image:linear-gradient(135deg,#00D4FF,#FFB800);font-size:54px">
+          三大核心场景
+        </div>
+        <div class="sep-line" id="s9-sep" style="background:linear-gradient(90deg,#00D4FF,#FFB800);margin:20px auto"></div>
+        <div id="s9-rag" style="margin-top:24px">
+          <div style="font-size:32px;color:#00D4FF;font-weight:600;margin-bottom:8px">① RAG 文档预处理</div>
+          <div style="font-size:32px;color:#c0c0d8;line-height:1.6">PDF → Markdown → 大模型检索<br><span style="color:#FFB800">Dify · RAGFlow</span> 都在用它</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Agent + 数字化 -->
+    <div class="phase" id="s9-p2">
+      <div class="phase-inner">
+        <div style="margin-bottom:32px">
+          <div style="font-size:32px;color:#00FF88;font-weight:600;margin-bottom:8px">② AI Agent 文档理解</div>
+          <div style="font-size:32px;color:#c0c0d8;line-height:1.6">MCP 接入，Agent 能直接<br>看懂 PDF 和图片文档</div>
+        </div>
+        <div style="margin-bottom:28px">
+          <div style="font-size:32px;color:#FFB800;font-weight:600;margin-bottom:8px">③ 批量文档数字化</div>
+          <div style="font-size:32px;color:#c0c0d8;line-height:1.6">发票 · 财报 · 证件 · 合同<br>大规模结构化提取</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S10: CTA ==================== -->
+  <div class="clip" id="s10" data-start="221.94" data-duration="14.02">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d0d2b 0%,#0a0a1a 50%,#1a0f05 100%)"></div>
+      <div class="glow" style="width:700px;height:700px;background:rgba(255,184,0,.3);top:-10%;left:50%;margin-left:-350px"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,212,255,.12);bottom:5%;right:-5%"></div>
+      <div class="grid-bg" style="opacity:0.03"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(255,184,0,.06),transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s10-ring" style="position:absolute;width:500px;height:500px;border:1px solid rgba(255,184,0,.08);border-radius:50%;top:25%;left:50%;margin-left:-250px"></div>
+      <div class="scan-line" style="animation-delay:1s;opacity:.2"></div>
+    </div>
+    <div class="layer-content">
+      <div style="text-align:center">
+        <div style="font-size:32px;color:#FFB800;font-weight:600;letter-spacing:4px;margin-bottom:20px" id="s10-label">OPEN SOURCE</div>
+        <div class="hero-title grad-text" id="s10-title" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:60px">
+          Apache 2.0
+        </div>
+        <div id="s10-sub" style="font-size:36px;color:#a0a0c0;margin-top:16px">可免费商用</div>
+        <div id="s10-cmd" style="margin-top:28px;padding:14px 28px;background:rgba(0,255,136,.08);border-radius:12px;font-family:'Courier New',monospace;font-size:32px;color:#00FF88;display:inline-block">
+          pip install paddleocr
+        </div>
+        <div style="margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap" id="s10-tags">
+          <div class="tag-pill" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)">CPU 即跑</div>
+          <div class="tag-pill" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3)">完整 SDK</div>
+          <div class="tag-pill" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3)">免费商用</div>
+        </div>
+        <div id="s10-cta" style="margin-top:40px;font-size:40px;font-weight:700;color:#fff">
+          关注 GitHub星探
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__hf = {
+  duration: 236.22,
+  seek: function(t) {
+    Object.keys(window.__timelines).forEach(function(key) {
+      var tl = window.__timelines[key];
+      tl.seek(t);
+      tl.paused(true);
+    });
+  }
+};
+
+(function() {
+  var tl = gsap.timeline({paused: true});
+  var totalDur = 236.22;
+
+  // Phase breakpoints per scene (relative to scene start)
+  var phases = {
+    s2: {p1End: 7.24, p2End: 21.41},
+    s3: {p1End: 4.04, p2End: 16.87, p3End: 32.86},
+    s4: {p1End: 11.75, p2End: 23.26},
+    s5: {p1End: 8.08, p2End: 22.39},
+    s6: {p1End: 9.33, p2End: 24.17},
+    s7: {p1End: 9.64, p2End: 26.09},
+    s8: {p1End: 10.86, p2End: 29.35},
+    s9: {p1End: 11.19, p2End: 29.52}
+  };
+
+  // Scene start times
+  var starts = {
+    s1: 0, s2: 13.15, s3: 34.56, s4: 67.42, s5: 90.68,
+    s6: 113.07, s7: 137.24, s8: 163.33, s9: 192.68, s10: 222.20
+  };
+
+  // Phase management
+  function showPhase(sceneId, phaseId) {
+    var scene = document.getElementById(sceneId);
+    if (!scene) return;
+    var allPhases = scene.querySelectorAll('.phase');
+    allPhases.forEach(function(p) { p.classList.remove('active'); p.style.display = 'none'; });
+    var target = document.getElementById(phaseId);
+    if (target) { target.style.display = 'flex'; target.classList.add('active'); }
+  }
+
+  // === S1: HOOK ===
+  tl.set('#s1', {opacity: 1}, 0);
+  tl.from('#s1-label', {opacity: 0, y: 20, duration: 0.15, ease: 'power3.out'}, 0);
+  tl.from('#s1-title', {scale: 0.85, opacity: 0, duration: 0.15, ease: 'power3.out'}, 0);
+  tl.from('#s1-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, 0.1);
+  tl.from('#s1-sub', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, 0.15);
+  tl.from('#s1-desc', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, 0.3);
+  tl.from('#s1-hook', {opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.out'}, 0.5);
+  tl.to('#s1-ring1', {rotation: 360, duration: 20, repeat: 100, ease: 'none'}, 0);
+  tl.to('#s1-ring2', {rotation: -360, duration: 30, repeat: 100, ease: 'none'}, 0);
+
+  // === S2: WHAT ===
+  tl.set('#s2', {opacity: 1}, starts.s2);
+  showPhase('s2', 's2-p1');
+  tl.call(function() { showPhase('s2', 's2-p1'); }, null, starts.s2);
+  tl.from('#s2-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s2 + 0.1);
+  tl.from('#s2-title', {opacity: 0, y: 20, duration: 0.4, ease: 'power3.out'}, starts.s2 + 0.15);
+  tl.from('#s2-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s2 + 0.3);
+  tl.from('#s2-text', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s2 + 0.4);
+  // Phase 2 switch
+  tl.call(function() { showPhase('s2', 's2-p2'); }, null, starts.s2 + phases.s2.p1End);
+  tl.from('#s2-p2-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s2 + phases.s2.p1End + 0.1);
+  tl.from('.s2-cap', {opacity: 0, y: 10, duration: 0.3, stagger: 0.12, ease: 'power3.out'}, starts.s2 + phases.s2.p1End + 0.2);
+  tl.from('#s2-summary', {opacity: 0, duration: 0.3, ease: 'power3.out'}, starts.s2 + phases.s2.p1End + 1.0);
+  // Fx
+  tl.to('#s2-dot1', {y: -20, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s2);
+  tl.to('#s2-dot2', {y: 15, duration: 2.5, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s2);
+  tl.to('#s2-dot3', {y: -12, duration: 4, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s2);
+
+  // === S3: HOW ===
+  tl.set('#s3', {opacity: 1}, starts.s3);
+  tl.call(function() { showPhase('s3', 's3-p1'); }, null, starts.s3);
+  tl.from('#s3-arch', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s3 + 0.1);
+  tl.from('#s3-title', {opacity: 0, scale: 0.9, duration: 0.4, ease: 'power3.out'}, starts.s3 + 0.15);
+  tl.from('#s3-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s3 + 0.3);
+  tl.from('#s3-desc', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s3 + 0.4);
+  // Phase 2
+  tl.call(function() { showPhase('s3', 's3-p2'); }, null, starts.s3 + phases.s3.p1End);
+  tl.from('#s3-num1', {opacity: 0, scale: 0.8, duration: 0.3, ease: 'power3.out'}, starts.s3 + phases.s3.p1End + 0.1);
+  tl.from('#s3-num2', {opacity: 0, scale: 0.8, duration: 0.3, ease: 'power3.out'}, starts.s3 + phases.s3.p1End + 0.2);
+  tl.from('.s3-pipe', {opacity: 0, y: 10, duration: 0.25, stagger: 0.1, ease: 'power3.out'}, starts.s3 + phases.s3.p1End + 0.3);
+  tl.from('#s3-key', {opacity: 0, x: -30, duration: 0.4, ease: 'power3.out'}, starts.s3 + phases.s3.p1End + 1.0);
+  // Phase 3
+  tl.call(function() { showPhase('s3', 's3-p3'); }, null, starts.s3 + phases.s3.p2End);
+  tl.from('#s3-p3-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s3 + phases.s3.p2End + 0.1);
+  tl.from('.s3-eng', {opacity: 0, scale: 0.85, duration: 0.3, stagger: 0.1, ease: 'power3.out'}, starts.s3 + phases.s3.p2End + 0.2);
+  tl.from('#s3-switch', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s3 + phases.s3.p2End + 0.7);
+  // Fx
+  tl.to('#s3-pulse', {scale: 1.1, opacity: 0.5, duration: 2, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s3);
+  tl.to('#s3-line1', {y: -30, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s3);
+
+  // === S4: CAP-V5 ===
+  tl.set('#s4', {opacity: 1}, starts.s4);
+  tl.call(function() { showPhase('s4', 's4-p1'); }, null, starts.s4);
+  tl.from('#s4-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s4 + 0.1);
+  tl.from('#s4-title', {opacity: 0, scale: 0.85, duration: 0.3, ease: 'power3.out'}, starts.s4 + 0.15);
+  tl.from('#s4-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s4 + 0.3);
+  tl.from('.s4-tag', {opacity: 0, y: 10, duration: 0.3, stagger: 0.1, ease: 'power3.out'}, starts.s4 + 0.35);
+  // Phase 2
+  tl.call(function() { showPhase('s4', 's4-p2'); }, null, starts.s4 + phases.s4.p1End);
+  tl.from('#s4-p2-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s4 + phases.s4.p1End + 0.1);
+  tl.from('#s4-stats > div', {opacity: 0, x: -20, duration: 0.3, stagger: 0.15, ease: 'power3.out'}, starts.s4 + phases.s4.p1End + 0.2);
+  tl.from('#s4-cmd', {opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.out'}, starts.s4 + phases.s4.p1End + 0.8);
+  // Fx
+  tl.to('#s4-spark1', {y: -15, duration: 2.5, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s4);
+  tl.to('#s4-spark2', {y: 12, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s4);
+  tl.to('#s4-ring', {rotation: 360, duration: 15, repeat: 100, ease: 'none'}, starts.s4);
+
+  // === S5: CAP-VL ===
+  tl.set('#s5', {opacity: 1}, starts.s5);
+  tl.call(function() { showPhase('s5', 's5-p1'); }, null, starts.s5);
+  tl.from('#s5-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s5 + 0.1);
+  tl.from('#s5-title', {opacity: 0, scale: 0.8, duration: 0.2, ease: 'power3.out'}, starts.s5 + 0.15);
+  tl.from('#s5-sub', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s5 + 0.3);
+  tl.from('#s5-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s5 + 0.4);
+  tl.from('#s5-info', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s5 + 0.5);
+  // Phase 2
+  tl.call(function() { showPhase('s5', 's5-p2'); }, null, starts.s5 + phases.s5.p1End);
+  tl.from('#s5-p2-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s5 + phases.s5.p1End + 0.1);
+  tl.from('#s5-flow', {opacity: 0, duration: 0.4, ease: 'power3.out'}, starts.s5 + phases.s5.p1End + 0.2);
+  tl.from('#s5-details .tag-pill', {opacity: 0, scale: 0.8, duration: 0.3, stagger: 0.1, ease: 'power3.out'}, starts.s5 + phases.s5.p1End + 0.5);
+  // Fx
+  tl.to('#s5-wave1', {opacity: 0.5, duration: 2, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s5);
+  tl.to('#s5-orb', {scale: 1.2, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s5);
+
+  // === S6: CAP-STRUCT ===
+  tl.set('#s6', {opacity: 1}, starts.s6);
+  tl.call(function() { showPhase('s6', 's6-p1'); }, null, starts.s6);
+  tl.from('#s6-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s6 + 0.1);
+  tl.from('#s6-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s6 + 0.15);
+  tl.from('.s6-zone', {opacity: 0, y: 10, duration: 0.3, stagger: 0.1, ease: 'power3.out'}, starts.s6 + 0.3);
+  // Phase 2
+  tl.call(function() { showPhase('s6', 's6-p2'); }, null, starts.s6 + phases.s6.p1End);
+  tl.from('#s6-features > div', {opacity: 0, x: -20, duration: 0.3, stagger: 0.15, ease: 'power3.out'}, starts.s6 + phases.s6.p1End + 0.1);
+  tl.from('#s6-unique', {opacity: 0, x: -30, duration: 0.4, ease: 'power3.out'}, starts.s6 + phases.s6.p1End + 0.6);
+  // Fx
+  tl.to('#s6-corner', {rotation: 90, duration: 8, repeat: 100, ease: 'none'}, starts.s6);
+
+  // === S7: ECOSYSTEM ===
+  tl.set('#s7', {opacity: 1}, starts.s7);
+  tl.call(function() { showPhase('s7', 's7-p1'); }, null, starts.s7);
+  tl.from('#s7-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s7 + 0.1);
+  tl.from('#s7-title', {opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.out'}, starts.s7 + 0.15);
+  tl.from('#s7-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s7 + 0.3);
+  tl.from('.s7-sdk', {opacity: 0, y: 10, duration: 0.25, stagger: 0.08, ease: 'power3.out'}, starts.s7 + 0.35);
+  // Phase 2
+  tl.call(function() { showPhase('s7', 's7-p2'); }, null, starts.s7 + phases.s7.p1End);
+  tl.from('#s7-big', {opacity: 0, scale: 0.85, duration: 0.3, ease: 'power3.out'}, starts.s7 + phases.s7.p1End + 0.1);
+  tl.from('.s7-plat', {opacity: 0, scale: 0.85, duration: 0.25, stagger: 0.06, ease: 'power3.out'}, starts.s7 + phases.s7.p1End + 0.2);
+  tl.from('#s7-slogan', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s7 + phases.s7.p1End + 0.8);
+  // Fx
+  tl.to('#s7-burst1', {y: -20, duration: 2, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s7);
+  tl.to('#s7-burst2', {y: 15, duration: 2.5, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s7);
+  tl.to('#s7-burst3', {y: -12, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s7);
+  tl.to('#s7-burst4', {y: 18, duration: 2, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s7);
+
+  // === S8: COMPARISON ===
+  tl.set('#s8', {opacity: 1}, starts.s8);
+  tl.call(function() { showPhase('s8', 's8-p1'); }, null, starts.s8);
+  tl.from('#s8-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s8 + 0.1);
+  tl.from('#s8-compare > div', {opacity: 0, y: 15, duration: 0.3, stagger: 0.15, ease: 'power3.out'}, starts.s8 + 0.2);
+  // Phase 2
+  tl.call(function() { showPhase('s8', 's8-p2'); }, null, starts.s8 + phases.s8.p1End);
+  tl.from('#s8-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s8 + phases.s8.p1End + 0.1);
+  tl.from('.s8-win', {opacity: 0, x: -15, duration: 0.3, stagger: 0.12, ease: 'power3.out'}, starts.s8 + phases.s8.p1End + 0.2);
+  tl.from('#s8-verdict', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s8 + phases.s8.p1End + 0.9);
+  // Fx
+  tl.to('#s8-dot1', {y: -15, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s8);
+  tl.to('#s8-dot2', {y: 12, duration: 2.5, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s8);
+
+  // === S9: USECASES ===
+  tl.set('#s9', {opacity: 1}, starts.s9);
+  tl.call(function() { showPhase('s9', 's9-p1'); }, null, starts.s9);
+  tl.from('#s9-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s9 + 0.1);
+  tl.from('#s9-title', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s9 + 0.15);
+  tl.from('#s9-sep', {scaleX: 0, duration: 0.3, ease: 'power3.out'}, starts.s9 + 0.3);
+  tl.from('#s9-rag', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s9 + 0.4);
+  // Phase 2
+  tl.call(function() { showPhase('s9', 's9-p2'); }, null, starts.s9 + phases.s9.p1End);
+  tl.from('#s9-p2 > div', {opacity: 0, y: 15, duration: 0.3, stagger: 0.2, ease: 'power3.out'}, starts.s9 + phases.s9.p1End + 0.1);
+  // Fx
+  tl.to('#s9-float1', {y: -20, duration: 3, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s9);
+  tl.to('#s9-float2', {y: 15, duration: 2.5, repeat: 100, yoyo: true, ease: 'sine.inOut'}, starts.s9);
+
+  // === S10: CTA ===
+  tl.set('#s10', {opacity: 1}, starts.s10);
+  tl.from('#s10-label', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s10 + 0.1);
+  tl.from('#s10-title', {opacity: 0, scale: 0.85, duration: 0.2, ease: 'power3.out'}, starts.s10 + 0.15);
+  tl.from('#s10-sub', {opacity: 0, y: 10, duration: 0.3, ease: 'power3.out'}, starts.s10 + 0.3);
+  tl.from('#s10-cmd', {opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.out'}, starts.s10 + 0.45);
+  tl.from('#s10-tags .tag-pill', {opacity: 0, y: 10, duration: 0.3, stagger: 0.1, ease: 'power3.out'}, starts.s10 + 0.6);
+  tl.from('#s10-cta', {opacity: 0, y: 15, duration: 0.3, ease: 'power3.out'}, starts.s10 + 1.0);
+  // Fx
+  tl.to('#s10-ring', {rotation: 360, duration: 20, repeat: 100, ease: 'none'}, starts.s10);
+
+  // Scene transitions (cross-fade 0.3s)
+  tl.to('#s1', {opacity: 0, duration: 0.3}, starts.s2 - 0.3);
+  tl.to('#s2', {opacity: 0, duration: 0.3}, starts.s3 - 0.3);
+  tl.to('#s3', {opacity: 0, duration: 0.3}, starts.s4 - 0.3);
+  tl.to('#s4', {opacity: 0, duration: 0.3}, starts.s5 - 0.3);
+  tl.to('#s5', {opacity: 0, duration: 0.3}, starts.s6 - 0.3);
+  tl.to('#s6', {opacity: 0, duration: 0.3}, starts.s7 - 0.3);
+  tl.to('#s7', {opacity: 0, duration: 0.3}, starts.s8 - 0.3);
+  tl.to('#s8', {opacity: 0, duration: 0.3}, starts.s9 - 0.3);
+  tl.to('#s9', {opacity: 0, duration: 0.3}, starts.s10 - 0.3);
+
+  window.__timelines = {};
+  window.__timelines['main'] = tl;
+})();
+</script>
+</body>
+</html>

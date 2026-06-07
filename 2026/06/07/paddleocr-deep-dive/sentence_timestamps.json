@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "source": "edge-tts-srt"
+  },
+  "segments": [
+    {
+      "scene": "hook",
+      "segment_index": 0,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "八万一千颗星，427位开发者，PaddlePaddle团队，干了整整六年。",
+          "start": 0.1,
+          "end": 5.19
+        },
+        {
+          "index": 1,
+          "text": "你以为它只是个文字识别工具？",
+          "start": 5.14,
+          "end": 7.68
+        },
+        {
+          "index": 2,
+          "text": "不，它虫新定义了文档AI。",
+          "start": 7.68,
+          "end": 10.09
+        },
+        {
+          "index": 3,
+          "text": "今天带你深度拆解PaddleOCR。",
+          "start": 10.09,
+          "end": 12.82
+        }
+      ]
+    },
+    {
+      "scene": "what",
+      "segment_index": 1,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "大多数人听到OCR，想到的就是把图片上的字提取出来，仅此而已。",
+          "start": 0.1,
+          "end": 5.26
+        },
+        {
+          "index": 1,
+          "text": "但PaddleOCR远不止于此。",
+          "start": 5.21,
+          "end": 7.24
+        },
+        {
+          "index": 2,
+          "text": "它不只能识别文字，还能解析文档版面、提取表格数据、识别数学公式、检测印章文字，甚至能理解文档内容，和AI大模型对话。",
+          "start": 7.24,
+          "end": 16.48
+        },
+        {
+          "index": 3,
+          "text": "一句话概括，它不是OCR工具，而是完整的文档AI生态。",
+          "start": 16.48,
+          "end": 21.34
+        }
+      ]
+    },
+    {
+      "scene": "how",
+      "segment_index": 2,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "它的核心设计哲学叫管线编排。",
+          "start": 0.1,
+          "end": 2.82
+        },
+        {
+          "index": 1,
+          "text": "什么是管线？",
+          "start": 2.77,
+          "end": 4.04
+        },
+        {
+          "index": 2,
+          "text": "想象一条工厂流水线，每条管线由多个专业模型串联，各司其职。",
+          "start": 4.04,
+          "end": 9.21
+        },
+        {
+          "index": 3,
+          "text": "文字识别管线、文档解析管线、表格识别管线、公式识别管线，一共十条管线，覆盖十三个模型类别。",
+          "start": 9.21,
+          "end": 16.87
+        },
+        {
+          "index": 4,
+          "text": "最精妙的设计是——模型可换，管线不变。",
+          "start": 16.87,
+          "end": 20.32
+        },
+        {
+          "index": 5,
+          "text": "管线里的每一个模型都可以独立替换、独立升级，你的代码一航都不用改。",
+          "start": 20.32,
+          "end": 25.68
+        },
+        {
+          "index": 6,
+          "text": "推理引擎也是可插拔的，Paddle、PyTorch、vLLM、拉玛.cpp，想用哪个用哪个，无缝切换。",
+          "start": 25.68,
+          "end": 32.8
+        }
+      ]
+    },
+    {
+      "scene": "cap-v5",
+      "segment_index": 3,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "先说它的看家本领，PP-OCRv5，纯文字识别。",
+          "start": 0.1,
+          "end": 3.54
+        },
+        {
+          "index": 1,
+          "text": "一百多种语言，中英日韩混合识别都不在话下，中文识别精度业界领先，比上一代v4直接提升了13%的准确率。",
+          "start": 3.49,
+          "end": 11.75
+        },
+        {
+          "index": 2,
+          "text": "最关键的是什么？",
+          "start": 11.75,
+          "end": 13.28
+        },
+        {
+          "index": 3,
+          "text": "不需要GPU。",
+          "start": 13.28,
+          "end": 14.57
+        },
+        {
+          "index": 4,
+          "text": "普通笔记本CPU就能流畅跑，内存占用才一百兆。",
+          "start": 14.57,
+          "end": 18.59
+        },
+        {
+          "index": 5,
+          "text": "安装更简单，pip install paddleocr，一航命令搞定，开箱即用。",
+          "start": 18.59,
+          "end": 23.21
+        }
+      ]
+    },
+    {
+      "scene": "cap-vl",
+      "segment_index": 4,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "但重头戏是这个——PaddleOCR-VL-1.6。",
+          "start": 0.1,
+          "end": 3.26
+        },
+        {
+          "index": 1,
+          "text": "这是一个0.9B参数的视觉语言模型，专门用来理解和解析文档。",
+          "start": 3.21,
+          "end": 8.08
+        },
+        {
+          "index": 2,
+          "text": "在权威评测OmniDocBench上，它拿到了96.33%的准确率，直接刷新了SOTA纪录，超越了所有开源和闭源方案。",
+          "start": 8.08,
+          "end": 15.98
+        },
+        {
+          "index": 3,
+          "text": "你把PDF丢进去，它直接输出结构化的Markdown，表格、公式、层级结构一个不落。",
+          "start": 15.98,
+          "end": 22.34
+        }
+      ]
+    },
+    {
+      "scene": "cap-struct",
+      "segment_index": 5,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "PP-StructureV3走的是另一条路线——结构化解析。",
+          "start": 0.1,
+          "end": 3.54
+        },
+        {
+          "index": 1,
+          "text": "它先用版面检测把文档拆成五大区域：标题、段落、表格、公式、印章。",
+          "start": 3.49,
+          "end": 9.33
+        },
+        {
+          "index": 2,
+          "text": "然后分而治之，表格变Excel，公式变LaTeX，印章也能识别出文字。",
+          "start": 9.33,
+          "end": 14.11
+        },
+        {
+          "index": 3,
+          "text": "有线表格、无线表格都搞得定。",
+          "start": 14.11,
+          "end": 16.79
+        },
+        {
+          "index": 4,
+          "text": "扫描件歪了？",
+          "start": 16.79,
+          "end": 18.24
+        },
+        {
+          "index": 5,
+          "text": "自动矫正。",
+          "start": 18.24,
+          "end": 19.45
+        },
+        {
+          "index": 6,
+          "text": "这是目前开源领域唯一做到表格、公式、印章全覆盖的项目。",
+          "start": 19.45,
+          "end": 24.12
+        }
+      ]
+    },
+    {
+      "scene": "ecosystem",
+      "segment_index": 6,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "到这里你可能觉得够了，但它还有一整条生态链。",
+          "start": 0.1,
+          "end": 3.81
+        },
+        {
+          "index": 1,
+          "text": "MCP Server，AI Agent直接调用OCR能力。",
+          "start": 3.76,
+          "end": 7.16
+        },
+        {
+          "index": 2,
+          "text": "LangChain集成，融入大模型应用。",
+          "start": 7.16,
+          "end": 9.64
+        },
+        {
+          "index": 3,
+          "text": "浏览器SDK，在网页里就能跑OCR，零服务器。",
+          "start": 9.64,
+          "end": 13.72
+        },
+        {
+          "index": 4,
+          "text": "Go SDK、TypeScript SDK，后端开发者直接用。",
+          "start": 13.72,
+          "end": 17.12
+        },
+        {
+          "index": 5,
+          "text": "还有Android、iOS的移动端部署方案。",
+          "start": 17.12,
+          "end": 19.92
+        },
+        {
+          "index": 6,
+          "text": "从浏览器到服务器，从CPU到GPU到NPU，十个以上的部署方式，全场景打通。",
+          "start": 19.92,
+          "end": 26.04
+        }
+      ]
+    },
+    {
+      "scene": "comparison",
+      "segment_index": 7,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "拿同类项目对比一下你就知道差距在哪了。",
+          "start": 0.1,
+          "end": 3.3
+        },
+        {
+          "index": 1,
+          "text": "Tesseract，老牌OCR引擎，但只能做纯文字识别，表格、公式、版面分析统统没有，中文效果也不理想。",
+          "start": 3.25,
+          "end": 10.86
+        },
+        {
+          "index": 2,
+          "text": "EasyOCR，精度不错，但生态单薄，只有Python包，没有浏览器SDK，没有MCP集成，也没有移动端方案。",
+          "start": 10.86,
+          "end": 18.15
+        },
+        {
+          "index": 3,
+          "text": "PaddleOCR强在哪？",
+          "start": 18.15,
+          "end": 19.89
+        },
+        {
+          "index": 4,
+          "text": "中文精度碾压，表格公式识别独一无二，部署方式十种以上，MCP和LangChain生态集成最完整。",
+          "start": 19.89,
+          "end": 26.48
+        },
+        {
+          "index": 5,
+          "text": "它不只是一个工具，是一个生态。",
+          "start": 26.48,
+          "end": 29.29
+        }
+      ]
+    },
+    {
+      "scene": "usecases",
+      "segment_index": 8,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "实际落地用在哪？",
+          "start": 0.1,
+          "end": 1.82
+        },
+        {
+          "index": 1,
+          "text": "三大核心场景。",
+          "start": 1.77,
+          "end": 3.33
+        },
+        {
+          "index": 2,
+          "text": "第一，RAG系统的文档预处理。",
+          "start": 3.33,
+          "end": 5.73
+        },
+        {
+          "index": 3,
+          "text": "把PDF变成结构化的Markdown喂给大模型，这是当前最重要的应用场景。",
+          "start": 5.73,
+          "end": 11.19
+        },
+        {
+          "index": 4,
+          "text": "Dify、RAGFlow这些主流RAG平台，都在底层用它。",
+          "start": 11.19,
+          "end": 14.92
+        },
+        {
+          "index": 5,
+          "text": "第二，AI Agent文档理解。",
+          "start": 14.92,
+          "end": 17.07
+        },
+        {
+          "index": 6,
+          "text": "通过MCP接入，Agent能直接看懂PDF和图片文档。",
+          "start": 17.07,
+          "end": 21.24
+        },
+        {
+          "index": 7,
+          "text": "第三，批量文档数字化。",
+          "start": 21.24,
+          "end": 23.52
+        },
+        {
+          "index": 8,
+          "text": "发票、财报、证件、合同，大规模结构化提取，省去大量人工录入。",
+          "start": 23.52,
+          "end": 29.46
+        }
+      ]
+    },
+    {
+      "scene": "cta",
+      "segment_index": 9,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "全部开源，Apache 2.0许可证，可免费商用。",
+          "start": 0.1,
+          "end": 3.64
+        },
+        {
+          "index": 1,
+          "text": "pip install paddleocr，一航命令就能开始。",
+          "start": 3.59,
+          "end": 6.36
+        },
+        {
+          "index": 2,
+          "text": "普通人CPU就能跑，开发者有完整的SDK和API。",
+          "start": 6.36,
+          "end": 10.36
+        },
+        {
+          "index": 3,
+          "text": "关注GitHub星探，下期带你拆解更多好项目。",
+          "start": 10.36,
+          "end": 13.95
+        }
+      ]
+    }
+  ]
+}

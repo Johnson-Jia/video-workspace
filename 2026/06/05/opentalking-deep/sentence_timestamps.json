@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "source": "edge-tts-srt"
+  },
+  "segments": [
+    {
+      "scene": "hook",
+      "segment_index": 0,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "48天，近千星，有个开源项目试图把数字人从PPT变成产品。",
+          "start": 0.1,
+          "end": 5.32
+        }
+      ]
+    },
+    {
+      "scene": "what",
+      "segment_index": 1,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "OpenTalking，不是数字人视频生成模型，而是一个编排层框架，它串联了语音识别、大模型、语音合成、数字人驱动、WebRTC推流全链路。",
+          "start": 0.1,
+          "end": 9.83
+        }
+      ]
+    },
+    {
+      "scene": "pain-point",
+      "segment_index": 2,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "市面上的数字人工具，要么闭源收费贵，要么开源部署门槛高、效果不稳定。",
+          "start": 0.1,
+          "end": 5.78
+        },
+        {
+          "index": 1,
+          "text": "OpenTalking 想打破这个僵局。",
+          "start": 5.73,
+          "end": 8.21
+        }
+      ]
+    },
+    {
+      "scene": "architecture",
+      "segment_index": 3,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "它的核心架构用了三层设计。",
+          "start": 0.1,
+          "end": 2.45
+        },
+        {
+          "index": 1,
+          "text": "Provider 适配器按能力域组织，Registry 注册表只用了51航代码实现统一的能力查找，Protocol 接口保证每个模块可以独立替换。",
+          "start": 2.4,
+          "end": 11.3
+        },
+        {
+          "index": 2,
+          "text": "新增一个模型，只需要写一个适配器然后注册。",
+          "start": 11.3,
+          "end": 15.34
+        }
+      ]
+    },
+    {
+      "scene": "pipeline",
+      "segment_index": 4,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "运行时管线是这样的，用户说话，语音识别转文字，大模型生成回复，语音合成出声音，驱动数字人面部生成视频帧，通过WebRTC实时播放，全链路可打断。",
+          "start": 0.1,
+          "end": 11.28
+        }
+      ]
+    },
+    {
+      "scene": "models",
+      "segment_index": 5,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "目前支持6种数字人模型，从Mock到QuickTalk、Wav2Lip、MuseTalk、FlashTalk、FlashHead。",
+          "start": 0.1,
+          "end": 6.31
+        },
+        {
+          "index": 1,
+          "text": "部署有4种模式，不需要GPU的Mock，本地推理，WebSocket直连，到OmniRT多卡调度，渐进式部署。",
+          "start": 6.26,
+          "end": 13.21
+        }
+      ]
+    },
+    {
+      "scene": "code-quality",
+      "segment_index": 6,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "源码层面，42K行Python加7K行TypeScript，35个单元测试文件，CI/CD工具链齐全。",
+          "start": 0.1,
+          "end": 6.91
+        },
+        {
+          "index": 1,
+          "text": "还有一份308航的AI协作指南，在同龄开源项目里相当少见。",
+          "start": 6.86,
+          "end": 12.09
+        }
+      ]
+    },
+    {
+      "scene": "risks-vision",
+      "segment_index": 7,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "但也得说实话，项目才48天，没有Release版本，核心开发者只有3到4人，Bus Factor很低。",
+          "start": 0.1,
+          "end": 6.21
+        },
+        {
+          "index": 1,
+          "text": "团队计划短期优化模型降低显存，常期做面部表情和自然对话，愿景是建立国内活跃的开源音视频生态。",
+          "start": 6.16,
+          "end": 13.85
+        }
+      ]
+    },
+    {
+      "scene": "cta",
+      "segment_index": 8,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "关注GitHub星探，发现更多好项目。",
+          "start": 0.1,
+          "end": 3.28
+        }
+      ]
+    }
+  ]
+}

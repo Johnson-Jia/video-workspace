@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenHuman 安装教程 — 新手完全指南</title>
+<style>
+  :root {
+    --primary: #4A83DD;
+    --primary-dark: #3A6BC2;
+    --primary-light: #E8F0FE;
+    --success: #2D9A5C;
+    --success-light: #E6F7EE;
+    --warning: #D4920B;
+    --warning-light: #FFF8E1;
+    --danger: #DC3545;
+    --danger-light: #FDE8EA;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--gray-800); line-height:1.8; background:var(--gray-50);
+  }
+  #progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--primary); z-index:9999; transition:width .15s; }
+  #sidebar {
+    position:fixed; top:0; left:0; width:280px; height:100vh;
+    background:#fff; border-right:1px solid var(--gray-200);
+    overflow-y:auto; z-index:100; padding:20px 0; transition: transform .3s;
+  }
+  #sidebar .logo { padding:0 24px 20px; border-bottom:1px solid var(--gray-200); font-size:18px; font-weight:700; color:var(--primary); }
+  #sidebar .logo small { display:block; font-size:12px; font-weight:400; color:var(--gray-600); margin-top:2px; }
+  #sidebar nav { padding:12px 0; }
+  #sidebar nav a { display:block; padding:8px 24px; color:var(--gray-700); text-decoration:none; font-size:14px; transition:all .15s; border-left:3px solid transparent; }
+  #sidebar nav a:hover { background:var(--gray-50); color:var(--primary); }
+  #sidebar nav a.active { background:var(--primary-light); color:var(--primary); border-left-color:var(--primary); font-weight:600; }
+  #sidebar nav .nav-group { padding:8px 24px 4px; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--gray-300); font-weight:700; }
+  #main { margin-left:280px; max-width:900px; padding:40px 48px 120px; }
+  #back-top { position:fixed; bottom:30px; right:30px; width:44px; height:44px; background:var(--primary); color:#fff; border:none; border-radius:50%; cursor:pointer; font-size:20px; box-shadow:var(--shadow-lg); opacity:0; transition:opacity .3s; z-index:200; }
+  #back-top.show { opacity:1; }
+  h1 { font-size:32px; font-weight:800; margin-bottom:8px; color:var(--gray-900); }
+  h2 { font-size:26px; font-weight:700; margin:48px 0 20px; color:var(--gray-900); border-bottom:2px solid var(--primary-light); padding-bottom:8px; }
+  h3 { font-size:20px; font-weight:600; margin:32px 0 14px; color:var(--gray-800); }
+  h4 { font-size:17px; font-weight:600; margin:24px 0 10px; color:var(--gray-700); }
+  p { margin-bottom:14px; }
+  a { color:var(--primary); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  strong { color:var(--gray-900); }
+  ul, ol { margin:10px 0 16px 24px; }
+  li { margin-bottom:6px; }
+  code { background:var(--gray-100); padding:2px 6px; border-radius:4px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; color:var(--danger); }
+  pre { background:var(--gray-900); color:#E5E7EB; padding:18px 20px; border-radius:var(--radius); overflow-x:auto; margin:14px 0 18px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; line-height:1.7; position:relative; }
+  pre code { background:none; color:inherit; padding:0; font-size:inherit; }
+  .copy-btn { position:absolute; top:8px; right:8px; background:rgba(255,255,255,.12); color:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px; transition:all .15s; }
+  .copy-btn:hover { background:rgba(255,255,255,.25); color:#fff; }
+  .callout { padding:16px 20px; border-radius:var(--radius); margin:16px 0; border-left:4px solid; }
+  .callout p { margin-bottom:8px; }
+  .callout p:last-child { margin-bottom:0; }
+  .callout-title { font-weight:700; margin-bottom:6px; }
+  .callout-info { background:var(--primary-light); border-color:var(--primary); }
+  .callout-info .callout-title { color:var(--primary-dark); }
+  .callout-success { background:var(--success-light); border-color:var(--success); }
+  .callout-success .callout-title { color:var(--success); }
+  .callout-warning { background:var(--warning-light); border-color:var(--warning); }
+  .callout-warning .callout-title { color:var(--warning); }
+  .callout-danger { background:var(--danger-light); border-color:var(--danger); }
+  .callout-danger .callout-title { color:var(--danger); }
+  .step { background:#fff; border-radius:var(--radius); padding:24px; margin:16px 0; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .step-number { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; font-size:15px; margin-right:10px; flex-shrink:0; }
+  .step-title { display:flex; align-items:center; font-size:17px; font-weight:600; color:var(--gray-900); margin-bottom:12px; }
+  .tabs { margin:16px 0; }
+  .tab-buttons { display:flex; border-bottom:2px solid var(--gray-200); }
+  .tab-btn { padding:10px 20px; background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-2px; cursor:pointer; font-size:14px; font-weight:500; color:var(--gray-600); transition:all .15s; }
+  .tab-btn:hover { color:var(--primary); }
+  .tab-btn.active { color:var(--primary); border-bottom-color:var(--primary); font-weight:600; }
+  .tab-content { display:none; padding:16px 0; }
+  .tab-content.active { display:block; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:14px; }
+  th { background:var(--gray-100); text-align:left; padding:10px 14px; font-weight:600; border:1px solid var(--gray-200); }
+  td { padding:10px 14px; border:1px solid var(--gray-200); }
+  tr:nth-child(even) { background:var(--gray-50); }
+  .checklist { list-style:none; margin-left:0; }
+  .checklist li { padding:6px 0 6px 30px; position:relative; }
+  .checklist li::before { content:"\2610"; position:absolute; left:0; top:6px; font-size:16px; color:var(--gray-300); }
+  .faq-item { border:1px solid var(--gray-200); border-radius:var(--radius); margin:8px 0; overflow:hidden; }
+  .faq-q { padding:14px 20px; cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; background:#fff; transition:background .15s; }
+  .faq-q:hover { background:var(--gray-50); }
+  .faq-q .arrow { transition:transform .3s; font-size:12px; color:var(--gray-600); }
+  .faq-q.open .arrow { transform:rotate(180deg); }
+  .faq-a { padding:0 20px; max-height:0; overflow:hidden; transition:all .3s; background:var(--gray-50); }
+  .faq-a.open { padding:16px 20px; max-height:1000px; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin:16px 0; }
+  .card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .card h4 { margin:0 0 8px; }
+  .card p { font-size:14px; color:var(--gray-600); margin:0; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; }
+  .badge-green { background:var(--success-light); color:var(--success); }
+  .flow { text-align:center; margin:20px 0; }
+  .flow-step { display:inline-block; background:var(--primary); color:#fff; padding:10px 20px; border-radius:var(--radius); font-weight:600; font-size:14px; margin:4px 0; }
+  .flow-arrow { display:inline-block; color:var(--gray-400); font-size:20px; margin:0 6px; vertical-align:middle; }
+  @media(max-width:900px) {
+    #sidebar { transform:translateX(-100%); }
+    #sidebar.open { transform:translateX(0); }
+    #main { margin-left:0; padding:24px 20px 80px; }
+    #menu-toggle { display:block !important; }
+  }
+  #menu-toggle { display:none; position:fixed; top:12px; left:12px; z-index:101; background:var(--primary); color:#fff; border:none; padding:8px 12px; border-radius:var(--radius); cursor:pointer; font-size:18px; }
+  @media print { #sidebar, #progress-bar, #back-top, #menu-toggle, .copy-btn { display:none !important; } #main { margin-left:0; padding:0; } pre { border:1px solid #ddd; } }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
+
+<div id="sidebar">
+  <div class="logo">OpenHuman<small>安装教程 v0.54</small></div>
+  <nav>
+    <div class="nav-group">开始之前</div>
+    <a href="#overview">项目概览与流程图</a>
+    <a href="#prerequisites">环境准备</a>
+    <div class="nav-group">网络与代理</div>
+    <a href="#proxy">网络代理配置</a>
+    <div class="nav-group">获取代码</div>
+    <a href="#clone">克隆代码仓库</a>
+    <div class="nav-group">AI 大模型</div>
+    <a href="#apikey">申请 API Key（含国产模型）</a>
+    <a href="#config-ai">配置大模型（含国产模型）</a>
+    <div class="nav-group">功能配置</div>
+    <a href="#config-memory">记忆系统配置</a>
+    <a href="#config-voice">语音功能配置</a>
+    <a href="#config-channels">通信渠道配置</a>
+    <a href="#config-env">完整环境变量</a>
+    <div class="nav-group">运行</div>
+    <a href="#build">编译与运行</a>
+    <a href="#docker">Docker 部署</a>
+    <div class="nav-group">帮助</div>
+    <a href="#faq">常见问题 FAQ</a>
+    <a href="#troubleshoot">故障排查</a>
+  </nav>
+</div>
+
+<div id="main">
+
+<!-- ==================== 第一章 ==================== -->
+<h2 id="overview">第一章：项目概览</h2>
+
+<h3>OpenHuman 是什么？</h3>
+<p>OpenHuman 是一个 <strong>AI 智能体桌面平台</strong>，可以连接多个 AI 大模型（如智谱 GLM、阿里云 Qwen、火山云豆包、DeepSeek、ChatGPT、Claude、本地 Ollama 等），并统一管理 WhatsApp、Telegram、Discord、Slack 等通信渠道。你通过一个桌面应用就能和 AI 对话、管理消息、定时执行任务。</p>
+
+<h3>安装流程总览</h3>
+<p>下面是整个安装过程的流程图，对照这个图一步一步走就行：</p>
+
+<div class="flow">
+  <div class="flow-step">1. 环境准备</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">2. 网络代理</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">3. 克隆代码</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">4. 申请 API Key</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">5. 配置环境</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">6. 编译运行</div>
+</div>
+<p style="text-align:center;font-size:13px;color:var(--gray-600);">步骤 2 和 4 根据个人情况可选</p>
+
+<div class="callout callout-success">
+  <p class="callout-title">不想编译？直接下载安装包</p>
+  <p>如果你只是想<strong>使用</strong>而不是<strong>开发</strong>，可以跳过步骤 1/2/3/6，直接去 <a href="https://github.com/tinyhumansai/openhuman/releases" target="_blank">GitHub Releases</a> 下载对应平台的安装包（.dmg / .exe / .deb）。安装后参考第 5-6 章配置 AI 即可。</p>
+</div>
+
+<h3>安装前检查清单</h3>
+<ul class="checklist">
+  <li>操作系统：Windows 10+、macOS 10.15+、Ubuntu 22.04+</li>
+  <li>硬盘空间：至少 10 GB（含 Chromium 框架和编译缓存）</li>
+  <li>内存：至少 8 GB（推荐 16 GB）</li>
+  <li>网络：能访问 GitHub 和外网（中国大陆用户需要配置代理）</li>
+  <li>一个 AI 大模型的 API Key（推荐国产模型：智谱 GLM / 阿里云 Qwen / 火山云豆包 / DeepSeek，或使用本地 Ollama 免费运行）</li>
+</ul>
+
+<!-- ==================== 第二章 ==================== -->
+<h2 id="prerequisites">第二章：环境准备</h2>
+<p>这一章安装 4 个基础工具。请按顺序操作，每一步都有<strong>验证命令</strong>，确认通过再往下走。</p>
+
+<h3>2.1 安装 Git</h3>
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(event,'git-win')">Windows</button>
+    <button class="tab-btn" onclick="switchTab(event,'git-mac')">macOS</button>
+    <button class="tab-btn" onclick="switchTab(event,'git-linux')">Linux</button>
+  </div>
+  <div class="tab-content active" id="git-win">
+    <div class="step">
+      <div class="step-title"><span class="step-number">1</span>下载 Git 安装包</div>
+      <p>访问 <a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a>，下载 64-bit 版本并双击安装。安装过程中全部保持默认选项即可。</p>
+    </div>
+  </div>
+  <div class="tab-content" id="git-mac">
+    <div class="step">
+      <div class="step-title"><span class="step-number">1</span>安装 Git</div>
+      <p>打开终端（Terminal），执行：</p>
+      <pre><code>xcode-select --install</code></pre>
+    </div>
+  </div>
+  <div class="tab-content" id="git-linux">
+    <div class="step">
+      <div class="step-title"><span class="step-number">1</span>安装 Git</div>
+      <pre><code>sudo apt update &amp;&amp; sudo apt install -y git</code></pre>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-title">验证安装</div>
+  <pre><code>git --version</code></pre>
+  <p>应输出类似 <code>git version 2.45.0</code> 的信息。</p>
+</div>
+
+<h3>2.2 安装 Rust</h3>
+<div class="callout callout-info">
+  <p class="callout-title">为什么需要 Rust？</p>
+  <p>OpenHuman 的核心引擎用 Rust 语言编写，必须安装 Rust 编译器才能从源码构建。</p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 Rust 工具链</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># Windows - 访问以下地址下载安装器
+# https://www.rust-lang.org/tools/install
+# 下载 rustup-init.exe 并运行</code></pre>
+  <p>安装过程中全部按回车选择默认选项。</p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>刷新环境变量</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux（安装完后执行）
+source "$HOME/.cargo/env"</code></pre>
+  <p>Windows 用户关闭并重新打开终端即可。</p>
+</div>
+<div class="step">
+  <div class="step-title">验证安装</div>
+  <pre><code>rustc --version</code></pre>
+  <p>应输出类似 <code>rustc 1.93.0</code>。</p>
+</div>
+
+<h3>2.3 安装 Node.js</h3>
+<div class="callout callout-warning">
+  <p class="callout-title">版本要求：必须 >= 24.0.0</p>
+  <p>OpenHuman 要求 Node.js 24 或更高版本。如果你已有旧版本，请先升级。</p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 Node.js（推荐使用 fnm 管理器）</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 先安装 fnm（Node 版本管理器）
+# macOS / Linux
+curl -fsSL https://fnm.vercel.app/install | bash
+source ~/.bashrc
+
+# Windows（PowerShell 管理员模式）
+winget install Schniz.fnm
+
+# 然后安装 Node.js 24
+fnm install 24
+fnm use 24</code></pre>
+  <p>如果你不想用 fnm，也可以直接从 <a href="https://nodejs.org/" target="_blank">nodejs.org</a> 下载安装。</p>
+</div>
+<div class="step">
+  <div class="step-title">验证安装</div>
+  <pre><code>node -v</code></pre>
+  <p>应输出 <code>v24.x.x</code>。</p>
+</div>
+
+<h3>2.4 安装 pnpm</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 pnpm 包管理器</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>npm install -g pnpm@10.10.0</code></pre>
+</div>
+<div class="step">
+  <div class="step-title">验证安装</div>
+  <pre><code>pnpm -v</code></pre>
+  <p>应输出 <code>10.10.0</code>。</p>
+</div>
+
+<h3>2.5 Windows 额外步骤</h3>
+<div class="callout callout-info"><p class="callout-title">仅 Windows 用户需要</p><p>macOS 和 Linux 用户可跳过本节。</p></div>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 Visual Studio Build Tools</div>
+  <ol>
+    <li>访问 <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/" target="_blank">Visual Studio Build Tools 下载页</a></li>
+    <li>下载并运行安装器</li>
+    <li>勾选 <strong>"Desktop development with C++"</strong></li>
+    <li>点击安装，等待完成（约 3-5 GB）</li>
+  </ol>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>安装 CMake</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>winget install Kitware.CMake</code></pre>
+  <p>或从 <a href="https://cmake.org/download/" target="_blank">cmake.org</a> 下载安装。</p>
+</div>
+
+<h3>2.6 Linux 额外步骤</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装系统依赖</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>sudo apt install -y \
+  libgtk-3-dev libwebkit2gtk-4.1-dev libssl-dev \
+  cmake mold clang libclang-dev libasound2-dev \
+  libxdo-dev libxtst-dev libx11-dev libevdev-dev</code></pre>
+</div>
+
+<h3>环境准备完成检查</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>git --version      # 应输出 git version 2.x
+rustc --version    # 应输出 rustc 1.93.0
+node -v            # 应输出 v24.x.x
+pnpm -v            # 应输出 10.10.0</code></pre>
+
+<!-- ==================== 第三章 ==================== -->
+<h2 id="proxy">第三章：网络代理配置</h2>
+<div class="callout callout-warning">
+  <p class="callout-title">谁需要看这一章？</p>
+  <p><strong>中国大陆用户</strong>必看 &mdash; 访问 GitHub、下载 Rust 依赖和 Node 包可能很慢或失败。<br><strong>海外用户</strong>可跳过本章。</p>
+</div>
+
+<h3>3.1 Git 代理设置</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>查看你的代理端口</div>
+  <p>打开你的代理软件（如 Clash、V2rayN），找到<strong>本地监听端口</strong>：</p>
+  <table>
+    <tr><th>代理软件</th><th>HTTP 端口</th><th>SOCKS5 端口</th></tr>
+    <tr><td>Clash for Windows</td><td>7890</td><td>7891</td></tr>
+    <tr><td>V2rayN</td><td>10809</td><td>10808</td></tr>
+    <tr><td>Shadowsocks</td><td>1080</td><td>1080</td></tr>
+  </table>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>配置 Git 代理</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 把 7890 换成你代理软件的实际端口
+# HTTP 代理方式
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+
+# 或者用 SOCKS5 方式（二选一）
+git config --global http.proxy socks5://127.0.0.1:7891
+git config --global https.proxy socks5://127.0.0.1:7891</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>验证代理</div>
+  <pre><code>git config --global --get http.proxy</code></pre>
+  <p>应输出你刚才设置的代理地址。</p>
+</div>
+<div class="callout callout-danger">
+  <p class="callout-title">取消代理（代理软件关闭后执行）</p>
+  <pre><code>git config --global --unset http.proxy
+git config --global --unset https.proxy</code></pre>
+</div>
+
+<h3>3.2 Cargo（Rust）镜像加速</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>配置 Rust 下载镜像（使用 rsproxy）</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux
+mkdir -p ~/.cargo
+cat &gt; ~/.cargo/config.toml &lt;&lt; 'EOF'
+[source.crates-io]
+replace-with = "rsproxy"
+
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+EOF</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># Windows PowerShell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.cargo"
+Set-Content -Path "$env:USERPROFILE\.cargo\config.toml" -Value @"
+[source.crates-io]
+replace-with = "rsproxy"
+
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+"@</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>配置 Rustup 镜像</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux - 加到 ~/.bashrc 或 ~/.zshrc 末尾
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># Windows PowerShell - 加到系统环境变量
+[Environment]::SetEnvironmentVariable("RUSTUP_DIST_SERVER", "https://rsproxy.cn", "User")
+[Environment]::SetEnvironmentVariable("RUSTUP_UPDATE_ROOT", "https://rsproxy.cn/rustup", "User")</code></pre>
+</div>
+
+<h3>3.3 pnpm（Node.js）镜像加速</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>设置 npm 镜像源</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>pnpm config set registry https://registry.npmmirror.com</code></pre>
+</div>
+
+<h3>3.4 让所有命令走代理（通用方法）</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>设置终端全局代理</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux - 在终端执行（每次开新终端都要执行，或加到 ~/.bashrc）
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+export all_proxy=socks5://127.0.0.1:7891</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># Windows PowerShell - 每次开新终端都要执行
+$env:http_proxy="http://127.0.0.1:7890"
+$env:https_proxy="http://127.0.0.1:7890"</code></pre>
+  <div class="callout callout-success">
+    <p>设置全局代理后，Git、Cargo、pnpm、curl 等所有网络请求都会走代理。</p>
+  </div>
+</div>
+
+<!-- ==================== 第四章 ==================== -->
+<h2 id="clone">第四章：克隆代码仓库</h2>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>克隆代码（含子模块）</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>git clone --recurse-submodules https://github.com/tinyhumansai/openhuman.git
+cd openhuman</code></pre>
+  <div class="callout callout-warning">
+    <p><code>--recurse-submodules</code> 不能省略！项目包含 CEF（Chromium 框架）等子模块。</p>
+  </div>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>如果忘记加子模块</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>git submodule update --init --recursive</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>配置环境变量文件</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>cp .env.example .env
+cp app/.env.example app/.env.local</code></pre>
+  <p>暂时不需要编辑，后面会一步步配置。</p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">4</span>安装前端依赖</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>pnpm install</code></pre>
+  <p>等待安装完成（约 1-3 分钟）。</p>
+</div>
+
+<!-- ==================== 第五章 ==================== -->
+<h2 id="apikey">第五章：申请大模型 API Key</h2>
+<p>OpenHuman 需要一个 AI 大模型来驱动对话和智能功能。你有 <strong>8 种选择</strong>，选一种即可：</p>
+
+<div class="callout callout-success">
+  <p class="callout-title">国产大模型推荐</p>
+  <p>智谱 GLM、阿里云 Qwen、火山云豆包 等国产大模型均兼容 OpenAI API 格式，注册简单、支持支付宝/微信付款、无需海外信用卡，<strong>强烈推荐国内用户优先选择</strong>。</p>
+</div>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid #ff6a00;">
+    <h4>智谱 GLM <span class="badge badge-green">国产推荐</span></h4>
+    <p>GLM-5.1 系列模型。国内注册，支付宝付款，支持中英双语，价格便宜。</p>
+  </div>
+  <div class="card" style="border-top:3px solid #ff6a00;">
+    <h4>阿里云 Qwen <span class="badge badge-green">国产推荐</span></h4>
+    <p>通义千问 Qwen-3.6 系列。阿里云百炼平台，支持支付宝，模型丰富。</p>
+  </div>
+  <div class="card" style="border-top:3px solid #ff6a00;">
+    <h4>火山云豆包 <span class="badge badge-green">国产推荐</span></h4>
+    <p>字节跳动豆包系列模型。火山引擎平台，支持支付宝，响应速度快。</p>
+  </div>
+  <div class="card" style="border-top:3px solid #ff6a00;">
+    <h4>DeepSeek <span class="badge badge-green">国产推荐</span></h4>
+    <p>DeepSeek-V3/R1 系列。推理能力极强，价格极低，注册简单。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>OpenRouter</h4>
+    <p>聚合多个模型，按量付费，$5 即可开始。支持 GPT-4o、Claude、Gemini 等。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>OpenAI</h4>
+    <p>ChatGPT 官方 API。需要海外信用卡，门槛较高。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--warning);">
+    <h4>Anthropic</h4>
+    <p>Claude 官方 API。需要海外信用卡。对话质量高。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>Ollama（本地免费）</h4>
+    <p>完全免费，无需网络。需要 8GB+ 内存。</p>
+  </div>
+</div>
+
+<h3>方案 A：申请智谱 GLM API Key（国产推荐）</h3>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册智谱开放平台账号</div>
+  <ul>
+    <li>访问 <a href="https://open.bigmodel.cn/" target="_blank">https://open.bigmodel.cn/</a></li>
+    <li>点击右上角 <strong>"注册"</strong>，使用手机号注册（国内手机号即可）</li>
+    <li>完成实名认证（需上传身份证，一般几分钟审核通过）</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>获取 API Key</div>
+  <ul>
+    <li>登录后进入 <a href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank">API Keys 管理页面</a></li>
+    <li>点击 <strong>"添加新 API Key"</strong></li>
+    <li>复制生成的 Key（格式：<code>xxxxxxxx.xxxxxxxx</code>）<strong>立即保存，关闭窗口后无法再查看</strong></li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>充值余额</div>
+  <ul>
+    <li>进入 <a href="https://open.bigmodel.cn/usercenter/billing" target="_blank">账户充值页面</a></li>
+    <li>支持 <strong>支付宝</strong>、微信支付</li>
+    <li>新注册用户通常赠送免费额度，可直接体验</li>
+  </ul>
+</div>
+
+<div class="callout callout-info">
+  <p class="callout-title">可用模型</p>
+  <p>GLM-5.1-Plus（推荐，综合能力强）、GLM-5.1-Air（轻量，响应快）、GLM-5.1-Flash（免费额度）</p>
+</div>
+
+<h3>方案 B：申请阿里云 Qwen API Key（国产推荐）</h3>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册阿里云百炼平台</div>
+  <ul>
+    <li>访问 <a href="https://bailian.console.aliyun.com/" target="_blank">https://bailian.console.aliyun.com/</a></li>
+    <li>使用阿里云账号登录（淘宝/支付宝账号可直接登录）</li>
+    <li>首次使用需开通"百炼"服务（免费开通）</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>获取 API Key</div>
+  <ul>
+    <li>进入百炼控制台后，点击右上角头像 &rarr; <strong>"API-KEY 管理"</strong></li>
+    <li>点击 <strong>"创建新的 API Key"</strong></li>
+    <li>复制生成的 Key（格式：<code>sk-xxxxxxxxxxxxxxxx</code>）<strong>立即保存</strong></li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>充值余额</div>
+  <ul>
+    <li>在百炼控制台 &rarr; <strong>"资源包管理"</strong> 或 <strong>"账户中心"</strong></li>
+    <li>支持 <strong>支付宝</strong> 充值</li>
+    <li>新用户通常赠送 100 万+ 免费 token</li>
+  </ul>
+</div>
+
+<div class="callout callout-info">
+  <p class="callout-title">可用模型</p>
+  <p>qwen-plus（推荐，性价比高）、qwen-turbo（轻量快速）、qwen-max（旗舰模型）、qwen-long（超长上下文）</p>
+</div>
+
+<h3>方案 C：申请火山云豆包 API Key（国产推荐）</h3>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册火山引擎账号</div>
+  <ul>
+    <li>访问 <a href="https://www.volcengine.com/" target="_blank">https://www.volcengine.com/</a></li>
+    <li>点击 <strong>"注册"</strong>，使用手机号注册</li>
+    <li>完成企业/个人实名认证</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>开通豆包大模型服务</div>
+  <ul>
+    <li>进入 <a href="https://console.volcengine.com/ark" target="_blank">火山方舟控制台</a></li>
+    <li>选择 <strong>"模型推理"</strong> &rarr; 创建推理接入点</li>
+    <li>选择模型（如 <strong>Doubao-1.5-pro</strong>）</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>获取 API Key</div>
+  <ul>
+    <li>进入 <a href="https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey" target="_blank">API Key 管理</a></li>
+    <li>点击 <strong>"创建新的 API Key"</strong></li>
+    <li>复制 Key（格式：<code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>）</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">4</span>获取接入点 Endpoint ID</div>
+  <ul>
+    <li>在推理接入点列表中，找到你创建的接入点</li>
+    <li>复制 <strong>Endpoint ID</strong>（格式：<code>ep-xxxxxxxx</code>），配置模型时需要用到</li>
+  </ul>
+</div>
+
+<div class="callout callout-info">
+  <p class="callout-title">可用模型</p>
+  <p>Doubao-1.5-pro（推荐）、Doubao-1.5-lite（轻量）、Doubao-1.5-32k（长上下文）</p>
+</div>
+
+<h3>方案 D：申请 DeepSeek API Key（国产推荐）</h3>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册 DeepSeek 账号</div>
+  <ul>
+    <li>访问 <a href="https://platform.deepseek.com/" target="_blank">https://platform.deepseek.com/</a></li>
+    <li>使用手机号或邮箱注册</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>获取 API Key</div>
+  <ul>
+    <li>进入 <a href="https://platform.deepseek.com/api_keys" target="_blank">API Keys 页面</a></li>
+    <li>点击 <strong>"创建 API Key"</strong></li>
+    <li>复制 Key（格式：<code>sk-xxxxxxxxxxxxxxxx</code>）</li>
+  </ul>
+</div>
+
+<div class="callout callout-info">
+  <p class="callout-title">可用模型</p>
+  <p>deepseek-chat（即 DeepSeek-V3，推荐）、deepseek-reasoner（即 DeepSeek-R1，推理增强）</p>
+</div>
+
+<h3>方案 E：申请 OpenRouter API Key（海外）</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册 OpenRouter 账号</div>
+  <ol>
+    <li>访问 <a href="https://openrouter.ai/" target="_blank">https://openrouter.ai/</a></li>
+    <li>点击右上角 <strong>"Sign In"</strong></li>
+    <li>使用 Google 账号或 GitHub 账号登录</li>
+  </ol>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>创建 API Key</div>
+  <ol>
+    <li>登录后，点击右上角头像 &rarr; <strong>"Keys"</strong></li>
+    <li>点击 <strong>"Create Key"</strong></li>
+    <li>给 Key 起个名字（如 <code>openhuman</code>），点击创建</li>
+    <li><strong>立即复制保存 Key</strong>（格式：<code>sk-or-v1-xxxxx...</code>），页面关闭后无法再查看</li>
+  </ol>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>充值余额</div>
+  <ol>
+    <li>点击头像 &rarr; <strong>"Credits"</strong></li>
+    <li>点击 <strong>"Add Credits"</strong></li>
+    <li>最低充值 $5 即可使用</li>
+  </ol>
+  <div class="callout callout-info"><p>每条消息费用约 $0.001-0.03，$5 大约可用数千条消息。</p></div>
+</div>
+
+<h3>方案 F：申请 OpenAI API Key（海外）</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>注册并创建 Key</div>
+  <ol>
+    <li>访问 <a href="https://platform.openai.com/" target="_blank">https://platform.openai.com/</a></li>
+    <li>注册 &rarr; 进入 <a href="https://platform.openai.com/api-keys" target="_blank">API Keys 页面</a></li>
+    <li>点击 <strong>"Create new secret key"</strong> &rarr; 复制保存（<code>sk-xxxxx...</code>）</li>
+  </ol>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>充值</div>
+  <ol>
+    <li>访问 <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank">Billing 页面</a></li>
+    <li>绑定海外信用卡，充值至少 $5</li>
+  </ol>
+  <div class="callout callout-warning"><p>OpenAI 需要海外信用卡（Visa/Mastercard）。中国大陆信用卡可能被拒绝，建议用 OpenRouter 替代。</p></div>
+</div>
+
+<h3>方案 G：申请 Anthropic API Key（海外）</h3>
+<div class="step">
+  <ol>
+    <li>访问 <a href="https://console.anthropic.com/" target="_blank">https://console.anthropic.com/</a> 注册</li>
+    <li>进入 <a href="https://console.anthropic.com/settings/keys" target="_blank">API Keys 页面</a> &rarr; <strong>"Create Key"</strong></li>
+    <li>复制保存（<code>sk-ant-xxxxx...</code>）</li>
+  </ol>
+</div>
+
+<h3>方案 H：使用 Ollama 本地模型（完全免费）</h3>
+<div class="callout callout-success">
+  <p class="callout-title">完全免费，无需 API Key！</p>
+  <p>Ollama 在你自己的电脑上运行 AI 模型，数据不离开你的机器。</p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 Ollama</div>
+  <ol>
+    <li>访问 <a href="https://ollama.com/" target="_blank">https://ollama.com/</a></li>
+    <li>点击 <strong>"Download"</strong>，选择对应平台下载安装</li>
+    <li>安装完成后，Ollama 会自动在后台运行</li>
+  </ol>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>下载 AI 模型</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 下载 Llama 3（约 4.7 GB，推荐 8GB+ 内存）
+ollama pull llama3
+
+# 或者更小的模型（约 2.3 GB，适合 8GB 内存）
+ollama pull llama3:8b
+
+# 下载中文能力更好的模型
+ollama pull qwen2:7b</code></pre>
+  <div class="callout callout-info"><p>模型下载需要网络。下载完成后可离线使用。</p></div>
+</div>
+<div class="step">
+  <div class="step-title">验证 Ollama 运行</div>
+  <pre><code>ollama list</code></pre>
+  <p>应列出你下载的模型。</p>
+</div>
+
+<!-- ==================== 第六章 ==================== -->
+<h2 id="config-ai">第六章：配置大模型</h2>
+
+<h3>6.1 方式一：应用内配置（推荐）</h3>
+<p>启动应用后，首次进入会看到引导向导：</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>选择运行时模式</div>
+  <table>
+    <tr><th>选项</th><th>说明</th><th>适合谁</th></tr>
+    <tr><td><strong>简单模式（推荐）</strong></td><td>使用 OpenHuman 托管 AI，无需管理 API Key</td><td>新手</td></tr>
+    <tr><td><strong>自定义模式</strong></td><td>自带 API Key，可选提供商和模型</td><td>开发者</td></tr>
+  </table>
+  <ul>
+    <li>选 <strong>"简单"</strong>：直接完成引导，开箱即用（有 $1 免费额度）</li>
+    <li>选 <strong>"自定义"</strong>：进入 AI 配置面板，按以下步骤操作</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>自定义模式：添加云提供商</div>
+  <p>进入 <strong>设置 &rarr; AI &rarr; LLM 配置</strong>，点击"添加提供商"：</p>
+  <table>
+    <tr><th>提供商</th><th>Slug</th><th>Endpoint URL</th><th>Auth Style</th><th>API Key</th></tr>
+    <tr><td><strong>智谱 GLM</strong></td><td><code>zhipu</code></td><td><code>https://open.bigmodel.cn/api/paas/v4</code></td><td>Bearer</td><td><code>xxxx.xxxx</code></td></tr>
+    <tr><td><strong>阿里云 Qwen</strong></td><td><code>qwen</code></td><td><code>https://dashscope.aliyuncs.com/compatible-mode/v1</code></td><td>Bearer</td><td><code>sk-xxx</code></td></tr>
+    <tr><td><strong>火山云豆包</strong></td><td><code>doubao</code></td><td><code>https://ark.cn-beijing.volces.com/api/v3</code></td><td>Bearer</td><td><code>xxxxxxxx-xxxx-...</code></td></tr>
+    <tr><td><strong>DeepSeek</strong></td><td><code>deepseek</code></td><td><code>https://api.deepseek.com/v1</code></td><td>Bearer</td><td><code>sk-xxx</code></td></tr>
+    <tr><td>OpenRouter</td><td><code>openrouter</code></td><td><code>https://openrouter.ai/api/v1</code></td><td>Bearer</td><td><code>sk-or-v1-xxx</code></td></tr>
+    <tr><td>OpenAI</td><td><code>openai</code></td><td><code>https://api.openai.com/v1</code></td><td>Bearer</td><td><code>sk-xxx</code></td></tr>
+    <tr><td>Anthropic</td><td><code>anthropic</code></td><td><code>https://api.anthropic.com</code></td><td>Anthropic</td><td><code>sk-ant-xxx</code></td></tr>
+  </table>
+
+  <div class="callout callout-success">
+    <p class="callout-title">国产模型 Endpoint 说明</p>
+    <ul>
+      <li><strong>智谱 GLM</strong>：Endpoint 固定为 <code>https://open.bigmodel.cn/api/paas/v4</code>，模型名填 <code>glm-5.1-plus</code>、<code>glm-5.1-air</code> 等</li>
+      <li><strong>阿里云 Qwen</strong>：必须使用 <code>/compatible-mode/v1</code> 路径（兼容 OpenAI 格式），模型名填 <code>qwen-plus</code>、<code>qwen-turbo</code>、<code>qwen-max</code> 等</li>
+      <li><strong>火山云豆包</strong>：Endpoint 固定为 <code>https://ark.cn-beijing.volces.com/api/v3</code>，模型名填你在方舟控制台创建的 <strong>接入点 ID</strong>（如 <code>ep-20250524xxxxx</code>），不是模型本身的名字</li>
+      <li><strong>DeepSeek</strong>：Endpoint 固定为 <code>https://api.deepseek.com/v1</code>，模型名填 <code>deepseek-chat</code> 或 <code>deepseek-reasoner</code></li>
+    </ul>
+    <p>以上所有国产模型均兼容 OpenAI API 格式，所以 Auth Style 统一选 <strong>Bearer</strong>。</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>配置本地 Ollama</div>
+  <p>在同一页面找到 <strong>"本地提供商 (Ollama)"</strong> 区域：</p>
+  <ol>
+    <li>打开 "启用 Ollama" 开关</li>
+    <li>选择资源预设（低/中/高，根据内存选择）</li>
+    <li>选择已安装的模型（如 <code>llama3</code>）</li>
+  </ol>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">4</span>配置工作负载路由</div>
+  <p>在 <strong>"工作负载路由"</strong> 区域，为每种任务选择模型。格式：<code>提供商slug:模型名[@温度]</code></p>
+
+  <div class="callout callout-info">
+    <p class="callout-title">国产模型路由示例</p>
+    <p>使用国产模型时，工作负载路由填写方式（以智谱为例）：</p>
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 智谱 GLM 示例
+zhipu:glm-5.1-plus
+zhipu:glm-5.1-air
+zhipu:glm-5.1-flash
+
+# 阿里云 Qwen 示例
+qwen:qwen-plus
+qwen:qwen-turbo
+qwen:qwen-max
+
+# 火山云豆包示例（注意：这里填接入点 ID，不是模型名）
+doubao:ep-20250524xxxxx
+
+# DeepSeek 示例
+deepseek:deepseek-chat
+deepseek:deepseek-reasoner</code></pre>
+  </div>
+
+  <table>
+    <tr><th>工作负载</th><th>说明</th><th>海外推荐</th><th>国产推荐</th></tr>
+    <tr><td>chat</td><td>日常对话</td><td><code>openrouter:openai/gpt-4o</code></td><td><code>zhipu:glm-5.1-plus</code> 或 <code>qwen:qwen-plus</code></td></tr>
+    <tr><td>reasoning</td><td>深度推理</td><td><code>openrouter:anthropic/claude-sonnet</code></td><td><code>deepseek:deepseek-reasoner</code> 或 <code>qwen:qwen-max</code></td></tr>
+    <tr><td>agentic</td><td>智能体任务</td><td>同 chat</td><td>同 chat</td></tr>
+    <tr><td>coding</td><td>代码生成</td><td>同 chat</td><td><code>deepseek:deepseek-chat</code> 或 <code>zhipu:glm-5.1-plus</code></td></tr>
+    <tr><td>memory</td><td>记忆处理</td><td><code>openrouter:openai/gpt-4o-mini</code></td><td><code>zhipu:glm-5.1-flash</code> 或 <code>qwen:qwen-turbo</code></td></tr>
+    <tr><td>embeddings</td><td>向量嵌入</td><td><code>ollama:bge-m3</code>（免费）</td><td><code>ollama:bge-m3</code>（免费）或 <code>qwen:text-embedding-v3</code></td></tr>
+    <tr><td>heartbeat</td><td>心跳</td><td>最便宜的模型</td><td><code>zhipu:glm-5.1-flash</code>（最便宜）</td></tr>
+    <tr><td>learning</td><td>学习</td><td>同 memory</td><td>同 memory</td></tr>
+    <tr><td>subconscious</td><td>后台</td><td>同 memory</td><td>同 memory</td></tr>
+  </table>
+</div>
+
+<h3>6.2 方式二：环境变量配置</h3>
+<p>编辑根目录 <code>.env</code>：</p>
+
+<div class="callout callout-info">
+  <p class="callout-title">国产模型环境变量示例</p>
+  <p>如果你使用国产大模型，参考以下配置：</p>
+</div>
+
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># ═══════ 智谱 GLM 配置 ═══════
+OPENHUMAN_MODEL=zhipu:glm-5.1-plus
+
+# ═══════ 阿里云 Qwen 配置 ═══════
+# OPENHUMAN_MODEL=qwen:qwen-plus
+
+# ═══════ 火山云豆包配置（注意填接入点 ID） ═══════
+# OPENHUMAN_MODEL=doubao:ep-20250524xxxxx
+
+# ═══════ DeepSeek 配置 ═══════
+# OPENHUMAN_MODEL=deepseek:deepseek-chat
+
+# ═══════ 通用设置 ═══════
+
+# 本地 AI 资源级别
+OPENHUMAN_LOCAL_AI_TIER=ram_8_16gb
+
+# 工具调用超时
+OPENHUMAN_TOOL_TIMEOUT_SECS=120
+
+# 启用推理能力
+OPENHUMAN_REASONING_ENABLED=true</code></pre>
+
+<div class="callout callout-info">
+  <p class="callout-title">API Key 安全说明</p>
+  <p>API Key <strong>不会</strong>存储在 .env 文件中。它们通过应用内设置输入后，使用 <strong>AES-256-GCM 加密</strong>存储在 <code>auth-profiles.json</code> 中，密钥通过 Argon2id 从用户密码派生。</p>
+</div>
+
+<!-- ==================== 第七章 ==================== -->
+<h2 id="config-memory">第七章：记忆系统配置</h2>
+
+<p>OpenHuman 的记忆系统会自动记录对话内容和偏好，让 AI 越来越了解你。</p>
+
+<div class="callout callout-success">
+  <p class="callout-title">记忆系统自动运行</p>
+  <p>只要 AI 模型已配置好（特别是 "memory" 和 "embeddings" 工作负载路由），记忆系统就会自动在后台工作。无需额外安装数据库或服务。</p>
+</div>
+
+<h3>7.1 记忆系统组成</h3>
+<table>
+  <tr><th>子系统</th><th>功能</th><th>存储位置</th></tr>
+  <tr><td>记忆树</td><td>层次化记忆存储，按主题组织</td><td><code>~/.openhuman/memory.db</code></td></tr>
+  <tr><td>摄取管道</td><td>对话 &rarr; 提取关键信息 &rarr; 存入记忆</td><td>后台自动运行</td></tr>
+  <tr><td>向量搜索</td><td>语义检索</td><td><code>~/.openhuman/vectors/</code></td></tr>
+  <tr><td>知识图谱</td><td>实体关系追踪</td><td>SQLite 内</td></tr>
+</table>
+
+<h3>7.2 配置嵌入模型</h3>
+<p>嵌入模型将文字转化为向量，用于语义搜索。有 3 种选择：</p>
+
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(event,'emb-cloud')">云端（默认）</button>
+    <button class="tab-btn" onclick="switchTab(event,'emb-ollama')">本地 Ollama（免费）</button>
+    <button class="tab-btn" onclick="switchTab(event,'emb-openai')">OpenAI</button>
+  </div>
+  <div class="tab-content active" id="emb-cloud">
+    <p>选择"简单模式"的用户，记忆系统自动使用 OpenHuman 后端的 Voyage 嵌入服务。<strong>零配置。</strong></p>
+  </div>
+  <div class="tab-content" id="emb-ollama">
+    <p>完全免费，数据不离机器：</p>
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 1. 先下载嵌入模型（约 1.2 GB）
+ollama pull bge-m3
+
+# 2. 在 .env 中添加
+OPENHUMAN_MEMORY_EMBEDDING_PROVIDER=ollama</code></pre>
+    <p>或在应用内：工作负载路由 &rarr; embeddings 行 &rarr; 选择 <code>ollama:bge-m3</code></p>
+  </div>
+  <div class="tab-content" id="emb-openai">
+    <p>费用极低（约 $0.02/百万 token）。在应用内：工作负载路由 &rarr; embeddings 行 &rarr; 选择 <code>openai:text-embedding-3-small</code></p>
+  </div>
+</div>
+
+<h3>7.3 管理记忆数据</h3>
+<p>应用内路径：<strong>设置 &rarr; 开发者选项 &rarr; 记忆数据</strong></p>
+<ul>
+  <li><strong>记忆窗口控制</strong>：调整记忆窗口大小</li>
+  <li><strong>记忆工作区</strong>：浏览、查看、编辑、删除已有记忆</li>
+  <li><strong>记忆调试</strong>：查看摄取管道运行日志</li>
+</ul>
+
+<!-- ==================== 第八章 ==================== -->
+<h2 id="config-voice">第八章：语音功能配置</h2>
+<p>语音功能为可选项，包含语音听写（Whisper）和语音合成（Piper）。</p>
+
+<h3>8.1 语音听写 (Whisper)</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>安装 Whisper</div>
+  <p>在应用内：<strong>设置 &rarr; AI &rarr; 语音</strong>，点击安装 Whisper。应用会自动下载。</p>
+  <p>或手动指定路径（在 .env 中）：<code>WHISPER_BIN=/path/to/whisper</code></p>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>使用</div>
+  <p>应用会注册全局快捷键。按下快捷键即可开始语音输入。</p>
+</div>
+
+<h3>8.2 语音合成 (Piper)</h3>
+<div class="step">
+  <p>同样在 <strong>设置 &rarr; AI &rarr; 语音</strong> 页面安装。手动指定：<code>PIPER_BIN=/path/to/piper</code></p>
+</div>
+
+<!-- ==================== 第九章 ==================== -->
+<h2 id="config-channels">第九章：通信渠道配置</h2>
+
+<h3>桌面端渠道（内嵌 WebView 登录）</h3>
+<table>
+  <tr><th>渠道</th><th>连接方式</th><th>平台限制</th></tr>
+  <tr><td>WhatsApp</td><td>扫码登录</td><td>需编译时启用 whatsapp-web feature</td></tr>
+  <tr><td>Telegram</td><td>WebView 登录</td><td>无</td></tr>
+  <tr><td>Discord</td><td>WebView 登录</td><td>无</td></tr>
+  <tr><td>Slack</td><td>WebView 登录</td><td>无</td></tr>
+  <tr><td>iMessage</td><td>自动读取</td><td><strong>仅 macOS</strong>，需 Full Disk Access</td></tr>
+  <tr><td>Google Messages</td><td>WebView 登录</td><td>无</td></tr>
+</table>
+
+<h3>跨平台渠道（Bot API）</h3>
+<p>在 <strong>设置 &rarr; 功能 &rarr; 消息传递</strong> 中配置：</p>
+<table>
+  <tr><th>渠道</th><th>所需信息</th></tr>
+  <tr><td>Telegram Bot</td><td>在 @BotFather 创建 Bot，获取 Token</td></tr>
+  <tr><td>Discord Bot</td><td>在 Discord Developer Portal 创建 Bot</td></tr>
+  <tr><td>飞书/Lark</td><td>飞书开放平台创建应用</td></tr>
+  <tr><td>钉钉</td><td>钉钉开放平台创建机器人</td></tr>
+</table>
+
+<!-- ==================== 第十章 ==================== -->
+<h2 id="config-env">第十章：完整环境变量参考</h2>
+<table>
+  <tr><th>变量名</th><th>默认值</th><th>说明</th></tr>
+  <tr><td><code>OPENHUMAN_APP_ENV</code></td><td><code>development</code></td><td>运行环境</td></tr>
+  <tr><td><code>OPENHUMAN_WORKSPACE</code></td><td><code>~/.openhuman</code></td><td>数据存储目录</td></tr>
+  <tr><td><code>OPENHUMAN_MODEL</code></td><td>云默认</td><td>默认模型（格式：slug:model）</td></tr>
+  <tr><td><code>OPENHUMAN_TEMPERATURE</code></td><td><code>0.7</code></td><td>模型温度</td></tr>
+  <tr><td><code>OPENHUMAN_LOCAL_AI_TIER</code></td><td>自动检测</td><td>本地 AI 资源级别</td></tr>
+  <tr><td><code>OPENHUMAN_CORE_HOST</code></td><td><code>127.0.0.1</code></td><td>核心服务地址</td></tr>
+  <tr><td><code>OPENHUMAN_CORE_PORT</code></td><td><code>7788</code></td><td>核心服务端口</td></tr>
+  <tr><td><code>OPENHUMAN_CORE_TOKEN</code></td><td>自动生成</td><td>认证令牌（Docker 必须）</td></tr>
+  <tr><td><code>OPENHUMAN_CORE_RUN_MODE</code></td><td><code>desktop</code></td><td>运行模式</td></tr>
+  <tr><td><code>OPENHUMAN_PROXY_ENABLED</code></td><td><code>false</code></td><td>启用代理</td></tr>
+  <tr><td><code>OPENHUMAN_HTTP_PROXY</code></td><td>无</td><td>HTTP 代理地址</td></tr>
+  <tr><td><code>OPENHUMAN_HTTPS_PROXY</code></td><td>无</td><td>HTTPS 代理地址</td></tr>
+  <tr><td><code>OPENHUMAN_REASONING_ENABLED</code></td><td><code>false</code></td><td>启用推理能力</td></tr>
+  <tr><td><code>OPENHUMAN_TOOL_TIMEOUT_SECS</code></td><td><code>120</code></td><td>工具超时</td></tr>
+  <tr><td><code>OPENHUMAN_LOG_PROMPTS</code></td><td><code>false</code></td><td>记录提示词日志</td></tr>
+  <tr><td><code>OLLAMA_BIN</code></td><td>自动检测</td><td>Ollama 路径</td></tr>
+  <tr><td><code>WHISPER_BIN</code></td><td>自动检测</td><td>Whisper 路径</td></tr>
+  <tr><td><code>PIPER_BIN</code></td><td>自动检测</td><td>Piper 路径</td></tr>
+  <tr><td><code>BACKEND_URL</code></td><td>生产</td><td>后端 API 地址</td></tr>
+  <tr><td><code>OPENHUMAN_CORE_REUSE_EXISTING</code></td><td>无</td><td>设为 1 附加到已有进程</td></tr>
+</table>
+
+<!-- ==================== 第十一章 ==================== -->
+<h2 id="build">第十一章：编译与运行</h2>
+
+<h3>11.1 开发模式</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>启动开发服务器</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 仅前端（不包含桌面壳）
+pnpm dev
+
+# 完整桌面应用（推荐！）
+# macOS / Linux
+pnpm dev:app
+
+# Windows
+pnpm dev:app:win</code></pre>
+</div>
+<div class="callout callout-warning">
+  <p class="callout-title">首次编译需要等待</p>
+  <p>首次运行会下载 CEF（~400MB）并编译 Rust（10-20 分钟）。后续启动只需 1-3 分钟。</p>
+</div>
+
+<h3>11.2 生产构建</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>pnpm build            # UI 构建
+pnpm tauri build      # 桌面安装包
+
+# 输出位置：app/src-tauri/target/release/bundle/
+# macOS: .app + .dmg
+# Windows: .exe (NSIS) + .msi
+# Linux: .deb + .AppImage</code></pre>
+
+<h3>11.3 仅运行核心（无 GUI）</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>cargo build --bin openhuman-core
+./target/debug/openhuman-core serve
+
+# Token 在 ~/.openhuman/core.token
+curl -X POST http://127.0.0.1:7788/rpc \
+  -H "Authorization: Bearer $(cat ~/.openhuman/core.token)" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"openhuman.health_check","id":1}'</code></pre>
+
+<!-- ==================== 第十二章 ==================== -->
+<h2 id="docker">第十二章：Docker 部署</h2>
+<p>如果你只需要核心服务（无桌面 GUI），Docker 是最简单的方式。</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>克隆并配置</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>git clone --recurse-submodules https://github.com/tinyhumansai/openhuman.git
+cd openhuman
+cp .env.example .env</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>编辑 .env（必须设置 Token）</div>
+  <pre><code>OPENHUMAN_CORE_TOKEN=替换为你的随机字符串
+OPENHUMAN_CORE_RUN_MODE=server</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>启动</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>docker compose up -d</code></pre>
+</div>
+<div class="step">
+  <div class="step-title"><span class="step-number">4</span>验证</div>
+  <pre><code>curl http://localhost:7788/health</code></pre>
+</div>
+
+<!-- ==================== 第十三章 ==================== -->
+<h2 id="faq">第十三章：常见问题 FAQ</h2>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q1：CEF 下载失败怎么办？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>CEF 约 400MB，网络问题可能导致失败：</p>
+    <ol>
+      <li>确保代理已配置（第三章）</li>
+      <li>设置环境变量：<code>export https_proxy=http://127.0.0.1:7890</code></li>
+      <li>重试：<code>pnpm dev:app</code>（CEF 有缓存，不会重复下载）</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q2：Node.js 版本不对？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <pre><code>fnm install 24
+fnm use 24
+fnm default 24</code></pre>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q3：Windows 报 MSVC 错误？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>安装 <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/" target="_blank">Visual Studio Build Tools</a>，勾选 "Desktop development with C++"，重启终端。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q4：如何完全免费使用？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ol>
+      <li>安装 Ollama：<a href="https://ollama.com/" target="_blank">ollama.com</a></li>
+      <li>下载模型：<code>ollama pull llama3</code></li>
+      <li>在 OpenHuman 中选择"自定义模式" &rarr; 启用 Ollama &rarr; 选择 <code>ollama:llama3</code></li>
+      <li>工作负载路由全部选 <code>ollama</code> 模型即可</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q5：应用白屏？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ol>
+      <li>检查终端是否有错误输出</li>
+      <li>检查 .env 配置</li>
+      <li>清除缓存：<code>rm -rf node_modules/.vite</code> 后重试</li>
+      <li>检查端口占用</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q6：如何只下载安装包？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>访问 <a href="https://github.com/tinyhumansai/openhuman/releases" target="_blank">GitHub Releases</a> 下载对应平台安装包，安装后参考第五、六章配置 AI 即可。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q7：Ollama 下载模型慢？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <pre><code>export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+ollama pull llama3</code></pre>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q8：如何查看日志？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <pre><code>pnpm debug logs         # 列出最近日志
+pnpm debug logs last    # 查看最近日志</code></pre>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q9：国产模型报 401/403 错误？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ol>
+      <li>确认 API Key 正确且未过期</li>
+      <li>确认账户余额充足（部分平台余额为 0 也会报 403）</li>
+      <li>确认 Endpoint URL 正确（阿里云必须用 <code>/compatible-mode/v1</code> 路径）</li>
+      <li>确认 Auth Style 选了 <strong>Bearer</strong>（国产模型统一用 Bearer）</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q10：火山云豆包模型填什么名字？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>火山云豆包比较特殊，模型名不填模型本身的名字，而是填你在方舟控制台创建的 <strong>"接入点 ID"（Endpoint ID）</strong>。</p>
+    <ol>
+      <li>进入 <a href="https://console.volcengine.com/ark" target="_blank">火山方舟控制台</a></li>
+      <li>创建推理接入点 &rarr; 选择模型（如 Doubao-1.5-pro）</li>
+      <li>在接入点列表中复制 ID（格式：<code>ep-20250524xxxxx</code>）</li>
+      <li>在 OpenHuman 中填入：<code>doubao:ep-20250524xxxxx</code></li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q11：可以用国产模型 + 海外模型混合吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>可以！</strong>OpenHuman 支持按工作负载分别配置不同提供商。例如：</p>
+    <ul>
+      <li>chat &rarr; <code>zhipu:glm-5.1-plus</code>（日常对话用国产模型，便宜）</li>
+      <li>reasoning &rarr; <code>deepseek:deepseek-reasoner</code>（深度推理用 DeepSeek R1）</li>
+      <li>embeddings &rarr; <code>ollama:bge-m3</code>（嵌入用本地模型，免费）</li>
+    </ul>
+    <p>你可以把便宜的国产模型用在大部分场景，只在需要高端推理时切换到更强的模型。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q12：OpenHuman 是完全免费的吗？为什么要登录？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ul>
+      <li><strong>软件本身</strong>：完全免费开源（GPL v3）</li>
+      <li><strong>使用 OpenHuman 托管 AI</strong>：需要注册登录，按 credits 收费（有免费额度）</li>
+      <li><strong>使用自己的 API Key</strong>（国产模型/海外模型）：不产生 OpenHuman 平台费用，费用付给对应的模型服务商</li>
+      <li><strong>使用本地 Ollama</strong>：完全免费，无需登录</li>
+    </ul>
+    <p>所以"需要登录和收费"指的是 OpenHuman 托管的 AI 服务。如果你自己配了智谱 GLM 或本地 Ollama，就绕过了这套计费。</p>
+  </div>
+</div>
+
+<!-- ==================== 第十四章 ==================== -->
+<h2 id="troubleshoot">第十四章：故障排查速查表</h2>
+<table>
+  <tr><th>问题</th><th>原因</th><th>解决方案</th></tr>
+  <tr><td>git clone 超时</td><td>网络</td><td>配 Git 代理（3.1）</td></tr>
+  <tr><td>pnpm install 失败</td><td>npm 源慢</td><td>设镜像源（3.3）</td></tr>
+  <tr><td>cargo build 下载失败</td><td>crates.io 慢</td><td>配 Cargo 镜像（3.2）</td></tr>
+  <tr><td>CEF 下载失败</td><td>网络/磁盘</td><td>查代理和磁盘（需 400MB+）</td></tr>
+  <tr><td>MSVC 错误</td><td>缺 C++ 工具链</td><td>安装 VS Build Tools（2.5）</td></tr>
+  <tr><td>GTK 错误</td><td>Linux 缺库</td><td>安装依赖（2.6）</td></tr>
+  <tr><td>node 版本低</td><td>&lt; 24</td><td>升级 Node.js（2.3）</td></tr>
+  <tr><td>pnpm 版本错</td><td>版本不对</td><td><code>npm i -g pnpm@10.10.0</code></td></tr>
+  <tr><td>白屏</td><td>核心未启动</td><td>查 .env 和端口</td></tr>
+  <tr><td>AI 不响应</td><td>API Key/余额</td><td>查 AI 设置（第六章）</td></tr>
+  <tr><td>国产模型 401/403</td><td>Key 错误或余额不足</td><td>确认 Key 有效 + 账户有余额 + Endpoint 正确（FAQ Q9）</td></tr>
+  <tr><td>豆包模型名无效</td><td>填了模型名而非接入点 ID</td><td>改填 ep-xxxxx 格式（FAQ Q10）</td></tr>
+  <tr><td>Qwen 连接失败</td><td>Endpoint 路径错误</td><td>必须用 <code>/compatible-mode/v1</code>（第六章配置表）</td></tr>
+  <tr><td>语音不工作</td><td>Whisper 未装</td><td>安装 Whisper（8.1）</td></tr>
+  <tr><td>tauri-cli panic</td><td>标准 CLI</td><td>运行 <code>scripts/ensure-tauri-cli.sh</code></td></tr>
+</table>
+
+<br><br>
+<div style="text-align:center; padding:40px; color:var(--gray-600); border-top:2px solid var(--gray-200); margin-top:48px;">
+  <p style="font-size:18px; font-weight:600; color:var(--gray-800);">恭喜！你已经完成了 OpenHuman 的完整安装。</p>
+  <p>如有问题，请访问 <a href="https://github.com/tinyhumansai/openhuman/issues" target="_blank">GitHub Issues</a> 提交反馈。</p>
+  <p style="font-size:13px; margin-top:20px;">OpenHuman v0.54 | 安装教程 | 2026-05</p>
+</div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('back-top').classList.toggle('show', h.scrollTop > 400);
+  document.querySelectorAll('#main h2[id]').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top &lt; 120 &amp;&amp; rect.bottom > 0) {
+      document.querySelectorAll('#sidebar nav a').forEach(a =&gt; a.classList.remove('active'));
+      const link = document.querySelector('#sidebar nav a[href="#' + el.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+});
+document.getElementById('back-top').innerHTML = '↑';
+document.getElementById('back-top').onclick = () =&gt; window.scrollTo({top:0, behavior:'smooth'});
+function switchTab(e, id) {
+  const parent = e.target.closest('.tabs');
+  parent.querySelectorAll('.tab-btn').forEach(b =&gt; b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(c =&gt; c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function toggleFaq(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+function copyCode(btn) {
+  const code = btn.parentElement.querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(() =&gt; {
+    btn.textContent = '已复制!';
+    setTimeout(() =&gt; btn.textContent = '复制', 2000);
+  });
+}
+</script>
+
+</body>
+</html>

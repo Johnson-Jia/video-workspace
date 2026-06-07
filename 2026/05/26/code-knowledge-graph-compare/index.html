@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Knowledge Graph Compare</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --bg-dark: #080810;
+  --bg-mid: #0a1628;
+  --accent-gold: #FFB800;
+  --accent-cyan: #00E5CC;
+  --accent-tech: #00D4FF;
+  --accent-red: #cc3333;
+  --text-primary: #ffffff;
+  --text-secondary: #8899aa;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: var(--font-sans); color: var(--text-primary); }
+
+.composition { width: 1080px; height: 1920px; position: relative; overflow: hidden; }
+
+/* Scene structure */
+.clip { position: absolute; width: 1080px; height: 1920px; overflow: hidden; }
+.scene-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.layer-bg { position: absolute; inset: 0; z-index: 1; }
+.layer-fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.layer-content { position: relative; z-index: 3; height: 100%; }
+
+/* Phase */
+.phase { position: absolute; inset: 0; padding: 180px 80px 220px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.scene-pad { padding: 180px 80px 220px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+
+/* Grid overlay */
+.grid-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(hsla(200,50%,40%,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(200,50%,40%,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Common text styles */
+.hero-title { font-size: 96px; font-weight: 900; line-height: 1.15; text-align: center; text-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+.section-title { font-size: 56px; font-weight: 700; text-align: center; margin-bottom: 36px; letter-spacing: 2px; }
+.body-text { font-size: 38px; line-height: 1.6; color: var(--text-secondary); text-align: center; }
+.data-value { font-family: var(--font-mono); font-size: 52px; font-weight: 700; }
+.data-label { font-size: 30px; color: var(--text-secondary); }
+.tag { display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 24px; font-weight: 600; margin: 6px; }
+.tag-gold { background: rgba(255,184,0,0.15); color: var(--accent-gold); border: 1px solid rgba(255,184,0,0.3); }
+.tag-cyan { background: rgba(0,229,204,0.12); color: var(--accent-cyan); border: 1px solid rgba(0,229,204,0.25); }
+.tag-red { background: rgba(204,51,51,0.12); color: #ff6655; border: 1px solid rgba(204,51,51,0.25); }
+
+/* Glow orbs for backgrounds */
+.glow-orb { position: absolute; border-radius: 50%; filter: blur(140px); }
+
+/* Animations */
+@keyframes driftOuter {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(180px, -120px); }
+  66% { transform: translate(-150px, 100px); }
+}
+@keyframes driftInner {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -80px) scale(1.1); }
+}
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.9; transform: scale(1.3); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, -80px) scale(1.1); }
+  66% { transform: translate(-120px, 60px) scale(0.9); }
+}
+@keyframes waveSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes rainSway {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(40px); opacity: 0.3; }
+}
+
+/* Project card list */
+.project-list { width: 85%; }
+.project-item { display: flex; align-items: center; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.project-name { font-family: var(--font-mono); font-size: 30px; font-weight: 600; flex: 1; }
+.project-desc { font-size: 24px; color: var(--text-secondary); }
+
+/* Compare layout */
+.compare-row { display: flex; width: 85%; gap: 24px; margin-top: 20px; }
+.compare-col { flex: 1; padding: 24px; border-radius: 16px; }
+.compare-col-left { background: rgba(0,229,204,0.06); border: 1px solid rgba(0,229,204,0.15); }
+.compare-col-right { background: rgba(255,184,0,0.06); border: 1px solid rgba(255,184,0,0.15); }
+.compare-item { font-size: 28px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.compare-item:last-child { border-bottom: none; }
+.compare-label { font-size: 24px; color: var(--text-secondary); margin-bottom: 8px; }
+
+/* Data rows */
+.data-rows { width: 85%; }
+.data-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.data-row:last-child { border-bottom: none; }
+
+/* Feature list */
+.feature-list { width: 85%; }
+.feature-item { display: flex; align-items: center; padding: 16px 0; gap: 16px; }
+.feature-num { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--accent-cyan); min-width: 40px; }
+.feature-text { font-size: 32px; }
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+  <!-- Audio -->
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.12" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ============ Scene 0: HOOK (0 - 3.17s) ============ -->
+  <div class="clip s-hook" data-start="0" data-duration="3.17">
+    <div class="scene-wrap scene-pad">
+      <!-- BG: deep dark with gold/cyan dual glow -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(160deg,#080810 0%,#0d1020 50%,#0a0a18 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:20%;left:10%;width:500px;height:500px;background:hsla(40,100%,50%,0.15);opacity:0.25;filter:blur(140px)"></div>
+        <div class="glow-orb" style="position:absolute;top:40%;right:5%;width:400px;height:400px;background:hsla(175,90%,50%,0.12);opacity:0.2;filter:blur(130px)"></div>
+      </div>
+      <!-- FX: StarBurst -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(40,90%,60%,0.5),transparent);transform-origin:top center;transform:rotate(0deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(40,90%,60%,0.4),transparent);transform-origin:top center;transform:rotate(60deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 0.5s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(175,80%,55%,0.4),transparent);transform-origin:top center;transform:rotate(120deg) scaleY(1);opacity:0.5;animation:rayPulse 4s ease-in-out infinite 1s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(40,85%,55%,0.45),transparent);transform-origin:top center;transform:rotate(180deg) scaleY(1);opacity:0.45;animation:rayPulse 4s ease-in-out infinite 1.5s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:500px;background:linear-gradient(transparent,hsla(175,75%,50%,0.35),transparent);transform-origin:top center;transform:rotate(240deg) scaleY(1);opacity:0.4;animation:rayPulse 4s ease-in-out infinite 2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:500px;background:linear-gradient(transparent,hsla(40,80%,50%,0.35),transparent);transform-origin:top center;transform:rotate(300deg) scaleY(1);opacity:0.4;animation:rayPulse 4s ease-in-out infinite 2.5s"></div>
+        <div style="position:absolute;top:30%;left:55%;width:12px;height:12px;border-radius:50%;background:hsl(40,95%,75%);opacity:0.9;box-shadow:0 0 10px hsla(40,95%,70%,0.6);animation:starTwinkle 2.5s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:65%;left:35%;width:10px;height:10px;border-radius:50%;background:hsl(175,85%,70%);opacity:0.8;box-shadow:0 0 8px hsla(175,85%,65%,0.5);animation:starTwinkle 3s ease-in-out infinite 0.8s"></div>
+        <div style="position:absolute;top:45%;left:75%;width:8px;height:8px;border-radius:50%;background:hsl(40,90%,70%);opacity:0.7;box-shadow:0 0 6px hsla(40,90%,65%,0.4);animation:starTwinkle 2s ease-in-out infinite 1.5s"></div>
+        <div style="position:absolute;top:55%;left:25%;width:10px;height:10px;border-radius:50%;background:hsl(175,80%,65%);opacity:0.8;box-shadow:0 0 8px hsla(175,80%,60%,0.5);animation:starTwinkle 2.8s ease-in-out infinite 2s"></div>
+      </div>
+      <!-- Content -->
+      <div class="layer-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
+        <div class="hook-title" style="font-size:110px;font-weight:900;text-align:center;line-height:1.15;text-shadow:0 4px 40px rgba(0,0,0,0.5),0 0 80px rgba(255,184,0,0.15)">
+          6个AI代码大脑<br>谁是最佳？
+        </div>
+        <div class="hook-badge" style="margin-top:36px">
+          <span class="tag tag-gold">代码知识图谱</span>
+          <span class="tag tag-cyan">深度对比</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 1: OVERVIEW (3.17 - 15.24s, 12.07s) ============ -->
+  <div class="clip s-overview" data-start="3.17" data-duration="12.07">
+    <div class="scene-wrap">
+      <!-- BG -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(170deg,#080815 0%,#0d1a2d 50%,#0a0e1a 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:25%;left:15%;width:350px;height:350px;background:hsla(195,80%,45%,0.12);opacity:0.2;filter:blur(120px)"></div>
+        <div class="glow-orb" style="position:absolute;bottom:20%;right:10%;width:300px;height:300px;background:hsla(40,90%,50%,0.08);opacity:0.15;filter:blur(100px)"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <!-- FX: MatrixRain -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:10%;left:18%;width:2px;height:280px;background:linear-gradient(transparent,hsla(195,80%,55%,0.4),transparent);opacity:0.45;box-shadow:0 0 6px hsla(195,80%,55%,0.2);animation:rainSway 14s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:35%;left:52%;width:2px;height:320px;background:linear-gradient(transparent,hsla(200,75%,50%,0.35),transparent);opacity:0.4;box-shadow:0 0 5px hsla(200,75%,50%,0.2);animation:rainSway 18s ease-in-out infinite 2s"></div>
+        <div style="position:absolute;top:15%;left:78%;width:2px;height:250px;background:linear-gradient(transparent,hsla(190,70%,45%,0.3),transparent);opacity:0.35;box-shadow:0 0 5px hsla(190,70%,45%,0.15);animation:rainSway 16s ease-in-out infinite 4s"></div>
+        <div style="position:absolute;top:55%;left:32%;width:2px;height:200px;background:linear-gradient(transparent,hsla(195,75%,50%,0.35),transparent);opacity:0.38;box-shadow:0 0 5px hsla(195,75%,50%,0.18);animation:rainSway 15s ease-in-out infinite 1s"></div>
+        <div style="position:absolute;top:40%;left:65%;width:2px;height:260px;background:linear-gradient(transparent,hsla(200,80%,50%,0.3),transparent);opacity:0.35;box-shadow:0 0 4px hsla(200,80%,50%,0.15);animation:rainSway 17s ease-in-out infinite 3s"></div>
+        <div style="position:absolute;top:20%;left:90%;width:2px;height:300px;background:linear-gradient(transparent,hsla(185,70%,45%,0.3),transparent);opacity:0.3;box-shadow:0 0 4px hsla(185,70%,45%,0.12);animation:rainSway 19s ease-in-out infinite 5s"></div>
+        <div style="position:absolute;top:60%;left:10%;width:2px;height:220px;background:linear-gradient(transparent,hsla(195,75%,50%,0.32),transparent);opacity:0.32;box-shadow:0 0 4px hsla(195,75%,50%,0.15);animation:rainSway 16s ease-in-out infinite 6s"></div>
+        <div style="position:absolute;top:45%;left:45%;width:2px;height:240px;background:linear-gradient(transparent,hsla(200,70%,48%,0.28),transparent);opacity:0.3;box-shadow:0 0 4px hsla(200,70%,48%,0.12);animation:rainSway 18s ease-in-out infinite 7s"></div>
+      </div>
+      <!-- Content: 2 phases -->
+      <div class="layer-content" style="height:100%">
+        <!-- Phase 1: 6 projects overview -->
+        <div class="phase phase-1">
+          <div class="section-title" style="color:var(--accent-cyan)">6个代码知识图谱项目</div>
+          <div class="project-list">
+            <div class="project-item"><span class="project-name">claude-context</span><span class="project-desc">语义搜索 · Zilliz</span></div>
+            <div class="project-item"><span class="project-name">cocoindex-code</span><span class="project-desc">AST感知 · 守护进程</span></div>
+            <div class="project-item"><span class="project-name">codebase-memory-mcp</span><span class="project-desc">纯C · 155语言</span></div>
+            <div class="project-item"><span class="project-name">CodeGraph</span><span class="project-desc">动态分派 · 零依赖</span></div>
+            <div class="project-item"><span class="project-name">GitNexus</span><span class="project-desc">16工具 · 可视化</span></div>
+            <div class="project-item"><span class="project-name">Understand-Anything</span><span class="project-desc">14平台 · 混合分析</span></div>
+          </div>
+        </div>
+        <!-- Phase 2: Key contrast data -->
+        <div class="phase phase-2">
+          <div class="section-title" style="color:var(--accent-gold)">差距不止十倍</div>
+          <div class="data-rows">
+            <div class="data-row">
+              <span class="data-label">语言支持</span>
+              <span class="data-value" style="color:var(--accent-cyan)">9 ~ 155 <span style="font-size:28px;color:var(--text-secondary)">种</span></span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">查询速度</span>
+              <span class="data-value" style="color:var(--accent-gold)">秒级 → 亚毫秒</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">核心能力</span>
+              <span class="data-value" style="font-size:36px;color:var(--text-primary)">语义搜索 / 知识图谱 / 代码智能</span>
+            </div>
+          </div>
+          <div style="margin-top:28px;text-align:center">
+            <span class="tag tag-cyan">语义搜索</span>
+            <span class="tag tag-cyan">知识图谱</span>
+            <span class="tag tag-cyan">代码智能</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 2: ROUND1 (15.24 - 26.57s, 11.33s) ============ -->
+  <div class="clip s-round1" data-start="15.24" data-duration="11.33">
+    <div class="scene-wrap">
+      <!-- BG: cool tech -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(150deg,#0a0e1a 0%,#0d1828 40%,#081420 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:30%;right:10%;width:400px;height:400px;background:hsla(190,80%,45%,0.14);opacity:0.22;filter:blur(130px)"></div>
+        <div class="glow-orb" style="position:absolute;bottom:30%;left:5%;width:300px;height:300px;background:hsla(200,70%,40%,0.1);opacity:0.18;filter:blur(110px)"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <!-- FX: LightOrbs -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:18%;left:28%;width:220px;height:220px;border-radius:50%;background:hsl(190,80%,50%);opacity:0.15;filter:blur(50px);animation:orbDrift 25s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:60%;left:68%;width:180px;height:180px;border-radius:50%;background:hsl(200,75%,45%);opacity:0.12;filter:blur(45px);animation:orbDrift 30s ease-in-out infinite 4s"></div>
+        <div style="position:absolute;top:78%;left:18%;width:200px;height:200px;border-radius:50%;background:hsl(180,70%,40%);opacity:0.1;filter:blur(55px);animation:orbDrift 22s ease-in-out infinite 8s"></div>
+      </div>
+      <!-- Content: 2 phases -->
+      <div class="layer-content" style="height:100%">
+        <!-- Phase 1: Extreme performer intro -->
+        <div class="phase phase-1">
+          <div class="section-title" style="color:var(--accent-cyan);font-size:40px">极端选手</div>
+          <div style="font-family:var(--font-mono);font-size:52px;font-weight:700;text-align:center;margin:20px 0;color:var(--text-primary)">codebase-memory-mcp</div>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:12px">
+            <span class="tag tag-cyan">纯C引擎</span>
+            <span class="tag tag-cyan">155种语言</span>
+          </div>
+        </div>
+        <!-- Phase 2: Performance data -->
+        <div class="phase phase-2">
+          <div class="section-title" style="color:var(--accent-tech)">性能极致</div>
+          <div class="data-rows">
+            <div class="data-row">
+              <span class="data-label">查询延迟</span>
+              <span class="data-value" style="color:var(--accent-cyan)">亚毫秒</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Linux内核 28M行</span>
+              <span class="data-value" style="color:var(--accent-gold)">3分钟搞定</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">实现语言</span>
+              <span class="data-value" style="font-size:40px;color:var(--text-primary)">纯C，零依赖</span>
+            </div>
+          </div>
+          <div style="margin-top:24px;font-size:30px;color:var(--text-secondary);text-align:center">但纯性能不是唯一标准</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 3: ROUND2 (26.57 - 35.33s, 8.76s) ============ -->
+  <div class="clip s-round2" data-start="26.57" data-duration="8.76">
+    <div class="scene-wrap scene-pad">
+      <!-- BG: warm vs cool tension -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a0a1a 0%,#14101e 50%,#0a0a18 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:25%;left:60%;width:380px;height:380px;background:hsla(40,90%,50%,0.12);opacity:0.2;filter:blur(120px)"></div>
+        <div class="glow-orb" style="position:absolute;top:50%;left:15%;width:300px;height:300px;background:hsla(280,60%,40%,0.1);opacity:0.15;filter:blur(100px)"></div>
+      </div>
+      <!-- FX: DualOrbit particles -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:22%;left:60%;animation:driftOuter 24s ease-in-out infinite 2s"><div style="width:14px;height:14px;border-radius:50%;background:hsl(270,65%,55%);opacity:0.45;filter:blur(2px);animation:driftInner 9s ease-in-out infinite 1s"></div></div>
+        <div style="position:absolute;top:45%;left:25%;animation:driftOuter 28s ease-in-out infinite 0s"><div style="width:18px;height:18px;border-radius:50%;background:hsl(40,80%,55%);opacity:0.5;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 2s"></div></div>
+        <div style="position:absolute;top:65%;left:70%;animation:driftOuter 22s ease-in-out infinite 4s"><div style="width:12px;height:12px;border-radius:50%;background:hsl(270,60%,50%);opacity:0.4;filter:blur(1px);animation:driftInner 8s ease-in-out infinite 3s"></div></div>
+        <div style="position:absolute;top:35%;left:45%;animation:driftOuter 26s ease-in-out infinite 1s"><div style="width:16px;height:16px;border-radius:50%;background:hsl(40,75%,50%);opacity:0.45;filter:blur(2px);animation:driftInner 11s ease-in-out infinite 0s"></div></div>
+        <div style="position:absolute;top:75%;left:35%;animation:driftOuter 30s ease-in-out infinite 3s"><div style="width:20px;height:20px;border-radius:50%;background:hsl(280,70%,55%);opacity:0.4;filter:blur(3px);animation:driftInner 9s ease-in-out infinite 4s"></div></div>
+        <div style="position:absolute;top:50%;left:80%;animation:driftOuter 25s ease-in-out infinite 5s"><div style="width:15px;height:15px;border-radius:50%;background:hsl(40,85%,55%);opacity:0.45;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 1s"></div></div>
+        <div style="position:absolute;top:80%;left:55%;animation:driftOuter 27s ease-in-out infinite 6s"><div style="width:13px;height:13px;border-radius:50%;background:hsl(265,65%,50%);opacity:0.42;filter:blur(2px);animation:driftInner 8s ease-in-out infinite 2s"></div></div>
+        <div style="position:absolute;top:30%;left:15%;animation:driftOuter 23s ease-in-out infinite 2s"><div style="width:17px;height:17px;border-radius:50%;background:hsl(45,80%,55%);opacity:0.48;filter:blur(2px);animation:driftInner 11s ease-in-out infinite 3s"></div></div>
+      </div>
+      <!-- Content -->
+      <div class="layer-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
+        <div class="section-title" style="color:var(--accent-gold)">GitNexus</div>
+        <div class="compare-row">
+          <div class="compare-col compare-col-left">
+            <div class="compare-label" style="color:var(--accent-cyan)">亮点</div>
+            <div class="compare-item">16个MCP工具</div>
+            <div class="compare-item">Web可视化</div>
+            <div class="compare-item">跨仓库分析</div>
+          </div>
+          <div class="compare-col compare-col-right">
+            <div class="compare-label" style="color:var(--accent-red)">致命短板</div>
+            <div class="compare-item" style="color:#ff6655;font-weight:600">许可证禁止商用</div>
+            <div class="compare-item" style="color:var(--accent-gold)">直接出局</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 4: WINNER (35.33 - 49.90s, 14.57s) ============ -->
+  <div class="clip s-winner" data-start="35.33" data-duration="14.57">
+    <div class="scene-wrap">
+      <!-- BG: dark premium gold -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(160deg,#0a0808 0%,#1a1408 30%,#0a0a10 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:20%;left:30%;width:500px;height:500px;background:hsla(40,100%,50%,0.18);opacity:0.25;filter:blur(150px)"></div>
+        <div class="glow-orb" style="position:absolute;bottom:25%;right:20%;width:350px;height:350px;background:hsla(175,80%,50%,0.1);opacity:0.18;filter:blur(120px)"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <!-- FX: StarBurst (climax) -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:800px;background:linear-gradient(transparent,hsla(40,95%,60%,0.6),transparent);transform-origin:top center;transform:rotate(0deg) scaleY(1);opacity:0.55;animation:rayPulse 3.5s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:750px;background:linear-gradient(transparent,hsla(40,90%,55%,0.5),transparent);transform-origin:top center;transform:rotate(45deg) scaleY(1);opacity:0.5;animation:rayPulse 3.5s ease-in-out infinite 0.4s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:700px;background:linear-gradient(transparent,hsla(175,80%,50%,0.4),transparent);transform-origin:top center;transform:rotate(90deg) scaleY(1);opacity:0.45;animation:rayPulse 3.5s ease-in-out infinite 0.8s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:750px;background:linear-gradient(transparent,hsla(40,85%,55%,0.5),transparent);transform-origin:top center;transform:rotate(135deg) scaleY(1);opacity:0.5;animation:rayPulse 3.5s ease-in-out infinite 1.2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:650px;background:linear-gradient(transparent,hsla(40,80%,50%,0.45),transparent);transform-origin:top center;transform:rotate(180deg) scaleY(1);opacity:0.45;animation:rayPulse 3.5s ease-in-out infinite 1.6s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:600px;background:linear-gradient(transparent,hsla(175,75%,45%,0.35),transparent);transform-origin:top center;transform:rotate(225deg) scaleY(1);opacity:0.4;animation:rayPulse 3.5s ease-in-out infinite 2s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:4px;height:700px;background:linear-gradient(transparent,hsla(40,90%,55%,0.5),transparent);transform-origin:top center;transform:rotate(270deg) scaleY(1);opacity:0.5;animation:rayPulse 3.5s ease-in-out infinite 2.4s"></div>
+        <div style="position:absolute;top:50%;left:50%;width:3px;height:650px;background:linear-gradient(transparent,hsla(175,70%,45%,0.35),transparent);transform-origin:top center;transform:rotate(315deg) scaleY(1);opacity:0.4;animation:rayPulse 3.5s ease-in-out infinite 2.8s"></div>
+        <div style="position:absolute;top:25%;left:60%;width:14px;height:14px;border-radius:50%;background:hsl(40,95%,75%);opacity:0.9;box-shadow:0 0 12px hsla(40,95%,70%,0.7);animation:starTwinkle 2s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;background:hsl(40,90%,70%);opacity:0.85;box-shadow:0 0 10px hsla(40,90%,65%,0.6);animation:starTwinkle 2.5s ease-in-out infinite 0.6s"></div>
+        <div style="position:absolute;top:40%;left:80%;width:10px;height:10px;border-radius:50%;background:hsl(175,80%,65%);opacity:0.8;box-shadow:0 0 8px hsla(175,80%,60%,0.5);animation:starTwinkle 3s ease-in-out infinite 1.2s"></div>
+        <div style="position:absolute;top:60%;left:20%;width:11px;height:11px;border-radius:50%;background:hsl(40,85%,70%);opacity:0.85;box-shadow:0 0 9px hsla(40,85%,65%,0.5);animation:starTwinkle 2.2s ease-in-out infinite 1.8s"></div>
+        <div style="position:absolute;top:35%;left:40%;width:9px;height:9px;border-radius:50%;background:hsl(175,75%,60%);opacity:0.75;box-shadow:0 0 7px hsla(175,75%,55%,0.4);animation:starTwinkle 2.8s ease-in-out infinite 2.4s"></div>
+      </div>
+      <!-- Content: 2 phases -->
+      <div class="layer-content" style="height:100%">
+        <!-- Phase 1: Hero presentation -->
+        <div class="phase phase-1">
+          <div style="font-size:36px;color:var(--accent-gold);font-weight:600;letter-spacing:4px;margin-bottom:16px">最终推荐</div>
+          <div style="font-family:var(--font-mono);font-size:80px;font-weight:900;text-align:center;color:var(--text-primary);text-shadow:0 0 60px rgba(255,184,0,0.2)">CodeGraph</div>
+          <div style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <span class="tag tag-gold">动态分派合成</span>
+            <span class="tag tag-gold">零外部依赖</span>
+            <span class="tag tag-cyan">MIT许可</span>
+          </div>
+          <div style="margin-top:28px;font-size:36px;color:var(--text-secondary);text-align:center">静态分析追踪动态语言调用</div>
+          <div style="margin-top:20px;font-family:var(--font-mono);font-size:48px;font-weight:700;text-align:center;color:var(--accent-gold)">工具调用减少 71%</div>
+        </div>
+        <!-- Phase 2: Core innovations -->
+        <div class="phase phase-2">
+          <div class="section-title" style="color:var(--accent-cyan)">核心创新</div>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-num">01</span><span class="feature-text">React setState 追踪</span></div>
+            <div class="feature-item"><span class="feature-num">02</span><span class="feature-text">Vue 事件绑定解析</span></div>
+            <div class="feature-item"><span class="feature-num">03</span><span class="feature-text">EventEmitter 配对分析</span></div>
+            <div class="feature-item"><span class="feature-num">04</span><span class="feature-text">回调合成与调用链追踪</span></div>
+          </div>
+          <div style="margin-top:24px;font-size:28px;color:var(--text-secondary);text-align:center">无需运行代码，开箱即用</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 5: HONORABLE (49.90 - 58.83s, 8.93s) ============ -->
+  <div class="clip s-honorable" data-start="49.90" data-duration="8.93">
+    <div class="scene-wrap scene-pad">
+      <!-- BG: settle tone -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(160deg,#080a14 0%,#0c1420 50%,#0a0e18 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:30%;left:20%;width:350px;height:350px;background:hsla(200,60%,40%,0.1);opacity:0.18;filter:blur(120px)"></div>
+        <div class="glow-orb" style="position:absolute;bottom:25%;right:15%;width:300px;height:300px;background:hsla(175,70%,40%,0.08);opacity:0.15;filter:blur(100px)"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <!-- FX: GradientWave -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:22%;left:0;width:100%;height:280px;background:linear-gradient(90deg,transparent,hsla(195,60%,40%,0.12),transparent);transform:rotate(-8deg);animation:waveSway 20s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:55%;left:0;width:100%;height:240px;background:linear-gradient(90deg,transparent,hsla(175,50%,45%,0.1),transparent);transform:rotate(5deg);animation:waveSway 25s ease-in-out infinite 5s"></div>
+        <div style="position:absolute;top:80%;left:0;width:100%;height:200px;background:linear-gradient(90deg,transparent,hsla(200,55%,40%,0.08),transparent);transform:rotate(-3deg);animation:waveSway 22s ease-in-out infinite 10s"></div>
+      </div>
+      <!-- Content -->
+      <div class="layer-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
+        <div class="section-title" style="color:var(--text-secondary);font-size:40px">亚军选手</div>
+        <div class="project-list">
+          <div class="project-item">
+            <span class="project-name" style="color:var(--accent-cyan)">codebase-memory-mcp</span>
+            <span class="project-desc">极致性能 · 纯C引擎</span>
+          </div>
+          <div class="project-item">
+            <span class="project-name" style="color:var(--accent-tech)">Understand-Anything</span>
+            <span class="project-desc">14个AI平台支持</span>
+          </div>
+        </div>
+        <div style="margin-top:32px;font-size:34px;text-align:center;color:var(--text-primary)">综合来看，<span style="color:var(--accent-gold);font-weight:700">CodeGraph</span> 是最佳平衡点</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Scene 6: CTA (58.83 - 63.32s, 4.49s) ============ -->
+  <div class="clip s-cta" data-start="58.83" data-duration="4.49">
+    <div class="scene-wrap scene-pad">
+      <!-- BG: warm glow -->
+      <div class="layer-bg">
+        <div style="width:100%;height:100%;background:linear-gradient(160deg,#0a0810 0%,#181008 50%,#0a0a10 100%)"></div>
+        <div class="glow-orb" style="position:absolute;top:35%;left:30%;width:450px;height:450px;background:hsla(40,100%,50%,0.15);opacity:0.22;filter:blur(150px)"></div>
+        <div class="glow-orb" style="position:absolute;top:50%;right:20%;width:300px;height:300px;background:hsla(175,80%,45%,0.08);opacity:0.15;filter:blur(100px)"></div>
+      </div>
+      <!-- FX: LightOrbs -->
+      <div class="layer-fx">
+        <div style="position:absolute;top:22%;left:35%;width:240px;height:240px;border-radius:50%;background:hsl(40,90%,55%);opacity:0.12;filter:blur(55px);animation:orbDrift 28s ease-in-out infinite 0s"></div>
+        <div style="position:absolute;top:60%;left:60%;width:200px;height:200px;border-radius:50%;background:hsl(175,75%,45%);opacity:0.1;filter:blur(50px);animation:orbDrift 32s ease-in-out infinite 3s"></div>
+        <div style="position:absolute;top:75%;left:20%;width:180px;height:180px;border-radius:50%;background:hsl(40,80%,50%);opacity:0.08;filter:blur(45px);animation:orbDrift 25s ease-in-out infinite 7s"></div>
+      </div>
+      <!-- Content -->
+      <div class="layer-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
+        <div class="cta-title" style="font-size:56px;font-weight:700;text-align:center;line-height:1.4;text-shadow:0 2px 20px rgba(0,0,0,0.4)">感兴趣可以搜项目名试试<br>关注我获取更多开源项目分析</div>
+        <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+          <span class="tag tag-gold">开源项目</span>
+          <span class="tag tag-cyan">代码分析</span>
+          <span class="tag tag-gold">每天更新</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- GSAP Timeline -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 63.32, seek: function(t) {} };
+
+// Scene start times
+const S = [0, 3.17, 15.24, 26.57, 35.33, 49.90, 58.83];
+
+const tl = gsap.timeline({paused: true});
+
+// === Scene 0: HOOK ===
+tl.from('.s-hook .hook-title', {opacity:0, scale:0.85, duration:0.4, ease:'power3.out'}, S[0] + 0.1)
+  .from('.s-hook .hook-badge', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[0] + 0.4);
+
+// === Scene 1: OVERVIEW (2 phases) ===
+// Phase 2+ init: GSAP .set at clip start
+tl.set('.s-overview .phase-2', {opacity: 0}, S[1]);
+tl.from('.s-overview .phase-1 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[1] + 0.2)
+  .from('.s-overview .phase-1 .project-item', {opacity:0, x:-20, duration:0.25, stagger:0.1, ease:'power3.out'}, S[1] + 0.5);
+// Phase 1→2 at ~5.3s (43% into narration)
+tl.to('.s-overview .phase-1', {opacity:0, duration:0.3}, S[1] + 5.3)
+  .to('.s-overview .phase-2', {opacity:1, duration:0.4}, S[1] + 5.6)
+  .from('.s-overview .phase-2 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[1] + 5.7)
+  .from('.s-overview .phase-2 .data-row', {opacity:0, y:15, duration:0.25, stagger:0.12, ease:'power3.out'}, S[1] + 6.0)
+  .from('.s-overview .phase-2 .tag', {opacity:0, scale:0.8, duration:0.2, stagger:0.08, ease:'power3.out'}, S[1] + 7.0);
+
+// === Scene 2: ROUND1 (2 phases) ===
+tl.set('.s-round1 .phase-2', {opacity: 0}, S[2]);
+tl.from('.s-round1 .phase-1 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[2] + 0.2)
+  .from('.s-round1 .phase-1 div:nth-child(2)', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, S[2] + 0.5)
+  .from('.s-round1 .phase-1 .tag', {opacity:0, scale:0.8, duration:0.2, stagger:0.08, ease:'power3.out'}, S[2] + 0.8);
+// Phase 1→2 at ~3.7s
+tl.to('.s-round1 .phase-1', {opacity:0, duration:0.3}, S[2] + 3.7)
+  .to('.s-round1 .phase-2', {opacity:1, duration:0.4}, S[2] + 4.0)
+  .from('.s-round1 .phase-2 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[2] + 4.1)
+  .from('.s-round1 .phase-2 .data-row', {opacity:0, y:15, duration:0.25, stagger:0.12, ease:'power3.out'}, S[2] + 4.4)
+  .from('.s-round1 .phase-2 div:last-child', {opacity:0, y:10, duration:0.3, ease:'power3.out'}, S[2] + 5.5);
+
+// === Scene 3: ROUND2 ===
+tl.from('.s-round2 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[3] + 0.2)
+  .from('.s-round2 .compare-col', {opacity:0, y:25, duration:0.3, stagger:0.15, ease:'power3.out'}, S[3] + 0.5)
+  .from('.s-round2 .compare-item', {opacity:0, x:-10, duration:0.2, stagger:0.08, ease:'power3.out'}, S[3] + 0.9);
+
+// === Scene 4: WINNER (2 phases) ===
+tl.set('.s-winner .phase-2', {opacity: 0}, S[4]);
+tl.from('.s-winner .phase-1 div:nth-child(1)', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, S[4] + 0.2)
+  .from('.s-winner .phase-1 div:nth-child(2)', {opacity:0, scale:0.85, duration:0.4, ease:'power3.out'}, S[4] + 0.4)
+  .from('.s-winner .phase-1 .tag', {opacity:0, scale:0.8, duration:0.2, stagger:0.08, ease:'power3.out'}, S[4] + 0.8)
+  .from('.s-winner .phase-1 div:nth-child(4)', {opacity:0, y:10, duration:0.3, ease:'power3.out'}, S[4] + 1.3)
+  .from('.s-winner .phase-1 div:nth-child(5)', {opacity:0, y:10, duration:0.3, ease:'power3.out'}, S[4] + 1.7);
+// Phase 1→2 at ~8.3s
+tl.to('.s-winner .phase-1', {opacity:0, duration:0.3}, S[4] + 8.3)
+  .to('.s-winner .phase-2', {opacity:1, duration:0.4}, S[4] + 8.6)
+  .from('.s-winner .phase-2 .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[4] + 8.7)
+  .from('.s-winner .phase-2 .feature-item', {opacity:0, x:-15, duration:0.25, stagger:0.12, ease:'power3.out'}, S[4] + 9.0)
+  .from('.s-winner .phase-2 div:last-child', {opacity:0, y:10, duration:0.3, ease:'power3.out'}, S[4] + 10.5);
+
+// === Scene 5: HONORABLE ===
+tl.from('.s-honorable .section-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, S[5] + 0.2)
+  .from('.s-honorable .project-item', {opacity:0, x:-15, duration:0.25, stagger:0.12, ease:'power3.out'}, S[5] + 0.5)
+  .from('.s-honorable .layer-content > div:last-child', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, S[5] + 1.2);
+
+// === Scene 6: CTA ===
+tl.from('.s-cta .cta-title', {opacity:0, y:20, duration:0.35, ease:'power3.out'}, S[6] + 0.15)
+  .from('.s-cta .tag', {opacity:0, scale:0.8, duration:0.2, stagger:0.08, ease:'power3.out'}, S[6] + 0.6);
+
+window.__timelines["main"] = tl;
+</script>
+
+</body>
+</html>

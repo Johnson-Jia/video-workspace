@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GitHub Trending 2026-06-02</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; background:#000; overflow:hidden; }
+
+  .composition { position:relative; width:1080px; height:1920px; overflow:hidden; }
+  .clip { position:absolute; inset:0; }
+  .scene-wrap { position:relative; width:100%; height:100%; overflow:hidden; }
+  .layer-bg { position:absolute; inset:0; z-index:1; }
+  .layer-fx { position:absolute; inset:0; z-index:2; pointer-events:none; }
+  .layer-content { position:relative; z-index:3; height:100%; }
+  .phase { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:180px 80px 220px 80px; }
+
+  /* Common elements */
+  .rank-num { font-size:72px; font-weight:900; color:#FFB800; line-height:1; }
+  .proj-name { font-size:52px; font-weight:900; color:#fff; margin-top:12px; word-break:break-all; }
+  .proj-desc { font-size:38px; font-weight:400; color:#a0a0c0; margin-top:8px; line-height:1.4; }
+  .lang-tag { display:inline-block; font-size:36px; font-weight:700; padding:6px 20px; border-radius:20px; margin-top:16px; }
+  .lang-python { background:rgba(55,118,171,0.25); color:#60a5fa; border:1px solid rgba(55,118,171,0.4); }
+  .lang-javascript { background:rgba(240,219,79,0.2); color:#fde047; border:1px solid rgba(240,219,79,0.4); }
+  .lang-typescript { background:rgba(49,120,198,0.25); color:#60a5fa; border:1px solid rgba(49,120,198,0.4); }
+  .star-count { font-size:44px; font-weight:900; color:#FFB800; margin-top:12px; }
+  .new-badge { display:inline-block; font-size:36px; font-weight:900; padding:6px 20px; border-radius:20px; background:rgba(0,212,255,0.2); color:#00D4FF; border:1px solid rgba(0,212,255,0.4); margin-left:16px; vertical-align:middle; }
+  .selling-points { display:flex; gap:16px; margin-top:20px; flex-wrap:wrap; }
+  .sp-item { font-size:32px; font-weight:700; color:#e0e0e0; padding:8px 20px; border-radius:12px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); }
+  .commentary { font-size:36px; font-weight:700; color:#FFB800; margin-top:24px; line-height:1.3; }
+  .category-label { font-size:36px; font-weight:700; color:#00D4FF; letter-spacing:2px; text-transform:uppercase; }
+
+  /* Card container */
+  .card { background:rgba(10,14,26,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:48px; backdrop-filter:blur(10px); }
+
+  /* Glow effect helper */
+  .glow { position:absolute; border-radius:50%; filter:blur(80px); }
+  .scan-line { position:absolute; width:100%; height:2px; background:linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent); }
+
+  /* fx elements */
+  .fx-orb { position:absolute; border-radius:50%; }
+  .fx-ray { position:absolute; width:2px; height:200px; transform-origin:bottom center; }
+  .fx-particle { position:absolute; width:6px; height:6px; border-radius:50%; }
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="63.768">
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.15" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ===== S1: HOOK (0 - 6.528s) ===== -->
+  <div class="clip" id="s1" data-start="0" data-duration="6.528">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(170deg, #0a0e1a 0%, #0d1b2a 40%, #1b2838 100%);">
+        <div class="glow" style="width:600px;height:600px;background:rgba(255,184,0,0.15);top:-100px;right:-100px;"></div>
+        <div class="glow" style="width:500px;height:500px;background:rgba(0,212,255,0.1);bottom:200px;left:-150px;"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s1-orb1" style="width:200px;height:200px;background:rgba(255,184,0,0.2);top:300px;right:100px;"></div>
+        <div class="fx-orb" id="s1-orb2" style="width:150px;height:150px;background:rgba(0,212,255,0.15);bottom:400px;left:80px;"></div>
+        <div class="scan-line" id="s1-scan" style="top:0;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" style="align-items:center; text-align:center;">
+          <div class="category-label" style="font-size:40px;margin-bottom:24px;">2026.06.02</div>
+          <h1 style="font-size:100px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:32px;">GitHub Trending</h1>
+          <div style="font-size:56px;font-weight:900;color:#FFB800;margin-bottom:16px;">+3,375 ★</div>
+          <div style="font-size:42px;color:#00D4FF;font-weight:700;">3 个新面孔首次上榜</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S2: MoneyPrinterTurbo (6.528 - 19.824s) ===== -->
+  <div class="clip" id="s2" data-start="6.528" data-duration="13.296">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(150deg, #0a0e1a 0%, #1a0a0a 40%, #0d1117 100%);">
+        <div class="glow" style="width:500px;height:500px;background:rgba(255,184,0,0.12);top:100px;left:-100px;"></div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(255,100,50,0.08);bottom:300px;right:-80px;"></div>
+        <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 40%, transparent 0deg, rgba(255,184,0,0.03) 5deg, transparent 10deg);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s2-orb1" style="width:120px;height:120px;background:rgba(255,184,0,0.25);top:200px;right:150px;"></div>
+        <div class="fx-orb" id="s2-orb2" style="width:80px;height:80px;background:rgba(255,140,0,0.2);top:600px;left:100px;"></div>
+        <div class="fx-orb" id="s2-orb3" style="width:60px;height:60px;background:rgba(255,200,50,0.15);bottom:400px;right:200px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase">
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+              <span class="rank-num">01</span>
+              <span class="category-label">当期之星</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <h2 class="proj-name" style="margin-top:0;">MoneyPrinterTurbo</h2>
+            </div>
+            <div><span class="lang-tag lang-python">Python</span></div>
+            <div class="star-count">+3,375 ★ 今日</div>
+            <div class="selling-points">
+              <span class="sp-item">全链路打通</span>
+              <span class="sp-item">完全开源</span>
+              <span class="sp-item">连续霸榜</span>
+            </div>
+            <div class="commentary">两天涨了五千多星，能连爆两天的真不多</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S3: Scrapling (19.824 - 30.696s) ===== -->
+  <div class="clip" id="s3" data-start="19.824" data-duration="10.872">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(170deg, #0a0e1a 0%, #0a1a0a 40%, #0d1117 100%);">
+        <div class="glow" style="width:500px;height:500px;background:rgba(0,200,100,0.1);top:50px;right:-80px;"></div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(0,180,80,0.08);bottom:200px;left:-100px;"></div>
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 70% 30%, transparent 0px, transparent 40px, rgba(0,200,100,0.03) 42px, transparent 44px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s3-orb1" style="width:100px;height:100px;background:rgba(0,200,100,0.2);top:250px;left:120px;"></div>
+        <div class="fx-orb" id="s3-orb2" style="width:70px;height:70px;background:rgba(0,255,120,0.15);bottom:500px;right:150px;"></div>
+        <div id="s3-pulse" style="position:absolute;width:300px;height:300px;border:2px solid rgba(0,200,100,0.15);border-radius:50%;top:400px;left:400px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase">
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+              <span class="rank-num">02</span>
+              <span class="category-label">反检测利器</span>
+            </div>
+            <h2 class="proj-name">Scrapling</h2>
+            <div><span class="lang-tag lang-python">Python</span></div>
+            <div class="star-count">+1,486 ★ 日增翻倍</div>
+            <div class="selling-points">
+              <span class="sp-item">AI伪装</span>
+              <span class="sp-item">Playwright</span>
+              <span class="sp-item">反反爬</span>
+            </div>
+            <div class="commentary">网站反爬越严，它反而越爬越快</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S4: impeccable (30.696 - 42.624s) ===== -->
+  <div class="clip" id="s4" data-start="30.696" data-duration="11.928">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(160deg, #0a0e1a 0%, #0d0a1a 40%, #0d1117 100%);">
+        <div class="glow" style="width:600px;height:600px;background:rgba(140,80,255,0.12);top:-50px;left:50%;transform:translateX(-50%);"></div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(0,212,255,0.1);bottom:100px;right:-100px;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(140,80,255,0.05), transparent 60%);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s4-orb1" style="width:100px;height:100px;background:rgba(140,80,255,0.25);top:180px;left:80px;"></div>
+        <div class="fx-orb" id="s4-orb2" style="width:90px;height:90px;background:rgba(0,212,255,0.2);bottom:350px;right:100px;"></div>
+        <div id="s4-ring" style="position:absolute;width:400px;height:400px;border:2px solid rgba(140,80,255,0.12);border-radius:50%;top:600px;left:340px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase">
+          <div class="card" style="border-color:rgba(140,80,255,0.3);">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+              <span class="rank-num">03</span>
+              <span class="new-badge">NEW</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <h2 class="proj-name" style="margin-top:0;">impeccable</h2>
+              <span class="category-label" style="font-size:36px;">AI审美专家</span>
+            </div>
+            <div><span class="lang-tag lang-javascript">JavaScript</span></div>
+            <div class="star-count">32.7K ★ 总星</div>
+            <div class="selling-points">
+              <span class="sp-item">AI审美</span>
+              <span class="sp-item">设计语言</span>
+              <span class="sp-item">首次上榜</span>
+            </div>
+            <div class="commentary">AI真正的短板，不是智商，是审美</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S5: oh-my-pi (42.624 - 52.344s) ===== -->
+  <div class="clip" id="s5" data-start="42.624" data-duration="9.720">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(140deg, #0a0e1a 0%, #0a1520 40%, #0d1117 100%);">
+        <div class="glow" style="width:500px;height:500px;background:rgba(0,150,255,0.1);top:100px;left:-80px;"></div>
+        <div class="glow" style="width:350px;height:350px;background:rgba(0,212,255,0.08);bottom:300px;right:-60px;"></div>
+        <div style="position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(0,212,255,0.5) 60px,rgba(0,212,255,0.5) 62px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s5-orb1" style="width:80px;height:80px;background:rgba(0,150,255,0.2);top:300px;right:100px;"></div>
+        <div class="fx-orb" id="s5-orb2" style="width:60px;height:60px;background:rgba(0,212,255,0.18);bottom:450px;left:150px;"></div>
+        <div id="s5-line" style="position:absolute;width:300px;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.2),transparent);top:500px;left:400px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase">
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+              <span class="rank-num">04</span>
+              <span class="new-badge">NEW</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <h2 class="proj-name" style="margin-top:0;">oh-my-pi</h2>
+              <span class="category-label" style="font-size:36px;">终端新势力</span>
+            </div>
+            <div><span class="lang-tag lang-typescript">TypeScript</span></div>
+            <div class="star-count">+335 ★ 今日</div>
+            <div class="selling-points">
+              <span class="sp-item">哈希锚定</span>
+              <span class="sp-item">内置LSP</span>
+              <span class="sp-item">多Provider</span>
+            </div>
+            <div class="commentary">凭什么上榜？凭极致</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S6: heretic (52.344 - 60.840s) ===== -->
+  <div class="clip" id="s6" data-start="52.344" data-duration="8.496">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(150deg, #0a0e1a 0%, #1a0a14 40%, #0d1117 100%);">
+        <div class="glow" style="width:500px;height:500px;background:rgba(255,50,80,0.08);top:50px;right:-100px;"></div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(200,0,100,0.06);bottom:200px;left:-80px;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%, rgba(255,50,80,0.04), transparent 50%);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s6-orb1" style="width:90px;height:90px;background:rgba(255,50,80,0.2);top:200px;left:120px;"></div>
+        <div class="fx-orb" id="s6-orb2" style="width:70px;height:70px;background:rgba(200,0,100,0.18);bottom:400px;right:180px;"></div>
+        <div id="s6-ring" style="position:absolute;width:250px;height:250px;border:2px solid rgba(255,50,80,0.12);border-radius:50%;top:500px;right:200px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase">
+          <div class="card" style="border-color:rgba(255,50,80,0.2);">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+              <span class="rank-num">05</span>
+              <span class="new-badge">NEW</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <h2 class="proj-name" style="margin-top:0;">heretic</h2>
+              <span class="category-label" style="font-size:36px;">认知解锁器</span>
+            </div>
+            <div><span class="lang-tag lang-python">Python</span></div>
+            <div class="star-count">23K ★ 总星</div>
+            <div class="selling-points">
+              <span class="sp-item">数学解锁</span>
+              <span class="sp-item">Abliteration</span>
+              <span class="sp-item">无审查</span>
+            </div>
+            <div class="commentary">看到AI真正知道什么</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S7: CTA (60.840 - 63.768s) ===== -->
+  <div class="clip" id="s7" data-start="60.840" data-duration="2.928">
+    <div class="scene-wrap">
+      <div class="layer-bg" style="background:linear-gradient(180deg, #0a0e1a 0%, #0d1b2a 50%, #0a0e1a 100%);">
+        <div class="glow" style="width:700px;height:700px;background:rgba(255,184,0,0.1);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="fx-orb" id="s7-orb1" style="width:150px;height:150px;background:rgba(255,184,0,0.2);top:600px;left:400px;"></div>
+        <div class="fx-orb" id="s7-orb2" style="width:100px;height:100px;background:rgba(0,212,255,0.15);bottom:500px;right:300px;"></div>
+        <div id="s7-burst" style="position:absolute;width:400px;height:400px;border:2px solid rgba(255,184,0,0.1);border-radius:50%;top:650px;left:340px;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" style="align-items:center;text-align:center;">
+          <h1 style="font-size:96px;font-weight:900;color:#FFB800;">GitHub星探</h1>
+          <p style="font-size:40px;color:#a0a0c0;margin-top:24px;">关注我，每天带你刷榜</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.__hf = window.__hf || [];
+window.__timelines = {};
+
+const totalDur = 63.768;
+const tl = gsap.timeline({paused: true});
+
+// Finite repeat helper: cycleDur = single cycle (yoyo counts as 2x duration)
+function rep(sceneStart, cycleDur) { return Math.max(1, Math.floor((totalDur - sceneStart) / cycleDur) - 1); }
+
+// S1: Hook
+tl.from('#s1 h1', {scale:0.85, opacity:0, duration:0.15, ease:'power3.out'}, 0);
+tl.from('#s1 .category-label', {opacity:0, y:20, duration:0.2, ease:'power3.out'}, 0.1);
+tl.from('#s1-orb1', {x:20, y:-15, repeat:rep(0,6), yoyo:true, duration:3, ease:'sine.inOut'}, 0);
+tl.from('#s1-orb2', {x:-15, y:20, repeat:rep(0,8), yoyo:true, duration:4, ease:'sine.inOut'}, 0);
+tl.from('#s1-scan', {y:1920, duration:3, repeat:rep(0,3), ease:'none'}, 0);
+
+// S2: MoneyPrinterTurbo
+tl.from('#s2 .card', {opacity:0, scale:0.95, duration:0.3, ease:'power3.out'}, 6.528);
+tl.from('#s2 .rank-num', {opacity:0, x:-20, duration:0.2, ease:'power3.out'}, 6.7);
+tl.from('#s2 .proj-name', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 6.8);
+tl.from('#s2 .star-count', {opacity:0, scale:0.9, duration:0.2, ease:'power3.out'}, 7.0);
+tl.from('#s2 .sp-item', {opacity:0, y:10, stagger:0.1, duration:0.2, ease:'power3.out'}, 7.1);
+tl.from('#s2 .commentary', {opacity:0, y:10, duration:0.25, ease:'power3.out'}, 7.4);
+tl.to('#s2-orb1', {x:15, y:-20, repeat:rep(6.5,6), yoyo:true, duration:3, ease:'sine.inOut'}, 6.5);
+tl.to('#s2-orb2', {x:-10, y:15, repeat:rep(6.5,8), yoyo:true, duration:4, ease:'sine.inOut'}, 6.5);
+tl.to('#s2-orb3', {scale:1.2, opacity:0.25, repeat:rep(6.5,4), yoyo:true, duration:2, ease:'sine.inOut'}, 6.5);
+
+// S3: Scrapling
+tl.from('#s3 .card', {opacity:0, scale:0.95, duration:0.3, ease:'power3.out'}, 19.824);
+tl.from('#s3 .rank-num', {opacity:0, x:-20, duration:0.2, ease:'power3.out'}, 20.0);
+tl.from('#s3 .proj-name', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 20.1);
+tl.from('#s3 .star-count', {opacity:0, scale:0.9, duration:0.2, ease:'power3.out'}, 20.3);
+tl.from('#s3 .sp-item', {opacity:0, y:10, stagger:0.1, duration:0.2, ease:'power3.out'}, 20.4);
+tl.from('#s3 .commentary', {opacity:0, y:10, duration:0.25, ease:'power3.out'}, 20.7);
+tl.to('#s3-orb1', {x:12, y:-18, repeat:rep(19.8,7), yoyo:true, duration:3.5, ease:'sine.inOut'}, 19.8);
+tl.to('#s3-orb2', {x:-8, y:12, repeat:rep(19.8,8), yoyo:true, duration:4, ease:'sine.inOut'}, 19.8);
+tl.to('#s3-pulse', {scale:1.3, opacity:0, repeat:rep(19.8,2), duration:2, ease:'power2.out'}, 19.8);
+
+// S4: impeccable
+tl.from('#s4 .card', {opacity:0, scale:0.95, duration:0.3, ease:'power3.out'}, 30.696);
+tl.from('#s4 .rank-num', {opacity:0, x:-20, duration:0.2, ease:'power3.out'}, 30.9);
+tl.from('#s4 .proj-name', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 31.0);
+tl.from('#s4 .new-badge', {scale:0.5, opacity:0, duration:0.2, ease:'back.out(1.7)'}, 30.9);
+tl.from('#s4 .star-count', {opacity:0, scale:0.9, duration:0.2, ease:'power3.out'}, 31.2);
+tl.from('#s4 .sp-item', {opacity:0, y:10, stagger:0.1, duration:0.2, ease:'power3.out'}, 31.3);
+tl.from('#s4 .commentary', {opacity:0, y:10, duration:0.25, ease:'power3.out'}, 31.6);
+tl.to('#s4-orb1', {x:-15, y:20, repeat:rep(30.7,6), yoyo:true, duration:3, ease:'sine.inOut'}, 30.7);
+tl.to('#s4-orb2', {x:10, y:-12, repeat:rep(30.7,7), yoyo:true, duration:3.5, ease:'sine.inOut'}, 30.7);
+tl.to('#s4-ring', {scale:1.2, opacity:0.05, repeat:rep(30.7,5), yoyo:true, duration:2.5, ease:'sine.inOut'}, 30.7);
+
+// S5: oh-my-pi
+tl.from('#s5 .card', {opacity:0, scale:0.95, duration:0.3, ease:'power3.out'}, 42.624);
+tl.from('#s5 .rank-num', {opacity:0, x:-20, duration:0.2, ease:'power3.out'}, 42.8);
+tl.from('#s5 .proj-name', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 42.9);
+tl.from('#s5 .new-badge', {scale:0.5, opacity:0, duration:0.2, ease:'back.out(1.7)'}, 42.8);
+tl.from('#s5 .star-count', {opacity:0, scale:0.9, duration:0.2, ease:'power3.out'}, 43.1);
+tl.from('#s5 .sp-item', {opacity:0, y:10, stagger:0.1, duration:0.2, ease:'power3.out'}, 43.2);
+tl.from('#s5 .commentary', {opacity:0, y:10, duration:0.25, ease:'power3.out'}, 43.5);
+tl.to('#s5-orb1', {x:10, y:-15, repeat:rep(42.6,6), yoyo:true, duration:3, ease:'sine.inOut'}, 42.6);
+tl.to('#s5-orb2', {x:-12, y:18, repeat:rep(42.6,8), yoyo:true, duration:4, ease:'sine.inOut'}, 42.6);
+tl.to('#s5-line', {x:30, opacity:0.3, repeat:rep(42.6,4), yoyo:true, duration:2, ease:'sine.inOut'}, 42.6);
+
+// S6: heretic
+tl.from('#s6 .card', {opacity:0, scale:0.95, duration:0.3, ease:'power3.out'}, 52.344);
+tl.from('#s6 .rank-num', {opacity:0, x:-20, duration:0.2, ease:'power3.out'}, 52.5);
+tl.from('#s6 .proj-name', {opacity:0, y:15, duration:0.25, ease:'power3.out'}, 52.6);
+tl.from('#s6 .new-badge', {scale:0.5, opacity:0, duration:0.2, ease:'back.out(1.7)'}, 52.5);
+tl.from('#s6 .star-count', {opacity:0, scale:0.9, duration:0.2, ease:'power3.out'}, 52.8);
+tl.from('#s6 .sp-item', {opacity:0, y:10, stagger:0.1, duration:0.2, ease:'power3.out'}, 52.9);
+tl.from('#s6 .commentary', {opacity:0, y:10, duration:0.25, ease:'power3.out'}, 53.2);
+tl.to('#s6-orb1', {x:-10, y:15, repeat:rep(52.3,6), yoyo:true, duration:3, ease:'sine.inOut'}, 52.3);
+tl.to('#s6-orb2', {x:12, y:-18, repeat:rep(52.3,7), yoyo:true, duration:3.5, ease:'sine.inOut'}, 52.3);
+tl.to('#s6-ring', {scale:1.15, opacity:0.03, repeat:rep(52.3,4), yoyo:true, duration:2, ease:'sine.inOut'}, 52.3);
+
+// S7: CTA
+tl.from('#s7 h1', {scale:0.85, opacity:0, duration:0.2, ease:'power3.out'}, 60.84);
+tl.from('#s7 p', {opacity:0, y:15, duration:0.2, ease:'power3.out'}, 61.0);
+tl.to('#s7-orb1', {scale:1.1, opacity:0.25, repeat:rep(60.8,4), yoyo:true, duration:2, ease:'sine.inOut'}, 60.8);
+tl.to('#s7-orb2', {x:10, y:-8, repeat:rep(60.8,6), yoyo:true, duration:3, ease:'sine.inOut'}, 60.8);
+tl.to('#s7-burst', {scale:1.2, opacity:0, repeat:rep(60.8,1.5), duration:1.5, ease:'power2.out'}, 60.8);
+
+window.__timelines["main"] = tl;
+
+window.__hf.push({
+  duration: totalDur,
+  fps: 30,
+  seek: function(t) {
+    tl.time(t);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GitHub Trending 2026-06-05</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden;}
+.clip{position:absolute;inset:0;}
+.scene-wrap{position:relative;width:100%;height:100%;overflow:hidden;}
+.layer-bg{position:absolute;inset:0;z-index:1;}
+.layer-fx{position:absolute;inset:0;z-index:2;pointer-events:none;}
+.layer-content{position:absolute;inset:0;z-index:3;}
+.phase{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;}
+/* Scene-specific bg elements */
+.glow-orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.glow-orb-sm{position:absolute;border-radius:50%;filter:blur(50px);}
+.grid-bg{position:absolute;inset:0;background-size:60px 60px;opacity:0.15;}
+.contour-bg{position:absolute;inset:0;}
+/* Text styles */
+.grad-text{display:inline-block;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.rank-num{font-size:120px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;}
+.project-name{font-size:52px;font-weight:700;font-family:'Courier New',monospace;letter-spacing:2px;text-shadow:0 2px 12px rgba(0,0,0,0.6);}
+.desc-text{font-size:36px;font-weight:500;line-height:1.5;color:#e0e0f0;text-shadow:0 1px 8px rgba(0,0,0,0.5);}
+.stat-row{display:flex;align-items:center;gap:16px;font-size:36px;font-weight:600;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,0.5);}
+.star-icon{color:#FFD700;font-size:40px;}
+.sell-points{font-size:36px;font-weight:500;color:rgba(255,255,255,0.7);line-height:1.4;text-shadow:0 1px 6px rgba(0,0,0,0.4);}
+.commentary{font-size:36px;font-weight:400;color:rgba(255,255,255,0.5);font-style:italic;line-height:1.3;text-shadow:0 1px 6px rgba(0,0,0,0.4);}
+.lang-badge{display:inline-block;padding:6px 18px;border-radius:16px;font-size:26px;font-weight:600;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);}
+.tag-pill{display:inline-block;padding:8px 24px;border-radius:24px;font-size:28px;font-weight:600;letter-spacing:1px;}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="53.41">
+
+<audio data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio data-track-index="2" data-volume="0.14" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+<!-- ============================================================ -->
+<!-- Scene 0: hook — 7.06s -->
+<!-- ============================================================ -->
+<div class="clip s-hook" id="s0" data-start="0" data-duration="7.06">
+<div class="scene-wrap">
+  <!-- BG: golden glow + noise texture -->
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%, #1a0f00 0%, #0a0a0f 100%);"></div>
+    <div class="glow-orb" style="width:700px;height:700px;left:190px;top:300px;background:radial-gradient(circle,rgba(255,180,0,0.45),transparent 70%);"></div>
+    <div class="glow-orb" style="width:500px;height:500px;left:300px;top:800px;background:radial-gradient(circle,rgba(255,120,0,0.3),transparent 70%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08;"><filter id="noise0"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noise0)"/></svg>
+  </div>
+  <!-- FX: expanding ring + sparks -->
+  <div class="layer-fx">
+    <div id="ring0" style="position:absolute;left:390px;top:560px;width:300px;height:300px;border-radius:50%;border:3px solid rgba(255,200,50,0.3);"></div>
+    <div id="ring0b" style="position:absolute;left:440px;top:610px;width:200px;height:200px;border-radius:50%;border:2px solid rgba(255,180,0,0.2);"></div>
+    <div id="spark0" style="position:absolute;left:520px;top:700px;width:4px;height:40px;background:rgba(255,200,50,0.4);border-radius:2px;"></div>
+  </div>
+  <!-- Content -->
+  <div class="layer-content">
+    <div class="phase" style="padding:180px 80px 220px 80px;">
+      <div style="text-align:center;">
+        <div class="grad-text" id="hook-pct" style="background-image:linear-gradient(135deg,#FFD700,#FF8C00);font-size:220px;font-weight:900;line-height:1;">95%</div>
+        <div id="hook-sub" style="font-size:48px;font-weight:700;color:#fff;margin-top:32px;line-height:1.4;text-shadow:0 2px 16px rgba(0,0,0,0.7);">AI输入砍掉95%</div>
+        <div id="hook-sub2" style="font-size:40px;font-weight:500;color:rgba(255,255,255,0.7);margin-top:20px;text-shadow:0 1px 10px rgba(0,0,0,0.5);">答案一模一样</div>
+        <div style="margin-top:40px;">
+          <span class="tag-pill" style="background:rgba(255,180,0,0.2);color:#FFD700;border:1px solid rgba(255,180,0,0.4);">GitHub 星探</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Scene 1: headroom — 14.76s -->
+<!-- ============================================================ -->
+<div class="clip s-headroom" id="s1" data-start="7.06" data-duration="14.76">
+<div class="scene-wrap">
+  <!-- BG: deep blue + cyan tech contour + noise -->
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(170deg,#050520 0%,#0a1628 50%,#0a0a0f 100%);"></div>
+    <div class="glow-orb" style="width:600px;height:600px;right:-100px;top:200px;background:radial-gradient(circle,rgba(0,180,255,0.25),transparent 70%);"></div>
+    <div class="glow-orb" style="width:400px;height:400px;left:-50px;top:1100px;background:radial-gradient(circle,rgba(0,100,200,0.2),transparent 70%);"></div>
+    <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 60% 40%,transparent,transparent 80px,rgba(0,180,255,0.04) 81px,transparent 82px);opacity:0.6;"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;"><filter id="noise1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noise1)"/></svg>
+  </div>
+  <!-- FX: scanning line + data dots -->
+  <div class="layer-fx">
+    <div id="scan1" style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.6),transparent);top:0;"></div>
+    <div id="dot1a" style="position:absolute;left:120px;top:600px;width:8px;height:8px;border-radius:50%;background:rgba(0,212,255,0.5);"></div>
+    <div id="dot1b" style="position:absolute;right:180px;top:1000px;width:6px;height:6px;border-radius:50%;background:rgba(0,180,255,0.4);"></div>
+  </div>
+  <!-- Content: Project card -->
+  <div class="layer-content">
+    <div class="phase" style="padding:180px 80px 220px 80px;">
+      <!-- Phase 1: main card (0-11s) -->
+      <div id="p1a" style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+        <div style="display:flex;align-items:center;gap:20px;width:100%;">
+          <span class="tag-pill" style="background:rgba(0,180,255,0.15);color:#00D4FF;border:1px solid rgba(0,180,255,0.3);">AI 减肥术</span>
+          <span class="lang-badge">Python</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:24px;width:100%;">
+          <div class="grad-text" style="background-image:linear-gradient(90deg,#FFD700,#FFA500);font-size:120px;font-weight:900;line-height:1;">#1</div>
+          <div class="project-name" style="color:#fff;">headroom</div>
+        </div>
+        <div class="desc-text" style="width:100%;">LLM 输入压缩，砍掉 95% token 答案不变</div>
+        <div class="stat-row" style="width:100%;">
+          <span class="star-icon">&#9733;</span>
+          <span class="grad-text" style="background-image:linear-gradient(90deg,#FFD700,#FF8C00);font-size:44px;font-weight:700;">+3142</span>
+          <span style="color:rgba(255,255,255,0.5);">/ 天</span>
+          <span style="margin-left:auto;color:rgba(255,255,255,0.6);font-size:36px;">12.5K &#9733;</span>
+        </div>
+        <div class="sell-points" style="width:100%;margin-top:16px;">压缩输入 · 保持质量 · 多端接入</div>
+      </div>
+      <!-- Phase 2: commentary (11-14.76s) -->
+      <div id="p1b" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:180px 80px 220px 80px;opacity:0;">
+        <div class="commentary" style="font-size:44px;font-weight:600;font-style:normal;color:rgba(255,255,255,0.85);text-align:center;line-height:1.5;">等于让 AI 吃饭只吃一口<br>干的活一点不少</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Scene 2: vtuber — 8.33s -->
+<!-- ============================================================ -->
+<div class="clip s-vtuber" id="s2" data-start="21.82" data-duration="8.33">
+<div class="scene-wrap">
+  <!-- BG: purple + violet glow + wave -->
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0518 0%,#15082a 50%,#0a0a0f 100%);"></div>
+    <div class="glow-orb" style="width:550px;height:550px;left:250px;top:400px;background:radial-gradient(circle,rgba(140,60,255,0.35),transparent 70%);"></div>
+    <div class="glow-orb-sm" style="width:300px;height:300px;right:100px;top:1200px;background:radial-gradient(circle,rgba(180,100,255,0.25),transparent 70%);"></div>
+    <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 55%,transparent,transparent 60px,rgba(160,80,255,0.03) 61px,transparent 62px);opacity:0.5;"></div>
+  </div>
+  <!-- FX: floating particles + aura -->
+  <div class="layer-fx">
+    <div id="fp2a" style="position:absolute;left:160px;top:500px;width:10px;height:10px;border-radius:50%;background:rgba(180,120,255,0.5);"></div>
+    <div id="fp2b" style="position:absolute;right:200px;top:800px;width:7px;height:7px;border-radius:50%;background:rgba(200,150,255,0.4);"></div>
+    <div id="aura2" style="position:absolute;left:100px;top:1200px;width:200px;height:2px;background:linear-gradient(90deg,transparent,rgba(180,120,255,0.3),transparent);"></div>
+  </div>
+  <!-- Content -->
+  <div class="layer-content">
+    <div class="phase" style="padding:180px 80px 220px 80px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+        <div style="display:flex;align-items:center;gap:16px;width:100%;">
+          <span class="tag-pill" style="background:rgba(160,80,255,0.15);color:#B060FF;border:1px solid rgba(160,80,255,0.3);">离线 AI 人</span>
+          <span class="lang-badge">Python</span>
+        </div>
+        <div class="project-name" style="color:#fff;width:100%;">Open-LLM-VTuber</div>
+        <div class="desc-text" style="width:100%;">本地 LLM 虚拟主播，完全离线运行</div>
+        <div class="stat-row" style="width:100%;">
+          <span class="star-icon">&#9733;</span>
+          <span style="font-size:40px;font-weight:700;color:#B060FF;">+581</span>
+          <span style="color:rgba(255,255,255,0.5);">/ 天</span>
+          <span style="margin-left:auto;color:rgba(255,255,255,0.6);font-size:36px;">9.6K &#9733;</span>
+        </div>
+        <div class="sell-points" style="width:100%;margin-top:8px;">离线运行 · 语音打断 · 跨平台</div>
+        <div class="commentary" style="width:100%;margin-top:8px;">不花钱的 AI 主播</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Scene 3: spec-kit-cosmos — 13.2s (2 phases) -->
+<!-- ============================================================ -->
+<div class="clip s-spec-kit-cosmos" id="s3" data-start="30.15" data-duration="13.2">
+<div class="scene-wrap">
+  <!-- BG: teal/green gradient + beams -->
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#020f0a 0%,#0a2020 40%,#051510 100%);"></div>
+    <div class="glow-orb" style="width:500px;height:500px;left:50px;top:300px;background:radial-gradient(circle,rgba(0,200,150,0.3),transparent 70%);"></div>
+    <div class="glow-orb" style="width:450px;height:450px;right:50px;top:900px;background:radial-gradient(circle,rgba(100,200,50,0.25),transparent 70%);"></div>
+    <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 45deg at 50% 50%,transparent 0deg,rgba(0,200,150,0.02) 5deg,transparent 10deg);opacity:0.4;"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;"><filter id="noise3"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noise3)"/></svg>
+  </div>
+  <!-- FX: light streak + data stream dots -->
+  <div class="layer-fx">
+    <div id="s3-streak" style="position:absolute;left:-200px;top:900px;width:1500px;height:3px;background:linear-gradient(90deg,transparent,rgba(0,200,150,0.5),transparent);transform:rotate(-15deg);"></div>
+    <div id="s3-dota" style="position:absolute;left:400px;top:400px;width:6px;height:6px;border-radius:50%;background:rgba(0,220,180,0.5);"></div>
+    <div id="s3-dotb" style="position:absolute;right:300px;top:1300px;width:8px;height:8px;border-radius:50%;background:rgba(100,220,50,0.4);"></div>
+  </div>
+  <!-- Content: 2 phases -->
+  <div class="layer-content">
+    <div class="phase">
+      <!-- Phase 1: spec-kit (0-6.54s) -->
+      <div id="p3a" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:180px 80px 220px 80px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
+          <div style="display:flex;align-items:center;gap:16px;width:100%;">
+            <span class="tag-pill" style="background:rgba(0,200,150,0.15);color:#00C896;border:1px solid rgba(0,200,150,0.3);">官方出品</span>
+            <span class="lang-badge">Python</span>
+          </div>
+          <div class="project-name" style="color:#fff;width:100%;">spec-kit</div>
+          <div class="desc-text" style="width:100%;">GitHub 官方 Spec 驱动开发工具</div>
+          <div class="stat-row" style="width:100%;">
+            <span class="star-icon">&#9733;</span>
+            <span style="font-size:40px;font-weight:700;color:#00C896;">108.6K</span>
+            <span style="color:rgba(255,255,255,0.5);">总星</span>
+            <span style="margin-left:auto;color:rgba(255,255,255,0.6);font-size:36px;">+321/天</span>
+          </div>
+          <div class="commentary" style="width:100%;margin-top:8px;">先写需求再写代码 — GitHub 这次站队了</div>
+        </div>
+      </div>
+      <!-- Phase 2: cosmos (6.54-13.2s) -->
+      <div id="p3b" class="phase-2" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:180px 80px 220px 80px;opacity:0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
+          <div style="display:flex;align-items:center;gap:16px;width:100%;">
+            <span class="tag-pill" style="background:rgba(100,200,50,0.15);color:#78C850;border:1px solid rgba(100,200,50,0.3);">物理 AI</span>
+            <span class="lang-badge">Jupyter</span>
+          </div>
+          <div class="project-name" style="color:#fff;width:100%;">NVIDIA cosmos</div>
+          <div class="desc-text" style="width:100%;">英伟达物理 AI 平台，虚拟训练真实部署</div>
+          <div class="stat-row" style="width:100%;">
+            <span class="star-icon">&#9733;</span>
+            <span style="font-size:40px;font-weight:700;color:#78C850;">9.0K</span>
+            <span style="color:rgba(255,255,255,0.5);">总星</span>
+            <span style="margin-left:auto;color:rgba(255,255,255,0.6);font-size:36px;">+133/天</span>
+          </div>
+          <div class="commentary" style="width:100%;margin-top:8px;">游戏引擎教机器人走路</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Scene 4: cta — 10.06s (2 phases) -->
+<!-- ============================================================ -->
+<div class="clip s-cta" id="s4" data-start="43.35" data-duration="10.06">
+<div class="scene-wrap">
+  <!-- BG: warm amber + vignette + noise -->
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#1a1005 0%,#0a0a0f 100%);"></div>
+    <div class="glow-orb" style="width:600px;height:600px;left:240px;top:500px;background:radial-gradient(circle,rgba(255,160,30,0.35),transparent 70%);"></div>
+    <div class="glow-orb-sm" style="width:350px;height:350px;left:370px;top:1000px;background:radial-gradient(circle,rgba(255,120,0,0.2),transparent 70%);"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.5) 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;"><filter id="noise4"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noise4)"/></svg>
+  </div>
+  <!-- FX: soft float + ray -->
+  <div class="layer-fx">
+    <div id="s4-dota" style="position:absolute;left:100px;top:400px;width:12px;height:12px;border-radius:50%;background:rgba(255,200,50,0.4);"></div>
+    <div id="s4-dotb" style="position:absolute;right:150px;top:1100px;width:9px;height:9px;border-radius:50%;background:rgba(255,160,0,0.3);"></div>
+    <div id="s4-ray" style="position:absolute;left:200px;top:1500px;width:680px;height:2px;background:linear-gradient(90deg,transparent,rgba(255,180,50,0.25),transparent);"></div>
+  </div>
+  <!-- Content: 2 phases -->
+  <div class="layer-content">
+    <div class="phase">
+      <!-- Phase 1: PaddleOCR -->
+      <div id="p4a" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:180px 80px 220px 80px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
+          <div style="display:flex;align-items:center;gap:16px;width:100%;">
+            <span class="tag-pill" style="background:rgba(255,160,30,0.15);color:#FFA01E;border:1px solid rgba(255,160,30,0.3);">国产之光</span>
+            <span class="lang-badge">Python</span>
+          </div>
+          <div class="project-name" style="color:#fff;width:100%;">PaddleOCR</div>
+          <div class="desc-text" style="width:100%;">百度开源 OCR，100+ 语言秒变结构化数据</div>
+          <div class="stat-row" style="width:100%;">
+            <span class="star-icon">&#9733;</span>
+            <span style="font-size:40px;font-weight:700;color:#FFA01E;">79.9K</span>
+            <span style="color:rgba(255,255,255,0.5);">总星</span>
+            <span style="margin-left:auto;color:rgba(255,255,255,0.6);font-size:36px;">+141/天</span>
+          </div>
+          <div class="sell-points" style="width:100%;margin-top:8px;">百度开源 · 百种语言 · 秒变数据</div>
+          <div class="commentary" style="width:100%;margin-top:8px;">图片拖进去就能用</div>
+        </div>
+      </div>
+      <!-- Phase 2: CTA -->
+      <div id="p4b" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:180px 80px 220px 80px;opacity:0;">
+        <div class="grad-text" style="background-image:linear-gradient(135deg,#FFD700,#FF8C00);font-size:96px;font-weight:900;line-height:1.2;text-align:center;">关注 GitHub星探</div>
+        <div style="margin-top:48px;font-size:48px;font-weight:500;color:rgba(255,255,255,0.7);text-align:center;">下期见</div>
+        <div style="display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;justify-content:center;">
+          <span class="tag-pill" style="background:rgba(255,160,30,0.12);color:#FFA01E;border:1px solid rgba(255,160,30,0.25);">#GitHub热门</span>
+          <span class="tag-pill" style="background:rgba(0,200,150,0.12);color:#00C896;border:1px solid rgba(0,200,150,0.25);">#开源</span>
+          <span class="tag-pill" style="background:rgba(160,80,255,0.12);color:#B060FF;border:1px solid rgba(160,80,255,0.25);">#AI</span>
+          <span class="tag-pill" style="background:rgba(0,180,255,0.12);color:#00B4FF;border:1px solid rgba(0,180,255,0.25);">#科技</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- end composition -->
+
+<script>
+window.__timelines = {};
+
+const tl = gsap.timeline({paused: true});
+
+// Total duration from segments
+tl.duration(53.41);
+
+// === Scene 0: hook ===
+tl.fromTo('#s0 .grad-text', {scale:0.8, opacity:0}, {scale:1, opacity:1, duration:0.15, ease:'power3.out'}, 0);
+tl.fromTo('#s0 #hook-sub', {opacity:0, y:30}, {opacity:1, y:0, duration:0.2, ease:'power3.out'}, 0.15);
+tl.fromTo('#s0 #hook-sub2', {opacity:0, y:20}, {opacity:1, y:0, duration:0.2, ease:'power3.out'}, 0.3);
+tl.fromTo('#s0 .tag-pill', {opacity:0, scale:0.9}, {opacity:1, scale:1, duration:0.2, ease:'power3.out'}, 0.4);
+// FX: ring expand + spark
+tl.fromTo('#ring0', {scale:0.5, opacity:0}, {scale:1.5, opacity:0.6, duration:1.5, ease:'power1.out', repeat:-1}, 0);
+tl.fromTo('#ring0b', {scale:0.5, opacity:0}, {scale:1.8, opacity:0.4, duration:2, ease:'power1.out', repeat:-1}, 0.2);
+tl.fromTo('#spark0', {opacity:0.2, scaleY:0.5}, {opacity:0.8, scaleY:1.5, duration:0.8, repeat:-1, yoyo:true, ease:'sine.inOut'}, 0.3);
+
+// === Scene 1: headroom ===
+const s1 = 7.06;
+tl.fromTo('#s1 .tag-pill', {opacity:0, x:-30}, {opacity:1, x:0, duration:0.25, ease:'power3.out'}, s1);
+tl.fromTo('#s1 .grad-text', {opacity:0, scale:0.8}, {opacity:1, scale:1, duration:0.3, ease:'power3.out'}, s1 + 0.15);
+tl.fromTo('#s1 .project-name', {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s1 + 0.35);
+tl.fromTo('#s1 .desc-text', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s1 + 0.55);
+tl.fromTo('#s1 .stat-row', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s1 + 0.75);
+tl.fromTo('#s1 .sell-points', {opacity:0}, {opacity:1, duration:0.25, ease:'power3.out'}, s1 + 0.95);
+// Phase 2: commentary at 11s offset (sentence "等于让AI吃饭只吃一口" at ~11.08s)
+tl.to('#p1a', {opacity:0, duration:0.3, ease:'power2.inOut'}, s1 + 10.5);
+tl.fromTo('#p1b', {opacity:0}, {opacity:1, duration:0.3, ease:'power2.inOut'}, s1 + 10.7);
+// FX: scan line
+tl.fromTo('#scan1', {top:0}, {top:'100%', duration:5, ease:'none', repeat:-1}, s1);
+// FX: dot pulse
+tl.fromTo('#dot1a', {scale:1}, {scale:1.8, opacity:0.2, duration:1.5, repeat:-1, yoyo:true}, s1);
+tl.fromTo('#dot1b', {scale:1}, {scale:1.5, opacity:0.15, duration:2, repeat:-1, yoyo:true}, s1 + 0.5);
+
+// === Scene 2: vtuber ===
+const s2 = 21.82;
+tl.fromTo('#s2 .tag-pill', {opacity:0, x:-30}, {opacity:1, x:0, duration:0.25, ease:'power3.out'}, s2);
+tl.fromTo('#s2 .project-name', {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s2 + 0.15);
+tl.fromTo('#s2 .desc-text', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s2 + 0.35);
+tl.fromTo('#s2 .stat-row', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s2 + 0.55);
+tl.fromTo('#s2 .sell-points', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s2 + 0.75);
+tl.fromTo('#s2 .commentary', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s2 + 0.9);
+// FX: float particles + aura
+tl.fromTo('#fp2a', {y:0}, {y:-80, duration:3, repeat:-1, yoyo:true, ease:'sine.inOut'}, s2);
+tl.fromTo('#fp2b', {y:0}, {y:-60, duration:2.5, repeat:-1, yoyo:true, ease:'sine.inOut'}, s2 + 0.5);
+tl.fromTo('#aura2', {opacity:0.15, x:-50}, {opacity:0.5, x:50, duration:2.5, repeat:-1, yoyo:true, ease:'sine.inOut'}, s2);
+
+// === Scene 3: spec-kit-cosmos (2 phases) ===
+const s3 = 30.15;
+// Phase 1: spec-kit
+tl.fromTo('#p3a .tag-pill', {opacity:0, x:-30}, {opacity:1, x:0, duration:0.25, ease:'power3.out'}, s3);
+tl.fromTo('#p3a .project-name', {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 0.15);
+tl.fromTo('#p3a .desc-text', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 0.35);
+tl.fromTo('#p3a .stat-row', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 0.55);
+tl.fromTo('#p3a .commentary', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s3 + 0.75);
+// Phase 2: cosmos at ~6.54s offset
+tl.to('#p3a', {opacity:0, duration:0.3, ease:'power2.inOut'}, s3 + 6.0);
+tl.fromTo('#p3b', {opacity:0}, {opacity:1, duration:0.3, ease:'power2.inOut'}, s3 + 6.2);
+tl.to("#s3 .phase-2", {opacity: 1, duration: 0.3, ease:'power2.inOut'}, s3 + 6.2);
+tl.fromTo('#p3b .tag-pill', {opacity:0, x:-30}, {opacity:1, x:0, duration:0.25, ease:'power3.out'}, s3 + 6.2);
+tl.fromTo('#p3b .project-name', {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 6.35);
+tl.fromTo('#p3b .desc-text', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 6.55);
+tl.fromTo('#p3b .stat-row', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s3 + 6.75);
+tl.fromTo('#p3b .commentary', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s3 + 6.95);
+// FX: streak sweep
+tl.fromTo('#s3 #s3-streak', {x:-300}, {x:300, duration:4, repeat:-1, ease:'none'}, s3);
+// FX: dots
+tl.fromTo('#s3 #s3-dota', {scale:1}, {scale:2, opacity:0.15, duration:1.8, repeat:-1, yoyo:true}, s3);
+tl.fromTo('#s3 #s3-dotb', {scale:1}, {scale:1.6, opacity:0.1, duration:2.2, repeat:-1, yoyo:true}, s3 + 0.7);
+
+// === Scene 4: cta ===
+const s4 = 43.35;
+// Phase 1: PaddleOCR
+tl.fromTo('#p4a .tag-pill', {opacity:0, x:-30}, {opacity:1, x:0, duration:0.25, ease:'power3.out'}, s4);
+tl.fromTo('#p4a .project-name', {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s4 + 0.15);
+tl.fromTo('#p4a .desc-text', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s4 + 0.35);
+tl.fromTo('#p4a .stat-row', {opacity:0, y:15}, {opacity:1, y:0, duration:0.25, ease:'power3.out'}, s4 + 0.55);
+tl.fromTo('#p4a .sell-points', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s4 + 0.75);
+tl.fromTo('#p4a .commentary', {opacity:0}, {opacity:1, duration:0.2, ease:'power3.out'}, s4 + 0.9);
+// Phase 2: CTA at ~7.5s (sentence "关注GitHub星探" starts at 7.5s)
+tl.to('#p4a', {opacity:0, duration:0.3, ease:'power2.inOut'}, s4 + 7.0);
+tl.fromTo('#p4b', {opacity:0}, {opacity:1, duration:0.3, ease:'power2.inOut'}, s4 + 7.2);
+tl.fromTo('#p4b .grad-text', {scale:0.85}, {scale:1, duration:0.25, ease:'power3.out'}, s4 + 7.2);
+tl.fromTo('#p4b div:nth-child(2)', {opacity:0, y:20}, {opacity:1, y:0, duration:0.2, ease:'power3.out'}, s4 + 7.45);
+tl.fromTo('#p4b div:nth-child(3) .tag-pill', {opacity:0, scale:0.9}, {opacity:1, scale:1, stagger:0.1, duration:0.2, ease:'power3.out'}, s4 + 7.6);
+// FX: float + ray
+tl.fromTo('#s4 #s4-dota', {y:0}, {y:-60, duration:3.5, repeat:-1, yoyo:true, ease:'sine.inOut'}, s4);
+tl.fromTo('#s4 #s4-dotb', {y:0}, {y:-50, duration:2.8, repeat:-1, yoyo:true, ease:'sine.inOut'}, s4 + 0.5);
+tl.fromTo('#s4 #s4-ray', {opacity:0.1, scaleX:0.8}, {opacity:0.4, scaleX:1.2, duration:2, repeat:-1, yoyo:true, ease:'sine.inOut'}, s4);
+
+window.__timelines["main"] = tl;
+
+window.__hf = {
+  duration: 53.41,
+  seek: function(t) {
+    tl.time(t);
+  }
+};
+</script>
+</body>
+</html>

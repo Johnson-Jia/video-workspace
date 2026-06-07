@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920">
+  <title>clipforge-deep-dive</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+    .layer-bg      { position: absolute; inset: 0; z-index: 1; }
+    .layer-fx      { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .layer-content { position: relative; z-index: 3; height: 100%; }
+    .scene-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .phase {
+      position: absolute; inset: 0;
+      padding: 60px 120px 60px 120px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      opacity: 1;
+    }
+    :root {
+      --bg-dark: #060612;
+      --bg-mid: #0a1628;
+      --accent-cyan: #00e5ff;
+      --accent-gold: #f9a825;
+      --accent-green: #00e676;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0cc;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+    .fx-ray {
+      position: absolute;
+      background: linear-gradient(180deg, transparent, rgba(0,229,255,0.3), transparent);
+      width: 2px;
+    }
+    .fx-pulse {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+    }
+    .card-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 24px;
+    }
+    .pill {
+      display: inline-block;
+      background: rgba(0,229,255,0.15);
+      color: var(--accent-cyan);
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: 24px;
+    }
+    .pill-gold {
+      background: rgba(249,168,37,0.15);
+      color: var(--accent-gold);
+    }
+    .hero-title {
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .grad-text {
+      background: linear-gradient(90deg, #00e5ff, #f9a825);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-gold {
+      background: linear-gradient(90deg, #f9a825, #ff6d00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-cyan {
+      background: linear-gradient(90deg, #00e5ff, #7c4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .timeline-node {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 28px;
+    }
+    .node-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .node-line {
+      width: 40px; height: 2px;
+      background: rgba(0,229,255,0.3);
+      flex-shrink: 0;
+    }
+    .compare-left, .compare-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="composition" data-composition-id="main"
+       data-width="1920" data-height="1080"
+       data-start="0" data-duration="131.928">
+    <audio data-track-index="1" data-volume="1" data-start="0"
+           src="narration.mp3" preload="auto"></audio>
+    <audio data-track-index="2" data-volume="0.35" data-start="0"
+           src="bgm.wav" preload="auto" loop></audio>
+
+    <!-- ═══ S1: HOOK (0.0 - 3.6) ═══ -->
+    <div class="clip" id="s1" data-start="0.0" data-duration="3.6">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, #0a1628, #060612);"></div>
+        <div class="glow-orb" style="width:500px;height:500px;background:rgba(0,229,255,0.15);top:10%;left:20%;"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:rgba(249,168,37,0.12);bottom:10%;right:20%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 80px, rgba(0,229,255,0.03) 81px, transparent 82px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s1-burst1" style="position:absolute;width:4px;height:4px;background:var(--accent-cyan);border-radius:50%;top:40%;left:45%;opacity:0.5;"></div>
+        <div id="fx-s1-burst2" style="position:absolute;width:3px;height:3px;background:var(--accent-gold);border-radius:50%;top:55%;right:40%;opacity:0.4;"></div>
+        <div id="fx-s1-burst3" style="position:absolute;width:3px;height:3px;background:#7c4dff;border-radius:50%;top:35%;right:35%;opacity:0.4;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap"><div class="phase" style="text-align:center;">
+          <h1 class="hero-title grad-text" style="font-size:88px;">一行文字到成片</h1>
+          <p style="font-size:36px;color:var(--text-secondary);margin-top:20px;">AI 自己做了条短视频</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- ═══ S2: PAIN (3.6 - 14.64) ═══ -->
+    <div class="clip" id="s2" data-start="3.6" data-duration="11.04">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg, #1a0a0a, #0d0d1a);"></div>
+        <div class="glow-orb" style="width:350px;height:350px;background:rgba(255,60,60,0.08);top:20%;left:10%;"></div>
+        <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%224%22 height=%224%22><rect width=%224%22 height=%224%22 fill=%22transparent%22/><rect width=%221%22 height=%221%22 fill=%22rgba(255,255,255,0.02)%22/></svg>');"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s2-line1" style="position:absolute;width:2px;height:200px;background:linear-gradient(180deg,transparent,rgba(255,80,80,0.2),transparent);left:200px;top:0;opacity:0.3;"></div>
+        <div id="fx-s2-line2" style="position:absolute;width:2px;height:180px;background:linear-gradient(180deg,transparent,rgba(255,80,80,0.15),transparent);right:300px;top:100px;opacity:0.25;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 class="hero-title grad-text-gold" style="font-size:56px;">做一条视频要多久？</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px;max-width:1400px;">
+              <span class="pill pill-gold">选题</span>
+              <span class="pill pill-gold">写文案</span>
+              <span class="pill pill-gold">配音</span>
+              <span class="pill pill-gold">找配乐</span>
+              <span class="pill pill-gold">做画面</span>
+              <span class="pill pill-gold">剪辑</span>
+              <span class="pill pill-gold">封面</span>
+              <span class="pill pill-gold">发布</span>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:80px;font-weight:900;color:var(--accent-gold);">4 小时</p>
+            <p style="font-size:32px;color:var(--text-secondary);margin-top:16px;">每次流程一样，只是内容不同</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S3: SPARK (14.64 - 22.512) ═══ -->
+    <div class="clip" id="s3" data-start="14.64" data-duration="7.872">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg, #0a0a1a, #001a33);"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:rgba(0,229,255,0.1);top:30%;right:20%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 70% 50%, transparent 0deg, rgba(0,229,255,0.02) 2deg, transparent 4deg);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s3-orb1" class="glow-orb" style="width:100px;height:100px;background:rgba(0,229,255,0.15);top:20%;left:30%;"></div>
+        <div id="fx-s3-orb2" class="glow-orb" style="width:80px;height:80px;background:rgba(0,230,118,0.12);bottom:25%;right:25%;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap"><div class="phase" style="text-align:center;">
+          <h2 class="hero-title grad-text-cyan" style="font-size:60px;">重复劳动是天敌</h2>
+          <p style="font-size:32px;color:var(--text-secondary);margin-top:20px;max-width:1200px;">能不能让 AI 驱动每个环节<br>把视频制作变成自动化流水线</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- ═══ S4: PHILOSOPHY (22.512 - 34.68) ═══ -->
+    <div class="clip" id="s4" data-start="22.512" data-duration="12.168">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%, #1a1200, #0a0a12);"></div>
+        <div class="glow-orb" style="width:300px;height:300px;background:rgba(249,168,37,0.1);top:30%;left:10%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 80% 50%, transparent 0px, transparent 60px, rgba(249,168,37,0.02) 61px, transparent 62px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s4-scan" style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent);top:50%;opacity:0.3;"></div>
+        <div id="fx-s4-pulse" style="position:absolute;width:120px;height:120px;border:1px solid rgba(249,168,37,0.2);border-radius:50%;top:40%;left:50%;transform:translate(-50%,-50%);"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 style="font-size:48px;font-weight:800;color:var(--accent-gold);">三条铁律</h2>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <div style="display:flex;gap:24px;justify-content:center;max-width:1600px;">
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:36px;font-weight:800;color:var(--accent-gold);">Schema 即真相</p>
+                <p style="font-size:24px;color:var(--text-secondary);margin-top:8px;">所有依赖定义在 YAML 里</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:36px;font-weight:800;color:var(--accent-cyan);">状态即文件</p>
+                <p style="font-size:24px;color:var(--text-secondary);margin-top:8px;">文件存在就是完成</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:36px;font-weight:800;color:var(--accent-green);">委托不重写</p>
+                <p style="font-size:24px;color:var(--text-secondary);margin-top:8px;">专业工具做专业的事</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S5: PIPELINE (34.68 - 46.728) ═══ -->
+    <div class="clip" id="s5" data-start="34.68" data-duration="12.048">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, #001020, #060612);"></div>
+        <div class="glow-orb" style="width:350px;height:350px;background:rgba(0,229,255,0.08);bottom:20%;left:40%;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg, transparent 49.5%, rgba(0,229,255,0.05) 50%, transparent 50.5%);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s5-node1" style="position:absolute;width:8px;height:8px;background:var(--accent-cyan);border-radius:50%;top:48%;left:15%;opacity:0.4;"></div>
+        <div id="fx-s5-node2" style="position:absolute;width:8px;height:8px;background:var(--accent-cyan);border-radius:50%;top:48%;right:15%;opacity:0.4;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 class="hero-title grad-text-cyan" style="font-size:48px;">9 阶段 DAG 管线</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px;max-width:1400px;">
+              <span class="pill">内容采集</span>
+              <span class="pill">视觉设计</span>
+              <span class="pill">旁白生成</span>
+              <span class="pill">音频合成</span>
+              <span class="pill">视频渲染</span>
+              <span class="pill">平台交付</span>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:40px;font-weight:800;color:var(--accent-cyan);">门禁校验</p>
+            <p style="font-size:28px;color:var(--text-secondary);margin-top:12px;">失败就修复重试，通过才进下一阶段</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S6: RULE ENGINE (46.728 - 58.944) ═══ -->
+    <div class="clip" id="s6" data-start="46.728" data-duration="12.216">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%, #0a1628, #0d0d0d);"></div>
+        <div class="glow-orb" style="width:280px;height:280px;background:rgba(124,77,255,0.08);top:15%;right:25%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(124,77,255,0.02) 41px, transparent 42px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s6-pulse1" class="glow-orb" style="width:60px;height:60px;background:rgba(124,77,255,0.2);top:30%;left:20%;"></div>
+        <div id="fx-s6-pulse2" class="glow-orb" style="width:50px;height:50px;background:rgba(249,168,37,0.15);bottom:30%;right:20%;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 style="font-size:44px;font-weight:800;color:#7c4dff;">规则引擎 · 四原子</h2>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:16px;max-width:1500px;">
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:32px;font-weight:700;color:#7c4dff;">意图</p><p style="font-size:22px;color:var(--text-secondary);">定义目标</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:32px;font-weight:700;color:var(--accent-cyan);">边界</p><p style="font-size:22px;color:var(--text-secondary);">约束行为</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:32px;font-weight:700;color:var(--accent-gold);">门禁</p><p style="font-size:22px;color:var(--text-secondary);">检验产出</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:32px;font-weight:700;color:var(--accent-green);">轨迹</p><p style="font-size:22px;color:var(--text-secondary);">记录全程</p></div>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:40px;font-weight:800;color:var(--accent-gold);">AI 质检系统</p>
+            <p style="font-size:28px;color:var(--text-secondary);margin-top:12px;">让 AI 自由创作，但绝不失控</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S7: INJECT-GATE (58.944 - 70.992) ═══ -->
+    <div class="clip" id="s7" data-start="58.944" data-duration="12.048">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg, #001a0a, #0a0a1a);"></div>
+        <div class="glow-orb" style="width:300px;height:300px;background:rgba(0,230,118,0.08);bottom:20%;left:30%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 30% 70%, transparent 0px, transparent 50px, rgba(0,230,118,0.02) 51px, transparent 52px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s7-flow1" style="position:absolute;width:3px;height:150px;background:linear-gradient(180deg,transparent,rgba(0,230,118,0.2),transparent);left:25%;top:10%;opacity:0.3;"></div>
+        <div id="fx-s7-flow2" style="position:absolute;width:3px;height:120px;background:linear-gradient(180deg,transparent,rgba(0,229,255,0.15),transparent);right:30%;top:200px;opacity:0.25;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 style="font-size:44px;font-weight:800;color:var(--accent-green);">执行四步闭环</h2>
+            <div style="display:flex;gap:12px;align-items:center;justify-content:center;margin-top:16px;">
+              <div class="pill">注入规则</div>
+              <span style="font-size:28px;color:var(--text-secondary);">→</span>
+              <div class="pill">自由创作</div>
+              <span style="font-size:28px;color:var(--text-secondary);">→</span>
+              <div class="pill">门禁校验</div>
+              <span style="font-size:28px;color:var(--text-secondary);">→</span>
+              <div class="pill">轨迹记录</div>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:40px;font-weight:800;color:var(--accent-green);">全程可追溯</p>
+            <p style="font-size:28px;color:var(--text-secondary);margin-top:12px;">每一步都有记录，事后可归因</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S8: VISUAL LAYERS (70.992 - 82.584) ═══ -->
+    <div class="clip" id="s8" data-start="70.992" data-duration="11.592">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg, #0d0d2a, #1a0a2a);"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:rgba(0,229,255,0.1);top:20%;left:20%;"></div>
+        <div class="glow-orb" style="width:300px;height:300px;background:rgba(124,77,255,0.08);bottom:15%;right:15%;"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s8-ring" style="position:absolute;width:200px;height:200px;border:2px solid rgba(0,229,255,0.15);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+        <div id="fx-s8-dot1" style="position:absolute;width:6px;height:6px;background:rgba(0,229,255,0.4);border-radius:50%;top:30%;left:60%;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 class="hero-title grad-text-cyan" style="font-size:48px;">三层视觉架构</h2>
+            <div style="display:flex;gap:24px;justify-content:center;margin-top:16px;max-width:1400px;">
+              <div class="card-item" style="flex:1;text-align:center;border-color:rgba(0,229,255,0.2);">
+                <p style="font-size:36px;font-weight:700;color:var(--accent-cyan);">背景层</p>
+                <p style="font-size:24px;color:var(--text-secondary);">营造氛围</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;border-color:rgba(124,77,255,0.2);">
+                <p style="font-size:36px;font-weight:700;color:#7c4dff;">特效层</p>
+                <p style="font-size:24px;color:var(--text-secondary);">创造动感</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;border-color:rgba(0,230,118,0.2);">
+                <p style="font-size:36px;font-weight:700;color:var(--accent-green);">内容层</p>
+                <p style="font-size:24px;color:var(--text-secondary);">传递信息</p>
+              </div>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:72px;font-weight:900;color:var(--accent-cyan);">30+</p>
+            <p style="font-size:32px;color:var(--text-secondary);margin-top:8px;">HTML + CSS + GSAP 组件自由组合</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S9: DESIGN INSIGHT (82.584 - 94.272) ═══ -->
+    <div class="clip" id="s9" data-start="82.584" data-duration="11.688">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg, #0a1628 50%, #1a1200 50%);"></div>
+        <div class="glow-orb" style="width:350px;height:350px;background:rgba(0,229,255,0.06);top:30%;left:15%;"></div>
+        <div class="glow-orb" style="width:350px;height:350px;background:rgba(249,168,37,0.06);top:30%;right:15%;"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s9-bar" style="position:absolute;left:50%;top:10%;width:2px;height:80%;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.1),transparent);opacity:0.2;"></div>
+        <div id="fx-s9-spark" style="position:absolute;width:5px;height:5px;background:#fff;border-radius:50%;top:45%;left:50%;opacity:0.3;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="flex-direction:row;align-items:center;justify-content:center;gap:40px;">
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:56px;font-weight:900;color:var(--accent-cyan);">流程零自由度</p>
+              <p style="font-size:28px;color:var(--text-secondary);margin-top:8px;">LETTER — 严格遵守</p>
+            </div>
+            <div style="width:3px;height:200px;background:linear-gradient(180deg,var(--accent-cyan),var(--accent-gold));opacity:0.4;"></div>
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:56px;font-weight:900;color:var(--accent-gold);">内容最大自由度</p>
+              <p style="font-size:28px;color:var(--text-secondary);margin-top:8px;">SPIRIT — 自由推导</p>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:40px;font-weight:800;" class="grad-text">把创造力释放到该释放的地方</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S10: TECH STACK (94.272 - 104.256) ═══ -->
+    <div class="clip" id="s10" data-start="94.272" data-duration="9.984">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, #0d1117, #161b22);"></div>
+        <div class="glow-orb" style="width:250px;height:250px;background:rgba(0,229,255,0.06);top:20%;right:20%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(0,229,255,0.015) 81px, transparent 82px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s10-cursor" style="position:absolute;width:2px;height:30px;background:rgba(0,230,118,0.4);top:35%;left:45%;opacity:0.3;"></div>
+        <div id="fx-s10-hl" style="position:absolute;left:20%;width:60%;height:36px;background:rgba(0,229,255,0.04);top:40%;opacity:0.3;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 style="font-size:44px;font-weight:800;color:var(--accent-cyan);">技术栈全景</h2>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:16px;max-width:1500px;">
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:30px;font-weight:700;color:#4FC3F7;">Python</p><p style="font-size:22px;color:var(--text-secondary);">规则引擎</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:30px;font-weight:700;color:var(--accent-cyan);">YAML</p><p style="font-size:22px;color:var(--text-secondary);">声明约束</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:30px;font-weight:700;color:var(--accent-green);">Edge-TTS</p><p style="font-size:22px;color:var(--text-secondary);">语音合成</p></div>
+              <div class="card-item" style="flex:1;text-align:center;"><p style="font-size:30px;font-weight:700;color:var(--accent-gold);">HyperFrames</p><p style="font-size:22px;color:var(--text-secondary);">视频渲染</p></div>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:36px;font-weight:700;color:var(--text-secondary);">每个环节用最合适的工具</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S11: EVOLUTION (104.256 - 115.68) ═══ -->
+    <div class="clip" id="s11" data-start="104.256" data-duration="11.424">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, #1a0a28, #0a0a12);"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:rgba(124,77,255,0.1);top:30%;left:30%;"></div>
+        <div class="glow-orb" style="width:350px;height:350px;background:rgba(249,168,37,0.08);bottom:20%;right:25%;"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s11-ring1" style="position:absolute;width:160px;height:160px;border:2px solid rgba(124,77,255,0.2);border-radius:50%;top:35%;left:35%;"></div>
+        <div id="fx-s11-ring2" style="position:absolute;width:120px;height:120px;border:2px solid rgba(249,168,37,0.15);border-radius:50%;top:40%;right:30%;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="flex-direction:row;align-items:center;justify-content:center;gap:40px;">
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:40px;font-weight:800;color:#7c4dff;">即时闭环</p>
+              <p style="font-size:26px;color:var(--text-secondary);margin-top:8px;">门禁校验 · 每次制作</p>
+            </div>
+            <div style="width:3px;height:160px;background:linear-gradient(180deg,#7c4dff,var(--accent-gold));opacity:0.3;"></div>
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:40px;font-weight:800;color:var(--accent-gold);">延迟闭环</p>
+              <p style="font-size:26px;color:var(--text-secondary);margin-top:8px;">播放数据 · 校准规则</p>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:72px;font-weight:900;color:#7c4dff;">30+</p>
+            <p style="font-size:28px;color:var(--text-secondary);margin-top:8px;">每一条规则来自真实事故复盘</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S12: RESULTS (115.68 - 125.208) ═══ -->
+    <div class="clip" id="s12" data-start="115.68" data-duration="9.528">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg, #1a1200, #0a0a12);"></div>
+        <div class="glow-orb" style="width:300px;height:300px;background:rgba(249,168,37,0.08);top:25%;left:35%;"></div>
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 60% 40%, transparent 0px, transparent 70px, rgba(249,168,37,0.015) 71px, transparent 72px);"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s12-glow1" class="glow-orb" style="width:80px;height:80px;background:rgba(249,168,37,0.15);top:30%;left:20%;"></div>
+        <div id="fx-s12-glow2" class="glow-orb" style="width:60px;height:60px;background:rgba(0,229,255,0.12);bottom:25%;right:25%;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap">
+          <div class="phase phase-1" style="text-align:center;">
+            <h2 style="font-size:44px;font-weight:800;color:var(--accent-gold);">实际成果</h2>
+            <div style="display:flex;gap:24px;justify-content:center;margin-top:16px;max-width:1500px;">
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:56px;font-weight:900;color:var(--accent-gold);">45s</p>
+                <p style="font-size:24px;color:var(--text-secondary);">标准模式</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:56px;font-weight:900;color:var(--accent-cyan);">60s</p>
+                <p style="font-size:24px;color:var(--text-secondary);">深度解析</p>
+              </div>
+              <div class="card-item" style="flex:1;text-align:center;">
+                <p style="font-size:56px;font-weight:900;color:var(--accent-green);">3-5min</p>
+                <p style="font-size:24px;color:var(--text-secondary);">长视频</p>
+              </div>
+            </div>
+          </div>
+          <div class="phase phase-2" style="text-align:center;">
+            <p style="font-size:32px;color:var(--text-secondary);">支持多种内容分类 · cron 定时全自动运行</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ S13: CTA (125.208 - 131.928) ═══ -->
+    <div class="clip" id="s13" data-start="125.208" data-duration="6.72">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, #1a1200, #0a0a12);"></div>
+        <div class="glow-orb" style="width:500px;height:500px;background:rgba(249,168,37,0.1);top:20%;left:30%;"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:rgba(0,229,255,0.06);bottom:15%;right:25%;"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="fx-s13-spark1" style="position:absolute;width:4px;height:4px;background:var(--accent-gold);border-radius:50%;top:35%;left:40%;opacity:0.4;"></div>
+        <div id="fx-s13-spark2" style="position:absolute;width:3px;height:3px;background:var(--accent-cyan);border-radius:50%;top:55%;right:35%;opacity:0.3;"></div>
+      </div>
+      <div class="layer-content">
+        <div class="scene-wrap"><div class="phase" style="text-align:center;">
+          <h2 class="hero-title grad-text-gold" style="font-size:64px;">AI 视频锻造炉</h2>
+          <p style="font-size:32px;color:var(--text-secondary);margin-top:16px;">让创作者专注创意，流程交给机器</p>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+            <span class="pill pill-gold">开源项目</span>
+            <span class="pill">AI 驱动</span>
+            <span class="pill">关注我，下期见</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    window.__timelines = {};
+    const tl = gsap.timeline({paused: true});
+
+    // ── S1: HOOK — t=0 震撼冲击 ──
+    tl.from('#s1 h1', {scale:0.85, opacity:0, duration:0.15, ease:'power3.out'}, 0);
+    tl.from('#s1 p', {opacity:0, y:20, duration:0.2, ease:'power3.out'}, 0.15);
+    gsap.to('#fx-s1-burst1', {repeat:-1, yoyo:true, duration:2, scale:1.5, opacity:0.2});
+    gsap.to('#fx-s1-burst2', {repeat:-1, yoyo:true, duration:2.5, scale:1.3, opacity:0.15});
+    gsap.to('#fx-s1-burst3', {repeat:-1, yoyo:true, duration:1.8, scale:1.4, opacity:0.15});
+
+    // ── S2: PAIN — phase 切换 ──
+    tl.set('#s2 .phase-2', {opacity:0}, 3.6);
+    tl.from('#s2 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 3.6);
+    tl.from('#s2 .phase-1 .pill', {opacity:0, scale:0.8, duration:0.3, stagger:0.08, ease:'power3.out'}, 3.8);
+    tl.to('#s2 .phase-1', {opacity:0, duration:0.4}, 9.2);
+    tl.to('#s2 .phase-2', {opacity:1, duration:0.4}, 9.2);
+    tl.from('#s2 .phase-2 p', {scale:0.9, opacity:0, duration:0.4, ease:'power3.out'}, 9.3);
+    gsap.to('#fx-s2-line1', {repeat:-1, yoyo:true, duration:3, y:80, opacity:0.15});
+    gsap.to('#fx-s2-line2', {repeat:-1, yoyo:true, duration:2.5, y:-60, opacity:0.12});
+
+    // ── S3: SPARK ──
+    tl.from('#s3 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 14.64);
+    tl.from('#s3 p', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 15.0);
+    gsap.to('#fx-s3-orb1', {repeat:-1, yoyo:true, duration:3, x:30, y:20, opacity:0.1});
+    gsap.to('#fx-s3-orb2', {repeat:-1, yoyo:true, duration:2.5, x:-20, y:-15, opacity:0.08});
+
+    // ── S4: PHILOSOPHY ──
+    tl.set('#s4 .phase-2', {opacity:0}, 22.512);
+    tl.from('#s4 .phase-1 h2', {opacity:0, scale:0.9, duration:0.4, ease:'power3.out'}, 22.512);
+    tl.to('#s4 .phase-1', {opacity:0, duration:0.4}, 28.6);
+    tl.to('#s4 .phase-2', {opacity:1, duration:0.4}, 28.6);
+    tl.from('#s4 .phase-2 .card-item', {opacity:0, y:20, duration:0.3, stagger:0.1, ease:'power3.out'}, 28.7);
+    gsap.to('#fx-s4-scan', {repeat:-1, yoyo:true, duration:3, y:200, opacity:0.15});
+    gsap.to('#fx-s4-pulse', {repeat:-1, yoyo:true, duration:2, scale:1.3, opacity:0.1});
+
+    // ── S5: PIPELINE ──
+    tl.set('#s5 .phase-2', {opacity:0}, 34.68);
+    tl.from('#s5 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 34.68);
+    tl.from('#s5 .phase-1 .pill', {opacity:0, scale:0.85, duration:0.3, stagger:0.06, ease:'power3.out'}, 35.0);
+    tl.to('#s5 .phase-1', {opacity:0, duration:0.4}, 40.7);
+    tl.to('#s5 .phase-2', {opacity:1, duration:0.4}, 40.7);
+    tl.from('#s5 .phase-2 p', {opacity:0, scale:0.9, duration:0.4, ease:'power3.out'}, 40.8);
+    gsap.to('#fx-s5-node1', {repeat:-1, yoyo:true, duration:2, scale:1.5, opacity:0.2});
+    gsap.to('#fx-s5-node2', {repeat:-1, yoyo:true, duration:2.5, scale:1.4, opacity:0.2});
+
+    // ── S6: RULE ENGINE ──
+    tl.set('#s6 .phase-2', {opacity:0}, 46.728);
+    tl.from('#s6 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 46.728);
+    tl.from('#s6 .phase-1 .card-item', {opacity:0, y:20, duration:0.3, stagger:0.08, ease:'power3.out'}, 47.0);
+    tl.to('#s6 .phase-1', {opacity:0, duration:0.4}, 53.5);
+    tl.to('#s6 .phase-2', {opacity:1, duration:0.4}, 53.5);
+    tl.from('#s6 .phase-2 p', {scale:0.9, opacity:0, duration:0.4, ease:'power3.out'}, 53.6);
+    gsap.to('#fx-s6-pulse1', {repeat:-1, yoyo:true, duration:2, scale:1.4, opacity:0.1});
+    gsap.to('#fx-s6-pulse2', {repeat:-1, yoyo:true, duration:2.5, scale:1.3, opacity:0.08});
+
+    // ── S7: INJECT-GATE ──
+    tl.set('#s7 .phase-2', {opacity:0}, 58.944);
+    tl.from('#s7 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 58.944);
+    tl.from('#s7 .phase-1 .pill', {opacity:0, scale:0.85, duration:0.3, stagger:0.06, ease:'power3.out'}, 59.2);
+    tl.to('#s7 .phase-1', {opacity:0, duration:0.4}, 65.5);
+    tl.to('#s7 .phase-2', {opacity:1, duration:0.4}, 65.5);
+    tl.from('#s7 .phase-2 p', {opacity:0, scale:0.9, duration:0.4, ease:'power3.out'}, 65.6);
+    gsap.to('#fx-s7-flow1', {repeat:-1, yoyo:true, duration:3, y:100, opacity:0.12});
+    gsap.to('#fx-s7-flow2', {repeat:-1, yoyo:true, duration:2.5, y:-80, opacity:0.1});
+
+    // ── S8: VISUAL LAYERS ──
+    tl.set('#s8 .phase-2', {opacity:0}, 70.992);
+    tl.from('#s8 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 70.992);
+    tl.from('#s8 .phase-1 .card-item', {opacity:0, y:20, duration:0.3, stagger:0.08, ease:'power3.out'}, 71.3);
+    tl.to('#s8 .phase-1', {opacity:0, duration:0.4}, 77.4);
+    tl.to('#s8 .phase-2', {opacity:1, duration:0.4}, 77.4);
+    tl.from('#s8 .phase-2 p', {scale:0.85, opacity:0, duration:0.4, ease:'power3.out'}, 77.5);
+    gsap.to('#fx-s8-ring', {repeat:-1, yoyo:true, duration:3, scale:1.2, opacity:0.08});
+    gsap.to('#fx-s8-dot1', {repeat:-1, yoyo:true, duration:2, y:20, x:-15, opacity:0.2});
+
+    // ── S9: DESIGN INSIGHT ──
+    tl.set('#s9 .phase-2', {opacity:0}, 82.584);
+    tl.from('#s9 .phase-1 p', {opacity:0, y:20, duration:0.4, stagger:0.1, ease:'power3.out'}, 82.584);
+    tl.to('#s9 .phase-1', {opacity:0, duration:0.4}, 89.2);
+    tl.to('#s9 .phase-2', {opacity:1, duration:0.4}, 89.2);
+    tl.from('#s9 .phase-2 p', {scale:0.9, opacity:0, duration:0.4, ease:'power3.out'}, 89.3);
+    gsap.to('#fx-s9-spark', {repeat:-1, yoyo:true, duration:1.5, scale:2, opacity:0.1});
+
+    // ── S10: TECH STACK ──
+    tl.set('#s10 .phase-2', {opacity:0}, 94.272);
+    tl.from('#s10 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 94.272);
+    tl.from('#s10 .phase-1 .card-item', {opacity:0, y:20, duration:0.3, stagger:0.08, ease:'power3.out'}, 94.5);
+    tl.to('#s10 .phase-1', {opacity:0, duration:0.4}, 100.0);
+    tl.to('#s10 .phase-2', {opacity:1, duration:0.4}, 100.0);
+    tl.from('#s10 .phase-2 p', {opacity:0, duration:0.3, ease:'power3.out'}, 100.1);
+    gsap.to('#fx-s10-cursor', {repeat:-1, yoyo:true, duration:1, y:30, opacity:0.15});
+    gsap.to('#fx-s10-hl', {repeat:-1, yoyo:true, duration:2, y:60, opacity:0.15});
+
+    // ── S11: EVOLUTION ──
+    tl.set('#s11 .phase-2', {opacity:0}, 104.256);
+    tl.from('#s11 .phase-1 p', {opacity:0, y:20, duration:0.4, stagger:0.1, ease:'power3.out'}, 104.256);
+    tl.to('#s11 .phase-1', {opacity:0, duration:0.4}, 110.5);
+    tl.to('#s11 .phase-2', {opacity:1, duration:0.4}, 110.5);
+    tl.from('#s11 .phase-2 p', {scale:0.85, opacity:0, duration:0.4, ease:'power3.out'}, 110.6);
+    gsap.to('#fx-s11-ring1', {repeat:-1, yoyo:true, duration:3, scale:1.15, opacity:0.08});
+    gsap.to('#fx-s11-ring2', {repeat:-1, yoyo:true, duration:2.5, scale:1.2, opacity:0.06});
+
+    // ── S12: RESULTS ──
+    tl.set('#s12 .phase-2', {opacity:0}, 115.68);
+    tl.from('#s12 .phase-1 h2', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 115.68);
+    tl.from('#s12 .phase-1 .card-item', {opacity:0, scale:0.9, duration:0.3, stagger:0.08, ease:'power3.out'}, 115.9);
+    tl.to('#s12 .phase-1', {opacity:0, duration:0.4}, 121.5);
+    tl.to('#s12 .phase-2', {opacity:1, duration:0.4}, 121.5);
+    tl.from('#s12 .phase-2 p', {opacity:0, duration:0.3, ease:'power3.out'}, 121.6);
+    gsap.to('#fx-s12-glow1', {repeat:-1, yoyo:true, duration:2, scale:1.3, opacity:0.08});
+    gsap.to('#fx-s12-glow2', {repeat:-1, yoyo:true, duration:2.5, scale:1.2, opacity:0.06});
+
+    // ── S13: CTA ──
+    tl.from('#s13 h2', {scale:0.85, opacity:0, duration:0.4, ease:'power3.out'}, 125.208);
+    tl.from('#s13 p', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 125.5);
+    tl.from('#s13 .pill', {opacity:0, scale:0.85, duration:0.3, stagger:0.08, ease:'power3.out'}, 125.7);
+    gsap.to('#fx-s13-spark1', {repeat:-1, yoyo:true, duration:2, scale:1.5, opacity:0.15});
+    gsap.to('#fx-s13-spark2', {repeat:-1, yoyo:true, duration:1.8, scale:1.3, opacity:0.1});
+
+    // ── HyperFrames API ──
+    window.__hf = { duration: 131.928, seek: function(t) { tl.time(t, false); } };
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

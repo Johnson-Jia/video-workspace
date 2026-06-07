@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg-dark: #0a0a1a;
+    --bg-mid: #1a1a2e;
+    --accent: #00f5d4;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0c0;
+    --highlight: #ff6b35;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg-dark); overflow: hidden; }
+
+  .clip {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px; height: 1920px;
+    overflow: hidden;
+  }
+
+  /* === Scene 1: Hook === */
+  #scene1 {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #16213e 50%, var(--bg-mid) 100%);
+  }
+  #scene1::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hook-wrap {
+    position: absolute;
+    width: 1080px; height: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .hook-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 8px;
+  }
+  .hook-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 88px;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .hook-title .accent { color: var(--accent); }
+  .hook-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .hook-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    color: var(--highlight);
+    margin-top: 20px;
+  }
+
+  /* === Project cards === */
+  #scene2, #scene3, #scene4 {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-mid) 100%);
+  }
+  .center-wrap {
+    position: absolute;
+    width: 1080px; height: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 45px;
+    padding: 0 60px;
+  }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: 4px;
+  }
+  .project-card {
+    width: 960px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,245,212,0.2);
+    border-radius: 16px;
+    padding: 44px 40px;
+  }
+  .project-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .project-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 34px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .project-stats {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    color: var(--text-secondary);
+  }
+  .stat .num { color: var(--highlight); font-weight: 700; }
+  .lang-tag {
+    display: inline-block;
+    background: rgba(0,245,212,0.15);
+    color: var(--accent);
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+  }
+
+  /* === Scene 4 CTA specific === */
+  .cta-divider {
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .cta-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .cta-title .accent { color: var(--accent); }
+  .cta-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .cta-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #00c9a7);
+    color: var(--bg-dark);
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  /* Grid overlay */
+  .grid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px; height: 1920px;
+    pointer-events: none;
+    opacity: 0.03;
+  }
+  .grid line { stroke: var(--accent); stroke-width: 1; }
+</style>
+</head>
+<body>
+
+<div data-composition-id="video" data-width="1080" data-height="1920" data-start="0" data-duration="29">
+
+  <!-- Audio: narration -->
+  <audio id="narration" src="narration.mp3" data-start="0" data-duration="29" data-track-index="0" data-volume="1"></audio>
+
+  <!-- Scene 1: Hook (0-4s) -->
+  <div id="scene1" class="clip" data-start="0" data-duration="4">
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="180" y1="0" x2="180" y2="1920"/>
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+      <line x1="900" y1="0" x2="900" y2="1920"/>
+    </svg>
+    <div class="hook-wrap">
+      <div class="hook-label">每 日 开 源</div>
+      <div class="hook-title">今天 GitHub<br><span class="accent">涨星最快</span></div>
+      <div class="hook-sub">5 个值得关注的开源项目</div>
+      <div class="hook-date">2026-05-15</div>
+    </div>
+  </div>
+
+  <!-- Scene 2: Projects 1+2 (4-13s) -->
+  <div id="scene2" class="clip" data-start="4" data-duration="9">
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+    </svg>
+    <div class="center-wrap">
+      <div class="section-label">开源项目</div>
+      <div class="project-card">
+        <div class="project-name">ossu/computer-science</div>
+        <div class="project-desc">免费自学计算机科学的完整路线图</div>
+        <div class="project-stats">
+          <span class="stat"><span class="num">203K</span> Star</span>
+          <span class="stat">今日 <span class="num">+332</span></span>
+          <span class="lang-tag">HTML</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-name">4ian/GDevelop</div>
+        <div class="project-desc">开源跨平台游戏引擎，支持 2D/3D</div>
+        <div class="project-stats">
+          <span class="stat"><span class="num">22.8K</span> Star</span>
+          <span class="stat">今日 <span class="num">+180</span></span>
+          <span class="lang-tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: Projects 3+4 (13-22s) -->
+  <div id="scene3" class="clip" data-start="13" data-duration="9">
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+    </svg>
+    <div class="center-wrap">
+      <div class="section-label">人工智能</div>
+      <div class="project-card">
+        <div class="project-name">frdel/agent-zero</div>
+        <div class="project-desc">AI 智能体框架，灵活可定制</div>
+        <div class="project-stats">
+          <span class="stat"><span class="num">17.6K</span> Star</span>
+          <span class="stat">今日 <span class="num">+163</span></span>
+          <span class="lang-tag">Python</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-name">ToTheBeginning/PuLID</div>
+        <div class="project-desc">AI 人脸定制技术，NeurIPS 2024</div>
+        <div class="project-stats">
+          <span class="stat"><span class="num">3.5K</span> Star</span>
+          <span class="stat">今日 <span class="num">+149</span></span>
+          <span class="lang-tag">Python</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Valkey + CTA (22-29s) -->
+  <div id="scene4" class="clip" data-start="22" data-duration="7">
+    <svg class="grid" viewBox="0 0 1080 1920">
+      <line x1="540" y1="0" x2="540" y2="1920"/>
+    </svg>
+    <div class="center-wrap">
+      <div class="section-label">基础设施</div>
+      <div class="project-card">
+        <div class="project-name">valkey-io/valkey</div>
+        <div class="project-desc">高性能键值数据库，缓存新选择</div>
+        <div class="project-stats">
+          <span class="stat"><span class="num">25.7K</span> Star</span>
+          <span class="stat">今日 <span class="num">+69</span></span>
+          <span class="lang-tag">C</span>
+        </div>
+      </div>
+      <div class="cta-divider"></div>
+      <div class="cta-title"><span class="accent">关注</span>每天更新</div>
+      <div class="cta-subtitle">每日 GitHub 热门开源项目</div>
+      <div class="cta-badge">GitHub Trending</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+
+const tl = gsap.timeline({paused: true});
+
+// Scene 1: Hook animations
+tl.from('#scene1 .hook-label', {opacity: 0, y: -30, duration: 0.3, ease: 'power3.out'}, 0)
+  .from('#scene1 .hook-title', {opacity: 0, scale: 0.8, duration: 0.4, ease: 'power3.out'}, 0.1)
+  .from('#scene1 .hook-sub', {opacity: 0, y: 20, duration: 0.3, ease: 'power3.out'}, 0.3)
+  .from('#scene1 .hook-date', {opacity: 0, duration: 0.2}, 0.5)
+
+// Scene 2: Projects A
+  .from('#scene2 .section-label', {opacity: 0, x: -30, duration: 0.25, ease: 'power3.out'}, 4)
+  .from('#scene2 .project-card:nth-child(2)', {opacity: 0, y: 40, duration: 0.3, ease: 'power3.out'}, 4.2)
+  .from('#scene2 .project-card:nth-child(3)', {opacity: 0, y: 40, duration: 0.3, ease: 'power3.out'}, 4.6)
+
+// Scene 3: Projects B
+  .from('#scene3 .section-label', {opacity: 0, x: -30, duration: 0.25, ease: 'power3.out'}, 13)
+  .from('#scene3 .project-card:nth-child(2)', {opacity: 0, y: 40, duration: 0.3, ease: 'power3.out'}, 13.2)
+  .from('#scene3 .project-card:nth-child(3)', {opacity: 0, y: 40, duration: 0.3, ease: 'power3.out'}, 13.6)
+
+// Scene 4: CTA
+  .from('#scene4 .section-label', {opacity: 0, x: -30, duration: 0.25, ease: 'power3.out'}, 22)
+  .from('#scene4 .project-card', {opacity: 0, y: 40, duration: 0.3, ease: 'power3.out'}, 22.2)
+  .from('#scene4 .cta-divider', {opacity: 0, scaleX: 0, duration: 0.3, ease: 'power3.out'}, 23)
+  .from('#scene4 .cta-title', {opacity: 0, y: 20, duration: 0.3, ease: 'power3.out'}, 23.3)
+  .from('#scene4 .cta-subtitle', {opacity: 0, duration: 0.2}, 23.5)
+  .from('#scene4 .cta-badge', {opacity: 0, scale: 0.8, duration: 0.3, ease: 'back.out(1.7)'}, 23.7);
+
+window.__timelines["video"] = tl;
+</script>
+</body>
+</html>

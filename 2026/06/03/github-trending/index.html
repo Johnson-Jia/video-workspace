@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.clip{position:absolute;inset:0;overflow:hidden}
+.scene-wrap{position:relative;width:100%;height:100%;overflow:hidden}
+.layer-bg{position:absolute;inset:0;z-index:1}
+.layer-fx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.layer-content{position:relative;z-index:3;height:100%}
+.phase{padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;min-height:100%}
+.grad-text{-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="56.77">
+  <audio data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.18" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- S1: Hook 0-4.45s -->
+  <div class="clip" id="s1" data-start="0" data-duration="4.45">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a12 0%,#1a0a00 50%,#0a0a12 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,180,0,0.25) 0%,transparent 60%)"></div>
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,200,50,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,200,50,0.04) 1px,transparent 1px);background-size:60px 60px"></div>
+        <div style="position:absolute;width:400px;height:400px;top:20%;left:30%;border-radius:50%;background:rgba(255,200,50,0.12);filter:blur(80px)"></div>
+        <div style="position:absolute;width:300px;height:300px;bottom:30%;right:20%;border-radius:50%;background:rgba(0,180,255,0.08);filter:blur(60px)"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s1-r1" style="position:absolute;width:2px;height:100%;left:30%;background:linear-gradient(to bottom,rgba(255,200,50,0.5),transparent);opacity:0.3"></div>
+        <div id="s1-r2" style="position:absolute;width:2px;height:100%;left:50%;background:linear-gradient(to bottom,rgba(255,200,50,0.4),transparent);opacity:0.3"></div>
+        <div id="s1-r3" style="position:absolute;width:2px;height:100%;left:70%;background:linear-gradient(to bottom,rgba(255,200,50,0.3),transparent);opacity:0.3"></div>
+        <div id="s1-d1" style="position:absolute;width:10px;height:10px;top:25%;left:20%;border-radius:50%;background:#FFD700;opacity:0.4"></div>
+        <div id="s1-d2" style="position:absolute;width:10px;height:10px;top:35%;right:25%;border-radius:50%;background:#FFD700;opacity:0.4"></div>
+        <div id="s1-d3" style="position:absolute;width:10px;height:10px;top:55%;left:40%;border-radius:50%;background:#00D4FF;opacity:0.4"></div>
+        <div id="s1-d4" style="position:absolute;width:10px;height:10px;top:65%;right:35%;border-radius:50%;background:#00D4FF;opacity:0.4"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" style="align-items:center">
+          <div style="text-align:center">
+            <div style="font-size:36px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:20px">6月3日</div>
+            <div id="s1-num" style="font-family:'Inter','PingFang SC',sans-serif;font-size:160px;font-weight:900;color:#FFD700;text-shadow:0 0 60px rgba(255,215,0,0.5);line-height:1">+3618</div>
+            <div style="font-size:38px;font-weight:600;color:rgba(255,215,0,0.7);margin-top:16px">最高单日涨星</div>
+            <div id="s1-sub" style="font-family:'Inter','PingFang SC',sans-serif;font-size:42px;font-weight:600;color:rgba(255,255,255,0.8);margin-top:30px">GitHub 今日热门项目速览</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: headroom 4.45-19.68s 15.23s 2 phases -->
+  <div class="clip" id="s2" data-start="4.45" data-duration="15.23">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,#060818 0%,#001a33 40%,#0a0a12 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,212,255,0.15) 0%,transparent 50%)"></div>
+        <div style="position:absolute;width:350px;height:350px;top:15%;right:10%;border-radius:50%;background:rgba(0,150,255,0.1);filter:blur(70px)"></div>
+        <div style="position:absolute;width:250px;height:250px;bottom:25%;left:15%;border-radius:50%;background:rgba(0,229,160,0.08);filter:blur(50px)"></div>
+        <div style="position:absolute;inset:0;background-image:repeating-radial-gradient(circle at 50% 50%,transparent 0px,transparent 40px,rgba(0,212,255,0.02) 41px,transparent 42px)"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s2-scan" style="position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.4),transparent)"></div>
+        <div id="s2-o1" style="position:absolute;width:120px;height:120px;top:20%;left:10%;border-radius:50%;background:rgba(0,212,255,0.2);filter:blur(30px)"></div>
+        <div id="s2-o2" style="position:absolute;width:80px;height:80px;bottom:30%;right:15%;border-radius:50%;background:rgba(0,229,160,0.15);filter:blur(30px)"></div>
+        <div id="s2-o3" style="position:absolute;width:60px;height:60px;top:60%;left:70%;border-radius:50%;background:rgba(0,150,255,0.18);filter:blur(30px)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" id="s2-p1" style="align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#00D4FF">01</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#00D4FF">chopratejas/headroom</span>
+            </div>
+            <div class="grad-text" style="font-family:'PingFang SC',sans-serif;font-size:72px;font-weight:800;margin-top:30px;background-image:linear-gradient(135deg,#00D4FF,#00E5A0)">AI 瘦身 95%</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:38px;color:rgba(255,255,255,0.75);line-height:1.5;margin-top:20px">工具输出、日志、RAG 文本<br>压缩 60-95%，答案质量不变</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+              <span style="font-size:28px;font-weight:600;padding:6px 16px;border-radius:8px;border:1px solid rgba(0,212,255,0.3);color:rgba(255,255,255,0.6)">Python</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(0,229,160,0.15);color:#00E5A0">6.6K ★</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,140,50,0.15);color:#FF8C32">+1265 今日</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase" id="s2-p2" style="position:absolute;inset:0;padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="font-family:'Inter',sans-serif;font-size:120px;font-weight:900;color:#00D4FF;line-height:1">95%</div>
+            <div style="font-size:42px;font-weight:600;color:rgba(255,255,255,0.6);margin-top:16px">Token 压缩比</div>
+            <div style="margin-top:40px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(0,212,255,0.1);color:#00D4FF">极速压缩</div>
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(0,229,160,0.1);color:#00E5A0">质量无损</div>
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(255,140,50,0.1);color:#FF8C32">MCP 集成</div>
+            </div>
+            <div style="margin-top:36px;font-size:36px;color:rgba(255,255,255,0.5);font-style:italic">"AI 每天处理的信息，95% 都是包装纸"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: ECC 19.68-32.8s 13.12s 2 phases -->
+  <div class="clip" id="s3" data-start="19.68" data-duration="13.12">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0a0a12 0%,#1a0f00 50%,#0a0a12 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(255,200,50,0.2) 0%,transparent 55%)"></div>
+        <div style="position:absolute;width:500px;height:500px;top:10%;left:20%;border-radius:50%;background:rgba(255,180,0,0.1);filter:blur(90px)"></div>
+        <div style="position:absolute;width:300px;height:300px;bottom:20%;right:10%;border-radius:50%;background:rgba(0,212,255,0.06);filter:blur(50px)"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s3-r1" style="position:absolute;width:300px;height:300px;top:30%;left:35%;border-radius:50%;border:2px solid rgba(255,200,50,0.3);opacity:0.3"></div>
+        <div id="s3-r2" style="position:absolute;width:200px;height:200px;top:35%;left:40%;border-radius:50%;border:2px solid rgba(255,200,50,0.2);opacity:0.3"></div>
+        <div id="s3-r3" style="position:absolute;width:400px;height:400px;top:25%;left:30%;border-radius:50%;border:2px solid rgba(255,200,50,0.15);opacity:0.3"></div>
+        <div id="s3-o1" style="position:absolute;width:100px;height:100px;top:50%;right:20%;border-radius:50%;background:rgba(255,200,50,0.15);filter:blur(30px)"></div>
+        <div id="s3-d1" style="position:absolute;width:12px;height:12px;top:15%;left:50%;border-radius:50%;background:#FFD700;opacity:0.4"></div>
+        <div id="s3-d2" style="position:absolute;width:10px;height:10px;top:70%;right:30%;border-radius:50%;background:#FFD700;opacity:0.4"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" id="s3-p1" style="align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#FFD700">02</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#fff">affaan-m/ECC</span>
+            </div>
+            <div class="grad-text" style="font-family:'Inter',sans-serif;font-size:140px;font-weight:900;margin-top:30px;background-image:linear-gradient(135deg,#FFD700,#FF8C32)">204K ★</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:38px;color:rgba(255,255,255,0.75);line-height:1.5;margin-top:20px">编程 Agent 性能优化系统<br>给 AI 助手加上直觉和记忆</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+              <span style="font-size:28px;font-weight:600;padding:6px 16px;border-radius:8px;border:1px solid rgba(255,200,50,0.3);color:rgba(255,255,255,0.6)">JavaScript</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,200,50,0.15);color:#FFD700">总星榜最高</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,140,50,0.15);color:#FF8C32">+1533 今日</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase" id="s3-p2" style="position:absolute;inset:0;padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="font-size:48px;font-weight:700;color:rgba(255,255,255,0.5)">就像训练运动员的肌肉记忆</div>
+            <div style="margin-top:40px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(255,200,50,0.1);color:#FFD700">直觉增强</div>
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(0,229,160,0.1);color:#00E5A0">记忆持久</div>
+              <div style="font-size:36px;font-weight:500;padding:10px 24px;border-radius:12px;background:rgba(0,212,255,0.1);color:#00D4FF">多平台适配</div>
+            </div>
+            <div style="margin-top:36px;font-family:'Inter',sans-serif;font-size:56px;font-weight:800;color:#FF8C32">+1500 ★ / 天</div>
+            <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-top:12px">总星数整个榜单最高</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: hermes+markitdown 32.8-43.14s 10.34s 2 phases -->
+  <div class="clip" id="s4" data-start="32.8" data-duration="10.34">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0812 0%,#0a1520 30%,#150a08 70%,#0a0a12 100%)"></div>
+        <div style="position:absolute;width:350px;height:350px;top:20%;left:10%;border-radius:50%;background:rgba(0,212,255,0.12);filter:blur(70px)"></div>
+        <div style="position:absolute;width:350px;height:350px;top:25%;right:10%;border-radius:50%;background:rgba(255,140,50,0.12);filter:blur(70px)"></div>
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:80px 80px"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s4-sw" style="position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,rgba(0,212,255,0.5),rgba(255,140,50,0.5));opacity:0.4"></div>
+        <div id="s4-o1" style="position:absolute;width:150px;height:150px;top:40%;left:5%;border-radius:50%;background:rgba(0,212,255,0.15);filter:blur(30px)"></div>
+        <div id="s4-o2" style="position:absolute;width:120px;height:120px;top:35%;right:8%;border-radius:50%;background:rgba(255,140,50,0.15);filter:blur(30px)"></div>
+        <div id="s4-d1" style="position:absolute;width:10px;height:10px;top:20%;left:30%;border-radius:50%;background:#00D4FF;opacity:0.4"></div>
+        <div id="s4-d2" style="position:absolute;width:10px;height:10px;top:75%;right:25%;border-radius:50%;background:#FF8C32;opacity:0.4"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" id="s4-p1" style="align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#00D4FF">03</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#00D4FF">nesquena/hermes-webui</span>
+            </div>
+            <div class="grad-text" style="font-family:'PingFang SC',sans-serif;font-size:68px;font-weight:800;margin-top:24px;background-image:linear-gradient(135deg,#00D4FF,#00E5A0)">AI Agent 搬到手机上</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:38px;color:rgba(255,255,255,0.75);margin-top:20px">网页和手机都能用的 Agent 前端</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+              <span style="font-size:28px;font-weight:600;padding:6px 16px;border-radius:8px;border:1px solid rgba(0,212,255,0.3);color:rgba(255,255,255,0.6)">Python</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(0,229,160,0.15);color:#00E5A0">12.6K ★</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,140,50,0.15);color:#FF8C32">+1722 加速</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase" id="s4-p2" style="position:absolute;inset:0;padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#FF8C32">★</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#FF8C32">microsoft/markitdown</span>
+            </div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:60px;font-weight:800;margin-top:20px;color:rgba(255,255,255,0.8)">连续霸榜 · 文件转 Markdown</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,200,50,0.15);color:#FFD700">141K ★</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,140,50,0.15);color:#FF8C32">+3618 今日最高</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5: flowsint+VoxCPM 43.14-54.8s 11.66s 2 phases -->
+  <div class="clip" id="s5" data-start="43.14" data-duration="11.66">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a12 0%,#001a1a 40%,#0a0f0a 70%,#0a0a12 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 45%,rgba(0,180,140,0.12) 0%,transparent 50%)"></div>
+        <div style="position:absolute;width:300px;height:300px;top:25%;right:15%;border-radius:50%;background:rgba(0,229,160,0.08);filter:blur(60px)"></div>
+        <div style="position:absolute;width:250px;height:250px;bottom:20%;left:20%;border-radius:50%;background:rgba(0,180,160,0.06);filter:blur(50px)"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s5-n1" style="position:absolute;width:12px;height:12px;top:20%;left:20%;border-radius:50%;background:#00E5A0;opacity:0.4"></div>
+        <div id="s5-n2" style="position:absolute;width:10px;height:10px;top:35%;left:55%;border-radius:50%;background:#00E5A0;opacity:0.4"></div>
+        <div id="s5-n3" style="position:absolute;width:10px;height:10px;top:55%;left:35%;border-radius:50%;background:#00D4FF;opacity:0.4"></div>
+        <div id="s5-n4" style="position:absolute;width:12px;height:12px;top:70%;right:25%;border-radius:50%;background:#00E5A0;opacity:0.4"></div>
+        <div id="s5-l1" style="position:absolute;height:1px;top:22%;left:22%;width:300px;background:linear-gradient(90deg,rgba(0,229,160,0.3),transparent);transform:rotate(15deg);opacity:0.2"></div>
+        <div id="s5-l2" style="position:absolute;height:1px;top:40%;left:36%;width:250px;background:linear-gradient(90deg,rgba(0,229,160,0.2),transparent);transform:rotate(-10deg);opacity:0.2"></div>
+        <div id="s5-o1" style="position:absolute;width:100px;height:100px;top:50%;right:10%;border-radius:50%;background:rgba(0,180,160,0.12);filter:blur(30px)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" id="s5-p1" style="align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#00E5A0">04</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#00E5A0">reconurge/flowsint</span>
+            </div>
+            <div class="grad-text" style="font-family:'PingFang SC',sans-serif;font-size:64px;font-weight:800;margin-top:24px;background-image:linear-gradient(135deg,#00E5A0,#00D4FF)">像破案一样追踪线索</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:38px;color:rgba(255,255,255,0.75);line-height:1.5;margin-top:20px">可视化图谱做网络安全调查<br>为安全分析师打造的调查平台</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+              <span style="font-size:28px;font-weight:600;padding:6px 16px;border-radius:8px;border:1px solid rgba(0,229,160,0.3);color:rgba(255,255,255,0.6)">TypeScript</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(0,229,160,0.15);color:#00E5A0">4.5K ★</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(0,212,255,0.15);color:#00D4FF">新上榜</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase" id="s5-p2" style="position:absolute;inset:0;padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div style="text-align:center;width:100%;max-width:920px">
+            <div style="display:flex;align-items:baseline;gap:20px;justify-content:center">
+              <span style="font-size:64px;font-weight:800;opacity:0.3;color:#FF8C32">★</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:#FF8C32">OpenBMB/VoxCPM</span>
+            </div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:56px;font-weight:800;margin-top:20px;color:rgba(255,255,255,0.8)">无分词器语音克隆</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:38px;color:rgba(255,255,255,0.75);line-height:1.5;margin-top:16px">多语言语音合成，不用分词器也能克隆声音<br>又涨了 783 星</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(255,140,50,0.15);color:#FF8C32">25.2K ★</span>
+              <span style="font-size:32px;font-weight:700;padding:8px 20px;border-radius:12px;background:rgba(0,229,160,0.15);color:#00E5A0">+783 今日</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6: CTA 54.8-56.77s 1.97s -->
+  <div class="clip" id="s6" data-start="54.8" data-duration="1.97">
+    <div class="scene-wrap">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0a12 0%,#1a0a00 50%,#0a0a12 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,180,50,0.15) 0%,transparent 50%)"></div>
+        <div style="position:absolute;width:400px;height:400px;top:30%;left:30%;border-radius:50%;background:rgba(255,200,50,0.1);filter:blur(80px)"></div>
+      </div>
+      <div class="layer-fx">
+        <div id="s6-o1" style="position:absolute;width:80px;height:80px;top:35%;left:20%;border-radius:50%;background:rgba(255,200,50,0.15);filter:blur(30px)"></div>
+        <div id="s6-o2" style="position:absolute;width:60px;height:60px;top:40%;right:25%;border-radius:50%;background:rgba(255,180,50,0.12);filter:blur(30px)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase" style="align-items:center">
+          <div style="text-align:center">
+            <div id="s6-title" style="font-family:'PingFang SC',sans-serif;font-size:96px;font-weight:900;color:#fff;text-shadow:0 0 40px rgba(255,200,50,0.3)">关注GitHub星探</div>
+            <div style="font-family:'PingFang SC',sans-serif;font-size:42px;color:rgba(255,255,255,0.6);margin-top:20px">下期见</div>
+            <div style="display:flex;gap:16px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+              <span style="font-size:28px;padding:8px 20px;border-radius:20px;background:rgba(255,140,50,0.15);color:#FF8C32">#GitHub热门</span>
+              <span style="font-size:28px;padding:8px 20px;border-radius:20px;background:rgba(0,212,255,0.15);color:#00D4FF">#开源</span>
+              <span style="font-size:28px;padding:8px 20px;border-radius:20px;background:rgba(0,229,160,0.15);color:#00E5A0">#AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = {
+  duration: 56.77,
+  seek: function(t) { var tl = window.__timelines["main"]; if (tl) tl.seek(t); }
+};
+var tl = gsap.timeline({paused:true});
+
+// S1 Hook 0-4.45
+tl.fromTo('#s1-num',{scale:0.8,opacity:0},{scale:1,opacity:1,duration:0.15,ease:'power3.out'},0);
+tl.fromTo('#s1-sub',{opacity:0,y:10},{opacity:1,y:0,duration:0.2,ease:'power3.out'},0.15);
+gsap.to('#s1-r1',{scaleY:0.8,opacity:0.15,duration:2,repeat:-1,yoyo:true});
+gsap.to('#s1-r2',{scaleY:1.2,opacity:0.2,duration:2.5,repeat:-1,yoyo:true});
+gsap.to('#s1-r3',{scaleY:0.9,opacity:0.1,duration:1.8,repeat:-1,yoyo:true});
+gsap.to('#s1-d1',{scale:1.5,opacity:0.6,duration:1.5,repeat:-1,yoyo:true});
+gsap.to('#s1-d2',{scale:1.3,opacity:0.5,duration:2,repeat:-1,yoyo:true});
+gsap.to('#s1-d3',{scale:1.4,opacity:0.5,duration:1.8,repeat:-1,yoyo:true});
+gsap.to('#s1-d4',{scale:1.2,opacity:0.4,duration:2.2,repeat:-1,yoyo:true});
+
+// S2 headroom 4.45-19.68 Phase1→Phase2@12.45
+tl.fromTo('#s2-p1',{opacity:0,x:-20},{opacity:1,x:0,duration:0.4,ease:'power3.out'},4.45);
+tl.set('#s2-p2',{opacity:0},4.45);
+tl.to('#s2-p1',{opacity:0,duration:0.3},12.45);
+tl.to('#s2-p2',{opacity:1,duration:0.3},12.45);
+tl.fromTo('#s2-p2 > div',{scale:0.9,opacity:0},{scale:1,opacity:1,duration:0.4,ease:'power3.out'},12.6);
+gsap.to('#s2-scan',{y:1920,duration:4,repeat:-1});
+gsap.to('#s2-o1',{y:-25,opacity:0.25,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s2-o2',{y:20,opacity:0.2,duration:3.5,repeat:-1,yoyo:true});
+gsap.to('#s2-o3',{y:-15,opacity:0.22,duration:2.8,repeat:-1,yoyo:true});
+
+// S3 ECC 19.68-32.8 Phase1→Phase2@26.68
+tl.fromTo('#s3-p1',{opacity:0,x:-20},{opacity:1,x:0,duration:0.4,ease:'power3.out'},19.68);
+tl.fromTo('#s3-p1 .grad-text',{scale:0.7,opacity:0},{scale:1,opacity:1,duration:0.5,ease:'power3.out'},19.88);
+tl.set('#s3-p2',{opacity:0},19.68);
+tl.to('#s3-p1',{opacity:0,duration:0.3},26.68);
+tl.to('#s3-p2',{opacity:1,duration:0.3},26.68);
+tl.fromTo('#s3-p2 > div',{scale:0.9,opacity:0},{scale:1,opacity:1,duration:0.4,ease:'power3.out'},26.85);
+gsap.to('#s3-r1',{scale:1.1,opacity:0.15,duration:2.5,repeat:-1,yoyo:true});
+gsap.to('#s3-r2',{scale:1.2,opacity:0.1,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s3-r3',{scale:1.05,opacity:0.1,duration:2,repeat:-1,yoyo:true});
+gsap.to('#s3-o1',{y:-20,opacity:0.2,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s3-d1',{scale:1.5,opacity:0.7,duration:1.5,repeat:-1,yoyo:true});
+gsap.to('#s3-d2',{scale:1.3,opacity:0.5,duration:2,repeat:-1,yoyo:true});
+
+// S4 hermes+markitdown 32.8-43.14 Phase1→Phase2@38.3
+tl.fromTo('#s4-p1',{opacity:0,x:-20},{opacity:1,x:0,duration:0.4,ease:'power3.out'},32.8);
+tl.set('#s4-p2',{opacity:0},32.8);
+tl.to('#s4-p1',{opacity:0,duration:0.3},38.3);
+tl.to('#s4-p2',{opacity:1,duration:0.3},38.3);
+tl.fromTo('#s4-p2 > div',{scale:0.9,opacity:0},{scale:1,opacity:1,duration:0.4,ease:'power3.out'},38.45);
+gsap.to('#s4-sw',{y:1920,duration:3,repeat:-1});
+gsap.to('#s4-o1',{y:-20,opacity:0.2,duration:2.5,repeat:-1,yoyo:true});
+gsap.to('#s4-o2',{y:15,opacity:0.2,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s4-d1',{scale:1.4,opacity:0.6,duration:1.8,repeat:-1,yoyo:true});
+gsap.to('#s4-d2',{scale:1.3,opacity:0.5,duration:2,repeat:-1,yoyo:true});
+
+// S5 flowsint+VoxCPM 43.14-54.8 Phase1→Phase2@49.14
+tl.fromTo('#s5-p1',{opacity:0,x:-20},{opacity:1,x:0,duration:0.4,ease:'power3.out'},43.14);
+tl.set('#s5-p2',{opacity:0},43.14);
+tl.to('#s5-p1',{opacity:0,duration:0.3},49.14);
+tl.to('#s5-p2',{opacity:1,duration:0.3},49.14);
+tl.fromTo('#s5-p2 > div',{scale:0.9,opacity:0},{scale:1,opacity:1,duration:0.4,ease:'power3.out'},49.3);
+gsap.to('#s5-n1',{scale:1.5,opacity:0.6,duration:2,repeat:-1,yoyo:true});
+gsap.to('#s5-n2',{scale:1.3,opacity:0.5,duration:2.5,repeat:-1,yoyo:true});
+gsap.to('#s5-n3',{scale:1.4,opacity:0.4,duration:1.8,repeat:-1,yoyo:true});
+gsap.to('#s5-n4',{scale:1.2,opacity:0.5,duration:2.2,repeat:-1,yoyo:true});
+gsap.to('#s5-l1',{scaleX:1.2,opacity:0.3,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s5-l2',{scaleX:0.8,opacity:0.15,duration:2.5,repeat:-1,yoyo:true});
+gsap.to('#s5-o1',{y:-20,opacity:0.15,duration:3.5,repeat:-1,yoyo:true});
+
+// S6 CTA 54.8-56.77
+tl.fromTo('#s6-title',{scale:0.85,opacity:0},{scale:1,opacity:1,duration:0.3,ease:'power3.out'},54.8);
+gsap.to('#s6-o1',{y:-30,opacity:0.2,duration:3,repeat:-1,yoyo:true});
+gsap.to('#s6-o2',{y:20,opacity:0.15,duration:2.5,repeat:-1,yoyo:true});
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

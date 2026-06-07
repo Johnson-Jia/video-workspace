@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── 从 design.md color_direction 读取色值 ── */
+:root {
+  --accent-warm: #FF8C32;      /* 信号橙（泄露/警告/关键发现） */
+  --accent-warm-soft: #FFA040;
+  --accent-cool: #00D4FF;      /* 赛博青（代码/数据/安全） */
+  --accent-cool-mid: #00B8E0;
+  --bg-dark: #0a0e1a;         /* 深蓝黑渐变 */
+  --text-white: #FFFFFF;
+  --text-muted: #8899BB;
+  --card-bg: rgba(13,21,37,0.85);
+  --glow-warm-opacity: 0.25;
+  --glow-cool-opacity: 0.20;
+}
+
+body { background: #050510; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, #0d1525 40%, #0a1220 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,140,50,var(--glow-warm-opacity)), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,var(--glow-cool-opacity)), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+.grid-texture {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* 第1层：中文日期 */
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: var(--accent-warm); letter-spacing: 8px; margin-bottom: 40px; }
+
+/* 第2层：场景标签 */
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: var(--accent-cool); letter-spacing: 6px; margin-bottom: 80px; }
+
+/* 第3层：胶囊徽章 */
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(255,140,50,0.15), rgba(255,140,50,0.25));
+  border: 2px solid rgba(255,140,50,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: var(--accent-warm-soft); letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(255,140,50,0.1);
+}
+
+/* 第4层：主标题（双色） */
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: var(--text-white); letter-spacing: -4px; }
+.main-title .accent { font-size: 220px; font-weight: 900; color: var(--accent-warm); letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(255,140,50,0.4), 0 0 160px rgba(255,140,50,0.15); }
+
+/* 第5层：渐变分隔线 */
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, var(--accent-warm), var(--accent-cool-mid)); margin-bottom: 80px; }
+
+/* 第6层：数据说明 */
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: var(--accent-cool); letter-spacing: 4px; margin-bottom: 100px; }
+
+/* 第7层：数据卡片 */
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: var(--card-bg);
+  border: 2px solid rgba(0,212,255,0.3); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card.warm { border-color: rgba(255,140,50,0.4); }
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; line-height: 1; }
+.card:not(.warm) .num { color: var(--accent-cool); text-shadow: 0 0 40px rgba(0,212,255,0.5); }
+.card.warm .num { color: var(--accent-warm-soft); text-shadow: 0 0 40px rgba(255,140,50,0.5); }
+.card .label { font-size: 52px; color: var(--text-muted); margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+  <div class="grid-texture"></div>
+
+  <!-- 第1层：中文日期 -->
+  <div class="date">2026年5月27日</div>
+  <!-- 第2层：场景标签 -->
+  <div class="scene-label">Claude Code 源码泄露</div>
+  <!-- 第3层：胶囊徽章 -->
+  <div class="badge">深度解析</div>
+  <!-- 第4层：主标题 — 双色设计 -->
+  <div class="main-title">
+    <span class="white">51万行</span><br>
+    <span class="accent">源码泄露</span>
+  </div>
+  <!-- 第5层：渐变分隔线 -->
+  <div class="divider"></div>
+  <!-- 第6层：数据说明 -->
+  <div class="data-subtitle">三层门控 · 源码揭秘</div>
+  <!-- 第7层：数据卡片 — 2个卡片 -->
+  <div class="cards">
+    <div class="card">
+      <div class="num">53</div>
+      <div class="label">个工具</div>
+    </div>
+    <div class="card warm">
+      <div class="num">7</div>
+      <div class="label">个隐藏功能</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<title>VibeCoding大赏 | ClipForge</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0a0e27;font-family:'PingFang SC','Microsoft YaHei',sans-serif;color:#fff}
+
+.scene{position:absolute;top:0;left:0;width:1080px;height:1920px;opacity:0}
+.scene.active{opacity:1}
+
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;overflow:hidden}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:hidden}
+.layer-content{position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+
+/* Shared typography */
+.impact{font-size:160px;font-weight:900;line-height:1.1;text-align:center;letter-spacing:-4px}
+.title{font-size:72px;font-weight:800;line-height:1.2;text-align:center}
+.body-text{font-size:40px;font-weight:400;line-height:1.6;text-align:center}
+.annotation{font-size:36px;font-weight:300;line-height:1.5;text-align:center;opacity:0.7}
+.badge{display:inline-block;padding:12px 28px;border-radius:12px;font-size:36px;font-weight:700;letter-spacing:2px}
+
+/* s1 Hook - deep navy with green accent */
+.scene-s1 .layer-bg{background:linear-gradient(160deg,#050816 0%,#0a0e27 30%,#0d1a3a 70%,#0a1628 100%)}
+.scene-s1 .grid-overlay{position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,170,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.06) 1px,transparent 1px);background-size:60px 60px}
+.scene-s1 .glow-orb{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(120px)}
+.scene-s1 .glow-orb.g1{top:-100px;left:-100px;background:rgba(0,212,170,0.15)}
+.scene-s1 .glow-orb.g2{bottom:-150px;right:-100px;background:rgba(0,100,255,0.12)}
+.scene-s1 .number-line{display:flex;gap:40px;justify-content:center;margin-bottom:40px}
+.scene-s1 .num-block{display:flex;flex-direction:column;align-items:center}
+.scene-s1 .num-block .num{font-size:120px;font-weight:900;background:linear-gradient(135deg,#00d4aa,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.scene-s1 .num-block .label{font-size:32px;color:rgba(255,255,255,0.5);margin-top:8px}
+
+/* s2 Origin - deep purple */
+.scene-s2 .layer-bg{background:linear-gradient(135deg,#1a0a2e 0%,#12082a 40%,#0d0620 100%)}
+.scene-s2 .pulse-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;border:2px solid rgba(255,0,110,0.15)}
+.scene-s2 .beam{position:absolute;width:2px;height:100%;top:0;background:linear-gradient(180deg,transparent,rgba(255,0,110,0.3),transparent)}
+.scene-s2 .pain-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 36px;margin-bottom:16px;text-align:left;width:100%}
+.scene-s2 .pain-card .icon{color:#ff006e;font-size:40px;margin-right:16px}
+.scene-s2 .highlight{color:#ff006e;font-weight:700}
+
+/* s3 Philosophy - teal dark */
+.scene-s3 .layer-bg{background:linear-gradient(180deg,#061a1a 0%,#0a2a2a 40%,#081818 100%)}
+.scene-s3 .contour{position:absolute;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(0,212,170,0.04) 80px,rgba(0,212,170,0.04) 81px)}
+.scene-s3 .mode-box{display:flex;gap:30px;margin-top:30px}
+.scene-s3 .mode{flex:1;padding:30px;border-radius:16px;text-align:center}
+.scene-s3 .mode.letter{background:rgba(0,136,255,0.1);border:2px solid rgba(0,136,255,0.3)}
+.scene-s3 .mode.spirit{background:rgba(255,0,110,0.1);border:2px solid rgba(255,0,110,0.3)}
+.scene-s3 .mode .mode-title{font-size:48px;font-weight:900;margin-bottom:10px}
+.scene-s3 .mode .mode-desc{font-size:30px;opacity:0.7;line-height:1.4}
+.scene-s3 .principle-row{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.scene-s3 .principle-tag{background:rgba(0,212,170,0.15);border:1px solid rgba(0,212,170,0.3);padding:14px 24px;border-radius:10px;font-size:30px;font-weight:600;color:#00d4aa}
+
+/* s4 Pipeline - dark blue */
+.scene-s4 .layer-bg{background:linear-gradient(135deg,#0a0e27 0%,#101840 50%,#0a0e27 100%)}
+.scene-s4 .scanline{position:absolute;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,136,255,0.4),transparent);top:0}
+.scene-s4 .stage-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
+.scene-s4 .stage-chip{background:rgba(0,136,255,0.12);border:1px solid rgba(0,136,255,0.25);padding:14px 20px;border-radius:8px;font-size:28px;font-weight:600;color:#88bbff}
+.scene-s4 .stat-row{display:flex;gap:40px;margin-top:36px;justify-content:center}
+.scene-s4 .stat-item{text-align:center}
+.scene-s4 .stat-item .stat-num{font-size:72px;font-weight:900;color:#00d4aa}
+.scene-s4 .stat-item .stat-label{font-size:28px;opacity:0.5;margin-top:4px}
+
+/* s5 Engine - deep dark */
+.scene-s5 .layer-bg{background:linear-gradient(180deg,#0a0510 0%,#150a28 40%,#0a0510 100%)}
+.scene-s5 .atom-grid{position:absolute;width:100%;height:100%;background-image:radial-gradient(rgba(0,212,170,0.08) 1px,transparent 1px);background-size:40px 40px}
+.scene-s5 .four-atoms{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.scene-s5 .atom{width:220px;padding:24px;border-radius:14px;text-align:center}
+.scene-s5 .atom.a1{background:rgba(0,212,170,0.1);border:2px solid rgba(0,212,170,0.3)}
+.scene-s5 .atom.a2{background:rgba(0,136,255,0.1);border:2px solid rgba(0,136,255,0.3)}
+.scene-s5 .atom.a3{background:rgba(255,0,110,0.1);border:2px solid rgba(255,0,110,0.3)}
+.scene-s5 .atom.a4{background:rgba(255,170,0,0.1);border:2px solid rgba(255,170,0,0.3)}
+.scene-s5 .atom .atom-name{font-size:40px;font-weight:900;margin-bottom:8px}
+.scene-s5 .atom .atom-desc{font-size:24px;opacity:0.6;line-height:1.3}
+.scene-s5 .insight-box{margin-top:24px;padding:24px 36px;background:rgba(255,170,0,0.08);border-left:4px solid #ffaa00;border-radius:0 12px 12px 0;text-align:left;width:100%}
+.scene-s5 .insight-box .insight-text{font-size:34px;font-weight:600;color:#ffcc44;line-height:1.4}
+
+/* s6 Render - dark teal */
+.scene-s6 .layer-bg{background:linear-gradient(160deg,#050f1a 0%,#0a2030 50%,#051015 100%)}
+.scene-s6 .layer-demo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.scene-s6 .layer-bar{width:700px;padding:20px 30px;margin-bottom:8px;border-radius:10px;font-size:30px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.scene-s6 .layer-bar.bg{background:rgba(0,212,170,0.12);border:2px solid rgba(0,212,170,0.3)}
+.scene-s6 .layer-bar.fx{background:rgba(0,136,255,0.12);border:2px solid rgba(0,136,255,0.3)}
+.scene-s6 .layer-bar.ct{background:rgba(255,0,110,0.12);border:2px solid rgba(255,0,110,0.3)}
+.scene-s6 .slot-box{margin-top:24px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.2);border-radius:12px;padding:24px;text-align:center}
+.scene-s6 .slot-label{font-size:26px;color:#00d4aa;font-family:monospace}
+.scene-s6 .component-count{margin-top:20px;display:flex;gap:30px;justify-content:center}
+.scene-s6 .comp-stat{text-align:center}
+.scene-s6 .comp-stat .comp-num{font-size:56px;font-weight:900;color:#0088ff}
+.scene-s6 .comp-stat .comp-label{font-size:26px;opacity:0.5}
+
+/* s7 Sync - dark blue accent */
+.scene-s7 .layer-bg{background:linear-gradient(135deg,#0a0a20 0%,#0d1040 50%,#0a0a20 100%)}
+.scene-s7 .timeline{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.scene-s7 .tl-bar{width:800px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;margin-bottom:16px;position:relative;overflow:hidden}
+.scene-s7 .tl-fill{height:100%;border-radius:4px}
+.scene-s7 .tl-fill.narr{background:linear-gradient(90deg,#00d4aa,#0088ff)}
+.scene-s7 .tl-fill.vis{background:linear-gradient(90deg,#ff006e,#ff6600)}
+.scene-s7 .sync-label{display:flex;gap:20px;margin-bottom:10px}
+.scene-s7 .sync-dot{width:16px;height:16px;border-radius:50%;display:inline-block;margin-right:8px}
+.scene-s7 .step-row{display:flex;gap:20px;margin-top:24px;justify-content:center;flex-wrap:wrap}
+.scene-s7 .step{background:rgba(0,136,255,0.1);border:1px solid rgba(0,136,255,0.2);padding:16px 24px;border-radius:10px;text-align:center}
+.scene-s7 .step .step-num{font-size:36px;font-weight:900;color:#0088ff}
+.scene-s7 .step .step-text{font-size:24px;opacity:0.6;margin-top:4px}
+
+/* s8 Evolution - dark warm */
+.scene-s8 .layer-bg{background:linear-gradient(180deg,#1a0a0a 0%,#2a0d15 40%,#1a0808 100%)}
+.scene-s8 .loop-container{display:flex;gap:40px;justify-content:center;margin-top:20px}
+.scene-s8 .loop-box{width:400px;padding:30px;border-radius:16px;text-align:center}
+.scene-s8 .loop-box.fail{background:rgba(255,0,110,0.08);border:2px solid rgba(255,0,110,0.25)}
+.scene-s8 .loop-box.succ{background:rgba(0,212,170,0.08);border:2px solid rgba(0,212,170,0.25)}
+.scene-s8 .loop-title{font-size:36px;font-weight:900;margin-bottom:12px}
+.scene-s8 .loop-steps{text-align:left;font-size:26px;opacity:0.7;line-height:1.8}
+.scene-s8 .loop-steps span{color:#fff;font-weight:600}
+.scene-s8 .aging-badge{margin-top:20px;background:rgba(255,170,0,0.12);border:1px solid rgba(255,170,0,0.3);padding:16px 30px;border-radius:10px;font-size:30px;color:#ffcc44}
+
+/* s9 Journey - dark multi */
+.scene-s9 .layer-bg{background:linear-gradient(135deg,#0a0820 0%,#150a28 30%,#0a1025 60%,#0a0820 100%)}
+.scene-s9 .timeline-track{position:absolute;width:4px;background:rgba(0,212,170,0.3);top:50%;left:50%;transform:translate(-50%,-50%);height:900px;border-radius:2px}
+.scene-s9 .day-cards{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px;width:100%}
+.scene-s9 .day-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;width:45%;text-align:left}
+.scene-s9 .day-card .day-num{font-size:28px;font-weight:900;color:#00d4aa;margin-bottom:4px}
+.scene-s9 .day-card .day-text{font-size:22px;opacity:0.6;line-height:1.3}
+.scene-s9 .decision-row{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;justify-content:center}
+.scene-s9 .decision{background:rgba(0,136,255,0.08);border:1px solid rgba(0,136,255,0.2);padding:12px 20px;border-radius:8px;font-size:24px;font-weight:600;color:#88bbff}
+
+/* s10 Results - achievement */
+.scene-s10 .layer-bg{background:linear-gradient(160deg,#0a0e27 0%,#0d1a3a 40%,#0a1628 100%)}
+.scene-s10 .metric-grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.scene-s10 .metric{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);border-radius:12px;padding:20px 28px;text-align:center;min-width:180px}
+.scene-s10 .metric .m-val{font-size:52px;font-weight:900;color:#00d4aa}
+.scene-s10 .metric .m-label{font-size:24px;opacity:0.5;margin-top:4px}
+.scene-s10 .mode-row{display:flex;gap:20px;margin-top:24px;justify-content:center}
+.scene-s10 .mode-card{background:rgba(0,136,255,0.08);border:1px solid rgba(0,136,255,0.2);border-radius:12px;padding:20px 24px;text-align:center;flex:1}
+.scene-s10 .mode-card .mc-dur{font-size:40px;font-weight:900;color:#88bbff}
+.scene-s10 .mode-card .mc-name{font-size:24px;opacity:0.5}
+
+/* s11 CTA - gradient finale */
+.scene-s11 .layer-bg{background:linear-gradient(180deg,#0a0e27 0%,#1a0a2e 30%,#0a2030 60%,#0a0e27 100%)}
+.scene-s11 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,0.08),transparent 70%)}
+.scene-s11 .tags{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+.scene-s11 .tag{background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.3);padding:14px 24px;border-radius:10px;font-size:32px;font-weight:600;color:#00d4aa}
+
+/* Particles */
+.particle{position:absolute;border-radius:50%;pointer-events:none}
+
+/* Scan animation helper */
+.scan-anim{position:absolute;width:100%;height:4px;left:0}
+</style>
+</head>
+<body>
+
+<!-- ═══ Root Composition ═══ -->
+<div data-composition-id="root" data-width="1080" data-height="1920" data-start="0" style="position:relative;width:1080px;height:1920px;overflow:hidden">
+
+<!-- ═══ Audio ═══ -->
+<audio id="narration" src="narration.mp3" preload="auto"></audio>
+<audio id="bgm" src="bgm.wav" preload="auto" data-volume="0.08"></audio>
+
+<!-- ═══ s1 Hook ═══ -->
+<div class="scene scene-s1" id="s1" data-start="0" data-duration="13.824">
+  <div class="layer-bg">
+    <div class="grid-overlay"></div>
+    <div class="glow-orb g1"></div>
+    <div class="glow-orb g2"></div>
+  </div>
+  <div class="layer-fx" id="fx-s1">
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.6);top:10%;left:20%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(0,136,255,0.5);top:30%;left:70%"></div>
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.4);top:60%;left:40%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(0,136,255,0.5);top:80%;left:85%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.5);top:45%;left:15%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="number-line">
+      <div class="num-block"><div class="num" id="n1">8</div><div class="label">天</div></div>
+      <div class="num-block"><div class="num" id="n2">60</div><div class="label">次提交</div></div>
+      <div class="num-block"><div class="num" id="n3">2万</div><div class="label">行代码</div></div>
+    </div>
+    <div class="title" style="margin-top:20px;font-size:64px;color:rgba(255,255,255,0.9)">一个AI，学会了自己造视频</div>
+    <div class="annotation" style="margin-top:24px;font-size:34px;color:rgba(0,212,170,0.7)">九个阶段全自动 · 从内容到成片</div>
+  </div>
+</div>
+
+<!-- ═══ s2 Origin ═══ -->
+<div class="scene scene-s2" id="s2" data-start="13.824" data-duration="30.696">
+  <div class="layer-bg">
+    <div class="pulse-ring" style="width:400px;height:400px"></div>
+    <div class="pulse-ring" style="width:700px;height:700px"></div>
+    <div class="beam" style="left:20%"></div>
+    <div class="beam" style="left:50%"></div>
+    <div class="beam" style="left:80%"></div>
+  </div>
+  <div class="layer-fx" id="fx-s2">
+    <div class="particle" style="width:6px;height:6px;background:rgba(255,0,110,0.4);top:15%;left:30%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(255,0,110,0.3);top:55%;left:75%"></div>
+    <div class="particle" style="width:5px;height:5px;background:rgba(255,100,150,0.3);top:75%;left:20%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:60px;margin-bottom:24px">为什么需要 ClipForge？</div>
+    <div class="pain-card">
+      <span class="body-text">写脚本 · 录旁白 · 剪画面 · 配音乐 · 做封面</span>
+    </div>
+    <div class="pain-card" style="border-color:rgba(255,0,110,0.3)">
+      <span class="body-text"><span class="highlight">一条45秒视频 = 2~4小时</span></span>
+    </div>
+    <div class="body-text" style="margin-top:20px;font-size:36px;font-weight:600;color:#00d4aa">发现 HyperFrames：HTML → 视频</div>
+    <div class="annotation" style="margin-top:16px">只解决渲染层 → 上游全手工 → 决定造整条管线</div>
+  </div>
+</div>
+
+<!-- ═══ s3 Philosophy ═══ -->
+<div class="scene scene-s3" id="s3" data-start="44.520" data-duration="39.864">
+  <div class="layer-bg">
+    <div class="contour"></div>
+    <div style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 70%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s3">
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.4);top:20%;left:80%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.3);top:70%;left:25%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(0,212,170,0.5);top:40%;left:60%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:10px">流程零自由度 · 内容最大自由度</div>
+    <div class="mode-box">
+      <div class="mode letter">
+        <div class="mode-title" style="color:#0088ff">LETTER</div>
+        <div class="mode-desc">管线硬编码<br>AI无权更改</div>
+      </div>
+      <div class="mode spirit">
+        <div class="mode-title" style="color:#ff006e">SPIRIT</div>
+        <div class="mode-desc">内容自主推导<br>颜色·特效·排版</div>
+      </div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-tag">Schema即真相</div>
+      <div class="principle-tag">状态即文件</div>
+      <div class="principle-tag">委托不重写</div>
+    </div>
+    <div class="annotation" style="margin-top:20px;font-size:30px">确定性 + 惊喜感 = 可复现的质量</div>
+  </div>
+</div>
+
+<!-- ═══ s4 Pipeline ═══ -->
+<div class="scene scene-s4" id="s4" data-start="84.384" data-duration="26.688">
+  <div class="layer-bg">
+    <div class="scanline" id="scan-s4"></div>
+    <div style="position:absolute;bottom:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,136,255,0.08),transparent 70%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s4">
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,136,255,0.5);top:25%;left:50%"></div>
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,136,255,0.4);top:65%;left:30%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(0,136,255,0.6);top:50%;left:80%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:60px;margin-bottom:16px">九阶段 DAG 管线</div>
+    <div class="stage-flow">
+      <div class="stage-chip">env-check</div>
+      <div class="stage-chip">content</div>
+      <div class="stage-chip">design</div>
+      <div class="stage-chip">narration</div>
+      <div class="stage-chip">audio</div>
+      <div class="stage-chip">video</div>
+      <div class="stage-chip">delivery</div>
+      <div class="stage-chip">scoring</div>
+      <div class="stage-chip">cleanup</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">阶段</div></div>
+      <div class="stat-item"><div class="stat-num">22+</div><div class="stat-label">门禁</div></div>
+      <div class="stat-item"><div class="stat-num">32</div><div class="stat-label">组件</div></div>
+    </div>
+    <div class="annotation" style="margin-top:20px;font-size:32px">核心指标：前3秒留存率</div>
+  </div>
+</div>
+
+<!-- ═══ s5 Engine ═══ -->
+<div class="scene scene-s5" id="s5" data-start="111.072" data-duration="40.584">
+  <div class="layer-bg">
+    <div class="atom-grid"></div>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,0.04),transparent 60%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s5">
+    <div class="particle" style="width:5px;height:5px;background:rgba(255,0,110,0.4);top:20%;left:75%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.5);top:60%;left:15%"></div>
+    <div class="particle" style="width:6px;height:6px;background:rgba(255,170,0,0.3);top:80%;left:60%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(0,136,255,0.4);top:40%;left:90%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:12px">四原子约束体系</div>
+    <div class="four-atoms">
+      <div class="atom a1"><div class="atom-name" style="color:#00d4aa">Intent</div><div class="atom-desc">你在做什么</div></div>
+      <div class="atom a2"><div class="atom-name" style="color:#0088ff">Boundary</div><div class="atom-desc">允许/禁止</div></div>
+      <div class="atom a3"><div class="atom-name" style="color:#ff006e">Gate</div><div class="atom-desc">22种校验</div></div>
+      <div class="atom a4"><div class="atom-name" style="color:#ffaa00">Trace</div><div class="atom-desc">执行轨迹</div></div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-text">不是从理论推导规则，而是从失败中提取经验</div>
+    </div>
+    <div class="annotation" style="margin-top:16px;font-size:28px">正向指令 > 禁止清单</div>
+  </div>
+</div>
+
+<!-- ═══ s6 Render ═══ -->
+<div class="scene scene-s6" id="s6" data-start="151.656" data-duration="47.280">
+  <div class="layer-bg">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(0deg,transparent 0%,rgba(0,212,170,0.03) 50%,transparent 100%)"></div>
+    <div style="position:absolute;bottom:-300px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,136,255,0.06),transparent 70%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s6">
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.5);top:15%;left:65%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(255,0,110,0.3);top:45%;left:20%"></div>
+    <div class="particle" style="width:6px;height:6px;background:rgba(0,136,255,0.4);top:75%;left:80%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:16px">三层渲染架构</div>
+    <div class="body-text" style="font-size:32px;margin-bottom:20px;opacity:0.7">bg · fx · content 严格分离</div>
+    <div style="margin:0 auto;width:700px">
+      <div class="layer-bar bg"><span style="color:#00d4aa">BG 层</span><span style="font-size:24px;opacity:0.5">渐变 · 纹理 · 光效</span></div>
+      <div class="layer-bar fx"><span style="color:#0088ff">FX 层</span><span style="font-size:24px;opacity:0.5">粒子 · 爆炸 · 矩阵雨</span></div>
+      <div class="layer-bar ct"><span style="color:#ff006e">Content 层</span><span style="font-size:24px;opacity:0.5">文字 · 数字 · 卡片</span></div>
+    </div>
+    <div class="slot-box">
+      <div class="slot-label">&lt;!-- CREATIVE_SLOT:s1-bg-html --&gt;</div>
+      <div class="body-text" style="font-size:28px;margin-top:8px;opacity:0.5">骨架生成 → 插槽填充 → AI自主创作</div>
+    </div>
+    <div class="component-count">
+      <div class="comp-stat"><div class="comp-num">8</div><div class="comp-label">背景组件</div></div>
+      <div class="comp-stat"><div class="comp-num">10</div><div class="comp-label">特效组件</div></div>
+      <div class="comp-stat"><div class="comp-num">14+</div><div class="comp-label">内容组件</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ s7 Sync ═══ -->
+<div class="scene scene-s7" id="s7" data-start="198.936" data-duration="29.760">
+  <div class="layer-bg">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,136,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,136,255,0.04) 1px,transparent 1px);background-size:80px 80px"></div>
+  </div>
+  <div class="layer-fx" id="fx-s7">
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,136,255,0.5);top:30%;left:40%"></div>
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.4);top:70%;left:70%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:16px">音画同步：分段校准</div>
+    <div class="step-row">
+      <div class="step"><div class="step-num">1</div><div class="step-text">分段旁白</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">逐段TTS</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">实测时长</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">精准对齐</div></div>
+    </div>
+    <div style="margin-top:30px;width:800px">
+      <div class="sync-label"><span class="sync-dot" style="background:#00d4aa"></span><span style="font-size:28px">旁白时长 actual</span></div>
+      <div class="tl-bar"><div class="tl-fill narr" style="width:85%"></div></div>
+      <div class="sync-label"><span class="sync-dot" style="background:#ff006e"></span><span style="font-size:28px">画面时长 data-duration</span></div>
+      <div class="tl-bar"><div class="tl-fill vis" style="width:85%"></div></div>
+    </div>
+    <div class="badge" style="margin-top:24px;background:rgba(0,212,170,0.12);color:#00d4aa;border:1px solid rgba(0,212,170,0.3)">差值 > 0.5s → HARD FAIL</div>
+  </div>
+</div>
+
+<!-- ═══ s8 Evolution ═══ -->
+<div class="scene scene-s8" id="s8" data-start="228.696" data-duration="28.248">
+  <div class="layer-bg">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 50%,rgba(255,0,110,0.05),transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(0,212,170,0.05),transparent 50%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s8">
+    <div class="particle" style="width:5px;height:5px;background:rgba(255,0,110,0.4);top:25%;left:20%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.5);top:65%;left:75%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,170,0,0.4);top:80%;left:40%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:16px">自进化反馈系统</div>
+    <div class="loop-container">
+      <div class="loop-box fail">
+        <div class="loop-title" style="color:#ff006e">失败闭环</div>
+        <div class="loop-steps"><span>门禁失败</span> → 归因分析<br><span>定位规则</span> → 修复重试</div>
+      </div>
+      <div class="loop-box succ">
+        <div class="loop-title" style="color:#00d4aa">成功闭环</div>
+        <div class="loop-steps"><span>门禁通过</span> → 记录轨迹<br><span>分析因素</span> → 沉淀模式</div>
+      </div>
+    </div>
+    <div class="aging-badge">90天老化机制 · 过期经验自动清除</div>
+    <div class="annotation" style="margin-top:16px;font-size:30px;font-weight:600;color:#ffcc44">规则从失败中诞生，从数据中进化</div>
+  </div>
+</div>
+
+<!-- ═══ s9 Journey ═══ -->
+<div class="scene scene-s9" id="s9" data-start="256.944" data-duration="33.816">
+  <div class="layer-bg">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(rgba(0,212,170,0.06) 1px,transparent 1px);background-size:50px 50px"></div>
+    <div style="position:absolute;top:-200px;left:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,136,255,0.06),transparent 70%)"></div>
+  </div>
+  <div class="layer-fx" id="fx-s9">
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.5);top:20%;left:85%"></div>
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,136,255,0.4);top:50%;left:10%"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,0,110,0.3);top:85%;left:55%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:52px;margin-bottom:10px">8天开发历程</div>
+    <div class="day-cards">
+      <div class="day-card"><div class="day-num">Day 1-2</div><div class="day-text">基础管线搭建<br>九阶段DAG定义</div></div>
+      <div class="day-card"><div class="day-num">Day 3</div><div class="day-text">音画同步危机<br>分段校准机制</div></div>
+      <div class="day-card"><div class="day-num">Day 4</div><div class="day-text">CSS动画全片空白<br>185行渲染规范</div></div>
+      <div class="day-card"><div class="day-num">Day 5</div><div class="day-text">双层padding事故<br>内容压到74%</div></div>
+      <div class="day-card"><div class="day-num">Day 6</div><div class="day-text">引擎层开发<br>4781行Python</div></div>
+      <div class="day-card"><div class="day-num">Day 7-8</div><div class="day-text">三层架构重构<br>门禁体系加固</div></div>
+    </div>
+    <div class="annotation" style="margin-top:14px;font-size:26px">4个关键决策 · 8个事故 → 8条硬性规则</div>
+  </div>
+</div>
+
+<!-- ═══ s10 Results ═══ -->
+<div class="scene scene-s10" id="s10" data-start="290.760" data-duration="24.384">
+  <div class="layer-bg">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 30%,rgba(0,212,170,0.06),transparent 50%)"></div>
+    <div style="position:absolute;bottom:0;left:0;width:100%;height:50%;background:linear-gradient(180deg,transparent,rgba(0,136,255,0.03))"></div>
+  </div>
+  <div class="layer-fx" id="fx-s10">
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.5);top:20%;left:60%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,136,255,0.4);top:70%;left:30%"></div>
+    <div class="particle" style="width:6px;height:6px;background:rgba(0,212,170,0.3);top:45%;left:90%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="title" style="font-size:56px;margin-bottom:16px">项目成果</div>
+    <div class="metric-grid">
+      <div class="metric"><div class="m-val">8</div><div class="m-label">天开发</div></div>
+      <div class="metric"><div class="m-val">60</div><div class="m-label">次提交</div></div>
+      <div class="metric"><div class="m-val">23K</div><div class="m-label">行代码</div></div>
+      <div class="metric"><div class="m-val">4781</div><div class="m-label">行引擎</div></div>
+      <div class="metric"><div class="m-val">32</div><div class="m-label">组件</div></div>
+      <div class="metric"><div class="m-val">22+</div><div class="m-label">门禁</div></div>
+    </div>
+    <div class="mode-row" style="margin-top:20px">
+      <div class="mode-card"><div class="mc-dur">45s</div><div class="mc-name">标准模式</div></div>
+      <div class="mode-card"><div class="mc-dur">60s</div><div class="mc-name">深度解析</div></div>
+      <div class="mode-card"><div class="mc-dur">3-10min</div><div class="mc-name">长视频</div></div>
+    </div>
+    <div class="badge" style="margin-top:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1)">Apache 2.0 开源</div>
+  </div>
+</div>
+
+<!-- ═══ s11 CTA ═══ -->
+<div class="scene scene-s11" id="s11" data-start="315.144" data-duration="23.544">
+  <div class="layer-bg">
+    <div class="cta-glow"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,170,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.03) 1px,transparent 1px);background-size:100px 100px"></div>
+  </div>
+  <div class="layer-fx" id="fx-s11">
+    <div class="particle" style="width:5px;height:5px;background:rgba(0,212,170,0.5);top:30%;left:50%"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(0,212,170,0.4);top:60%;left:30%"></div>
+    <div class="particle" style="width:6px;height:6px;background:rgba(255,0,110,0.3);top:75%;left:70%"></div>
+  </div>
+  <div class="layer-content">
+    <div class="impact" style="font-size:80px;margin-bottom:24px;background:linear-gradient(135deg,#00d4aa,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">本视频由 ClipForge 自己制作</div>
+    <div class="body-text" style="font-size:32px;opacity:0.7;margin-bottom:24px">从文案到画面，从旁白到配乐<br>全部由AI管线自动完成</div>
+    <div class="body-text" style="font-size:34px;font-weight:600;color:#00d4aa;margin-bottom:20px">管线编排 + 约束引擎 + 自进化反馈</div>
+    <div class="tags">
+      <div class="tag">#vibecoding大赏</div>
+      <div class="tag">#ai新星计划</div>
+      <div class="tag">@抖音科技</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+const SCENES = [
+  {id:'s1',start:0,dur:13.824},
+  {id:'s2',start:13.824,dur:30.696},
+  {id:'s3',start:44.520,dur:39.864},
+  {id:'s4',start:84.384,dur:26.688},
+  {id:'s5',start:111.072,dur:40.584},
+  {id:'s6',start:151.656,dur:47.280},
+  {id:'s7',start:198.936,dur:29.760},
+  {id:'s8',start:228.696,dur:28.248},
+  {id:'s9',start:256.944,dur:33.816},
+  {id:'s10',start:290.760,dur:24.384},
+  {id:'s11',start:315.144,dur:23.544}
+];
+
+const tl = gsap.timeline({paused:true});
+
+SCENES.forEach((s,i) => {
+  const el = document.getElementById(s.id);
+  tl.set(el, {opacity:1}, s.start);
+  tl.fromTo(el, {opacity:0}, {opacity:1, duration:0.4, ease:'power2.out'}, s.start);
+
+  if(s.id==='s1'){
+    tl.from('#n1',{scale:0,duration:0.5,ease:'back.out(1.7)'},s.start+0.2);
+    tl.from('#n2',{scale:0,duration:0.5,ease:'back.out(1.7)'},s.start+0.4);
+    tl.from('#n3',{scale:0,duration:0.5,ease:'back.out(1.7)'},s.start+0.6);
+  }
+  if(s.id==='s4'){
+    tl.fromTo('#scan-s4',{top:'0%'},{top:'100%',duration:s.dur,ease:'none'},s.start);
+  }
+
+  const particles = el.querySelectorAll('.particle');
+  particles.forEach((p,pi) => {
+    tl.fromTo(p,
+      {y:0,x:0,opacity:0.3},
+      {y:-40+Math.random()*80,x:20-Math.random()*40,opacity:0.6,duration:s.dur*0.8,ease:'sine.inOut',repeat:1,yoyo:true},
+      s.start+0.5+pi*0.3
+    );
+  });
+
+  tl.to(el, {opacity:0, duration:0.3, ease:'power2.in'}, s.start+s.dur-0.3);
+  tl.set(el, {opacity:0}, s.start+s.dur);
+});
+
+window.__timelines = window.__timelines || {};
+window.__timelines["root"] = tl;
+</script>
+</div><!-- end root composition -->
+</body>
+</html>

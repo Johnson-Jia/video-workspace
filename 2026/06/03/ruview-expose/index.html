@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>ruview-expose</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1080px; height: 1920px; overflow: hidden;
+      position: relative; background: #000;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+    .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+    .layer-bg { position: absolute; inset: 0; z-index: 1; }
+    .layer-fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .layer-content { position: relative; z-index: 3; height: 100%; }
+    .phase {
+      position: absolute; inset: 0;
+      padding: 180px 80px 220px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 1;
+    }
+    :root {
+      --red: #ff1744; --cyan: #00f5d4; --gold: #ffc400;
+      --bg-dark: #080818; --text-primary: #ffffff; --text-secondary: #a0a0c0;
+    }
+
+    /* Utility classes */
+    .grad-text {
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .card {
+      background: rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 32px;
+      border-left: 4px solid var(--cyan);
+    }
+    .card.danger { border-left-color: var(--red); }
+    .card.gold { border-left-color: var(--gold); }
+    .title-lg { font-size: 72px; font-weight: 800; line-height: 1.15; margin-bottom: 36px; }
+    .title-xl { font-size: 96px; font-weight: 900; line-height: 1.05; }
+    .hero-num { font-size: 140px; font-weight: 900; line-height: 1; }
+    .label { font-size: 40px; color: var(--text-secondary); }
+    .val { font-size: 48px; font-weight: 700; }
+    .row { display: flex; align-items: center; gap: 20px; }
+    .col { display: flex; flex-direction: column; gap: 18px; }
+    .gap-sm { gap: 12px; }
+    .gap-md { gap: 24px; }
+    .gap-lg { gap: 36px; }
+    .mt { margin-top: 24px; }
+    .badge {
+      display: inline-block; padding: 8px 24px; border-radius: 8px;
+      font-size: 36px; font-weight: 700;
+    }
+    .badge-true { background: rgba(0,245,212,0.15); color: var(--cyan); }
+    .badge-fake { background: rgba(255,23,68,0.15); color: var(--red); }
+    .badge-warn { background: rgba(255,196,0,0.15); color: var(--gold); }
+    .divider { width: 100%; height: 2px; background: rgba(255,255,255,0.1); margin: 20px 0; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-item {
+      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 24px;
+      text-align: center;
+    }
+    .stat-item .num { font-size: 56px; font-weight: 800; }
+    .stat-item .desc { font-size: 36px; color: var(--text-secondary); margin-top: 8px; }
+    .list-item { display: flex; align-items: flex-start; gap: 16px; font-size: 42px; line-height: 1.4; }
+    .list-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 16px; }
+    .compare-row { display: flex; gap: 32px; margin-bottom: 20px; }
+    .compare-col { flex: 1; }
+    .compare-col .header { font-size: 36px; font-weight: 700; padding-bottom: 16px; border-bottom: 3px solid; margin-bottom: 16px; }
+    .timeline-track { display: flex; flex-direction: column; gap: 16px; }
+    .timeline-item {
+      display: flex; align-items: center; gap: 20px; padding: 16px 24px;
+      border-radius: 12px; background: rgba(255,255,255,0.04);
+    }
+    .timeline-dot { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+    .timeline-bar { flex: 1; height: 8px; border-radius: 4px; }
+    .warn-banner {
+      background: rgba(255,23,68,0.12); border: 2px solid var(--red);
+      border-radius: 16px; padding: 32px; text-align: center;
+    }
+    .warn-banner .icon { font-size: 72px; }
+    .warn-banner .text { font-size: 48px; font-weight: 800; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main"
+     data-width="1080" data-height="1920" data-start="0"
+     data-duration="354.46">
+  <audio id="narration-audio" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm-audio" data-track-index="2" data-volume="0.18" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ═══ Scene 1: hook (0.0s + 12.34s) ═══ -->
+  <div class="clip" id="hook" data-start="0.0" data-duration="12.34">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 75% 15%,rgba(255,23,68,0.3) 0%,transparent 50%),radial-gradient(ellipse at 25% 85%,rgba(0,245,212,0.15) 0%,transparent 45%),#000;"></div>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="hook-ring1" style="position:absolute;top:50%;left:50%;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;border:2px solid rgba(255,23,68,0.4);"></div>
+      <div id="hook-ring2" style="position:absolute;top:50%;left:50%;width:500px;height:500px;margin:-250px 0 0 -250px;border-radius:50%;border:1px solid rgba(0,245,212,0.3);"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1" style="text-align:center;">
+        <div id="hook-label" class="label" style="font-size:40px;margin-bottom:32px;">GitHub 项目声称</div>
+        <div id="hook-num1" style="display:flex;justify-content:center;align-items:baseline;gap:16px;">
+          <span class="hero-num" style="background-image:linear-gradient(135deg,#ff1744,#ffc400);-webkit-background-clip:text;background-clip:text;color:transparent;">54,000</span>
+          <span style="font-size:56px;font-weight:700;color:var(--text-secondary);">FPS</span>
+        </div>
+        <div id="hook-num2" style="display:flex;justify-content:center;align-items:baseline;gap:16px;margin-top:16px;">
+          <span class="hero-num" style="background-image:linear-gradient(135deg,#ffc400,#ff9100);-webkit-background-clip:text;background-clip:text;color:transparent;">94.2%</span>
+          <span style="font-size:56px;font-weight:700;color:var(--text-secondary);">准确率</span>
+        </div>
+        <div id="hook-sub" style="margin-top:48px;font-size:48px;color:var(--text-secondary);">WiFi 信号追踪人体姿态</div>
+        <div id="hook-punch" style="margin-top:24px;font-size:56px;font-weight:800;color:var(--red);">真相是什么？</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 2: project_overview (12.34s + 28.68s) ═══ -->
+  <div class="clip" id="project_overview" data-start="12.34" data-duration="28.68">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a2e 0%,#001a33 40%,#0a1628 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(0,245,212,0.08) 0%,transparent 40%);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(0,245,212,0.06) 1px,transparent 1px);background-size:40px 40px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="po-scan" style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.4),transparent);top:0;"></div>
+      <div id="po-float" style="position:absolute;width:80px;height:80px;border:1px solid rgba(0,245,212,0.2);transform:rotate(45deg);top:200px;right:120px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="po1-title" class="title-lg" style="background-image:linear-gradient(135deg,#00f5d4,#4fc3f7);-webkit-background-clip:text;background-clip:text;color:transparent;">RuView</div>
+        <div id="po1-sub" style="font-size:44px;color:var(--text-secondary);margin-bottom:32px;">WiFi CSI 无摄像头姿态估计</div>
+        <div id="po1-stats" class="stat-grid">
+          <div class="stat-item"><div class="num" style="color:var(--gold);">54,000</div><div class="desc">FPS 推理速度</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--gold);">94.2%</div><div class="desc">姿态准确率</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">38</div><div class="desc">Rust crate</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">148</div><div class="desc">架构决策文档</div></div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="po2-title" class="title-lg">惊人的工程规模</div>
+        <div id="po2-grid" class="stat-grid">
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">38</div><div class="desc">Rust crate 工作空间</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">148</div><div class="desc">ADR 架构决策</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">50+</div><div class="desc">ESP32 C 文件</div></div>
+          <div class="stat-item"><div class="num" style="color:var(--cyan);">23</div><div class="desc">CI 工作流</div></div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div id="po3-title" class="title-lg" style="color:var(--cyan);">底层代码货真价实</div>
+        <div id="po3-list" class="col gap-md">
+          <div class="card"><div class="row"><div class="list-dot" style="background:var(--cyan);"></div><span style="font-size:42px;">FFT 频谱分析</span></div></div>
+          <div class="card"><div class="row"><div class="list-dot" style="background:var(--cyan);"></div><span style="font-size:42px;">相位解缠绕</span></div></div>
+          <div class="card"><div class="row"><div class="list-dot" style="background:var(--cyan);"></div><span style="font-size:42px;">Fresnel 区建模</span></div></div>
+          <div class="card"><div class="row"><div class="list-dot" style="background:var(--cyan);"></div><span style="font-size:42px;">Hampel 滤波</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 3: fake_vs_real (41.02s + 48.34s) ═══ -->
+  <div class="clip" id="fake_vs_real" data-start="41.02" data-duration="48.34">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0a1a 0%,#0d0d24 100%);"></div>
+      <div style="position:absolute;left:0;top:0;width:50%;height:100%;background:linear-gradient(90deg,rgba(0,245,212,0.04),transparent);"></div>
+      <div style="position:absolute;right:0;top:0;width:50%;height:100%;background:linear-gradient(270deg,rgba(255,23,68,0.04),transparent);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fvr-sweep" style="position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--red),var(--cyan));opacity:0.6;"></div>
+      <div id="fvr-flash" style="position:absolute;inset:0;background:rgba(255,23,68,0.08);"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="fvr1-title" class="title-lg">验证真实能力</div>
+        <div id="fvr1-list" class="col gap-md">
+          <div class="card"><div class="row"><span class="badge badge-true">真实</span><span style="font-size:42px;">WiFi CSI 数据采集 — 50+ C 文件</span></div></div>
+          <div class="card"><div class="row"><span class="badge badge-true">真实</span><span style="font-size:42px;">信号处理 FFT — Rust+Python</span></div></div>
+          <div class="card"><div class="row"><span class="badge badge-true">真实</span><span style="font-size:42px;">存在/运动检测 — 技术可行</span></div></div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="fvr2-title" class="title-lg" style="color:var(--red);">姿态估计: 画风突变</div>
+        <div id="fvr2-compare" class="compare-row">
+          <div class="compare-col">
+            <div class="header" style="color:var(--cyan);border-color:var(--cyan);">宣称</div>
+            <div style="font-size:40px;line-height:1.5;">DensePose 神经网络推理</div>
+          </div>
+          <div class="compare-col">
+            <div class="header" style="color:var(--red);border-color:var(--red);">实际</div>
+            <div style="font-size:40px;line-height:1.5;">启发式公式硬算关节点</div>
+          </div>
+        </div>
+        <div class="card danger"><div style="font-size:42px;font-weight:700;color:var(--red);">54,000 FPS — 整个代码库零基准测试</div></div>
+      </div>
+      <div class="phase phase-3">
+        <div id="fvr3-title" class="title-lg" style="color:var(--red);">启发式公式揭秘</div>
+        <div id="fvr3-flow" class="col gap-md">
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">运动分数 → 固定偏移量</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">呼吸振幅 → 几何公式推导</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">17 个关节点 = 程序化估算</span></div></div>
+        </div>
+        <div class="card mt" style="background:rgba(255,196,0,0.08);border-left-color:var(--gold);"><div style="font-size:40px;color:var(--gold);">这不是深度学习推理</div></div>
+      </div>
+      <div class="phase phase-4">
+        <div id="fvr4-title" class="title-lg" style="color:var(--gold);">无证据的性能声明</div>
+        <div id="fvr4-data" class="stat-grid">
+          <div class="stat-item" style="border:1px solid rgba(255,23,68,0.3);">
+            <div class="num" style="color:var(--red);">54K fps</div>
+            <div class="desc" style="color:var(--red);">无基准测试</div>
+          </div>
+          <div class="stat-item" style="border:1px solid rgba(255,196,0,0.3);">
+            <div class="num" style="color:var(--gold);">94.2%</div>
+            <div class="desc" style="color:var(--gold);">来源可疑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 4: evidence_code (89.36s + 64.01s) ═══ -->
+  <div class="clip" id="evidence_code" data-start="89.36" data-duration="64.01">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:#050508;"></div>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,23,68,0.03) 60px,rgba(255,23,68,0.03) 61px);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,23,68,0.1) 0%,transparent 60%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="ec-glitch1" style="position:absolute;top:300px;left:0;width:100%;height:4px;background:var(--red);opacity:0.3;"></div>
+      <div id="ec-glitch2" style="position:absolute;top:900px;left:0;width:100%;height:2px;background:var(--cyan);opacity:0.3;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="ec1-title" class="title-lg" style="color:var(--red);">Python v1: 直接造假</div>
+        <div class="card danger" style="margin-bottom:20px;">
+          <div style="font-size:40px;color:var(--red);font-weight:700;margin-bottom:12px;">np.random.rand()</div>
+          <div style="font-size:38px;line-height:1.5;">文本模式下用随机数充当 WiFi 信号数据，振幅随机，相位随机</div>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <div style="font-size:40px;color:var(--cyan);font-weight:700;margin-bottom:12px;">二进制模式: 真实实现</div>
+          <div style="font-size:38px;line-height:1.5;">Magic number 校验 + I/Q 数据提取 — 开发者知道正确写法</div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="ec2-title" class="title-lg" style="color:var(--red);">Rust v2: 换汤不换药</div>
+        <div id="ec2-list" class="col gap-md">
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">derive_single_person_pose()</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">硬编码偏移量</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">几何公式推导 17 个关键点</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">演示骨架 — 非神经网络推理</span></div></div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div id="ec3-title" class="title-lg" style="color:var(--red);">安全模块: 形同虚设</div>
+        <div id="ec3-compare" class="compare-row">
+          <div class="compare-col">
+            <div class="header" style="color:var(--cyan);border-color:var(--cyan);">宣称</div>
+            <div style="font-size:40px;line-height:1.5;">HMAC-SHA256<br>安全认证</div>
+          </div>
+          <div class="compare-col">
+            <div class="header" style="color:var(--red);border-color:var(--red);">实际</div>
+            <div style="font-size:40px;line-height:1.5;">XOR 折叠<br>硬编码测试密钥</div>
+          </div>
+        </div>
+        <div class="card danger"><div style="font-size:40px;font-weight:700;color:var(--red);">7 个 CRITICAL 级安全漏洞</div></div>
+      </div>
+      <div class="phase phase-4">
+        <div id="ec4-title" class="title-lg" style="color:var(--gold);">性能测试: sleep 出来的</div>
+        <div class="card gold" style="margin-bottom:20px;">
+          <div style="font-size:40px;color:var(--gold);font-weight:700;margin-bottom:12px;">asyncio.sleep() 模拟推理</div>
+          <div style="font-size:38px;line-height:1.5;">1ms sleep = 1ms 推理？</div>
+        </div>
+        <div class="card danger">
+          <div style="font-size:40px;font-weight:700;color:var(--red);">54,000 FPS 就是这样算出来的</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 5: fraud_proof (153.37s + 47.69s) ═══ -->
+  <div class="clip" id="fraud_proof" data-start="153.37" data-duration="47.69">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0808 0%,#120808 50%,#0a0808 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,196,0,0.06) 0%,transparent 50%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fp-spot" style="position:absolute;width:400px;height:400px;border-radius:50%;border:2px solid rgba(255,196,0,0.2);top:600px;left:340px;"></div>
+      <div id="fp-line" style="position:absolute;left:0;width:100%;height:1px;background:rgba(255,196,0,0.15);top:400px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="fp1-title" class="title-lg" style="color:var(--gold);">社区独立审计</div>
+        <div id="fp1-list" class="col gap-md">
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">Python v1 确认为骗局</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">无训练模型权重</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">可疑 Star 购买行为</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:42px;">精度声明无数据支撑</span></div></div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="fp2-title" class="title-lg" style="color:var(--gold);">维护者的回应</div>
+        <div class="card" style="margin-bottom:24px;background:rgba(0,245,212,0.06);border-left-color:var(--cyan);">
+          <div style="font-size:42px;color:var(--cyan);font-weight:700;">"不，这不是假的，它确实能工作"</div>
+        </div>
+        <div style="font-size:40px;color:var(--text-secondary);margin-bottom:20px;">但需要：</div>
+        <div id="fp2-reqs" class="col gap-sm">
+          <div class="card"><div style="font-size:40px;">ESP32-S3 特定硬件</div></div>
+          <div class="card"><div style="font-size:40px;">或 Intel 5300 / Atheros AR9580</div></div>
+          <div class="card"><div style="font-size:40px;">特定固件配置</div></div>
+        </div>
+        <div class="card danger mt"><div style="font-size:40px;font-weight:700;color:var(--red);">普通用户几乎无法复现</div></div>
+      </div>
+      <div class="phase phase-3">
+        <div id="fp3-title" class="title-lg" style="color:var(--red);">安全评级: F</div>
+        <div id="fp3-data" class="stat-grid">
+          <div class="stat-item" style="border:1px solid rgba(255,23,68,0.3);">
+            <div class="num" style="color:var(--red);">F</div><div class="desc">安全评级</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" style="color:var(--red);">7</div><div class="desc">CRITICAL 漏洞</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" style="color:var(--gold);">7,312</div><div class="desc">行单文件</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" style="color:var(--gold);">65</div><div class="desc">圈复杂度</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 6: security_quality (201.06s + 46.06s) ═══ -->
+  <div class="clip" id="security_quality" data-start="201.06" data-duration="46.06">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:#0a0000;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(255,23,68,0.15) 0%,transparent 50%);"></div>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,23,68,0.02) 80px,rgba(255,23,68,0.02) 81px);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="sq-pulse" style="position:absolute;top:50%;left:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;border:2px solid rgba(255,23,68,0.3);"></div>
+      <div id="sq-bar" style="position:absolute;top:0;left:0;width:100%;height:6px;background:var(--red);opacity:0.4;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="sq1-title" class="title-lg">代码质量指标</div>
+        <div id="sq1-grid" class="stat-grid">
+          <div class="stat-item" style="border:1px solid rgba(255,23,68,0.3);">
+            <div class="num" style="color:var(--red);">7,312</div><div class="desc">行单文件 main.rs</div>
+          </div>
+          <div class="stat-item" style="border:1px solid rgba(255,196,0,0.3);">
+            <div class="num" style="color:var(--gold);">65</div><div class="desc">圈复杂度</div>
+          </div>
+          <div class="stat-item" style="border:1px solid rgba(255,196,0,0.3);">
+            <div class="num" style="color:var(--gold);">37</div><div class="desc">字段 God Object</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" style="color:var(--text-secondary);">4</div><div class="desc">处复制粘贴</div>
+          </div>
+        </div>
+        <div class="card mt" style="border-left-color:var(--gold);"><div style="font-size:38px;color:var(--gold);">同时处理 UDP CSI / WebSocket / REST API</div></div>
+      </div>
+      <div class="phase phase-2">
+        <div id="sq2-title" class="title-lg" style="color:var(--red);">安全漏洞清单</div>
+        <div id="sq2-list" class="col gap-sm">
+          <div class="card danger"><div class="row"><span class="badge badge-fake">假</span><span style="font-size:40px;">HMAC — XOR 折叠替代加密哈希</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:40px;">硬编码测试密钥写死在代码里</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:40px;">默认配置关闭认证</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:40px;">无输入验证 / UDP 无认证</span></div></div>
+          <div class="card danger"><div class="row"><div class="list-dot" style="background:var(--red);"></div><span style="font-size:40px;">WebSocket 无加密</span></div></div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="warn-banner">
+          <div class="icon">&#9888;</div>
+          <div class="text" style="color:var(--red);">灾难救援场景<br>绝对不可用</div>
+        </div>
+        <div class="warn-banner mt" style="border-color:var(--gold);background:rgba(255,196,0,0.08);">
+          <div class="text" style="color:var(--gold);">生命安全无保障</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 7: feasibility (247.12s + 55.1s) ═══ -->
+  <div class="clip" id="feasibility" data-start="247.12" data-duration="55.1">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#081820 0%,#0a1628 50%,#060e18 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(0,150,136,0.08) 0%,transparent 50%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fe-bar" style="position:absolute;bottom:400px;left:80px;width:920px;height:8px;background:rgba(0,150,136,0.2);border-radius:4px;"></div>
+      <div id="fe-dot" style="position:absolute;width:24px;height:24px;border-radius:50%;background:var(--cyan);top:0;opacity:0.4;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="fe1-title" class="title-lg" style="color:var(--cyan);">技术成熟度光谱</div>
+        <div id="fe1-timeline" class="timeline-track">
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--cyan);"></div>
+            <div style="flex:1;">
+              <div style="font-size:42px;font-weight:700;">存在检测</div>
+              <div style="font-size:36px;color:var(--cyan);">成熟 — 工业界有产品</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:#4fc3f7;"></div>
+            <div style="flex:1;">
+              <div style="font-size:42px;font-weight:700;">运动检测</div>
+              <div style="font-size:36px;color:#4fc3f7;">较成熟 — 方法论可靠</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--gold);"></div>
+            <div style="flex:1;">
+              <div style="font-size:42px;font-weight:700;">呼吸检测</div>
+              <div style="font-size:36px;color:var(--gold);">研究中 — 受控环境可行</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--red);"></div>
+            <div style="flex:1;">
+              <div style="font-size:42px;font-weight:700;">姿态估计</div>
+              <div style="font-size:36px;color:var(--red);">极早期 — CMU 仅展示可能性</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="fe2-title" class="title-lg" style="color:var(--gold);">姿态估计的实践障碍</div>
+        <div id="fe2-list" class="col gap-md">
+          <div class="card gold"><div class="row"><div class="list-dot" style="background:var(--gold);"></div><span style="font-size:42px;">数千小时配对数据集</span></div></div>
+          <div class="card gold"><div class="row"><div class="list-dot" style="background:var(--gold);"></div><span style="font-size:42px;">严格环境控制</span></div></div>
+          <div class="card gold"><div class="row"><div class="list-dot" style="background:var(--gold);"></div><span style="font-size:42px;">精确设备校准</span></div></div>
+          <div class="card gold"><div class="row"><div class="list-dot" style="background:var(--gold);"></div><span style="font-size:42px;">多天线阵列</span></div></div>
+        </div>
+        <div class="warn-banner mt" style="border-color:var(--gold);background:rgba(255,196,0,0.08);">
+          <div class="text" style="font-size:44px;color:var(--gold);">单个 ESP32 的 CSI 信息远远不够<br>实验室外几乎不可行</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 8: advice (302.22s + 47.9s) ═══ -->
+  <div class="clip" id="advice" data-start="302.22" data-duration="47.9">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#141008 0%,#1a1008 50%,#0e0a04 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,196,0,0.08) 0%,transparent 50%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="ad-glow" style="position:absolute;top:50%;left:50%;width:600px;height:600px;margin:-300px 0 0 -300px;border-radius:50%;background:radial-gradient(circle,rgba(255,196,0,0.06),transparent);"></div>
+      <div id="ad-particle" style="position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:0.3;top:400px;left:200px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div id="ad1-title" class="title-lg" style="color:var(--gold);">给研究者</div>
+        <div id="ad1-list" class="col gap-md">
+          <div class="card"><div class="row"><span class="badge badge-true">可用</span><span style="font-size:42px;">信号处理代码可作参考</span></div></div>
+          <div class="card danger"><div class="row"><span class="badge badge-fake">警告</span><span style="font-size:42px;">姿态估计声明不可依赖</span></div></div>
+          <div class="card" style="border-left-color:var(--cyan);"><div class="row"><div class="list-dot" style="background:var(--cyan);"></div><span style="font-size:42px;">参考 CMU 原始论文更靠谱</span></div></div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div id="ad2-title" class="title-lg" style="color:var(--gold);">给开发者 &amp; 投资者</div>
+        <div id="ad2-list" class="col gap-md">
+          <div class="card"><div class="row"><span class="badge badge-true">可学</span><span style="font-size:42px;">Rust DDD 架构值得学习</span></div></div>
+          <div class="card"><div class="row"><span class="badge badge-true">可用</span><span style="font-size:42px;">存在检测、运动追踪可用</span></div></div>
+          <div class="card danger"><div class="row"><span class="badge badge-fake">禁用</span><span style="font-size:42px;">姿态估计禁止用于生产</span></div></div>
+          <div class="warn-banner" style="padding:24px;">
+            <div class="text" style="font-size:40px;color:var(--red);">生命安全场景绝对不可用</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="font-size:44px;font-weight:800;text-align:center;background-image:linear-gradient(135deg,#ffc400,#ff6d00);-webkit-background-clip:text;background-clip:text;color:transparent;">画了法拉利外壳的电动自行车</div>
+        <div style="text-align:center;margin-top:16px;">
+          <span style="font-size:40px;color:var(--text-secondary);">速度表是假的，安全气囊不存在</span>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div style="text-align:center;">
+          <div style="font-size:64px;font-weight:800;background-image:linear-gradient(135deg,#ffc400,#ff6d00);-webkit-background-clip:text;background-clip:text;color:transparent;">画了法拉利外壳的电动自行车</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Scene 9: cta (350.12s + 4.34s) ═══ -->
+  <div class="clip" id="cta" data-start="350.12" data-duration="4.34">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0804 0%,#141008 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,196,0,0.12) 0%,transparent 50%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="cta-spark1" style="position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);top:500px;left:300px;opacity:0.5;"></div>
+      <div id="cta-spark2" style="position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold);top:800px;right:250px;opacity:0.4;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1" style="text-align:center;">
+        <div style="font-size:56px;font-weight:700;color:var(--text-secondary);margin-bottom:40px;">开源社区需要这样的审视</div>
+        <div style="font-size:72px;font-weight:800;background-image:linear-gradient(135deg,#ffc400,#ff6d00);-webkit-background-clip:text;background-clip:text;color:transparent;">关注我，下期见</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.__timelines = {};
+  const tl = gsap.timeline({ paused: true });
+
+  // Phase init: Phase 2+ hidden
+  tl.set("#project_overview .phase-2", { opacity: 0 }, 12.34);
+  tl.set("#project_overview .phase-3", { opacity: 0 }, 12.34);
+  tl.set("#fake_vs_real .phase-2", { opacity: 0 }, 41.02);
+  tl.set("#fake_vs_real .phase-3", { opacity: 0 }, 41.02);
+  tl.set("#fake_vs_real .phase-4", { opacity: 0 }, 41.02);
+  tl.set("#evidence_code .phase-2", { opacity: 0 }, 89.36);
+  tl.set("#evidence_code .phase-3", { opacity: 0 }, 89.36);
+  tl.set("#evidence_code .phase-4", { opacity: 0 }, 89.36);
+  tl.set("#fraud_proof .phase-2", { opacity: 0 }, 153.37);
+  tl.set("#fraud_proof .phase-3", { opacity: 0 }, 153.37);
+  tl.set("#security_quality .phase-2", { opacity: 0 }, 201.06);
+  tl.set("#security_quality .phase-3", { opacity: 0 }, 201.06);
+  tl.set("#feasibility .phase-2", { opacity: 0 }, 247.12);
+  tl.set("#advice .phase-2", { opacity: 0 }, 302.22);
+  tl.set("#advice .phase-3", { opacity: 0 }, 302.22);
+
+  // Phase auto-switch (calibrated by phase_calibrator.py)
+  const PHASE_TIMINGS = {"meta":{"voice":"zh-CN-YunjianNeural","rate":"+25%","bgm_volume":0.18,"bgm_volume_source":"bgm_pipeline","bgm_mean_db":-12.1,"bgm_max_db":-0.1,"bgm_volume_table_note":"中等","bgm_volume_adjusted":false,"calibration_source":"edge-tts-srt"},"stats":{"total_scenes":7,"total_phases":22,"anchor_calibrated":21,"auto_split":1},"scenes":[{"scene":"project_overview","segment_index":1,"global_start":12.34,"duration":28.68,"phases":[{"phase":1,"start_offset":0.0,"end_offset":6.75,"sentences":[0,1],"calibration":"sentence-anchor"},{"phase":2,"start_offset":6.75,"end_offset":19.05,"sentences":[2,3],"calibration":"sentence-anchor"},{"phase":3,"start_offset":19.05,"end_offset":28.68,"sentences":[4,5],"calibration":"sentence-anchor"}]},{"scene":"fake_vs_real","segment_index":2,"global_start":41.02,"duration":48.34,"phases":[{"phase":1,"start_offset":0.0,"end_offset":10.66,"sentences":[0,1,2],"calibration":"sentence-anchor"},{"phase":2,"start_offset":10.66,"end_offset":26.18,"sentences":[3,4,5,6],"calibration":"sentence-anchor"},{"phase":3,"start_offset":26.18,"end_offset":38.12,"sentences":[7,8,9],"calibration":"sentence-anchor"},{"phase":4,"start_offset":38.12,"end_offset":48.34,"sentences":[10,11],"calibration":"sentence-anchor"}]},{"scene":"evidence_code","segment_index":3,"global_start":89.36,"duration":64.01,"phases":[{"phase":1,"start_offset":0.0,"end_offset":21.32,"sentences":[0,1,2,3],"calibration":"sentence-anchor"},{"phase":2,"start_offset":21.32,"end_offset":43.49,"sentences":[4,5,6,7],"calibration":"sentence-anchor"},{"phase":3,"start_offset":43.49,"end_offset":53.92,"sentences":[8,9,10],"calibration":"sentence-anchor"},{"phase":4,"start_offset":53.92,"end_offset":64.01,"sentences":[11,12,13],"calibration":"sentence-anchor"}]},{"scene":"fraud_proof","segment_index":4,"global_start":153.37,"duration":47.69,"phases":[{"phase":1,"start_offset":0.0,"end_offset":11.45,"sentences":[0,1,2],"calibration":"sentence-anchor"},{"phase":2,"start_offset":11.45,"end_offset":31.61,"sentences":[3,4,5,6],"calibration":"sentence-anchor"},{"phase":3,"start_offset":31.61,"end_offset":47.69,"sentences":[7,8,9],"calibration":"sentence-anchor"}]},{"scene":"security_quality","segment_index":5,"global_start":201.06,"duration":46.06,"phases":[{"phase":1,"start_offset":0.0,"end_offset":15.21,"sentences":[0,1,2],"calibration":"sentence-anchor"},{"phase":2,"start_offset":15.21,"end_offset":31.43,"sentences":[3,4,5,6,7],"calibration":"sentence-anchor"},{"phase":3,"start_offset":31.43,"end_offset":46.06,"sentences":[8,9],"calibration":"sentence-anchor"}]},{"scene":"feasibility","segment_index":6,"global_start":247.12,"duration":55.1,"phases":[{"phase":1,"start_offset":0.0,"end_offset":23.28,"sentences":[0,1,2,3,4,5],"calibration":"sentence-anchor"},{"phase":2,"start_offset":23.28,"end_offset":55.1,"sentences":[6,7,8,9,10],"calibration":"sentence-anchor"}]},{"scene":"advice","segment_index":7,"global_start":302.22,"duration":47.9,"phases":[{"phase":1,"start_offset":0.0,"end_offset":21.96,"sentences":[0,1,2],"calibration":"sentence-anchor"},{"phase":2,"start_offset":21.96,"end_offset":47.84,"sentences":[3,4,5,6],"calibration":"sentence-anchor"},{"phase":3,"start_offset":47.84,"end_offset":47.9,"sentences":[4,5,6],"calibration":"anchor-invalid"}]}]};
+  if (PHASE_TIMINGS.scenes) {
+    PHASE_TIMINGS.scenes.forEach(sc => {
+      sc.phases.forEach((p, i) => {
+        if (i === 0) return;
+        const t = sc.global_start + p.start_offset;
+        tl.to(`#${sc.scene} .phase-${i}`, { opacity: 0, duration: 0.3 }, t);
+        tl.to(`#${sc.scene} .phase-${i + 1}`, { opacity: 1, duration: 0.4 }, t + 0.1);
+      });
+    });
+  } else {
+    tl.to("#project_overview .phase-1", { opacity: 0, duration: 0.3 }, 12.34 + 6.75);
+    tl.to("#project_overview .phase-2", { opacity: 1, duration: 0.4 }, 12.34 + 6.75 + 0.1);
+    tl.to("#project_overview .phase-2", { opacity: 0, duration: 0.3 }, 12.34 + 19.05);
+    tl.to("#project_overview .phase-3", { opacity: 1, duration: 0.4 }, 12.34 + 19.05 + 0.1);
+    tl.to("#fake_vs_real .phase-1", { opacity: 0, duration: 0.3 }, 41.02 + 10.66);
+    tl.to("#fake_vs_real .phase-2", { opacity: 1, duration: 0.4 }, 41.02 + 10.66 + 0.1);
+    tl.to("#fake_vs_real .phase-2", { opacity: 0, duration: 0.3 }, 41.02 + 26.18);
+    tl.to("#fake_vs_real .phase-3", { opacity: 1, duration: 0.4 }, 41.02 + 26.18 + 0.1);
+    tl.to("#fake_vs_real .phase-3", { opacity: 0, duration: 0.3 }, 41.02 + 38.12);
+    tl.to("#fake_vs_real .phase-4", { opacity: 1, duration: 0.4 }, 41.02 + 38.12 + 0.1);
+    tl.to("#evidence_code .phase-1", { opacity: 0, duration: 0.3 }, 89.36 + 21.32);
+    tl.to("#evidence_code .phase-2", { opacity: 1, duration: 0.4 }, 89.36 + 21.32 + 0.1);
+    tl.to("#evidence_code .phase-2", { opacity: 0, duration: 0.3 }, 89.36 + 43.49);
+    tl.to("#evidence_code .phase-3", { opacity: 1, duration: 0.4 }, 89.36 + 43.49 + 0.1);
+    tl.to("#evidence_code .phase-3", { opacity: 0, duration: 0.3 }, 89.36 + 53.92);
+    tl.to("#evidence_code .phase-4", { opacity: 1, duration: 0.4 }, 89.36 + 53.92 + 0.1);
+    tl.to("#fraud_proof .phase-1", { opacity: 0, duration: 0.3 }, 153.37 + 11.45);
+    tl.to("#fraud_proof .phase-2", { opacity: 1, duration: 0.4 }, 153.37 + 11.45 + 0.1);
+    tl.to("#fraud_proof .phase-2", { opacity: 0, duration: 0.3 }, 153.37 + 31.61);
+    tl.to("#fraud_proof .phase-3", { opacity: 1, duration: 0.4 }, 153.37 + 31.61 + 0.1);
+    tl.to("#security_quality .phase-1", { opacity: 0, duration: 0.3 }, 201.06 + 15.21);
+    tl.to("#security_quality .phase-2", { opacity: 1, duration: 0.4 }, 201.06 + 15.21 + 0.1);
+    tl.to("#security_quality .phase-2", { opacity: 0, duration: 0.3 }, 201.06 + 31.43);
+    tl.to("#security_quality .phase-3", { opacity: 1, duration: 0.4 }, 201.06 + 31.43 + 0.1);
+    tl.to("#feasibility .phase-1", { opacity: 0, duration: 0.3 }, 247.12 + 23.28);
+    tl.to("#feasibility .phase-2", { opacity: 1, duration: 0.4 }, 247.12 + 23.28 + 0.1);
+    tl.to("#advice .phase-1", { opacity: 0, duration: 0.3 }, 302.22 + 21.96);
+    tl.to("#advice .phase-2", { opacity: 1, duration: 0.4 }, 302.22 + 21.96 + 0.1);
+    tl.to("#advice .phase-2", { opacity: 0, duration: 0.3 }, 302.22 + 47.84);
+    tl.to("#advice .phase-3", { opacity: 1, duration: 0.4 }, 302.22 + 47.84 + 0.1);
+  }
+
+  // ═══ Entrance animations ═══
+
+  // Hook scene
+  tl.from("#hook-label", { opacity: 0, y: 40, duration: 0.8 }, 0.2);
+  tl.from("#hook-num1", { opacity: 0, scale: 0.5, duration: 1.0 }, 0.6);
+  tl.from("#hook-num2", { opacity: 0, scale: 0.5, duration: 1.0 }, 1.2);
+  tl.from("#hook-sub", { opacity: 0, y: 30, duration: 0.6 }, 2.5);
+  tl.from("#hook-punch", { opacity: 0, scale: 0.8, duration: 0.6 }, 3.5);
+
+  // Hook fx
+  tl.fromTo("#hook-ring1", { scale: 0.5, opacity: 0.6 }, { scale: 2.5, opacity: 0, duration: 5, ease: "power2.out" }, 0.5);
+  tl.fromTo("#hook-ring2", { scale: 0.5, opacity: 0.4 }, { scale: 3, opacity: 0, duration: 6, ease: "power2.out" }, 1.0);
+
+  // Project overview scene
+  tl.from("#po1-title", { opacity: 0, y: 50, duration: 0.6 }, 12.54);
+  tl.from("#po1-sub", { opacity: 0, duration: 0.5 }, 12.74);
+  tl.from("#po1-stats", { opacity: 0, y: 30, duration: 0.6 }, 13.0);
+  tl.fromTo("#po-scan", { top: 0 }, { top: 1920, duration: 28.68, ease: "none" }, 12.34);
+  tl.fromTo("#po-float", { rotation: 45, opacity: 0.3 }, { rotation: 405, opacity: 0.1, duration: 28.68, ease: "none" }, 12.34);
+
+  // Fake vs real scene
+  tl.from("#fvr1-title", { opacity: 0, x: -40, duration: 0.6 }, 41.22);
+  tl.from("#fvr1-list", { opacity: 0, y: 30, duration: 0.6 }, 41.42);
+  tl.fromTo("#fvr-sweep", { left: 0 }, { left: 1076, duration: 48.34, ease: "none" }, 41.02);
+  tl.fromTo("#fvr-flash", { opacity: 0 }, { opacity: 0.15, duration: 2, yoyo: true, repeat: 11 }, 41.02);
+
+  // Evidence code scene
+  tl.from("#ec1-title", { opacity: 0, x: -40, duration: 0.6 }, 89.56);
+  tl.fromTo("#ec-glitch1", { x: -200 }, { x: 1280, duration: 8, ease: "none", repeat: 7 }, 89.36);
+  tl.fromTo("#ec-glitch2", { x: 1280 }, { x: -200, duration: 10, ease: "none", repeat: 5 }, 89.36);
+
+  // Fraud proof scene
+  tl.from("#fp1-title", { opacity: 0, y: 40, duration: 0.6 }, 153.57);
+  tl.from("#fp1-list", { opacity: 0, y: 20, duration: 0.5 }, 153.77);
+  tl.fromTo("#fp-spot", { scale: 0.8, opacity: 0.2 }, { scale: 1.3, opacity: 0, duration: 8, ease: "power1.inOut" }, 153.37);
+  tl.fromTo("#fp-line", { top: 400 }, { top: 1500, duration: 47.69, ease: "none" }, 153.37);
+
+  // Security quality scene
+  tl.from("#sq1-title", { opacity: 0, y: 40, duration: 0.6 }, 201.26);
+  tl.from("#sq1-grid", { opacity: 0, y: 20, duration: 0.5 }, 201.46);
+  tl.fromTo("#sq-pulse", { scale: 0.5, opacity: 0.4 }, { scale: 2, opacity: 0, duration: 4, ease: "power1.out" }, 201.06);
+  tl.fromTo("#sq-pulse", { scale: 0.5, opacity: 0.4 }, { scale: 2, opacity: 0, duration: 4, ease: "power1.out" }, 205.06);
+  tl.fromTo("#sq-pulse", { scale: 0.5, opacity: 0.4 }, { scale: 2, opacity: 0, duration: 4, ease: "power1.out" }, 209.06);
+
+  // Feasibility scene
+  tl.from("#fe1-title", { opacity: 0, y: 40, duration: 0.6 }, 247.32);
+  tl.from("#fe1-timeline", { opacity: 0, y: 20, duration: 0.5 }, 247.52);
+  tl.fromTo("#fe-bar", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 23.28, ease: "none" }, 247.12);
+
+  // Advice scene
+  tl.from("#ad1-title", { opacity: 0, y: 40, duration: 0.6 }, 302.42);
+  tl.from("#ad1-list", { opacity: 0, y: 20, duration: 0.5 }, 302.62);
+  tl.fromTo("#ad-glow", { scale: 0.8, opacity: 0.05 }, { scale: 1.2, opacity: 0.1, duration: 47.9, ease: "none" }, 302.22);
+  tl.fromTo("#ad-particle", { y: 400, opacity: 0.3 }, { y: 1400, opacity: 0, duration: 20, ease: "none" }, 302.22);
+
+  // CTA scene
+  tl.from("#cta-spark1", { scale: 0, duration: 0.5 }, 350.32);
+  tl.from("#cta-spark2", { scale: 0, duration: 0.5 }, 350.52);
+
+  // HyperFrames API
+  window.__hf = {
+    duration: 354.46,
+    seek: function(t) { tl.time(t, false); }
+  };
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

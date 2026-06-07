@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg-dark: #080810;
+    --bg-mid: #0d1020;
+    --accent: #00ff88;
+    --accent2: #00d4ff;
+    --hot: #ff6b35;
+    --text-primary: #ffffff;
+    --text-secondary: #8899aa;
+  }
+  body { background: var(--bg-dark); overflow: hidden; }
+
+  .clip {
+    position: absolute; top: 0; left: 0;
+    width: 1080px; height: 1920px;
+    overflow: hidden;
+  }
+
+  /* ── Scene 1: Hook — 雷达扫描 ── */
+  #scene-hook {
+    background: radial-gradient(ellipse at center, #0d1020 0%, #080810 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .radar-grid {
+    position: absolute; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .radar-ring { position: absolute; border: 2px solid rgba(0,255,136,0.12); border-radius: 50%; }
+  .radar-ring-1 { width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .radar-ring-2 { width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .radar-ring-3 { width: 1000px; height: 1000px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .radar-sweep {
+    position: absolute; width: 500px; height: 500px;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0%, rgba(0,255,136,0.2) 15%, transparent 30%);
+  }
+  .hook-title {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 96px; font-weight: 900;
+    color: var(--accent); text-align: center; line-height: 1.2;
+    text-shadow: 0 0 60px rgba(0,255,136,0.3);
+  }
+  .hook-sub {
+    position: relative; z-index: 2; margin-top: 40px;
+    font-family: 'Inter', sans-serif; font-size: 48px; font-weight: 600;
+    color: var(--text-secondary); text-align: center;
+  }
+  .wifi-icon {
+    position: relative; z-index: 2; margin-bottom: 60px;
+    width: 120px; height: 120px;
+    border: 6px solid var(--accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wifi-dot { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; }
+  .wifi-arc { position: absolute; border: 6px solid transparent; border-top-color: var(--accent); border-radius: 50%; }
+  .wifi-arc-1 { width: 60px; height: 60px; top: -20px; }
+  .wifi-arc-2 { width: 90px; height: 90px; top: -35px; }
+
+  /* ── Scene 2: What — 项目介绍 ── */
+  #scene-what {
+    background: linear-gradient(180deg, #080810 0%, #0d1020 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .bg-grid-2 {
+    position: absolute; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .project-name {
+    position: relative; z-index: 2;
+    font-family: 'JetBrains Mono', monospace; font-size: 72px; font-weight: 700;
+    color: var(--accent2);
+    background: rgba(0,212,255,0.08); border: 2px solid rgba(0,212,255,0.2);
+    padding: 20px 60px; border-radius: 24px;
+  }
+  .what-title {
+    position: relative; z-index: 2; margin-top: 60px;
+    font-family: 'Inter', sans-serif; font-size: 56px; font-weight: 800;
+    color: var(--text-primary); text-align: center; line-height: 1.3;
+  }
+  .what-accent { color: var(--accent); }
+  .what-arrow {
+    position: relative; z-index: 2; margin-top: 48px;
+    font-size: 64px; color: var(--accent2);
+  }
+  .what-result {
+    position: relative; z-index: 2; margin-top: 24px;
+    font-family: 'Inter', sans-serif; font-size: 52px; font-weight: 700;
+    color: var(--hot); text-align: center;
+  }
+
+  /* ── Scene 3: How — 原理示意 ── */
+  #scene-how {
+    background: radial-gradient(ellipse at center, #0d1020 0%, #080810 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .how-bg-grid {
+    position: absolute; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.025) 1px, transparent 1px);
+    background-size: 54px 54px;
+  }
+  .how-title {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 52px; font-weight: 800;
+    color: var(--text-primary); text-align: center; margin-bottom: 60px;
+  }
+  .how-flow {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 36px;
+  }
+  .how-step {
+    display: flex; align-items: center; gap: 32px;
+    width: 900px;
+  }
+  .how-icon-box {
+    width: 100px; height: 100px; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; flex-shrink: 0;
+  }
+  .how-icon-router { background: rgba(0,212,255,0.1); border: 2px solid rgba(0,212,255,0.3); }
+  .how-icon-body { background: rgba(0,255,136,0.1); border: 2px solid rgba(0,255,136,0.3); }
+  .how-icon-brain { background: rgba(255,107,53,0.1); border: 2px solid rgba(255,107,53,0.3); }
+  .how-step-text {
+    font-family: 'Inter', sans-serif; font-size: 40px; font-weight: 600;
+    color: var(--text-primary); line-height: 1.3;
+  }
+  .how-step-sub { font-size: 32px; color: var(--text-secondary); font-weight: 400; }
+  .how-arrow-down {
+    font-size: 48px; color: var(--accent); text-align: center;
+  }
+
+  /* ── Scene 4: Capabilities — 六功能 ── */
+  #scene-capabilities {
+    background: linear-gradient(180deg, #080810 0%, #0d1020 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .cap-bg-grid {
+    position: absolute; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .cap-label {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 700;
+    color: var(--text-secondary); letter-spacing: 4px;
+    margin-bottom: 40px;
+  }
+  .cap-grid {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    width: 920px;
+  }
+  .cap-card {
+    background: rgba(13,16,32,0.9);
+    border: 1px solid rgba(0,255,136,0.12);
+    border-radius: 18px; padding: 28px 24px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .cap-icon { font-size: 44px; margin-bottom: 12px; }
+  .cap-title {
+    font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 700;
+    color: var(--text-primary); text-align: center; margin-bottom: 6px;
+  }
+  .cap-stat {
+    font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .cap-desc {
+    font-family: 'Inter', sans-serif; font-size: 24px;
+    color: var(--text-secondary); text-align: center;
+  }
+  .cap-c1 .cap-icon { color: var(--accent); }
+  .cap-c1 { border-color: rgba(0,255,136,0.2); }
+  .cap-c1 .cap-stat { color: var(--accent); }
+  .cap-c2 .cap-icon { color: var(--hot); }
+  .cap-c2 { border-color: rgba(255,107,53,0.2); }
+  .cap-c2 .cap-stat { color: var(--hot); }
+  .cap-c3 .cap-icon { color: var(--accent2); }
+  .cap-c3 { border-color: rgba(0,212,255,0.2); }
+  .cap-c3 .cap-stat { color: var(--accent2); }
+  .cap-c4 .cap-icon { color: #c084fc; }
+  .cap-c4 { border-color: rgba(192,132,252,0.2); }
+  .cap-c4 .cap-stat { color: #c084fc; }
+  .no-cam-tag {
+    position: relative; z-index: 2; margin-top: 36px;
+    font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 800;
+    color: var(--hot);
+    background: rgba(255,107,53,0.08); border: 2px solid rgba(255,107,53,0.25);
+    padding: 14px 40px; border-radius: 36px;
+  }
+
+  /* ── Scene 5: Use Cases — 三大场景 ── */
+  #scene-usecases {
+    background: radial-gradient(ellipse at center, #0d1020 0%, #080810 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .uc-bg-grid {
+    position: absolute; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+    background-size: 54px 54px;
+  }
+  .uc-title {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 48px; font-weight: 800;
+    color: var(--text-primary); margin-bottom: 48px;
+  }
+  .uc-cards {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 28px; width: 880px;
+  }
+  .uc-card {
+    display: flex; align-items: center; gap: 28px;
+    background: rgba(13,16,32,0.9);
+    border: 1px solid rgba(0,212,255,0.12);
+    border-radius: 18px; padding: 28px 32px;
+  }
+  .uc-emoji { font-size: 56px; flex-shrink: 0; }
+  .uc-content { display: flex; flex-direction: column; }
+  .uc-name {
+    font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 6px;
+  }
+  .uc-detail {
+    font-family: 'Inter', sans-serif; font-size: 28px;
+    color: var(--text-secondary); line-height: 1.3;
+  }
+  .uc-highlight { color: var(--accent); font-weight: 600; }
+
+  /* ── Scene 6: Tech — 技术参数 ── */
+  #scene-tech {
+    background: linear-gradient(180deg, #080810 0%, #0d1020 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .tech-glow {
+    position: absolute; width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,255,136,0.06), transparent 70%);
+    top: 20%; left: 50%; transform: translateX(-50%);
+  }
+  .chip-icon {
+    position: relative; z-index: 2;
+    width: 140px; height: 140px;
+    background: rgba(0,255,136,0.08); border: 3px solid rgba(0,255,136,0.3);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+    color: var(--accent); margin-bottom: 48px;
+  }
+  .tech-stats {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 28px; align-items: center;
+  }
+  .tech-row { display: flex; align-items: center; gap: 20px; }
+  .tech-value {
+    font-family: 'JetBrains Mono', monospace; font-size: 60px; font-weight: 700;
+    color: var(--accent);
+  }
+  .tech-unit {
+    font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .tech-divider {
+    width: 180px; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,255,136,0.3), transparent);
+  }
+  .tech-lang {
+    position: relative; z-index: 2; margin-top: 36px;
+    display: flex; gap: 20px;
+  }
+  .tech-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600;
+    padding: 10px 28px; border-radius: 14px;
+  }
+  .badge-rust { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.25); }
+  .badge-oss { background: rgba(0,212,255,0.1); color: var(--accent2); border: 1px solid rgba(0,212,255,0.25); }
+  .badge-local { background: rgba(255,107,53,0.1); color: var(--hot); border: 1px solid rgba(255,107,53,0.25); }
+
+  /* ── Scene 7: Privacy — 隐私优势 ── */
+  #scene-privacy {
+    background: radial-gradient(ellipse at center, #0d1020 0%, #080810 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .privacy-glow {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,255,136,0.06), transparent 70%);
+    top: 25%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .shield-icon {
+    position: relative; z-index: 2; margin-bottom: 48px;
+    width: 120px; height: 140px;
+    background: rgba(0,255,136,0.08);
+    border: 3px solid var(--accent);
+    border-radius: 60px 60px 20px 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+  }
+  .privacy-title {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 52px; font-weight: 800;
+    color: var(--accent); margin-bottom: 48px;
+  }
+  .privacy-list {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 28px; width: 800px;
+  }
+  .privacy-item {
+    display: flex; align-items: center; gap: 24px;
+  }
+  .privacy-x {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255,107,53,0.15); border: 2px solid rgba(255,107,53,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 900;
+    color: var(--hot); flex-shrink: 0;
+  }
+  .privacy-text {
+    font-family: 'Inter', sans-serif; font-size: 40px; font-weight: 600;
+    color: var(--text-primary);
+  }
+  .privacy-sub {
+    font-size: 30px; color: var(--text-secondary); font-weight: 400;
+  }
+
+  /* ── Scene 8: CTA ── */
+  #scene-cta {
+    background: radial-gradient(ellipse at center, #0d1020 0%, #080810 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .cta-project {
+    position: relative; z-index: 2;
+    font-family: 'JetBrains Mono', monospace; font-size: 72px; font-weight: 700;
+    color: var(--accent2); margin-bottom: 48px;
+    background: rgba(0,212,255,0.06); border: 2px solid rgba(0,212,255,0.15);
+    padding: 24px 64px; border-radius: 28px;
+  }
+  .cta-line {
+    position: relative; z-index: 2;
+    width: 300px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px; margin-bottom: 48px;
+  }
+  .cta-text {
+    position: relative; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 56px; font-weight: 700;
+    color: var(--text-primary);
+  }
+  .cta-glow {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.05), transparent 70%);
+    bottom: 10%; right: -100px;
+  }
+</style>
+</head>
+<body>
+
+<div data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="52.17">
+  <audio id="narration" src="narration.mp3" data-start="0" data-duration="52.17" data-track-index="0" data-volume="1"></audio>
+
+  <!-- Scene 1: Hook (0 - 3.98s) -->
+  <div class="clip" id="scene-hook" data-start="0" data-duration="3.98">
+    <div class="radar-grid"></div>
+    <div class="radar-ring radar-ring-1"></div>
+    <div class="radar-ring radar-ring-2"></div>
+    <div class="radar-ring radar-ring-3"></div>
+    <div class="radar-sweep" id="sweep"></div>
+    <div class="wifi-icon">
+      <div class="wifi-dot"></div>
+      <div class="wifi-arc wifi-arc-1"></div>
+      <div class="wifi-arc wifi-arc-2"></div>
+    </div>
+    <div class="hook-title">WiFi能<br>看穿墙壁？</div>
+    <div class="hook-sub">这不是科幻电影</div>
+  </div>
+
+  <!-- Scene 2: What (3.98 - 9.40s) -->
+  <div class="clip" id="scene-what" data-start="3.98" data-duration="5.42">
+    <div class="bg-grid-2"></div>
+    <div class="project-name">RuView</div>
+    <div class="what-title">用<span class="what-accent">WiFi电波</span><br>感知人体存在</div>
+    <div class="what-arrow">↓</div>
+    <div class="what-result">穿墙 · 测心跳 · 识动作</div>
+  </div>
+
+  <!-- Scene 3: How (9.40 - 17.30s) -->
+  <div class="clip" id="scene-how" data-start="9.40" data-duration="7.90">
+    <div class="how-bg-grid"></div>
+    <div class="how-title">工作原理</div>
+    <div class="how-flow">
+      <div class="how-step">
+        <div class="how-icon-box how-icon-router">📡</div>
+        <div>
+          <div class="how-step-text">WiFi路由器发出无线电波</div>
+          <div class="how-step-sub">2.4GHz信号穿过整个房间</div>
+        </div>
+      </div>
+      <div class="how-arrow-down">↓</div>
+      <div class="how-step">
+        <div class="how-icon-box how-icon-body">🧍</div>
+        <div>
+          <div class="how-step-text">人体移动和呼吸改变信号</div>
+          <div class="how-step-sub">身体反射产生可测量变化</div>
+        </div>
+      </div>
+      <div class="how-arrow-down">↓</div>
+      <div class="how-step">
+        <div class="how-icon-box how-icon-brain">🧠</div>
+        <div>
+          <div class="how-step-text">AI分析信号变化</div>
+          <div class="how-step-sub">实时输出人体状态数据</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Capabilities (17.30 - 27.16s) -->
+  <div class="clip" id="scene-capabilities" data-start="17.30" data-duration="9.86">
+    <div class="cap-bg-grid"></div>
+    <div class="cap-label">核心能力</div>
+    <div class="cap-grid">
+      <div class="cap-card cap-c1">
+        <div class="cap-icon">📡</div>
+        <div class="cap-title">穿墙检测</div>
+        <div class="cap-stat">100% 准确</div>
+        <div class="cap-desc">最远5米穿透深度</div>
+      </div>
+      <div class="cap-card cap-c2">
+        <div class="cap-icon">💓</div>
+        <div class="cap-title">呼吸监测</div>
+        <div class="cap-stat">±1 BPM</div>
+        <div class="cap-desc">精确到正负1次</div>
+      </div>
+      <div class="cap-card cap-c3">
+        <div class="cap-icon">🏃</div>
+        <div class="cap-title">活动识别</div>
+        <div class="cap-stat">走 / 坐 / 摔倒</div>
+        <div class="cap-desc">实时判断人体动作</div>
+      </div>
+      <div class="cap-card cap-c4">
+        <div class="cap-icon">👥</div>
+        <div class="cap-title">多人追踪</div>
+        <div class="cap-stat">最多5人</div>
+        <div class="cap-desc">每接入点独立计数</div>
+      </div>
+    </div>
+    <div class="no-cam-tag">零摄像头 · 零穿戴 · 零隐私风险</div>
+  </div>
+
+  <!-- Scene 5: Use Cases (27.16 - 35.94s) -->
+  <div class="clip" id="scene-usecases" data-start="27.16" data-duration="8.78">
+    <div class="uc-bg-grid"></div>
+    <div class="uc-title">实际应用场景</div>
+    <div class="uc-cards">
+      <div class="uc-card">
+        <div class="uc-emoji">👴</div>
+        <div class="uc-content">
+          <div class="uc-name">养老院跌倒检测</div>
+          <div class="uc-detail">不用摄像头，<span class="uc-highlight">2秒内</span>检测到跌倒并报警</div>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-emoji">👶</div>
+        <div class="uc-content">
+          <div class="uc-name">婴儿呼吸监测</div>
+          <div class="uc-detail">不用穿戴设备，持续监测<span class="uc-highlight">呼吸频率</span></div>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-emoji">🌙</div>
+        <div class="uc-content">
+          <div class="uc-name">全黑环境监控</div>
+          <div class="uc-detail">不依赖光线，<span class="uc-highlight">伸手不见五指</span>也能工作</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 6: Tech (35.94 - 43.19s) -->
+  <div class="clip" id="scene-tech" data-start="35.94" data-duration="7.25">
+    <div class="tech-glow"></div>
+    <div class="chip-icon">ESP32</div>
+    <div class="tech-stats">
+      <div class="tech-row">
+        <div class="tech-value">几个</div>
+        <div class="tech-unit">芯片组网</div>
+      </div>
+      <div class="tech-divider"></div>
+      <div class="tech-row">
+        <div class="tech-value">58K</div>
+        <div class="tech-unit">Star</div>
+      </div>
+    </div>
+    <div class="tech-lang">
+      <div class="tech-badge badge-rust">Rust</div>
+      <div class="tech-badge badge-oss">MIT 开源</div>
+      <div class="tech-badge badge-local">全本地</div>
+    </div>
+  </div>
+
+  <!-- Scene 7: Privacy (43.19 - 49.07s) -->
+  <div class="clip" id="scene-privacy" data-start="43.19" data-duration="5.88">
+    <div class="privacy-glow"></div>
+    <div class="shield-icon">🛡</div>
+    <div class="privacy-title">隐私保护</div>
+    <div class="privacy-list">
+      <div class="privacy-item">
+        <div class="privacy-x">✕</div>
+        <div>
+          <div class="privacy-text">不采集任何图像</div>
+          <div class="privacy-sub">从根本上规避隐私风险</div>
+        </div>
+      </div>
+      <div class="privacy-item">
+        <div class="privacy-x">✕</div>
+        <div>
+          <div class="privacy-text">不上传云端</div>
+          <div class="privacy-sub">全部本地运行，数据不出门</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 8: CTA (49.07 - 52.17s) -->
+  <div class="clip" id="scene-cta" data-start="49.07" data-duration="3.10">
+    <div class="cta-glow"></div>
+    <div class="cta-project">RuView</div>
+    <div class="cta-line"></div>
+    <div class="cta-text">关注我，每天更新</div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+
+// Hook — 雷达扫描 (t=0)
+tl.from('#scene-hook .radar-ring', {scale: 0, opacity: 0, stagger: 0.15, duration: 0.3, ease: 'power3.out'}, 0)
+  .fromTo('#sweep', {rotation: 0}, {rotation: 360, duration: 3.5, ease: 'none'}, 0.2)
+  .from('#scene-hook .wifi-icon', {scale: 0, opacity: 0, duration: 0.35, ease: 'back.out(1.7)'}, 0.3)
+  .from('#scene-hook .hook-title', {y: 60, opacity: 0, duration: 0.35, ease: 'power3.out'}, 0.6)
+  .from('#scene-hook .hook-sub', {y: 40, opacity: 0, duration: 0.3, ease: 'power3.out'}, 1.0);
+
+// What — 项目介绍 (t=3.98)
+tl.from('#scene-what .project-name', {y: -80, opacity: 0, duration: 0.35, ease: 'power3.out'}, 3.98)
+  .from('#scene-what .what-title', {y: 60, opacity: 0, duration: 0.35, ease: 'power3.out'}, 4.28)
+  .from('#scene-what .what-arrow', {scaleY: 0, opacity: 0, duration: 0.25, ease: 'power3.out'}, 4.68)
+  .from('#scene-what .what-result', {y: 40, opacity: 0, duration: 0.35, ease: 'power3.out'}, 4.93);
+
+// How — 原理 (t=9.40)
+tl.from('#scene-how .how-title', {y: -40, opacity: 0, duration: 0.3, ease: 'power3.out'}, 9.40)
+  .from('#scene-how .how-step', {x: -60, opacity: 0, stagger: 0.35, duration: 0.35, ease: 'power3.out'}, 9.70)
+  .from('#scene-how .how-arrow-down', {scaleY: 0, opacity: 0, stagger: 0.35, duration: 0.25, ease: 'power3.out'}, 10.10);
+
+// Capabilities — 六功能 (t=17.30)
+tl.from('#scene-capabilities .cap-label', {y: -40, opacity: 0, duration: 0.3, ease: 'power3.out'}, 17.30)
+  .from('#scene-capabilities .cap-card', {y: 60, opacity: 0, stagger: 0.15, duration: 0.35, ease: 'power3.out'}, 17.50)
+  .from('#scene-capabilities .no-cam-tag', {scale: 0.8, opacity: 0, duration: 0.35, ease: 'back.out(1.7)'}, 18.30);
+
+// Use Cases (t=27.16)
+tl.from('#scene-usecases .uc-title', {y: -40, opacity: 0, duration: 0.3, ease: 'power3.out'}, 27.16)
+  .from('#scene-usecases .uc-card', {x: -60, opacity: 0, stagger: 0.25, duration: 0.35, ease: 'power3.out'}, 27.46);
+
+// Tech (t=35.94)
+tl.from('#scene-tech .chip-icon', {scale: 0, rotation: -90, opacity: 0, duration: 0.4, ease: 'back.out(1.7)'}, 35.94)
+  .from('#scene-tech .tech-row', {x: -60, opacity: 0, stagger: 0.25, duration: 0.35, ease: 'power3.out'}, 36.24)
+  .from('#scene-tech .tech-divider', {scaleX: 0, opacity: 0, duration: 0.3, ease: 'power3.out'}, 36.54)
+  .from('#scene-tech .tech-badge', {y: 30, opacity: 0, stagger: 0.15, duration: 0.3, ease: 'power3.out'}, 36.84);
+
+// Privacy (t=43.19)
+tl.from('#scene-privacy .shield-icon', {scale: 0, opacity: 0, duration: 0.4, ease: 'back.out(1.7)'}, 43.19)
+  .from('#scene-privacy .privacy-title', {y: -40, opacity: 0, duration: 0.3, ease: 'power3.out'}, 43.40)
+  .from('#scene-privacy .privacy-item', {x: -60, opacity: 0, stagger: 0.25, duration: 0.35, ease: 'power3.out'}, 43.70);
+
+// CTA (t=49.07)
+tl.from('#scene-cta .cta-project', {y: -60, opacity: 0, duration: 0.35, ease: 'power3.out'}, 49.07)
+  .from('#scene-cta .cta-line', {scaleX: 0, opacity: 0, duration: 0.3, ease: 'power3.out'}, 49.37)
+  .from('#scene-cta .cta-text', {y: 40, opacity: 0, duration: 0.35, ease: 'power3.out'}, 49.62);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

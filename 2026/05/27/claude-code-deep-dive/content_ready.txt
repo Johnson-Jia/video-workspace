@@ -1,0 +1,66 @@
+# Claude Code 深度解析专题
+
+## 视频模式
+单主题深度解析（45-60s，7-8 场景，300-450 字）
+
+## 主题
+Claude Code 源码泄露背后的真相 — 51 万行代码揭示了什么
+
+## 核心数据点
+- 1,987 个 TypeScript 源文件，约 51 万行代码
+- 53 个内置工具（文件操作/命令执行/Agent编排/网络/MCP等）
+- 87 个斜杠命令，约 50 个编译开关
+- 7 个隐藏功能：BUDDY（AI宠物）、KAIROS（持久助手）、ULTRAPLAN（云端规划）、Coordinator（多Agent编排）、Bridge（远程控制）、Voice（语音交互）、Proactive（主动模式）
+- 三层功能门控：编译时 feature() → USER_TYPE 硬编码 → GrowthBook 远程 A/B 测试
+- 外部版是精简版，内部版解锁全部功能
+- 泄露方式：npm 包未排除 source map 文件
+- 2025 年全年 176 次更新，从 Beta 发展为全平台产品
+
+## 深度解析维度（7-8 场景结构）
+
+### 维度 1：泄露事件
+npm 发布时未排除 cli.js.map，source map 中的 sourcesContent 字段存储了编译前的完整 TypeScript 源码。1,987 个文件、约 30MB 数据、接近 100% 完整度。VentureBeat 评价"竞争对手获得了 agentic 编码工具的蓝图"。
+
+### 维度 2：架构规模
+技术栈：TypeScript + React + Ink（终端TUI）+ MCP + GrowthBook + OpenTelemetry。入口文件 main.tsx 有 4,690 行，启动流程 8 个阶段。src/ 下 38 个一级目录，包含 tools、commands、components（105个UI组件）、hooks（113个）、services（~80个）等。
+
+### 维度 3：工具体系
+53 个工具分 6 大类：文件操作（Read/Edit/Write/Glob/Grep/Notebook）、命令执行（Bash/PowerShell/TerminalCapture）、Agent编排（Agent/SendMessage/TeamCreate/Task系列，共8个）、开发工具（PlanMode/Worktree/Skill/LSP）、网络搜索（WebSearch/WebFetch/WebBrowser）、MCP集成等。Bash 工具有完整的安全检查器。
+
+### 维度 4：功能门控
+三层过滤机制：
+- 第一层：编译时 ~50 个 feature() 开关，Bun bundler DCE 死代码消除
+- 第二层：USER_TYPE 硬编码（'ant' 内部 vs 'external' 外部），200+ 处条件检查
+- 第三层：GrowthBook 远程 A/B 测试，tengu_* 前缀开关，运行时动态控制
+内部用户 20 分钟刷新配置，外部用户 6 小时。
+
+### 维度 5：隐藏功能亮点
+- BUDDY：终端拓麻歌子，18 种宠物，稀有度体系 Common→Legendary，1% 闪光概率
+- KAIROS：跨会话持久运行，四阶段记忆整合（自动做梦），主动找活干
+- ULTRAPLAN：云端 Opus 模型独立研究最长 30 分钟，Git Bundle 传送代码上下文
+- Coordinator：多 Agent 编排，系统提示"禁止甩锅式委派"
+
+### 维度 6：安全体系
+Bash 安全检查器（注入检测 + 权限分级 + 沙箱）、OAuth 2.0 + JWT + Keychain、反蒸馏保护（ANTI_DISTILLATION_CC）、客户端证明（NATIVE_CLIENT_ATTESTATION）。
+
+### 维度 7：竞争对比
+Claude Code vs Cursor vs Copilot：
+- Claude Code：终端原生、高自主性、MCP 原生、多 Agent 支持、后端/复杂代码库最佳
+- Cursor：AI 原生 IDE、全栈体验、新项目友好
+- Copilot：多平台插件、企业合规、VS Code 生态
+社区评分 Claude Code 9/10（生产代码场景）
+
+### 维度 8：行业启示
+- AI 编码工具的护城河不是模型，而是 harness（编排层）的工程复杂度
+- 功能门控是 AI 产品的重要设计模式
+- MCP 协议正在成为 AI 工具扩展标准
+- 终端 CLI + IDE + Web/移动 多端覆盖成为标配
+
+## 选取优先级
+重点突出：泄露事件（钩子价值高）→ 架构规模（数据震撼）→ 隐藏功能（好奇心驱动）→ 功能门控（技术深度）→ 行业启示（升华收尾）
+弱化：安全细节（枯燥）、竞品对比细节（偏离主题）
+
+## 内容来源
+- workspace/sources/GitHub项目分析报告/claude-code/REPORT.html（源码泄露深度分析，10章）
+- workspace/sources/GitHub项目分析报告/claude-code/GUIDE.html（完全使用手册，15章）
+- https://code.claude.com/docs/zh-CN/overview（官方文档）

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#080818;
+  --bg-mid:#12122e;
+  --accent-warm:#f0b429;
+  --accent-cool:#00e5a0;
+  --text-primary:#ffffff;
+  --text-secondary:#a0a0c0;
+}
+body{
+  width:1080px;height:1920px;overflow:hidden;
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  background:var(--bg-dark);
+}
+.composition{position:relative;width:1080px;height:1920px}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px}
+.scene-wrap{
+  position:absolute;width:1080px;height:1920px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding-top:120px;padding-bottom:120px;
+}
+.bg-grad{position:absolute;width:100%;height:100%}
+.glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none}
+.grid-bg{
+  position:absolute;width:100%;height:100%;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,160,0.04) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;
+}
+
+/* Hook */
+.s-hook .bg-grad{background:linear-gradient(180deg,#080818 0%,#1a1040 50%,#080818 100%)}
+.hook-badge{
+  font-size:30px;font-weight:600;color:var(--accent-cool);
+  padding:10px 28px;border:2px solid rgba(0,229,160,0.3);
+  border-radius:50px;margin-bottom:50px;letter-spacing:4px;
+}
+.hook-title{
+  font-size:110px;font-weight:900;color:#fff;text-align:center;
+  line-height:1.2;text-shadow:0 0 60px rgba(240,180,41,0.5);
+}
+.hook-title .w{color:var(--accent-warm)}
+
+/* Shared */
+.badge{
+  font-size:26px;font-weight:600;color:var(--accent-cool);
+  padding:8px 24px;background:rgba(0,229,160,0.1);
+  border-radius:30px;margin-bottom:36px;letter-spacing:2px;
+}
+.badge-warm{
+  color:var(--accent-warm);background:rgba(240,180,41,0.1);
+  border:1px solid rgba(240,180,41,0.3);
+}
+.stitle{font-size:52px;font-weight:800;color:#fff;text-align:center;line-height:1.3;margin-bottom:24px}
+.sdesc{font-size:34px;color:var(--text-secondary);text-align:center;line-height:1.6;max-width:900px}
+
+/* Feature cards */
+.fcard{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(0,229,160,0.2);
+  border-radius:16px;padding:22px 26px;display:flex;align-items:center;gap:16px;
+  width:420px;
+}
+.fnum{font-size:44px;font-weight:900;color:var(--accent-cool);min-width:70px}
+.flabel{font-size:28px;color:#fff;line-height:1.4}
+
+/* Usecase cards */
+.ucard{
+  background:rgba(255,255,255,0.05);border-left:4px solid var(--accent-warm);
+  border-radius:0 12px 12px 0;padding:18px 26px;width:900px;margin-bottom:14px;
+}
+.ucard-name{font-size:30px;font-weight:700;color:var(--accent-warm);margin-bottom:6px}
+.ucard-desc{font-size:25px;color:var(--text-secondary);line-height:1.5}
+
+/* Tool tags */
+.ttag{padding:8px 18px;border-radius:16px;font-size:22px}
+.ttag-cool{background:rgba(0,229,160,0.1);color:var(--accent-cool)}
+.ttag-warm{background:rgba(240,180,41,0.1);color:var(--accent-warm)}
+
+/* CTA */
+.cta-title{
+  font-size:80px;font-weight:900;color:#fff;text-align:center;line-height:1.3;
+  text-shadow:0 0 40px rgba(240,180,41,0.4);
+}
+.cta-sub{font-size:36px;color:var(--accent-cool);margin-top:28px;text-align:center}
+.cta-tags{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+.cta-tag{
+  font-size:24px;color:var(--text-secondary);padding:10px 24px;
+  border-radius:30px;border:1px solid rgba(160,160,192,0.3);
+}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-duration="64.71" data-width="1080" data-height="1920">
+  <audio id="narration" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto" data-start="0"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.06" src="bgm.wav" preload="auto" loop data-start="0"></audio>
+
+  <!-- 1. Hook -->
+  <div class="clip s-hook" data-start="0" data-duration="2.88">
+    <div class="scene-wrap">
+      <div class="bg-grad"></div>
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-warm);opacity:0.25;top:400px;left:-100px"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:800px;right:-80px"></div>
+      <div class="grid-bg"></div>
+      <div class="hook-badge">AI 智能体角色库</div>
+      <div class="hook-title"><span class="w">10万</span>Star<br>中文版反超原版</div>
+    </div>
+  </div>
+
+  <!-- 2. What -->
+  <div class="clip s-what" data-start="2.88" data-duration="8.28">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0f1a2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.15;top:350px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge">项目定义</div>
+      <div style="font-size:46px;font-weight:800;color:var(--accent-warm);margin-bottom:16px">agency-agents</div>
+      <div class="stitle">AI 智能体角色库</div>
+      <div style="display:flex;gap:30px;margin-top:16px">
+        <div style="text-align:center">
+          <div style="font-size:68px;font-weight:900;color:var(--accent-cool)">215</div>
+          <div style="font-size:26px;color:var(--text-secondary)">专家角色</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:68px;font-weight:900;color:var(--accent-warm)">18</div>
+          <div style="font-size:26px;color:var(--text-secondary)">部门</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:68px;font-weight:900;color:var(--accent-cool)">17</div>
+          <div style="font-size:26px;color:var(--text-secondary)">工具支持</div>
+        </div>
+      </div>
+      <div class="sdesc" style="margin-top:24px">每个都有独立人设和专业流程<br>不是通用模板，是真正的专家系统</div>
+    </div>
+  </div>
+
+  <!-- 3. How - Five layers -->
+  <div class="clip s-how" data-start="11.16" data-duration="9.36">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#101228 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:500px;left:-100px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge">设计原理</div>
+      <div class="stitle">五层设计框架</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;width:900px">
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 22px;background:rgba(0,229,160,0.08);border-radius:12px;border-left:4px solid var(--accent-cool)">
+          <div style="font-size:34px;font-weight:900;color:var(--accent-cool);min-width:36px">1</div>
+          <div style="font-size:28px;color:#fff">身份人设 — 独特个性和沟通风格</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 22px;background:rgba(0,229,160,0.06);border-radius:12px;border-left:4px solid rgba(0,229,160,0.6)">
+          <div style="font-size:34px;font-weight:900;color:var(--accent-cool);min-width:36px">2</div>
+          <div style="font-size:28px;color:#fff">核心使命 — 做什么、不做什么</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 22px;background:rgba(0,229,160,0.05);border-radius:12px;border-left:4px solid rgba(0,229,160,0.4)">
+          <div style="font-size:34px;font-weight:900;color:var(--accent-cool);min-width:36px">3</div>
+          <div style="font-size:28px;color:#fff">关键规则 — 领域硬约束</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 22px;background:rgba(0,229,160,0.04);border-radius:12px;border-left:4px solid rgba(0,229,160,0.3)">
+          <div style="font-size:34px;font-weight:900;color:var(--accent-cool);min-width:36px">4</div>
+          <div style="font-size:28px;color:#fff">交付物 — 具体产出、含代码示例</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:18px;padding:14px 22px;background:rgba(0,229,160,0.03);border-radius:12px;border-left:4px solid rgba(0,229,160,0.2)">
+          <div style="font-size:34px;font-weight:900;color:var(--accent-cool);min-width:36px">5</div>
+          <div style="font-size:28px;color:#fff">成功指标 — 可量化的质量标准</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Capabilities -->
+  <div class="clip s-capabilities" data-start="20.52" data-duration="11.16">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0d1525 50%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-cool);opacity:0.18;top:300px;right:-120px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-warm);opacity:0.1;bottom:300px;left:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge">核心能力</div>
+      <div class="stitle" style="margin-bottom:32px">中文版新增 50 个原创角色</div>
+      <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;max-width:920px">
+        <div class="fcard"><div class="fnum">18</div><div class="flabel">个部门全覆盖</div></div>
+        <div class="fcard"><div class="fnum">17</div><div class="flabel">种编程工具</div></div>
+        <div class="fcard"><div class="fnum">6</div><div class="flabel">个中国平台运营</div></div>
+        <div class="fcard"><div class="fnum">4</div><div class="flabel">个全新部门</div></div>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:900px">
+        <span class="ttag ttag-cool">抖音运营</span>
+        <span class="ttag ttag-cool">小红书</span>
+        <span class="ttag ttag-cool">私域流量</span>
+        <span class="ttag ttag-cool">直播电商</span>
+        <span class="ttag ttag-warm">微信运营</span>
+        <span class="ttag ttag-warm">B站策略</span>
+        <span class="ttag ttag-warm">快手</span>
+        <span class="ttag ttag-warm">微博</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Use Cases -->
+  <div class="clip s-usecases" data-start="31.68" data-duration="12.70">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#1a0f2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:400px;left:-80px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.1;bottom:350px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge badge-warm">全球独一无二</div>
+      <div class="stitle" style="margin-bottom:24px">中国原创特色场景</div>
+      <div class="ucard">
+        <div class="ucard-name">养殖档案核对员</div>
+        <div class="ucard-desc">自动审计兽药、饲料、免疫记录，FIFO 复核批号</div>
+      </div>
+      <div class="ucard">
+        <div class="ucard-name">高考志愿填报顾问</div>
+        <div class="ucard-desc">精通平行志愿、院校专业组、冲稳保策略</div>
+      </div>
+      <div class="ucard">
+        <div class="ucard-name">政务数字化售前顾问</div>
+        <div class="ucard-desc">政策解读、方案设计、标书编写、等保密评信创</div>
+      </div>
+      <div class="ucard">
+        <div class="ucard-name">上位机工程师</div>
+        <div class="ucard-desc">Qt/QML、Modbus/CAN 工业协议、实时可视化</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Tech -->
+  <div class="clip s-tech" data-start="44.38" data-duration="7.97">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#0f1a2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.2;top:350px;right:-80px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge">技术生态</div>
+      <div class="stitle" style="margin-bottom:24px">17 种工具 + 产品矩阵</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:940px;margin-bottom:24px">
+        <span class="ttag ttag-cool">Claude Code</span>
+        <span class="ttag ttag-cool">Cursor</span>
+        <span class="ttag ttag-cool">Copilot</span>
+        <span class="ttag ttag-cool">Gemini CLI</span>
+        <span class="ttag ttag-cool">Windsurf</span>
+        <span class="ttag ttag-cool">Aider</span>
+        <span class="ttag ttag-warm">Trae</span>
+        <span class="ttag ttag-warm">Codex CLI</span>
+        <span class="ttag ttag-warm">DeerFlow</span>
+        <span class="ttag ttag-warm">Kiro</span>
+        <span class="ttag ttag-warm">Qwen Code</span>
+        <span class="ttag ttag-warm">WorkBuddy</span>
+      </div>
+      <div style="font-size:27px;color:var(--text-secondary);text-align:center;line-height:1.6">
+        编排引擎 + 方法论框架 + 安全中间件<br>
+        <span style="color:var(--accent-cool);font-weight:700">6 个项目组成完整产品矩阵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Compare -->
+  <div class="clip s-compare" data-start="52.35" data-duration="8.04">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#12122e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:300px;left:-100px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.12;bottom:300px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="badge">上游 vs 中文版</div>
+      <div style="display:flex;gap:32px;margin-top:12px">
+        <div style="text-align:center;width:420px;padding:28px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(160,160,192,0.2)">
+          <div style="font-size:30px;font-weight:700;color:var(--text-secondary);margin-bottom:14px">上游（原版）</div>
+          <div style="font-size:56px;font-weight:900;color:#fff">103K</div>
+          <div style="font-size:24px;color:var(--text-secondary);margin-top:6px">Star · Reddit 起家</div>
+          <div style="font-size:22px;color:var(--accent-cool);margin-top:12px">184 角色 · 11 工具</div>
+          <div style="font-size:22px;color:var(--accent-cool);margin-top:4px">7 天破万 Star</div>
+        </div>
+        <div style="text-align:center;width:420px;padding:28px;background:rgba(240,180,41,0.05);border-radius:16px;border:1px solid rgba(240,180,41,0.3)">
+          <div style="font-size:30px;font-weight:700;color:var(--accent-warm);margin-bottom:14px">中文版</div>
+          <div style="font-size:56px;font-weight:900;color:var(--accent-warm)">12.4K</div>
+          <div style="font-size:24px;color:var(--text-secondary);margin-top:6px">Star · 100% 翻译</div>
+          <div style="font-size:22px;color:var(--accent-cool);margin-top:12px">215 角色 · 17 工具</div>
+          <div style="font-size:22px;color:var(--accent-cool);margin-top:4px">+HR 法务 供应链</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CTA -->
+  <div class="clip s-cta" data-start="60.39" data-duration="4.32">
+    <div class="scene-wrap">
+      <div class="bg-grad" style="background:linear-gradient(180deg,#080818 0%,#1a1040 50%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:var(--accent-warm);opacity:0.2;top:400px;left:240px"></div>
+      <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.12;bottom:300px;right:-60px"></div>
+      <div class="grid-bg"></div>
+      <div class="cta-title">开源免费<br><span style="color:var(--accent-warm)">值得试试</span></div>
+      <div class="cta-sub">关注获取更多好项目</div>
+      <div class="cta-tags">
+        <div class="cta-tag">#GitHub</div>
+        <div class="cta-tag">#开源</div>
+        <div class="cta-tag">#AI</div>
+        <div class="cta-tag">#智能体</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>window.__hf={duration:64.71,seek:function(t){}};window.__timelines={};</script>
+</body>
+</html>

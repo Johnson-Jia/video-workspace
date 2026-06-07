@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-dark: #060d1f;
+  --bg-mid: #0f172a;
+  --accent-blue: #3b82f6;
+  --accent-amber: #f59e0b;
+  --accent-cyan: #06b6d4;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --text-white: #f8fafc;
+  --text-gray: #94a3b8;
+}
+
+body { background: var(--bg-dark); overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.composition { position: relative; width: 1080px; height: 1920px; }
+
+.clip { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; overflow: hidden; }
+
+/* === Background Layers === */
+.bg-grad { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-mid) 50%, var(--bg-dark) 100%); }
+.grid-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none; }
+.glow { position: absolute; border-radius: 50%; filter: blur(140px); pointer-events: none; }
+
+/* === Content Layout === */
+.scene-wrap { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 200px 60px 300px; }
+
+/* === Typography === */
+.hero { font-size: 88px; font-weight: 900; color: var(--text-white); text-align: center; line-height: 1.15; }
+.title { font-size: 56px; font-weight: 800; color: var(--text-white); text-align: center; line-height: 1.2; }
+.subtitle { font-size: 40px; font-weight: 600; color: var(--text-gray); text-align: center; margin-top: 24px; }
+.body-text { font-size: 36px; font-weight: 600; color: var(--text-gray); text-align: center; line-height: 1.5; }
+.accent-blue { color: var(--accent-blue); }
+.accent-amber { color: var(--accent-amber); }
+.accent-cyan { color: var(--accent-cyan); }
+.accent-green { color: var(--accent-green); }
+.accent-red { color: var(--accent-red); }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* === Components === */
+.badge { display: inline-block; padding: 12px 36px; border-radius: 40px; font-size: 26px; font-weight: 700; margin-bottom: 32px; }
+.badge-blue { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: var(--accent-blue); }
+.badge-amber { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: var(--accent-amber); }
+.badge-green { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: var(--accent-green); }
+.badge-red { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: var(--accent-red); }
+
+.card { background: rgba(15,23,42,0.85); border: 1px solid rgba(59,130,246,0.15); border-radius: 24px;
+  padding: 36px 44px; margin-top: 28px; width: 100%; max-width: 920px; }
+.card-amber { border-color: rgba(245,158,11,0.2); }
+.card-green { border-color: rgba(16,185,129,0.2); }
+.card-red { border-color: rgba(239,68,68,0.2); }
+
+.row { display: flex; gap: 28px; width: 100%; max-width: 920px; margin-top: 24px; }
+.col { flex: 1; }
+.stat-box { background: rgba(15,23,42,0.85); border: 1px solid rgba(59,130,246,0.15); border-radius: 24px;
+  padding: 32px 28px; text-align: center; }
+.stat-num { font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700; }
+.stat-label { font-size: 26px; color: var(--text-gray); margin-top: 12px; }
+
+.divider { width: 400px; height: 6px; border-radius: 3px; margin: 36px 0;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-amber)); }
+
+.list-item { display: flex; align-items: flex-start; gap: 20px; margin-top: 20px; width: 100%; max-width: 920px; }
+.list-num { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; min-width: 48px; }
+.list-content { flex: 1; }
+.list-title { font-size: 34px; font-weight: 700; color: var(--text-white); }
+.list-desc { font-size: 28px; color: var(--text-gray); margin-top: 6px; line-height: 1.4; }
+
+.tag-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+.tag { padding: 14px 32px; border-radius: 36px; font-size: 28px; font-weight: 600;
+  background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.25); color: var(--accent-blue); }
+.tag-amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: var(--accent-amber); }
+
+.compare-row { display: flex; gap: 24px; width: 100%; max-width: 920px; margin-top: 24px; }
+.compare-col { flex: 1; background: rgba(15,23,42,0.85); border-radius: 20px; padding: 28px 24px;
+  border: 1px solid rgba(59,130,246,0.12); text-align: center; }
+.compare-title { font-size: 30px; font-weight: 700; color: var(--text-white); }
+.compare-desc { font-size: 24px; color: var(--text-gray); margin-top: 8px; }
+
+/* === Animations === */
+.anim-in { opacity: 0; transform: translateY(40px); }
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-duration="544.56" data-width="1080" data-height="1920">
+
+  <!-- Audio tracks -->
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.03" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ====== SCENE 1: hook (0 - 2.45) ====== -->
+  <div class="clip" data-start="0" data-duration="2.45">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-amber);opacity:0.2;top:200px;left:-100px;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-blue);opacity:0.15;bottom:300px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="hero anim-in" style="font-size:140px;">
+        <span class="accent-amber">140亿</span>美元
+      </div>
+      <div class="title anim-in" style="margin-top:36px;font-size:48px;">垂直AI智能体市场</div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 2: pain-a (2.45 - 28.68) ====== -->
+  <div class="clip" data-start="2.45" data-duration="26.23">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-amber);opacity:0.18;top:300px;right:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-amber anim-in">核心痛点</div>
+      <div class="title anim-in">企业SaaS工具<span class="accent-amber">利用率仅30-40%</span></div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="stat-box">
+          <div class="stat-num accent-amber">100元</div>
+          <div class="stat-label">企业每花</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num accent-red">60-70元</div>
+          <div class="stat-label">没有产生价值</div>
+        </div>
+      </div>
+      <div class="card card-amber anim-in" style="margin-top:32px;">
+        <div class="body-text">买了财务软件，账目还是自己做<br>买了CRM系统，客户关系还是自己维护</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 3: pain-b (28.68 - 59.40) ====== -->
+  <div class="clip" data-start="28.68" data-duration="30.72">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:550px;height:550px;background:var(--accent-blue);opacity:0.18;top:250px;left:-120px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-amber);opacity:0.12;bottom:400px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">中小企业困境</div>
+      <div class="title anim-in">买得起 · <span class="accent-amber">用不好</span></div>
+      <div class="divider"></div>
+      <div class="compare-row anim-in">
+        <div class="compare-col" style="border-color:rgba(245,158,11,0.2);">
+          <div class="compare-title accent-amber">自己用工具做</div>
+          <div class="compare-desc">效率低 · 学习成本高</div>
+        </div>
+        <div class="compare-col" style="border-color:rgba(59,130,246,0.2);">
+          <div class="compare-title accent-blue">外包给专业公司</div>
+          <div class="compare-desc">成本高 · 响应慢</div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:32px;text-align:center;">
+        <div class="body-text" style="color:var(--accent-cyan);font-size:32px;">两条路之间的<span style="color:var(--text-white);font-weight:700;">巨大缝隙</span><br>正是垂直AI智能体要填的<span style="color:var(--accent-amber);font-weight:700;">市场空间</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 4: market (59.40 - 88.75) ====== -->
+  <div class="clip" data-start="59.40" data-duration="29.35">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-blue);opacity:0.2;top:150px;left:-150px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">市场空间</div>
+      <div class="title anim-in">全球垂直AI智能体市场</div>
+      <div class="row anim-in" style="margin-top:40px;">
+        <div class="stat-box">
+          <div class="stat-num accent-blue mono">$140亿</div>
+          <div class="stat-label">2026年市场规模</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num accent-green mono">45%+</div>
+          <div class="stat-label">年增长率</div>
+        </div>
+      </div>
+      <div class="stat-box anim-in" style="width:100%;max-width:920px;margin-top:24px;">
+        <div class="stat-num accent-amber mono" style="font-size:44px;">$340-495亿</div>
+        <div class="stat-label">2031年预计市场规模</div>
+      </div>
+      <div class="card anim-in" style="margin-top:24px;text-align:center;">
+        <div class="body-text" style="font-size:28px;color:var(--accent-green);">大语言模型让行业AI系统搭建成本<span style="color:var(--text-white);font-weight:700;">降低90%+</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 5: why-big (88.75 - 130.10) ====== -->
+  <div class="clip" data-start="88.75" data-duration="41.35">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cyan);opacity:0.15;bottom:300px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-green anim-in">为什么是现在</div>
+      <div class="title anim-in">技术门槛<span class="accent-green">断崖式降低</span></div>
+      <div class="divider"></div>
+      <div class="compare-row anim-in">
+        <div class="compare-col" style="border-color:rgba(239,68,68,0.2);">
+          <div class="compare-title" style="color:var(--accent-red);">之前</div>
+          <div class="compare-desc">几十人团队<br>半年开发周期</div>
+        </div>
+        <div class="compare-col" style="border-color:rgba(16,185,129,0.2);">
+          <div class="compare-title" style="color:var(--accent-green);">现在</div>
+          <div class="compare-desc">2-3人团队<br>1个月搭出原型</div>
+        </div>
+      </div>
+      <div class="list-item anim-in" style="margin-top:32px;">
+        <div class="list-num accent-blue">1</div>
+        <div class="list-content">
+          <div class="list-title">大语言模型成熟</div>
+          <div class="list-desc">行业知识理解和推理能力大幅提升</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-blue">2</div>
+        <div class="list-content">
+          <div class="list-title">智能体框架涌现</div>
+          <div class="list-desc">开源框架让搭建成本降低90%+</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-blue">3</div>
+        <div class="list-content">
+          <div class="list-title">行业需求集中爆发</div>
+          <div class="list-desc">中国企业数字化转型加速</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 6: oss-crewai (130.10 - 158.08) ====== -->
+  <div class="clip" data-start="130.10" data-duration="27.98">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cyan);opacity:0.18;top:250px;left:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">开源框架 · 入门首选</div>
+      <div class="title anim-in">CrewAI</div>
+      <div class="stat-box anim-in" style="max-width:400px;margin-top:16px;">
+        <div class="stat-num accent-cyan mono">28,000+ ★</div>
+      </div>
+      <div class="divider"></div>
+      <div class="card anim-in">
+        <div class="list-item" style="margin-top:0;">
+          <div class="list-num accent-cyan">★</div>
+          <div class="list-content">
+            <div class="list-title">角色扮演协作模式</div>
+            <div class="list-desc">定义AI角色 → 分配目标 → 团队协作完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:16px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">学习门槛最低<br><span class="accent-green">天然契合垂直行业工作方式</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 7: oss-others (158.08 - 186.16) ====== -->
+  <div class="clip" data-start="158.08" data-duration="28.08">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-blue);opacity:0.15;top:300px;right:-80px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cyan);opacity:0.12;bottom:350px;left:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">开源框架 · 对比</div>
+      <div class="title anim-in" style="font-size:48px;">AutoGen · LangGraph</div>
+      <div class="divider"></div>
+      <div class="compare-row anim-in">
+        <div class="compare-col" style="border-color:rgba(6,182,212,0.2);">
+          <div class="compare-title">AutoGen</div>
+          <div class="stat-num accent-cyan mono" style="font-size:32px;">43,000+ ★</div>
+          <div class="compare-desc" style="margin-top:12px;">多智能体自由对话<br>微软出品 · 灵活但陡峭</div>
+        </div>
+        <div class="compare-col" style="border-color:rgba(59,130,246,0.2);">
+          <div class="compare-title">LangGraph</div>
+          <div class="stat-num accent-blue mono" style="font-size:32px;">LangChain</div>
+          <div class="compare-desc" style="margin-top:12px;">图定义工作流<br>结构化流程 · 分支判断</div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:24px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">
+          <span class="accent-cyan">CrewAI</span> 角色协作 ·
+          <span class="accent-blue">AutoGen</span> 自由对话 ·
+          <span class="accent-amber">LangGraph</span> 结构化流程
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 8: oss-detail (186.16 - 226.58) ====== -->
+  <div class="clip" data-start="186.16" data-duration="40.42">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:550px;height:550px;background:var(--accent-cyan);opacity:0.18;top:200px;left:-120px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">框架选型对比</div>
+      <div class="title anim-in" style="font-size:46px;">三大框架核心差异</div>
+      <div class="divider"></div>
+      <!-- Table-like comparison -->
+      <div class="row anim-in" style="margin-top:0;">
+        <div class="stat-box" style="border-color:rgba(6,182,212,0.3);">
+          <div class="compare-title accent-cyan" style="font-size:28px;">CrewAI</div>
+          <div class="stat-label" style="margin-top:16px;font-size:22px;text-align:left;">
+            ✓ 角色扮演模式<br>
+            ✓ 学习门槛最低<br>
+            ✓ 多步骤协作<br>
+            <span class="accent-green">→ 创业首选</span>
+          </div>
+        </div>
+        <div class="stat-box" style="border-color:rgba(59,130,246,0.3);">
+          <div class="compare-title accent-blue" style="font-size:28px;">AutoGen</div>
+          <div class="stat-label" style="margin-top:16px;font-size:22px;text-align:left;">
+            ✓ 自由对话编排<br>
+            ✓ 人类可随时介入<br>
+            ✗ 学习曲线陡<br>
+            <span class="accent-amber">→ 研究用途</span>
+          </div>
+        </div>
+        <div class="stat-box" style="border-color:rgba(245,158,11,0.3);">
+          <div class="compare-title accent-amber" style="font-size:28px;">LangGraph</div>
+          <div class="stat-label" style="margin-top:16px;font-size:22px;text-align:left;">
+            ✓ 图定义流程<br>
+            ✓ 分支判断清晰<br>
+            ✓ 状态管理强<br>
+            <span class="accent-amber">→ 流程场景</span>
+          </div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:20px;text-align:center;">
+        <div class="body-text" style="font-size:26px;">建议从 <span class="accent-cyan" style="font-weight:700;">CrewAI</span> 入手 — 学习门槛最低，角色模式天然契合垂直行业</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 9: future (226.58 - 258.52) ====== -->
+  <div class="clip" data-start="226.58" data-duration="31.94">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:550px;height:550px;background:var(--accent-green);opacity:0.18;top:200px;right:-120px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-green anim-in">未来12-18个月</div>
+      <div class="title anim-in">三大关键<span class="accent-green">趋势</span></div>
+      <div class="divider"></div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-green">1</div>
+        <div class="list-content">
+          <div class="list-title">从通用到垂直加速分化</div>
+          <div class="list-desc">通用AI被大厂垄断，垂直行业仍有巨大创业空间</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-amber">2</div>
+        <div class="list-content">
+          <div class="list-title">从工具到结果的范式转移</div>
+          <div class="list-desc">用户不为工具买单，为结果买单</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-cyan">3</div>
+        <div class="list-content">
+          <div class="list-title">多模态能力突破</div>
+          <div class="list-desc">处理医疗影像、工程图纸、法律文书等更多行业数据</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 10: competition (258.52 - 292.82) ====== -->
+  <div class="clip" data-start="258.52" data-duration="34.30">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-amber);opacity:0.15;top:300px;left:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-blue);opacity:0.12;bottom:400px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-amber anim-in">竞争格局</div>
+      <div class="title anim-in">大厂通用 <span class="accent-amber">vs</span> 创业垂直</div>
+      <div class="divider"></div>
+      <div class="compare-row anim-in">
+        <div class="compare-col" style="border-color:rgba(239,68,68,0.2);">
+          <div class="compare-title accent-red">大厂优势</div>
+          <div class="compare-desc">通用模型强<br>算力充足<br>用户基数大</div>
+        </div>
+        <div class="compare-col" style="border-color:rgba(16,185,129,0.2);">
+          <div class="compare-title accent-green">创业机会</div>
+          <div class="compare-desc">行业知识深<br>流程理解透<br>合规要求精</div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:24px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">每个行业的知识体系、流程规范、合规要求<br><span class="accent-amber" style="font-weight:700;">大厂的通用模型做不好这些</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 11: path-saas (292.82 - 325.12) ====== -->
+  <div class="clip" data-start="292.82" data-duration="32.30">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:550px;height:550px;background:var(--accent-blue);opacity:0.18;top:250px;left:-120px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">路径一 · 推荐</div>
+      <div class="title anim-in">垂直<span class="accent-blue">SaaS</span></div>
+      <div class="divider"></div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-blue">→</div>
+        <div class="list-content">
+          <div class="list-title">法律行业：合同自动审查</div>
+          <div class="list-desc">每份合同 199-499 元，按结果收费</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-blue">→</div>
+        <div class="list-content">
+          <div class="list-title">财务行业：记账报税</div>
+          <div class="list-desc">规则明确，AI 准确性可保证</div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:20px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">MVP 周期 <span class="accent-green" style="font-weight:700;">3-4个月</span><br>核心不是技术多强，而是<span class="accent-amber" style="font-weight:700;">行业痛点理解有多深</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 12: path-paas (325.12 - 354.50) ====== -->
+  <div class="clip" data-start="325.12" data-duration="29.38">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-amber);opacity:0.15;top:300px;right:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-amber anim-in">路径二 & 三</div>
+      <div class="title anim-in">PaaS平台 · 项目制</div>
+      <div class="divider"></div>
+      <div class="compare-row anim-in">
+        <div class="compare-col" style="border-color:rgba(245,158,11,0.2);">
+          <div class="compare-title accent-amber">PaaS 平台</div>
+          <div class="compare-desc">行业知识库<br>智能体模板<br>工具集成<br><span class="accent-amber">天花板高 · 周期长</span></div>
+        </div>
+        <div class="compare-col" style="border-color:rgba(148,163,184,0.2);">
+          <div class="compare-title">项目制方案</div>
+          <div class="compare-desc">大企业定制<br>客单价高<br>不可规模化<br><span class="accent-red">仅适合早期</span></div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:24px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">优先级：<span class="accent-green" style="font-weight:700;">垂直SaaS</span> > PaaS > 项目制</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 13: revenue (354.50 - 395.23) ====== -->
+  <div class="clip" data-start="354.50" data-duration="40.73">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-green);opacity:0.18;top:200px;left:-150px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-green anim-in">盈利模型</div>
+      <div class="title anim-in">按<span class="accent-green">结果</span>收费</div>
+      <div class="divider"></div>
+      <div class="row anim-in">
+        <div class="stat-box" style="border-color:rgba(16,185,129,0.2);">
+          <div class="stat-num accent-green mono">199元</div>
+          <div class="stat-label">合同审查/份</div>
+        </div>
+        <div class="stat-box" style="border-color:rgba(16,185,129,0.2);">
+          <div class="stat-num accent-green mono">499元</div>
+          <div class="stat-label">复杂合同/份</div>
+        </div>
+      </div>
+      <div class="card card-green anim-in" style="margin-top:20px;">
+        <div class="list-item" style="margin-top:0;">
+          <div class="list-num accent-green">✓</div>
+          <div class="list-content">
+            <div class="list-title">与客户利益完全对齐</div>
+            <div class="list-desc">不是卖工具订阅，是交付结果</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-green anim-in" style="margin-top:12px;">
+        <div class="list-item" style="margin-top:0;">
+          <div class="list-num accent-green">✓</div>
+          <div class="list-content">
+            <div class="list-title">转化率远高于订阅制</div>
+            <div class="list-desc">用户为效果买单，决策门槛低</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 14: impl-plan (395.23 - 444.65) ====== -->
+  <div class="clip" data-start="395.23" data-duration="49.42">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-blue);opacity:0.15;top:300px;right:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-amber);opacity:0.12;bottom:350px;left:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-blue anim-in">落地路线图</div>
+      <div class="title anim-in">四阶段实施计划</div>
+      <div class="divider"></div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-blue">P1</div>
+        <div class="list-content">
+          <div class="list-title">行业调研 + MVP 定义</div>
+          <div class="list-desc">选择行业 → 深入调研 → 定义核心功能</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-cyan">P2</div>
+        <div class="list-content">
+          <div class="list-title">技术搭建 + 原型开发</div>
+          <div class="list-desc">CrewAI 框架 → 知识库构建 → 工作流编排</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-amber">P3</div>
+        <div class="list-content">
+          <div class="list-title">小范围测试 + 迭代</div>
+          <div class="list-desc">10-20个种子用户 → 收集反馈 → 快速迭代</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-green">P4</div>
+        <div class="list-content">
+          <div class="list-title">规模化 + 增长</div>
+          <div class="list-desc">打磨产品 → 渠道拓展 → 建立行业口碑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 15: risk (444.65 - 480.07) ====== -->
+  <div class="clip" data-start="444.65" data-duration="35.42">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:550px;height:550px;background:var(--accent-red);opacity:0.12;top:250px;left:-120px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-red anim-in">风险提示</div>
+      <div class="title anim-in">四大主要<span class="accent-red">风险</span></div>
+      <div class="divider"></div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-red">1</div>
+        <div class="list-content">
+          <div class="list-title">行业知识壁垒</div>
+          <div class="list-desc">纯技术团队容易在细节犯错，建议与行业专家深度合作</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-red">2</div>
+        <div class="list-content">
+          <div class="list-title">AI准确性风险</div>
+          <div class="list-desc">财务法律领域要求接近100%，建议 AI执行+人类审核</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-amber">3</div>
+        <div class="list-content">
+          <div class="list-title">数据安全风险</div>
+          <div class="list-desc">优先使用国产模型或本地部署方案</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-amber">4</div>
+        <div class="list-content">
+          <div class="list-title">竞争风险</div>
+          <div class="list-desc">大模型公司也在向垂直渗透，用行业深度对抗通用性</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 16: summary (480.07 - 508.05) ====== -->
+  <div class="clip" data-start="480.07" data-duration="27.98">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-amber);opacity:0.2;top:200px;right:-150px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-amber anim-in">核心要点</div>
+      <div class="title anim-in">总结</div>
+      <div class="divider"></div>
+      <div class="card card-amber anim-in">
+        <div class="list-item" style="margin-top:0;">
+          <div class="list-num accent-amber">$</div>
+          <div class="list-content">
+            <div class="list-title">140亿美元 · 年增长45%+</div>
+            <div class="list-desc">搭建成本降低90%以上释放巨大需求</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-amber anim-in" style="margin-top:12px;">
+        <div class="list-item" style="margin-top:0;">
+          <div class="list-num accent-amber">→</div>
+          <div class="list-content">
+            <div class="list-title">选行业 → 建MVP → 按结果收费</div>
+            <div class="list-desc">CrewAI 入手，3-4月出MVP</div>
+          </div>
+        </div>
+      </div>
+      <div class="card anim-in" style="margin-top:12px;text-align:center;border-color:rgba(245,158,11,0.3);">
+        <div class="body-text" style="font-size:32px;">核心壁垒是<span class="accent-amber" style="font-weight:700;">行业知识深度</span><br>不是技术本身</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 17: strategy (508.05 - 537.43) ====== -->
+  <div class="clip" data-start="508.05" data-duration="29.38">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-green);opacity:0.18;top:300px;left:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-amber);opacity:0.15;bottom:350px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="badge badge-green anim-in">策略建议</div>
+      <div class="title anim-in">行动<span class="accent-green">路线</span></div>
+      <div class="divider"></div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-green">1</div>
+        <div class="list-content">
+          <div class="list-title">选择你深入了解的行业</div>
+          <div class="list-desc">法律、财务等规则明确的行业优先</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-green">2</div>
+        <div class="list-content">
+          <div class="list-title">找到行业专家深度合作</div>
+          <div class="list-desc">10年以上从业经验，补齐行业知识短板</div>
+        </div>
+      </div>
+      <div class="list-item anim-in">
+        <div class="list-num accent-green">3</div>
+        <div class="list-content">
+          <div class="list-title">3-4个月做出MVP</div>
+          <div class="list-desc">CrewAI + 行业知识库 → 按结果收费模式切入</div>
+        </div>
+      </div>
+      <div class="card card-green anim-in" style="margin-top:20px;text-align:center;">
+        <div class="body-text" style="font-size:28px;">用 <span class="accent-green" style="font-weight:700;">行业深度</span> 对抗大模型的 <span class="accent-amber" style="font-weight:700;">通用性</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCENE 18: cta (537.43 - 544.56) ====== -->
+  <div class="clip" data-start="537.43" data-duration="7.13">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-blue);opacity:0.25;top:400px;left:50%;transform:translateX(-50%);"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-amber);opacity:0.15;top:200px;left:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="hero anim-in" style="font-size:72px;">关注我<br><span class="accent-amber">获取更多商业洞察</span></div>
+      <div class="subtitle anim-in" style="font-size:32px;margin-top:28px;">下一期：银发经济的AI产品机会</div>
+      <div class="tag-row anim-in" style="margin-top:36px;">
+        <div class="tag">#AI</div>
+        <div class="tag">#创业</div>
+        <div class="tag">#垂直智能体</div>
+        <div class="tag tag-amber">#商业分析</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__hf = { duration: 544.56, seek: function(t) {} };
+window.__timelines = {};
+
+const tl = gsap.timeline({ paused: true });
+
+// Animate all .anim-in elements within each clip
+document.querySelectorAll('.clip').forEach(clip => {
+  const items = clip.querySelectorAll('.anim-in');
+  items.forEach((el, i) => {
+    const startTime = parseFloat(clip.dataset.start) + 0.2 + (i * 0.25);
+    tl.fromTo(el,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' },
+      startTime
+    );
+  });
+});
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>视频生成开源项目专题</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#080818;
+  --bg-mid:#12122e;
+  --accent-warm:#f0b429;
+  --accent-cool:#00e5a0;
+  --text-primary:#ffffff;
+  --text-secondary:#a0a0c0;
+  --card-bg:rgba(255,255,255,0.06);
+  --card-border:rgba(255,255,255,0.1);
+  --purple:#6366f1;
+}
+body{
+  width:1080px;height:1920px;overflow:hidden;
+  background:var(--bg-dark);
+  font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden}
+.bg-grad{position:absolute;width:100%;height:100%;z-index:0}
+.glow{position:absolute;border-radius:50%;filter:blur(140px);z-index:1;pointer-events:none}
+.grid-bg{
+  position:absolute;width:100%;height:100%;z-index:2;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,160,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.scene-wrap{
+  position:relative;z-index:3;width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding-top:120px;padding-bottom:120px;
+}
+
+/* ===== HOOK ===== */
+.s-hook .bg-grad{background:linear-gradient(180deg,#0a0818 0%,#1a0f2e 40%,#0a0818 100%)}
+.s-hook .gw1{width:600px;height:600px;background:var(--accent-warm);opacity:0.25;top:200px;left:-100px}
+.s-hook .gw2{width:600px;height:600px;background:var(--accent-warm);opacity:0.18;bottom:300px;right:-80px}
+.hook-badge{
+  padding:14px 36px;background:rgba(240,180,41,0.15);
+  border:1px solid rgba(240,180,41,0.4);border-radius:40px;
+  color:var(--accent-warm);font-size:28px;font-weight:600;
+  letter-spacing:2px;margin-bottom:48px;
+}
+.hook-title{
+  font-size:112px;font-weight:900;color:var(--text-primary);
+  text-align:center;line-height:1.18;letter-spacing:-2px;
+  text-shadow:0 0 60px rgba(240,180,41,0.45);
+}
+.hook-title .acc{color:var(--accent-warm)}
+.hook-sub{
+  font-size:44px;font-weight:500;color:var(--accent-cool);
+  margin-top:40px;text-align:center;
+}
+
+/* ===== PROJECT SCENES ===== */
+.s-proj .bg-grad{background:linear-gradient(180deg,#080818 0%,#0d1a2e 40%,#080818 100%)}
+.s-proj .gc1{width:560px;height:560px;background:var(--accent-cool);opacity:0.2;top:150px;right:-100px}
+.s-proj .gc2{width:420px;height:420px;background:var(--purple);opacity:0.15;bottom:200px;left:-60px}
+.proj-rank{
+  position:absolute;top:240px;left:60px;font-size:130px;font-weight:900;
+  color:var(--accent-cool);opacity:0.1;line-height:1;z-index:1;pointer-events:none;
+}
+.proj-header{display:flex;flex-direction:column;align-items:center;margin-bottom:36px}
+.proj-num{font-size:30px;font-weight:700;color:var(--accent-cool);letter-spacing:4px;margin-bottom:14px}
+.proj-name{
+  font-size:66px;font-weight:800;color:var(--text-primary);
+  font-family:'JetBrains Mono','Fira Code',monospace;
+  letter-spacing:-1px;text-shadow:0 0 30px rgba(0,229,160,0.3);margin-bottom:14px;
+}
+.proj-sub{font-size:30px;font-weight:500;color:var(--text-secondary);text-align:center;max-width:900px}
+.proj-div{width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--accent-cool),transparent);margin:28px 0}
+.feat-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:960px;margin-top:16px}
+.feat-tag{
+  padding:14px 26px;background:rgba(0,229,160,0.08);
+  border:1px solid rgba(0,229,160,0.25);border-radius:12px;
+  color:var(--accent-cool);font-size:25px;font-weight:600;text-align:center;
+}
+.feat-card{
+  width:880px;background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;padding:26px 32px;margin-top:22px;
+}
+.feat-card-text{font-size:28px;color:var(--text-secondary);line-height:1.6;text-align:center}
+.feat-hl{color:var(--accent-cool);font-weight:700}
+.lang-pill{
+  display:inline-block;padding:8px 20px;background:rgba(0,229,160,0.12);
+  border-radius:20px;font-size:22px;color:var(--accent-cool);font-weight:600;margin-top:14px;
+}
+
+/* ===== COMPARISON ===== */
+.s-cmp .bg-grad{background:linear-gradient(180deg,#080818 0%,#151530 50%,#080818 100%)}
+.s-cmp .gw{width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:100px;left:-80px}
+.s-cmp .gc{width:500px;height:500px;background:var(--accent-cool);opacity:0.15;bottom:200px;right:-60px}
+.cmp-title{font-size:54px;font-weight:800;color:var(--text-primary);text-align:center;margin-bottom:44px}
+.cmp-cards{display:flex;flex-direction:column;gap:22px;width:920px}
+.cmp-card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;padding:30px 34px;
+  display:flex;align-items:center;gap:22px;border-left:5px solid;
+}
+.cmp-card.c1{border-left-color:var(--accent-cool)}
+.cmp-card.c2{border-left-color:var(--purple)}
+.cmp-card.c3{border-left-color:var(--accent-warm)}
+.cmp-rank{font-size:46px;font-weight:900;min-width:76px}
+.cmp-rank.r1{color:var(--accent-cool)}.cmp-rank.r2{color:#818cf8}.cmp-rank.r3{color:var(--accent-warm)}
+.cmp-info{flex:1}
+.cmp-name{font-size:34px;font-weight:700;color:var(--text-primary);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.cmp-desc{font-size:25px;color:var(--text-secondary)}
+.cmp-badge{padding:8px 16px;border-radius:20px;font-size:20px;font-weight:600;white-space:nowrap}
+.cmp-badge.b1{background:rgba(0,229,160,0.12);color:var(--accent-cool)}
+.cmp-badge.b2{background:rgba(99,102,241,0.15);color:#818cf8}
+.cmp-badge.b3{background:rgba(240,180,41,0.12);color:var(--accent-warm)}
+
+/* ===== CTA ===== */
+.s-cta .bg-grad{background:linear-gradient(180deg,#0a0818 0%,#1a1020 50%,#0a0818 100%)}
+.s-cta .glow-ctr{
+  width:600px;height:600px;background:var(--accent-warm);opacity:0.22;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.cta-title{
+  font-size:82px;font-weight:900;color:var(--text-primary);
+  text-align:center;line-height:1.3;
+  text-shadow:0 0 40px rgba(240,180,41,0.4);
+}
+.cta-title .acc{color:var(--accent-warm)}
+.cta-sub{font-size:36px;font-weight:500;color:var(--accent-cool);margin-top:32px;text-align:center}
+.cta-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:48px}
+.cta-tag{
+  padding:12px 28px;background:rgba(240,180,41,0.1);
+  border:1px solid rgba(240,180,41,0.3);border-radius:30px;
+  color:var(--accent-warm);font-size:26px;font-weight:600;
+}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-duration="50.22" data-width="1080" data-height="1920">
+
+  <audio id="narration" data-track-index="1" data-volume="1" src="narration.mp3" preload="auto" data-start="0"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.12" src="bgm.wav" preload="auto" loop data-start="0"></audio>
+
+  <!-- 1 hook  0→3.84 -->
+  <div class="clip s-hook" data-start="0" data-duration="3.84">
+    <div class="bg-grad"></div>
+    <div class="glow gw1"></div>
+    <div class="glow gw2"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="hook-badge">开源专题</div>
+      <div class="hook-title">用代码<span class="acc">做视频</span></div>
+      <div class="hook-sub">三个开源项目盘点</div>
+    </div>
+  </div>
+
+  <!-- 2 hyperframes  3.84→17.30 -->
+  <div class="clip s-proj s-hf" data-start="3.84" data-duration="13.46">
+    <div class="bg-grad"></div>
+    <div class="glow gc1"></div>
+    <div class="glow gc2"></div>
+    <div class="grid-bg"></div>
+    <div class="proj-rank">01</div>
+    <div class="scene-wrap">
+      <div class="proj-header">
+        <div class="proj-num">PROJECT 01</div>
+        <div class="proj-name">HyperFrames</div>
+        <div class="proj-sub">HTML 即视频 · AI Agent 专属渲染框架</div>
+      </div>
+      <div class="proj-div"></div>
+      <div class="feat-grid">
+        <div class="feat-tag">GSAP</div>
+        <div class="feat-tag">Lottie</div>
+        <div class="feat-tag">Three.js</div>
+        <div class="feat-tag">15 个技能文件</div>
+        <div class="feat-tag">确定性渲染</div>
+        <div class="feat-tag">CDP 帧捕获</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-text">写 HTML 就能渲染视频，<span class="feat-hl">同样的代码出一样的视频</span></div>
+      </div>
+      <div class="lang-pill">TypeScript · Puppeteer · FFmpeg</div>
+    </div>
+  </div>
+
+  <!-- 3 pixelle  17.30→28.24 -->
+  <div class="clip s-proj s-px" data-start="17.30" data-duration="10.94">
+    <div class="bg-grad"></div>
+    <div class="glow gc1"></div>
+    <div class="glow gc2"></div>
+    <div class="grid-bg"></div>
+    <div class="proj-rank">02</div>
+    <div class="scene-wrap">
+      <div class="proj-header">
+        <div class="proj-num">PROJECT 02</div>
+        <div class="proj-name">Pixelle Video</div>
+        <div class="proj-sub">阿里达摩院 · 全自动短视频生成引擎</div>
+      </div>
+      <div class="proj-div"></div>
+      <div class="feat-grid">
+        <div class="feat-tag">文案自动生成</div>
+        <div class="feat-tag">配图 + 配音全包</div>
+        <div class="feat-tag">20+ ComfyUI 工作流</div>
+        <div class="feat-tag">零 GPU 可运行</div>
+        <div class="feat-tag">数字人 + 动作迁移</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-text">输入一个主题，<span class="feat-hl">从文案到成片全自动</span></div>
+      </div>
+      <div class="lang-pill">Python · FastAPI · ComfyUI</div>
+    </div>
+  </div>
+
+  <!-- 4 remotion  28.24→38.39 -->
+  <div class="clip s-proj s-rm" data-start="28.24" data-duration="10.15">
+    <div class="bg-grad"></div>
+    <div class="glow gc1"></div>
+    <div class="glow gc2"></div>
+    <div class="grid-bg"></div>
+    <div class="proj-rank">03</div>
+    <div class="scene-wrap">
+      <div class="proj-header">
+        <div class="proj-num">PROJECT 03</div>
+        <div class="proj-name">Remotion</div>
+        <div class="proj-sub">React 视频即代码 · 生态最成熟</div>
+      </div>
+      <div class="proj-div"></div>
+      <div class="feat-grid">
+        <div class="feat-tag">4000+ Commits</div>
+        <div class="feat-tag">4 大云平台渲染</div>
+        <div class="feat-tag">MCP 协议集成</div>
+        <div class="feat-tag">Rust 合成器</div>
+        <div class="feat-tag">4 种语言 SDK</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-text"><span class="feat-hl">Claude 和 GPT 直接帮你做视频</span></div>
+      </div>
+      <div class="lang-pill">TypeScript · React · Rust</div>
+    </div>
+  </div>
+
+  <!-- 5 comparison  38.39→45.78 -->
+  <div class="clip s-cmp" data-start="38.39" data-duration="7.39">
+    <div class="bg-grad"></div>
+    <div class="glow gw"></div>
+    <div class="glow gc"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="cmp-title">三条路线，各有打法</div>
+      <div class="cmp-cards">
+        <div class="cmp-card c1">
+          <div class="cmp-rank r1">01</div>
+          <div class="cmp-info">
+            <div class="cmp-name">HyperFrames</div>
+            <div class="cmp-desc">面向 AI Agent · HTML 写视频</div>
+          </div>
+          <div class="cmp-badge b1">AI-First</div>
+        </div>
+        <div class="cmp-card c2">
+          <div class="cmp-rank r2">02</div>
+          <div class="cmp-info">
+            <div class="cmp-name">Pixelle Video</div>
+            <div class="cmp-desc">全自动化 · 主题即视频</div>
+          </div>
+          <div class="cmp-badge b2">全自动</div>
+        </div>
+        <div class="cmp-card c3">
+          <div class="cmp-rank r3">03</div>
+          <div class="cmp-info">
+            <div class="cmp-name">Remotion</div>
+            <div class="cmp-desc">面向开发者 · React 生态</div>
+          </div>
+          <div class="cmp-badge b3">开发者</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 cta  45.78→50.22 -->
+  <div class="clip s-cta" data-start="45.78" data-duration="4.44">
+    <div class="bg-grad"></div>
+    <div class="glow glow-ctr"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="cta-title">感兴趣？<br><span class="acc">搜项目名</span></div>
+      <div class="cta-sub">关注我 · 持续分享开源好项目</div>
+      <div class="cta-tags">
+        <div class="cta-tag">#开源</div>
+        <div class="cta-tag">#编程</div>
+        <div class="cta-tag">#短视频</div>
+        <div class="cta-tag">#AI</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 50.22, seek: function(t) {} };
+var tl = gsap.timeline({paused: true});
+tl.from('.s-hook .hook-badge', {opacity:0, y:20, duration:0.4, ease:'power3.out'}, 0.1)
+  .from('.s-hook .hook-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 0.2)
+  .from('.s-hook .hook-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.4)
+  .from('.s-hf .proj-num', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 3.94)
+  .from('.s-hf .proj-name', {opacity:0, y:25, duration:0.3, ease:'power3.out'}, 4.04)
+  .from('.s-hf .proj-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 4.14)
+  .from('.s-hf .feat-tag', {opacity:0, y:15, duration:0.3, ease:'power3.out', stagger:0.2}, 4.34)
+  .from('.s-hf .feat-card', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 5.6)
+  .from('.s-hf .lang-pill', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 5.9)
+  .from('.s-px .proj-num', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 17.4)
+  .from('.s-px .proj-name', {opacity:0, y:25, duration:0.3, ease:'power3.out'}, 17.5)
+  .from('.s-px .proj-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 17.6)
+  .from('.s-px .feat-tag', {opacity:0, y:15, duration:0.3, ease:'power3.out', stagger:0.2}, 17.8)
+  .from('.s-px .feat-card', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 19.0)
+  .from('.s-px .lang-pill', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 19.3)
+  .from('.s-rm .proj-num', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 28.34)
+  .from('.s-rm .proj-name', {opacity:0, y:25, duration:0.3, ease:'power3.out'}, 28.44)
+  .from('.s-rm .proj-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 28.54)
+  .from('.s-rm .feat-tag', {opacity:0, y:15, duration:0.3, ease:'power3.out', stagger:0.2}, 28.74)
+  .from('.s-rm .feat-card', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 29.9)
+  .from('.s-rm .lang-pill', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 30.2)
+  .from('.s-cmp .cmp-title', {opacity:0, y:25, duration:0.3, ease:'power3.out'}, 38.49)
+  .from('.s-cmp .cmp-card', {opacity:0, x:-30, duration:0.3, ease:'power3.out', stagger:0.25}, 38.79)
+  .from('.s-cta .cta-title', {opacity:0, y:25, duration:0.4, ease:'power3.out'}, 45.88)
+  .from('.s-cta .cta-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 46.18)
+  .from('.s-cta .cta-tag', {opacity:0, y:15, duration:0.3, ease:'power3.out', stagger:0.15}, 46.38);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

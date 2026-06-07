@@ -1,0 +1,78 @@
+# 二次元活跃开源项目 — 商业逻辑分析
+
+## 内容定位
+3 分钟商业分析视频，覆盖：背景 → 赛道现状 → 商业逻辑 → 趋势判断 → 落地实操
+
+## 核心数据（来源：2026-06-01 实地验证）
+
+### 赛道一：AI 绘画（最大赛道）
+- ComfyUI：115K Star，每日更新，已从个人账号迁至 Comfy-Org 组织
+- 生态最丰富：Illustrious XL（动漫 SDXL）、Pony V6/V7、Flux anime LoRA
+- AUTOMATIC1111 SD WebUI：163K Star 但已停更近 2 年（僵尸维护）
+- SD Forge：开发者已离开，基本停更
+- **商业信号**：个人项目组织化（Comfy-Org），生态从工具转向平台
+
+### 赛道二：语音克隆 / TTS（最活跃）
+- GPT-SoVITS：45K+ Star，v3/v4 迭代，1 分钟样本克隆，中英日三语
+- Fish Speech：20K+ Star，v1.5，SOTA 级音质，Apache-2.0 工业级许可
+- Style-Bert-VITS2：5K+ Star，情感可控日系 TTS，专为动漫优化
+- CosyVoice：15K+ Star，阿里 FunAudioLLM，多语言 TTS
+- **商业信号**：从"能说话"到"有感情"（情感控制），门槛降至 1 分钟样本
+
+### 赛道三：VTuber / 虚拟主播（最前沿）
+- Open-LLM-VTuber：8K Star，LLM + Live2D + 语音 + 视觉感知，v2.0 重写中
+- awesome-ai-vtubers：AI VTuber 生态最全资源索引
+- **商业信号**：从"皮套+真人"到"AI 全自动虚拟主播"，本地运行无需云服务
+
+### 赛道四：游戏工具（社区最热）
+- BetterGI：13.7K Star，近 3 月 593 条 issue/PR，CV 驱动非侵入式
+- Snap.Hutao Remastered：社区续作（原版已删库）
+- **商业信号**：CV 代替内存修改 = 更安全的自动化方向
+
+### 赛道五：番剧 / 漫画（基础设施）
+- Auto_Bangumi：8K Star，全自动追番，WebAuthn + Bangumi 归档
+- Suwayomi-Server：7K Star，Tachiyomi 桌面重写，持续活跃
+- Bangumi：中文二次元资料库标准，API 供第三方接入
+- **商业信号**：Bangumi 成为数据中台，下游项目围绕它构建生态
+
+### 赛道六：Live2D / 2D 动画（基础设施）
+- Inochi2D：Live2D 开源替代，已上架 Steam，BSD-3 许可
+- Live2D 官方 SDK：工业标准，覆盖 Unity/Web/Native
+- **商业信号**：开源替代品上架 Steam = 降低非技术用户门槛
+
+## 商业逻辑梳理
+
+### 1. 生态结构（三层）
+- 数据层：Bangumi（数据中台）→ 各项目通过 API 接入
+- 工具层：ComfyUI（图像）、GPT-SoVITS（语音）、Open-LLM-VTuber（整合）
+- 应用层：BetterGI（游戏）、Auto_Bangumi（追番）、Suwayomi（阅读）
+
+### 2. 核心驱动力
+- AI 能力平民化：1 分钟语音克隆、本地 AI 绘画、免云 VTuber
+- 许可证趋势：MIT/Apache-2.0 主导，商业友好
+- 组织化升级：个人 → 组织（Comfy-Org），提升可持续性
+
+### 3. 已停更项目的警示
+- SD WebUI（163K Star → 停更）= Star 数不等于活跃
+- SD Forge（开发者转方向）= 个人项目单点风险
+- Snap.Hutao（删库）= 社区续作模式
+
+## 落地实操建议
+
+### 入门路径（按难度递进）
+1. 零门槛：Auto_Bangumi 追番 + Suwayomi 看漫画
+2. 轻度创作：ComfyUI + 动漫模型生成二次元图像
+3. 进阶创作：GPT-SoVITS 克隆角色声音 + Style-Bert-VITS2 情感配音
+4. 深度玩家：Open-LLM-VTuber 搭建 AI 虚拟主播
+
+### 技术栈推荐
+- 绘画：ComfyUI（节点式，可扩展）+ Illustrious XL / Pony V6
+- 语音：GPT-SoVITS（克隆）+ Fish Speech（高保真）
+- VTuber：Open-LLM-VTuber + Inochi2D（免 Live2D 许可）
+- 基础设施：Bangumi API + Auto_Bangumi
+
+## 叙事方向
+- 视角：商业分析，不是技术教程
+- 语气：客观分析 + 关键数据点 + 趋势判断
+- 钩子方向：二次元开源生态正在大洗牌，有人崛起有人倒下
+- 落脚点：给观众一条可执行的入门路径

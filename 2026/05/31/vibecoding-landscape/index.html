@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-width="1920" data-height="1080">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#060a1a;font-family:'PingFang SC','Microsoft YaHei',sans-serif}
+
+/* ── 全局工具 ── */
+.scene{position:absolute;top:0;left:0;width:1920px;height:1080px;opacity:0;overflow:hidden}
+.layer-bg{position:absolute;inset:0;z-index:1;overflow:hidden}
+.layer-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.layer-content{position:absolute;inset:0;z-index:3;padding:60px 120px;display:flex;flex-direction:column;justify-content:center}
+
+/* ── 渐变色标题 ── */
+.title-gradient{
+  background:linear-gradient(135deg,#00f0ff 0%,#4a7cf7 50%,#a855f7 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  font-weight:900;letter-spacing:2px;line-height:1.2;
+}
+.title-amber{
+  background:linear-gradient(135deg,#ff8c00 0%,#ffbe0b 50%,#ff6b35 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:900;line-height:1.2;
+}
+.title-cyan-green{
+  background:linear-gradient(135deg,#00f0ff 0%,#22d3ee 40%,#34d399 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:900;line-height:1.2;
+}
+.title-purple-pink{
+  background:linear-gradient(135deg,#a855f7 0%,#ec4899 50%,#f43f5e 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:900;line-height:1.2;
+}
+.text-white{color:#e2e8f0}
+.text-cyan{color:#00f0ff}
+.text-amber{color:#ff8c00}
+.text-muted{color:#94a3b8}
+
+/* ── 代码风格 ── */
+.code-block{
+  background:rgba(10,14,39,0.8);border:1px solid rgba(74,124,247,0.3);
+  border-radius:12px;padding:24px 32px;font-family:'JetBrains Mono','Fira Code',monospace;
+  font-size:24px;color:#22d3ee;line-height:1.6;
+}
+
+/* ── 卡片 ── */
+.card{
+  background:rgba(15,20,50,0.7);border:1px solid rgba(74,124,247,0.25);
+  border-radius:16px;padding:28px 32px;backdrop-filter:blur(8px);
+}
+.card-glow{
+  box-shadow:0 0 30px rgba(0,240,255,0.08),inset 0 0 30px rgba(74,124,247,0.05);
+}
+
+/* ── 标签 ── */
+.tag{
+  display:inline-block;padding:6px 16px;border-radius:20px;font-size:20px;font-weight:600;
+  background:rgba(0,240,255,0.1);border:1px solid rgba(0,240,255,0.3);color:#00f0ff;
+}
+.tag-amber{background:rgba(255,140,0,0.1);border-color:rgba(255,140,0,0.3);color:#ff8c00}
+.tag-purple{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.3);color:#a855f7}
+</style>
+</head>
+<body data-composition-id="main" data-width="1920" data-height="1080">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s1 Hook — 开场冲击 (12.096s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s1">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#0a0e27 0%,#060a1a 100%)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(74,124,247,0.05) 0%,transparent 50%,rgba(0,240,255,0.03) 100%)"></div>
+    <div id="s1-matrix" style="position:absolute;inset:0;opacity:0.15"></div>
+  </div>
+  <div class="layer-fx">
+    <div id="s1-pulse" style="position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(0,240,255,0.12) 0%,transparent 70%)"></div>
+    <div style="position:absolute;top:20%;left:10%;width:8px;height:8px;border-radius:50%;background:#00f0ff;opacity:0.6"></div>
+    <div style="position:absolute;top:70%;right:15%;width:6px;height:6px;border-radius:50%;background:#a855f7;opacity:0.5"></div>
+    <div style="position:absolute;bottom:25%;left:20%;width:5px;height:5px;border-radius:50%;background:#4a7cf7;opacity:0.4"></div>
+  </div>
+  <div class="layer-content" style="align-items:center;text-align:center;gap:32px">
+    <div style="display:flex;gap:80px;justify-content:center;align-items:baseline">
+      <div><span class="title-gradient" style="font-size:120px" id="s1-num1">8</span><span class="text-muted" style="font-size:36px;margin-left:8px">天</span></div>
+      <div><span class="title-gradient" style="font-size:120px" id="s1-num2">60</span><span class="text-muted" style="font-size:36px;margin-left:8px">次提交</span></div>
+      <div><span class="title-gradient" style="font-size:120px" id="s1-num3">2</span><span class="text-muted" style="font-size:36px;margin-left:8px">万行代码</span></div>
+    </div>
+    <div class="title-cyan-green" style="font-size:52px;max-width:1400px">一个 AI，学会了自己造视频</div>
+    <div class="text-muted" style="font-size:28px">不靠模板 · 不靠剪辑师 · 从内容到成片全自动</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s2 Origin — 起点 (27.720s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s2">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0e27 0%,#0d1a3a 50%,#0f172a 100%)"></div>
+    <div style="position:absolute;top:-20%;right:-10%;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,247,0.06) 0%,transparent 60%)"></div>
+    <div style="position:absolute;bottom:-30%;left:-5%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.05) 0%,transparent 60%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:15%;left:5%;width:3px;height:120px;background:linear-gradient(180deg,transparent,#4a7cf7,transparent);opacity:0.4"></div>
+    <div style="position:absolute;top:30%;right:8%;width:2px;height:80px;background:linear-gradient(180deg,transparent,#a855f7,transparent);opacity:0.3"></div>
+    <div id="s2-float1" style="position:absolute;top:60%;left:40%;width:4px;height:4px;border-radius:50%;background:#00f0ff;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:40px">
+    <div class="title-amber" style="font-size:48px">做短视频，最痛苦的是什么？</div>
+    <div style="display:flex;gap:40px">
+      <div class="card card-glow" style="flex:1;border-color:rgba(255,140,0,0.3)">
+        <div class="text-amber" style="font-size:20px;font-weight:700;margin-bottom:16px">痛点</div>
+        <div class="text-white" style="font-size:32px;line-height:1.5">讲出来了，<br>但<span style="color:#ff8c00;font-weight:700">做不成视频</span></div>
+        <div class="text-muted" style="font-size:24px;margin-top:16px">脚本 2h + 剪辑 2h + 配乐 1h<br>= 每条视频 5 小时</div>
+      </div>
+      <div class="card card-glow" style="flex:1;border-color:rgba(0,240,255,0.3)">
+        <div class="text-cyan" style="font-size:20px;font-weight:700;margin-bottom:16px">转折</div>
+        <div class="text-white" style="font-size:32px;line-height:1.5">发现 <span style="color:#00f0ff;font-weight:700">HyperFrames</span><br>HTML → 视频</div>
+        <div class="text-muted" style="font-size:24px;margin-top:16px">渲染层不够<br>需要完整自动化管线</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <span class="tag">ClipForge 的起点</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s3 Philosophy — 设计哲学 (26.616s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s3">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0f172a 0%,#1a0a2e 50%,#0f172a 100%)"></div>
+    <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:linear-gradient(180deg,transparent 10%,rgba(168,85,247,0.2) 50%,transparent 90%)"></div>
+    <div style="position:absolute;top:50%;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent 5%,rgba(74,124,247,0.1) 50%,transparent 95%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div id="s3-orb-l" style="position:absolute;top:40%;left:25%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,247,0.1) 0%,transparent 70%)"></div>
+    <div id="s3-orb-r" style="position:absolute;top:40%;right:25%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 70%)"></div>
+  </div>
+  <div class="layer-content" style="gap:36px;align-items:center;text-align:center">
+    <div class="title-purple-pink" style="font-size:44px">流程零自由度 · 内容最大自由度</div>
+    <div style="display:flex;gap:60px;width:100%">
+      <div class="card" style="flex:1;text-align:left;border-color:rgba(74,124,247,0.4)">
+        <div style="font-size:24px;font-weight:800;color:#4a7cf7;margin-bottom:20px;letter-spacing:3px">LETTER 模式</div>
+        <div class="text-white" style="font-size:32px;line-height:1.5">执行顺序 · 硬编码<br>质量标准 · 不可变<br>错误恢复 · 自动化</div>
+        <div class="text-muted" style="font-size:24px;margin-top:16px;font-style:italic">工程 = 确定性</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <div style="width:2px;height:200px;background:linear-gradient(180deg,#4a7cf7,#a855f7);border-radius:2px"></div>
+      </div>
+      <div class="card" style="flex:1;text-align:left;border-color:rgba(168,85,247,0.4)">
+        <div style="font-size:24px;font-weight:800;color:#a855f7;margin-bottom:20px;letter-spacing:3px">SPIRIT 模式</div>
+        <div class="text-white" style="font-size:32px;line-height:1.5">场景内容 · AI 推导<br>视觉配色 · 自主决定<br>特效组合 · 自由创作</div>
+        <div class="text-muted" style="font-size:24px;margin-top:16px;font-style:italic">创意 = 惊喜感</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;justify-content:center">
+      <span class="tag">Schema 即真相</span>
+      <span class="tag">状态即文件</span>
+      <span class="tag">委托不重写</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s4 Pipeline — 九阶段管线 (26.688s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s4">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#060a1a 0%,#0a1628 50%,#0f172a 100%)"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 212px,rgba(74,124,247,0.04) 212px,rgba(74,124,247,0.04) 214px)"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 120px,rgba(0,240,255,0.02) 120px,rgba(0,240,255,0.02) 122px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:10%;left:3%;width:100px;height:1px;background:#4a7cf7;opacity:0.3"></div>
+    <div style="position:absolute;bottom:15%;right:5%;width:150px;height:1px;background:#00f0ff;opacity:0.3"></div>
+    <div style="position:absolute;top:85%;left:50%;width:6px;height:6px;border-radius:50%;background:#a855f7;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:32px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="title-cyan-green" style="font-size:42px">九阶段 DAG 管线</div>
+      <div style="display:flex;gap:12px">
+        <span class="tag">9 阶段</span>
+        <span class="tag-amber tag">22+ 门禁</span>
+        <span class="tag-purple tag">32 组件</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div class="card" style="padding:16px 20px;border-color:rgba(255,140,0,0.4)"><span style="font-size:22px;color:#ff8c00;font-weight:700">env-check</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px"><span style="font-size:22px;color:#00f0ff;font-weight:700">content</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px"><span style="font-size:22px;color:#00f0ff;font-weight:700">design</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px"><span style="font-size:22px;color:#00f0ff;font-weight:700">narration</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px;border-color:rgba(168,85,247,0.4)"><span style="font-size:22px;color:#a855f7;font-weight:700">audio ∥ assets</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px"><span style="font-size:22px;color:#00f0ff;font-weight:700">video</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px"><span style="font-size:22px;color:#00f0ff;font-weight:700">delivery</span></div>
+      <div style="color:#4a7cf7;font-size:28px">→</div>
+      <div class="card" style="padding:16px 20px;border-color:rgba(255,140,0,0.4)"><span style="font-size:22px;color:#ff8c00;font-weight:700">scoring</span></div>
+    </div>
+    <div class="card card-glow" style="border-color:rgba(255,140,0,0.3)">
+      <div style="font-size:20px;color:#ff8c00;font-weight:700;margin-bottom:12px">核心指标：黄金 3 秒</div>
+      <div class="text-white" style="font-size:32px">用户划走只需 <span style="color:#ff8c00;font-weight:900;font-size:40px">1-3 秒</span> → 第一个场景必须是纯钩子，画面必须全片最强</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s5 Engine — 四原子约束 (35.736s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s5">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0e27 0%,#1a0a2e 40%,#0d1a3a 100%)"></div>
+    <div style="position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.05) 0%,transparent 60%)"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 80%,rgba(255,140,0,0.03) 0%,transparent 50%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div id="s5-ring" style="position:absolute;top:50%;left:50%;width:400px;height:400px;transform:translate(-50%,-50%);border:1px solid rgba(168,85,247,0.15);border-radius:50%"></div>
+    <div style="position:absolute;top:20%;right:12%;width:4px;height:4px;border-radius:50%;background:#ff8c00;opacity:0.6"></div>
+    <div style="position:absolute;bottom:25%;left:8%;width:5px;height:5px;border-radius:50%;background:#a855f7;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:28px">
+    <div class="title-purple-pink" style="font-size:42px">四原子约束引擎</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="card" style="border-left:4px solid #4a7cf7">
+        <div style="font-size:20px;color:#4a7cf7;font-weight:800;margin-bottom:8px">INTENT 意图</div>
+        <div class="text-white" style="font-size:28px">告诉 AI 在做什么</div>
+      </div>
+      <div class="card" style="border-left:4px solid #00f0ff">
+        <div style="font-size:20px;color:#00f0ff;font-weight:800;margin-bottom:8px">BOUNDARY 边界</div>
+        <div class="text-white" style="font-size:28px">规定允许和禁止的行为</div>
+      </div>
+      <div class="card" style="border-left:4px solid #ff8c00">
+        <div style="font-size:20px;color:#ff8c00;font-weight:800;margin-bottom:8px">GATE 门禁</div>
+        <div class="text-white" style="font-size:28px">自动校验产出质量</div>
+      </div>
+      <div class="card" style="border-left:4px solid #a855f7">
+        <div style="font-size:20px;color:#a855f7;font-weight:800;margin-bottom:8px">TRACE 轨迹</div>
+        <div class="text-white" style="font-size:28px">记录完整执行上下文</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px">
+      <div class="card" style="flex:1;border-color:rgba(255,140,0,0.3)">
+        <div class="text-amber" style="font-size:20px;font-weight:700;margin-bottom:8px">核心洞察</div>
+        <div class="text-white" style="font-size:32px;font-weight:700">告诉 AI <span style="color:#00f0ff">应该做什么</span>，而非不能做什么</div>
+      </div>
+      <div class="card" style="flex:1;border-color:rgba(255,100,100,0.3)">
+        <div style="font-size:20px;color:#ff6b6b;font-weight:700;margin-bottom:8px">从事故中学习</div>
+        <div class="text-white" style="font-size:28px;line-height:1.4">CSS 动画 → 全片空白<br>双重 padding → 74% 压缩<br>BGM 预衰减 → 双重静音</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s6 Rendering — 三层架构 (30.336s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s6">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0e27 0%,#0f172a 100%)"></div>
+    <div style="position:absolute;top:-10%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,240,255,0.05) 0%,transparent 70%)"></div>
+    <div style="position:absolute;bottom:-15%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,247,0.04) 0%,transparent 70%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:12%;left:15%;width:80px;height:1px;background:linear-gradient(90deg,transparent,#00f0ff,transparent);opacity:0.4"></div>
+    <div style="position:absolute;bottom:18%;right:20%;width:60px;height:1px;background:linear-gradient(90deg,transparent,#4a7cf7,transparent);opacity:0.3"></div>
+    <div id="s6-dot" style="position:absolute;top:40%;right:10%;width:5px;height:5px;border-radius:50%;background:#00f0ff;opacity:0.6"></div>
+  </div>
+  <div class="layer-content" style="gap:28px">
+    <div class="title-cyan-green" style="font-size:42px">三层渲染架构</div>
+    <div style="display:flex;gap:28px">
+      <div style="flex:1">
+        <div class="card" style="margin-bottom:12px;border-left:4px solid #4a7cf7;background:rgba(74,124,247,0.05)">
+          <div style="font-size:18px;color:#4a7cf7;font-weight:800;margin-bottom:6px">LAYER-BG z:1</div>
+          <div class="text-white" style="font-size:26px">渐变 · 网格 · 光晕 · 纹理</div>
+        </div>
+        <div class="card" style="margin-bottom:12px;border-left:4px solid #a855f7;background:rgba(168,85,247,0.05)">
+          <div style="font-size:18px;color:#a855f7;font-weight:800;margin-bottom:6px">LAYER-FX z:2</div>
+          <div class="text-white" style="font-size:26px">粒子 · 爆炸 · 矩阵雨 · 光球</div>
+        </div>
+        <div class="card" style="border-left:4px solid #00f0ff;background:rgba(0,240,255,0.05)">
+          <div style="font-size:18px;color:#00f0ff;font-weight:800;margin-bottom:6px">LAYER-CONTENT z:3</div>
+          <div class="text-white" style="font-size:26px">文字 · 数字 · 卡片 · 标签</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+        <div class="card card-glow" style="border-color:rgba(0,240,255,0.3)">
+          <div class="text-cyan" style="font-size:20px;font-weight:700;margin-bottom:8px">骨架 + 创意插槽</div>
+          <div class="text-white" style="font-size:26px;line-height:1.5">骨架由系统保证结构<br>插槽由 AI 自由填充内容<br><span class="text-muted" style="font-size:22px">流程零自由度 · 内容最大自由度</span></div>
+        </div>
+        <div style="display:flex;gap:12px">
+          <span class="tag">32 组件</span>
+          <span class="tag-amber tag">8 bg</span>
+          <span class="tag-purple tag">10 fx</span>
+          <span class="tag">14+ content</span>
+        </div>
+        <div class="text-muted" style="font-size:22px;text-align:center">GSAP Timeline · Seek 模式渲染 · CSS animation 禁用</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s7 Sync — 音画同步 (22.848s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s7">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0e27 0%,#0d1a3a 100%)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,240,255,0.02) 0%,transparent 50%,rgba(74,124,247,0.02) 100%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:50%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(0,240,255,0.15) 20%,rgba(0,240,255,0.15) 80%,transparent 100%)"></div>
+    <div style="position:absolute;top:30%;left:50%;width:4px;height:4px;border-radius:50%;background:#4a7cf7;opacity:0.6"></div>
+    <div style="position:absolute;top:70%;left:30%;width:3px;height:3px;border-radius:50%;background:#00f0ff;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:32px">
+    <div class="title-gradient" style="font-size:42px">音画同步 — 分段校准</div>
+    <div style="display:flex;gap:24px">
+      <div class="card" style="flex:1;text-align:center;border-top:4px solid #ff8c00">
+        <div style="font-size:36px;color:#ff8c00;font-weight:900">Step 1</div>
+        <div class="text-white" style="font-size:26px;margin-top:8px">分段写旁白</div>
+        <div class="text-muted" style="font-size:20px">预估时长 (estimated)</div>
+      </div>
+      <div style="display:flex;align-items:center"><span style="font-size:36px;color:#4a7cf7">→</span></div>
+      <div class="card" style="flex:1;text-align:center;border-top:4px solid #a855f7">
+        <div style="font-size:36px;color:#a855f7;font-weight:900">Step 2</div>
+        <div class="text-white" style="font-size:26px;margin-top:8px">逐段 TTS</div>
+        <div class="text-muted" style="font-size:20px">实际时长 (actual)</div>
+      </div>
+      <div style="display:flex;align-items:center"><span style="font-size:36px;color:#4a7cf7">→</span></div>
+      <div class="card" style="flex:1;text-align:center;border-top:4px solid #00f0ff">
+        <div style="font-size:36px;color:#00f0ff;font-weight:900">Step 3</div>
+        <div class="text-white" style="font-size:26px;margin-top:8px">actual 替换 estimated</div>
+        <div class="text-muted" style="font-size:20px">data-duration 唯一来源</div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(255,140,0,0.3);text-align:center">
+      <div class="text-white" style="font-size:28px">Phase 视觉分段：找 <span style="color:#ff8c00;font-weight:700">话题转换点</span>，不是时间均分</div>
+      <div class="text-muted" style="font-size:22px;margin-top:8px">差值 > 0.5s → 门禁 HARD FAIL</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s8 Evolution — 自进化反馈 (24.696s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s8">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#0f172a 0%,#060a1a 100%)"></div>
+    <div style="position:absolute;top:0;left:30%;width:40%;height:100%;background:linear-gradient(180deg,rgba(168,85,247,0.04) 0%,transparent 30%,transparent 70%,rgba(0,240,255,0.04) 100%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div id="s8-pulse1" style="position:absolute;top:35%;left:30%;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,100,100,0.15)"></div>
+    <div id="s8-pulse2" style="position:absolute;top:35%;right:30%;width:100px;height:100px;border-radius:50%;border:1px solid rgba(0,240,255,0.15)"></div>
+    <div style="position:absolute;top:15%;left:50%;width:5px;height:5px;border-radius:50%;background:#a855f7;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:32px;align-items:center;text-align:center">
+    <div class="title-purple-pink" style="font-size:42px">双闭环自进化</div>
+    <div style="display:flex;gap:40px;width:100%">
+      <div class="card" style="flex:1;border-color:rgba(255,100,100,0.3)">
+        <div style="font-size:24px;color:#ff6b6b;font-weight:800;margin-bottom:16px">失败闭环</div>
+        <div class="text-white" style="font-size:26px;line-height:1.6">门禁失败 → 归因分析<br>→ 定位规则 → 修复重试<br><span class="text-muted" style="font-size:22px">强归因 + 弱归因</span></div>
+      </div>
+      <div class="card" style="flex:1;border-color:rgba(0,240,255,0.3)">
+        <div style="font-size:24px;color:#00f0ff;font-weight:800;margin-bottom:16px">成功闭环</div>
+        <div class="text-white" style="font-size:26px;line-height:1.6">门禁通过 → 轨迹记录<br>→ 成功分析 → 沉淀模式<br><span class="text-muted" style="font-size:22px">90 天老化自动清除</span></div>
+      </div>
+    </div>
+    <div class="card card-glow" style="border-color:rgba(168,85,247,0.3)">
+      <div class="text-white" style="font-size:32px">播放数据 → <span style="color:#a855f7;font-weight:700">机器评分校准</span> → 规则自动调整</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s9 Journey — 8天历程 (32.640s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s9">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#060a1a 0%,#0d1a3a 50%,#0a0e27 100%)"></div>
+    <div style="position:absolute;top:45%;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent 5%,#4a7cf7 30%,#a855f7 50%,#00f0ff 70%,transparent 95%);opacity:0.3"></div>
+    <div style="position:absolute;top:0;right:0;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,0,0.04) 0%,transparent 70%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:10%;left:8%;width:4px;height:4px;border-radius:50%;background:#ff8c00;opacity:0.5"></div>
+    <div style="position:absolute;top:80%;right:12%;width:5px;height:5px;border-radius:50%;background:#00f0ff;opacity:0.5"></div>
+    <div style="position:absolute;top:25%;right:25%;width:3px;height:3px;border-radius:50%;background:#a855f7;opacity:0.4"></div>
+  </div>
+  <div class="layer-content" style="gap:24px;justify-content:flex-start;padding-top:50px">
+    <div class="title-amber" style="font-size:40px">8 天开发历程</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #4a7cf7">
+        <div style="color:#4a7cf7;font-size:18px;font-weight:700">Day 1-2</div>
+        <div class="text-white" style="font-size:22px">DAG 管线搭建</div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #ff6b6b">
+        <div style="color:#ff6b6b;font-size:18px;font-weight:700">Day 3</div>
+        <div class="text-white" style="font-size:22px">音画同步危机</div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #ff8c00">
+        <div style="color:#ff8c00;font-size:18px;font-weight:700">Day 4</div>
+        <div class="text-white" style="font-size:22px">CSS 动画全片空白</div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #ffbe0b">
+        <div style="color:#ffbe0b;font-size:18px;font-weight:700">Day 5</div>
+        <div class="text-white" style="font-size:22px">双重 padding 事故</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #a855f7">
+        <div style="color:#a855f7;font-size:18px;font-weight:700">Day 6</div>
+        <div class="text-white" style="font-size:22px">引擎层上线 4781 行</div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #00f0ff">
+        <div style="color:#00f0ff;font-size:18px;font-weight:700">Day 7</div>
+        <div class="text-white" style="font-size:22px">三层架构重构</div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;padding:14px 18px;border-left:3px solid #22d3ee">
+        <div style="color:#22d3ee;font-size:18px;font-weight:700">Day 8</div>
+        <div class="text-white" style="font-size:22px">A/V 同步门禁加固</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <span class="tag">状态即文件</span>
+      <span class="tag">正向规则优先</span>
+      <span class="tag">骨架+插槽</span>
+      <span class="tag">委托不重写</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s10 Results — 成果数据 (20.256s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s10">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0e27 0%,#0f172a 50%,#0d1a3a 100%)"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 30%,rgba(0,240,255,0.04) 0%,transparent 60%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;top:20%;left:20%;width:80px;height:1px;background:#00f0ff;opacity:0.3"></div>
+    <div style="position:absolute;bottom:25%;right:25%;width:100px;height:1px;background:#a855f7;opacity:0.3"></div>
+    <div style="position:absolute;top:60%;left:70%;width:4px;height:4px;border-radius:50%;background:#ff8c00;opacity:0.5"></div>
+  </div>
+  <div class="layer-content" style="gap:32px;align-items:center;text-align:center">
+    <div class="title-gradient" style="font-size:44px">项目数据</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center">
+      <div class="card card-glow" style="min-width:160px;text-align:center;border-color:rgba(0,240,255,0.3)">
+        <div style="font-size:48px;font-weight:900;color:#00f0ff">8</div>
+        <div class="text-muted" style="font-size:20px">天开发</div>
+      </div>
+      <div class="card card-glow" style="min-width:160px;text-align:center;border-color:rgba(74,124,247,0.3)">
+        <div style="font-size:48px;font-weight:900;color:#4a7cf7">60</div>
+        <div class="text-muted" style="font-size:20px">次提交</div>
+      </div>
+      <div class="card card-glow" style="min-width:160px;text-align:center;border-color:rgba(168,85,247,0.3)">
+        <div style="font-size:48px;font-weight:900;color:#a855f7">23K</div>
+        <div class="text-muted" style="font-size:20px">行代码</div>
+      </div>
+      <div class="card card-glow" style="min-width:160px;text-align:center;border-color:rgba(255,140,0,0.3)">
+        <div style="font-size:48px;font-weight:900;color:#ff8c00">32</div>
+        <div class="text-muted" style="font-size:20px">视觉组件</div>
+      </div>
+      <div class="card card-glow" style="min-width:160px;text-align:center;border-color:rgba(0,240,255,0.3)">
+        <div style="font-size:48px;font-weight:900;color:#00f0ff">22+</div>
+        <div class="text-muted" style="font-size:20px">门禁检查</div>
+      </div>
+    </div>
+    <div class="text-white" style="font-size:28px">3 种视频模式：45s 快讯 / 60s 解析 / 10min 长视频</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- s11 CTA — 号召 (24.336s) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="scene" id="s11">
+  <div class="layer-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#0a1628 0%,#060a1a 100%)"></div>
+    <div style="position:absolute;top:50%;left:50%;width:1000px;height:1000px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(74,124,247,0.06) 0%,transparent 60%)"></div>
+    <div style="position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(0,240,255,0.04) 0%,transparent 60%)"></div>
+  </div>
+  <div class="layer-fx">
+    <div id="s11-ring1" style="position:absolute;top:50%;left:50%;width:300px;height:300px;transform:translate(-50%,-50%);border:1px solid rgba(0,240,255,0.1);border-radius:50%"></div>
+    <div id="s11-ring2" style="position:absolute;top:50%;left:50%;width:500px;height:500px;transform:translate(-50%,-50%);border:1px solid rgba(74,124,247,0.08);border-radius:50%"></div>
+    <div style="position:absolute;top:20%;left:15%;width:4px;height:4px;border-radius:50%;background:#00f0ff;opacity:0.6"></div>
+    <div style="position:absolute;bottom:20%;right:15%;width:4px;height:4px;border-radius:50%;background:#a855f7;opacity:0.6"></div>
+  </div>
+  <div class="layer-content" style="gap:28px;align-items:center;text-align:center">
+    <div class="title-gradient" style="font-size:38px;max-width:1200px">本视频由 ClipForge 自己制作</div>
+    <div class="text-white" style="font-size:32px;max-width:1100px;line-height:1.5">9 阶段自动化管线 · 从内容分析到最终渲染<br>全程无需人工干预</div>
+    <div style="display:flex;gap:20px">
+      <div class="card" style="border-color:rgba(0,240,255,0.3)">
+        <div style="font-size:24px;color:#00f0ff;font-weight:700">开源</div>
+        <div class="text-white" style="font-size:28px">Apache 2.0</div>
+      </div>
+      <div class="card" style="border-color:rgba(168,85,247,0.3)">
+        <div style="font-size:24px;color:#a855f7;font-weight:700">管线</div>
+        <div class="text-white" style="font-size:28px">编排 + 约束 + 进化</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <span class="tag" style="font-size:22px">#vibecoding大赏</span>
+      <span class="tag-amber tag" style="font-size:22px">#ai新星计划</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- Audio -->
+<!-- ══════════════════════════════════════════════ -->
+<audio id="narration" src="narration.mp3" data-volume="1.0" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.12" data-start="0"></audio>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- GSAP Timeline — 场景切换由 opacity 驱动 -->
+<!-- ══════════════════════════════════════════════ -->
+<script>
+const TOTAL = 283.968;
+const tl = gsap.timeline({paused:true});
+
+// s1 Hook (0 → 12.096)
+tl.to('#s1',{opacity:1,duration:0.5})
+  .from('#s1 .layer-content > *',{y:60,opacity:0,stagger:0.15,duration:0.5,ease:'power3.out'},'<0.2')
+  .fromTo('#s1-pulse',{scale:0.8,opacity:0.3},{scale:1.2,opacity:0.1,duration:3,yoyo:true,repeat:2},'<')
+  .to('#s1',{opacity:0,duration:0.4},9.5)
+
+// s2 Origin (12.096 → 39.816)
+tl.to('#s2',{opacity:1,duration:0.4},12.096)
+  .from('#s2 .title-amber',{x:-40,opacity:0,duration:0.5},12.296)
+  .from('#s2 .card',{x:-30,opacity:0,stagger:0.2,duration:0.5,ease:'power2.out'},12.596)
+  .fromTo('#s2-float1',{y:0},{y:-20,duration:4,yoyo:true,repeat:3},12.096)
+  .to('#s2',{opacity:0,duration:0.4},39.416)
+
+// s3 Philosophy (39.816 → 66.432)
+tl.to('#s3',{opacity:1,duration:0.4},39.816)
+  .from('#s3 .title-purple-pink',{y:-30,opacity:0,duration:0.5},40.016)
+  .from('#s3 .card',{scale:0.9,opacity:0,stagger:0.15,duration:0.5,ease:'back.out(1.2)'},40.316)
+  .from('#s3 .tag',{y:20,opacity:0,stagger:0.1,duration:0.3},40.816)
+  .fromTo('#s3-orb-l',{scale:1},{scale:1.15,duration:5,yoyo:true,repeat:2},39.816)
+  .fromTo('#s3-orb-r',{scale:1},{scale:1.15,duration:5,yoyo:true,repeat:2},40.316)
+  .to('#s3',{opacity:0,duration:0.4},66.032)
+
+// s4 Pipeline (66.432 → 93.120)
+tl.to('#s4',{opacity:1,duration:0.4},66.432)
+  .from('#s4 .title-cyan-green',{x:-30,opacity:0,duration:0.5},66.632)
+  .from('#s4 .card',{scale:0.85,opacity:0,stagger:0.06,duration:0.4,ease:'back.out(1.1)'},66.932)
+  .from('#s4 .tag',{y:15,opacity:0,stagger:0.1,duration:0.3},67.432)
+  .to('#s4',{opacity:0,duration:0.4},92.720)
+
+// s5 Engine (93.120 → 128.856)
+tl.to('#s5',{opacity:1,duration:0.4},93.120)
+  .from('#s5 .title-purple-pink',{y:-30,opacity:0,duration:0.5},93.320)
+  .from('#s5 .card',{x:-25,opacity:0,stagger:0.12,duration:0.5,ease:'power2.out'},93.620)
+  .fromTo('#s5-ring',{scale:1,rotation:0},{scale:1.1,rotation:30,duration:8,yoyo:true,repeat:1},93.120)
+  .to('#s5',{opacity:0,duration:0.4},128.456)
+
+// s6 Rendering (128.856 → 159.192)
+tl.to('#s6',{opacity:1,duration:0.4},128.856)
+  .from('#s6 .title-cyan-green',{scale:0.9,opacity:0,duration:0.5},129.056)
+  .from('#s6 .card',{y:25,opacity:0,stagger:0.12,duration:0.5,ease:'power2.out'},129.356)
+  .fromTo('#s6-dot',{y:0},{y:-15,duration:3,yoyo:true,repeat:4},128.856)
+  .to('#s6',{opacity:0,duration:0.4},158.792)
+
+// s7 Sync (159.192 → 182.040)
+tl.to('#s7',{opacity:1,duration:0.4},159.192)
+  .from('#s7 .title-gradient',{y:-30,opacity:0,duration:0.5},159.392)
+  .from('#s7 .card',{scale:0.9,opacity:0,stagger:0.15,duration:0.5,ease:'back.out(1.1)'},159.692)
+  .to('#s7',{opacity:0,duration:0.4},181.640)
+
+// s8 Evolution (182.040 → 206.736)
+tl.to('#s8',{opacity:1,duration:0.4},182.040)
+  .from('#s8 .title-purple-pink',{y:-30,opacity:0,duration:0.5},182.240)
+  .from('#s8 .card',{x:-25,opacity:0,stagger:0.15,duration:0.5,ease:'power2.out'},182.540)
+  .fromTo('#s8-pulse1',{scale:1},{scale:1.15,duration:4,yoyo:true,repeat:2},182.040)
+  .fromTo('#s8-pulse2',{scale:1},{scale:1.15,duration:4,yoyo:true,repeat:2},182.540)
+  .to('#s8',{opacity:0,duration:0.4},206.336)
+
+// s9 Journey (206.736 → 239.376)
+tl.to('#s9',{opacity:1,duration:0.4},206.736)
+  .from('#s9 .title-amber',{x:-30,opacity:0,duration:0.5},206.936)
+  .from('#s9 .card',{y:20,opacity:0,stagger:0.08,duration:0.4,ease:'power2.out'},207.236)
+  .to('#s9',{opacity:0,duration:0.4},238.976)
+
+// s10 Results (239.376 → 259.632)
+tl.to('#s10',{opacity:1,duration:0.4},239.376)
+  .from('#s10 .title-gradient',{scale:0.85,opacity:0,duration:0.5},239.576)
+  .from('#s10 .card',{scale:0.7,opacity:0,stagger:0.08,duration:0.4,ease:'back.out(1.5)'},239.876)
+  .to('#s10',{opacity:0,duration:0.4},259.232)
+
+// s11 CTA (259.632 → 283.968)
+tl.to('#s11',{opacity:1,duration:0.4},259.632)
+  .from('#s11 .title-gradient',{y:-30,opacity:0,duration:0.5},259.832)
+  .from('#s11 .card',{scale:0.9,opacity:0,stagger:0.15,duration:0.5},260.132)
+  .from('#s11 .tag',{y:15,opacity:0,stagger:0.1,duration:0.3},260.632)
+  .fromTo('#s11-ring1',{scale:1},{scale:1.05,duration:5,yoyo:true,repeat:2},259.632)
+  .fromTo('#s11-ring2',{scale:1},{scale:1.03,duration:6,yoyo:true,repeat:2},260.132)
+
+// HyperFrames seek API
+window.__timelines = { main: tl };
+window.__hf = {
+  duration: 283.968,
+  seek: function(t) { tl.time(t); }
+};
+tl.play();
+</script>
+</body>
+</html>

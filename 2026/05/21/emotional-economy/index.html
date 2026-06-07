@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>情绪经济与精神消费</title>
+<script>
+window.__timelines = {};
+window.__timelines['main'] = {
+  duration: function() { return 517.11; },
+  pause: function() {},
+  play: function() {},
+  seek: function(t) {},
+  time: function() { return 0; },
+  kill: function() {},
+  progress: function() { return 0; },
+  totalDuration: function() { return 517.11; }
+};
+window.__hf = {
+  duration: 517.11,
+  seek: function(t) {},
+  timelines: window.__timelines
+};
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #0c0a1a; font-family: 'Inter', sans-serif; }
+
+:root {
+  --bg-deep: #0c0a1a;
+  --bg-mid: #1a1535;
+  --bg-light: #2a2245;
+  --accent-warm: #e8a838;
+  --accent-gold: #d4943c;
+  --accent-cool: #8b6cc7;
+  --accent-tech: #4fd1c5;
+  --accent-mint: #38d9a9;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0c0;
+  --text-dim: #6b6b8a;
+}
+
+.clip {
+  position: absolute; top: 0; left: 0;
+  width: 1080px; height: 1920px;
+  overflow: hidden;
+}
+
+/* Background layers */
+.bg-grad {
+  position: absolute; width: 100%; height: 100%;
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
+}
+.bg-grad-warm {
+  background: linear-gradient(180deg, #1a0f0a 0%, #1a1535 50%, #0c0a1a 100%);
+}
+.bg-grad-cool {
+  background: linear-gradient(180deg, #0a0f1a 0%, #15132a 50%, #0c0a1a 100%);
+}
+
+.grid-bg {
+  position: absolute; width: 100%; height: 100%;
+  background-image:
+    linear-gradient(rgba(79,209,197,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,209,197,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(140px); pointer-events: none;
+}
+
+.scene-wrap {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding-top: 120px; padding-bottom: 120px;
+  z-index: 2;
+}
+
+/* Typography */
+.hero-text {
+  font-size: 80px; font-weight: 900; color: var(--text-primary);
+  letter-spacing: -1px; line-height: 1.2;
+}
+.title-text {
+  font-size: 56px; font-weight: 700; color: var(--text-primary);
+  line-height: 1.3;
+}
+.subtitle-text {
+  font-size: 40px; font-weight: 600; color: var(--text-secondary);
+  line-height: 1.4;
+}
+.body-text {
+  font-size: 36px; font-weight: 400; color: var(--text-secondary);
+  line-height: 1.5;
+}
+.tag-text {
+  font-size: 28px; font-weight: 600;
+}
+.mono { font-family: 'JetBrains Mono', monospace; }
+.accent-warm { color: var(--accent-warm); }
+.accent-cool { color: var(--accent-cool); }
+.accent-tech { color: var(--accent-tech); }
+.accent-gold { color: var(--accent-gold); }
+
+/* Section label */
+.section-label {
+  font-size: 24px; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; padding: 8px 24px;
+  border-radius: 20px; margin-bottom: 32px;
+}
+.label-warm { background: rgba(232,168,56,0.15); color: var(--accent-warm); }
+.label-cool { background: rgba(139,108,199,0.15); color: var(--accent-cool); }
+.label-tech { background: rgba(79,209,197,0.15); color: var(--accent-tech); }
+
+/* Data cards */
+.data-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 36px 44px;
+  margin-bottom: 20px; width: 900px;
+}
+.data-number {
+  font-size: 64px; font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+.data-label {
+  font-size: 30px; color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+/* Project cards */
+.project-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(79,209,197,0.2);
+  border-radius: 16px; padding: 28px 36px;
+  margin-bottom: 16px; width: 900px;
+}
+.project-card .star-badge {
+  display: inline-block;
+  background: rgba(79,209,197,0.15);
+  color: var(--accent-tech);
+  padding: 4px 16px; border-radius: 12px;
+  font-size: 24px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Comparison table */
+.compare-row {
+  display: flex; width: 900px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 16px 0;
+}
+.compare-header {
+  font-size: 28px; font-weight: 700; color: var(--accent-cool);
+}
+.compare-cell {
+  flex: 1; font-size: 26px; color: var(--text-secondary);
+  text-align: center;
+}
+
+/* CTA tags */
+.tag-pill {
+  display: inline-block;
+  padding: 10px 28px; border-radius: 24px;
+  font-size: 26px; font-weight: 600;
+  margin: 8px;
+}
+
+/* Divider */
+.divider {
+  width: 80px; height: 4px; border-radius: 2px;
+  margin: 24px auto;
+}
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.08" data-start="0" src="bgm.mp3" preload="auto"></audio>
+
+  <!-- Scene 0: Hook -->
+  <div class="clip" data-start="0" data-duration="4.34">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:700px;height:700px;background:var(--accent-warm);opacity:0.25;top:200px;left:-100px;"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-cool);opacity:0.2;bottom:100px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="mono data-number accent-warm" style="font-size:120px;text-shadow:0 0 60px rgba(232,168,56,0.5);">1.2亿</div>
+      <div style="font-size:44px;color:var(--text-secondary);margin:16px 0;">人独居</div>
+      <div class="divider" style="background:var(--accent-warm);"></div>
+      <div class="mono data-number accent-gold" style="font-size:100px;">500亿</div>
+      <div style="font-size:44px;color:var(--text-secondary);margin:16px 0;">情绪消费</div>
+      <div style="font-size:48px;font-weight:700;color:var(--text-primary);margin-top:32px;text-shadow:0 0 30px rgba(139,108,199,0.4);">谁在为孤独买单？</div>
+    </div>
+  </div>
+
+  <!-- Scene 1: Pain Points -->
+  <div class="clip" data-start="4.34" data-duration="41.50">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.18;top:100px;right:-80px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.15;bottom:200px;left:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">背景分析</div>
+      <div class="title-text" style="margin-bottom:40px;">当代年轻人的<span class="accent-warm">三重精神困境</span></div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);">
+        <div style="font-size:36px;font-weight:700;color:var(--text-primary);">高压倦怠</div>
+        <div style="font-size:30px;color:var(--text-secondary);margin-top:8px;">996、房贷、职场内卷</div>
+        <div style="margin-top:12px;"><span class="mono accent-warm" style="font-size:48px;font-weight:900;">68%</span><span style="font-size:28px;color:var(--text-dim);margin-left:8px;">18-35岁中度以上焦虑</span></div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);">
+        <div style="font-size:36px;font-weight:700;color:var(--text-primary);">结构性孤独</div>
+        <div style="font-size:30px;color:var(--text-secondary);margin-top:8px;">独居人口超1.2亿，越刷社交越孤独</div>
+        <div style="margin-top:12px;"><span class="mono accent-cool" style="font-size:48px;font-weight:900;">1.2亿</span><span style="font-size:28px;color:var(--text-dim);margin-left:8px;">中国独居人口</span></div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);">
+        <div style="font-size:36px;font-weight:700;color:var(--text-primary);">意义感缺失</div>
+        <div style="font-size:30px;color:var(--text-secondary);margin-top:8px;">不满足于活得下去，渴望活得有意思</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 2: Demand Frequency -->
+  <div class="clip" data-start="45.84" data-duration="36.46">
+    <div class="bg-grad-cool"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-tech);opacity:0.18;top:150px;left:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-warm);opacity:0.12;bottom:300px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-tech">需求特征</div>
+      <div class="title-text" style="margin-bottom:36px;">高频需求 + <span class="accent-tech">真金白银投票</span></div>
+      <div class="data-card" style="text-align:center;border-top:3px solid var(--accent-tech);">
+        <div class="data-number accent-tech">45%</div>
+        <div class="data-label">城市青年每周至少三次显著孤独感</div>
+      </div>
+      <div style="display:flex;gap:20px;margin-top:16px;">
+        <div class="data-card" style="flex:1;text-align:center;border-top:3px solid var(--accent-warm);width:auto;">
+          <div class="data-number accent-warm" style="font-size:48px;">500亿</div>
+          <div class="data-label">情绪小物市场</div>
+        </div>
+        <div class="data-card" style="flex:1;text-align:center;border-top:3px solid var(--accent-cool);width:auto;">
+          <div class="data-number accent-cool" style="font-size:48px;">30%+</div>
+          <div class="data-label">虚拟打赏年增长</div>
+        </div>
+      </div>
+      <div style="margin-top:32px;font-size:34px;color:var(--text-primary);font-weight:600;text-align:center;line-height:1.4;">
+        被理解、被陪伴的产品<br><span class="accent-gold">付费天花板远超工具类</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: Alternatives Fail -->
+  <div class="clip" data-start="82.30" data-duration="40.03">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:50px;left:50%;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.15;bottom:100px;right:-40px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">替代方案</div>
+      <div class="title-text" style="margin-bottom:28px;">四个层次，<span class="accent-warm">每个都不够好</span></div>
+      <div class="data-card" style="border-left:4px solid #e05555;">
+        <div style="font-size:32px;font-weight:700;color:#e05555;">社交</div>
+        <div style="font-size:28px;color:var(--text-secondary);">表演性连接，越刷越孤独</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-gold);">
+        <div style="font-size:32px;font-weight:700;color:var(--accent-gold);">线下</div>
+        <div style="font-size:28px;color:var(--text-secondary);">门槛高，社恐和加班族的奢侈品</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);">
+        <div style="font-size:32px;font-weight:700;color:var(--accent-cool);">心理咨询</div>
+        <div style="font-size:28px;color:var(--text-secondary);">渗透率不到3%，供给严重不足</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--text-dim);">
+        <div style="font-size:32px;font-weight:700;color:var(--text-dim);">娱乐消费</div>
+        <div style="font-size:28px;color:var(--text-secondary);">你是观众，不是参与者</div>
+      </div>
+      <div style="margin-top:24px;font-size:36px;font-weight:700;color:var(--accent-tech);text-align:center;">
+        市场空白：介于社交与咨询之间
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Market Size -->
+  <div class="clip" data-start="122.33" data-duration="35.90">
+    <div class="bg-grad-cool"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-tech);opacity:0.2;top:100px;right:-100px;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.12;bottom:200px;left:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-tech">市场规模</div>
+      <div class="title-text" style="margin-bottom:32px;">全球<span class="accent-tech">情绪陪伴AI</span>市场</div>
+      <div class="data-card" style="text-align:center;border-top:4px solid var(--accent-tech);padding:40px;">
+        <div style="font-size:28px;color:var(--text-dim);">2024年</div>
+        <div class="data-number accent-tech" style="font-size:72px;">11-16亿</div>
+        <div class="data-label">美元</div>
+      </div>
+      <div style="font-size:56px;color:var(--text-dim);margin:12px 0;">&#8595;</div>
+      <div class="data-card" style="text-align:center;border-top:4px solid var(--accent-warm);padding:40px;">
+        <div style="font-size:28px;color:var(--text-dim);">2030年预测</div>
+        <div class="data-number accent-warm" style="font-size:72px;">80-120亿</div>
+        <div class="data-label">美元 / 年复合增长 28-35%</div>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:24px;">
+        <div style="text-align:center;flex:1;">
+          <div class="mono accent-cool" style="font-size:44px;font-weight:900;">900亿</div>
+          <div style="font-size:26px;color:var(--text-dim);">中国演出市场</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div class="mono accent-gold" style="font-size:44px;font-weight:900;">47%</div>
+          <div style="font-size:26px;color:var(--text-dim);">Z世代为开心买单</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 5: Turning Point -->
+  <div class="clip" data-start="158.23" data-duration="34.49">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:600px;height:600px;background:#e05555;opacity:0.15;top:100px;left:50%;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-tech);opacity:0.18;bottom:100px;right:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">标志性事件</div>
+      <div class="title-text" style="margin-bottom:32px;">商业平台收紧 <span class="accent-warm">开源爆发</span></div>
+      <div class="data-card" style="border-left:4px solid #e05555;">
+        <div style="font-size:30px;color:#e05555;font-weight:700;">某50亿美元平台收紧审核</div>
+        <div style="margin-top:12px;display:flex;align-items:center;gap:12px;">
+          <span class="mono" style="font-size:56px;font-weight:900;color:#e05555;">40%</span>
+          <span style="font-size:30px;color:var(--text-secondary);">核心用户一周内流失</span>
+        </div>
+      </div>
+      <div style="font-size:40px;color:var(--text-dim);margin:16px 0;">&#8595;</div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);">
+        <div style="font-size:30px;color:var(--accent-tech);font-weight:700;">开源替代品迎来爆发</div>
+        <div style="margin-top:12px;font-size:28px;color:var(--text-secondary);line-height:1.6;">
+          角色扮演前端新增 Star 超全年总和<br>
+          自托管平台 Star 从 2万 飙升至 <span class="mono accent-tech" style="font-weight:700;">13.7万</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;font-size:32px;font-weight:600;color:var(--text-primary);text-align:center;line-height:1.4;">
+        合规牺牲情感深度<br>用户就<span class="accent-warm">毫不犹豫地转向</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 6: Structural Trends -->
+  <div class="clip" data-start="192.72" data-duration="41.71">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.18;top:50px;left:-80px;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-tech);opacity:0.15;bottom:200px;right:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-cool">底层趋势</div>
+      <div class="title-text" style="margin-bottom:32px;">三个<span class="accent-cool">不可逆的结构性趋势</span></div>
+      <div class="data-card" style="border-top:3px solid var(--accent-warm);">
+        <div style="font-size:34px;font-weight:700;color:var(--accent-warm);">社会原子化加剧</div>
+        <div style="font-size:28px;color:var(--text-secondary);margin-top:8px;line-height:1.5;">独居人口1.2亿，一人户占比近30%<br>家庭和社区情感支持弱化</div>
+      </div>
+      <div class="data-card" style="border-top:3px solid var(--accent-cool);">
+        <div style="font-size:34px;font-weight:700;color:var(--accent-cool);">精神需求升级</div>
+        <div style="font-size:28px;color:var(--text-secondary);margin-top:8px;line-height:1.5;">从买商品到买体验<br>从买功能到买情感</div>
+      </div>
+      <div class="data-card" style="border-top:3px solid var(--accent-tech);">
+        <div style="font-size:34px;font-weight:700;color:var(--accent-tech);">AI技术成熟</div>
+        <div style="font-size:28px;color:var(--text-secondary);margin-top:8px;line-height:1.5;">大模型首次具备理解情感的表面能力<br>多模态AI模糊真实与AI陪伴边界</div>
+      </div>
+      <div style="margin-top:20px;font-size:32px;font-weight:700;color:var(--accent-warm);text-align:center;">
+        不是周期性风口，是结构性长期趋势
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 7: Competition -->
+  <div class="clip" data-start="234.43" data-duration="28.78">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-warm);opacity:0.15;top:200px;right:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.12;bottom:300px;left:-80px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">竞争格局</div>
+      <div class="title-text" style="margin-bottom:28px;">商业产品<span class="accent-warm">三类代表</span></div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);">
+        <div style="font-size:30px;font-weight:700;color:var(--text-primary);">自研模型 + 用户生成角色</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">超2000万角色 / 月活超3000万</div>
+        <div style="font-size:24px;color:var(--accent-gold);margin-top:4px;">估值约50亿美元</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);">
+        <div style="font-size:30px;font-weight:700;color:var(--text-primary);">关系培养理念</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">月活约500万 / 技术已被超越</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);">
+        <div style="font-size:30px;font-weight:700;color:var(--text-primary);">中国团队出海</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">海外月活突破1000万</div>
+      </div>
+      <div style="margin-top:16px;font-size:28px;color:var(--text-dim);text-align:center;">共同问题：合规压力 = 内容安全但无聊</div>
+    </div>
+  </div>
+
+  <!-- Scene 8: SillyTavern -->
+  <div class="clip" data-start="263.21" data-duration="40.92">
+    <div class="bg-grad-cool"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-tech);opacity:0.2;top:50px;left:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.12;bottom:100px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-tech">开源项目</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+        <div class="title-text">SillyTavern</div>
+        <div class="star-badge">27.7K</div>
+      </div>
+      <div style="font-size:30px;color:var(--text-secondary);margin-bottom:24px;">AI角色扮演前端 / 连接多种大模型</div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">角色卡系统</div>
+        <div style="font-size:26px;color:var(--text-secondary);">数十万张角色卡，丰富角色生态</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">情绪表达</div>
+        <div style="font-size:26px;color:var(--text-secondary);">AI根据语境动态改变表情</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">群聊 + 世界观</div>
+        <div style="font-size:26px;color:var(--text-secondary);">多角色互动 / 复杂叙事背景</div>
+      </div>
+      <div style="margin-top:12px;font-size:26px;color:var(--text-dim);">Discord社区 15万成员 / 需自配模型后端</div>
+    </div>
+  </div>
+
+  <!-- Scene 9: Open WebUI -->
+  <div class="clip" data-start="304.13" data-duration="34.97">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.18;top:100px;right:-80px;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-tech);opacity:0.15;bottom:200px;left:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-cool">开源项目</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+        <div class="title-text">Open WebUI</div>
+        <div class="star-badge">137K</div>
+      </div>
+      <div style="font-size:30px;color:var(--text-secondary);margin-bottom:24px;">最热门自托管AI平台 / 全功能</div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">Docker 一行部署</div>
+        <div style="font-size:26px;color:var(--text-secondary);">完全断网运行 / 数据不离开本地</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">全功能覆盖</div>
+        <div style="font-size:26px;color:var(--text-secondary);">角色对话 / 文档RAG / 语音 / 图像</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--text-primary);font-weight:600;">600+ 贡献者</div>
+        <div style="font-size:26px;color:var(--text-secondary);">但通用平台，非情感陪伴专用</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 10: AIRI -->
+  <div class="clip" data-start="339.10" data-duration="38.93">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-warm);opacity:0.2;top:100px;left:-100px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-tech);opacity:0.15;bottom:300px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">开源项目</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+        <div class="title-text">AIRI</div>
+        <div class="star-badge">39.3K</div>
+      </div>
+      <div style="font-size:30px;color:var(--text-secondary);margin-bottom:20px;">野心勃勃的<span class="accent-warm">数字生命</span>项目</div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--accent-warm);font-weight:600;">长期记忆系统</div>
+        <div style="font-size:26px;color:var(--text-secondary);">分层架构 / 记住上周聊了什么</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--accent-cool);font-weight:600;">情绪系统 + 日程感知</div>
+        <div style="font-size:26px;color:var(--text-secondary);">角色有情绪 / 知道周几几点 / 主动对话</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);padding:24px 36px;">
+        <div style="font-size:28px;color:var(--accent-tech);font-weight:600;">语音 + 虚拟形象 + 游戏</div>
+        <div style="font-size:26px;color:var(--text-secondary);">实时语音 / Live2D渲染 / 能玩游戏</div>
+      </div>
+      <div style="margin-top:12px;font-size:28px;color:var(--accent-warm);font-weight:600;text-align:center;">独一无二：用户可以和AI在游戏中互动</div>
+    </div>
+  </div>
+
+  <!-- Scene 11: Comparison -->
+  <div class="clip" data-start="378.03" data-duration="28.46">
+    <div class="bg-grad-cool"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.18;top:100px;left:50%;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-tech);opacity:0.12;bottom:200px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-cool">项目对比</div>
+      <div class="title-text" style="margin-bottom:28px;">三个项目 <span class="accent-cool">怎么选？</span></div>
+      <div class="compare-row" style="border-bottom:2px solid rgba(255,255,255,0.1);">
+        <div class="compare-cell compare-header" style="flex:1.2;text-align:left;">维度</div>
+        <div class="compare-cell compare-header">SillyTavern</div>
+        <div class="compare-cell compare-header">Open WebUI</div>
+        <div class="compare-cell compare-header">AIRI</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell" style="flex:1.2;text-align:left;color:var(--text-primary);font-weight:600;">角色生态</div>
+        <div class="compare-cell accent-tech">极丰富</div>
+        <div class="compare-cell" style="color:var(--text-dim);">基础</div>
+        <div class="compare-cell" style="color:var(--text-dim);">发展初期</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell" style="flex:1.2;text-align:left;color:var(--text-primary);font-weight:600;">记忆能力</div>
+        <div class="compare-cell" style="color:var(--text-dim);">中等</div>
+        <div class="compare-cell" style="color:var(--text-dim);">基础</div>
+        <div class="compare-cell accent-warm">强</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell" style="flex:1.2;text-align:left;color:var(--text-primary);font-weight:600;">情绪系统</div>
+        <div class="compare-cell" style="color:var(--text-dim);">基础</div>
+        <div class="compare-cell" style="color:var(--text-dim);">无</div>
+        <div class="compare-cell accent-warm">强</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell" style="flex:1.2;text-align:left;color:var(--text-primary);font-weight:600;">部署难度</div>
+        <div class="compare-cell" style="color:var(--text-dim);">中等</div>
+        <div class="compare-cell accent-tech">低</div>
+        <div class="compare-cell" style="color:var(--text-dim);">较高</div>
+      </div>
+      <div style="margin-top:24px;font-size:28px;color:var(--text-secondary);text-align:center;line-height:1.5;">
+        快速验证选 SillyTavern（3-4月MVP）<br>
+        长期壁垒选 <span class="accent-warm">AIRI</span>（6-8月MVP）
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 12: Commercialization -->
+  <div class="clip" data-start="406.49" data-duration="48.65">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-warm);opacity:0.2;top:50px;left:-100px;"></div>
+    <div class="glow" style="width:500px;height:500px;background:var(--accent-cool);opacity:0.15;bottom:100px;right:-80px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-tech);opacity:0.12;top:50%;left:50%;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">商业化路径</div>
+      <div class="title-text" style="margin-bottom:24px;">怎么落地赚钱？<span class="accent-warm">三条路</span></div>
+      <div class="data-card" style="border-left:4px solid var(--accent-warm);padding:24px 36px;">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-warm);">情感陪伴APP</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">18-35岁独居青年 / 订阅+角色市场</div>
+        <div style="margin-top:8px;font-size:24px;"><span class="mono accent-warm" style="font-weight:700;">150-300万</span><span style="color:var(--text-dim);margin-left:6px;">月收入（DAU 10万）</span></div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);padding:24px 36px;">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-cool);">AI心理健康助手</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">轻度焦虑白领 / 个人+企业EAP</div>
+        <div style="margin-top:8px;font-size:24px;"><span class="mono accent-cool" style="font-weight:700;">50-100万</span><span style="color:var(--text-dim);margin-left:6px;">月收入（10家企业）</span></div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);padding:24px 36px;">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-tech);">虚拟IP + 数字人</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">品牌/娱乐公司 / 项目制</div>
+        <div style="margin-top:8px;font-size:24px;"><span class="mono accent-tech" style="font-weight:700;">500-1000万</span><span style="color:var(--text-dim);margin-left:6px;">年收入（5个客户）</span></div>
+      </div>
+      <div style="margin-top:16px;font-size:32px;font-weight:700;color:var(--accent-gold);text-align:center;">
+        核心逻辑：为情绪价值定价
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 13: Risks -->
+  <div class="clip" data-start="455.14" data-duration="40.39">
+    <div class="bg-grad"></div>
+    <div class="glow" style="width:500px;height:500px;background:#e05555;opacity:0.12;top:200px;left:-80px;"></div>
+    <div class="glow" style="width:400px;height:400px;background:var(--accent-cool);opacity:0.15;bottom:200px;right:-60px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div class="section-label label-warm">风险评估</div>
+      <div class="title-text" style="margin-bottom:28px;">风险<span class="accent-warm">不容忽视</span></div>
+      <div class="data-card" style="border-left:4px solid #e05555;">
+        <div style="font-size:30px;font-weight:700;color:#e05555;">监管灰色地带</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">内容边界平衡是最大挑战<br>过松有法律风险，过严失去用户</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-gold);">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-gold);">用户忠诚度低</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">切换成本几乎为零<br>粘性关键在于关系深度</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-cool);">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-cool);">一时爆款陷阱</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">好奇心涌入，新鲜感消退后流失<br>必须融入日常节奏</div>
+      </div>
+      <div class="data-card" style="border-left:4px solid var(--accent-tech);">
+        <div style="font-size:30px;font-weight:700;color:var(--accent-tech);">伦理隐忧</div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:6px;">深度情感依赖后服务中断 = 真实痛苦</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 14: Summary + CTA -->
+  <div class="clip" data-start="495.53" data-duration="21.58">
+    <div class="bg-grad-warm"></div>
+    <div class="glow" style="width:700px;height:700px;background:var(--accent-warm);opacity:0.25;top:150px;left:-100px;"></div>
+    <div class="glow" style="width:600px;height:600px;background:var(--accent-cool);opacity:0.2;bottom:50px;right:-100px;"></div>
+    <div class="grid-bg"></div>
+    <div class="scene-wrap">
+      <div style="font-size:36px;font-weight:700;color:var(--text-primary);text-align:center;line-height:1.5;">
+        情绪经济不是一阵风<br>
+        是<span class="accent-warm">结构性长期趋势</span>
+      </div>
+      <div class="divider" style="background:var(--accent-warm);margin:28px auto;"></div>
+      <div style="font-size:32px;color:var(--text-secondary);text-align:center;line-height:1.5;">
+        AI情感陪伴是最具爆发力的产品形态<br>
+        开源社区已提供坚实技术基础
+      </div>
+      <div style="margin-top:36px;font-size:48px;font-weight:900;color:var(--accent-warm);text-align:center;text-shadow:0 0 40px rgba(232,168,56,0.4);">
+        关注我
+      </div>
+      <div style="font-size:32px;color:var(--accent-cool);text-align:center;margin-top:8px;">持续追踪 AI 商业机会</div>
+      <div style="margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+        <div class="tag-pill" style="background:rgba(232,168,56,0.15);color:var(--accent-warm);">#AI</div>
+        <div class="tag-pill" style="background:rgba(139,108,199,0.15);color:var(--accent-cool);">#情绪经济</div>
+        <div class="tag-pill" style="background:rgba(79,209,197,0.15);color:var(--accent-tech);">#开源</div>
+        <div class="tag-pill" style="background:rgba(212,148,60,0.15);color:var(--accent-gold);">#商业分析</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

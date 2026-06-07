@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenSpec 新手操作指南 — 从零开始掌握规范驱动开发</title>
+<style>
+  :root {
+    --primary: #6C5CE7;
+    --primary-dark: #5A4BD1;
+    --primary-light: #EDE9FE;
+    --success: #00B894;
+    --success-light: #E6F7F3;
+    --warning: #FDCB6E;
+    --warning-light: #FFF8E1;
+    --danger: #E17055;
+    --danger-light: #FDE8EA;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--gray-800); line-height:1.8; background:var(--gray-50);
+  }
+  #progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--primary); z-index:9999; transition:width .15s; }
+  #sidebar {
+    position:fixed; top:0; left:0; width:280px; height:100vh;
+    background:#fff; border-right:1px solid var(--gray-200);
+    overflow-y:auto; z-index:100; padding:20px 0; transition: transform .3s;
+  }
+  #sidebar .logo { padding:0 24px 20px; border-bottom:1px solid var(--gray-200); font-size:18px; font-weight:700; color:var(--primary); }
+  #sidebar .logo small { display:block; font-size:12px; font-weight:400; color:var(--gray-600); margin-top:2px; }
+  #sidebar nav { padding:12px 0; }
+  #sidebar nav a { display:block; padding:8px 24px; color:var(--gray-700); text-decoration:none; font-size:14px; transition:all .15s; border-left:3px solid transparent; }
+  #sidebar nav a:hover { background:var(--gray-50); color:var(--primary); }
+  #sidebar nav a.active { background:var(--primary-light); color:var(--primary); border-left-color:var(--primary); font-weight:600; }
+  #sidebar nav .nav-group { padding:8px 24px 4px; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--gray-300); font-weight:700; }
+  #main { margin-left:280px; max-width:900px; padding:40px 48px 120px; }
+  #back-top { position:fixed; bottom:30px; right:30px; width:44px; height:44px; background:var(--primary); color:#fff; border:none; border-radius:50%; cursor:pointer; font-size:20px; box-shadow:var(--shadow-lg); opacity:0; transition:opacity .3s; z-index:200; }
+  #back-top.show { opacity:1; }
+  h1 { font-size:32px; font-weight:800; margin-bottom:8px; color:var(--gray-900); }
+  h2 { font-size:26px; font-weight:700; margin:48px 0 20px; color:var(--gray-900); border-bottom:2px solid var(--primary-light); padding-bottom:8px; }
+  h3 { font-size:20px; font-weight:600; margin:32px 0 14px; color:var(--gray-800); }
+  h4 { font-size:17px; font-weight:600; margin:24px 0 10px; color:var(--gray-700); }
+  p { margin-bottom:14px; }
+  a { color:var(--primary); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  strong { color:var(--gray-900); }
+  ul, ol { margin:10px 0 16px 24px; }
+  li { margin-bottom:6px; }
+  code { background:var(--gray-100); padding:2px 6px; border-radius:4px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; color:var(--danger); }
+  pre { background:var(--gray-900); color:#E5E7EB; padding:18px 20px; border-radius:var(--radius); overflow-x:auto; margin:14px 0 18px; font-family:"JetBrains Mono","Fira Code","Consolas",monospace; font-size:13px; line-height:1.7; position:relative; }
+  pre code { background:none; color:inherit; padding:0; font-size:inherit; }
+  .copy-btn { position:absolute; top:8px; right:8px; background:rgba(255,255,255,.12); color:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px; transition:all .15s; }
+  .copy-btn:hover { background:rgba(255,255,255,.25); color:#fff; }
+  .callout { padding:16px 20px; border-radius:var(--radius); margin:16px 0; border-left:4px solid; }
+  .callout p { margin-bottom:8px; }
+  .callout p:last-child { margin-bottom:0; }
+  .callout-title { font-weight:700; margin-bottom:6px; }
+  .callout-info { background:var(--primary-light); border-color:var(--primary); }
+  .callout-info .callout-title { color:var(--primary-dark); }
+  .callout-success { background:var(--success-light); border-color:var(--success); }
+  .callout-success .callout-title { color:var(--success); }
+  .callout-warning { background:var(--warning-light); border-color:var(--warning); }
+  .callout-warning .callout-title { color:var(--warning); }
+  .callout-danger { background:var(--danger-light); border-color:var(--danger); }
+  .callout-danger .callout-title { color:var(--danger); }
+  .step { background:#fff; border-radius:var(--radius); padding:24px; margin:16px 0; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .step-number { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; font-size:15px; margin-right:10px; flex-shrink:0; }
+  .step-title { display:flex; align-items:center; font-size:17px; font-weight:600; color:var(--gray-900); margin-bottom:12px; }
+  .tabs { margin:16px 0; }
+  .tab-buttons { display:flex; border-bottom:2px solid var(--gray-200); }
+  .tab-btn { padding:10px 20px; background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-2px; cursor:pointer; font-size:14px; font-weight:500; color:var(--gray-600); transition:all .15s; }
+  .tab-btn:hover { color:var(--primary); }
+  .tab-btn.active { color:var(--primary); border-bottom-color:var(--primary); font-weight:600; }
+  .tab-content { display:none; padding:16px 0; }
+  .tab-content.active { display:block; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:14px; }
+  th { background:var(--gray-100); text-align:left; padding:10px 14px; font-weight:600; border:1px solid var(--gray-200); }
+  td { padding:10px 14px; border:1px solid var(--gray-200); }
+  tr:nth-child(even) { background:var(--gray-50); }
+  .checklist { list-style:none; margin-left:0; }
+  .checklist li { padding:6px 0 6px 30px; position:relative; }
+  .checklist li::before { content:"\2610"; position:absolute; left:0; top:6px; font-size:16px; color:var(--gray-300); }
+  .faq-item { border:1px solid var(--gray-200); border-radius:var(--radius); margin:8px 0; overflow:hidden; }
+  .faq-q { padding:14px 20px; cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; background:#fff; transition:background .15s; }
+  .faq-q:hover { background:var(--gray-50); }
+  .faq-q .arrow { transition:transform .3s; font-size:12px; color:var(--gray-600); }
+  .faq-q.open .arrow { transform:rotate(180deg); }
+  .faq-a { padding:0 20px; max-height:0; overflow:hidden; transition:all .3s; background:var(--gray-50); }
+  .faq-a.open { padding:16px 20px; max-height:1000px; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin:16px 0; }
+  .card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .card h4 { margin:0 0 8px; }
+  .card p { font-size:14px; color:var(--gray-600); margin:0; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; }
+  .badge-green { background:var(--success-light); color:var(--success); }
+  .badge-purple { background:var(--primary-light); color:var(--primary); }
+  .flow { text-align:center; margin:20px 0; }
+  .flow-step { display:inline-block; background:var(--primary); color:#fff; padding:10px 20px; border-radius:var(--radius); font-weight:600; font-size:14px; margin:4px 0; }
+  .flow-arrow { display:inline-block; color:var(--gray-400); font-size:20px; margin:0 6px; vertical-align:middle; }
+  .flow-step.green { background:var(--success); }
+  .flow-step.orange { background:var(--warning); color:var(--gray-800); }
+  .comparison { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+  .comparison > div { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid var(--gray-200); }
+  .comparison h4 { margin:0 0 10px; color:var(--primary); }
+  @media(max-width:900px) {
+    #sidebar { transform:translateX(-100%); }
+    #sidebar.open { transform:translateX(0); }
+    #main { margin-left:0; padding:24px 20px 80px; }
+    #menu-toggle { display:block !important; }
+    .comparison { grid-template-columns:1fr; }
+  }
+  #menu-toggle { display:none; position:fixed; top:12px; left:12px; z-index:101; background:var(--primary); color:#fff; border:none; padding:8px 12px; border-radius:var(--radius); cursor:pointer; font-size:18px; }
+  @media print { #sidebar, #progress-bar, #back-top, #menu-toggle, .copy-btn { display:none !important; } #main { margin-left:0; padding:0; } pre { border:1px solid #ddd; } }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
+
+<div id="sidebar">
+  <div class="logo">OpenSpec<small>新手操作指南 v1.3.1</small></div>
+  <nav>
+    <div class="nav-group">认识 OpenSpec</div>
+    <a href="#overview">项目概览与核心理念</a>
+    <a href="#why">为什么需要 OpenSpec</a>
+    <a href="#vs">与竞品对比</a>
+    <div class="nav-group">安装准备</div>
+    <a href="#prerequisites">环境要求</a>
+    <a href="#install">安装 OpenSpec CLI</a>
+    <div class="nav-group">快速上手</div>
+    <a href="#init">初始化项目</a>
+    <a href="#first-change">第一次变更：完整实战</a>
+    <div class="nav-group">工作流详解</div>
+    <a href="#core-flow">核心工作流（默认）</a>
+    <a href="#expanded-flow">扩展工作流</a>
+    <a href="#explore">探索模式</a>
+    <div class="nav-group">配置与定制</div>
+    <a href="#config">项目配置</a>
+    <a href="#multi-lang">多语言支持</a>
+    <a href="#custom-schema">自定义 Schema</a>
+    <a href="#tools">支持的工具（25+）</a>
+    <div class="nav-group">进阶</div>
+    <a href="#cli-ref">CLI 命令速查</a>
+    <a href="#workspace">协调工作区（Beta）</a>
+    <a href="#migration">从旧版迁移</a>
+    <div class="nav-group">帮助</div>
+    <a href="#faq">常见问题 FAQ</a>
+    <a href="#troubleshoot">故障排查</a>
+  </nav>
+</div>
+
+<div id="main">
+
+<!-- ==================== 第一章 ==================== -->
+<h2 id="overview">第一章：项目概览</h2>
+
+<h3>OpenSpec 是什么？</h3>
+<p>OpenSpec 是一个 <strong>AI 原生的规范驱动开发框架</strong>，帮助你和 AI 编码助手在写代码之前就<strong>对齐要做什么</strong>。它在你现有的项目中创建一个轻量级的规范层，让 AI 的输出更可预测、更可控。</p>
+
+<div class="callout callout-info">
+  <p class="callout-title">一句话理解</p>
+  <p>OpenSpec = 规范先行 + AI 编码。先写清楚"要做什么"，再让 AI 动手。</p>
+</div>
+
+<h3>核心理念</h3>
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>流动而非僵化</h4>
+    <p>没有阶段门槛，随时可以做任何操作。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>迭代而非瀑布</h4>
+    <p>边构建边学习，随时回溯优化。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--warning);">
+    <h4>简单而非复杂</h4>
+    <p>秒级初始化，最小仪式感。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--danger);">
+    <h4>面向棕地</h4>
+    <p>专为已有项目设计，不只适用于全新项目。</p>
+  </div>
+</div>
+
+<h3>安装流程总览</h3>
+<div class="flow">
+  <div class="flow-step">1. 安装 CLI</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">2. 初始化项目</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">3. 创建变更提案</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">4. 实施任务</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step green">5. 归档完成</div>
+</div>
+
+<h3>它怎么运作的？</h3>
+<p>OpenSpec 在你的项目中创建 <code>openspec/</code> 目录，包含两个核心区域：</p>
+
+<div class="comparison">
+  <div>
+    <h4>specs/ — 系统真相</h4>
+    <p>描述系统<strong>当前</strong>行为的规范。按领域组织（如 <code>auth/</code>、<code>payments/</code>），包含需求和场景。</p>
+  </div>
+  <div>
+    <h4>changes/ — 变更提案</h4>
+    <p>每个变更一个文件夹，包含提案、规范差异、设计、任务。完成后归档并合并到主规范。</p>
+  </div>
+</div>
+
+<p>变更完成归档后，差异规范会自动合并到主规范中：</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec/
+├── specs/              # 系统真相（当前行为规范）
+│   └── auth/
+│       └── spec.md
+├── changes/            # 变更提案（一个文件夹 = 一个变更）
+│   └── add-dark-mode/
+│       ├── proposal.md  # 为什么做 + 做什么
+│       ├── specs/       # 规范差异（新增/修改/删除）
+│       ├── design.md    # 技术方案
+│       └── tasks.md     # 实施清单
+└── config.yaml         # 项目配置（可选）</code></pre>
+
+<!-- ==================== 为什么需要 ==================== -->
+<h2 id="why">第二章：为什么需要 OpenSpec</h2>
+
+<p>AI 编码助手很强大，但当需求只存在于聊天历史中时，输出往往不可预测。OpenSpec 添加了一个轻量级规范层，让你在代码编写之前就和 AI 对齐。</p>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>先对齐再动手</h4>
+    <p>人和 AI 在写代码前先在规范上达成一致。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>有条理</h4>
+    <p>每个变更都有独立的文件夹：提案、规范、设计、任务。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>灵活工作</h4>
+    <p>随时更新任何产物，没有僵化的阶段门槛。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>工具无关</h4>
+    <p>支持 25+ AI 编码工具，用你喜欢的就行。</p>
+  </div>
+</div>
+
+<!-- ==================== 对比 ==================== -->
+<h2 id="vs">第三章：与竞品对比</h2>
+
+<table>
+  <tr><th>方案</th><th>优点</th><th>缺点</th><th>适合谁</th></tr>
+  <tr>
+    <td><strong>OpenSpec</strong></td>
+    <td>轻量、灵活、支持 25+ 工具、可自定义工作流</td>
+    <td>相对年轻，社区还在成长</td>
+    <td>大多数开发者</td>
+  </tr>
+  <tr>
+    <td><strong>GitHub Spec Kit</strong></td>
+    <td>全面、由 GitHub 维护</td>
+    <td>重量级、阶段门槛多、需要 Python</td>
+    <td>大型企业</td>
+  </tr>
+  <tr>
+    <td><strong>AWS Kiro</strong></td>
+    <td>功能强大</td>
+    <td>锁定 IDE 和 Claude 模型</td>
+    <td>AWS 用户</td>
+  </tr>
+  <tr>
+    <td><strong>不用任何规范</strong></td>
+    <td>零学习成本</td>
+    <td>模糊提示词 = 不可预测的结果</td>
+    <td>一次性脚本</td>
+  </tr>
+</table>
+
+<!-- ==================== 第四章：环境要求 ==================== -->
+<h2 id="prerequisites">第四章：环境要求</h2>
+
+<div class="callout callout-warning">
+  <p class="callout-title">版本要求</p>
+  <p>OpenSpec 需要 <strong>Node.js 20.19.0 或更高版本</strong>。请先确认你的 Node.js 版本。</p>
+</div>
+
+<h3>4.1 检查 Node.js 版本</h3>
+<div class="step">
+  <div class="step-title">验证 Node.js</div>
+  <pre><code>node --version</code></pre>
+  <p>应输出 <code>v20.19.0</code> 或更高。如果版本过低或未安装，按以下方式升级。</p>
+</div>
+
+<h3>4.2 安装/升级 Node.js（如果需要）</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>推荐使用 fnm 管理 Node 版本</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># macOS / Linux
+curl -fsSL https://fnm.vercel.app/install | bash
+source ~/.bashrc
+
+# Windows（PowerShell 管理员模式）
+winget install Schniz.fnm
+
+# 然后安装 Node.js 24
+fnm install 24
+fnm use 24
+fnm default 24</code></pre>
+  <p>也可以直接从 <a href="https://nodejs.org/" target="_blank">nodejs.org</a> 下载安装。</p>
+</div>
+
+<h3>安装前检查清单</h3>
+<ul class="checklist">
+  <li>Node.js >= 20.19.0</li>
+  <li>一个 AI 编码工具（Claude Code、Cursor、Windsurf 等，详见第七章）</li>
+  <li>一个现有项目（OpenSpec 专为已有项目设计）</li>
+  <li>终端 / 命令行工具</li>
+</ul>
+
+<!-- ==================== 第五章：安装 ==================== -->
+<h2 id="install">第五章：安装 OpenSpec CLI</h2>
+
+<p>OpenSpec 支持多种包管理器安装。选择你习惯的方式：</p>
+
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(event,'t-npm')">npm（推荐）</button>
+    <button class="tab-btn" onclick="switchTab(event,'t-pnpm')">pnpm</button>
+    <button class="tab-btn" onclick="switchTab(event,'t-yarn')">yarn</button>
+    <button class="tab-btn" onclick="switchTab(event,'t-bun')">bun</button>
+  </div>
+  <div class="tab-content active" id="t-npm">
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>npm install -g @fission-ai/openspec@latest</code></pre>
+  </div>
+  <div class="tab-content" id="t-pnpm">
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>pnpm add -g @fission-ai/openspec@latest</code></pre>
+  </div>
+  <div class="tab-content" id="t-yarn">
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>yarn global add @fission-ai/openspec@latest</code></pre>
+  </div>
+  <div class="tab-content" id="t-bun">
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>bun add -g @fission-ai/openspec@latest</code></pre>
+    <div class="callout callout-info"><p>Bun 可以全局安装 OpenSpec，但 OpenSpec 当前运行在 Node.js 上，仍需 Node.js >= 20.19.0。</p></div>
+  </div>
+</div>
+
+<h3>Nix 用户（免安装直接运行）</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 直接运行
+nix run github:Fission-AI/OpenSpec -- init
+
+# 或安装到 profile
+nix profile install github:Fission-AI/OpenSpec</code></pre>
+
+<h3>验证安装</h3>
+<div class="step">
+  <div class="step-title">确认安装成功</div>
+  <pre><code>openspec --version</code></pre>
+  <p>应输出 <code>1.3.1</code> 或更高版本号。</p>
+</div>
+
+<!-- ==================== 第六章：初始化 ==================== -->
+<h2 id="init">第六章：初始化项目</h2>
+
+<p>安装 CLI 后，在你的项目目录中初始化 OpenSpec：</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>进入你的项目目录</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>cd your-project</code></pre>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>运行初始化</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec init</code></pre>
+  <p>初始化会交互式引导你选择：</p>
+  <ul>
+    <li><strong>AI 工具选择</strong> — 你使用的编码助手（Claude Code、Cursor 等）</li>
+    <li><strong>工作流配置</strong> — 默认使用 <code>core</code> 配置（propose / explore / apply / sync / archive）</li>
+    <li><strong>项目配置</strong> — 可选的 <code>config.yaml</code>，输入技术栈和约定</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>非交互式初始化（CI/脚本）</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 指定工具
+openspec init --tools claude,cursor
+
+# 全部工具
+openspec init --tools all
+
+# 跳过工具配置
+openspec init --tools none
+
+# 自动清理旧文件
+openspec init --force</code></pre>
+</div>
+
+<h3>初始化创建了什么？</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec/
+├── specs/              # 你的规范（真相来源）
+├── changes/            # 变更提案
+└── config.yaml         # 项目配置
+
+.claude/skills/         # Claude Code 技能文件（如选择了 Claude）
+.cursor/skills/         # Cursor 技能文件（如选择了 Cursor）
+...                     # 其他工具的配置</code></pre>
+
+<div class="callout callout-success">
+  <p class="callout-title">初始化后立刻可用</p>
+  <p>初始化完成后，你的 AI 编码助手会自动检测 OpenSpec 的技能文件。无需重启，直接在聊天中使用 <code>/opsx:propose</code> 即可开始。</p>
+</div>
+
+<!-- ==================== 第七章：第一次变更 ==================== -->
+<h2 id="first-change">第七章：第一次变更 — 完整实战</h2>
+
+<p>让我们用一个真实例子走完整个流程：为你的应用添加暗黑模式。</p>
+
+<h3>7.1 创建变更提案</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>告诉 AI 你的想法</div>
+  <p>在你的 AI 编码助手聊天界面输入：</p>
+  <pre><code>/opsx:propose add-dark-mode</code></pre>
+  <p>AI 会自动创建变更目录并生成所有规划产物。</p>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>查看 AI 生成了什么</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>AI:  Created openspec/changes/add-dark-mode/
+     ✓ proposal.md — 为什么做、做什么
+     ✓ specs/       — 需求和场景
+     ✓ design.md    — 技术方案
+     ✓ tasks.md     — 实施清单
+     Ready for implementation!</code></pre>
+</div>
+
+<h3>7.2 产物说明</h3>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>proposal.md</h4>
+    <p><strong>为什么</strong>做这件事 + <strong>做</strong>什么。捕获意图、范围、高层方案。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>specs/</h4>
+    <p>差异规范，描述新增/修改/删除的需求和场景。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--warning);">
+    <h4>design.md</h4>
+    <p>技术方案：架构决策、数据流、文件变更列表。</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--danger);">
+    <h4>tasks.md</h4>
+    <p>实施清单：带复选框的任务列表，按编号组织。</p>
+  </div>
+</div>
+
+<h3>7.3 产物之间的依赖关系</h3>
+<div class="flow">
+  <div class="flow-step">proposal</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">specs + design</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">tasks</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step green">实施</div>
+</div>
+<p style="text-align:center;font-size:13px;color:var(--gray-600);">依赖是"赋能"关系，不是"门控"关系 — 你可以随时跳过或回溯</p>
+
+<h3>7.4 实施任务</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">3</span>让 AI 开始实施</div>
+  <pre><code>/opsx:apply</code></pre>
+  <p>AI 会读取 <code>tasks.md</code>，逐个完成任务并打勾。</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>AI:  Working through tasks...
+     ✓ 1.1 Created ThemeContext with light/dark state
+     ✓ 1.2 Added CSS custom properties to globals.css
+     ✓ 1.3 Implemented localStorage persistence
+     ✓ 2.1 Created ThemeToggle component
+     ...
+     All tasks complete!</code></pre>
+</div>
+
+<h3>7.5 归档变更</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">4</span>归档完成的变更</div>
+  <pre><code>/opsx:archive</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>AI:  Archiving add-dark-mode...
+     ✓ Merged specs into openspec/specs/ui/spec.md
+     ✓ Moved to openspec/changes/archive/2026-05-24-add-dark-mode/
+     Done! Ready for the next feature.</code></pre>
+</div>
+
+<div class="callout callout-success">
+  <p class="callout-title">恭喜！你已完成第一个 OpenSpec 工作循环</p>
+  <p>差异规范已合并到主规范中，变更已归档保留。你的 <code>specs/ui/spec.md</code> 现在包含了暗黑模式的行为描述。</p>
+</div>
+
+<!-- ==================== 第八章：核心工作流 ==================== -->
+<h2 id="core-flow">第八章：核心工作流（默认 core 配置）</h2>
+
+<p>新安装默认使用 <code>core</code> 配置，包含 5 个命令：</p>
+
+<div class="flow">
+  <div class="flow-step">/opsx:propose</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">/opsx:apply</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step">/opsx:sync</div><span class="flow-arrow">&rarr;</span>
+  <div class="flow-step green">/opsx:archive</div>
+</div>
+
+<table>
+  <tr><th>命令</th><th>用途</th><th>说明</th></tr>
+  <tr><td><code>/opsx:propose</code></td><td>创建变更 + 生成规划产物</td><td>一步到位的默认起始命令</td></tr>
+  <tr><td><code>/opsx:explore</code></td><td>探索想法</td><td>需求不明确时先探索，不创建任何文件</td></tr>
+  <tr><td><code>/opsx:apply</code></td><td>实施任务</td><td>按 tasks.md 逐个完成，支持中断恢复</td></tr>
+  <tr><td><code>/opsx:sync</code></td><td>同步差异规范</td><td>可选。归档时会自动提示同步</td></tr>
+  <tr><td><code>/opsx:archive</code></td><td>归档变更</td><td>合并差异规范 + 移动到 archive/</td></tr>
+</table>
+
+<!-- ==================== 第九章：扩展工作流 ==================== -->
+<h2 id="expanded-flow">第九章：扩展工作流</h2>
+
+<p>如果你需要更精细的控制，可以启用扩展工作流命令：</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>启用扩展工作流</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 配置工作流配置
+openspec config profile
+
+# 刷新项目文件
+openspec update</code></pre>
+</div>
+
+<h3>扩展命令一览</h3>
+<table>
+  <tr><th>命令</th><th>用途</th><th>场景</th></tr>
+  <tr><td><code>/opsx:new</code></td><td>创建变更脚手架</td><td>只想创建空目录，逐步填充</td></tr>
+  <tr><td><code>/opsx:continue</code></td><td>创建下一个产物</td><td>一步一步来，每步审查</td></tr>
+  <tr><td><code>/opsx:ff</code></td><td>快进：一次创建所有规划产物</td><td>清楚要做什么时使用</td></tr>
+  <tr><td><code>/opsx:verify</code></td><td>验证实施结果</td><td>归档前检查实施是否匹配规范</td></tr>
+  <tr><td><code>/opsx:bulk-archive</code></td><td>批量归档</td><td>同时完成多个变更</td></tr>
+  <tr><td><code>/opsx:onboard</code></td><td>交互式教程</td><td>新用户学习完整流程</td></tr>
+</table>
+
+<h3>使用场景对比</h3>
+
+<div class="callout callout-info">
+  <p class="callout-title">什么时候用 /opsx:ff，什么时候用 /opsx:continue？</p>
+  <table>
+    <tr><th>情况</th><th>用哪个</th></tr>
+    <tr><td>需求清晰，准备好开工</td><td><code>/opsx:ff</code></td></tr>
+    <tr><td>还在探索，想逐步审查</td><td><code>/opsx:continue</code></td></tr>
+    <tr><td>时间紧，需要快速推进</td><td><code>/opsx:ff</code></td></tr>
+    <tr><td>复杂变更，想精细控制</td><td><code>/opsx:continue</code></td></tr>
+  </table>
+</div>
+
+<!-- ==================== 第十章：探索模式 ==================== -->
+<h2 id="explore">第十章：探索模式</h2>
+
+<p>当你不确定要做什么，或者需要先调查问题时：</p>
+
+<div class="step">
+  <div class="step-title">开启探索对话</div>
+  <pre><code>/opsx:explore</code></pre>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>You: /opsx:explore
+
+AI:  What would you like to explore?
+
+You: 我该用什么方案处理 API 限流？
+
+AI:  让我看看你的现有设置...
+     [分析代码库]
+
+     我看到三种方案：
+     1. 中间件方式（简单，按端点限制）
+     2. Redis 后端（可扩展，共享状态）
+     3. 每用户令牌桶（公平，但复杂）
+
+     你的规模怎么样？
+
+You: 中型项目，先从简单的开始吧。
+AI:  那方案 1 最合适。准备好后运行 /opsx:propose add-rate-limiting 开始。</code></pre>
+  <div class="callout callout-success">
+    <p>探索模式不会创建任何文件。纯粹是思考伙伴，帮你理清思路。</p>
+  </div>
+</div>
+
+<!-- ==================== 第十一章：配置 ==================== -->
+<h2 id="config">第十一章：项目配置</h2>
+
+<p>通过 <code>openspec/config.yaml</code> 定制 OpenSpec 的行为：</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>创建配置文件</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># openspec/config.yaml
+schema: spec-driven
+
+context: |
+  技术栈: TypeScript, React, Node.js
+  API 风格: RESTful, JSON 响应
+  测试: Vitest 单元测试 + Playwright E2E
+  代码风格: ESLint + Prettier, 严格 TypeScript
+
+rules:
+  proposal:
+    - 包含回滚方案
+    - 标注受影响的团队
+  specs:
+    - 使用 Given/When/Then 格式
+  design:
+    - 复杂流程包含时序图</code></pre>
+</div>
+
+<h3>配置字段说明</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+  <tr><td><code>schema</code></td><td>string</td><td>默认工作流 Schema（如 <code>spec-driven</code>）</td></tr>
+  <tr><td><code>context</code></td><td>string</td><td>项目上下文，注入到所有产物（上限 50KB）</td></tr>
+  <tr><td><code>rules</code></td><td>object</td><td>按产物 ID 分组的规则（仅注入到对应产物）</td></tr>
+</table>
+
+<div class="callout callout-info">
+  <p class="callout-title">Schema 解析优先级（从高到低）</p>
+  <ol>
+    <li>CLI 标志：<code>--schema &lt;name&gt;</code></li>
+    <li>变更元数据：<code>.openspec.yaml</code></li>
+    <li>项目配置：<code>config.yaml</code></li>
+    <li>默认值：<code>spec-driven</code></li>
+  </ol>
+</div>
+
+<!-- ==================== 第十二章：多语言 ==================== -->
+<h2 id="multi-lang">第十二章：多语言支持</h2>
+
+<p>在 <code>config.yaml</code> 的 <code>context</code> 中添加语言指令即可让所有产物使用指定语言。</p>
+
+<h3>简体中文配置</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># openspec/config.yaml
+schema: spec-driven
+
+context: |
+  语言：中文（简体）
+  所有产出物必须用简体中文撰写。
+  技术术语如 "API"、"REST"、"GraphQL" 保持英文。
+  代码示例和文件路径保持英文。
+
+  技术栈: TypeScript, React 18, Node.js 20</code></pre>
+
+<h3>其他语言示例</h3>
+<table>
+  <tr><th>语言</th><th>context 设置</th></tr>
+  <tr><td>日语</td><td><code>言語：日本語 / すべての成果物は日本語で作成してください</code></td></tr>
+  <tr><td>葡萄牙语</td><td><code>Language: Portuguese (pt-BR) / All artifacts must be written in Brazilian Portuguese</code></td></tr>
+  <tr><td>西班牙语</td><td><code>Idioma: Español / Todos los artefactos deben escribirse en español</code></td></tr>
+  <tr><td>法语</td><td><code>Langue: Français / Tous les artefacts doivent être rédigés en français</code></td></tr>
+</table>
+
+<!-- ==================== 第十三章：自定义 Schema ==================== -->
+<h2 id="custom-schema">第十三章：自定义 Schema</h2>
+
+<p>当项目配置不够灵活时，你可以创建完全自定义的工作流。</p>
+
+<h3>方式一：Fork 内置 Schema</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>复制内置 Schema</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec schema fork spec-driven my-workflow</code></pre>
+  <p>这会将 <code>spec-driven</code> 完整复制到 <code>openspec/schemas/my-workflow/</code>，你可以自由编辑。</p>
+</div>
+
+<h3>方式二：从零创建</h3>
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>创建新 Schema</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 交互式
+openspec schema init research-first
+
+# 非交互式
+openspec schema init rapid \
+  --description "快速迭代工作流" \
+  --artifacts "proposal,tasks" \
+  --default</code></pre>
+</div>
+
+<h3>Schema 结构</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec/schemas/my-workflow/
+├── schema.yaml           # 工作流定义
+└── templates/
+    ├── proposal.md       # 提案模板
+    ├── spec.md           # 规范模板
+    ├── design.md         # 设计模板
+    └── tasks.md          # 任务模板</code></pre>
+
+<h3>schema.yaml 示例</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>name: my-workflow
+version: 1
+description: 我的团队自定义工作流
+
+artifacts:
+  - id: proposal
+    generates: proposal.md
+    description: 变更提案
+    template: proposal.md
+    instruction: |
+      创建提案，解释为什么需要这个变更。
+      聚焦问题本身，不要过早给出方案。
+    requires: []
+
+  - id: design
+    generates: design.md
+    description: 技术设计
+    template: design.md
+    instruction: |
+      创建技术设计文档，解释如何实施。
+    requires:
+      - proposal
+
+  - id: tasks
+    generates: tasks.md
+    description: 实施清单
+    template: tasks.md
+    requires:
+      - design
+
+apply:
+  requires: [tasks]
+  tracks: tasks.md</code></pre>
+
+<div class="step">
+  <div class="step-title">验证 Schema</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>openspec schema validate my-workflow</code></pre>
+</div>
+
+<!-- ==================== 第十四章：支持的工具 ==================== -->
+<h2 id="tools">第十四章：支持的 AI 工具（25+）</h2>
+
+<p>OpenSpec 支持 25+ AI 编码助手，覆盖主流工具：</p>
+
+<div class="card-grid">
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>Claude Code <span class="badge badge-purple">热门</span></h4>
+    <p>技能路径：<code>.claude/skills/openspec-*/</code></p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>Cursor <span class="badge badge-purple">热门</span></h4>
+    <p>技能路径：<code>.cursor/skills/openspec-*/</code></p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--primary);">
+    <h4>Windsurf <span class="badge badge-purple">热门</span></h4>
+    <p>技能路径：<code>.windsurf/skills/openspec-*/</code></p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>GitHub Copilot</h4>
+    <p>仅 IDE 扩展支持，CLI 暂不支持</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>OpenAI Codex</h4>
+    <p>命令安装在全局 Codex Home</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--success);">
+    <h4>Gemini CLI</h4>
+    <p>技能路径：<code>.gemini/skills/openspec-*/</code></p>
+  </div>
+</div>
+
+<p>其他支持的工具：Amazon Q、Cline、Continue、Kilo Code、Kimi CLI、Kiro、Trae、RooCode、Augment、Factory Droid、Lingma、Qwen Code、Pi、Qoder、IBM Bob Shell 等等。</p>
+
+<div class="callout callout-info">
+  <p class="callout-title">不同工具的命令语法</p>
+  <table>
+    <tr><th>工具</th><th>语法示例</th></tr>
+    <tr><td>Claude Code</td><td><code>/opsx:propose</code></td></tr>
+    <tr><td>Cursor / Windsurf / Copilot IDE</td><td><code>/opsx-propose</code></td></tr>
+    <tr><td>Kimi CLI</td><td><code>/skill:openspec-propose</code></td></tr>
+    <tr><td>Trae</td><td><code>/openspec-propose</code></td></tr>
+  </table>
+</div>
+
+<!-- ==================== 第十五章：CLI 速查 ==================== -->
+<h2 id="cli-ref">第十五章：CLI 命令速查</h2>
+
+<table>
+  <tr><th>分类</th><th>命令</th><th>用途</th></tr>
+  <tr><td rowspan="2"><strong>设置</strong></td><td><code>openspec init</code></td><td>初始化项目</td></tr>
+  <tr><td><code>openspec update</code></td><td>更新 AI 工具配置</td></tr>
+  <tr><td rowspan="3"><strong>浏览</strong></td><td><code>openspec list</code></td><td>列出活跃变更</td></tr>
+  <tr><td><code>openspec list --specs</code></td><td>列出所有规范</td></tr>
+  <tr><td><code>openspec show &lt;name&gt;</code></td><td>查看变更/规范详情</td></tr>
+  <tr><td rowspan="2"><strong>验证</strong></td><td><code>openspec validate</code></td><td>校验变更结构</td></tr>
+  <tr><td><code>openspec validate --all --json</code></td><td>批量校验（CI 用）</td></tr>
+  <tr><td><strong>归档</strong></td><td><code>openspec archive &lt;name&gt;</code></td><td>归档完成的变更</td></tr>
+  <tr><td rowspan="3"><strong>工作流</strong></td><td><code>openspec status --change &lt;name&gt;</code></td><td>查看产物进度</td></tr>
+  <tr><td><code>openspec instructions &lt;artifact&gt;</code></td><td>获取下一步指令</td></tr>
+  <tr><td><code>openspec view</code></td><td>交互式仪表盘</td></tr>
+  <tr><td rowspan="4"><strong>Schema</strong></td><td><code>openspec schema init &lt;name&gt;</code></td><td>创建自定义 Schema</td></tr>
+  <tr><td><code>openspec schema fork &lt;src&gt; &lt;name&gt;</code></td><td>Fork 已有 Schema</td></tr>
+  <tr><td><code>openspec schema validate &lt;name&gt;</code></td><td>验证 Schema</td></tr>
+  <tr><td><code>openspec schemas</code></td><td>列出所有 Schema</td></tr>
+  <tr><td rowspan="2"><strong>配置</strong></td><td><code>openspec config list</code></td><td>查看当前配置</td></tr>
+  <tr><td><code>openspec config profile</code></td><td>配置工作流配置</td></tr>
+</table>
+
+<h3>环境变量</h3>
+<table>
+  <tr><th>变量</th><th>说明</th></tr>
+  <tr><td><code>OPENSPEC_TELEMETRY=0</code></td><td>关闭匿名遥测</td></tr>
+  <tr><td><code>DO_NOT_TRACK=1</code></td><td>标准 DNT 信号，等效关闭遥测</td></tr>
+  <tr><td><code>OPENSPEC_CONCURRENCY</code></td><td>并行验证数（默认 6）</td></tr>
+  <tr><td><code>NO_COLOR</code></td><td>禁用彩色输出</td></tr>
+</table>
+
+<!-- ==================== 第十六章：工作区 ==================== -->
+<h2 id="workspace">第十六章：协调工作区（Beta）</h2>
+
+<div class="callout callout-warning">
+  <p class="callout-title">Beta 功能</p>
+  <p>工作区功能正在积极开发中，命令和输出格式可能随时变更。不建议在生产环境中依赖。</p>
+</div>
+
+<p>当一个项目跨越多个仓库或文件夹时，协调工作区提供统一的规划中心：</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 引导式创建工作区
+openspec workspace setup
+
+# 非交互式创建
+openspec workspace setup --no-interactive \
+  --name platform \
+  --link /repos/api \
+  --link web=/repos/web
+
+# 查看已知工作区
+openspec workspace list
+
+# 检查工作区状态
+openspec workspace doctor
+
+# 打开工作区
+openspec workspace open</code></pre>
+
+<h3>工作区结构</h3>
+<pre><code>workspace-folder/
+├── changes/                       # 工作区级规划
+└── .openspec-workspace/
+    ├── workspace.yaml             # 共享身份和链接名
+    └── local.yaml                 # 本机路径映射</code></pre>
+
+<!-- ==================== 第十七章：迁移 ==================== -->
+<h2 id="migration">第十七章：从旧版迁移</h2>
+
+<p>如果你之前使用旧版 OpenSpec（<code>/openspec:proposal</code> 等命令），迁移非常简单：</p>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">1</span>升级 CLI</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>npm install -g @fission-ai/openspec@latest</code></pre>
+</div>
+
+<div class="step">
+  <div class="step-title"><span class="step-number">2</span>运行迁移</div>
+  <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 交互式
+openspec init
+
+# 或自动模式
+openspec init --force</code></pre>
+</div>
+
+<h3>迁移映射</h3>
+<table>
+  <tr><th>旧版命令</th><th>新版等价</th></tr>
+  <tr><td><code>/openspec:proposal</code></td><td><code>/opsx:propose</code>（默认）或 <code>/opsx:new</code> + <code>/opsx:ff</code></td></tr>
+  <tr><td><code>/openspec:apply</code></td><td><code>/opsx:apply</code></td></tr>
+  <tr><td><code>/openspec:archive</code></td><td><code>/opsx:archive</code></td></tr>
+</table>
+
+<div class="callout callout-success">
+  <p class="callout-title">你的数据是安全的</p>
+  <ul>
+    <li>活跃变更 — 完整保留，可用新命令继续</li>
+    <li>已归档变更 — 不受影响</li>
+    <li>主规范 — 不受影响</li>
+    <li>你自己的内容 — 只移除 OpenSpec 标记块，你的内容完整保留</li>
+  </ul>
+</div>
+
+<h3>迁移 project.md</h3>
+<p>旧的 <code>openspec/project.md</code> 需要手动迁移到 <code>config.yaml</code>。可以用这个提示词帮助：</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code>我正在将 OpenSpec 的旧 project.md 迁移到新 config.yaml。
+
+这是我当前的 project.md：
+[粘贴 project.md 内容]
+
+请帮我创建 config.yaml，包含：
+1. 简洁的 context 部分（会注入到每个规划请求）
+2. 按产物分组的 rules（如果内容是特定产物相关的）
+
+省略 AI 模型已经知道的通用最佳实践。</code></pre>
+
+<!-- ==================== 第十八章：FAQ ==================== -->
+<h2 id="faq">第十八章：常见问题 FAQ</h2>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q1：OpenSpec 是免费的吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>是的，完全免费开源</strong>（MIT 许可证）。OpenSpec 是一个 CLI 工具和框架，不收取任何费用。你需要支付的是 AI 编码助手本身的费用。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q2：推荐使用什么 AI 模型？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>OpenSpec 效果最好的是<strong>高推理能力模型</strong>。推荐：</p>
+    <ul>
+      <li><strong>Codex 5.5</strong> 和 <strong>Claude Opus 4.7</strong>（规划和实施都很好）</li>
+      <li>Claude Sonnet、GPT-4o 也可以，但规划能力稍弱</li>
+      <li>保持干净的上下文窗口，在开始实施前清除上下文</li>
+    </ul>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q3：命令不被识别怎么办？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <ol>
+      <li>确认已初始化：<code>openspec init</code></li>
+      <li>重新生成技能文件：<code>openspec update</code></li>
+      <li>检查 <code>.claude/skills/</code> 目录是否存在</li>
+      <li>重启 AI 工具以加载新技能</li>
+    </ol>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q4：如何关闭遥测？</span><span class="arrow">&#9660;</span></div>
+  <div class="faqa">
+    <pre><code>export OPENSPEC_TELEMETRY=0</code></pre>
+    <p>或设置标准 DNT 信号：<code>export DO_NOT_TRACK=1</code></p>
+    <p>OpenSpec 只收集命令名称和版本号，不收集参数、路径、内容或个人信息。CI 环境下自动禁用。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q5：什么时候更新变更 vs 开始新变更？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>更新现有变更</strong>：意图相同、范围缩小、基于学习修正方案。</p>
+    <p><strong>开始新变更</strong>：意图根本改变、范围爆炸式增长、原始变更可以独立完成。</p>
+    <p>原则：更新保留上下文，新变更提供清晰度。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q6：如何升级 OpenSpec？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <pre><button class="copy-btn" onclick="copyCode(this)">复制</button><code># 升级包
+npm install -g @fission-ai/openspec@latest
+
+# 刷新每个项目的 AI 配置
+cd your-project
+openspec update</code></pre>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q7：可以用中文写规范吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>可以！</strong>在 <code>openspec/config.yaml</code> 中添加语言指令：</p>
+    <pre><code>context: |
+  语言：中文（简体）
+  所有产出物必须用简体中文撰写。</code></pre>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q8：/opsx:verify 是什么？什么时候用？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><code>/opsx:verify</code> 从三个维度验证实施是否匹配规范：</p>
+    <ul>
+      <li><strong>完整性</strong>：所有任务完成、所有需求已实现、场景已覆盖</li>
+      <li><strong>正确性</strong>：实施匹配规范意图、边界条件已处理</li>
+      <li><strong>一致性</strong>：设计决策反映在代码中、命名约定一致</li>
+    </ul>
+    <p>建议归档前运行。不会阻止归档，但会提前发现问题。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q9：多个变更能并行吗？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p><strong>可以！</strong>每个变更有独立文件夹，互不冲突。使用 <code>/opsx:apply &lt;name&gt;</code> 指定要实施的变更。完成后用 <code>/opsx:bulk-archive</code> 批量归档。</p>
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFaq(this)"><span>Q10：Delta 规范是什么？</span><span class="arrow">&#9660;</span></div>
+  <div class="faq-a">
+    <p>Delta 规范只描述<strong>变化</strong>，而不是重写整个规范。使用三种段落：</p>
+    <ul>
+      <li><code>## ADDED Requirements</code> — 新增行为，归档时追加到主规范</li>
+      <li><code>## MODIFIED Requirements</code> — 变更行为，归档时替换现有需求</li>
+      <li><code>## REMOVED Requirements</code> — 废弃行为，归档时从主规范删除</li>
+    </ul>
+    <p>这让两个变更可以同时修改同一个规范文件而不冲突（只要改的是不同的需求）。</p>
+  </div>
+</div>
+
+<!-- ==================== 第十九章：故障排查 ==================== -->
+<h2 id="troubleshoot">第十九章：故障排查速查表</h2>
+
+<table>
+  <tr><th>问题</th><th>原因</th><th>解决方案</th></tr>
+  <tr><td>node 版本报错</td><td>&lt; 20.19.0</td><td>升级 Node.js：安装 fnm → <code>fnm install 24</code></td></tr>
+  <tr><td><code>openspec</code> 命令不存在</td><td>未全局安装</td><td><code>npm install -g @fission-ai/openspec@latest</code></td></tr>
+  <tr><td>AI 不识别 <code>/opsx:</code> 命令</td><td>未初始化或技能过期</td><td><code>openspec init</code> + <code>openspec update</code>，然后重启 AI 工具</td></tr>
+  <tr><td>"Change not found"</td><td>找不到变更</td><td>指定名称：<code>/opsx:apply add-dark-mode</code>；检查 <code>openspec list</code></td></tr>
+  <tr><td>"No artifacts ready"</td><td>依赖未满足</td><td><code>openspec status --change &lt;name&gt;</code> 查看缺失项</td></tr>
+  <tr><td>"Schema not found"</td><td>Schema 名称错误</td><td><code>openspec schemas</code> 查看可用列表</td></tr>
+  <tr><td>AI 产物质量差</td><td>缺少项目上下文</td><td>完善 <code>openspec/config.yaml</code> 的 context 和 rules</td></tr>
+  <tr><td>Config 不生效</td><td>路径或格式错误</td><td>确认文件在 <code>openspec/config.yaml</code>（不是 .yml）</td></tr>
+  <tr><td>归档时规范冲突</td><td>多个变更改同一规范</td><td>使用 <code>/opsx:bulk-archive</code> 按时间顺序合并</td></tr>
+  <tr><td>迁移后命令不出现</td><td>IDE 未刷新</td><td>重启 IDE</td></tr>
+  <tr><td><code>project.md</code> 未自动迁移</td><td>设计如此</td><td>手动迁移内容到 <code>config.yaml</code>，然后删除文件</td></tr>
+</table>
+
+<br><br>
+<div style="text-align:center; padding:40px; color:var(--gray-600); border-top:2px solid var(--gray-200); margin-top:48px;">
+  <p style="font-size:18px; font-weight:600; color:var(--gray-800);">你已经掌握了 OpenSpec 的全部核心知识！</p>
+  <p>如有问题，请访问 <a href="https://github.com/Fission-AI/OpenSpec/issues" target="_blank">GitHub Issues</a> 或加入 <a href="https://discord.gg/YctCnvvshC" target="_blank">Discord 社区</a>。</p>
+  <p style="font-size:13px; margin-top:20px;">OpenSpec v1.3.1 | 新手操作指南 | 2026-05</p>
+</div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('back-top').classList.toggle('show', h.scrollTop > 400);
+  document.querySelectorAll('#main h2[id]').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < 120 && rect.bottom > 0) {
+      document.querySelectorAll('#sidebar nav a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector('#sidebar nav a[href="#' + el.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+});
+document.getElementById('back-top').innerHTML = '↑';
+document.getElementById('back-top').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+function switchTab(e, id) {
+  const parent = e.target.closest('.tabs');
+  parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function toggleFaq(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+function copyCode(btn) {
+  const code = btn.parentElement.querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    btn.textContent = '已复制!';
+    setTimeout(() => btn.textContent = '复制', 2000);
+  });
+}
+</script>
+
+</body>
+</html>

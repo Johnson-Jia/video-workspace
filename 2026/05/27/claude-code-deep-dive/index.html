@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Claude Code 深度解析</title>
+<style>
+/* ── Global Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── CSS Variables ── */
+:root {
+  --bg-dark: #060612;
+  --bg-mid: #0a0a24;
+  --accent-warm: #FFB800;
+  --accent-cool: #00D4FF;
+  --accent-alert: #FF3B30;
+  --accent-cyan: #00E5FF;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0c0;
+  --text-dim: #6b6b8a;
+  --safe-top: 200px;
+  --safe-bottom: 300px;
+  --safe-h: 80px;
+}
+
+/* ── Composition Root ── */
+.composition { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+/* ── Clip (scene) ── */
+.clip { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; overflow: hidden; }
+
+/* ── Three-Layer Architecture ── */
+.layer-bg { position: absolute; inset: 0; z-index: 1; }
+.layer-fx { position: absolute; inset: 0; z-index: 2; overflow: hidden; }
+.layer-content {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--safe-top) var(--safe-h) var(--safe-bottom);
+}
+
+/* ── Grid Overlay ── */
+.grid-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.04;
+}
+
+/* ── Animations ── */
+@keyframes driftOuter {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(180px, -120px); }
+  66% { transform: translate(-150px, 100px); }
+}
+@keyframes driftInner {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -80px) scale(1.1); }
+}
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, -80px) scale(1.1); }
+  66% { transform: translate(-120px, 60px) scale(0.9); }
+}
+@keyframes rainSway {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(40px); opacity: 0.3; }
+}
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.9; transform: scale(1.3); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes waveSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+}
+@keyframes scanLine {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+
+  <!-- ═══ Audio Tracks ═══ -->
+  <audio data-track-index="1" data-volume="1" data-start="0" id="narration" src="narration.mp3" preload="auto"></audio>
+  <audio data-track-index="2" data-volume="0.10" data-start="0" id="bgm" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 0: hook — 源码泄露事件引爆 (4.34s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-hook" data-start="0" data-duration="4.34">
+    <!-- BG: deep black with amber glow -->
+    <div class="layer-bg" style="background: linear-gradient(170deg, #0a0400 0%, #120800 40%, #060612 100%);"></div>
+    <!-- FX: dual amber glows + starburst rays -->
+    <div class="layer-fx">
+      <div style="position:absolute;top:30%;left:50%;width:600px;height:600px;border-radius:50%;
+        background:radial-gradient(circle,hsla(38,100%,50%,0.25),transparent 70%);
+        transform:translate(-50%,-50%);filter:blur(80px);animation:glowPulse 4s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:55%;left:40%;width:500px;height:500px;border-radius:50%;
+        background:radial-gradient(circle,hsla(0,85%,55%,0.18),transparent 70%);
+        transform:translate(-50%,-50%);filter:blur(90px);animation:glowPulse 5s ease-in-out infinite 1.5s;"></div>
+      <!-- StarBurst rays -->
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(38,90%,60%,0.5),transparent);
+        transform-origin:top center;transform:rotate(0deg) scaleY(1);
+        opacity:0.5;animation:rayPulse 4s ease-in-out infinite 0.3s;"></div>
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(38,90%,60%,0.45),transparent);
+        transform-origin:top center;transform:rotate(60deg) scaleY(1);
+        opacity:0.45;animation:rayPulse 4s ease-in-out infinite 0.6s;"></div>
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(0,80%,55%,0.4),transparent);
+        transform-origin:top center;transform:rotate(120deg) scaleY(1);
+        opacity:0.4;animation:rayPulse 5s ease-in-out infinite 0.9s;"></div>
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(38,90%,60%,0.4),transparent);
+        transform-origin:top center;transform:rotate(180deg) scaleY(1);
+        opacity:0.4;animation:rayPulse 4.5s ease-in-out infinite 1.2s;"></div>
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(0,80%,55%,0.35),transparent);
+        transform-origin:top center;transform:rotate(240deg) scaleY(1);
+        opacity:0.35;animation:rayPulse 5s ease-in-out infinite 0.5s;"></div>
+      <div style="position:absolute;top:40%;left:50%;width:3px;height:700px;
+        background:linear-gradient(transparent,hsla(38,90%,60%,0.35),transparent);
+        transform-origin:top center;transform:rotate(300deg) scaleY(1);
+        opacity:0.35;animation:rayPulse 4s ease-in-out infinite 1s;"></div>
+      <!-- Twinkle dots -->
+      <div style="position:absolute;top:35%;left:60%;width:10px;height:10px;border-radius:50%;
+        background:hsl(38,95%,75%);opacity:0.9;box-shadow:0 0 8px hsla(38,95%,70%,0.6);
+        animation:starTwinkle 2.5s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:25%;left:75%;width:8px;height:8px;border-radius:50%;
+        background:hsl(0,90%,70%);opacity:0.8;box-shadow:0 0 6px hsla(0,90%,65%,0.5);
+        animation:starTwinkle 3s ease-in-out infinite 0.8s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;">
+        <div style="font-size:108px;font-weight:900;color:#FFB800;line-height:1.15;
+          text-shadow:0 0 40px hsla(38,100%,50%,0.4),0 0 80px hsla(38,100%,50%,0.15);
+          letter-spacing:3px;" class="hook-title">51万行代码</div>
+        <div style="font-size:64px;font-weight:700;color:#ffffff;margin-top:24px;
+          text-shadow:0 0 20px rgba(255,255,255,0.2);
+          letter-spacing:6px;" class="hook-sub">全泄露了</div>
+        <div style="font-size:28px;color:#a0a0c0;margin-top:36px;letter-spacing:4px;
+          border-top:1px solid hsla(38,100%,50%,0.2);padding-top:20px;" class="hook-tag">不用任何黑客技术</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 1: what — Claude Code 是什么 (7.63s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-what" data-start="4.34" data-duration="7.63">
+    <div class="layer-bg" style="background: linear-gradient(160deg, #080818 0%, #0a0a2e 50%, #060620 100%);"></div>
+    <div class="layer-fx">
+      <div style="position:absolute;top:25%;left:20%;width:220px;height:220px;border-radius:50%;
+        background:hsl(195,80%,50%);opacity:0.18;filter:blur(55px);
+        animation:orbDrift 25s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:65%;left:70%;width:180px;height:180px;border-radius:50%;
+        background:hsl(210,70%,45%);opacity:0.15;filter:blur(50px);
+        animation:orbDrift 30s ease-in-out infinite 4s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:85%;">
+        <div style="font-size:26px;color:var(--accent-cool);letter-spacing:6px;margin-bottom:30px;
+          text-transform:uppercase;" class="what-label">Source Map 泄露</div>
+        <div style="font-size:60px;font-weight:800;color:#ffffff;margin-bottom:16px;
+          text-shadow:0 0 20px rgba(0,212,255,0.2);" class="what-title">Claude Code</div>
+        <div style="font-size:30px;color:var(--text-secondary);margin-bottom:50px;
+          line-height:1.5;" class="what-desc">npm 发包忘删 source map<br>源码全暴露</div>
+        <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;" class="what-stats">
+          <div style="background:hsla(195,80%,50%,0.08);border:1px solid hsla(195,80%,50%,0.2);
+            border-radius:12px;padding:20px 30px;text-align:center;">
+            <div style="font-size:52px;font-weight:800;color:var(--accent-cool);">1987</div>
+            <div style="font-size:22px;color:var(--text-dim);margin-top:4px;">个文件</div>
+          </div>
+          <div style="background:hsla(38,100%,50%,0.08);border:1px solid hsla(38,100%,50%,0.2);
+            border-radius:12px;padding:20px 30px;text-align:center;">
+            <div style="font-size:52px;font-weight:800;color:var(--accent-warm);">53</div>
+            <div style="font-size:22px;color:var(--text-dim);margin-top:4px;">个工具</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 2: architecture — 技术架构 (7.54s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-architecture" data-start="11.97" data-duration="7.54">
+    <div class="layer-bg" style="background: linear-gradient(180deg, #060620 0%, #080830 40%, #0a0a18 100%);"></div>
+    <div class="layer-fx">
+      <!-- MatrixRain lines -->
+      <div style="position:absolute;top:10%;left:15%;width:2px;height:300px;
+        background:linear-gradient(transparent,hsla(195,80%,55%,0.5),transparent);
+        opacity:0.5;box-shadow:0 0 6px hsla(195,80%,55%,0.3);
+        animation:rainSway 14s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:30%;left:40%;width:2px;height:250px;
+        background:linear-gradient(transparent,hsla(210,75%,50%,0.45),transparent);
+        opacity:0.45;box-shadow:0 0 6px hsla(210,75%,50%,0.25);
+        animation:rainSway 18s ease-in-out infinite 3s;"></div>
+      <div style="position:absolute;top:20%;left:65%;width:2px;height:350px;
+        background:linear-gradient(transparent,hsla(195,80%,55%,0.4),transparent);
+        opacity:0.4;box-shadow:0 0 6px hsla(195,80%,55%,0.2);
+        animation:rainSway 16s ease-in-out infinite 1.5s;"></div>
+      <div style="position:absolute;top:45%;left:85%;width:2px;height:200px;
+        background:linear-gradient(transparent,hsla(210,75%,50%,0.35),transparent);
+        opacity:0.35;box-shadow:0 0 6px hsla(210,75%,50%,0.2);
+        animation:rainSway 20s ease-in-out infinite 5s;"></div>
+      <div style="position:absolute;top:15%;left:50%;width:2px;height:280px;
+        background:linear-gradient(transparent,hsla(195,80%,55%,0.3),transparent);
+        opacity:0.3;box-shadow:0 0 4px hsla(195,80%,55%,0.15);
+        animation:rainSway 15s ease-in-out infinite 2s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:85%;">
+        <div style="font-size:52px;font-weight:800;color:#ffffff;margin-bottom:36px;
+          text-shadow:0 0 20px rgba(0,212,255,0.15);" class="arch-title">51万行 TypeScript</div>
+        <div style="display:flex;flex-direction:column;gap:18px;align-items:center;" class="arch-stack">
+          <div style="display:flex;align-items:center;gap:16px;background:hsla(195,80%,50%,0.06);
+            border:1px solid hsla(195,80%,50%,0.15);border-radius:10px;padding:16px 32px;width:600px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-cool);
+              box-shadow:0 0 8px var(--accent-cool);"></div>
+            <span style="font-size:30px;color:#ffffff;font-weight:600;">React + Ink</span>
+            <span style="font-size:24px;color:var(--text-dim);margin-left:auto;">终端 UI</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;background:hsla(38,100%,50%,0.06);
+            border:1px solid hsla(38,100%,50%,0.15);border-radius:10px;padding:16px 32px;width:600px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--accent-warm);
+              box-shadow:0 0 8px var(--accent-warm);"></div>
+            <span style="font-size:30px;color:#ffffff;font-weight:600;">MCP 协议</span>
+            <span style="font-size:24px;color:var(--text-dim);margin-left:auto;">工具扩展</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;background:hsla(210,80%,50%,0.06);
+            border:1px solid hsla(210,80%,50%,0.15);border-radius:10px;padding:16px 32px;width:600px;">
+            <div style="width:12px;height:12px;border-radius:50%;background:#7B68EE;
+              box-shadow:0 0 8px #7B68EE;"></div>
+            <span style="font-size:30px;color:#ffffff;font-weight:600;">Agent 编排系统</span>
+            <span style="font-size:24px;color:var(--text-dim);margin-left:auto;">精心设计</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 3: tools — 53个工具体系 (7.39s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-tools" data-start="19.51" data-duration="7.39">
+    <div class="layer-bg" style="background: linear-gradient(145deg, #080818 0%, #061828 50%, #040810 100%);"></div>
+    <div class="layer-fx">
+      <!-- DualOrbit particles (cyan range) -->
+      <div style="position:absolute;top:25%;left:65%;animation:driftOuter 28s ease-in-out infinite 3s">
+        <div style="width:16px;height:16px;border-radius:50%;background:hsl(195,80%,55%);
+          opacity:0.5;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 1s"></div>
+      </div>
+      <div style="position:absolute;top:50%;left:20%;animation:driftOuter 25s ease-in-out infinite 0s">
+        <div style="width:12px;height:12px;border-radius:50%;background:hsl(210,75%,50%);
+          opacity:0.45;filter:blur(2px);animation:driftInner 9s ease-in-out infinite 2s"></div>
+      </div>
+      <div style="position:absolute;top:70%;left:80%;animation:driftOuter 22s ease-in-out infinite 5s">
+        <div style="width:18px;height:18px;border-radius:50%;background:hsl(200,70%,55%);
+          opacity:0.4;filter:blur(2px);animation:driftInner 11s ease-in-out infinite 0.5s"></div>
+      </div>
+      <div style="position:absolute;top:35%;left:40%;animation:driftOuter 30s ease-in-out infinite 2s">
+        <div style="width:14px;height:14px;border-radius:50%;background:hsl(190,80%,60%);
+          opacity:0.5;filter:blur(2px);animation:driftInner 8s ease-in-out infinite 3s"></div>
+      </div>
+      <div style="position:absolute;top:80%;left:30%;animation:driftOuter 26s ease-in-out infinite 1s">
+        <div style="width:20px;height:20px;border-radius:50%;background:hsl(220,70%,50%);
+          opacity:0.35;filter:blur(3px);animation:driftInner 12s ease-in-out infinite 1.5s"></div>
+      </div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:90%;">
+        <div style="font-size:36px;font-weight:700;color:var(--accent-cool);margin-bottom:28px;
+          letter-spacing:4px;" class="tools-header">53个工具 六大体系</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" class="tools-grid">
+          <div style="background:hsla(195,80%,50%,0.06);border:1px solid hsla(195,80%,50%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-cool);">文件操作</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">Read / Write / Edit</div>
+          </div>
+          <div style="background:hsla(38,100%,50%,0.06);border:1px solid hsla(38,100%,50%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-warm);">命令执行</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">Bash + 安全检查</div>
+          </div>
+          <div style="background:hsla(270,70%,50%,0.06);border:1px solid hsla(270,70%,50%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:#A855F7;">Agent编排</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">多智能体调度</div>
+          </div>
+          <div style="background:hsla(195,80%,50%,0.06);border:1px solid hsla(195,80%,50%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-cool);">MCP集成</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">外部工具接入</div>
+          </div>
+          <div style="background:hsla(38,100%,50%,0.06);border:1px solid hsla(38,100%,50%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-warm);">网络访问</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">WebFetch / Search</div>
+          </div>
+          <div style="background:hsla(0,85%,55%,0.06);border:1px solid hsla(0,85%,55%,0.15);
+            border-radius:10px;padding:20px 24px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-alert);">安全防护</div>
+            <div style="font-size:20px;color:var(--text-dim);margin-top:4px;">内置安全检查器</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 4: hidden — 7大隐藏功能 (7.63s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-hidden" data-start="26.90" data-duration="7.63">
+    <div class="layer-bg" style="background: linear-gradient(135deg, #0a0418 0%, #120828 40%, #080412 100%);"></div>
+    <div class="layer-fx">
+      <!-- GradientWave + LightOrbs -->
+      <div style="position:absolute;top:30%;left:20%;width:200px;height:200px;border-radius:50%;
+        background:hsl(270,70%,55%);opacity:0.18;filter:blur(50px);
+        animation:orbDrift 22s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:60%;left:65%;width:180px;height:180px;border-radius:50%;
+        background:hsl(195,75%,50%);opacity:0.15;filter:blur(45px);
+        animation:orbDrift 28s ease-in-out infinite 3s;"></div>
+      <div style="position:absolute;top:20%;left:0;width:100%;height:300px;
+        background:linear-gradient(90deg,transparent,hsla(270,60%,40%,0.12),transparent);
+        transform:rotate(-8deg);animation:waveSway 20s ease-in-out infinite 0s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:85%;">
+        <div style="font-size:34px;font-weight:700;color:#A855F7;margin-bottom:28px;
+          letter-spacing:3px;" class="hidden-header">七大隐藏功能</div>
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:center;" class="hidden-list">
+          <div style="display:flex;align-items:center;gap:14px;width:700px;">
+            <div style="font-size:32px;font-weight:900;color:var(--accent-warm);min-width:40px;">01</div>
+            <div style="font-size:28px;color:#ffffff;font-weight:600;">BUDDY</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-left:auto;">终端宠物</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;width:700px;">
+            <div style="font-size:32px;font-weight:900;color:var(--accent-cool);min-width:40px;">02</div>
+            <div style="font-size:28px;color:#ffffff;font-weight:600;">KAIROS</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-left:auto;">关终端还在跑</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;width:700px;">
+            <div style="font-size:32px;font-weight:900;color:#A855F7;min-width:40px;">03</div>
+            <div style="font-size:28px;color:#ffffff;font-weight:600;">ULTRAPLAN</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-left:auto;">云端研究30分钟</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 5: gating — 三层门控 (9.36s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-gating" data-start="34.53" data-duration="9.36">
+    <div class="layer-bg" style="background: linear-gradient(180deg, #120404 0%, #1a0808 40%, #080404 100%);"></div>
+    <div class="layer-fx">
+      <!-- Alert red glow + DualOrbit -->
+      <div style="position:absolute;top:35%;left:50%;width:500px;height:500px;border-radius:50%;
+        background:radial-gradient(circle,hsla(0,85%,55%,0.2),transparent 70%);
+        transform:translate(-50%,-50%);filter:blur(70px);animation:glowPulse 3.5s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:30%;left:70%;animation:driftOuter 24s ease-in-out infinite 1s">
+        <div style="width:14px;height:14px;border-radius:50%;background:hsl(0,80%,55%);
+          opacity:0.5;filter:blur(2px);animation:driftInner 9s ease-in-out infinite 0s"></div>
+      </div>
+      <div style="position:absolute;top:65%;left:25%;animation:driftOuter 28s ease-in-out infinite 3s">
+        <div style="width:18px;height:18px;border-radius:50%;background:hsl(20,80%,55%);
+          opacity:0.45;filter:blur(2px);animation:driftInner 10s ease-in-out infinite 1.5s"></div>
+      </div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:85%;">
+        <div style="font-size:36px;font-weight:700;color:var(--accent-alert);margin-bottom:28px;
+          letter-spacing:3px;" class="gating-header">三层功能门控</div>
+        <div style="display:flex;flex-direction:column;gap:20px;align-items:center;" class="gating-gates">
+          <div style="background:hsla(0,85%,55%,0.08);border:1px solid hsla(0,85%,55%,0.2);
+            border-radius:12px;padding:22px 32px;width:720px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-alert);">第一层：编译开关</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-top:6px;">50 个开关删除代码，外部版精简</div>
+          </div>
+          <div style="background:hsla(38,100%,50%,0.08);border:1px solid hsla(38,100%,50%,0.2);
+            border-radius:12px;padding:22px 32px;width:720px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-warm);">第二层：用户类型</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-top:6px;">200 处用户类型检查</div>
+          </div>
+          <div style="background:hsla(195,80%,50%,0.08);border:1px solid hsla(195,80%,50%,0.2);
+            border-radius:12px;padding:22px 32px;width:720px;text-align:left;">
+            <div style="font-size:28px;font-weight:700;color:var(--accent-cool);">第三层：远程A/B测试</div>
+            <div style="font-size:22px;color:var(--text-secondary);margin-top:6px;">内部20分钟刷新 / 外部等6小时</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 6: moat — 护城河 (7.80s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-moat" data-start="43.89" data-duration="7.80">
+    <div class="layer-bg" style="background: linear-gradient(160deg, #060612 0%, #0a1428 40%, #080818 100%);"></div>
+    <div class="layer-fx">
+      <!-- Compare scene: cool left, warm right glows -->
+      <div style="position:absolute;top:40%;left:25%;width:300px;height:300px;border-radius:50%;
+        background:hsl(195,80%,50%);opacity:0.15;filter:blur(60px);
+        animation:orbDrift 25s ease-in-out infinite 0s;"></div>
+      <div style="position:absolute;top:45%;left:75%;width:280px;height:280px;border-radius:50%;
+        background:hsl(38,100%,50%);opacity:0.15;filter:blur(55px);
+        animation:orbDrift 28s ease-in-out infinite 2s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;width:90%;">
+        <div style="font-size:48px;font-weight:800;color:#ffffff;margin-bottom:40px;
+          text-shadow:0 0 20px rgba(0,212,255,0.15);" class="moat-title">真正的护城河</div>
+        <div style="display:flex;gap:24px;justify-content:center;" class="moat-compare">
+          <div style="flex:1;background:hsla(195,80%,50%,0.06);border:1px solid hsla(195,80%,50%,0.15);
+            border-radius:12px;padding:28px 24px;text-align:center;">
+            <div style="font-size:24px;color:var(--text-dim);margin-bottom:12px;">模型能力</div>
+            <div style="font-size:44px;font-weight:800;color:var(--accent-cool);">容易抄</div>
+          </div>
+          <div style="display:flex;align-items:center;font-size:40px;color:var(--text-dim);">VS</div>
+          <div style="flex:1;background:hsla(38,100%,50%,0.08);border:1px solid hsla(38,100%,50%,0.2);
+            border-radius:12px;padding:28px 24px;text-align:center;">
+            <div style="font-size:24px;color:var(--text-dim);margin-bottom:12px;">编排层工程</div>
+            <div style="font-size:44px;font-weight:800;color:var(--accent-warm);">难抄</div>
+          </div>
+        </div>
+        <div style="font-size:26px;color:var(--text-secondary);margin-top:32px;
+          line-height:1.6;" class="moat-detail">上下文管理 / 工具编排 / 权限控制<br>51万行的工程复杂度才是壁垒</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCENE 7: cta — 关注引导 (3.00s) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="clip s-cta" data-start="51.69" data-duration="3.00">
+    <div class="layer-bg" style="background: linear-gradient(170deg, #0a0400 0%, #121008 40%, #080608 100%);"></div>
+    <div class="layer-fx">
+      <!-- Warm glow for CTA -->
+      <div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;
+        background:radial-gradient(circle,hsla(38,100%,50%,0.2),transparent 70%);
+        transform:translate(-50%,-50%);filter:blur(70px);animation:glowPulse 4s ease-in-out infinite 0s;"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="layer-content">
+      <div style="text-align:center;">
+        <div style="font-size:72px;font-weight:900;color:var(--accent-warm);
+          text-shadow:0 0 30px hsla(38,100%,50%,0.3),0 0 60px hsla(38,100%,50%,0.1);
+          letter-spacing:4px;" class="cta-title">关注我</div>
+        <div style="font-size:36px;color:var(--text-secondary);margin-top:24px;
+          letter-spacing:2px;" class="cta-sub">聊聊AI工具那些事</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end composition -->
+
+<!-- ═══ GSAP Timeline ═══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+window.__hf = { duration: 54.69, seek: function(t) {} };
+
+const tl = gsap.timeline({paused: true});
+
+// Scene 0: hook — hero title entrance
+tl.from('.s-hook .hook-title', {opacity:0, y:30, duration:0.4, ease:'power3.out'}, 0.1)
+  .from('.s-hook .hook-sub', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 0.35)
+  .from('.s-hook .hook-tag', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 0.55)
+
+// Scene 1: what — card entrance
+  .from('.s-what .what-label', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 4.44)
+  .from('.s-what .what-title', {opacity:0, y:25, duration:0.3, ease:'power3.out'}, 4.64)
+  .from('.s-what .what-desc', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 4.84)
+  .from('.s-what .what-stats > div', {opacity:0, y:30, duration:0.3, ease:'power3.out', stagger:0.2}, 5.04)
+
+// Scene 2: architecture — stack items
+  .from('.s-architecture .arch-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 12.07)
+  .from('.s-architecture .arch-stack > div', {opacity:0, y:25, duration:0.3, ease:'power3.out', stagger:0.2}, 12.37)
+
+// Scene 3: tools — grid cards
+  .from('.s-tools .tools-header', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 19.61)
+  .from('.s-tools .tools-grid > div', {opacity:0, y:25, duration:0.3, ease:'power3.out', stagger:0.15}, 19.91)
+
+// Scene 4: hidden — list items
+  .from('.s-hidden .hidden-header', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 27.0)
+  .from('.s-hidden .hidden-list > div', {opacity:0, y:25, duration:0.3, ease:'power3.out', stagger:0.2}, 27.3)
+
+// Scene 5: gating — gate cards
+  .from('.s-gating .gating-header', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 34.63)
+  .from('.s-gating .gating-gates > div', {opacity:0, y:30, duration:0.3, ease:'power3.out', stagger:0.2}, 34.93)
+
+// Scene 6: moat — compare + detail
+  .from('.s-moat .moat-title', {opacity:0, y:20, duration:0.3, ease:'power3.out'}, 43.99)
+  .from('.s-moat .moat-compare > div', {opacity:0, y:25, duration:0.3, ease:'power3.out', stagger:0.15}, 44.29)
+  .from('.s-moat .moat-detail', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 44.89)
+
+// Scene 7: cta — warm entrance
+  .from('.s-cta .cta-title', {opacity:0, scale:0.8, duration:0.4, ease:'power3.out'}, 51.79)
+  .from('.s-cta .cta-sub', {opacity:0, y:15, duration:0.3, ease:'power3.out'}, 52.09)
+;
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

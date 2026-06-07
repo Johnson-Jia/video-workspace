@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920, initial-scale=1">
+<title>GitHub Trending 2026-05-21</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+  :root {
+    --bg-dark: #080818;
+    --bg-mid: #12122e;
+    --accent-warm: #f0b429;
+    --accent-cool: #00e5a0;
+    --accent-cyan: #00f0ff;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0c0;
+    --text-muted: #6b6b8d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: var(--bg-dark);
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .composition {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+  }
+
+  .clip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+  }
+
+  /* ========== SHARED ========== */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+  }
+
+  .grid-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ========== SCENE 0: HOOK ========== */
+  .s-hook {
+    background: linear-gradient(180deg, #080818 0%, #1a1040 40%, #0d0d2a 100%);
+  }
+
+  .hook-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s-hook .glow-warm {
+    width: 600px;
+    height: 600px;
+    background: #f0b429;
+    opacity: 0.22;
+    top: 300px;
+    left: -100px;
+  }
+
+  .s-hook .glow-cool {
+    width: 500px;
+    height: 500px;
+    background: #00e5a0;
+    opacity: 0.15;
+    top: 600px;
+    right: -80px;
+  }
+
+  .hook-badge {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-warm);
+    background: rgba(240,180,41,0.12);
+    border: 1px solid rgba(240,180,41,0.3);
+    border-radius: 40px;
+    padding: 12px 36px;
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+  }
+
+  .hook-title {
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -2px;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 0 60px rgba(240,180,41,0.5);
+  }
+
+  .hook-title .accent {
+    color: var(--accent-warm);
+    display: block;
+  }
+
+  .hook-sub {
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--accent-cool);
+    margin-top: 48px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  /* ========== SCENE 1: ANCHOR ========== */
+  .s-anchor {
+    background: linear-gradient(180deg, #0a0a20 0%, #14103a 50%, #0a0a20 100%);
+  }
+
+  .anchor-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s-anchor .glow-warm {
+    width: 500px;
+    height: 500px;
+    background: #f0b429;
+    opacity: 0.18;
+    top: 200px;
+    right: -120px;
+  }
+
+  .s-anchor .glow-cool {
+    width: 450px;
+    height: 450px;
+    background: #00e5a0;
+    opacity: 0.15;
+    bottom: 200px;
+    left: -100px;
+  }
+
+  .anchor-section-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+  }
+
+  .anchor-card {
+    width: 880px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .anchor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--accent-warm);
+  }
+
+  .anchor-card .rank {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--accent-warm);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+  }
+
+  .anchor-card .name {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 16px;
+  }
+
+  .anchor-card .desc {
+    font-size: 28px;
+    color: var(--text-secondary);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .anchor-card .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .lang-badge {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    background: rgba(0,240,255,0.1);
+    border: 1px solid rgba(0,240,255,0.25);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .anchor-card .stars-today {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-warm);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .anchor-card .stars-total {
+    font-size: 24px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .milestone-card {
+    width: 880px;
+    background: linear-gradient(135deg, rgba(0,229,160,0.08) 0%, rgba(0,229,160,0.02) 100%);
+    border: 1px solid rgba(0,229,160,0.25);
+    border-radius: 24px;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .milestone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--accent-cool);
+  }
+
+  .milestone-label {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-cool);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .milestone-card .name {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .milestone-card .milestone-row {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  .milestone-card .big-star {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--accent-cool);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .milestone-card .delta {
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .milestone-card .lang-badge {
+    margin-top: 16px;
+    display: inline-block;
+  }
+
+  /* ========== SCENE 2: PROJECT AE ========== */
+  .s-project-ae {
+    background: linear-gradient(180deg, #0a0a20 0%, #0e1a30 50%, #0a0a20 100%);
+  }
+
+  .project-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s-project-ae .glow-cool {
+    width: 500px;
+    height: 500px;
+    background: #00e5a0;
+    opacity: 0.18;
+    top: 150px;
+    left: -100px;
+  }
+
+  .s-project-ae .glow-warm2 {
+    width: 400px;
+    height: 400px;
+    background: #00f0ff;
+    opacity: 0.12;
+    bottom: 200px;
+    right: -60px;
+  }
+
+  .project-card {
+    width: 880px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--accent-cool);
+  }
+
+  .project-card .rank {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent-cool);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+  }
+
+  .project-card .name {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 12px;
+    word-break: break-all;
+  }
+
+  .project-card .desc {
+    font-size: 28px;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  .project-card .tag-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .project-card .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .project-card .stars-today {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-cool);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .project-card .stars-total {
+    font-size: 24px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ========== SCENE 3: PROJECT OMP ========== */
+  .s-project-omp {
+    background: linear-gradient(180deg, #0a0a20 0%, #0e1a30 50%, #0a0a20 100%);
+  }
+
+  .s-project-omp .glow-cool {
+    width: 500px;
+    height: 500px;
+    background: #00f0ff;
+    opacity: 0.16;
+    top: 250px;
+    right: -80px;
+  }
+
+  .s-project-omp .glow-warm2 {
+    width: 400px;
+    height: 400px;
+    background: #00e5a0;
+    opacity: 0.14;
+    bottom: 300px;
+    left: -80px;
+  }
+
+  /* ========== SCENE 4: PROJECT FMD + OWA + CTA ========== */
+  .s-cta {
+    background: linear-gradient(180deg, #0a0a20 0%, #1a1040 40%, #0d0d2a 100%);
+  }
+
+  .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s-cta .glow-warm {
+    width: 550px;
+    height: 550px;
+    background: #f0b429;
+    opacity: 0.18;
+    top: 200px;
+    right: -100px;
+  }
+
+  .s-cta .glow-cool {
+    width: 450px;
+    height: 450px;
+    background: #00e5a0;
+    opacity: 0.15;
+    bottom: 250px;
+    left: -80px;
+  }
+
+  .mini-cards {
+    width: 880px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .mini-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 4px solid var(--accent-cool);
+    border-radius: 16px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .mini-card .rank {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent-cool);
+    font-family: 'JetBrains Mono', monospace;
+    min-width: 50px;
+  }
+
+  .mini-card .info {
+    flex: 1;
+  }
+
+  .mini-card .name {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .mini-card .desc {
+    font-size: 24px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .mini-card .stars-today {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-cool);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .cta-divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(240,180,41,0.4), transparent);
+    margin-bottom: 48px;
+  }
+
+  .cta-glow {
+    width: 400px;
+    height: 400px;
+    background: #f0b429;
+    opacity: 0.2;
+    border-radius: 50%;
+    filter: blur(140px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .cta-title {
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+    text-shadow: 0 0 40px rgba(240,180,41,0.4);
+    margin-bottom: 20px;
+  }
+
+  .cta-title .accent {
+    color: var(--accent-warm);
+  }
+
+  .cta-sub {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--accent-cool);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .cta-tags {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-tags .tag {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 10px 28px;
+  }
+
+  /* New badge */
+  .new-badge {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-warm);
+    background: rgba(240,180,41,0.12);
+    border: 1px solid rgba(240,180,41,0.3);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .streak-badge {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff6b6b;
+    background: rgba(255,107,107,0.12);
+    border: 1px solid rgba(255,107,107,0.3);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0">
+
+  <!-- Audio tracks -->
+  <audio id="narration" data-start="0" data-duration="35.98" data-track-index="0" data-volume="1.0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-start="0" data-duration="35.98" data-track-index="1" data-volume="0.04" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ===== SCENE 0: HOOK (0 - 5.02) ===== -->
+  <div class="clip s-hook" data-start="0" data-duration="5.02">
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid-bg"></div>
+    <div class="hook-wrap">
+      <div class="hook-badge">GitHub 热门项目</div>
+      <div class="hook-title">四个新项目<span class="accent">同时杀入热榜</span></div>
+      <div class="hook-sub">有个项目三天暴涨两万星</div>
+    </div>
+  </div>
+
+  <!-- ===== SCENE 1: ANCHOR (5.02 - 12.29) ===== -->
+  <div class="clip s-anchor" data-start="5.02" data-duration="7.27">
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid-bg"></div>
+    <div class="anchor-wrap">
+      <div class="anchor-card">
+        <div class="rank">1</div>
+        <div class="name">openhuman <span class="streak-badge">连续霸榜3天</span></div>
+        <div class="desc">个人 AI 超级智能，隐私优先，简单又强大</div>
+        <div class="meta-row">
+          <span class="lang-badge">Rust</span>
+          <span class="stars-today">+3,394</span>
+          <span class="stars-total">23.8K 总星</span>
+        </div>
+      </div>
+      <div class="milestone-card">
+        <div class="milestone-label">总星破万里程碑</div>
+        <div class="name">codegraph</div>
+        <div class="milestone-row">
+          <span class="big-star">10K</span>
+          <span class="delta">今日 +2,123</span>
+        </div>
+        <div class="lang-badge" style="margin-top:12px;">TypeScript</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCENE 2: PROJECT AE (12.29 - 20.09) ===== -->
+  <div class="clip s-project-ae" data-start="12.29" data-duration="7.8">
+    <div class="glow glow-cool"></div>
+    <div class="glow glow-warm2"></div>
+    <div class="grid-bg"></div>
+    <div class="project-wrap">
+      <div class="project-card">
+        <div class="rank">2</div>
+        <div class="name">ai-engineering-from-scratch <span class="new-badge">NEW</span></div>
+        <div class="desc">从零开始学 AI 工程的完整课程，覆盖大模型、Agent、视觉和 NLP，Python + TypeScript 双语言实战</div>
+        <div class="tag-row">
+          <span class="lang-badge">Python</span>
+          <span class="lang-badge">TypeScript</span>
+        </div>
+        <div class="meta-row">
+          <span class="stars-today">+765</span>
+          <span class="stars-total">9.7K 总星</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCENE 3: PROJECT OMP (20.09 - 26.14) ===== -->
+  <div class="clip s-project-omp" data-start="20.09" data-duration="6.05">
+    <div class="glow glow-cool"></div>
+    <div class="glow glow-warm2"></div>
+    <div class="grid-bg"></div>
+    <div class="project-wrap">
+      <div class="project-card">
+        <div class="rank">3</div>
+        <div class="name">oh-my-pi <span class="new-badge">NEW</span></div>
+        <div class="desc">终端 AI 编程代理，哈希锚定编辑 + LSP 集成 + 子代理系统，多 provider 都能用</div>
+        <div class="tag-row">
+          <span class="lang-badge">TypeScript</span>
+        </div>
+        <div class="meta-row">
+          <span class="stars-today">+270</span>
+          <span class="stars-total">5.5K 总星</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCENE 4: FMD + OWA + CTA (26.14 - 35.98) ===== -->
+  <div class="clip s-cta" data-start="26.14" data-duration="9.84">
+    <div class="glow glow-warm"></div>
+    <div class="glow glow-cool"></div>
+    <div class="grid-bg"></div>
+    <div class="cta-glow"></div>
+    <div class="cta-wrap">
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="rank">4</div>
+          <div class="info">
+            <div class="name">files.md <span class="new-badge">NEW</span></div>
+            <div class="desc">Go 写的极简 Markdown 笔记，完全本地，注重隐私</div>
+            <div class="lang-badge" style="margin-top:8px;">Go</div>
+          </div>
+          <div class="stars-today">+429</div>
+        </div>
+        <div class="mini-card">
+          <div class="rank">5</div>
+          <div class="info">
+            <div class="name">OpenWA <span class="new-badge">NEW</span></div>
+            <div class="desc">开源 WhatsApp 网关，支持自部署</div>
+            <div class="lang-badge" style="margin-top:8px;">TypeScript</div>
+          </div>
+          <div class="stars-today">+741</div>
+        </div>
+      </div>
+      <div class="cta-divider"></div>
+      <div class="cta-title">关注我<span class="accent">每天更新</span></div>
+      <div class="cta-sub">GitHub 热门项目</div>
+      <div class="cta-tags">
+        <div class="tag">#GitHub</div>
+        <div class="tag">#开源</div>
+        <div class="tag">#AI</div>
+        <div class="tag">#程序员</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+window.__timelines = {};
+window.__timelines['main'] = {
+  duration: function() { return 35.98; },
+  pause: function() {},
+  play: function() {},
+  seek: function(t) {},
+  time: function() { return 0; },
+  kill: function() {},
+  progress: function() { return 0; },
+  totalDuration: function() { return 35.98; }
+};
+window.__hf = {
+  duration: 35.98,
+  seek: function(t) {},
+  timelines: window.__timelines
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitHub Trending 2026-05-29</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif}
+:root{
+  --bg-dark:#080818;
+  --accent-warm:#FFB800;
+  --accent-cool:#00D4FF;
+  --text-primary:#fff;
+  --text-secondary:#a0a0c0;
+}
+.composition{position:relative;width:1080px;height:1920px}
+
+/* IRON LAW: .clip 铺满全画幅，inset:0，禁止 top/right/bottom/left 偏移 */
+.clip{position:absolute;inset:0}
+
+.scene-wrap{position:relative;width:100%;height:100%;overflow:hidden}
+.layer-bg{position:absolute;inset:0;z-index:1}
+.layer-fx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.layer-content{position:relative;z-index:3;height:100%}
+
+/* ── 组件公共 ── */
+.full-card{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 80px 220px 80px}
+.card-glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none}
+.card-grid{position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+
+/* ── Hook ── */
+.hero-badge{font-size:28px;font-weight:600;color:var(--accent-warm);background:rgba(255,184,0,0.15);padding:8px 24px;border-radius:20px;margin-bottom:40px}
+.hero-title{font-size:100px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1.15;text-shadow:0 0 60px rgba(255,184,0,0.5);text-align:center}
+.hero-title .accent{color:var(--accent-warm)}
+.hero-sub{font-size:44px;font-weight:600;color:var(--accent-cool);margin-top:40px;text-align:center}
+
+/* ── Project card ── */
+.pfc-category{font-size:28px;font-weight:600;color:var(--accent-cool);margin-bottom:40px}
+.pfc-main{display:flex;align-items:center;gap:30px;width:100%;margin-bottom:40px}
+.pfc-rank{font-size:120px;font-weight:900;color:var(--accent-warm);text-shadow:0 0 60px rgba(255,184,0,0.4);flex-shrink:0;min-width:100px;text-align:center}
+.pfc-info{flex:1;display:flex;flex-direction:column;gap:10px}
+.pfc-name{font-size:48px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace}
+.pfc-desc{font-size:28px;color:var(--text-secondary);line-height:1.4}
+.pfc-lang{display:inline-block;font-size:22px;font-weight:600;color:var(--accent-cool);background:rgba(0,212,255,0.12);padding:4px 16px;border-radius:12px;margin-top:4px;width:fit-content}
+.pfc-stars{font-size:32px;font-weight:800;color:var(--accent-warm);text-shadow:0 0 30px rgba(255,184,0,0.3);flex-shrink:0;text-align:right;white-space:nowrap}
+.pfc-selling{font-size:28px;font-weight:600;color:var(--accent-cool);margin-bottom:16px;text-align:center}
+.pfc-commentary{font-size:24px;color:var(--text-secondary);text-align:center;font-style:italic}
+
+/* ── Dual card (topic5: 2 projects) ── */
+.dual-phase{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 80px 220px 80px}
+.dual-rank{font-size:100px;font-weight:900;color:var(--accent-warm);text-shadow:0 0 50px rgba(255,184,0,0.4)}
+.dual-name{font-size:44px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;margin-top:8px}
+.dual-desc{font-size:26px;color:var(--text-secondary);margin-top:10px;text-align:center}
+.dual-stars{font-size:30px;font-weight:700;color:var(--accent-warm);margin-top:14px}
+.dual-selling{font-size:26px;color:var(--accent-cool);margin-top:10px}
+
+/* ── CTA ── */
+.cta-title{font-size:80px;font-weight:900;color:#fff;text-shadow:0 0 60px rgba(255,184,0,0.5);text-align:center}
+.cta-sub{font-size:36px;color:var(--accent-cool);margin-top:32px}
+.cta-tags{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+.cta-tag{font-size:24px;font-weight:600;color:var(--accent-warm);background:rgba(255,184,0,0.12);padding:6px 20px;border-radius:16px}
+
+/* ── Character ── */
+.char-overlay{position:absolute;bottom:60px;left:40px;z-index:10}
+.speech-bubble{position:absolute;bottom:280px;left:20px;z-index:11;background:rgba(255,255,255,0.95);color:#1a1a2e;padding:16px 24px;border-radius:20px 20px 20px 4px;font-size:22px;font-weight:600;max-width:360px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-start="0" data-width="1080" data-height="1920">
+
+<audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio id="bgm" data-track-index="2" data-volume="0.15" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+<!-- ===== Scene 1: hook (0 ~ 3.79s) ===== -->
+<div class="clip" id="s1" data-start="0" data-duration="3.79">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#0a0a1a,#0d1f3c,#1a0a2e)">
+    <div style="position:absolute;top:15%;left:10%;width:600px;height:600px;border-radius:50%;background:#FFB800;opacity:0.22;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:10%;right:5%;width:500px;height:500px;border-radius:50%;background:#00D4FF;opacity:0.18;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="hero-badge">2026.05.29</div>
+      <div class="hero-title"><span class="accent">AI</span>做短视频</div>
+      <div class="hero-title" style="font-size:90px;margin-top:-10px">自己先火了</div>
+      <div class="hero-sub">GitHub 每日热门</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 2: topic1 MoneyPrinterTurbo (3.79 ~ 18.21s) ===== -->
+<div class="clip" id="s2" data-start="3.79" data-duration="14.42">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#0a0818,#1a0d2e,#0a1a2e)">
+    <div style="position:absolute;top:10%;right:15%;width:500px;height:500px;border-radius:50%;background:#FFB800;opacity:0.20;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:20%;left:5%;width:400px;height:400px;border-radius:50%;background:#00D4FF;opacity:0.15;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="pfc-category">AI / 自动化 / 短视频</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">#1</div>
+        <div class="pfc-info">
+          <div class="pfc-name">MoneyPrinterTurbo</div>
+          <div class="pfc-desc">大模型一键生成短视频，输入主题直接出片</div>
+          <div class="pfc-lang">Python</div>
+        </div>
+        <div class="pfc-stars">66K ★<br><span style="font-size:22px;color:#FFB800">+4685 今日</span></div>
+      </div>
+      <div class="pfc-selling">输入即出片 · 配音字幕 · 全自动</div>
+      <div class="pfc-commentary">"涨星速度比我外卖还快"</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 3: topic2 Understand-Anything (18.21 ~ 30.38s) ===== -->
+<div class="clip" id="s3" data-start="18.21" data-duration="12.17">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#08081a,#0d1a33,#0a1028)">
+    <div style="position:absolute;top:20%;left:10%;width:550px;height:550px;border-radius:50%;background:#00D4FF;opacity:0.22;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:15%;right:10%;width:450px;height:450px;border-radius:50%;background:#FFB800;opacity:0.16;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="pfc-category">开发工具 / 知识图谱</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">#2</div>
+        <div class="pfc-info">
+          <div class="pfc-name">Understand-Anything</div>
+          <div class="pfc-desc">代码变交互知识图谱，可搜索、可提问、可探索</div>
+          <div class="pfc-lang">TypeScript</div>
+        </div>
+        <div class="pfc-stars">42K ★<br><span style="font-size:22px;color:#FFB800">+3766 今日</span></div>
+      </div>
+      <div class="pfc-selling">代码变图谱 · 可搜索 · 可提问</div>
+      <div class="pfc-commentary">"代码不再是用来读的，是用来探索的"</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 4: topic3 taste-skill (30.38 ~ 42.21s) ===== -->
+<div class="clip" id="s4" data-start="30.38" data-duration="11.83">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#0a0a20,#1a0a28,#0d1528)">
+    <div style="position:absolute;top:5%;right:20%;width:480px;height:480px;border-radius:50%;background:#FFB800;opacity:0.18;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:25%;left:10%;width:420px;height:420px;border-radius:50%;background:#00D4FF;opacity:0.14;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="pfc-category">AI 品味 / 开发者工具</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">#3</div>
+        <div class="pfc-info">
+          <div class="pfc-name">taste-skill</div>
+          <div class="pfc-desc">给AI加审美能力，从根上治千篇一律</div>
+          <div class="pfc-lang">Shell</div>
+        </div>
+        <div class="pfc-stars">26K ★<br><span style="font-size:22px;color:#FFB800">+2235 今日</span></div>
+      </div>
+      <div class="pfc-selling">去模板化 · 有品味 · 有个性</div>
+      <div class="pfc-commentary">"AI写得不错就是没品味，专门治AI的审美"</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 5: topic4 English-level-up-tips (42.21 ~ 53.06s) ===== -->
+<div class="clip" id="s5" data-start="42.21" data-duration="10.85">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#08081a,#101a2a,#0d0d25)">
+    <div style="position:absolute;top:15%;left:15%;width:500px;height:500px;border-radius:50%;background:#00D4FF;opacity:0.20;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:10%;right:10%;width:440px;height:440px;border-radius:50%;background:#FFB800;opacity:0.15;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="pfc-category">学习方法 / 英语</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">#4</div>
+        <div class="pfc-info">
+          <div class="pfc-name">English-level-up-tips</div>
+          <div class="pfc-desc">离谱的英语学习指南，教你方法不是背单词</div>
+        </div>
+        <div class="pfc-stars">48K ★<br><span style="font-size:22px;color:#FFB800">+2015 今日</span></div>
+      </div>
+      <div class="pfc-selling">方法论 · 实用 · 中文友好</div>
+      <div class="pfc-commentary">"方法论比单词量重要"</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 6: topic5 markitdown + twenty (53.06 ~ 65.95s) ===== -->
+<div class="clip" id="s6" data-start="53.06" data-duration="12.89">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#0a0a20,#200a1a,#0a1530)">
+    <div style="position:absolute;top:10%;left:20%;width:600px;height:600px;border-radius:50%;background:#FFB800;opacity:0.24;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:15%;right:5%;width:500px;height:500px;border-radius:50%;background:#00D4FF;opacity:0.20;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <!-- Phase 1: markitdown (first ~6.5s) -->
+    <div class="dual-phase" id="s6p1">
+      <div class="dual-rank">#5</div>
+      <div class="dual-name">markitdown</div>
+      <div class="dual-desc">微软出品，任何文件秒变 Markdown</div>
+      <div class="dual-stars">127K ★ — 微软出品开发必备</div>
+      <div class="dual-selling">文件秒转 · 开发必备</div>
+    </div>
+    <!-- Phase 2: twenty (last ~6.4s) -->
+    <div class="dual-phase" id="s6p2" style="opacity:0">
+      <div class="dual-rank">#6</div>
+      <div class="dual-name">twenty</div>
+      <div class="dual-desc">开源版 Salesforce，企业级 CRM 免费用</div>
+      <div class="dual-stars">47K ★ — 开源免费</div>
+      <div class="dual-selling">用爱发电打败用钱发电</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Scene 7: cta (65.95 ~ 68.01s) ===== -->
+<div class="clip" id="s7" data-start="65.95" data-duration="2.06">
+<div class="scene-wrap">
+  <div class="layer-bg" style="background:linear-gradient(135deg,#0a0a1a,#0d1f3c,#1a0a2e)">
+    <div style="position:absolute;top:20%;left:20%;width:500px;height:500px;border-radius:50%;background:#FFB800;opacity:0.20;filter:blur(140px)"></div>
+    <div style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;border-radius:50%;background:#00D4FF;opacity:0.16;filter:blur(140px)"></div>
+  </div>
+  <div class="layer-fx">
+    <div style="position:absolute;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:40px 40px"></div>
+  </div>
+  <div class="layer-content">
+    <div class="full-card">
+      <div class="cta-title">关注我</div>
+      <div class="cta-sub">下期见</div>
+      <div class="cta-tags">
+        <span class="cta-tag">#GitHub热门</span>
+        <span class="cta-tag">#开源</span>
+        <span class="cta-tag">#AI</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+
+// Scene 6 phase transition: markitdown → twenty
+tl.to('#s6p1', {opacity: 0, duration: 0.4}, 53.06 + 6.45);
+tl.to('#s6p2', {opacity: 1, duration: 0.4}, 53.06 + 6.45);
+
+const totalDuration = 68.01;
+window.__hf = { duration: totalDuration, seek: function(t) { tl.time(t, false); } };
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

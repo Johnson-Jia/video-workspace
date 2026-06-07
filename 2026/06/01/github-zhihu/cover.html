@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    position: relative;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 229, 160, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 160, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Gradient glow orbs */
+  .glow-1 {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: -150px;
+    right: 200px;
+    background: radial-gradient(circle, rgba(0, 229, 160, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+  }
+
+  .glow-2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    bottom: -100px;
+    left: 100px;
+    background: radial-gradient(circle, rgba(240, 136, 62, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+  }
+
+  .glow-3 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 300px;
+    left: 700px;
+    background: radial-gradient(circle, rgba(56, 132, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+
+  /* Content container */
+  .content {
+    position: relative;
+    z-index: 10;
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 120px;
+  }
+
+  /* Date line */
+  .date-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: #00e5a0;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  /* Main title */
+  .main-title {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, #e6edf3 0%, #8b949e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .main-title span {
+    -webkit-text-fill-color: #00e5a0;
+  }
+
+  /* Top 3 cards */
+  .top-cards {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .top-card {
+    background: rgba(22, 27, 34, 0.9);
+    border: 1px solid rgba(48, 54, 61, 0.8);
+    border-radius: 16px;
+    padding: 28px 32px;
+    min-width: 340px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .top-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00e5a0, #3884ff);
+  }
+
+  .top-card .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: #00e5a0;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .top-card .name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e6edf3;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .top-card .desc {
+    font-size: 14px;
+    color: #8b949e;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    max-width: 280px;
+  }
+
+  .top-card .stars {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f0883e;
+  }
+
+  .top-card .stars .unit {
+    font-size: 16px;
+    color: #8b949e;
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  /* Bottom stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(48, 54, 61, 0.5);
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: #e6edf3;
+  }
+
+  .stat-label {
+    font-size: 16px;
+    color: #8b949e;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(48, 54, 61, 0.8);
+  }
+
+  /* Theme badge */
+  .theme-badge {
+    position: absolute;
+    top: 80px;
+    right: 120px;
+    background: rgba(0, 229, 160, 0.1);
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    border-radius: 24px;
+    padding: 12px 28px;
+    font-size: 16px;
+    color: #00e5a0;
+    font-weight: 600;
+  }
+
+  /* GitHub logo mark */
+  .gh-mark {
+    position: absolute;
+    bottom: 40px;
+    right: 120px;
+    opacity: 0.15;
+    font-size: 200px;
+    line-height: 1;
+    color: #e6edf3;
+  }
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="glow-3"></div>
+
+  <div class="theme-badge">AI Agent 技能生态爆发周</div>
+
+  <div class="content">
+    <div class="date-line">2026年6月 · 第1周</div>
+    <h1 class="main-title">GitHub <span>热门开源项目</span>盘点</h1>
+
+    <div class="top-cards">
+      <div class="top-card">
+        <div class="rank">#1 TOP</div>
+        <div class="name">affaan-m/ECC</div>
+        <div class="desc">Agent 性能优化系统</div>
+        <div class="stars">200,591<span class="unit">★</span></div>
+      </div>
+      <div class="top-card">
+        <div class="rank">#2 TOP</div>
+        <div class="name">microsoft/markitdown</div>
+        <div class="desc">任意文件一键转 Markdown</div>
+        <div class="stars">134,941<span class="unit">★</span></div>
+      </div>
+      <div class="top-card">
+        <div class="rank">#3 TOP</div>
+        <div class="name">MoneyPrinterTurbo</div>
+        <div class="desc">AI 一键生成短视频</div>
+        <div class="stars">74,143<span class="unit">★</span></div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-value">14</span>
+        <span class="stat-label">个项目</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-value">4</span>
+        <span class="stat-label">个分类</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-value">533K+</span>
+        <span class="stat-label">总 Stars</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="gh-mark">⌥</div>
+</body>
+</html>

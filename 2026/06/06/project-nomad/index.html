@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>Project NOMAD</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+    .layer-bg      { position: absolute; inset: 0; z-index: 1; }
+    .layer-fx      { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .layer-content { position: relative; z-index: 3; height: 100%; }
+
+    .phase {
+      position: absolute; inset: 0;
+      padding: 180px 80px 220px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 1;
+    }
+
+    :root {
+      --bg-dark: #0A0E17;
+      --bg-mid: #0F1923;
+      --accent-warm: #FFB800;
+      --accent-cool: #00D4FF;
+      --text-primary: #FFFFFF;
+      --text-secondary: #8899AA;
+    }
+
+    /* ── Global CSS ── */
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 32px 36px;
+    }
+    .accent-text {
+      background-image: linear-gradient(135deg, var(--accent-warm), #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cool-text {
+      background-image: linear-gradient(135deg, var(--accent-cool), #0099CC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow-warm {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+    }
+    .glow-cool {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.25;
+    }
+    .data-label {
+      font-size: 36px;
+      color: var(--text-secondary);
+      letter-spacing: 2px;
+    }
+    .data-value {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--accent-warm);
+      line-height: 1.1;
+    }
+    .divider-line {
+      width: 120px;
+      height: 4px;
+      background-image: linear-gradient(90deg, var(--accent-warm), transparent);
+      border-radius: 2px;
+    }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .icon-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .icon-card .ic-icon { font-size: 48px; margin-bottom: 12px; }
+    .icon-card .ic-label { color: var(--text-secondary); font-size: 36px; font-weight: 600; color: var(--text-primary); }
+    .icon-card .ic-desc { font-size: 36px; color: var(--text-secondary); margin-top: 6px; }
+    .module-pill {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-size: 36px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .scan-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cool), transparent);
+      opacity: 0.4;
+    }
+    .grid-overlay {
+      opacity: 0.4;
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .scene-title {
+      font-size: 100px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -2px;
+    }
+    .scene-subtitle {
+      font-size: 38px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 20px;
+    }
+    .ring-pulse {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid var(--accent-warm);
+      opacity: 0.15;
+    }
+    .metric-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .tag-line {
+      font-size: 36px;
+      color: var(--accent-cool);
+      font-weight: 600;
+      letter-spacing: 4px;
+    }
+
+    /* ── s1 CSS ── */
+    #s1 .hook-title {
+      font-size: 120px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    /* ── s2 CSS ── */
+    #s2 .project-name {
+      font-size: 90px;
+      font-weight: 800;
+      letter-spacing: 6px;
+    }
+    #s2 .project-def {
+      font-size: 36px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+    }
+    #s2 .stat-grid {
+      display: flex;
+      gap: 40px;
+      margin-top: 32px;
+    }
+
+    /* ── s3 CSS ── */
+    #s3 .zero-card {
+      background: rgba(255,184,0,0.06);
+      border: 1px solid rgba(255,184,0,0.15);
+      border-radius: 16px;
+      padding: 24px 32px;
+      margin-bottom: 16px;
+    }
+    #s3 .zero-card .zc-num {
+      font-size: 48px;
+      font-weight: 800;
+    }
+    #s3 .zero-card .zc-label {
+      color: var(--text-secondary); font-size: 36px;
+      color: var(--text-secondary);
+      margin-left: 12px;
+    }
+
+    /* ── s4 CSS ── */
+    #s4 .arch-diagram {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    #s4 .module-box {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 14px;
+      padding: 20px 28px;
+      color: var(--text-secondary); font-size: 36px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 180px;
+    }
+    #s4 .module-box .mb-sub {
+      font-size: 36px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    #s4 .center-hub {
+      background: rgba(255,184,0,0.1);
+      border: 1px solid rgba(255,184,0,0.2);
+      border-radius: 20px;
+      padding: 24px 40px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ── s5 CSS ── */
+    #s5 .feature-highlight {
+      background: rgba(255,184,0,0.05);
+      border-left: 4px solid var(--accent-warm);
+      border-radius: 0 16px 16px 0;
+      padding: 28px 32px;
+    }
+    #s5 .tech-pills {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* ── s6 CSS ── */
+    #s6 .tool-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+    }
+    #s6 .tool-card .tc-icon { font-size: 44px; margin-bottom: 10px; }
+    #s6 .tool-card .tc-name { color: var(--text-secondary); font-size: 36px; font-weight: 600; }
+    #s6 .tool-card .tc-desc { font-size: 36px; color: var(--text-secondary); margin-top: 6px; }
+    #s6 .summary-banner {
+      background: linear-gradient(135deg, rgba(255,184,0,0.08), rgba(0,212,255,0.06));
+      border: 1px solid rgba(255,184,0,0.12);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    /* ── s7 CSS ── */
+    #s7 .limit-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,100,100,0.1);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+    }
+    #s7 .limit-card .lc-label {
+      color: var(--text-secondary); font-size: 36px;
+      color: var(--text-secondary);
+    }
+    #s7 .limit-card .lc-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: #FF6B6B;
+    }
+    #s7 .limit-card .lc-value.ok {
+      color: var(--accent-warm);
+    }
+
+    /* ── s8 CSS ── */
+    #s8 .usecase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    #s8 .uc-card {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.1);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    #s8 .uc-card .uc-icon { font-size: 44px; margin-bottom: 8px; }
+    #s8 .uc-card .uc-name { color: var(--text-secondary); font-size: 36px; font-weight: 600; }
+    #s8 .vision-block {
+      background: rgba(255,184,0,0.06);
+      border: 1px solid rgba(255,184,0,0.12);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    /* ── s9 CSS ── */
+    #s9 .cta-question {
+      font-size: 56px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.4;
+    }
+    #s9 .cta-follow {
+      font-size: 38px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="composition" data-composition-id="main"
+       data-width="1080" data-height="1920"
+       data-start="0">
+    <audio id="narration" data-track-index="1" data-volume="1"
+           src="narration.mp3" preload="auto" data-start="0"></audio>
+    <audio id="bgm" data-track-index="2"
+           data-volume="0.5"
+           src="bgm.wav" preload="auto" data-start="0" loop></audio>
+
+    <!-- ═══ s1-hook ═══ -->
+    <div class="clip" id="s1" data-start="0.0" data-duration="3.1">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0E17 0%,#0F1923 50%,#0A0E17 100%)"></div>
+        <div class="glow-warm" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#FFB800,transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="ring-pulse" style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+        <div class="ring-pulse" style="width:800px;height:800px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-cool)"></div>
+        <div class="scan-line" style="top:40%"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="text-align:center">
+            <div class="divider-line" style="margin:0 auto 32px"></div>
+            <div class="hook-title accent-text">拔掉网线</div>
+            <div class="hook-title" style="color:#fff;margin-top:8px">你的电脑</div>
+            <div class="hook-title" style="color:#fff;margin-top:8px">还能干嘛？</div>
+            <div class="divider-line" style="margin:32px auto 0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s2-what ═══ -->
+    <div class="clip" id="s2" data-start="3.1" data-duration="13.54">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0A0E17 0%,#111B2B 50%,#0A0E17 100%)"></div>
+        <div class="glow-warm" style="width:400px;height:400px;top:15%;right:-100px;background:radial-gradient(circle,#FFB800,transparent)"></div>
+        <div class="glow-cool" style="width:350px;height:350px;bottom:20%;left:-80px;background:radial-gradient(circle,#00D4FF,transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="grid-overlay"></div>
+        <div class="scan-line" style="top:35%"></div>
+        <div style="position:absolute;width:200px;height:200px;top:60%;right:60px;border-radius:50%;border:1px solid rgba(0,212,255,0.08)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="tag-line">OPEN SOURCE</div>
+          <div class="project-name accent-text" style="margin-top:16px">NOMAD</div>
+          <div class="project-def">完全免费的开源离线知识服务器</div>
+          <div class="stat-grid">
+            <div>
+              <div class="data-label">GitHub Stars</div>
+              <div class="data-value">28K+</div>
+            </div>
+            <div>
+              <div class="data-label">月增长</div>
+              <div class="data-value">20x</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div style="font-size:38px;font-weight:600;margin-bottom:28px;text-align:center">断网也能用</div>
+          <div class="icon-grid">
+            <div class="icon-card">
+              <div class="ic-icon">🤖</div>
+              <div class="ic-label">AI 聊天</div>
+              <div class="ic-desc">本地大模型</div>
+            </div>
+            <div class="icon-card">
+              <div class="ic-icon">📚</div>
+              <div class="ic-label">百科全书</div>
+              <div class="ic-desc">离线维基百科</div>
+            </div>
+            <div class="icon-card">
+              <div class="ic-icon">🗺</div>
+              <div class="ic-label">离线地图</div>
+              <div class="ic-desc">区域导航</div>
+            </div>
+            <div class="icon-card">
+              <div class="ic-icon">🎓</div>
+              <div class="ic-label">在线课程</div>
+              <div class="ic-desc">完整教育体系</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s3-philosophy ═══ -->
+    <div class="clip" id="s3" data-start="16.64" data-duration="19.08">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0D1220 0%,#0A0E17 40%,#0F1A2A 100%)"></div>
+        <div class="glow-warm" style="width:500px;height:500px;top:30%;left:-120px;background:radial-gradient(circle,rgba(255,184,0,0.4),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="grid-overlay"></div>
+        <div class="ring-pulse" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-warm)"></div>
+        <div class="scan-line" style="top:65%"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="font-size:38px;color:var(--text-secondary);margin-bottom:20px;letter-spacing:3px">设计理念</div>
+          <div class="scene-title" style="font-size:76px">互联网</div>
+          <div class="scene-title accent-text" style="font-size:76px;margin-top:8px">不是永久的</div>
+          <div style="margin-top:32px">
+            <div class="zero-card">
+              <span class="zc-num accent-text">零</span><span class="zc-label">联网</span>
+            </div>
+            <div class="zero-card">
+              <span class="zc-num accent-text">零</span><span class="zc-label">遥测</span>
+            </div>
+            <div class="zero-card">
+              <span class="zc-num accent-text">零</span><span class="zc-label">依赖</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div style="font-size:36px;color:var(--text-secondary);margin-bottom:16px;letter-spacing:2px">创建者</div>
+          <div class="card" style="margin-bottom:20px">
+            <div style="font-size: 36px;font-weight:600;margin-bottom:12px">不是 AI 科学家</div>
+            <div style="display:flex;align-items:center;gap:20px;margin-top:16px">
+              <div style="font-size:72px;font-weight:800;color:var(--accent-warm)">18</div>
+              <div>
+                <div style="font-size: 36px;color:var(--text-secondary)">年</div>
+                <div style="font-size: 36px;font-weight:600">网络工程师</div>
+              </div>
+            </div>
+          </div>
+          <div style="font-size: 36px;color:var(--accent-cool);text-align:center;margin-top:12px;font-weight:600">装网络的人，做了离线工具</div>
+        </div>
+        <div class="phase phase-3">
+          <div style="text-align:center">
+            <div class="divider-line" style="margin:0 auto 24px"></div>
+            <div style="font-size:52px;font-weight:700;line-height:1.4">知识不应该</div>
+            <div style="font-size:52px;font-weight:700;line-height:1.4" class="accent-text">只有在线才能获取</div>
+            <div class="divider-line" style="margin:24px auto 0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s4-architecture ═══ -->
+    <div class="clip" id="s4" data-start="35.72" data-duration="16.27">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(200deg,#0A0E17 0%,#0C1520 50%,#0A0E17 100%)"></div>
+        <div class="glow-cool" style="width:450px;height:450px;top:20%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(0,212,255,0.3),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="grid-overlay"></div>
+        <div class="ring-pulse" style="width:400px;height:400px;top:25%;left:50%;transform:translateX(-50%);border-color:var(--accent-cool)"></div>
+        <div class="scan-line" style="top:50%"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="font-size:36px;color:var(--accent-cool);margin-bottom:16px;letter-spacing:3px;font-weight:600">Docker 编排</div>
+          <div class="arch-diagram">
+            <div class="module-box"><div>🤖 AI</div><div class="mb-sub">Ollama</div></div>
+            <div class="module-box"><div>📚 知识库</div><div class="mb-sub">Kiwix</div></div>
+            <div class="module-box"><div>🗺 地图</div><div class="mb-sub">ProtoMaps</div></div>
+            <div class="module-box"><div>🎓 教育</div><div class="mb-sub">Kolibri</div></div>
+            <div class="module-box"><div>🔧 工具</div><div class="mb-sub">CyberChef</div></div>
+            <div class="module-box"><div>📝 笔记</div><div class="mb-sub">FlatNotes</div></div>
+          </div>
+          <div class="center-hub">
+            <div style="font-size: 36px;font-weight:700;color:var(--accent-warm)">Command Center</div>
+            <div style="font-size: 36px;color:var(--text-secondary);margin-top:6px">统一管理面板</div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="card" style="text-align:center">
+            <div style="font-size:36px;font-weight:600;margin-bottom:24px">架构优势</div>
+            <div class="metric-row" style="justify-content:center">
+              <div class="module-pill" style="border-color:var(--accent-warm)">一键安装</div>
+              <div class="module-pill" style="border-color:var(--accent-cool)">图形化管理</div>
+            </div>
+            <div style="margin-top:24px;font-size: 36px;line-height:1.6">
+              <div>✓ 每个模块<span class="accent-text">独立运行</span></div>
+              <div style="margin-top:12px">✓ 每个模块<span class="accent-text">独立更新</span></div>
+              <div style="margin-top:12px">✓ 模块之间<span class="cool-text">互不干扰</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s5-features-ai ═══ -->
+    <div class="clip" id="s5" data-start="51.99" data-duration="18.1">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,#0A0E17 0%,#151A10 40%,#0A0E17 100%)"></div>
+        <div class="glow-warm" style="width:600px;height:600px;top:40%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,184,0,0.3),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="ring-pulse" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-warm)"></div>
+        <div class="ring-pulse" style="width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-cool)"></div>
+        <div class="scan-line" style="top:30%"></div>
+        <div class="scan-line" style="top:70%"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="font-size:36px;color:var(--accent-cool);letter-spacing:3px;font-weight:600;margin-bottom:16px">核心功能</div>
+          <div class="scene-title" style="font-size:68px">离线 AI 对话</div>
+          <div class="feature-highlight" style="margin-top:24px">
+            <div style="font-size: 36px;font-weight:600;margin-bottom:12px">上传文档 → AI 分析总结</div>
+            <div style="font-size: 36px;color:var(--text-secondary)">完全本地运行，<span class="accent-text" style="font-weight:700">隐私零泄露</span></div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div style="font-size: 36px;color:var(--text-secondary);margin-bottom:16px">技术栈</div>
+          <div class="tech-pills">
+            <div class="module-pill" style="background:rgba(255,184,0,0.08);border-color:var(--accent-warm)">Ollama</div>
+            <div class="module-pill" style="background:rgba(0,212,255,0.08);border-color:var(--accent-cool)">Qdrant</div>
+            <div class="module-pill" style="background:rgba(255,184,0,0.08);border-color:var(--accent-warm)">RAG 语义搜索</div>
+          </div>
+          <div class="card" style="margin-top:24px;text-align:center">
+            <div style="font-size: 36px;color:var(--text-secondary)">不是玩具 AI</div>
+            <div style="font-size:36px;font-weight:700;margin-top:8px">生产级离线 AI 方案</div>
+          </div>
+        </div>
+        <div class="phase phase-3">
+          <div style="font-size:36px;font-weight:600;margin-bottom:16px">离线维基百科</div>
+          <div class="card" style="text-align:center">
+            <div class="data-value" style="font-size:96px">99G</div>
+            <div style="font-size: 36px;color:var(--text-secondary);margin-top:8px">完整百科全书下载到本地</div>
+            <div style="display:flex;gap:20px;justify-content:center;margin-top:20px">
+              <div class="module-pill">医学参考</div>
+              <div class="module-pill">生存指南</div>
+              <div class="module-pill">电子书</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s6-features-tools ═══ -->
+    <div class="clip" id="s6" data-start="70.09" data-duration="15.84">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0A0E17 0%,#0D1520 50%,#0A0E17 100%)"></div>
+        <div class="glow-cool" style="width:400px;height:400px;top:15%;right:-80px;background:radial-gradient(circle,rgba(0,212,255,0.3),transparent)"></div>
+        <div class="glow-warm" style="width:300px;height:300px;bottom:25%;left:-60px;background:radial-gradient(circle,rgba(255,184,0,0.2),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="grid-overlay"></div>
+        <div class="scan-line" style="top:45%"></div>
+        <div style="position:absolute;width:300px;height:300px;top:60%;left:40%;border-radius:50%;border:1px solid rgba(255,184,0,0.06)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="icon-grid">
+            <div class="tool-card">
+              <div class="tc-icon">🗺</div>
+              <div class="tc-name cool-text">离线地图</div>
+              <div class="tc-desc">区域数据·断网导航</div>
+            </div>
+            <div class="tool-card">
+              <div class="tc-icon">🎓</div>
+              <div class="tc-name cool-text">教育平台</div>
+              <div class="tc-desc">进度追踪·多用户</div>
+            </div>
+          </div>
+          <div style="font-size: 36px;color:var(--text-secondary);text-align:center;margin-top:20px">适合家庭和教室场景</div>
+        </div>
+        <div class="phase phase-2">
+          <div class="icon-grid" style="margin-bottom:20px">
+            <div class="tool-card">
+              <div class="tc-icon">🔧</div>
+              <div class="tc-name">数据分析</div>
+              <div class="tc-desc">加密·解密·编码</div>
+            </div>
+            <div class="tool-card">
+              <div class="tc-icon">📝</div>
+              <div class="tc-name">Markdown 笔记</div>
+              <div class="tc-desc">本地记录</div>
+            </div>
+          </div>
+          <div class="summary-banner">
+            <div style="font-size:36px;font-weight:700">6 个工具各司其职</div>
+            <div style="font-size: 36px;color:var(--accent-warm);margin-top:8px;font-weight:600">全部离线运行</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s7-limitations ═══ -->
+    <div class="clip" id="s7" data-start="85.93" data-duration="15.12">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0E17 0%,#100D15 50%,#0A0E17 100%)"></div>
+        <div class="glow-warm" style="width:300px;height:300px;top:25%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,100,100,0.15),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="grid-overlay"></div>
+        <div class="scan-line" style="top:55%"></div>
+        <div style="position:absolute;width:250px;height:250px;top:30%;right:80px;border-radius:50%;border:1px solid rgba(255,100,100,0.08)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="font-size:36px;color:var(--text-secondary);margin-bottom:20px;letter-spacing:3px">硬件门槛</div>
+          <div class="limit-card">
+            <div class="lc-label">推荐显卡</div>
+            <div class="lc-value ok">RTX 3060</div>
+          </div>
+          <div class="limit-card">
+            <div class="lc-label">推荐内存</div>
+            <div class="lc-value ok">32 GB</div>
+          </div>
+          <div class="limit-card">
+            <div class="lc-label">安装下载</div>
+            <div class="lc-value ok">几十 GB 内容</div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div style="font-size:36px;color:var(--text-secondary);margin-bottom:20px;letter-spacing:3px">国内限制</div>
+          <div class="limit-card">
+            <div class="lc-label">Docker 镜像</div>
+            <div class="lc-value">被墙，需代理</div>
+          </div>
+          <div class="limit-card">
+            <div class="lc-label">内容语言</div>
+            <div class="lc-value">全英文</div>
+          </div>
+          <div class="limit-card">
+            <div class="lc-label">中文维基</div>
+            <div class="lc-value">需另行下载</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s8-usecases ═══ -->
+    <div class="clip" id="s8" data-start="101.05" data-duration="12.67">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0A0E17 0%,#0D1A20 50%,#0A0E17 100%)"></div>
+        <div class="glow-cool" style="width:500px;height:500px;top:40%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="glow-warm" style="width:300px;height:300px;top:15%;right:-60px;background:radial-gradient(circle,rgba(255,184,0,0.2),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="ring-pulse" style="width:500px;height:500px;top:35%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-cool)"></div>
+        <div class="scan-line" style="top:40%"></div>
+        <div style="position:absolute;width:200px;height:200px;bottom:25%;left:60px;border-radius:50%;border:1px solid rgba(255,184,0,0.06)"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div style="font-size:36px;color:var(--accent-cool);margin-bottom:20px;letter-spacing:3px;font-weight:600">适用场景</div>
+          <div class="usecase-grid">
+            <div class="uc-card">
+              <div class="uc-icon">🏕</div>
+              <div class="uc-name">露营偏远</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-icon">🚨</div>
+              <div class="uc-name">应急中断</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-icon">🔒</div>
+              <div class="uc-name">隐私敏感</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-icon">📖</div>
+              <div class="uc-name">教育信息化</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase phase-2">
+          <div class="vision-block">
+            <div style="font-size: 36px;color:var(--text-secondary);margin-bottom:12px">一旦装好</div>
+            <div style="font-size:44px;font-weight:700">谁都不需要网络也能用</div>
+            <div style="margin-top:20px;font-size: 36px;color:var(--accent-cool);font-weight:600">架构思路值得国内开发者借鉴</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ s9-cta ═══ -->
+    <div class="clip" id="s9" data-start="113.72" data-duration="6.29">
+      <div class="layer-bg">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0E17 0%,#0F1923 50%,#0A0E17 100%)"></div>
+        <div class="glow-warm" style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,184,0,0.25),transparent)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)"></div>
+      </div>
+      <div class="layer-fx">
+        <div class="ring-pulse" style="width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-warm)"></div>
+        <div class="ring-pulse" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:var(--accent-cool)"></div>
+        <div class="scan-line" style="top:60%"></div>
+      </div>
+      <div class="layer-content">
+        <div class="phase phase-1">
+          <div class="cta-question">
+            断网后还需要<br>什么功能？
+          </div>
+          <div style="margin-top:24px;text-align:center">
+            <div style="font-size: 36px;color:var(--text-secondary)">评论区告诉我</div>
+          </div>
+          <div class="cta-follow">关注我，下期见</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Phase 初始化
+    tl.set("#s2 .phase-2", { opacity: 0 }, 3.1);
+    tl.set("#s3 .phase-2", { opacity: 0 }, 16.64);
+    tl.set("#s3 .phase-3", { opacity: 0 }, 16.64);
+    tl.set("#s4 .phase-2", { opacity: 0 }, 35.72);
+    tl.set("#s5 .phase-2", { opacity: 0 }, 51.99);
+    tl.set("#s5 .phase-3", { opacity: 0 }, 51.99);
+    tl.set("#s6 .phase-2", { opacity: 0 }, 70.09);
+    tl.set("#s7 .phase-2", { opacity: 0 }, 85.93);
+    tl.set("#s8 .phase-2", { opacity: 0 }, 101.05);
+
+    // Phase 切换
+    const PHASE_TIMINGS = {"meta": {"voice": "zh-CN-YunjianNeural", "rate": "+25%", "bgm_volume": 0.37, "bgm_volume_source": "formula", "bgm_mean_db": -19.7, "bgm_max_db": -2.5, "bgm_narr_max_db": -3.2, "bgm_gap_target": 9.0, "calibration_source": "edge-tts-srt"}, "stats": {"total_scenes": 7, "total_phases": 16, "anchor_calibrated": 15, "auto_split": 1}, "scenes": [{"scene": "s2", "segment_index": 1, "global_start": 3.1, "duration": 13.54, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 9.73, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 9.73, "end_offset": 13.54, "sentences": [2], "calibration": "sentence-anchor"}]}, {"scene": "s3", "segment_index": 2, "global_start": 16.64, "duration": 19.08, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 9.31, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 9.31, "end_offset": 19.02, "sentences": [2, 3], "calibration": "sentence-anchor"}, {"phase": 3, "start_offset": 19.02, "end_offset": 19.08, "sentences": [2, 3], "calibration": "anchor-invalid"}]}, {"scene": "s4", "segment_index": 3, "global_start": 35.72, "duration": 16.27, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 11.1, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 11.1, "end_offset": 16.27, "sentences": [2], "calibration": "sentence-anchor"}]}, {"scene": "s5", "segment_index": 4, "global_start": 51.99, "duration": 18.1, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 7.54, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 7.54, "end_offset": 10.7, "sentences": [2], "calibration": "sentence-anchor"}, {"phase": 3, "start_offset": 10.7, "end_offset": 18.1, "sentences": [3], "calibration": "sentence-anchor"}]}, {"scene": "s6", "segment_index": 5, "global_start": 70.09, "duration": 15.84, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 9.27, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 9.27, "end_offset": 15.84, "sentences": [2, 3], "calibration": "sentence-anchor"}]}, {"scene": "s7", "segment_index": 6, "global_start": 85.93, "duration": 15.12, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 6.43, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 6.43, "end_offset": 15.12, "sentences": [2, 3], "calibration": "sentence-anchor"}]}, {"scene": "s8", "segment_index": 7, "global_start": 101.05, "duration": 12.67, "phases": [{"phase": 1, "start_offset": 0.0, "end_offset": 9.72, "sentences": [0, 1], "calibration": "sentence-anchor"}, {"phase": 2, "start_offset": 9.72, "end_offset": 12.67, "sentences": [2], "calibration": "sentence-anchor"}]}]};
+
+    // s2: phase 1→2 at 12.83
+    tl.to("#s2 .phase-1", { opacity: 0, duration: 0.3 }, 12.83);
+    tl.to("#s2 .phase-2", { opacity: 1, duration: 0.4 }, 12.93);
+    // s3: phase 1→2 at 25.95, phase 2→3 at 35.66
+    tl.to("#s3 .phase-1", { opacity: 0, duration: 0.3 }, 25.95);
+    tl.to("#s3 .phase-2", { opacity: 1, duration: 0.4 }, 26.05);
+    tl.to("#s3 .phase-2", { opacity: 0, duration: 0.3 }, 35.66);
+    tl.to("#s3 .phase-3", { opacity: 1, duration: 0.4 }, 35.76);
+    // s4: phase 1→2 at 46.82
+    tl.to("#s4 .phase-1", { opacity: 0, duration: 0.3 }, 46.82);
+    tl.to("#s4 .phase-2", { opacity: 1, duration: 0.4 }, 46.92);
+    // s5: phase 1→2 at 59.53, phase 2→3 at 62.69
+    tl.to("#s5 .phase-1", { opacity: 0, duration: 0.3 }, 59.53);
+    tl.to("#s5 .phase-2", { opacity: 1, duration: 0.4 }, 59.63);
+    tl.to("#s5 .phase-2", { opacity: 0, duration: 0.3 }, 62.69);
+    tl.to("#s5 .phase-3", { opacity: 1, duration: 0.4 }, 62.79);
+    // s6: phase 1→2 at 79.36
+    tl.to("#s6 .phase-1", { opacity: 0, duration: 0.3 }, 79.36);
+    tl.to("#s6 .phase-2", { opacity: 1, duration: 0.4 }, 79.46);
+    // s7: phase 1→2 at 92.36
+    tl.to("#s7 .phase-1", { opacity: 0, duration: 0.3 }, 92.36);
+    tl.to("#s7 .phase-2", { opacity: 1, duration: 0.4 }, 92.46);
+    // s8: phase 1→2 at 110.77
+    tl.to("#s8 .phase-1", { opacity: 0, duration: 0.3 }, 110.77);
+    tl.to("#s8 .phase-2", { opacity: 1, duration: 0.4 }, 110.87);
+
+    // GSAP 动画
+    // s1 hook - amber glow pulse
+    tl.fromTo("#s1 .glow-warm", { scale: 0.8, opacity: 0.2 }, { scale: 1.2, opacity: 0.4, duration: 3.1, ease: "power2.inOut" }, 0);
+
+    // s2 - slide in
+    tl.fromTo("#s2 .project-name", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 3.1);
+    tl.fromTo("#s2 .stat-grid", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 3.5);
+
+    // s3 - zero cards stagger
+    tl.fromTo("#s3 .zero-card", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, stagger: 0.15 }, 16.64);
+
+    // s4 - modules stagger
+    tl.fromTo("#s4 .module-box", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.08 }, 35.72);
+    tl.fromTo("#s4 .center-hub", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 36.2);
+
+    // s5 - feature highlight slide
+    tl.fromTo("#s5 .feature-highlight", { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 51.99);
+
+    // s6 - tool cards stagger
+    tl.fromTo("#s6 .tool-card", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.1 }, 70.09);
+
+    // s7 - limit cards stagger
+    tl.fromTo("#s7 .limit-card", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, stagger: 0.12 }, 85.93);
+
+    // s8 - usecase cards
+    tl.fromTo("#s8 .uc-card", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.1 }, 101.05);
+
+    // s9 - cta
+    tl.fromTo("#s9 .cta-question", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 113.72);
+
+    // HyperFrames API
+    window.__hf = {
+      duration: 120.01,
+      seek: function(t) { tl.time(t, false); }
+    };
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

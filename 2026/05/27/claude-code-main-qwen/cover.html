@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --accent-warm: #D97757;
+  --accent-warm-soft: #E8956E;
+  --accent-cool: #00D4FF;
+  --accent-cool-mid: #0EA5C7;
+  --bg-dark: #0A0E1A;
+  --text-white: #FFFFFF;
+  --text-muted: #9CA3AF;
+  --card-bg: rgba(17,24,39,0.85);
+}
+body { background: #050510; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, #0D1117 40%, #080818 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,119,87,0.20), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.12), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+.grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 120px 120px;
+  pointer-events: none;
+}
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: var(--accent-warm); letter-spacing: 8px; margin-bottom: 40px; }
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: var(--accent-cool); letter-spacing: 6px; margin-bottom: 80px; }
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(217,119,87,0.15), rgba(217,119,87,0.25));
+  border: 2px solid rgba(217,119,87,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: var(--accent-warm-soft); letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(217,119,87,0.1);
+}
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: var(--text-white); letter-spacing: -4px; }
+.main-title .accent { font-size: 220px; font-weight: 900; color: var(--accent-warm); letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(217,119,87,0.4), 0 0 160px rgba(217,119,87,0.15); }
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, var(--accent-warm), var(--accent-cool-mid)); margin-bottom: 80px; }
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: var(--accent-cool); letter-spacing: 4px; margin-bottom: 100px; }
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: var(--card-bg);
+  border: 2px solid rgba(217,119,87,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; color: var(--accent-warm-soft); line-height: 1; }
+.card .label { font-size: 52px; color: var(--text-muted); margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+  <div class="grid-bg"></div>
+
+  <div class="date">2026年5月27日</div>
+  <div class="scene-label">AI 编程工具深度解析</div>
+  <div class="badge">源码泄露分析</div>
+  <div class="main-title">
+    <span class="white">51万行源码</span><br>
+    <span class="accent">泄露的秘密</span>
+  </div>
+  <div class="divider"></div>
+  <div class="data-subtitle">8 个场景 · 深度解析 Claude Code 架构</div>
+  <div class="cards">
+    <div class="card">
+      <div class="num">510K</div>
+      <div class="label">行编排层代码</div>
+    </div>
+    <div class="card">
+      <div class="num">53</div>
+      <div class="label">个自主工具</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

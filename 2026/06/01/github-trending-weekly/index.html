@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;width:1080px;height:1920px;overflow:hidden;font-family:-apple-system,'SF Pro Display','PingFang SC','Noto Sans SC',sans-serif;-webkit-font-smoothing:antialiased}
+.clip{position:absolute;inset:0}
+.scene-wrap{position:relative;width:100%;height:100%;overflow:hidden}
+.layer-bg{position:absolute;inset:0;z-index:1}
+.layer-fx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.layer-content{position:relative;z-index:3;height:100%}
+.phase{padding:180px 80px 220px 80px;display:flex;flex-direction:column;justify-content:center;height:100%}
+.g-header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.g-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0}
+.g-label{font-size:40px;font-weight:800;letter-spacing:2px}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:26px 30px;margin-bottom:18px}
+.c-name{font-size:38px;font-weight:800;margin-bottom:6px}
+.c-stars{font-size:50px;font-weight:900;margin-bottom:6px;color:#fff}
+.c-desc{font-size:30px;font-weight:400;opacity:0.65;line-height:1.4;color:#fff}
+.orb{position:absolute;border-radius:50%;filter:blur(60px)}
+.sline{position:absolute;left:0;right:0;height:2px}
+.streak{position:absolute;height:3px;border-radius:2px;transform:rotate(-25deg)}
+.fdot{position:absolute;width:6px;height:6px;border-radius:50%}
+</style>
+</head>
+<body>
+<div data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="55.27">
+<audio data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio data-track-index="2" data-volume="0.35" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+<!-- ========== Scene 1: Hook (0 - 4.65s) ========== -->
+<div class="clip" data-start="0" data-duration="4.65">
+<div class="scene-wrap s-hook" id="s1">
+<div class="layer-bg" style="background:linear-gradient(170deg,#0a0e1a 0%,#0d1525 40%,#111d35 100%)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,255,0.15),transparent 70%);top:-100px;left:-100px"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(255,149,0,0.12),transparent 70%);bottom:200px;right:-80px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 120px,rgba(255,255,255,0.015) 120px,rgba(255,255,255,0.015) 121px)"></div>
+</div>
+<div class="layer-fx">
+  <div class="orb fx-h1" style="width:280px;height:280px;background:rgba(0,212,255,0.22);top:300px;left:100px;filter:blur(80px)"></div>
+  <div class="orb fx-h2" style="width:240px;height:240px;background:rgba(255,149,0,0.2);top:900px;right:60px;filter:blur(80px)"></div>
+  <div class="orb fx-h3" style="width:200px;height:200px;background:rgba(0,230,118,0.18);bottom:400px;left:180px;filter:blur(80px)"></div>
+</div>
+<div class="layer-content">
+  <div class="phase" style="align-items:center;text-align:center">
+    <div class="hook-el" style="font-size:80px;font-weight:900;line-height:1.15;color:#fff">本周GitHub</div>
+    <div class="hook-el" style="font-size:96px;font-weight:900;line-height:1.2;background:linear-gradient(90deg,#00d4ff,#ff9500,#00e676,#b388ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">关键词</div>
+    <div class="hook-el" style="font-size:42px;font-weight:700;margin-top:28px;color:rgba(255,255,255,0.75)">AI Agent 技能生态大爆发</div>
+    <div class="hook-el" style="display:flex;gap:20px;justify-content:center;margin-top:48px">
+      <div style="width:180px;height:8px;border-radius:4px;background:#00d4ff"></div>
+      <div style="width:180px;height:8px;border-radius:4px;background:#ff9500"></div>
+      <div style="width:180px;height:8px;border-radius:4px;background:#00e676"></div>
+      <div style="width:180px;height:8px;border-radius:4px;background:#b388ff"></div>
+    </div>
+    <div class="hook-el" style="margin-top:36px;font-size:64px;font-weight:900;color:#ff9500">200K ★</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== Scene 2: G1 Skills (4.65 - 21.05s, 16.4s) ========== -->
+<div class="clip" data-start="4.65" data-duration="16.4">
+<div class="scene-wrap s-g1" id="s2">
+<div class="layer-bg" style="background:linear-gradient(170deg,#060d18 0%,#0a1628 50%,#0d1a2e 100%)">
+  <div class="orb" style="width:550px;height:550px;background:radial-gradient(circle,rgba(0,212,255,0.13),transparent 70%);top:-120px;right:-80px"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08),transparent 70%);bottom:100px;left:-60px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(60deg,transparent,transparent 80px,rgba(0,212,255,0.03) 80px,rgba(0,212,255,0.03) 81px)"></div>
+</div>
+<div class="layer-fx">
+  <div class="sline fx-s1" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),transparent);top:500px"></div>
+  <div class="sline fx-s2" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.2),transparent);top:1200px"></div>
+  <div class="orb fx-g1o" style="width:220px;height:220px;background:rgba(0,212,255,0.2);bottom:350px;right:120px;filter:blur(70px)"></div>
+</div>
+<div class="layer-content">
+  <!-- Phase 1: ECC + Understand-Anything (4.65 - 8.45) -->
+  <div class="phase p1" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#00d4ff"></div><div class="g-label" style="color:#00d4ff">技能生态</div></div>
+    <div class="card g1-c" style="border-color:rgba(0,212,255,0.3)">
+      <div class="c-name" style="color:#00d4ff">ECC</div>
+      <div class="c-stars">200K ★</div>
+      <div class="c-desc">Agent 性能优化系统，覆盖技能/本能/记忆/安全</div>
+    </div>
+    <div class="card g1-c" style="border-color:rgba(0,212,255,0.2)">
+      <div class="c-name" style="color:#00d4ff">Understand-Anything</div>
+      <div class="c-stars">47K ★</div>
+      <div class="c-desc">把任意代码变成可交互知识图谱</div>
+    </div>
+  </div>
+  <!-- Phase 2: codegraph + taste-skill (8.45 - 15.95) -->
+  <div class="phase p2" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#00d4ff"></div><div class="g-label" style="color:#00d4ff">技能生态</div></div>
+    <div class="card g1-c" style="border-color:rgba(0,212,255,0.3)">
+      <div class="c-name" style="color:#00d4ff">codegraph</div>
+      <div class="c-stars">35K ★</div>
+      <div class="c-desc">预索引代码知识图谱，100% 本地运行，省 token</div>
+    </div>
+    <div class="card g1-c" style="border-color:rgba(0,212,255,0.2)">
+      <div class="c-name" style="color:#00d4ff">taste-skill</div>
+      <div class="c-stars">30K ★</div>
+      <div class="c-desc">让 AI 有好品味，阻止生成无聊内容</div>
+    </div>
+  </div>
+  <!-- Phase 3: Cybersecurity-Skills (15.95 - 21.05) -->
+  <div class="phase p3" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#00d4ff"></div><div class="g-label" style="color:#00d4ff">技能生态</div></div>
+    <div class="card g1-c" style="border-color:rgba(0,212,255,0.3)">
+      <div class="c-name" style="color:#00d4ff">Cybersecurity-Skills</div>
+      <div class="c-stars">13K ★</div>
+      <div class="c-desc">754 个网络安全技能，映射 MITRE ATT&CK 等 5 个框架</div>
+    </div>
+    <div class="g1-c" style="font-size:36px;color:rgba(0,212,255,0.5);text-align:center;margin-top:16px">──── 本组 5 个项目 · 累计 325K+ ★ ────</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== Scene 3: G2 Content (21.05 - 33.06s, 12.01s) ========== -->
+<div class="clip" data-start="21.05" data-duration="12.01">
+<div class="scene-wrap s-g2" id="s3">
+<div class="layer-bg" style="background:linear-gradient(170deg,#0e0c08 0%,#141008 50%,#1a1408 100%)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(255,149,0,0.13),transparent 70%);top:-100px;left:-80px"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(255,149,0,0.08),transparent 70%);bottom:200px;right:-60px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(-45deg,transparent,transparent 100px,rgba(255,149,0,0.025) 100px,rgba(255,149,0,0.025) 101px)"></div>
+</div>
+<div class="layer-fx">
+  <div class="streak fx-st1" style="width:400px;background:linear-gradient(90deg,transparent,rgba(255,149,0,0.25),transparent);top:400px;left:-50px"></div>
+  <div class="streak fx-st2" style="width:350px;background:linear-gradient(90deg,transparent,rgba(255,149,0,0.2),transparent);top:1000px;right:-30px"></div>
+  <div class="orb fx-g2o" style="width:240px;height:240px;background:rgba(255,149,0,0.2);bottom:300px;left:100px;filter:blur(70px)"></div>
+</div>
+<div class="layer-content">
+  <!-- Phase 1: markitdown (21.05 - 26.25) -->
+  <div class="phase p1" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#ff9500"></div><div class="g-label" style="color:#ff9500">内容与工具</div></div>
+    <div class="card g2-c" style="border-color:rgba(255,149,0,0.3)">
+      <div class="c-name" style="color:#ff9500">markitdown</div>
+      <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-bottom:6px">microsoft</div>
+      <div class="c-stars">135K ★</div>
+      <div class="c-desc">任意文件一键转 Markdown</div>
+    </div>
+  </div>
+  <!-- Phase 2: MoneyPrinterTurbo + heretic (26.25 - 33.06) -->
+  <div class="phase p2" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#ff9500"></div><div class="g-label" style="color:#ff9500">内容与工具</div></div>
+    <div class="card g2-c" style="border-color:rgba(255,149,0,0.3)">
+      <div class="c-name" style="color:#ff9500">MoneyPrinterTurbo</div>
+      <div class="c-stars">74K ★</div>
+      <div class="c-desc">AI 大模型一键生成高清短视频</div>
+    </div>
+    <div class="card g2-c" style="border-color:rgba(255,149,0,0.2)">
+      <div class="c-name" style="color:#ff9500">heretic</div>
+      <div class="c-stars">23K ★</div>
+      <div class="c-desc">全自动移除语言模型审查限制</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== Scene 4: G3 Infra (33.06 - 45.07s, 12.01s) ========== -->
+<div class="clip" data-start="33.06" data-duration="12.01">
+<div class="scene-wrap s-g3" id="s4">
+<div class="layer-bg" style="background:linear-gradient(170deg,#060e08 0%,#081408 50%,#0a1a0c 100%)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(0,230,118,0.12),transparent 70%);top:-100px;right:-80px"></div>
+  <div class="orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(0,230,118,0.08),transparent 70%);bottom:150px;left:-50px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle 3px at 50% 50%,rgba(0,230,118,0.08) 100%,transparent 100%);background-size:60px 60px"></div>
+</div>
+<div class="layer-fx">
+  <div class="fdot fx-d1" style="background:rgba(0,230,118,0.35);top:350px;left:150px;width:8px;height:8px"></div>
+  <div class="fdot fx-d2" style="background:rgba(0,230,118,0.3);top:700px;right:200px;width:6px;height:6px"></div>
+  <div class="fdot fx-d3" style="background:rgba(0,230,118,0.25);top:1100px;left:300px;width:7px;height:7px"></div>
+  <div class="fdot fx-d4" style="background:rgba(0,230,118,0.3);top:1500px;right:150px;width:5px;height:5px"></div>
+  <div class="fdot fx-d5" style="background:rgba(0,230,118,0.2);bottom:350px;left:500px;width:6px;height:6px"></div>
+  <div class="orb fx-g3o" style="width:200px;height:200px;background:rgba(0,230,118,0.18);top:600px;left:50px;filter:blur(70px)"></div>
+</div>
+<div class="layer-content">
+  <!-- Phase 1: iii + liteparse (33.06 - 39.56) -->
+  <div class="phase p1" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#00e676"></div><div class="g-label" style="color:#00e676">开发者基建</div></div>
+    <div class="card g3-c" style="border-color:rgba(0,230,118,0.3)">
+      <div class="c-name" style="color:#00e676">iii</div>
+      <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-bottom:6px">Rust</div>
+      <div class="c-stars">17K ★</div>
+      <div class="c-desc">实时编排、扩展和观测每个服务</div>
+    </div>
+    <div class="card g3-c" style="border-color:rgba(0,230,118,0.2)">
+      <div class="c-name" style="color:#00e676">liteparse</div>
+      <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-bottom:6px">Rust · Llama 团队</div>
+      <div class="c-stars">8.3K ★</div>
+      <div class="c-desc">快速开源文档解析器，PDF/OCR</div>
+    </div>
+  </div>
+  <!-- Phase 2: dograh + herdr (39.56 - 45.07) -->
+  <div class="phase p2" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#00e676"></div><div class="g-label" style="color:#00e676">开发者基建</div></div>
+    <div class="card g3-c" style="border-color:rgba(0,230,118,0.3)">
+      <div class="c-name" style="color:#00e676">dograh</div>
+      <div class="c-stars">4K ★</div>
+      <div class="c-desc">开源语音 AI 平台，Vapi 自托管替代</div>
+    </div>
+    <div class="card g3-c" style="border-color:rgba(0,230,118,0.2)">
+      <div class="c-name" style="color:#00e676">herdr</div>
+      <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-bottom:6px">Rust</div>
+      <div class="c-stars">3.4K ★</div>
+      <div class="c-desc">终端 Agent 多路复用器，像 tmux 管理 AI Agent</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== Scene 5: G4 Learn (45.07 - 54.37s, 9.3s) ========== -->
+<div class="clip" data-start="45.07" data-duration="9.3">
+<div class="scene-wrap s-g4" id="s5">
+<div class="layer-bg" style="background:linear-gradient(170deg,#0a0814 0%,#0e0c1e 50%,#12102a 100%)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(179,136,255,0.13),transparent 70%);top:-120px;left:-80px"></div>
+  <div class="orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(179,136,255,0.08),transparent 70%);bottom:200px;right:-40px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(179,136,255,0.03) 80px,rgba(179,136,255,0.03) 81px)"></div>
+</div>
+<div class="layer-fx">
+  <div class="orb fx-g4a" style="width:260px;height:260px;background:rgba(179,136,255,0.22);top:400px;right:80px;filter:blur(80px)"></div>
+  <div class="orb fx-g4b" style="width:200px;height:200px;background:rgba(179,136,255,0.18);bottom:500px;left:100px;filter:blur(70px)"></div>
+  <div class="orb fx-g4c" style="width:150px;height:150px;background:rgba(179,136,255,0.15);top:1000px;left:400px;filter:blur(60px)"></div>
+</div>
+<div class="layer-content">
+  <!-- Phase 1: ai-engineering-from-scratch (45.07 - 50.47) -->
+  <div class="phase p1" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#b388ff"></div><div class="g-label" style="color:#b388ff">学习与治理</div></div>
+    <div class="card g4-c" style="border-color:rgba(179,136,255,0.3)">
+      <div class="c-name" style="color:#b388ff">ai-engineering-from-scratch</div>
+      <div class="c-stars">26K ★</div>
+      <div class="c-desc">从零学 AI 工程，覆盖 Agent/CV/NLP/RL/MCP 全栈</div>
+    </div>
+  </div>
+  <!-- Phase 2: agent-governance-toolkit (50.47 - 54.37) -->
+  <div class="phase p2" style="position:absolute;inset:0">
+    <div class="g-header"><div class="g-dot" style="background:#b388ff"></div><div class="g-label" style="color:#b388ff">学习与治理</div></div>
+    <div class="card g4-c" style="border-color:rgba(179,136,255,0.3)">
+      <div class="c-name" style="color:#b388ff">agent-governance-toolkit</div>
+      <div style="font-size:36px;color:rgba(255,255,255,0.4);margin-bottom:6px">microsoft</div>
+      <div class="c-stars">3.6K ★</div>
+      <div class="c-desc">AI Agent 治理工具包，零信任沙盒 + OWASP 全覆盖</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== Scene 6: CTA (54.37 - 55.27s, 0.9s) ========== -->
+<div class="clip" data-start="54.37" data-duration="0.9">
+<div class="scene-wrap s-cta" id="s6">
+<div class="layer-bg" style="background:linear-gradient(170deg,#0a0e1a 0%,#0d1525 50%,#111d35 100%)">
+  <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="orb fx-cta1" style="width:300px;height:300px;background:rgba(0,212,255,0.15);top:400px;left:100px;filter:blur(80px)"></div>
+  <div class="orb fx-cta2" style="width:250px;height:250px;background:rgba(179,136,255,0.15);bottom:400px;right:100px;filter:blur(80px)"></div>
+</div>
+<div class="layer-content">
+  <div class="phase" style="align-items:center;text-align:center">
+    <div class="cta-el" style="font-size:80px;font-weight:900;color:#fff">关注我</div>
+    <div class="cta-el" style="font-size:42px;font-weight:600;margin-top:16px;color:rgba(255,255,255,0.6)">下期见</div>
+  </div>
+</div>
+</div>
+</div>
+
+</div><!-- end composition -->
+
+<script>
+window.__timelines = {};
+const tl = gsap.timeline({paused: true});
+
+// === Hook (0 - 4.65s) ===
+tl.from('.s-hook .hook-el', {opacity:0, y:30, duration:0.4, stagger:0.12, ease:'power3.out'}, 0.15);
+tl.to('.fx-h1', {x:40, y:-30, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 0);
+tl.to('.fx-h2', {x:-35, y:25, repeat:-1, yoyo:true, duration:3.5, ease:'sine.inOut'}, 0);
+tl.to('.fx-h3', {x:30, y:20, repeat:-1, yoyo:true, duration:2.8, ease:'sine.inOut'}, 0);
+
+// === G1 Skills (4.65 - 21.05s) ===
+// Phase management: hide p2/p3 at scene start
+tl.set('.s-g1 .p2', {opacity:0}, 4.65);
+tl.set('.s-g1 .p3', {opacity:0}, 4.65);
+// Phase 1 entrance
+tl.from('.s-g1 .p1 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 4.8);
+tl.from('.s-g1 .p1 .g1-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 5.0);
+// Transition to Phase 2 at 8.45
+tl.to('.s-g1 .p1', {opacity:0, duration:0.3}, 8.3);
+tl.from('.s-g1 .p2 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 8.55);
+tl.from('.s-g1 .p2 .g1-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 8.7);
+tl.to('.s-g1 .p2', {opacity:1, duration:0.3}, 8.55);
+// Transition to Phase 3 at 15.95
+tl.to('.s-g1 .p2', {opacity:0, duration:0.3}, 15.8);
+tl.from('.s-g1 .p3 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 16.05);
+tl.from('.s-g1 .p3 .g1-c', {opacity:0, y:20, duration:0.3, stagger:0.1, ease:'power3.out'}, 16.2);
+tl.to('.s-g1 .p3', {opacity:1, duration:0.3}, 16.05);
+// FX animations
+tl.to('.fx-s1', {x:200, repeat:-1, yoyo:true, duration:4, ease:'sine.inOut'}, 4.65);
+tl.to('.fx-s2', {x:-180, repeat:-1, yoyo:true, duration:3.5, ease:'sine.inOut'}, 4.65);
+tl.to('.fx-g1o', {scale:1.3, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 4.65);
+
+// === G2 Content (21.05 - 33.06s) ===
+tl.set('.s-g2 .p2', {opacity:0}, 21.05);
+tl.from('.s-g2 .p1 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 21.2);
+tl.from('.s-g2 .p1 .g2-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 21.35);
+// Transition to Phase 2 at 26.25
+tl.to('.s-g2 .p1', {opacity:0, duration:0.3}, 26.1);
+tl.from('.s-g2 .p2 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 26.35);
+tl.from('.s-g2 .p2 .g2-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 26.5);
+tl.to('.s-g2 .p2', {opacity:1, duration:0.3}, 26.35);
+// FX
+tl.to('.fx-st1', {x:300, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 21.05);
+tl.to('.fx-st2', {x:-250, repeat:-1, yoyo:true, duration:3.5, ease:'sine.inOut'}, 21.05);
+tl.to('.fx-g2o', {scale:1.4, repeat:-1, yoyo:true, duration:2.5, ease:'sine.inOut'}, 21.05);
+
+// === G3 Infra (33.06 - 45.07s) ===
+tl.set('.s-g3 .p2', {opacity:0}, 33.06);
+tl.from('.s-g3 .p1 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 33.2);
+tl.from('.s-g3 .p1 .g3-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 33.35);
+// Transition at 39.56
+tl.to('.s-g3 .p1', {opacity:0, duration:0.3}, 39.4);
+tl.from('.s-g3 .p2 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 39.65);
+tl.from('.s-g3 .p2 .g3-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 39.8);
+tl.to('.s-g3 .p2', {opacity:1, duration:0.3}, 39.65);
+// FX: floating dots
+tl.to('.fx-d1', {y:-40, repeat:-1, yoyo:true, duration:2.5, ease:'sine.inOut'}, 33.06);
+tl.to('.fx-d2', {y:35, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 33.06);
+tl.to('.fx-d3', {y:-30, repeat:-1, yoyo:true, duration:2.8, ease:'sine.inOut'}, 33.06);
+tl.to('.fx-d4', {y:25, repeat:-1, yoyo:true, duration:3.2, ease:'sine.inOut'}, 33.06);
+tl.to('.fx-d5', {y:-20, repeat:-1, yoyo:true, duration:2.6, ease:'sine.inOut'}, 33.06);
+tl.to('.fx-g3o', {scale:1.3, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 33.06);
+
+// === G4 Learn (45.07 - 54.37s) ===
+tl.set('.s-g4 .p2', {opacity:0}, 45.07);
+tl.from('.s-g4 .p1 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 45.2);
+tl.from('.s-g4 .p1 .g4-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 45.35);
+// Transition at 50.47
+tl.to('.s-g4 .p1', {opacity:0, duration:0.3}, 50.3);
+tl.from('.s-g4 .p2 .g-header', {opacity:0, x:-20, duration:0.3, ease:'power3.out'}, 50.55);
+tl.from('.s-g4 .p2 .g4-c', {opacity:0, y:20, duration:0.3, stagger:0.12, ease:'power3.out'}, 50.7);
+tl.to('.s-g4 .p2', {opacity:1, duration:0.3}, 50.55);
+// FX: purple orbs
+tl.to('.fx-g4a', {x:40, y:-30, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut'}, 45.07);
+tl.to('.fx-g4b', {x:-35, y:25, repeat:-1, yoyo:true, duration:3.5, ease:'sine.inOut'}, 45.07);
+tl.to('.fx-g4c', {scale:1.4, repeat:-1, yoyo:true, duration:2.8, ease:'sine.inOut'}, 45.07);
+
+// === CTA (54.37 - 55.27s) ===
+tl.from('.s-cta .cta-el', {opacity:0, y:20, duration:0.25, stagger:0.08, ease:'power3.out'}, 54.42);
+tl.to('.fx-cta1', {scale:1.3, repeat:-1, yoyo:true, duration:2, ease:'sine.inOut'}, 54.37);
+tl.to('.fx-cta2', {scale:1.2, repeat:-1, yoyo:true, duration:2.5, ease:'sine.inOut'}, 54.37);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

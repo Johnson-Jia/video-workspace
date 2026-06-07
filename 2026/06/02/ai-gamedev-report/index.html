@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>ai-gamedev-report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1080px; height: 1920px; overflow: hidden;
+      position: relative; background: #000;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+    .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+    .layer-bg      { position: absolute; inset: 0; z-index: 1; }
+    .layer-fx      { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .layer-content { position: relative; z-index: 3; height: 100%; }
+    .phase {
+      position: absolute; inset: 0;
+      padding: 180px 80px 220px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 1;
+    }
+    :root {
+      --bg-dark: #080818;
+      --bg-mid: #001a33;
+      --accent-warm: #f9a825;
+      --accent-cool: #00f5d4;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0c0;
+    }
+
+    /* Global creative styles */
+    .grad-text {
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .safe-box {
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .tag-num {
+      font-size: 28px;
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+    .big-num {
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .card-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .card-item {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    .fx-line {
+      position: absolute;
+      height: 2px;
+      opacity: 0.4;
+    }
+    .fx-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--accent-warm);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main"
+     data-width="1080" data-height="1920" data-start="0">
+  <audio data-track-index="1" data-volume="1" data-start="0"
+         src="narration.mp3" preload="auto"></audio>
+  <audio data-track-index="2" data-start="0"
+         data-volume="0.15"
+         src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ═══ S1 HOOK (0.0 ~ 7.61) ═══ -->
+  <div class="clip" id="s1" data-start="0.0" data-duration="7.61">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%, rgba(249,168,37,0.15) 0%, transparent 60%), linear-gradient(180deg, #0a0a1a 0%, #0d0d2b 100%);"></div>
+      <div class="glow-orb" style="width:500px;height:500px;top:20%;left:50%;transform:translateX(-50%);background:rgba(249,168,37,0.12);"></div>
+      <div class="glow-orb" style="width:300px;height:300px;top:50%;left:20%;background:rgba(0,245,212,0.06);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 88deg, rgba(249,168,37,0.03) 88deg 90deg, transparent 90deg 180deg);background-size:120px 120px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s1-scan" class="fx-line" style="width:1080px;top:600px;left:0;background:linear-gradient(90deg, transparent, rgba(0,245,212,0.5), transparent);"></div>
+      <div id="fx-s1-burst" style="position:absolute;width:8px;height:8px;border-radius:50%;top:35%;left:50%;background:rgba(249,168,37,0.8);"></div>
+      <div id="fx-s1-dot1" class="fx-dot" style="top:25%;left:15%;background:#00f5d4;"></div>
+      <div id="fx-s1-dot2" class="fx-dot" style="top:60%;left:80%;background:#ff006e;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff6b6b;font-weight:700;letter-spacing:4px;margin-bottom:20px;">GAME DEV</div>
+          <h1 class="grad-text" style="font-size:100px;font-weight:900;line-height:1.15;background-image:linear-gradient(135deg, #f9a825, #ff6b6b, #ff006e);">游戏开发<br>变天了</h1>
+          <div style="margin-top:40px;font-size:40px;color:#e0e0e0;font-weight:500;line-height:1.5;">
+            <span style="color:#00f5d4;font-size:72px;font-weight:900;">40+</span> 个AI项目<br>同时爆发
+          </div>
+          <div style="margin-top:24px;font-size:36px;color:#888;font-weight:400;">从写代码到搭关卡 全流程被接管</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S2 BACKGROUND (7.61 ~ 45.34) ═══ -->
+  <div class="clip" id="s2" data-start="7.61" data-duration="37.73">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg, #060614 0%, #0a1a2e 50%, #0d0d2b 100%);"></div>
+      <div class="glow-orb" style="width:600px;height:600px;top:10%;right:-10%;background:rgba(0,136,204,0.08);"></div>
+      <div class="glow-orb" style="width:400px;height:400px;bottom:15%;left:-5%;background:rgba(0,245,212,0.05);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(0,136,204,0.04) 40px, rgba(0,136,204,0.04) 41px);opacity:0.7;"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(0,200,255,0.06) 1px, transparent 1px);background-size:48px 48px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s2-line1" class="fx-line" style="width:300px;top:400px;left:100px;background:rgba(0,245,212,0.3);"></div>
+      <div id="fx-s2-line2" class="fx-line" style="width:400px;top:900px;left:500px;background:rgba(249,168,37,0.2);"></div>
+      <div id="fx-s2-dot1" class="fx-dot" style="top:30%;left:30%;background:#00f5d4;"></div>
+      <div id="fx-s2-dot2" class="fx-dot" style="top:70%;left:70%;background:#f9a825;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;letter-spacing:2px;">WHY NOW</div>
+          <h2 class="grad-text" style="font-size:72px;font-weight:900;line-height:1.2;margin-top:12px;background-image:linear-gradient(90deg, #fff, #a0a0c0);">三重驱动力<br>同时成熟</h2>
+          <div style="margin-top:48px;display:flex;flex-direction:column;gap:20px;">
+            <div class="card-item" style="border-left:3px solid #00f5d4;">
+              <div style="font-size:36px;font-weight:700;color:#00f5d4;">01 MCP 协议</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">AI ↔ 引擎标准通信</div>
+            </div>
+            <div class="card-item" style="border-left:3px solid #f9a825;">
+              <div style="font-size:36px;font-weight:700;color:#f9a825;">02 Agent 质变</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">从补函数 → 搭建完整关卡</div>
+            </div>
+            <div class="card-item" style="border-left:3px solid #ff006e;">
+              <div style="font-size:36px;font-weight:700;color:#ff006e;">03 本地模型</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">云端付费 → 一台电脑就能跑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">CONDITION 1 & 2</div>
+          <h2 style="font-size:56px;font-weight:800;line-height:1.3;margin-top:16px;">MCP = AI 的<span style="color:#00f5d4;">标准化双手</span></h2>
+          <div style="margin-top:36px;font-size:36px;color:#ccc;line-height:1.6;">
+            以前：各种定制接口<br>
+            现在：<span style="color:#00f5d4;font-weight:700;">什么引擎都能抓</span>
+          </div>
+          <div style="margin-top:40px;height:2px;background:rgba(255,255,255,0.1);"></div>
+          <h2 style="font-size:56px;font-weight:800;line-height:1.3;margin-top:32px;">Agent 能力<span style="color:#f9a825;">质变</span></h2>
+          <div style="margin-top:36px;font-size:36px;color:#ccc;line-height:1.6;">
+            补函数 → 创建蓝图 → 搭建关卡<br>
+            <span style="color:#f9a825;font-weight:700;">全程无需人类监控</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">TRIPLE CONVERGENCE</div>
+          <h2 class="grad-text" style="font-size:68px;font-weight:900;line-height:1.2;margin-top:16px;background-image:linear-gradient(135deg, #00f5d4, #f9a825, #ff006e);">三重叠加<br>概念 → 现实</h2>
+          <div style="margin-top:48px;display:flex;gap:20px;justify-content:center;">
+            <div style="text-align:center;">
+              <div style="font-size:64px;font-weight:900;color:#00f5d4;">MCP</div>
+              <div style="font-size:36px;color:#888;">标准通信</div>
+            </div>
+            <div style="font-size:48px;color:#444;align-self:center;">+</div>
+            <div style="text-align:center;">
+              <div style="font-size:64px;font-weight:900;color:#f9a825;">Agent</div>
+              <div style="font-size:36px;color:#888;">全自主</div>
+            </div>
+            <div style="font-size:48px;color:#444;align-self:center;">+</div>
+            <div style="text-align:center;">
+              <div style="font-size:64px;font-weight:900;color:#ff006e;">Local</div>
+              <div style="font-size:36px;color:#888;">免费部署</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S3 SIX ROUTES (45.34 ~ 80.93) ═══ -->
+  <div class="clip" id="s3" data-start="45.34" data-duration="35.59">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(145deg, #0a0f1a 0%, #0d1a2d 40%, #120a22 100%);"></div>
+      <div class="glow-orb" style="width:500px;height:500px;top:5%;left:50%;transform:translateX(-50%);background:rgba(0,245,212,0.07);"></div>
+      <div class="glow-orb" style="width:350px;height:350px;bottom:20%;right:-5%;background:rgba(255,0,110,0.06);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(0,245,212,0.06) 1px, transparent 1px);background-size:40px 40px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s3-hex" style="position:absolute;width:120px;height:120px;top:15%;left:10%;border:2px solid rgba(0,245,212,0.2);border-radius:12px;transform:rotate(45deg);"></div>
+      <div id="fx-s3-hex2" style="position:absolute;width:80px;height:80px;top:65%;right:12%;border:2px solid rgba(255,0,110,0.2);border-radius:12px;transform:rotate(30deg);"></div>
+      <div id="fx-s3-line" class="fx-line" style="width:500px;top:960px;left:50px;background:linear-gradient(90deg, rgba(0,245,212,0.3), rgba(255,0,110,0.2));"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">SIX TRACKS</div>
+          <h2 class="grad-text" style="font-size:64px;font-weight:900;line-height:1.2;margin-top:12px;background-image:linear-gradient(90deg, #00f5d4, #fff);">六大技术路线</h2>
+          <div style="margin-top:32px;display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#00f5d4;min-width:60px;">01</div>
+              <div><div style="font-size:36px;font-weight:700;">编辑器内嵌 Agent</div><div style="font-size:36px;color:#888;">AI 直接在引擎里干活</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#f9a825;min-width:60px;">02</div>
+              <div><div style="font-size:36px;font-weight:700;">MCP 协议桥接</div><div style="font-size:36px;color:#888;">远程控制引擎</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#ff006e;min-width:60px;">03</div>
+              <div><div style="font-size:36px;font-weight:700;">Skills 体系</div><div style="font-size:36px;color:#888;">Agent 管理项目全流程</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">TRACK 04–06</div>
+          <div style="margin-top:28px;display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#00f5d4;min-width:60px;">04</div>
+              <div><div style="font-size:36px;font-weight:700;">游戏内嵌 LLM</div><div style="font-size:36px;color:#888;">给 NPC 加智能 让角色会说话</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#f9a825;min-width:60px;">05</div>
+              <div><div style="font-size:36px;font-weight:700;">AI 资产生成</div><div style="font-size:36px;color:#888;">模型 贴图 动画全包</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="font-size:48px;font-weight:900;color:#ff006e;min-width:60px;">06</div>
+              <div><div style="font-size:36px;font-weight:700;">跨引擎通用</div><div style="font-size:36px;color:#888;">一次开发 多引擎运行</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">KEY NUMBER</div>
+          <div style="margin-top:24px;">
+            <span class="big-num grad-text" style="background-image:linear-gradient(135deg, #ff006e, #f9a825);">75%</span>
+          </div>
+          <div style="font-size:40px;font-weight:700;margin-top:16px;">项目 2025 年才创建</div>
+          <div style="font-size:36px;color:#888;margin-top:12px;">40+ 开源项目 同步爆发</div>
+          <div style="margin-top:32px;font-size:36px;font-weight:800;color:#ff006e;">这场爆发 才刚刚开始</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S4 AUTONOMIX (80.93 ~ 128.11) ═══ -->
+  <div class="clip" id="s4" data-start="80.93" data-duration="47.18">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(0,136,204,0.1) 0%, transparent 50%), linear-gradient(180deg, #060618 0%, #0a1628 50%, #080818 100%);"></div>
+      <div class="glow-orb" style="width:700px;height:700px;top:-10%;left:50%;transform:translateX(-50%);background:rgba(0,136,204,0.06);"></div>
+      <div class="glow-orb" style="width:300px;height:300px;bottom:30%;right:0;background:rgba(249,168,37,0.05);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(0,136,204,0.04) 80px, rgba(0,136,204,0.04) 81px);"></div>
+      <div style="position:absolute;inset:0;background:conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(0,136,204,0.04) 60deg, transparent 120deg, rgba(0,200,255,0.03) 180deg, transparent 240deg, rgba(0,136,204,0.02) 300deg, transparent 360deg);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s4-scan" class="fx-line" style="width:1080px;top:500px;left:0;background:linear-gradient(90deg, transparent, rgba(0,136,204,0.4), transparent);"></div>
+      <div id="fx-s4-node1" class="fx-dot" style="top:20%;left:20%;background:#0088cc;width:10px;height:10px;"></div>
+      <div id="fx-s4-node2" class="fx-dot" style="top:40%;left:80%;background:#00f5d4;width:8px;height:8px;"></div>
+      <div id="fx-s4-node3" class="fx-dot" style="top:75%;left:35%;background:#f9a825;width:10px;height:10px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#0088cc;font-weight:700;">★ STAR PROJECT</div>
+          <h2 class="grad-text" style="font-size:80px;font-weight:900;line-height:1.1;margin-top:12px;background-image:linear-gradient(135deg, #00f5d4, #0088cc);">Autonomix</h2>
+          <div style="margin-top:32px;display:flex;gap:24px;">
+            <div style="text-align:center;flex:1;">
+              <div class="big-num grad-text" style="background-image:linear-gradient(135deg, #00f5d4, #0088cc);">85</div>
+              <div style="font-size:36px;color:#888;">工具数量</div>
+            </div>
+            <div style="text-align:center;flex:1;">
+              <div style="font-size:80px;font-weight:900;color:#f9a825;">A</div>
+              <div style="font-size:36px;color:#888;">成熟度评级</div>
+            </div>
+          </div>
+          <div style="margin-top:24px;font-size:36px;color:#ccc;line-height:1.6;">
+            蓝图节点 · 材质编辑 · 关卡搭建 · 自动测试
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">KILLER FEATURE</div>
+          <h2 style="font-size:56px;font-weight:900;line-height:1.2;margin-top:12px;">T3D 注入技术</h2>
+          <div style="margin-top:32px;display:flex;gap:20px;">
+            <div class="card-item" style="border-top:3px solid #ff6b6b;">
+              <div style="font-size:36px;color:#ff6b6b;font-weight:700;">传统方式</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">逐节点调 API</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">几十节点 = 几十次调用</div>
+            </div>
+            <div style="align-self:center;font-size:48px;font-weight:900;color:#f9a825;">→</div>
+            <div class="card-item" style="border-top:3px solid #00f5d4;">
+              <div style="font-size:36px;color:#00f5d4;font-weight:700;">T3D 格式</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">整图打包一次注入</div>
+              <div style="font-size:48px;font-weight:900;color:#00f5d4;margin-top:8px;">10x 效率</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">VISION + SAFETY</div>
+          <div style="margin-top:28px;">
+            <div class="card-item" style="border-left:3px solid #00f5d4;margin-bottom:16px;">
+              <div style="font-size:36px;font-weight:700;color:#00f5d4;">AI 视觉检查</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">自动截图 → VLM 检查 UI 布局和光照<br><span style="color:#00f5d4;">相当于给 AI 装了一双眼睛</span></div>
+            </div>
+            <div class="card-item" style="border-left:3px solid #f9a825;">
+              <div style="font-size:36px;font-weight:700;color:#f9a825;">六层安全防护</div>
+              <div style="font-size:36px;color:#ccc;margin-top:8px;">风险评估 · 受保护文件 · 完整执行日志</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-4">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">COMPARISON</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:12px;">vs UE5.7 官方助手</h2>
+          <div style="margin-top:28px;display:flex;gap:20px;">
+            <div class="card-item" style="text-align:center;border-top:3px solid #888;">
+              <div style="font-size:36px;font-weight:700;">官方助手</div>
+              <div style="font-size:36px;font-weight:900;color:#888;margin-top:12px;">只读查询</div>
+            </div>
+            <div class="card-item" style="text-align:center;border-top:3px solid #00f5d4;">
+              <div style="font-size:36px;font-weight:700;">Autonomix</div>
+              <div style="font-size:36px;font-weight:900;color:#00f5d4;margin-top:12px;">动手干活</div>
+            </div>
+          </div>
+          <div style="margin-top:24px;font-size:36px;font-weight:700;text-align:center;color:#f9a825;">互补 而非替代</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S5 MCP (128.11 ~ 160.37) ═══ -->
+  <div class="clip" id="s5" data-start="128.11" data-duration="32.26">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg, #08101e 0%, #0a1a2d 50%, #0d1520 100%);"></div>
+      <div class="glow-orb" style="width:500px;height:500px;top:30%;left:-10%;background:rgba(0,245,212,0.06);"></div>
+      <div class="glow-orb" style="width:400px;height:400px;bottom:10%;right:-5%;background:rgba(249,168,37,0.06);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 50% 50%, transparent 0px, transparent 58px, rgba(0,245,212,0.04) 58px, rgba(0,245,212,0.04) 60px, transparent 60px, transparent 118px, rgba(0,245,212,0.03) 118px, rgba(0,245,212,0.03) 120px, transparent 120px, transparent 178px, rgba(0,245,212,0.02) 178px, rgba(0,245,212,0.02) 180px);background-size:240px 240px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s5-conn1" style="position:absolute;width:2px;height:200px;top:20%;left:50%;background:linear-gradient(180deg, rgba(0,245,212,0.4), transparent);"></div>
+      <div id="fx-s5-conn2" style="position:absolute;width:2px;height:200px;top:40%;left:30%;background:linear-gradient(180deg, rgba(249,168,37,0.3), transparent);"></div>
+      <div id="fx-s5-conn3" style="position:absolute;width:2px;height:200px;top:40%;left:70%;background:linear-gradient(180deg, rgba(255,0,110,0.3), transparent);"></div>
+      <div id="fx-s5-hub" class="fx-dot" style="top:35%;left:49%;background:#00f5d4;width:12px;height:12px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">MCP PROTOCOL</div>
+          <h2 class="grad-text" style="font-size:68px;font-weight:900;line-height:1.15;margin-top:12px;background-image:linear-gradient(135deg, #00f5d4, #0088cc);">核心价值<br>解耦</h2>
+          <div style="margin-top:36px;font-size:36px;color:#ccc;line-height:1.6;">
+            同一个 MCP 服务器<br>
+            <span style="color:#00f5d4;font-weight:700;">Claude Desktop</span> · <span style="color:#f9a825;font-weight:700;">Cursor</span> · <span style="color:#ff006e;font-weight:700;">VS Code</span><br>
+            全部通用 不绑定单一客户端
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">COMPETITION</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:12px;">8 个 UE5 MCP 项目竞争</h2>
+          <div style="margin-top:28px;text-align:center;">
+            <div class="big-num grad-text" style="background-image:linear-gradient(135deg, #f9a825, #ff6b6b);">88</div>
+            <div style="font-size:36px;color:#ccc;margin-top:8px;">ChiR24 方案 工具数居首</div>
+          </div>
+          <div style="margin-top:24px;font-size:36px;color:#888;text-align:center;">资产管理 · 场景编辑 · 代码生成 全覆盖</div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">CONVERGENCE</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:16px;">收敛预测</h2>
+          <div style="margin-top:32px;">
+            <div style="font-size:36px;color:#ccc;line-height:1.8;">
+              今年收敛到 <span style="color:#f9a825;font-weight:900;">2-3</span> 个主流方案<br>
+              UE 官方 <span style="color:#00f5d4;font-weight:900;">内置 MCP</span><br>
+              AI 操控引擎 = <span style="color:#ff006e;font-weight:900;">标配功能</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S6 CLAUDE STUDIOS (160.37 ~ 192.46) ═══ -->
+  <div class="clip" id="s6" data-start="160.37" data-duration="32.09">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%, rgba(160,0,200,0.08) 0%, transparent 50%), linear-gradient(180deg, #0a0818 0%, #12081e 100%);"></div>
+      <div class="glow-orb" style="width:600px;height:600px;top:20%;left:50%;transform:translateX(-50%);background:rgba(255,0,110,0.06);"></div>
+      <div class="glow-orb" style="width:300px;height:300px;bottom:20%;left:10%;background:rgba(160,0,200,0.05);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(60deg, transparent, transparent 30px, rgba(160,0,200,0.04) 30px, rgba(160,0,200,0.04) 31px), repeating-linear-gradient(-60deg, transparent, transparent 30px, rgba(255,0,110,0.03) 30px, rgba(255,0,110,0.03) 31px);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 100%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s6-branch1" style="position:absolute;width:2px;height:160px;top:30%;left:35%;background:rgba(255,0,110,0.3);"></div>
+      <div id="fx-s6-branch2" style="position:absolute;width:2px;height:160px;top:30%;left:50%;background:rgba(160,0,200,0.3);"></div>
+      <div id="fx-s6-branch3" style="position:absolute;width:2px;height:160px;top:30%;left:65%;background:rgba(249,168,37,0.3);"></div>
+      <div id="fx-s6-core" style="position:absolute;width:16px;height:16px;top:28%;left:50%;transform:translateX(-50%);background:rgba(255,0,110,0.6);border-radius:50%;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">NEW CONCEPT</div>
+          <h2 class="grad-text" style="font-size:64px;font-weight:900;line-height:1.15;margin-top:12px;background-image:linear-gradient(135deg, #ff006e, #a000c8);">AI 虚拟工作室</h2>
+          <div style="margin-top:36px;display:flex;gap:24px;justify-content:center;">
+            <div style="text-align:center;">
+              <div class="big-num grad-text" style="background-image:linear-gradient(135deg, #ff006e, #a000c8);">49</div>
+              <div style="font-size:36px;color:#888;">AI Agent</div>
+            </div>
+            <div style="text-align:center;">
+              <div class="big-num grad-text" style="background-image:linear-gradient(135deg, #a000c8, #00f5d4);">73</div>
+              <div style="font-size:36px;color:#888;">Skills</div>
+            </div>
+          </div>
+          <div style="margin-top:28px;font-size:36px;color:#ccc;">三级架构：总监 → 主管 → 专员</div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#a000c8;font-weight:700;">FULL PIPELINE</div>
+          <div style="margin-top:24px;font-size:36px;color:#ccc;line-height:1.6;">
+            策划 · 程序 · 美术 · 测试<br>
+            <span style="font-weight:700;color:#ff006e;">每个环节都有专门的 Agent</span>
+          </div>
+          <div style="margin-top:32px;height:2px;background:rgba(255,255,255,0.1);"></div>
+          <div style="margin-top:24px;display:flex;gap:16px;">
+            <div class="card-item" style="text-align:center;flex:1;border-top:2px solid #0088cc;">
+              <div style="font-size:36px;font-weight:700;">虚幻</div>
+            </div>
+            <div class="card-item" style="text-align:center;flex:1;border-top:2px solid #00f5d4;">
+              <div style="font-size:36px;font-weight:700;">Unity</div>
+            </div>
+            <div class="card-item" style="text-align:center;flex:1;border-top:2px solid #a000c8;">
+              <div style="font-size:36px;font-weight:700;">Godot</div>
+            </div>
+          </div>
+          <div style="margin-top:16px;font-size:36px;color:#f9a825;text-align:center;font-weight:700;">三引擎同时出版本</div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">PARADIGM SHIFT</div>
+          <h2 class="grad-text" style="font-size:64px;font-weight:900;line-height:1.2;margin-top:16px;background-image:linear-gradient(135deg, #f9a825, #ff006e);">一人 = 整个工作室</h2>
+          <div style="margin-top:32px;font-size:36px;color:#ccc;line-height:1.6;">
+            独立开发者<br>
+            <span style="font-size:40px;font-weight:900;color:#ff006e;">不可想象 → 现实</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S7 BUSINESS (192.46 ~ 228.03) ═══ -->
+  <div class="clip" id="s7" data-start="192.46" data-duration="35.57">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg, #12100a 0%, #1a1008 40%, #0a0a14 100%);"></div>
+      <div class="glow-orb" style="width:500px;height:500px;top:15%;right:-5%;background:rgba(249,168,37,0.08);"></div>
+      <div class="glow-orb" style="width:350px;height:350px;bottom:25%;left:-5%;background:rgba(255,107,107,0.05);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(249,168,37,0.03) 20px, rgba(249,168,37,0.03) 21px), repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,107,107,0.02) 20px, rgba(255,107,107,0.02) 21px);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(249,168,37,0.05) 1px, transparent 1px);background-size:36px 36px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s7-bar1" style="position:absolute;width:40px;left:15%;background:linear-gradient(180deg, #f9a825, transparent);border-radius:4px 4px 0 0;"></div>
+      <div id="fx-s7-bar2" style="position:absolute;width:40px;left:35%;background:linear-gradient(180deg, #00f5d4, transparent);border-radius:4px 4px 0 0;"></div>
+      <div id="fx-s7-bar3" style="position:absolute;width:40px;left:55%;background:linear-gradient(180deg, #ff6b6b, transparent);border-radius:4px 4px 0 0;"></div>
+      <div id="fx-s7-pulse" style="position:absolute;width:200px;height:200px;top:60%;left:50%;transform:translate(-50%,-50%);border:2px solid rgba(249,168,37,0.2);border-radius:50%;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">MATURITY</div>
+          <h2 style="font-size:60px;font-weight:900;margin-top:12px;">成熟度评级</h2>
+          <div style="margin-top:28px;display:flex;gap:16px;">
+            <div class="card-item" style="text-align:center;border-top:4px solid #00f5d4;flex:1;">
+              <div style="font-size:72px;font-weight:900;color:#00f5d4;">A</div>
+              <div style="font-size:36px;font-weight:700;">Autonomix</div>
+              <div style="font-size:36px;color:#888;">可直接上生产</div>
+            </div>
+            <div class="card-item" style="text-align:center;border-top:4px solid #f9a825;flex:1;">
+              <div style="font-size:72px;font-weight:900;color:#f9a825;">B</div>
+              <div style="font-size:36px;font-weight:700;">MCP 项目</div>
+              <div style="font-size:36px;color:#888;">能用 需打磨</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#ff6b6b;font-weight:700;">⚠ RISKS</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:12px;">三大风险</h2>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px;">
+            <div class="card-item" style="border-left:4px solid #ff6b6b;">
+              <div style="font-size:36px;font-weight:700;">版本不兼容</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">每次大版本升级 = 一场赌博</div>
+            </div>
+            <div class="card-item" style="border-left:4px solid #f9a825;">
+              <div style="font-size:36px;font-weight:700;">代码质量不稳定</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">时而惊艳 时而离谱</div>
+            </div>
+            <div class="card-item" style="border-left:4px solid #a000c8;">
+              <div style="font-size:36px;font-weight:700;">开源停更</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">维护者热情消退 = 项目死亡</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">SELECTION</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:12px;">选型逻辑</h2>
+          <div style="margin-top:28px;font-size:36px;color:#ccc;line-height:2;">
+            编辑器内开发 → <span style="color:#00f5d4;font-weight:700;">Autonomix</span><br>
+            远程控制引擎 → <span style="color:#f9a825;font-weight:700;">MCP 方案</span><br>
+            管理全流程 → <span style="color:#ff006e;font-weight:700;">Agent 体系</span>
+          </div>
+          <div style="margin-top:24px;font-size:36px;font-weight:900;color:#f9a825;">三者不冲突 可以组合</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S8 FUTURE (228.03 ~ 258.08) ═══ -->
+  <div class="clip" id="s8" data-start="228.03" data-duration="30.05">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, rgba(0,136,204,0.06) 0%, transparent 50%), linear-gradient(180deg, #060618 0%, #0a0f20 50%, #08081a 100%);"></div>
+      <div class="glow-orb" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,136,204,0.04);"></div>
+      <div class="glow-orb" style="width:250px;height:250px;top:20%;right:10%;background:rgba(0,245,212,0.05);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,136,204,0.05) 60px, rgba(0,136,204,0.05) 61px);"></div>
+      <div style="position:absolute;inset:0;background:conic-gradient(from 0deg at 30% 70%, transparent 0deg, rgba(0,136,204,0.03) 90deg, transparent 180deg, rgba(0,245,212,0.02) 270deg, transparent 360deg);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s8-arrow" style="position:absolute;width:4px;height:300px;left:50%;top:30%;background:linear-gradient(180deg, rgba(0,245,212,0.4), transparent);border-radius:2px;"></div>
+      <div id="fx-s8-ring" style="position:absolute;width:160px;height:160px;top:25%;left:50%;transform:translateX(-50%);border:2px solid rgba(0,245,212,0.15);border-radius:50%;"></div>
+      <div id="fx-s8-dot1" class="fx-dot" style="top:55%;left:25%;background:#f9a825;width:8px;height:8px;"></div>
+      <div id="fx-s8-dot2" class="fx-dot" style="top:70%;left:75%;background:#00f5d4;width:8px;height:8px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">12 MONTHS AHEAD</div>
+          <h2 class="grad-text" style="font-size:64px;font-weight:900;line-height:1.15;margin-top:12px;background-image:linear-gradient(135deg, #00f5d4, #0088cc);">三个高确定性<br>趋势</h2>
+          <div style="margin-top:28px;display:flex;flex-direction:column;gap:16px;">
+            <div class="card-item" style="border-left:3px solid #00f5d4;">
+              <div style="font-size:36px;font-weight:700;">MCP 成 UE 官方标准协议</div>
+            </div>
+            <div class="card-item" style="border-left:3px solid #f9a825;">
+              <div style="font-size:36px;font-weight:700;">本地 3-7B 模型 ≈ GPT-4</div>
+            </div>
+            <div class="card-item" style="border-left:3px solid #ff006e;">
+              <div style="font-size:36px;font-weight:700;">AI 自动化测试 = 标配</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">MEDIUM CERTAINTY</div>
+          <div style="margin-top:20px;">
+            <div class="card-item" style="margin-bottom:12px;">
+              <div style="font-size:36px;font-weight:700;">蓝图 → C++ 自动翻译</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">可视化脚本转高性能代码</div>
+            </div>
+            <div class="card-item">
+              <div style="font-size:36px;font-weight:700;">自然语言 → 粒子特效</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">文字描述直接生成视觉特效</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">THE FUTURE IS NEAR</div>
+          <h2 class="grad-text" style="font-size:60px;font-weight:900;line-height:1.2;margin-top:16px;background-image:linear-gradient(135deg, #ff006e, #f9a825, #00f5d4);">概念 → Demo<br>端到端自动化</h2>
+          <div style="margin-top:28px;font-size:36px;font-weight:700;color:#ccc;">
+            12 个月后的游戏开发<br>
+            <span style="font-size:44px;font-weight:900;color:#ff006e;">跟今天完全不一样</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S9 PRACTICAL (258.08 ~ 296.22) ═══ -->
+  <div class="clip" id="s9" data-start="258.08" data-duration="38.14">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(145deg, #081a12 0%, #0a1a20 40%, #0a1418 100%);"></div>
+      <div class="glow-orb" style="width:500px;height:500px;top:10%;left:50%;transform:translateX(-50%);background:rgba(0,245,212,0.05);"></div>
+      <div class="glow-orb" style="width:300px;height:300px;bottom:30%;right:-5%;background:rgba(249,168,37,0.04);"></div>
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,245,212,0.02) 10px, rgba(0,245,212,0.02) 20px, transparent 20px, transparent 50px);opacity:0.6;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(0,0,0,0.25) 100%);"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s9-step1" style="position:absolute;width:60px;height:4px;top:35%;left:20%;background:rgba(0,245,212,0.3);border-radius:2px;"></div>
+      <div id="fx-s9-step2" style="position:absolute;width:60px;height:4px;top:50%;left:40%;background:rgba(249,168,37,0.3);border-radius:2px;"></div>
+      <div id="fx-s9-step3" style="position:absolute;width:60px;height:4px;top:65%;left:60%;background:rgba(255,0,110,0.3);border-radius:2px;"></div>
+      <div id="fx-s9-glow" class="glow-orb" style="width:200px;height:200px;top:40%;left:50%;transform:translateX(-50%);background:rgba(0,245,212,0.03);filter:blur(40px);"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">TECH STACK</div>
+          <h2 class="grad-text" style="font-size:64px;font-weight:900;line-height:1.15;margin-top:12px;background-image:linear-gradient(135deg, #00f5d4, #f9a825);">四件套组合</h2>
+          <div style="margin-top:32px;display:flex;gap:12px;">
+            <div class="card-item" style="text-align:center;flex:1;border-top:3px solid #00f5d4;">
+              <div style="font-size:36px;font-weight:700;color:#00f5d4;">Autonomix</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">编辑器AI</div>
+            </div>
+            <div class="card-item" style="text-align:center;flex:1;border-top:3px solid #ff006e;">
+              <div style="font-size:36px;font-weight:700;color:#ff006e;">Studios</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">全流程</div>
+            </div>
+            <div class="card-item" style="text-align:center;flex:1;border-top:3px solid #f9a825;">
+              <div style="font-size:36px;font-weight:700;color:#f9a825;">MCP</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">引擎桥接</div>
+            </div>
+            <div class="card-item" style="text-align:center;flex:1;border-top:3px solid #a000c8;">
+              <div style="font-size:36px;font-weight:700;color:#a000c8;">Ollama</div>
+              <div style="font-size:36px;color:#888;margin-top:4px;">本地模型</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-2">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;">STEP 1–2</div>
+          <div class="step-card">
+            <div style="font-size:36px;font-weight:700;"><span style="color:#00f5d4;">Step 1</span> 安装 Autonomix 插件</div>
+            <div style="font-size:36px;color:#ccc;margin-top:8px;">安装到 UE5 编辑器</div>
+          </div>
+          <div class="step-card" style="border-left-color:#ff006e;">
+            <div style="font-size:36px;font-weight:700;"><span style="color:#ff006e;">Step 2</span> 配置 Claude Code</div>
+            <div style="font-size:36px;color:#ccc;margin-top:8px;">加载 Game-Studios Agent 体系</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-3">
+        <div class="safe-box">
+          <div style="font-size:36px;color:#ff006e;font-weight:700;">STEP 3–4</div>
+          <div class="step-card" style="border-left-color:#f9a825;">
+            <div style="font-size:36px;font-weight:700;"><span style="color:#f9a825;">Step 3</span> MCP 连接</div>
+            <div style="font-size:36px;color:#ccc;margin-top:8px;">用 MCP 连接编辑器和 AI 客户端</div>
+          </div>
+          <div class="step-card" style="border-left-color:#a000c8;">
+            <div style="font-size:36px;font-weight:700;"><span style="color:#a000c8;">Step 4</span> 选择模型</div>
+            <div style="font-size:36px;color:#ccc;margin-top:8px;">按项目规模选云端 API 或本地模型</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase phase-4">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#00f5d4;font-weight:700;">BUDGET</div>
+          <h2 style="font-size:52px;font-weight:800;margin-top:16px;color:#f9a825;">预算完全可控</h2>
+          <div style="margin-top:24px;font-size:36px;color:#ccc;line-height:1.8;">
+            本地模型 <span style="color:#00f5d4;font-weight:700;">免费</span><br>
+            云端 API <span style="color:#f9a825;font-weight:700;">按需付费</span><br>
+            技术门槛：会装插件就能上手
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S10 CTA (296.22 ~ 305.17) ═══ -->
+  <div class="clip" id="s10" data-start="296.22" data-duration="8.95">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, rgba(249,168,37,0.1) 0%, transparent 50%), linear-gradient(180deg, #0a0a1a 0%, #0d0d2b 100%);"></div>
+      <div class="glow-orb" style="width:600px;height:600px;top:30%;left:50%;transform:translateX(-50%);background:rgba(249,168,37,0.08);"></div>
+      <div class="glow-orb" style="width:300px;height:300px;bottom:30%;left:20%;background:rgba(0,245,212,0.04);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(249,168,37,0.04) 1px, transparent 1px);background-size:40px 40px;"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="fx-s10-p1" class="fx-dot" style="top:25%;left:20%;background:#f9a825;width:6px;height:6px;"></div>
+      <div id="fx-s10-p2" class="fx-dot" style="top:40%;left:75%;background:#00f5d4;width:8px;height:8px;"></div>
+      <div id="fx-s10-p3" class="fx-dot" style="top:65%;left:30%;background:#ff006e;width:6px;height:6px;"></div>
+      <div id="fx-s10-p4" class="fx-dot" style="top:55%;left:85%;background:#f9a825;width:5px;height:5px;"></div>
+    </div>
+    <div class="layer-content">
+      <div class="phase phase-1">
+        <div class="safe-box" style="text-align:center;">
+          <div style="font-size:36px;color:#f9a825;font-weight:700;letter-spacing:2px;">WINDOW OPEN</div>
+          <h2 class="grad-text" style="font-size:72px;font-weight:900;line-height:1.2;margin-top:20px;background-image:linear-gradient(135deg, #f9a825, #ff006e);">窗口期已打开<br>越早入局<br>优势越大</h2>
+          <div style="margin-top:40px;font-size:36px;font-weight:700;color:#ccc;">
+            关注我<br>
+            <span class="grad-text" style="font-size:40px;background-image:linear-gradient(90deg, #00f5d4, #f9a825);">持续追踪 AI 工具链最前沿</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ═══ GSAP INIT ═══
+  window.__timelines = {};
+  const tl = gsap.timeline({ paused: true });
+
+  // ── Phase init: hide phase-2+ ──
+  tl.set("#s2 .phase-2", { opacity: 0 }, 7.61);
+  tl.set("#s2 .phase-3", { opacity: 0 }, 7.61);
+  tl.set("#s3 .phase-2", { opacity: 0 }, 45.34);
+  tl.set("#s3 .phase-3", { opacity: 0 }, 45.34);
+  tl.set("#s4 .phase-2", { opacity: 0 }, 80.93);
+  tl.set("#s4 .phase-3", { opacity: 0 }, 80.93);
+  tl.set("#s4 .phase-4", { opacity: 0 }, 80.93);
+  tl.set("#s5 .phase-2", { opacity: 0 }, 128.11);
+  tl.set("#s5 .phase-3", { opacity: 0 }, 128.11);
+  tl.set("#s6 .phase-2", { opacity: 0 }, 160.37);
+  tl.set("#s6 .phase-3", { opacity: 0 }, 160.37);
+  tl.set("#s7 .phase-2", { opacity: 0 }, 192.46);
+  tl.set("#s7 .phase-3", { opacity: 0 }, 192.46);
+  tl.set("#s8 .phase-2", { opacity: 0 }, 228.03);
+  tl.set("#s8 .phase-3", { opacity: 0 }, 228.03);
+  tl.set("#s9 .phase-2", { opacity: 0 }, 258.08);
+  tl.set("#s9 .phase-3", { opacity: 0 }, 258.08);
+  tl.set("#s9 .phase-4", { opacity: 0 }, 258.08);
+
+  // ═══ PHASE TRANSITIONS ═══
+  // S2: phase-1→2 at ~20.2, phase-2→3 at ~32.8
+  tl.to("#s2 .phase-1", { opacity: 0, duration: 0.3 }, 20.2);
+  tl.to("#s2 .phase-2", { opacity: 1, duration: 0.4 }, 20.3);
+  tl.to("#s2 .phase-2", { opacity: 0, duration: 0.3 }, 32.8);
+  tl.to("#s2 .phase-3", { opacity: 1, duration: 0.4 }, 32.9);
+
+  // S3: phase-1→2 at ~57.2, phase-2→3 at ~69.1
+  tl.to("#s3 .phase-1", { opacity: 0, duration: 0.3 }, 57.2);
+  tl.to("#s3 .phase-2", { opacity: 1, duration: 0.4 }, 57.3);
+  tl.to("#s3 .phase-2", { opacity: 0, duration: 0.3 }, 69.1);
+  tl.to("#s3 .phase-3", { opacity: 1, duration: 0.4 }, 69.2);
+
+  // S4: 4 phases, ~11.8s each
+  tl.to("#s4 .phase-1", { opacity: 0, duration: 0.3 }, 92.7);
+  tl.to("#s4 .phase-2", { opacity: 1, duration: 0.4 }, 92.8);
+  tl.to("#s4 .phase-2", { opacity: 0, duration: 0.3 }, 104.5);
+  tl.to("#s4 .phase-3", { opacity: 1, duration: 0.4 }, 104.6);
+  tl.to("#s4 .phase-3", { opacity: 0, duration: 0.3 }, 116.3);
+  tl.to("#s4 .phase-4", { opacity: 1, duration: 0.4 }, 116.4);
+
+  // S5: phase-1→2 at ~138.9, phase-2→3 at ~149.7
+  tl.to("#s5 .phase-1", { opacity: 0, duration: 0.3 }, 138.9);
+  tl.to("#s5 .phase-2", { opacity: 1, duration: 0.4 }, 139.0);
+  tl.to("#s5 .phase-2", { opacity: 0, duration: 0.3 }, 149.7);
+  tl.to("#s5 .phase-3", { opacity: 1, duration: 0.4 }, 149.8);
+
+  // S6: phase-1→2 at ~171.1, phase-2→3 at ~181.8
+  tl.to("#s6 .phase-1", { opacity: 0, duration: 0.3 }, 171.1);
+  tl.to("#s6 .phase-2", { opacity: 1, duration: 0.4 }, 171.2);
+  tl.to("#s6 .phase-2", { opacity: 0, duration: 0.3 }, 181.8);
+  tl.to("#s6 .phase-3", { opacity: 1, duration: 0.4 }, 181.9);
+
+  // S7: phase-1→2 at ~204.4, phase-2→3 at ~216.3
+  tl.to("#s7 .phase-1", { opacity: 0, duration: 0.3 }, 204.4);
+  tl.to("#s7 .phase-2", { opacity: 1, duration: 0.4 }, 204.5);
+  tl.to("#s7 .phase-2", { opacity: 0, duration: 0.3 }, 216.3);
+  tl.to("#s7 .phase-3", { opacity: 1, duration: 0.4 }, 216.4);
+
+  // S8: phase-1→2 at ~238.0, phase-2→3 at ~248.0
+  tl.to("#s8 .phase-1", { opacity: 0, duration: 0.3 }, 238.0);
+  tl.to("#s8 .phase-2", { opacity: 1, duration: 0.4 }, 238.1);
+  tl.to("#s8 .phase-2", { opacity: 0, duration: 0.3 }, 248.0);
+  tl.to("#s8 .phase-3", { opacity: 1, duration: 0.4 }, 248.1);
+
+  // S9: 4 phases, ~9.5s each
+  tl.to("#s9 .phase-1", { opacity: 0, duration: 0.3 }, 267.6);
+  tl.to("#s9 .phase-2", { opacity: 1, duration: 0.4 }, 267.7);
+  tl.to("#s9 .phase-2", { opacity: 0, duration: 0.3 }, 277.1);
+  tl.to("#s9 .phase-3", { opacity: 1, duration: 0.4 }, 277.2);
+  tl.to("#s9 .phase-3", { opacity: 0, duration: 0.3 }, 286.6);
+  tl.to("#s9 .phase-4", { opacity: 1, duration: 0.4 }, 286.7);
+
+  // ═══ SCENE ANIMATIONS ═══
+
+  // S1 Hook — explosive entrance
+  tl.from("#s1 h1", { scale: 0.85, opacity: 0, y: 40, duration: 0.15, ease: "power3.out" }, 0);
+  tl.from("#s1 .phase-1 div", { opacity: 0, y: 30, duration: 0.4, stagger: 0.08, ease: "power2.out" }, 0.15);
+  tl.to("#fx-s1-scan", { x: 200, duration: 2, repeat: 3, ease: "none" }, 0);
+  tl.from("#fx-s1-burst", { scale: 0, opacity: 0, duration: 0.3, ease: "back.out(2)" }, 0);
+  tl.to("#fx-s1-burst", { scale: 3, opacity: 0, duration: 2, ease: "power2.out" }, 0.3);
+  tl.to("#fx-s1-dot1", { y: -20, duration: 1.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 0);
+  tl.to("#fx-s1-dot2", { y: 15, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 0);
+
+  // S2 Background — steady build
+  tl.from("#s2 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4, ease: "power2.out" }, 7.61);
+  tl.from("#s2 .phase-1 .card-item", { opacity: 0, x: -30, duration: 0.35, stagger: 0.12, ease: "power2.out" }, 8.0);
+  tl.to("#fx-s2-line1", { x: 100, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 7.61);
+  tl.to("#fx-s2-line2", { x: -80, duration: 4, repeat: 3, yoyo: true, ease: "sine.inOut" }, 7.61);
+  tl.to("#fx-s2-dot1", { y: -15, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 7.61);
+  tl.to("#fx-s2-dot2", { y: 12, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 7.61);
+
+  // S3 Six Routes
+  tl.from("#s3 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4 }, 45.34);
+  tl.from("#s3 .phase-1 div", { opacity: 0, y: 20, duration: 0.3, stagger: 0.06 }, 45.5);
+  tl.to("#fx-s3-hex", { rotation: "45_short", duration: 6, repeat: 3, ease: "none" }, 45.34);
+  tl.to("#fx-s3-hex2", { rotation: "30_short", duration: 8, repeat: 3, ease: "none" }, 45.34);
+  tl.to("#fx-s3-line", { x: 100, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 45.34);
+
+  // S4 Autonomix — reveal
+  tl.from("#s4 .phase-1 h2", { scale: 0.9, opacity: 0, duration: 0.15, ease: "power3.out" }, 80.93);
+  tl.from("#s4 .phase-1 .big-num", { opacity: 0, scale: 0.5, duration: 0.4, ease: "back.out(1.5)" }, 81.0);
+  tl.to("#fx-s4-scan", { x: 300, duration: 3, repeat: 3, ease: "none" }, 80.93);
+  tl.to("#fx-s4-node1", { y: -20, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 80.93);
+  tl.to("#fx-s4-node2", { y: 15, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 80.93);
+  tl.to("#fx-s4-node3", { y: -10, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 80.93);
+
+  // S5 MCP — connecting
+  tl.from("#s5 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4 }, 128.11);
+  tl.to("#fx-s5-conn1", { scaleY: 1.2, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 128.11);
+  tl.to("#fx-s5-conn2", { scaleY: 0.8, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 128.11);
+  tl.to("#fx-s5-conn3", { scaleY: 1.1, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 128.11);
+  tl.to("#fx-s5-hub", { scale: 1.5, opacity: 0.3, duration: 1.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 128.11);
+
+  // S6 Claude Studios — branching
+  tl.from("#s6 .phase-1 h2", { opacity: 0, scale: 0.9, duration: 0.15, ease: "power3.out" }, 160.37);
+  tl.from("#s6 .phase-1 .big-num", { opacity: 0, scale: 0.5, duration: 0.4, ease: "back.out(1.5)" }, 160.5);
+  tl.to("#fx-s6-branch1", { scaleY: 1.3, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 160.37);
+  tl.to("#fx-s6-branch2", { scaleY: 1.1, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 160.37);
+  tl.to("#fx-s6-branch3", { scaleY: 1.2, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 160.37);
+  tl.to("#fx-s6-core", { scale: 2, opacity: 0.2, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 160.37);
+
+  // S7 Business — gauges
+  tl.from("#s7 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4 }, 192.46);
+  tl.set("#fx-s7-bar1", { height: 200, bottom: "30%" }, 192.46);
+  tl.set("#fx-s7-bar2", { height: 150, bottom: "30%" }, 192.46);
+  tl.set("#fx-s7-bar3", { height: 100, bottom: "30%" }, 192.46);
+  tl.from("#fx-s7-bar1", { scaleY: 0, duration: 0.6, ease: "power2.out" }, 192.46);
+  tl.from("#fx-s7-bar2", { scaleY: 0, duration: 0.6, ease: "power2.out" }, 192.6);
+  tl.from("#fx-s7-bar3", { scaleY: 0, duration: 0.6, ease: "power2.out" }, 192.8);
+  tl.to("#fx-s7-pulse", { scale: 1.3, opacity: 0.1, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 192.46);
+
+  // S8 Future — forward motion
+  tl.from("#s8 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4 }, 228.03);
+  tl.to("#fx-s8-arrow", { y: -40, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 228.03);
+  tl.to("#fx-s8-ring", { scale: 1.2, opacity: 0.1, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 228.03);
+  tl.to("#fx-s8-dot1", { x: 20, y: -10, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 228.03);
+  tl.to("#fx-s8-dot2", { x: -15, y: 10, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 228.03);
+
+  // S9 Practical — steps
+  tl.from("#s9 .phase-1 h2", { opacity: 0, y: 30, duration: 0.4 }, 258.08);
+  tl.from("#s9 .phase-1 .card-item", { opacity: 0, y: 20, duration: 0.3, stagger: 0.08 }, 258.3);
+  tl.to("#fx-s9-step1", { x: 30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 258.08);
+  tl.to("#fx-s9-step2", { x: 25, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 258.08);
+  tl.to("#fx-s9-step3", { x: 20, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 258.08);
+  tl.to("#fx-s9-glow", { scale: 1.2, duration: 3, repeat: 3, yoyo: true, ease: "sine.inOut" }, 258.08);
+
+  // S10 CTA — warm close
+  tl.from("#s10 h2", { scale: 0.9, opacity: 0, y: 40, duration: 0.15, ease: "power3.out" }, 296.22);
+  tl.from("#s10 .phase-1 div", { opacity: 0, y: 20, duration: 0.4, stagger: 0.1 }, 296.3);
+  tl.to("#fx-s10-p1", { y: -20, duration: 1.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 296.22);
+  tl.to("#fx-s10-p2", { y: 15, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 296.22);
+  tl.to("#fx-s10-p3", { y: -12, duration: 2.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 296.22);
+  tl.to("#fx-s10-p4", { y: 10, duration: 1.8, repeat: 3, yoyo: true, ease: "sine.inOut" }, 296.22);
+
+  // ═══ HyperFrames API ═══
+  const totalDuration = 305.17;
+  window.__hf = {
+    duration: 305.17,
+    seek: function(t) { tl.time(t, false); }
+  };
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

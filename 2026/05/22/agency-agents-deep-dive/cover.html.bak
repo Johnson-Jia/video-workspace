@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050510; overflow: hidden; font-family: 'Noto Sans JP', 'Inter', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, #060614 0%, #0a0a22 40%, #060612 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,180,41,0.2), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,160,0.12), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+
+/* grid overlay */
+.grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Layer 1: date */
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: #f0b429; letter-spacing: 8px; margin-bottom: 40px; }
+
+/* Layer 2: scene label */
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: #7dd8c0; letter-spacing: 6px; margin-bottom: 80px; }
+
+/* Layer 3: badge */
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(240,180,41,0.15), rgba(240,180,41,0.25));
+  border: 2px solid rgba(240,180,41,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: #f0b429; letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(240,180,41,0.1); }
+
+/* Layer 4: main title */
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: #FFFFFF; letter-spacing: -4px; }
+.main-title .accent { font-size: 220px; font-weight: 900; color: #00e5a0; letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(0,229,160,0.4), 0 0 160px rgba(0,229,160,0.15); }
+
+/* Layer 5: divider */
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, #f0b429, #00e5a0); margin-bottom: 80px; }
+
+/* Layer 6: data subtitle */
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: #7dd8c0; letter-spacing: 4px; margin-bottom: 100px; }
+
+/* Layer 7: cards */
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: rgba(20,20,50,0.85);
+  border: 2px solid rgba(0,229,160,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; color: #f0b429; line-height: 1; }
+.card .label { font-size: 52px; color: #8899BB; margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+  <div class="grid"></div>
+
+  <!-- Layer 1 -->
+  <div class="date">2026年5月22日</div>
+  <!-- Layer 2 -->
+  <div class="scene-label">AI 智能体专栏</div>
+  <!-- Layer 3 -->
+  <div class="badge">开源角色库</div>
+  <!-- Layer 4 -->
+  <div class="main-title">
+    <span class="white">215个</span><br>
+    <span class="accent">AI角色</span>
+  </div>
+  <!-- Layer 5 -->
+  <div class="divider"></div>
+  <!-- Layer 6 -->
+  <div class="data-subtitle">即插即用 · 18个部门 · 17种工具</div>
+  <!-- Layer 7 -->
+  <div class="cards">
+    <div class="card">
+      <div class="num">103K</div>
+      <div class="label">上游 Star</div>
+    </div>
+    <div class="card">
+      <div class="num">215</div>
+      <div class="label">中文版角色数</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

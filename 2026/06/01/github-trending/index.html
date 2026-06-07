@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --accent-warm: #f0b429;
+  --accent-cool: #00b4ff;
+  --accent-green: #00e5a0;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.65);
+  --bg-deep: #0a0e1a;
+}
+body { background: #000; overflow: hidden; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.clip { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; overflow: hidden; }
+.layer-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.layer-fx { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.layer-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 180px 80px 220px 80px; }
+
+/* BG: 8 distinct styles */
+.bg-s1 { background: radial-gradient(ellipse at 50% 35%, rgba(240,180,41,0.18) 0%, transparent 55%), radial-gradient(ellipse at 20% 70%, rgba(255,100,50,0.1) 0%, transparent 40%), var(--bg-deep); }
+.bg-s2 { background: linear-gradient(rgba(0,229,160,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.05) 1px, transparent 1px); background-size: 50px 50px; background-color: #0a0f1c; }
+.bg-s3 { background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(240,180,41,0.1) 25deg, transparent 55deg, rgba(0,180,255,0.07) 130deg, transparent 180deg, rgba(0,229,160,0.06) 280deg, transparent 360deg), #0c0e1a; }
+.bg-s4 { background: linear-gradient(180deg, rgba(0,180,255,0.1) 0%, rgba(120,80,255,0.06) 35%, rgba(0,229,160,0.04) 65%, transparent 100%), radial-gradient(ellipse at 30% 60%, rgba(120,80,255,0.08) 0%, transparent 45%), #0a0d1c; }
+.bg-s5 { background: repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(0,180,255,0.04) 50px, rgba(0,180,255,0.04) 51px), repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(0,229,160,0.03) 50px, rgba(0,229,160,0.03) 51px), #0b0f1a; }
+.bg-s6 { background: radial-gradient(ellipse at 25% 25%, rgba(120,80,255,0.12) 0%, transparent 50%), radial-gradient(ellipse at 75% 65%, rgba(0,180,255,0.1) 0%, transparent 45%), #0a0c1e; }
+.bg-s7 { background: radial-gradient(circle at 50% 40%, rgba(0,229,160,0.08) 0%, transparent 55%), linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px); background-size: 100% 100%, 60px 60px, 60px 60px; background-color: #0b0e1a; }
+.bg-s8 { background: radial-gradient(ellipse at 50% 45%, rgba(240,180,41,0.1) 0%, transparent 65%), radial-gradient(ellipse at 50% 55%, rgba(0,180,255,0.06) 0%, transparent 50%), var(--bg-deep); }
+
+/* FX */
+.fx-glow { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+.fx-line { position: absolute; height: 1px; pointer-events: none; }
+.fx-dot { position: absolute; border-radius: 50%; pointer-events: none; }
+
+/* Content */
+.hook-badge { font-size: 36px; font-weight: 600; color: var(--accent-cool); background: rgba(0,180,255,0.12); padding: 8px 28px; border-radius: 20px; margin-bottom: 36px; }
+.hook-number { font-size: 140px; font-weight: 900; color: var(--accent-warm); text-align: center; text-shadow: 0 0 80px rgba(240,180,41,0.5); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.hook-title { font-size: 64px; font-weight: 900; color: var(--text-primary); text-align: center; line-height: 1.35; margin-top: 28px; }
+.hook-sub { font-size: 36px; color: var(--text-secondary); text-align: center; margin-top: 32px; }
+
+.pfc { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; }
+.pfc-glow-warm { position: absolute; width: 500px; height: 500px; border-radius: 50%; filter: blur(140px); background: var(--accent-warm); top: 280px; left: -100px; opacity: 0.12; pointer-events: none; }
+.pfc-glow-cool { position: absolute; width: 420px; height: 420px; border-radius: 50%; filter: blur(140px); background: var(--accent-cool); bottom: 380px; right: -80px; opacity: 0.1; pointer-events: none; }
+.pfc-category { font-size: 28px; font-weight: 600; color: var(--accent-cool); margin-bottom: 44px; background: rgba(0,180,255,0.1); padding: 6px 22px; border-radius: 16px; }
+.pfc-main { display: flex; align-items: center; gap: 28px; width: 100%; margin-bottom: 44px; }
+.pfc-rank { font-size: 120px; font-weight: 900; color: var(--accent-warm); text-shadow: 0 0 60px rgba(240,180,41,0.4); flex-shrink: 0; min-width: 120px; text-align: center; }
+.pfc-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.pfc-name { font-size: 48px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; }
+.pfc-desc { font-size: 32px; color: var(--text-secondary); line-height: 1.4; }
+.pfc-lang { display: inline-block; font-size: 22px; font-weight: 600; color: var(--accent-cool); background: rgba(0,180,255,0.12); padding: 4px 16px; border-radius: 12px; margin-top: 4px; width: fit-content; }
+.pfc-stars { font-size: 36px; font-weight: 800; color: var(--accent-warm); text-shadow: 0 0 30px rgba(240,180,41,0.3); flex-shrink: 0; text-align: right; white-space: nowrap; }
+.pfc-selling { font-size: 32px; font-weight: 700; color: var(--accent-green); margin-bottom: 20px; text-align: center; }
+.pfc-commentary { font-size: 28px; color: var(--text-secondary); text-align: center; font-style: italic; }
+
+.cta-text { font-size: 52px; font-weight: 900; color: var(--accent-warm); text-align: center; line-height: 1.4; }
+.cta-sub { font-size: 28px; color: var(--text-secondary); text-align: center; margin-top: 24px; }
+</style>
+</head>
+<body>
+
+<div id="root" data-composition-id="main" data-start="0" data-duration="40.22" data-width="1080" data-height="1920">
+
+<audio id="narration" src="narration.mp3" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.35" data-start="0"></audio>
+
+<!-- S1: Hook -->
+<div class="clip" id="s1" data-start="0" data-duration="4.96">
+  <div class="layer-bg" style="background: radial-gradient(ellipse at 50% 35%, rgba(240,180,41,0.18) 0%, transparent 55%), radial-gradient(ellipse at 20% 70%, rgba(255,100,50,0.1) 0%, transparent 40%), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%), #0a0e1a;"></div>
+  <div class="layer-fx">
+    <div class="fx-glow" style="width:500px;height:500px;top:20%;left:30%;background:rgba(240,180,41,0.2);"></div>
+    <div class="fx-glow" style="width:350px;height:350px;bottom:25%;right:10%;background:rgba(255,100,50,0.15);"></div>
+    <div class="fx-line" style="top:48%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(240,180,41,0.3),transparent);"></div>
+    <div class="fx-dot" style="top:30%;left:12%;width:6px;height:6px;background:rgba(240,180,41,0.5);"></div>
+    <div class="fx-dot" style="top:65%;right:15%;width:5px;height:5px;background:rgba(255,100,50,0.4);"></div>
+  </div>
+  <div class="layer-content" style="gap:0;">
+    <div class="hook-badge">6月1日 GitHub Trending</div>
+    <div class="hook-number">2759★</div>
+    <div class="hook-title">单日最高涨星<br>直接炸了</div>
+    <div class="hook-sub">6 个项目 · 单日合计 5593 星</div>
+  </div>
+</div>
+
+<!-- S2: markitdown -->
+<div class="clip" id="s2" data-start="4.96" data-duration="7.19">
+  <div class="layer-bg" style="background: linear-gradient(rgba(0,229,160,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.05) 1px, transparent 1px), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%); background-size: 50px 50px, 50px 50px, 100% 100%; background-color: #0a0f1c;"></div>
+  <div class="layer-fx">
+    <div class="fx-glow" style="width:400px;height:400px;top:60%;left:-5%;background:rgba(0,229,160,0.12);"></div>
+    <div class="fx-dot" style="top:18%;right:20%;width:8px;height:8px;background:rgba(0,229,160,0.4);"></div>
+    <div class="fx-dot" style="bottom:22%;left:18%;width:6px;height:6px;background:rgba(0,229,160,0.3);"></div>
+    <div class="fx-line" style="bottom:35%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.2),transparent);"></div>
+    <div class="fx-line" style="top:10%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.15),transparent);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">文件转换终结者</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">1</div>
+        <div class="pfc-info">
+          <div class="pfc-name">markitdown</div>
+          <div class="pfc-desc">微软出品 · 任何文件一键转 Markdown</div>
+          <div class="pfc-lang">Python</div>
+        </div>
+        <div class="pfc-stars">+2759 ★</div>
+      </div>
+      <div class="pfc-selling">万物可转 · 134K Star · 微软出品</div>
+      <div class="pfc-commentary">文件格式终结者</div>
+    </div>
+  </div>
+</div>
+
+<!-- S3: MoneyPrinterTurbo -->
+<div class="clip" id="s3" data-start="12.15" data-duration="5.61">
+  <div class="layer-bg" style="background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(240,180,41,0.1) 25deg, transparent 55deg, rgba(0,180,255,0.07) 130deg, transparent 180deg, rgba(0,229,160,0.06) 280deg, transparent 360deg), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%), #0c0e1a;"></div>
+  <div class="layer-fx">
+    <div class="fx-glow" style="width:350px;height:350px;top:10%;right:5%;background:rgba(240,180,41,0.15);"></div>
+    <div class="fx-dot" style="top:75%;left:25%;width:7px;height:7px;background:rgba(240,180,41,0.4);"></div>
+    <div class="fx-dot" style="top:25%;left:40%;width:5px;height:5px;background:rgba(0,180,255,0.35);"></div>
+    <div class="fx-line" style="top:70%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(0,180,255,0.2),transparent);"></div>
+    <div class="fx-line" style="top:42%;left:-20%;width:140%;height:2px;background:linear-gradient(90deg,transparent,rgba(240,180,41,0.5),transparent);transform:rotate(-12deg);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">AI 视频生成</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">2</div>
+        <div class="pfc-info">
+          <div class="pfc-name">MoneyPrinterTurbo</div>
+          <div class="pfc-desc">输入文字直接出视频 · 配音字幕全搞定</div>
+          <div class="pfc-lang">Python</div>
+        </div>
+        <div class="pfc-stars">74K ★</div>
+      </div>
+      <div class="pfc-selling">文字变视频 · 全自动 · 印钞机</div>
+      <div class="pfc-commentary">名字就叫印钞机，名不虚传</div>
+    </div>
+  </div>
+</div>
+
+<!-- S4: VoxCPM -->
+<div class="clip" id="s4" data-start="17.76" data-duration="6.03">
+  <div class="layer-bg" style="background: linear-gradient(180deg, rgba(0,180,255,0.1) 0%, rgba(120,80,255,0.06) 35%, rgba(0,229,160,0.04) 65%, transparent 100%), radial-gradient(ellipse at 30% 60%, rgba(120,80,255,0.08) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%), #0a0d1c;"></div>
+  <div class="layer-fx">
+    <div class="fx-dot" style="top:18%;left:12%;width:8px;height:8px;background:rgba(120,80,255,0.45);"></div>
+    <div class="fx-dot" style="top:55%;right:18%;width:6px;height:6px;background:rgba(0,229,160,0.35);"></div>
+    <div class="fx-dot" style="bottom:28%;left:30%;width:7px;height:7px;background:rgba(0,180,255,0.4);"></div>
+    <div class="fx-dot" style="top:38%;right:35%;width:5px;height:5px;background:rgba(120,80,255,0.3);"></div>
+    <div class="fx-glow" style="width:300px;height:300px;bottom:15%;left:10%;background:rgba(120,80,255,0.1);"></div>
+    <div class="fx-line" style="top:0;left:45%;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(120,80,255,0.15),transparent);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">语音革命</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">3</div>
+        <div class="pfc-info">
+          <div class="pfc-name">VoxCPM</div>
+          <div class="pfc-desc">不用分词器 · 端到端语音合成 · 声音克隆</div>
+          <div class="pfc-lang">Python</div>
+        </div>
+        <div class="pfc-stars">+639 ★</div>
+      </div>
+      <div class="pfc-selling">无分词器 · 端到端 · 声音克隆</div>
+      <div class="pfc-commentary">语音合成新范式</div>
+    </div>
+  </div>
+</div>
+
+<!-- S5: train-llm -->
+<div class="clip" id="s5" data-start="23.79" data-duration="5.16">
+  <div class="layer-bg" style="background: linear-gradient(rgba(0,180,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%); background-size: 60px 60px, 60px 60px, 100% 100%; background-color: #0b0f1a;"></div>
+  <div class="layer-fx">
+    <div class="fx-dot" style="top:50%;left:50%;width:280px;height:280px;border-radius:50%;border:2px solid rgba(0,180,255,0.12);background:transparent;"></div>
+    <div class="fx-glow" style="width:250px;height:250px;top:35%;left:35%;background:rgba(0,180,255,0.08);"></div>
+    <div class="fx-dot" style="top:22%;right:22%;width:6px;height:6px;background:rgba(0,229,160,0.4);"></div>
+    <div class="fx-dot" style="bottom:30%;left:20%;width:5px;height:5px;background:rgba(0,180,255,0.35);"></div>
+    <div class="fx-line" style="top:60%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.15),transparent);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">AI 教育</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">4</div>
+        <div class="pfc-info">
+          <div class="pfc-name">train-llm-from-scratch</div>
+          <div class="pfc-desc">从零训练大模型 · 手把手教程</div>
+          <div class="pfc-lang">Jupyter Notebook</div>
+        </div>
+        <div class="pfc-stars">+627 ★</div>
+      </div>
+      <div class="pfc-selling">从零训练 · 手把手 · 你也能训 AI</div>
+      <div class="pfc-commentary">人人能训大模型</div>
+    </div>
+  </div>
+</div>
+
+<!-- S6: project-nomad -->
+<div class="clip" id="s6" data-start="28.95" data-duration="5.32">
+  <div class="layer-bg" style="background: radial-gradient(ellipse at 25% 25%, rgba(120,80,255,0.12) 0%, transparent 50%), radial-gradient(ellipse at 75% 65%, rgba(0,180,255,0.1) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%), #0a0c1e;"></div>
+  <div class="layer-fx">
+    <div class="fx-dot" style="top:14%;left:22%;width:6px;height:6px;background:rgba(120,80,255,0.45);"></div>
+    <div class="fx-dot" style="top:42%;right:16%;width:5px;height:5px;background:rgba(0,229,160,0.35);"></div>
+    <div class="fx-dot" style="bottom:20%;left:35%;width:7px;height:7px;background:rgba(0,180,255,0.4);"></div>
+    <div class="fx-dot" style="top:68%;left:12%;width:4px;height:4px;background:rgba(255,255,255,0.25);"></div>
+    <div class="fx-glow" style="width:350px;height:350px;top:25%;right:-5%;background:rgba(120,80,255,0.1);"></div>
+    <div class="fx-line" style="top:50%;left:0;width:100%;background:linear-gradient(90deg,transparent,rgba(120,80,255,0.15),transparent);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">离线生存</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">5</div>
+        <div class="pfc-info">
+          <div class="pfc-name">project-nomad</div>
+          <div class="pfc-desc">断网也能用的离线 AI 工具箱</div>
+          <div class="pfc-lang">TypeScript</div>
+        </div>
+        <div class="pfc-stars">27.7K ★</div>
+      </div>
+      <div class="pfc-selling">断网可用 · 本地 AI · 知识工具箱</div>
+      <div class="pfc-commentary">赛博朋克离线派</div>
+    </div>
+  </div>
+</div>
+
+<!-- S7: compound-plugin -->
+<div class="clip" id="s7" data-start="34.27" data-duration="3.98">
+  <div class="layer-bg" style="background: radial-gradient(circle at 50% 40%, rgba(0,229,160,0.08) 0%, transparent 55%), linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%); background-size: 100% 100%, 60px 60px, 60px 60px, 100% 100%; background-color: #0b0e1a;"></div>
+  <div class="layer-fx">
+    <div class="fx-glow" style="width:300px;height:300px;top:30%;right:10%;background:rgba(0,229,160,0.1);"></div>
+    <div class="fx-dot" style="top:25%;left:20%;width:6px;height:6px;background:rgba(0,229,160,0.4);"></div>
+    <div class="fx-dot" style="bottom:30%;right:25%;width:5px;height:5px;background:rgba(0,180,255,0.35);"></div>
+    <div class="fx-line" style="top:48%;left:-50%;width:200%;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.25),transparent);"></div>
+    <div class="fx-line" style="top:0;left:60%;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(0,229,160,0.12),transparent);"></div>
+  </div>
+  <div class="layer-content">
+    <div class="pfc-glow-warm"></div>
+    <div class="pfc-glow-cool"></div>
+    <div class="pfc">
+      <div class="pfc-category">开发工具</div>
+      <div class="pfc-main">
+        <div class="pfc-rank">6</div>
+        <div class="pfc-info">
+          <div class="pfc-name">compound-plugin</div>
+          <div class="pfc-desc">Claude Code / Cursor / Codex 通用工程插件</div>
+          <div class="pfc-lang">TypeScript</div>
+        </div>
+        <div class="pfc-stars">18.7K ★</div>
+      </div>
+      <div class="pfc-selling">多工具通用 · 官方插件 · 工程增强</div>
+      <div class="pfc-commentary">AI 编程增强包</div>
+    </div>
+  </div>
+</div>
+
+<!-- S8: CTA -->
+<div class="clip" id="s8" data-start="38.25" data-duration="1.97">
+  <div class="layer-bg" style="background: radial-gradient(ellipse at 50% 45%, rgba(240,180,41,0.1) 0%, transparent 65%), radial-gradient(ellipse at 50% 55%, rgba(0,180,255,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.3) 100%), #0a0e1a;"></div>
+  <div class="layer-fx">
+    <div class="fx-glow" style="width:500px;height:500px;top:30%;left:25%;background:rgba(240,180,41,0.12);"></div>
+    <div class="fx-glow" style="width:300px;height:300px;bottom:20%;right:15%;background:rgba(0,180,255,0.08);"></div>
+  </div>
+  <div class="layer-content" style="gap:16px;">
+    <div class="cta-text">关注我<br>下期见</div>
+    <div class="cta-sub">GitHub 星探 · 每日热门开源</div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+tl.set(['#s2','#s3','#s4','#s5','#s6','#s7','#s8'], {opacity:0}, 0);
+tl.set('#s1', {opacity:1}, 0);
+tl.set('#s1', {opacity:0}, 4.96);
+tl.set('#s2', {opacity:1}, 4.96);
+tl.set('#s2', {opacity:0}, 12.15);
+tl.set('#s3', {opacity:1}, 12.15);
+tl.set('#s3', {opacity:0}, 17.76);
+tl.set('#s4', {opacity:1}, 17.76);
+tl.set('#s4', {opacity:0}, 23.79);
+tl.set('#s5', {opacity:1}, 23.79);
+tl.set('#s5', {opacity:0}, 28.95);
+tl.set('#s6', {opacity:1}, 28.95);
+tl.set('#s6', {opacity:0}, 34.27);
+tl.set('#s7', {opacity:1}, 34.27);
+tl.set('#s7', {opacity:0}, 38.25);
+tl.set('#s8', {opacity:1}, 38.25);
+tl.set('#s8', {opacity:0}, 40.22);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+window.__hf = { duration: 40.22, seek: function(ms) { tl.seek(ms / 1000); } };
+</script>
+</body>
+</html>

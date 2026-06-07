@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#060612;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif}
+:root{--bg:#060612;--bg2:#0e0e2a;--warm:#f0b429;--cool:#00d4aa;--red:#ef4444;--green:#4ade80;--white:#fff;--gray:#a0a0c0;--dim:#6b7280}
+
+.composition{position:relative;width:1080px;height:1920px}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden}
+audio{display:none}
+
+/* common layers */
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.glow{position:absolute;border-radius:50%;filter:blur(160px);pointer-events:none;z-index:0}
+
+/* scene-wrap: flex center */
+.scene-wrap{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:160px 60px;z-index:1}
+
+/* text utilities */
+.hero{font-size:100px;font-weight:900;color:var(--white);letter-spacing:-2px;line-height:1.15;text-align:center}
+.title{font-size:64px;font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.2;text-align:center}
+.sub{font-size:40px;font-weight:600;color:var(--gray);margin-top:24px;text-align:center;line-height:1.4}
+.body{font-size:36px;font-weight:400;color:var(--gray);line-height:1.5;text-align:center}
+.mono{font-family:'JetBrains Mono','Consolas',monospace}
+.accent-warm{color:var(--warm)}
+.accent-cool{color:var(--cool)}
+.accent-red{color:var(--red)}
+.accent-green{color:var(--green)}
+
+/* badge */
+.badge{display:inline-block;font-size:28px;font-weight:700;padding:10px 28px;border-radius:40px;margin-bottom:32px}
+
+/* project card */
+.pcard{width:920px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:40px 48px;margin-top:24px}
+.pcard-row{display:flex;align-items:center;gap:24px}
+.pcard-rank{font-size:48px;font-weight:900;min-width:60px}
+.pcard-info{flex:1}
+.pcard-name{font-size:38px;font-weight:700;color:var(--white)}
+.pcard-desc{font-size:28px;color:var(--gray);margin-top:8px}
+.pcard-stars{font-size:32px;font-weight:700;text-align:right}
+.pcard-lang{display:inline-block;font-size:22px;font-weight:600;padding:6px 18px;border-radius:20px;margin-top:12px}
+
+/* comparison card */
+.cmp-card{width:440px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 36px}
+.cmp-title{font-size:34px;font-weight:700;color:var(--white);margin-bottom:16px}
+.cmp-item{font-size:26px;color:var(--gray);line-height:1.5;margin-top:10px}
+.cmp-row{display:flex;gap:32px;width:100%;justify-content:center}
+
+/* feature list */
+.feat{display:flex;align-items:flex-start;gap:16px;margin-top:14px}
+.feat-icon{font-size:28px;min-width:40px;text-align:center}
+.feat-text{font-size:30px;color:var(--gray);line-height:1.4}
+
+/* elimination tag */
+.tag-out{display:inline-block;font-size:28px;font-weight:700;padding:8px 24px;border-radius:20px;background:rgba(239,68,68,.15);color:var(--red);margin-top:20px}
+.tag-pass{display:inline-block;font-size:28px;font-weight:700;padding:8px 24px;border-radius:20px;background:rgba(74,222,128,.15);color:var(--green);margin-top:20px}
+
+/* CTA tags */
+.tags{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:40px}
+.tag{font-size:26px;font-weight:600;padding:10px 24px;border-radius:30px;background:rgba(255,255,255,.08);color:var(--gray)}
+
+/* round marker */
+.round-marker{font-size:32px;font-weight:800;padding:12px 36px;border-radius:40px;margin-bottom:40px}
+
+/* highlight stat */
+.stat-row{display:flex;gap:40px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-val{font-size:56px;font-weight:900}
+.stat-label{font-size:24px;color:var(--dim);margin-top:8px}
+
+/* table comparison */
+.tbl{width:920px;border-collapse:collapse;margin-top:24px}
+.tbl th{font-size:28px;font-weight:700;padding:16px 20px;text-align:left;border-bottom:2px solid rgba(255,255,255,.1)}
+.tbl td{font-size:26px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.05)}
+.tbl td:first-child{color:var(--white);font-weight:600}
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-start="0" data-duration="230.63" data-width="1080" data-height="1920">
+
+<audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio id="bgm" data-track-index="2" data-volume="0.03" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+<!-- Scene 0: Hook -->
+<div class="clip s-hook" data-start="0" data-duration="2.50">
+  <div class="glow" style="width:600px;height:600px;background:var(--warm);opacity:.25;top:300px;left:-100px"></div>
+  <div class="glow" style="width:500px;height:500px;background:var(--cool);opacity:.2;bottom:200px;right:-80px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="hero" style="font-size:110px;text-shadow:0 0 60px rgba(240,180,41,.4)">做PPT<br><span class="accent-warm">还在手动排版？</span></div>
+  </div>
+</div>
+
+<!-- Scene 1: Opening - 5 Projects Overview -->
+<div class="clip s-opening" data-start="2.50" data-duration="22.20">
+  <div class="glow" style="width:500px;height:500px;background:var(--cool);opacity:.18;top:100px;right:-60px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);opacity:.15;bottom:100px;left:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="badge" style="background:rgba(0,212,170,.12);color:var(--cool)">五轮淘汰赛</div>
+    <div class="title">5个AI PPT开源项目<br><span class="accent-warm">深度对比</span></div>
+    <div style="margin-top:48px;width:920px">
+      <div class="pcard" style="margin-top:12px;padding:24px 40px">
+        <div class="pcard-row"><div class="pcard-rank accent-warm">1</div><div class="pcard-info"><div class="pcard-name mono">PPT Master</div><div class="pcard-desc">原生可编辑PPTX生成</div><div class="pcard-lang" style="background:rgba(240,180,41,.12);color:var(--warm)">Python</div></div><div class="pcard-stars accent-warm">18.7K</div></div>
+      </div>
+      <div class="pcard" style="margin-top:12px;padding:24px 40px">
+        <div class="pcard-row"><div class="pcard-rank accent-cool">2</div><div class="pcard-info"><div class="pcard-name mono">Presenton</div><div class="pcard-desc">桌面应用开箱即用</div><div class="pcard-lang" style="background:rgba(0,212,170,.12);color:var(--cool)">JavaScript</div></div><div class="pcard-stars accent-cool">5.0K</div></div>
+      </div>
+      <div class="pcard" style="margin-top:12px;padding:24px 40px">
+        <div class="pcard-row"><div class="pcard-rank accent-cool">3</div><div class="pcard-info"><div class="pcard-name mono">PPTAgent</div><div class="pcard-desc">中科院多智能体架构</div><div class="pcard-lang" style="background:rgba(0,212,170,.12);color:var(--cool)">Python</div></div><div class="pcard-stars accent-cool">4.4K</div></div>
+      </div>
+      <div class="pcard" style="margin-top:12px;padding:24px 40px">
+        <div class="pcard-row"><div class="pcard-rank" style="color:var(--gray)">4</div><div class="pcard-info"><div class="pcard-name mono">ALLWEONE</div><div class="pcard-desc">38主题在线PPT</div><div class="pcard-lang" style="background:rgba(255,255,255,.08);color:var(--gray)">TypeScript</div></div><div class="pcard-stars" style="color:var(--gray)">2.8K</div></div>
+      </div>
+      <div class="pcard" style="margin-top:12px;padding:24px 40px">
+        <div class="pcard-row"><div class="pcard-rank" style="color:var(--dim)">5</div><div class="pcard-info"><div class="pcard-name mono">ai-to-pptx</div><div class="pcard-desc">在线PPT生成工具</div><div class="pcard-lang" style="background:rgba(255,255,255,.06);color:var(--dim)">TypeScript</div></div><div class="pcard-stars" style="color:var(--dim)">1.4K</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 2: Round 1 Title -->
+<div class="clip s-round1-title" data-start="24.70" data-duration="2.52">
+  <div class="glow" style="width:600px;height:600px;background:var(--warm);opacity:.2;top:400px;left:-100px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--red);opacity:.12;bottom:300px;right:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="round-marker" style="background:rgba(240,180,41,.15);color:var(--warm)">第一轮</div>
+    <div class="hero" style="font-size:96px">小白能不能<span class="accent-warm">装上？</span></div>
+  </div>
+</div>
+
+<!-- Scene 3: PPT Master Elimination -->
+<div class="clip s-round1-pptmaster" data-start="27.22" data-duration="20.18">
+  <div class="glow" style="width:500px;height:500px;background:var(--warm);opacity:.15;top:200px;right:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--red);opacity:.12;bottom:200px;left:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="title" style="font-size:56px"><span class="accent-warm">PPT Master</span> <span style="font-size:36px;color:var(--gray)">18.7K Star</span></div>
+    <div class="sub" style="font-size:32px">输出质量表现突出 — 原生可编辑PPTX</div>
+    <div style="margin-top:36px;width:920px">
+      <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">每个文字框、形状都是PowerPoint原生对象</div></div>
+      <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">SVG到DrawingML转换管线，像素级控制</div></div>
+      <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">17种专业风格，229页示例项目</div></div>
+    </div>
+    <div style="margin-top:36px;width:920px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:16px;padding:24px 32px">
+      <div class="body" style="color:var(--red);font-size:28px;text-align:left">安装门槛：需安装AI编程工具 + API密钥<br>普通人根本不知道什么是AI编程工具</div>
+    </div>
+    <div class="tag-out">淘汰</div>
+  </div>
+</div>
+
+<!-- Scene 4: PPTAgent Elimination -->
+<div class="clip s-round1-pptagent" data-start="47.40" data-duration="13.82">
+  <div class="glow" style="width:500px;height:500px;background:var(--warm);opacity:.15;top:200px;left:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--red);opacity:.12;bottom:200px;right:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="title" style="font-size:56px"><span class="accent-cool">PPTAgent</span> <span style="font-size:36px;color:var(--gray)">4.4K Star</span></div>
+    <div class="sub" style="font-size:32px">中科院出品 / EMNLP 2025 论文项目</div>
+    <div style="margin-top:36px;width:920px">
+      <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">多智能体编排架构，Planner/Research/Design</div></div>
+      <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">配置驱动，MCP工具生态，Docker沙箱</div></div>
+    </div>
+    <div style="margin-top:36px;width:920px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:16px;padding:24px 32px">
+      <div class="body" style="color:var(--red);font-size:28px;text-align:left">安装门槛：Windows不支持 + 需WSL + Docker + 3-4个API密钥</div>
+    </div>
+    <div class="tag-out">淘汰</div>
+  </div>
+</div>
+
+<!-- Scene 5: ai-to-pptx Elimination -->
+<div class="clip s-round1-aitopptx" data-start="61.22" data-duration="10.13">
+  <div class="glow" style="width:500px;height:500px;background:var(--red);opacity:.18;top:300px;right:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);opacity:.12;bottom:200px;left:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="title" style="font-size:56px"><span style="color:var(--dim)">ai-to-pptx</span> <span style="font-size:36px;color:var(--dim)">1.4K Star</span></div>
+    <div class="sub" style="font-size:32px;color:var(--dim)">虽然能在线用...</div>
+    <div style="margin-top:36px;width:920px;background:rgba(239,68,68,.08);border:2px solid rgba(239,68,68,.2);border-radius:16px;padding:32px">
+      <div class="body" style="color:var(--red);font-size:32px;font-weight:600;text-align:left">PPT内容全部发送到作者私人服务器<br><br>商业文件、年终汇报、融资BP<br>数据直接泄露</div>
+    </div>
+    <div class="tag-out">淘汰</div>
+  </div>
+</div>
+
+<!-- Scene 6: Round 1 Result -->
+<div class="clip s-round1-result" data-start="71.35" data-duration="4.49">
+  <div class="glow" style="width:600px;height:600px;background:var(--cool);opacity:.2;top:300px;left:-100px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);opacity:.15;bottom:300px;right:-80px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="body" style="font-size:36px;color:var(--red);margin-bottom:20px">三个项目出局</div>
+    <div style="display:flex;gap:24px;margin-bottom:32px">
+      <div style="font-size:28px;padding:8px 20px;border-radius:16px;background:rgba(239,68,68,.1);color:var(--red);text-decoration:line-through;opacity:.6">PPT Master</div>
+      <div style="font-size:28px;padding:8px 20px;border-radius:16px;background:rgba(239,68,68,.1);color:var(--red);text-decoration:line-through;opacity:.6">PPTAgent</div>
+      <div style="font-size:28px;padding:8px 20px;border-radius:16px;background:rgba(239,68,68,.1);color:var(--red);text-decoration:line-through;opacity:.6">ai-to-pptx</div>
+    </div>
+    <div class="hero" style="font-size:80px">还剩<span class="accent-green"> 2 </span>个</div>
+  </div>
+</div>
+
+<!-- Scene 7: Round 2 - Can you use it? -->
+<div class="clip s-round2" data-start="75.84" data-duration="23.18">
+  <div class="glow" style="width:500px;height:500px;background:var(--cool);opacity:.18;top:100px;right:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);opacity:.12;bottom:100px;left:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="round-marker" style="background:rgba(0,212,170,.12);color:var(--cool)">第二轮</div>
+    <div class="title" style="font-size:56px;margin-bottom:40px">装上之后<span class="accent-cool">会不会用？</span></div>
+    <div class="cmp-row">
+      <div class="cmp-card" style="border-color:rgba(0,212,170,.2)">
+        <div class="cmp-title accent-cool">Presenton</div>
+        <div class="cmp-item">桌面应用，本地运行</div>
+        <div class="cmp-item">输入主题 → 生成大纲</div>
+        <div class="cmp-item">确认 → 生成PPT → 导出</div>
+        <div class="tag-pass" style="margin-top:20px;font-size:24px">通过</div>
+      </div>
+      <div class="cmp-card" style="border-color:rgba(240,180,41,.2)">
+        <div class="cmp-title accent-warm">ALLWEONE</div>
+        <div class="cmp-item">在线直接用</div>
+        <div class="cmp-item">输入主题 → 审核大纲</div>
+        <div class="cmp-item">选主题 → 自动生成</div>
+        <div class="tag-pass" style="margin-top:20px;font-size:24px;background:rgba(240,180,41,.15);color:var(--warm)">通过</div>
+      </div>
+    </div>
+    <div class="body" style="margin-top:32px">两个都是<span class="accent-green">五分钟学会</span>的操作</div>
+  </div>
+</div>
+
+<!-- Scene 8: Round 3 - Beautiful enough? -->
+<div class="clip s-round3" data-start="99.02" data-duration="20.45">
+  <div class="glow" style="width:500px;height:500px;background:var(--warm);opacity:.15;top:100px;left:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--cool);opacity:.12;bottom:100px;right:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="round-marker" style="background:rgba(240,180,41,.12);color:var(--warm)">第三轮</div>
+    <div class="title" style="font-size:56px;margin-bottom:40px">生成的PPT<span class="accent-warm">够不够精美？</span></div>
+    <div class="cmp-row">
+      <div class="cmp-card" style="border-color:rgba(0,212,170,.2)">
+        <div class="cmp-title accent-cool">Presenton</div>
+        <div class="cmp-item">干净专业路线</div>
+        <div class="cmp-item">简约风格</div>
+        <div class="cmp-item">内置多种模板</div>
+        <div class="cmp-item">可导入自己的PPT作模板</div>
+        <div class="tag-pass" style="margin-top:16px;font-size:24px">通过</div>
+      </div>
+      <div class="cmp-card" style="border-color:rgba(240,180,41,.2)">
+        <div class="cmp-title accent-warm">ALLWEONE</div>
+        <div class="cmp-item">丰富多样路线</div>
+        <div class="cmp-item"><span class="accent-warm" style="font-weight:700">38个</span>内置主题</div>
+        <div class="cmp-item">商务/科技/教育/创意</div>
+        <div class="cmp-item">风格选择非常丰富</div>
+        <div class="tag-pass" style="margin-top:16px;font-size:24px;background:rgba(240,180,41,.15);color:var(--warm)">通过</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 9: Round 4 - Can you edit? -->
+<div class="clip s-round4" data-start="119.47" data-duration="17.23">
+  <div class="glow" style="width:500px;height:500px;background:var(--cool);opacity:.18;top:200px;right:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);opacity:.15;bottom:200px;left:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="round-marker" style="background:rgba(0,212,170,.12);color:var(--cool)">第四轮</div>
+    <div class="title" style="font-size:56px;margin-bottom:40px">生成之后<span class="accent-cool">能不能改？</span></div>
+    <div class="cmp-row">
+      <div class="cmp-card" style="border-color:rgba(0,212,170,.2)">
+        <div class="cmp-title accent-cool">Presenton</div>
+        <div class="cmp-item">对话式编辑</div>
+        <div class="cmp-item">自然语言告诉AI想改什么</div>
+        <div class="cmp-item">"换个配色方案"</div>
+      </div>
+      <div class="cmp-card" style="border-color:rgba(240,180,41,.3)">
+        <div class="cmp-title accent-warm">ALLWEONE</div>
+        <div class="cmp-item">对话编辑 + 专业编辑器</div>
+        <div class="cmp-item">点击修改文字</div>
+        <div class="cmp-item">拖拽调整 / 替换图片</div>
+        <div class="cmp-item"><span class="accent-warm" style="font-weight:700">一键切换主题</span></div>
+      </div>
+    </div>
+    <div class="body" style="margin-top:28px;font-size:32px">这一轮 <span class="accent-warm" style="font-weight:700">ALLWEONE 胜出</span></div>
+  </div>
+</div>
+
+<!-- Scene 10: Round 5 - Real scenarios -->
+<div class="clip s-round5" data-start="136.70" data-duration="19.44">
+  <div class="glow" style="width:500px;height:500px;background:var(--warm);opacity:.15;top:100px;left:-80px"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--cool);opacity:.12;bottom:100px;right:-60px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="round-marker" style="background:rgba(240,180,41,.12);color:var(--warm)">第五轮</div>
+    <div class="title" style="font-size:52px;margin-bottom:32px">实际场景<span class="accent-warm">验证</span></div>
+    <div style="width:920px">
+      <table class="tbl">
+        <tr><th style="color:var(--gray)">场景</th><th style="color:var(--cool)">Presenton</th><th style="color:var(--warm)">ALLWEONE</th></tr>
+        <tr><td>职场汇报 30页</td><td style="color:var(--green)">3-5min 专业</td><td style="color:var(--green)">3-5min 专业</td></tr>
+        <tr><td>学术答辩 15页</td><td style="color:var(--green)">PDF导入 更准确</td><td>基本胜任</td></tr>
+        <tr><td>产品发布 20页</td><td>专业模板</td><td style="color:var(--green)">主题丰富 + 在线分享</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 11: Recommend Presenton -->
+<div class="clip s-recommend-presenton" data-start="156.14" data-duration="28.70">
+  <div class="glow" style="width:600px;height:600px;background:var(--cool);opacity:.2;top:200px;right:-100px"></div>
+  <div class="glow" style="width:500px;height:500px;background:var(--warm);opacity:.12;bottom:100px;left:-80px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="badge" style="background:rgba(0,212,170,.15);color:var(--cool)">推荐</div>
+    <div class="title" style="font-size:64px"><span class="accent-cool">Presenton</span></div>
+    <div class="sub" style="font-size:30px;margin-top:16px">几乎开箱即用的AI PPT工具</div>
+    <div style="margin-top:32px;width:920px">
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val accent-cool">5.0K</div><div class="stat-label">Star</div></div>
+        <div class="stat"><div class="stat-val accent-cool">3</div><div class="stat-label">种部署方式</div></div>
+        <div class="stat"><div class="stat-val accent-cool">Apache</div><div class="stat-label">开源协议</div></div>
+      </div>
+      <div style="margin-top:28px">
+        <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">本地运行，输入主题就能生成</div></div>
+        <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">支持多种AI模型后端，想用什么自己选</div></div>
+        <div class="feat"><div class="feat-icon accent-green">+</div><div class="feat-text" style="font-weight:600">支持完全离线运行，数据不出电脑</div></div>
+        <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">桌面应用 / Docker / Web 三种部署</div></div>
+        <div class="feat"><div class="feat-icon accent-cool">+</div><div class="feat-text">输出可编辑PPTX + PDF</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 12: Recommend ALLWEONE -->
+<div class="clip s-recommend-allweone" data-start="184.84" data-duration="28.46">
+  <div class="glow" style="width:600px;height:600px;background:var(--warm);opacity:.2;top:200px;left:-100px"></div>
+  <div class="glow" style="width:500px;height:500px;background:var(--cool);opacity:.12;bottom:100px;right:-80px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="badge" style="background:rgba(240,180,41,.15);color:var(--warm)">推荐</div>
+    <div class="title" style="font-size:64px"><span class="accent-warm">ALLWEONE</span></div>
+    <div class="sub" style="font-size:30px;margin-top:16px">功能覆盖非常全面</div>
+    <div style="margin-top:32px;width:920px">
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val accent-warm">2.8K</div><div class="stat-label">Star</div></div>
+        <div class="stat"><div class="stat-val accent-warm">38</div><div class="stat-label">内置主题</div></div>
+        <div class="stat"><div class="stat-val accent-warm">MIT</div><div class="stat-label">开源协议</div></div>
+      </div>
+      <div style="margin-top:28px">
+        <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">38个主题覆盖范围广，风格选择丰富</div></div>
+        <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">专业幻灯片编辑器，编辑能力表现突出</div></div>
+        <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">支持代码块、表格、图表、拖拽排序</div></div>
+        <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">在线演示 + 链接分享，团队协作方便</div></div>
+        <div class="feat"><div class="feat-icon accent-warm">+</div><div class="feat-text">16:9 / 4:3 / 1:1 / 9:16 多格式输出</div></div>
+        <div class="feat"><div class="feat-icon accent-green">+</div><div class="feat-text" style="font-weight:600">在线直接用，无需安装</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 13: Summary + CTA -->
+<div class="clip s-summary-cta" data-start="213.30" data-duration="17.33">
+  <div class="glow" style="width:700px;height:700px;background:var(--warm);opacity:.25;top:200px;left:-120px"></div>
+  <div class="glow" style="width:600px;height:600px;background:var(--cool);opacity:.18;bottom:100px;right:-100px"></div>
+  <div class="grid-bg"></div>
+  <div class="scene-wrap" style="padding-top:120px;padding-bottom:120px">
+    <div class="title" style="font-size:52px;margin-bottom:32px">总结一下</div>
+    <div style="width:920px">
+      <div class="pcard" style="border-color:rgba(0,212,170,.2);margin-top:0">
+        <div class="pcard-row"><div style="font-size:48px;color:var(--cool)">1</div><div class="pcard-info"><div class="pcard-name accent-cool">Presenton</div><div class="pcard-desc">离线用 / 注重隐私 / 本地运行</div></div></div>
+      </div>
+      <div class="pcard" style="border-color:rgba(240,180,41,.2)">
+        <div class="pcard-row"><div style="font-size:48px;color:var(--warm)">2</div><div class="pcard-info"><div class="pcard-name accent-warm">ALLWEONE</div><div class="pcard-desc">在线用 / 主题丰富 / 编辑能力强</div></div></div>
+      </div>
+    </div>
+    <div class="body" style="margin-top:24px;font-size:30px">两个都<span class="accent-green" style="font-weight:600">不需要写代码</span><br>五分钟内生成第一份精美PPT</div>
+    <div class="tags">
+      <div class="tag">#开源</div>
+      <div class="tag">#PPT</div>
+      <div class="tag">#AI工具</div>
+      <div class="tag">#效率</div>
+    </div>
+    <div class="sub" style="margin-top:24px;font-size:32px;font-weight:700;color:var(--warm)">关注我，发现更多好用的开源项目</div>
+  </div>
+</div>
+
+</div>
+
+<script>window.__hf={duration:230.63,seek:function(t){}};window.__timelines={};</script>
+</body>
+</html>

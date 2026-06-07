@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050510; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: linear-gradient(180deg, #080820 0%, #0d0d2a 40%, #080818 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.glow-warm {
+  position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.18), transparent 70%);
+  filter: blur(200px); top: -200px; left: -400px; pointer-events: none;
+}
+.glow-cool {
+  position: absolute; width: 1200px; height: 1200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.1), transparent 70%);
+  filter: blur(200px); bottom: -200px; right: -400px; pointer-events: none;
+}
+
+.date { position: relative; font-size: 80px; font-weight: 800;
+  color: #f59e0b; letter-spacing: 8px; margin-bottom: 40px; }
+.scene-label { position: relative; font-size: 64px; font-weight: 600;
+  color: #6CB4EE; letter-spacing: 6px; margin-bottom: 80px; }
+.badge { position: relative; display: inline-block;
+  background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.25));
+  border: 2px solid rgba(245,158,11,0.4); border-radius: 100px;
+  padding: 28px 100px; font-size: 64px; font-weight: 700;
+  color: #f59e0b; letter-spacing: 8px; margin-bottom: 120px;
+  box-shadow: 0 0 60px rgba(245,158,11,0.1); }
+.main-title { position: relative; text-align: center; line-height: 1.2; margin-bottom: 64px; }
+.main-title .white { font-size: 220px; font-weight: 900; color: #FFFFFF; letter-spacing: -4px; }
+.main-title .accent { font-size: 220px; font-weight: 900; color: #f59e0b; letter-spacing: -4px;
+  text-shadow: 0 0 80px rgba(245,158,11,0.4), 0 0 160px rgba(245,158,11,0.15); }
+.divider { position: relative; width: 900px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, #f59e0b, #0ea5e9); margin-bottom: 80px; }
+.data-subtitle { position: relative; font-size: 88px; font-weight: 600;
+  color: #6CB4EE; letter-spacing: 4px; margin-bottom: 100px; }
+.cards { position: relative; display: flex; gap: 80px; }
+.card { background: rgba(20,20,50,0.85);
+  border: 2px solid rgba(245,158,11,0.2); border-radius: 48px;
+  padding: 64px 100px; text-align: center; min-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+.card .num { font-family: 'JetBrains Mono', monospace; font-size: 120px;
+  font-weight: 700; color: #f59e0b; line-height: 1; }
+.card .label { font-size: 52px; color: #8899BB; margin-top: 24px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+
+  <div class="date">2026年5月22日</div>
+  <div class="scene-label">行业深度解读</div>
+  <div class="badge">万亿赛道深度拆解</div>
+  <div class="main-title">
+    <span class="white">即时零售</span><br>
+    <span class="accent">三足鼎立</span>
+  </div>
+  <div class="divider"></div>
+  <div class="data-subtitle">2030年规模2万亿 · 7.5亿用户</div>
+  <div class="cards">
+    <div class="card">
+      <div class="num">+24%</div>
+      <div class="label">2025年增速</div>
+    </div>
+    <div class="card">
+      <div class="num">700万</div>
+      <div class="label">骑手规模</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

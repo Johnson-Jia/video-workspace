@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #030810; overflow: hidden; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+
+.cover {
+  position: relative; width: 2160px; height: 3840px;
+  background: #030810;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+/* V3 atmospheric blobs — depth behind the star field */
+.blob-warm {
+  position: absolute;
+  width: 1800px; height: 1800px; border-radius: 50%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(255,184,0,0.14) 0%, rgba(255,140,0,0.04) 45%, transparent 70%);
+  top: 10%; left: -22%;
+  filter: blur(120px);
+}
+
+.blob-cool {
+  position: absolute;
+  width: 1600px; height: 1600px; border-radius: 50%;
+  background: radial-gradient(ellipse at 60% 55%, rgba(100,255,218,0.10) 0%, rgba(80,200,180,0.02) 45%, transparent 70%);
+  bottom: 10%; right: -18%;
+  filter: blur(110px);
+}
+
+/* V2 dot grid */
+.star-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle 2px, rgba(255,255,255,0.07) 100%, transparent 100%);
+  background-size: 80px 80px;
+  background-position: 40px 40px;
+}
+
+/* Bright white stars */
+.star-b {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* Amber stars */
+.star-a {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: #FFB800;
+  box-shadow: 0 0 20px rgba(255,184,0,0.6), 0 0 40px rgba(255,184,0,0.2);
+}
+
+/* Teal stars */
+.star-t {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: #64FFDA;
+  box-shadow: 0 0 20px rgba(100,255,218,0.6), 0 0 40px rgba(100,255,218,0.2);
+}
+
+/* Connection lines */
+.conn {
+  position: absolute; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.09), rgba(255,255,255,0.02));
+  transform-origin: left center;
+}
+
+.content {
+  position: relative; text-align: center; z-index: 1;
+}
+
+/* V3 gradient text applied to V2 title */
+.title-line {
+  font-size: 280px; font-weight: 900; line-height: 1.2;
+  letter-spacing: 36px;
+  background-image: linear-gradient(135deg, #FFB800 0%, #FF8C00 25%, #FFFFFF 50%, #64FFDA 75%, #4DD0B0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dot-sep {
+  display: inline-block; width: 24px; height: 24px; border-radius: 50%;
+  background: #FFB800; margin: 0 32px; vertical-align: middle;
+  box-shadow: 0 0 30px rgba(255,184,0,0.5), 0 0 60px rgba(255,184,0,0.2);
+}
+
+.subtitle {
+  font-size: 76px; font-weight: 300; color: rgba(255,255,255,0.35);
+  letter-spacing: 6px; margin-top: 60px;
+}
+
+.deco-line {
+  width: 500px; height: 2px; margin: 80px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(255,184,0,0.3), rgba(100,255,218,0.3), transparent);
+}
+
+/* V3 micro particles for texture */
+.pw {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: #FFB800; opacity: 0.3;
+}
+.pc {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: #64FFDA; opacity: 0.25;
+}
+
+.footer {
+  position: absolute; bottom: 160px; left: 0; right: 0; text-align: center;
+}
+
+.footer-text {
+  font-size: 52px; font-weight: 400; color: rgba(255,255,255,0.25);
+  letter-spacing: 14px;
+}
+
+.footer-sep {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); margin: 0 20px; vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<div data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="1">
+<div class="clip" data-start="0" data-duration="1">
+<div class="cover">
+  <!-- V3 atmospheric blobs -->
+  <div class="blob-warm"></div>
+  <div class="blob-cool"></div>
+
+  <!-- V2 star grid -->
+  <div class="star-grid"></div>
+
+  <!-- Bright stars -->
+  <div class="star-b" style="top:280px;left:180px"></div>
+  <div class="star-b" style="top:520px;left:1420px"></div>
+  <div class="star-b" style="top:1050px;left:380px"></div>
+  <div class="star-b" style="top:1580px;left:1780px"></div>
+  <div class="star-b" style="top:2250px;left:280px"></div>
+  <div class="star-b" style="top:2820px;left:1220px"></div>
+  <div class="star-b" style="top:3420px;left:680px"></div>
+  <div class="star-b" style="top:3680px;left:1580px"></div>
+
+  <!-- Amber stars -->
+  <div class="star-a" style="top:350px;left:680px"></div>
+  <div class="star-a" style="top:950px;left:1580px"></div>
+  <div class="star-a" style="top:2050px;left:180px"></div>
+  <div class="star-a" style="top:3080px;left:920px"></div>
+
+  <!-- Teal stars -->
+  <div class="star-t" style="top:180px;left:1200px"></div>
+  <div class="star-t" style="top:1320px;left:480px"></div>
+  <div class="star-t" style="top:2620px;left:1650px"></div>
+  <div class="star-t" style="top:3580px;left:380px"></div>
+
+  <!-- Connection lines -->
+  <div class="conn" style="top:284px;left:186px;width:490px;transform:rotate(12deg)"></div>
+  <div class="conn" style="top:524px;left:1430px;width:360px;transform:rotate(-20deg)"></div>
+  <div class="conn" style="top:958px;left:1590px;width:400px;transform:rotate(25deg)"></div>
+  <div class="conn" style="top:1328px;left:490px;width:550px;transform:rotate(7deg)"></div>
+  <div class="conn" style="top:2254px;left:286px;width:600px;transform:rotate(14deg)"></div>
+  <div class="conn" style="top:2628px;left:1660px;width:460px;transform:rotate(-10deg)"></div>
+  <div class="conn" style="top:3426px;left:686px;width:520px;transform:rotate(18deg)"></div>
+
+  <!-- V3 micro particles -->
+  <div class="pw" style="top:620px;left:320px"></div>
+  <div class="pw" style="top:1280px;left:1720px"></div>
+  <div class="pw" style="top:2780px;left:480px"></div>
+  <div class="pc" style="top:480px;left:1050px"></div>
+  <div class="pc" style="top:1850px;left:1580px"></div>
+  <div class="pc" style="top:3280px;left:720px"></div>
+
+  <div class="content">
+    <div class="title-line">星火<span class="dot-sep"></span>燎原</div>
+    <div class="subtitle">每一行开源代码，都是一颗星火</div>
+    <div class="deco-line"></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-text">GITHUB</span>
+    <span class="footer-sep"></span>
+    <span class="footer-text">星探</span>
+    <span class="footer-sep"></span>
+    <span class="footer-text">频道介绍</span>
+  </div>
+</div>
+</div>
+</div>
+<script>window.__hf = { duration: 1, seek: function(t) {} };window.__timelines = {};</script>
+</body>
+</html>

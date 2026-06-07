@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI × 游戏开发开源生态 — 40+ 项目全景索引</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a1a;
+  --bg-card: #12122a;
+  --bg-card-hover: #1a1a3a;
+  --border: rgba(255,255,255,0.06);
+  --border-accent: rgba(249,168,37,0.3);
+  --text: #e8e8f0;
+  --text-muted: #8899bb;
+  --text-dim: #556688;
+  --accent-warm: #F9A825;
+  --accent-warm-soft: #FFB74D;
+  --accent-cool: #00F5D4;
+  --accent-blue: #4DA8FF;
+  --accent-purple: #A78BFA;
+  --accent-pink: #F472B6;
+  --accent-green: #34D399;
+  --accent-red: #F87171;
+  --route-a: #F9A825;
+  --route-b: #00F5D4;
+  --route-c: #4DA8FF;
+  --route-d: #A78BFA;
+  --route-e: #F472B6;
+  --route-f: #34D399;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 32px 100px;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 0 60px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(249,168,37,0.08) 0%, rgba(0,245,212,0.04) 40%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(249,168,37,0.12), rgba(249,168,37,0.22));
+  border: 1px solid rgba(249,168,37,0.3);
+  border-radius: 100px;
+  padding: 8px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-warm-soft);
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.hero h1 .warm { color: var(--accent-warm); }
+.hero h1 .cool { color: var(--accent-cool); }
+.hero .subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 48px 0 72px;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+}
+.stat-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  line-height: 1;
+}
+.stat-card .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 72px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--bg);
+  flex-shrink: 0;
+}
+.section-tag.a { background: var(--route-a); }
+.section-tag.b { background: var(--route-b); }
+.section-tag.c { background: var(--route-c); }
+.section-tag.d { background: var(--route-d); }
+.section-tag.e { background: var(--route-e); }
+.section-tag.f { background: var(--route-f); }
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Project cards */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.project {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.project:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+.project::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project:hover::before { opacity: 1; }
+.project.route-a::before { background: var(--route-a); }
+.project.route-b::before { background: var(--route-b); }
+.project.route-c::before { background: var(--route-c); }
+.project.route-d::before { background: var(--route-d); }
+.project.route-e::before { background: var(--route-e); }
+.project.route-f::before { background: var(--route-f); }
+
+.project-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.project-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+.project-name a {
+  color: inherit;
+  text-decoration: none;
+}
+.project-name a:hover {
+  color: var(--accent-cool);
+}
+.project-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.badge-a { background: rgba(249,168,37,0.15); color: var(--route-a); }
+.badge-b { background: rgba(0,245,212,0.12); color: var(--route-b); }
+.badge-c { background: rgba(77,168,255,0.15); color: var(--route-c); }
+.badge-d { background: rgba(167,139,250,0.15); color: var(--route-d); }
+.badge-e { background: rgba(244,114,182,0.15); color: var(--route-e); }
+.badge-f { background: rgba(52,211,153,0.15); color: var(--route-f); }
+
+.project-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.meta-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+.meta-tag.highlight {
+  background: rgba(249,168,37,0.08);
+  border-color: rgba(249,168,37,0.15);
+  color: var(--accent-warm-soft);
+}
+
+/* Tool index table */
+.tool-section {
+  margin-bottom: 48px;
+}
+.tool-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--accent-pink);
+}
+.tool-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tool-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+.tool-chip:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(244,114,182,0.3);
+}
+
+/* Category label */
+.category-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.footer a { color: var(--accent-cool); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 32px 16px 60px; }
+  .hero h1 { font-size: 32px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .projects { grid-template-columns: 1fr; }
+  .stat-card .num { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">AI × GAME DEV ECOSYSTEM</div>
+    <h1><span class="warm">游戏开发</span>，<span class="cool">变天了</span></h1>
+    <p class="subtitle">40+ AI 项目 × 6 大赛道 × 全景索引 — 数据截止 2025-05-30</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="num">26</div>
+      <div class="label">核心开源项目</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">8</div>
+      <div class="label">UE5 MCP 服务器</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">88</div>
+      <div class="label">单项目最多工具数</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">337</div>
+      <div class="label">最大 Skills 库</div>
+    </div>
+  </div>
+
+  <!-- ==================== 路线 A ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag a">A</div>
+      <div>
+        <div class="section-title">编辑器内嵌 AI Agent</div>
+        <div class="section-desc">在 UE5 编辑器内嵌入 AI，直接操控引擎 API — Blueprint、C++、材质、关卡</div>
+      </div>
+    </div>
+    <div class="projects">
+
+      <div class="project route-a">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/PRQELT/Autonomix">Autonomix</a></div>
+          <span class="project-badge badge-a">评级 A</span>
+        </div>
+        <div class="project-desc">85+ 工具，UE5 编辑器内全自主 AI Agent。T3D Blueprint 注入、VLM 视口视觉、PIE 自动测试、模糊 Diff 应用器。6 层安全机制。支持几乎所有 LLM 提供商。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">85+ 工具</span>
+          <span class="meta-tag">C++ Slate</span>
+          <span class="meta-tag">VLM</span>
+          <span class="meta-tag">MIT</span>
+        </div>
+      </div>
+
+      <div class="project route-a">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Italink/UnrealClientProtocol">UnrealClientProtocol</a></div>
+          <span class="project-badge badge-a">反射协议</span>
+        </div>
+        <div class="project-desc">基于 TCP+JSON 的 UE5 反射协议，允许外部 AI 客户端直接调用引擎函数。轻量级通信层。</div>
+        <div class="project-meta">
+          <span class="meta-tag">C++ Plugin</span>
+          <span class="meta-tag">TCP+JSON</span>
+        </div>
+      </div>
+
+      <div class="project route-a">
+        <div class="project-head">
+          <div class="project-name">UE 5.7 内置 AI Assistant</div>
+          <span class="project-badge badge-a">官方</span>
+        </div>
+        <div class="project-desc">Epic 官方内置 AI 助手，定位为 F1 帮助系统：解释功能、建议工作流、链接文档。与 Autonomix 互补而非竞争。</div>
+        <div class="project-meta">
+          <span class="meta-tag">只读</span>
+          <span class="meta-tag">UE 5.7+</span>
+          <span class="meta-tag">知识查询</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 路线 B ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag b">B</div>
+      <div>
+        <div class="section-title">MCP 协议桥接</div>
+        <div class="section-desc">AI 客户端通过 MCP 协议远程控制 UE5 — 不侵入编辑器，客户端灵活可组合</div>
+      </div>
+    </div>
+    <div class="projects">
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/ChiR24/Unreal_mcp">ChiR24/Unreal_mcp</a></div>
+          <span class="project-badge badge-b">最全面</span>
+        </div>
+        <div class="project-desc">88 个工具，当前最全面的 UE5 MCP 服务器。原生 Automation Bridge，覆盖资产管理、关卡编辑、Blueprint 操作。C++ 插件 + Python。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">88 工具</span>
+          <span class="meta-tag">C++ + Python</span>
+          <span class="meta-tag">UE 5.x</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/remiphilippe/mcp-unreal">remiphilippe/mcp-unreal</a></div>
+          <span class="project-badge badge-b">最轻量</span>
+        </div>
+        <div class="project-desc">49 个工具，Go 单文件实现。零 Python 依赖，单一二进制部署。适配 UE 5.7。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">49 工具</span>
+          <span class="meta-tag">Go</span>
+          <span class="meta-tag">单文件部署</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Natfii/ue5-mcp-bridge">Natfii/ue5-mcp-bridge</a></div>
+        </div>
+        <div class="project-desc">原 UnrealClaude 插件核心，Python 实现。~20 个工具，成熟的 MCP 桥接方案。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~20 工具</span>
+          <span class="meta-tag">Python</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/chongdashu/unreal-mcp">chongdashu/unreal-mcp</a></div>
+        </div>
+        <div class="project-desc">学术背景项目，C++ + Python 实现，实验性强。适合研究和探索 MCP 与 UE5 的深度集成。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~30 工具</span>
+          <span class="meta-tag">C++ + Python</span>
+          <span class="meta-tag">学术</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/genorca/unreal-mcp">GenOrca/unreal-mcp</a></div>
+        </div>
+        <div class="project-desc">支持自定义工具开发的 MCP 服务器，Python + C++ 混合架构。方便扩展领域专用工具。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~25 工具</span>
+          <span class="meta-tag">Python + C++</span>
+          <span class="meta-tag">可扩展</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/flopperam/unreal-engine-mcp">flopperam/unreal-engine-mcp</a></div>
+        </div>
+        <div class="project-desc">社区维护的轻量入门方案。~15 个工具，适合 MCP 初学者快速上手。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~15 工具</span>
+          <span class="meta-tag">轻量入门</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/kvick-games/UnrealMCP">kvick-games/UnrealMCP</a></div>
+        </div>
+        <div class="project-desc">引擎内原生 MCP 实现，纯 C++ 编写。不依赖外部 Python 环境。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~20 工具</span>
+          <span class="meta-tag">纯 C++</span>
+        </div>
+      </div>
+
+      <div class="project route-b">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/VedantRGosavi/UE5-MCP">VedantRGosavi/UE5-MCP</a></div>
+        </div>
+        <div class="project-desc">专注于程序化生成和 Blueprint 自动化的 MCP 服务器。Python 实现。</div>
+        <div class="project-meta">
+          <span class="meta-tag">~20 工具</span>
+          <span class="meta-tag">程序化生成</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 路线 C ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag c">C</div>
+      <div>
+        <div class="section-title">Claude Code Skills / Agent 体系</div>
+        <div class="section-desc">CLI 层面的多 Agent 协作系统 — 49 Agent、337 Skills，管理从设计到发布的全流程</div>
+      </div>
+    </div>
+    <div class="projects">
+
+      <div class="project route-c">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Donchitos/Claude-Code-Game-Studios">Claude-Code-Game-Studios</a></div>
+          <span class="project-badge badge-c">全流程工作室</span>
+        </div>
+        <div class="project-desc">49 Agent / 73 Skills / 12 Hooks。三级 Agent 层级（Director → Lead → Specialist），覆盖游戏设计、编程、美术、QA、发布全生命周期。支持 UE5 / Unity / Godot 三引擎。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">49 Agents</span>
+          <span class="meta-tag highlight">73 Skills</span>
+          <span class="meta-tag">三引擎</span>
+          <span class="meta-tag">MIT</span>
+        </div>
+      </div>
+
+      <div class="project route-c">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/alirezarezvani/claude-skills">alirezarezvani/claude-skills</a></div>
+          <span class="project-badge badge-c">337 Skills</span>
+        </div>
+        <div class="project-desc">覆盖全领域开发的 Skills 库（不限于游戏）。同时兼容 Claude Code、OpenAI Codex、Gemini CLI、Cursor。学一次语法，四个平台通用。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">337 Skills</span>
+          <span class="meta-tag">多平台兼容</span>
+        </div>
+      </div>
+
+      <div class="project route-c">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/HermeticOrmus/claude-code-game-development">claude-code-game-development</a></div>
+        </div>
+        <div class="project-desc">学习资源仓库，收录使用 Claude Code 进行游戏开发的实践案例和教程。</div>
+        <div class="project-meta">
+          <span class="meta-tag">学习资源</span>
+          <span class="meta-tag">教程</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 路线 D ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag d">D</div>
+      <div>
+        <div class="section-title">游戏内 LLM 集成</div>
+        <div class="section-desc">运行时 NPC AI — 让游戏角色具备自然语言对话和动态行为决策能力</div>
+      </div>
+    </div>
+    <div class="projects">
+
+      <div class="project route-d">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Sovahero/UnrealAiConnector">UnrealAiConnector</a></div>
+        </div>
+        <div class="project-desc">多 LLM API 连接器，支持 Claude / GPT / Gemini。用于 NPC 对话、任务生成等运行时 AI 场景。</div>
+        <div class="project-meta">
+          <span class="meta-tag">C++ Plugin</span>
+          <span class="meta-tag">多模型</span>
+          <span class="meta-tag">HTTP API</span>
+        </div>
+      </div>
+
+      <div class="project route-d">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/getnamo/Llama-Unreal">Llama-Unreal</a></div>
+        </div>
+        <div class="project-desc">本地 llama.cpp 集成，支持 GGUF 格式模型。离线运行 NPC AI，适合隐私敏感场景和移动端。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">本地离线</span>
+          <span class="meta-tag">llama.cpp</span>
+          <span class="meta-tag">GGUF</span>
+        </div>
+      </div>
+
+      <div class="project route-d">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/prajwalshettydev/UnrealGenAISupport">UnrealGenAISupport</a></div>
+        </div>
+        <div class="project-desc">综合 GenAI 支持插件，支持 GPT-5 / DeepSeek / Claude 多模型切换，同时提供 MCP 服务器功能。</div>
+        <div class="project-meta">
+          <span class="meta-tag">多模型切换</span>
+          <span class="meta-tag">MCP 服务器</span>
+        </div>
+      </div>
+
+      <div class="project route-d">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Akiya-Research-Institute/LocalLLM-Demo-UE5">LocalLLM-Demo-UE5</a></div>
+        </div>
+        <div class="project-desc">本地大模型运行演示，GGUF 格式。适合学习和原型验证本地 LLM 在 UE5 中的集成方式。</div>
+        <div class="project-meta">
+          <span class="meta-tag">本地模型</span>
+          <span class="meta-tag">学习演示</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 路线 E ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag e">E</div>
+      <div>
+        <div class="section-title">AI 资产生成工具链</div>
+        <div class="section-desc">从图像、3D 模型到音乐、语音 — AI 辅助游戏资产生成的工具索引</div>
+      </div>
+    </div>
+
+    <div class="projects" style="margin-bottom: 32px;">
+      <div class="project route-e">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/Yuan-ManX/ai-game-devtools">ai-game-devtools</a></div>
+          <span class="project-badge badge-e">工具索引</span>
+        </div>
+        <div class="project-desc">最全面的 AI 游戏开发工具索引，16 个类别、覆盖数百个工具。从 LLM、视觉模型到 3D 生成、音频 AI，一站式查找。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">16 类</span>
+          <span class="meta-tag">数百工具</span>
+          <span class="meta-tag">MIT</span>
+        </div>
+      </div>
+      <div class="project route-e">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/leigest519/OpenGame">OpenGame</a></div>
+        </div>
+        <div class="project-desc">端到端 Web 游戏生成。从自然语言描述到可玩游戏，探索 AI 原生游戏创作的边界。</div>
+        <div class="project-meta">
+          <span class="meta-tag">端到端</span>
+          <span class="meta-tag">Web 游戏</span>
+        </div>
+      </div>
+      <div class="project route-e">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/pirua-game/ai_game_base_analysis_cli_mcp_tool">gdep</a></div>
+        </div>
+        <div class="project-desc">代码库分析 MCP 工具。AI 通过 MCP 分析游戏代码库结构，辅助理解和重构。</div>
+        <div class="project-meta">
+          <span class="meta-tag">MCP</span>
+          <span class="meta-tag">代码分析</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 工具索引展开 -->
+    <div class="tool-section">
+      <h3>ai-game-devtools 索引中的工具/模型</h3>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">LLM & 工具</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Auto-GPT</span>
+          <span class="tool-chip">MetaGPT</span>
+          <span class="tool-chip">ChatDev</span>
+          <span class="tool-chip">LangChain</span>
+          <span class="tool-chip">Qwen3</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">视觉模型</div>
+        <div class="tool-grid">
+          <span class="tool-chip">CogVLM2</span>
+          <span class="tool-chip">LLaVA-OneVision</span>
+          <span class="tool-chip">Qwen-VL</span>
+          <span class="tool-chip">MiniCPM-V</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">World Model</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Genie</span>
+          <span class="tool-chip">GameNGen</span>
+          <span class="tool-chip">Oasis</span>
+          <span class="tool-chip">Cosmos</span>
+          <span class="tool-chip">Genie 3</span>
+          <span class="tool-chip">Matrix-Game</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">Agent</div>
+        <div class="tool-grid">
+          <span class="tool-chip">AutoGen</span>
+          <span class="tool-chip">crewAI</span>
+          <span class="tool-chip">AgentScope</span>
+          <span class="tool-chip">SIMA</span>
+          <span class="tool-chip">XAgent</span>
+          <span class="tool-chip">LARP</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">代码</div>
+        <div class="tool-grid">
+          <span class="tool-chip">DeepSeek Coder</span>
+          <span class="tool-chip">StarCoder2</span>
+          <span class="tool-chip">CodeGeeX4</span>
+          <span class="tool-chip">Cursor</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">图像</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Flux</span>
+          <span class="tool-chip">Stable Diffusion 3.5</span>
+          <span class="tool-chip">Kolors</span>
+          <span class="tool-chip">HunyuanImage</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">纹理</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Dream Textures</span>
+          <span class="tool-chip">DreamMat</span>
+          <span class="tool-chip">Text2Tex</span>
+          <span class="tool-chip">With Poly</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">3D 模型</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Hunyuan3D 2.1</span>
+          <span class="tool-chip">TripoSR</span>
+          <span class="tool-chip">GaussianDreamer</span>
+          <span class="tool-chip">Meshy</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">数字人 / 头像</div>
+        <div class="tool-grid">
+          <span class="tool-chip">LivePortrait</span>
+          <span class="tool-chip">Hallo2</span>
+          <span class="tool-chip">MuseTalk</span>
+          <span class="tool-chip">Ready Player Me</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">动画</div>
+        <div class="tool-grid">
+          <span class="tool-chip">Animate Anyone</span>
+          <span class="tool-chip">AnimateDiff</span>
+          <span class="tool-chip">ToonCrafter</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">视频</div>
+        <div class="tool-grid">
+          <span class="tool-chip">HunyuanVideo</span>
+          <span class="tool-chip">Wan2.2</span>
+          <span class="tool-chip">Open-Sora</span>
+          <span class="tool-chip">CogVideoX</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">音效</div>
+        <div class="tool-grid">
+          <span class="tool-chip">AudioLDM 2</span>
+          <span class="tool-chip">Stable Audio</span>
+          <span class="tool-chip">MMAudio</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">音乐</div>
+        <div class="tool-grid">
+          <span class="tool-chip">MusicGen</span>
+          <span class="tool-chip">YuE</span>
+          <span class="tool-chip">Magenta</span>
+          <span class="tool-chip">Riffusion</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">语音合成</div>
+        <div class="tool-grid">
+          <span class="tool-chip">ChatTTS</span>
+          <span class="tool-chip">GPT-SoVITS</span>
+          <span class="tool-chip">CosyVoice</span>
+          <span class="tool-chip">MeloTTS</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">声音克隆 / 歌声合成</div>
+        <div class="tool-grid">
+          <span class="tool-chip">DiffSinger</span>
+          <span class="tool-chip">so-vits-svc</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div class="category-label">Shader / 分析</div>
+        <div class="tool-grid">
+          <span class="tool-chip">AI Shader (Unity)</span>
+          <span class="tool-chip">Ludo.ai</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 路线 F ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag f">F</div>
+      <div>
+        <div class="section-title">跨引擎方案</div>
+        <div class="section-desc">AI × 游戏开发不止 UE5 — Unity、Godot、独立 AI 引擎的跨平台方案</div>
+      </div>
+    </div>
+    <div class="projects">
+
+      <div class="project route-f">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/CoplayDev/unity-mcp">CoplayDev/unity-mcp</a></div>
+        </div>
+        <div class="project-desc">Unity 引擎的 MCP 桥接方案。通过 MCP 协议让 AI 客户端远程控制 Unity 编辑器。</div>
+        <div class="project-meta">
+          <span class="meta-tag">Unity</span>
+          <span class="meta-tag">MCP</span>
+        </div>
+      </div>
+
+      <div class="project route-f">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/The1Studio/the1-unity-claude-agents">the1-unity-claude-agents</a></div>
+        </div>
+        <div class="project-desc">Unity 版 Claude Code Agent 体系，借鉴 Claude-Code-Game-Studios 的多 Agent 协作模式。</div>
+        <div class="project-meta">
+          <span class="meta-tag">Unity</span>
+          <span class="meta-tag">Agent 体系</span>
+        </div>
+      </div>
+
+      <div class="project route-f">
+        <div class="project-head">
+          <div class="project-name"><a href="https://github.com/WorldQL/dreamlab-engine">dreamlab-engine</a></div>
+        </div>
+        <div class="project-desc">AI 原生游戏引擎。不基于现有引擎，而是从零构建面向 AI 开发者的游戏创作平台。</div>
+        <div class="project-meta">
+          <span class="meta-tag highlight">独立引擎</span>
+          <span class="meta-tag">AI 原生</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>数据来源：<a href="https://github.com">GitHub</a> 公开仓库 | 报告编制：AI Deep Research Agent</p>
+    <p style="margin-top: 8px;">项目状态可能随时变化，建议使用前核实最新信息</p>
+  </div>
+
+</div>
+
+</body>
+</html>

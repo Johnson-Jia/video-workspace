@@ -1,0 +1,612 @@
+{
+  "segments": [
+    {
+      "scene": "hook",
+      "type": "hook",
+      "text": "一个 GitHub 项目号称用 WiFi 信号就能精确追踪人体姿态，五万四千帧每秒的推理速度，准确率百分之九十四。听起来是不是像科幻电影？但真相可能让你大跌眼镜。",
+      "estimated_duration": 12,
+      "emotion": "grab",
+      "emotion_intensity": 0.7,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [],
+      "visual_intent": {
+        "bg": {
+          "mood": "dark, tense, dramatic",
+          "color_hint": "pure black, red warning glow top-right, cyan cold glow bottom-left",
+          "density": "generous"
+        },
+        "fx": {
+          "emotion": "shock, alert",
+          "motion_style": "pulsing, expanding",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "hero",
+          "focus": "shocking claim numbers: 54K fps, 94.2% accuracy",
+          "layout_hint": {
+            "density": "generous"
+          }
+        }
+      },
+      "narration_segment": "一个 GitHub 项目号称用 WiFi 信号就能精确追踪人体姿态，五万四千帧每秒的推理速度，准确率百分之九十四。听起来是不是像科幻电影？但真相可能让你大跌眼镜。"
+    },
+    {
+      "scene": "project_overview",
+      "type": "what",
+      "text": "这个项目叫 RuView，声称用 WiFi CSI 信号实现无摄像头的人体姿态估计。听着很前沿对吧？项目规模确实惊人：三十八个 Rust crate 组成的工作空间，一百四十八个架构决策文档，二十三个 CI 工作流。光是看工程量，你绝对会觉得这是一个顶级团队在做的事情。ESP32 固件层有五十多个 C 文件，信号处理层有真实的 FFT、相位解缠绕、Fresnel 区建模。这些底层代码都是货真价实的。",
+      "estimated_duration": 30,
+      "emotion": "build",
+      "emotion_intensity": 0.6,
+      "humor_type": "analogy",
+      "character_expression": "think",
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "项目宣称的能力",
+          "visual_type": "hero",
+          "key_data": [
+            "WiFi CSI 姿态估计",
+            "54,000 fps",
+            "94.2% 准确率",
+            "38 个 Rust crate"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 1
+          }
+        },
+        {
+          "focus": "惊人的工程规模",
+          "visual_type": "data",
+          "key_data": [
+            "38 crate",
+            "148 ADR",
+            "50+ C 文件",
+            "23 CI workflow"
+          ],
+          "narration_anchor": {
+            "start_sentence": 2,
+            "end_sentence": 3
+          }
+        },
+        {
+          "focus": "真实的底层代码",
+          "visual_type": "list",
+          "key_data": [
+            "FFT 频谱分析",
+            "相位解缠绕",
+            "Fresnel 区建模",
+            "Hampel 滤波"
+          ],
+          "narration_anchor": {
+            "start_sentence": 4,
+            "end_sentence": 5
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "tech, impressive, cool",
+          "color_hint": "deep dark blue, cyan accents",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "curiosity, evaluation",
+          "motion_style": "steady, scanning",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "data",
+          "focus": "project scale metrics",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      },
+      "narration_segment": "这个项目叫 RuView，声称用 WiFi CSI 信号实现无摄像头的人体姿态估计。听着很前沿对吧？项目规模确实惊人：三十八个 Rust crate 组成的工作空间，一百四十八个架构决策文档，二十三个 CI 工作流。光是看工程量，你绝对会觉得这是一个顶级团队在做的事情。ESP32 固件层有五十多个 C 文件，信号处理层有真实的 FFT、相位解缠绕、Fresnel 区建模。这些底层代码都是货真价实的。"
+    },
+    {
+      "scene": "fake_vs_real",
+      "type": "capabilities",
+      "text": "但问题来了。当我们把它的宣称能力逐个验证，真相就浮出水面了。WiFi CSI 数据采集，这是真的，五十多个 C 文件确实实现了完整的采集管线。信号处理也是真的，Rust 和 Python 双重实现，专业级 DSP 代码。存在检测和运动追踪，真实且技术可行。但到了姿态估计，画风就变了。它声称的 DensePose 人体姿态估计，实际上是用启发式公式硬算出来的。什么叫启发式公式？就是从运动分数、呼吸振幅这些信号特征，通过固定偏移量和几何公式，推导出十七个关节点坐标。这不是深度学习推理，这是程序化估算。五万四千帧每秒的推理速度，整个代码库里找不到一个基准测试。百分之九十四点二的姿态准确率，我们后面会看到这个数字是怎么来的。",
+      "estimated_duration": 48,
+      "emotion": "reveal",
+      "emotion_intensity": 0.85,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "真实能力列表",
+          "visual_type": "list",
+          "key_data": [
+            "WiFi CSI 采集 ✅",
+            "信号处理 FFT ✅",
+            "存在/运动检测 ✅"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 2
+          }
+        },
+        {
+          "focus": "姿态估计真相",
+          "visual_type": "compare",
+          "key_data": [
+            "宣称: DensePose 神经网络推理",
+            "实际: 启发式公式硬算关节点",
+            "54K fps → 零基准测试"
+          ],
+          "narration_anchor": {
+            "start_sentence": 3,
+            "end_sentence": 6
+          }
+        },
+        {
+          "focus": "启发式公式揭秘",
+          "visual_type": "highlight",
+          "key_data": [
+            "运动分数 → 偏移量",
+            "呼吸振幅 → 几何公式",
+            "17个关节点 = 程序化估算"
+          ],
+          "narration_anchor": {
+            "start_sentence": 7,
+            "end_sentence": 9
+          }
+        },
+        {
+          "focus": "无证据的性能声明",
+          "visual_type": "data",
+          "key_data": [
+            "54K fps → 无基准测试",
+            "94.2% 准确率 → 来源可疑"
+          ],
+          "narration_anchor": {
+            "start_sentence": 10,
+            "end_sentence": 11
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "analytical, revealing, contrast",
+          "color_hint": "dark base, red warning vs cyan truth",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "revelation, shock",
+          "motion_style": "sharp, transitioning",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "compare",
+          "focus": "real vs fake capabilities comparison",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      },
+      "narration_segment": "但问题来了。当我们把它的宣称能力逐个验证，真相就浮出水面了。WiFi CSI 数据采集，这是真的，五十多个 C 文件确实实现了完整的采集管线。信号处理也是真的，Rust 和 Python 双重实现，专业级 DSP 代码。存在检测和运动追踪，真实且技术可行。但到了姿态估计，画风就变了。它声称的 DensePose 人体姿态估计，实际上是用启发式公式硬算出来的。什么叫启发式公式？就是从运动分数、呼吸振幅这些信号特征，通过固定偏移量和几何公式，推导出十七个关节点坐标。这不是深度学习推理，这是程序化估算。五万四千帧每秒的推理速度，整个代码库里找不到一个基准测试。百分之九十四点二的姿态准确率，我们后面会看到这个数字是怎么来的。"
+    },
+    {
+      "scene": "evidence_code",
+      "type": "how",
+      "text": "现在看最关键的证据。Python 第一版代码中，CSI 数据提取器在文本模式下，直接用 numpy dot random rand 生成随机数充当 WiFi 信号数据。振幅是随机的，相位也是随机的。但讽刺的是，同一个文件在二进制模式下，确实实现了真实的 ESP32 CSI 数据解析，包括 magic number 校验和 I/Q 数据提取。这说明开发者完全知道正确写法，但为了演示效果选择了造假。Rust 第二版也没好到哪去。核心函数 derive single person pose 从运动分数、呼吸振幅、主导频率这些信号特征出发，通过硬编码偏移量和几何启发式公式，推导出十七个 COCO 格式关键点坐标。演示里展示的骨架，根本不是神经网络推理出来的。更有意思的是安全模块。号称实现了安全认证的代码，实际上用的是 XOR 折叠，而不是标准的 HMAC-SHA256。还硬编码了测试密钥。性能测试更离谱，直接用 asyncio sleep 模拟推理时间。一毫秒的 sleep 就等于一毫秒的推理？那五万四千帧每秒就是这么算出来的。",
+      "estimated_duration": 55,
+      "emotion": "climax",
+      "emotion_intensity": 1.0,
+      "humor_type": "sarcasm",
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "Python v1 造假证据",
+          "visual_type": "highlight",
+          "key_data": [
+            "np.random.rand() 生成假数据",
+            "文本模式造假 vs 二进制模式真实",
+            "开发者知道正确写法"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 3
+          }
+        },
+        {
+          "focus": "Rust v2 启发式公式",
+          "visual_type": "list",
+          "key_data": [
+            "derive_single_person_pose()",
+            "硬编码偏移量",
+            "几何公式推导",
+            "非神经网络推理"
+          ],
+          "narration_anchor": {
+            "start_sentence": 4,
+            "end_sentence": 7
+          }
+        },
+        {
+          "focus": "假 HMAC 安全漏洞",
+          "visual_type": "compare",
+          "key_data": [
+            "宣称: HMAC-SHA256 安全认证",
+            "实际: XOR 折叠 + 硬编码测试密钥",
+            "7 个 CRITICAL 级安全漏洞"
+          ],
+          "narration_anchor": {
+            "start_sentence": 8,
+            "end_sentence": 10
+          }
+        },
+        {
+          "focus": "模拟性能测试",
+          "visual_type": "highlight",
+          "key_data": [
+            "asyncio.sleep() 模拟推理",
+            "54K fps = sleep 算出来的"
+          ],
+          "narration_anchor": {
+            "start_sentence": 11,
+            "end_sentence": 13
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "dark, accusatory, tense",
+          "color_hint": "pure black, red hot accents",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "exposure, shock",
+          "motion_style": "sharp, flashing",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "compare",
+          "focus": "code evidence of fraud",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      },
+      "narration_segment": "现在看最关键的证据。Python 第一版代码中，CSI 数据提取器在文本模式下，直接用 numpy dot random rand 生成随机数充当 WiFi 信号数据。振幅是随机的，相位也是随机的。但讽刺的是，同一个文件在二进制模式下，确实实现了真实的 ESP32 CSI 数据解析，包括 magic number 校验和 I/Q 数据提取。这说明开发者完全知道正确写法，但为了演示效果选择了造假。Rust 第二版也没好到哪去。核心函数 derive single person pose 从运动分数、呼吸振幅、主导频率这些信号特征出发，通过硬编码偏移量和几何启发式公式，推导出十七个 COCO 格式关键点坐标。演示里展示的骨架，根本不是神经网络推理出来的。更有意思的是安全模块。号称实现了安全认证的代码，实际上用的是 XOR 折叠，而不是标准的 HMAC-SHA256。还硬编码了测试密钥。性能测试更离谱，直接用 asyncio sleep 模拟推理时间。一毫秒的 sleep 就等于一毫秒的推理？那五万四千帧每秒就是这么算出来的。"
+    },
+    {
+      "scene": "fraud_proof",
+      "type": "reveal",
+      "text": "社区也不是吃素的。有人 fork 了项目做独立审计，结论是 Python 第一版确认为骗局。无任何训练好的模型权重，可疑的 Star 购买行为，精度声明没有数据支撑。项目维护者在争议 issue 中的回应也很有意思。他说不，这不是假的，它确实能工作。但同时列出一堆前提条件：需要 ESP32-S3 特定硬件，或者 Intel 5300 网卡，或者 Atheros AR9580，还要特定的固件配置。这些条件组合起来，普通用户几乎无法复现。还有独立质量工程审计，给了安全评级 F。三十七个字段的 God Object 结构体，七千三百一十二行的单文件，圈复杂度高达六十五。B 站上也有技术博主做过评测，演示效果有限，环境要求苛刻，跟宣传的精确姿态估计差距明显。",
+      "estimated_duration": 42,
+      "emotion": "climax",
+      "emotion_intensity": 0.9,
+      "humor_type": "sarcasm",
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "Fork 审计结论",
+          "visual_type": "list",
+          "key_data": [
+            "Python v1 确认骗局",
+            "无训练模型权重",
+            "可疑 Star 购买",
+            "精度无数据支撑"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 2
+          }
+        },
+        {
+          "focus": "维护者回应与硬件门槛",
+          "visual_type": "highlight",
+          "key_data": [
+            "否认造假",
+            "但需 ESP32-S3",
+            "或 Intel 5300",
+            "或 Atheros AR9580",
+            "普通用户无法复现"
+          ],
+          "narration_anchor": {
+            "start_sentence": 3,
+            "end_sentence": 6
+          }
+        },
+        {
+          "focus": "独立审计结果",
+          "visual_type": "data",
+          "key_data": [
+            "安全评级: F",
+            "7 个 CRITICAL 漏洞",
+            "7312 行单文件",
+            "圈复杂度 CC=65"
+          ],
+          "narration_anchor": {
+            "start_sentence": 7,
+            "end_sentence": 9
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "exposing, evidence-based",
+          "color_hint": "dark with red warning streaks",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "verdict, conclusion",
+          "motion_style": "steady, authoritative",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "list",
+          "focus": "community verification and audit results",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      },
+      "narration_segment": "社区也不是吃素的。有人 fork 了项目做独立审计，结论是 Python 第一版确认为骗局。无任何训练好的模型权重，可疑的 Star 购买行为，精度声明没有数据支撑。项目维护者在争议 issue 中的回应也很有意思。他说不，这不是假的，它确实能工作。但同时列出一堆前提条件：需要 ESP32-S3 特定硬件，或者 Intel 5300 网卡，或者 Atheros AR9580，还要特定的固件配置。这些条件组合起来，普通用户几乎无法复现。还有独立质量工程审计，给了安全评级 F。三十七个字段的 God Object 结构体，七千三百一十二行的单文件，圈复杂度高达六十五。B 站上也有技术博主做过评测，演示效果有限，环境要求苛刻，跟宣传的精确姿态估计差距明显。"
+    },
+    {
+      "scene": "security_quality",
+      "type": "features",
+      "text": "我们来看安全和质量的具体数字。七千三百一十二行的单文件 main.rs，同时处理 UDP CSI 接收、WebSocket 广播和 REST API。圈复杂度六十五，意味着这个文件的逻辑分支极其复杂，任何改动都可能引发连锁反应。三十七个字段的结构体 AppStateInner，这是一个典型的 God Object 反模式。安全方面更触目惊心。七个 CRITICAL 级安全漏洞。假 HMAC，我们说过用 XOR 折叠替代真正的加密哈希。硬编码测试密钥直接写死在代码里。默认配置竟然是关闭认证的。example.env 文件里明文写着占位符密钥。没有任何输入验证，UDP 无认证，WebSocket 无加密。这样的代码如果用在实际的灾难救援场景，后果不堪设想。",
+      "estimated_duration": 38,
+      "emotion": "climax",
+      "emotion_intensity": 0.85,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "代码质量指标",
+          "visual_type": "data",
+          "key_data": [
+            "7,312 行单文件",
+            "圈复杂度 CC=65",
+            "37 字段 God Object",
+            "4 处复制粘贴"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 2
+          }
+        },
+        {
+          "focus": "安全漏洞清单",
+          "visual_type": "list",
+          "key_data": [
+            "7 个 CRITICAL 漏洞",
+            "假 HMAC: XOR 折叠",
+            "硬编码测试密钥",
+            "默认关闭认证",
+            "无输入验证"
+          ],
+          "narration_anchor": {
+            "start_sentence": 3,
+            "end_sentence": 7
+          }
+        },
+        {
+          "focus": "致命风险警告",
+          "visual_type": "highlight",
+          "key_data": [
+            "灾难救援场景绝对不可用",
+            "生命安全无保障"
+          ],
+          "narration_anchor": {
+            "start_sentence": 8,
+            "end_sentence": 9
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "danger, alarming, critical",
+          "color_hint": "deep dark, bright red warning accents",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "alarm, urgency",
+          "motion_style": "pulsing, alert",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "data",
+          "focus": "security vulnerabilities and code quality metrics",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      },
+      "narration_segment": "我们来看安全和质量的具体数字。七千三百一十二行的单文件 main.rs，同时处理 UDP CSI 接收、WebSocket 广播和 REST API。圈复杂度六十五，意味着这个文件的逻辑分支极其复杂，任何改动都可能引发连锁反应。三十七个字段的结构体 AppStateInner，这是一个典型的 God Object 反模式。安全方面更触目惊心。七个 CRITICAL 级安全漏洞。假 HMAC，我们说过用 XOR 折叠替代真正的加密哈希。硬编码测试密钥直接写死在代码里。默认配置竟然是关闭认证的。example.env 文件里明文写着占位符密钥。没有任何输入验证，UDP 无认证，WebSocket 无加密。这样的代码如果用在实际的灾难救援场景，后果不堪设想。"
+    },
+    {
+      "scene": "feasibility",
+      "type": "tech",
+      "text": "客观地说，WiFi CSI 感知本身是一个真实的研究领域，有十多年的学术积累。CMU 的 DensePose From WiFi 论文，MIT CSAIL 的多篇研究，都证明了这个方向的理论可行性。但技术成熟度是有光谱的。存在检测已经成熟，多篇论文验证，工业界有产品。运动检测也比较成熟，方法论可靠。呼吸检测还在研究中，受控环境下可行。手势识别是早期研究阶段。姿态估计是极早期，CMU 论文只是展示了可能性。想真正实现 WiFi 姿态估计，需要大规模配对数据集，数千小时的 WiFi 信号加同步摄像头标注。需要严格的环境控制，单人、无其他运动源、固定房间布局。需要精确的设备校准，收发器位置和朝向固定。还需要强大的计算资源和多天线阵列。单个 ESP32 的 CSI 信息远远不够。这些条件使得 WiFi 姿态估计在实验室外几乎不可行。",
+      "estimated_duration": 48,
+      "emotion": "settle",
+      "emotion_intensity": 0.5,
+      "humor_type": null,
+      "character_expression": "think",
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "技术成熟度光谱",
+          "visual_type": "timeline",
+          "key_data": [
+            "存在检测: 成熟",
+            "运动检测: 较成熟",
+            "呼吸检测: 研究中",
+            "姿态估计: 极早期"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 5
+          }
+        },
+        {
+          "focus": "姿态估计的实践障碍",
+          "visual_type": "list",
+          "key_data": [
+            "需要数千小时配对数据集",
+            "严格环境控制",
+            "精确设备校准",
+            "多天线阵列",
+            "实验室外不可行"
+          ],
+          "narration_anchor": {
+            "start_sentence": 6,
+            "end_sentence": 10
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "analytical, objective, calm",
+          "color_hint": "dark teal, cool blue accents",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "thoughtful, measured",
+          "motion_style": "steady, progressive",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "timeline",
+          "focus": "technology maturity spectrum",
+          "layout_hint": {
+            "density": "standard"
+          }
+        }
+      },
+      "narration_segment": "客观地说，WiFi CSI 感知本身是一个真实的研究领域，有十多年的学术积累。CMU 的 DensePose From WiFi 论文，MIT CSAIL 的多篇研究，都证明了这个方向的理论可行性。但技术成熟度是有光谱的。存在检测已经成熟，多篇论文验证，工业界有产品。运动检测也比较成熟，方法论可靠。呼吸检测还在研究中，受控环境下可行。手势识别是早期研究阶段。姿态估计是极早期，CMU 论文只是展示了可能性。想真正实现 WiFi 姿态估计，需要大规模配对数据集，数千小时的 WiFi 信号加同步摄像头标注。需要严格的环境控制，单人、无其他运动源、固定房间布局。需要精确的设备校准，收发器位置和朝向固定。还需要强大的计算资源和多天线阵列。单个 ESP32 的 CSI 信息远远不够。这些条件使得 WiFi 姿态估计在实验室外几乎不可行。"
+    },
+    {
+      "scene": "advice",
+      "type": "usecases",
+      "text": "最后给不同的人不同的建议。如果你是研究者或学者，WiFi CSI 信号处理代码确实可以作为参考实现，但千万别依赖这个项目的姿态估计声明，去参考 CMU 的原始论文更靠谱。如果你是开发者，Rust 的 DDD 架构和信号处理模块值得学习，存在检测和运动追踪模块确实可以用，但姿态估计模块不要用在生产环境。如果你是投资者或决策者，我再说一遍，生命安全场景绝对不可用，灾难救援更不行，演示效果远低于宣传，这个项目只适合作为研究方向。对普通用户来说，别指望无摄像头精确姿态估计，环境要求远高于普通家庭。一句话总结这个项目：画了法拉利外壳的电动自行车。外壳看起来像法拉利，引擎确实能跑，但它不是法拉利，速度表是假的，安全气囊不存在。",
+      "estimated_duration": 42,
+      "emotion": "settle",
+      "emotion_intensity": 0.5,
+      "humor_type": "analogy",
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [
+        {
+          "focus": "给研究者的建议",
+          "visual_type": "list",
+          "key_data": [
+            "信号处理可参考",
+            "姿态估计不可依赖",
+            "参考 CMU 原始论文"
+          ],
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 2
+          }
+        },
+        {
+          "focus": "给开发者/投资者的建议",
+          "visual_type": "list",
+          "key_data": [
+            "Rust 架构值得学习",
+            "存在检测可用",
+            "姿态估计禁用生产环境",
+            "生命安全场景绝对不可用"
+          ],
+          "narration_anchor": {
+            "start_sentence": 3,
+            "end_sentence": 6
+          }
+        },
+        {
+          "focus": "项目总结定性",
+          "visual_type": "highlight",
+          "key_data": [
+            "法拉利外壳的电动自行车",
+            "引擎能跑但不是法拉利",
+            "速度表是假的",
+            "安全气囊不存在"
+          ],
+          "narration_anchor": {
+            "start_sentence": 7,
+            "end_sentence": 9
+          }
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "conclusive, grounded, calm",
+          "color_hint": "dark warm amber, settled",
+          "density": "generous"
+        },
+        "fx": {
+          "emotion": "resolution, clarity",
+          "motion_style": "gentle, settling",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "list",
+          "focus": "audience-specific advice and project verdict",
+          "layout_hint": {
+            "density": "standard"
+          }
+        }
+      },
+      "narration_segment": "最后给不同的人不同的建议。如果你是研究者或学者，WiFi CSI 信号处理代码确实可以作为参考实现，但千万别依赖这个项目的姿态估计声明，去参考 CMU 的原始论文更靠谱。如果你是开发者，Rust 的 DDD 架构和信号处理模块值得学习，存在检测和运动追踪模块确实可以用，但姿态估计模块不要用在生产环境。如果你是投资者或决策者，我再说一遍，生命安全场景绝对不可用，灾难救援更不行，演示效果远低于宣传，这个项目只适合作为研究方向。对普通用户来说，别指望无摄像头精确姿态估计，环境要求远高于普通家庭。一句话总结这个项目：画了法拉利外壳的电动自行车。外壳看起来像法拉利，引擎确实能跑，但它不是法拉利，速度表是假的，安全气囊不存在。"
+    },
+    {
+      "scene": "cta",
+      "type": "cta",
+      "text": "开源社区需要这样的审视。关注我，下期见。",
+      "estimated_duration": 5,
+      "emotion": "summon",
+      "emotion_intensity": 0.4,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [],
+      "visual_intent": {
+        "bg": {
+          "mood": "warm, inviting, resolute",
+          "color_hint": "dark amber glow, warm base",
+          "density": "generous"
+        },
+        "fx": null,
+        "content": {
+          "visual_type": "highlight",
+          "focus": "follow CTA and community vigilance",
+          "layout_hint": {
+            "density": "generous"
+          }
+        }
+      },
+      "narration_segment": "开源社区需要这样的审视。关注我，下期见。"
+    }
+  ]
+}

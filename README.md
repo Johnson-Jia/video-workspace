@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**25 天 · 60 条视频 · 5 个系列 · 全自动**
+**26 天 · 62 条视频 · 5 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -63,19 +63,19 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月8日 | [GitHub 每日热门](2026/06/08/github-trending/) |
 | 6月7日 | [GitHub 每日热门](2026/06/07/github-trending/) |
 | 6月6日 | [GitHub 每日热门](2026/06/06/github-trending/) |
 | 6月5日 | [GitHub 每日热门](2026/06/05/github-trending/) |
 | 6月3日 | [GitHub 每日热门](2026/06/03/github-trending/) |
-| 6月2日 | [GitHub 每日热门](2026/06/02/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月8日 | [GitHub 周度热门汇总](2026/06/08/github-trending-weekly/) |
 | 6月1日 | [GitHub 周度热门汇总](2026/06/01/github-trending-weekly/) |
 | 5月25日 | [GitHub 周度热门汇总](2026/05/25/github-trending-weekly/) |
-| 5月18日 | [GitHub 周度热门汇总](2026/05/18/github-trending-weekly/) |
 
 ### 深度解析
 
@@ -88,7 +88,7 @@
 | 6月3日 | [RuView 虚假开源项目揭露](2026/06/03/ruview-expose/) |
 | 6月3日 | [二次元开源生态 6 赛道盘点](2026/06/03/anime-opensource-biz/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 60 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 62 条视频。
 <!-- END RECENT -->
 
 ---

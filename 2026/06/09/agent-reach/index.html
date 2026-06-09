@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden}
+.composition{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.clip{position:absolute;inset:0;}
+.layer-bg,.layer-fx,.layer-content{position:absolute;inset:0;pointer-events:none}
+.layer-content{pointer-events:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;height:1920px}
+.phase{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:180px 90px 220px 90px}
+.phase-inner{width:100%;max-width:920px}
+.hero-title{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:96px;font-weight:900;line-height:1.15;color:#fff;letter-spacing:-1px}
+.hero-sub{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:42px;font-weight:700;color:#FFB800;line-height:1.3}
+.body-title{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1.25}
+.body-text{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:34px;font-weight:400;color:#c0c0d8;line-height:1.6}
+.body-accent{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:38px;font-weight:700;line-height:1.4}
+.tag-pill{display:inline-block;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:28px;font-weight:600;padding:8px 20px;border-radius:100px;margin:4px}
+.glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none}
+.grid-bg{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);background-size:40px 40px}
+.grad-text{background-clip:text;-webkit-background-clip:text;color:transparent}
+@keyframes scanLine{0%{top:-2px}100%{top:100%}}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.5),transparent);animation:scanLine 4s linear infinite}
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.data-label{font-size:30px;color:#a0a0c0;font-weight:500}
+.data-value{font-size:32px;font-weight:700;color:#fff}
+.compare-cols{display:flex;gap:24px;width:100%}
+.compare-col{flex:1;padding:24px;border-radius:16px}
+.sep-line{width:80px;height:4px;border-radius:2px;margin:16px 0}
+.list-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.list-num{font-size:30px;font-weight:800;min-width:36px;color:#FFB800}
+.list-text{font-size:30px;color:#c0c0d8;line-height:1.5;font-weight:500}
+.tier-badge{display:inline-block;font-size:24px;font-weight:700;padding:6px 14px;border-radius:8px;margin:3px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="211.992">
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+  <audio id="bgm" data-track-index="2" data-volume="0.19" data-start="0" src="bgm.wav" preload="auto" loop></audio>
+
+  <!-- ==================== S1: HOOK (0-10.536s) ==================== -->
+  <div class="clip" id="s1" data-start="0" data-duration="10.536">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a1a 0%,#0d1a2b 40%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:700px;height:700px;background:rgba(0,212,255,.3);top:-5%;left:-15%"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(255,184,0,.2);bottom:5%;right:-10%"></div>
+      <div style="position:absolute;inset:0;opacity:.03;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg,rgba(0,212,255,.15) 1deg,transparent 2deg);animation:rotate 60s linear infinite"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.5) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s1-ring1" style="position:absolute;width:500px;height:500px;border:2px solid rgba(0,212,255,.12);border-radius:50%;top:12%;left:50%;margin-left:-250px"></div>
+      <div id="s1-ring2" style="position:absolute;width:700px;height:700px;border:1px solid rgba(255,184,0,.08);border-radius:50%;top:5%;left:50%;margin-left:-350px"></div>
+      <div class="scan-line" id="s1-scan"></div>
+    </div>
+    <div class="layer-content" style="padding:180px 90px 220px 90px">
+      <div style="text-align:center">
+        <div id="s1-label" style="font-size:32px;font-weight:600;color:#00D4FF;letter-spacing:4px;margin-bottom:28px">AGENT REACH</div>
+        <div id="s1-title" class="hero-title grad-text" style="background-image:linear-gradient(135deg,#00D4FF,#00FFB8);font-size:120px">多平台</div>
+        <div id="s1-sep" style="margin:24px auto;width:120px;height:3px;background:linear-gradient(90deg,#00D4FF,#FFB800);border-radius:2px"></div>
+        <div id="s1-sub" style="font-size:44px;font-weight:700;color:#fff;line-height:1.3">AI 助手一次性打通</div>
+        <div id="s1-desc" class="body-text" style="margin-top:24px;font-size:34px;color:#a0a0c0">社交 · 视频 · 资讯 · 一键全搞定</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S2: WHAT (10.536-25.992s) ==================== -->
+  <div class="clip" id="s2" data-start="10.536" data-duration="15.456">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080818 0%,#0a1628 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,136,204,.2);top:5%;left:20%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(255,140,50,.12);bottom:15%;right:5%"></div>
+      <div style="position:absolute;inset:0;opacity:.03;background:repeating-radial-gradient(circle at 40% 35%,transparent 0px,transparent 30px,rgba(0,136,204,.1) 31px,transparent 32px)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 35%,rgba(0,136,204,.06) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s2-dot1" style="position:absolute;width:8px;height:8px;background:#00D4FF;border-radius:50%;top:22%;left:12%;opacity:.6"></div>
+      <div id="s2-dot2" style="position:absolute;width:6px;height:6px;background:#FFB800;border-radius:50%;top:65%;right:15%;opacity:.5"></div>
+      <div id="s2-dot3" style="position:absolute;width:10px;height:10px;background:#00FF88;border-radius:50%;bottom:25%;left:20%;opacity:.4"></div>
+    </div>
+    <div class="layer-content" style="padding:180px 90px 220px 90px">
+      <div style="text-align:center">
+        <div id="s2-name" class="hero-title grad-text" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:88px">Agent Reach</div>
+        <div id="s2-sep" style="margin:20px auto;width:80px;height:3px;background:#FFB800;border-radius:2px"></div>
+        <div id="s2-desc" class="body-text" style="font-size:36px;color:#c0c0d8">开源脚手架工具 · 不做框架 · 装好就退出</div>
+        <div id="s2-stats" style="margin-top:32px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+          <div class="tag-pill" style="background:rgba(0,212,255,.15);color:#00D4FF;border:1px solid rgba(0,212,255,.3)">Python 3.10+</div>
+          <div class="tag-pill" style="background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)">MIT 协议</div>
+          <div class="tag-pill" style="background:rgba(0,255,136,.15);color:#00FF88;border:1px solid rgba(0,255,136,.3)">253 提交</div>
+          <div class="tag-pill" style="background:rgba(180,130,255,.15);color:#B482FF;border:1px solid rgba(180,130,255,.3)">15 贡献者</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S3: PHILOSOPHY (25.992-48.240s) ==================== -->
+  <div class="clip" id="s3" data-start="25.992" data-duration="22.248">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d1a14 0%,#0a1628 50%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,255,136,.15);top:0;left:-5%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(255,140,50,.12);bottom:10%;right:5%"></div>
+      <div style="position:absolute;inset:0;opacity:.02;background:repeating-radial-gradient(circle at 50% 50%,transparent 0px,transparent 20px,rgba(0,212,255,.08) 21px,transparent 22px)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.4) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s3-line1" style="position:absolute;width:2px;height:200px;background:linear-gradient(180deg,rgba(0,255,136,.4),transparent);top:15%;left:15%"></div>
+      <div id="s3-line2" style="position:absolute;width:2px;height:160px;background:linear-gradient(180deg,rgba(255,140,50,.3),transparent);top:50%;right:12%"></div>
+      <div id="s3-dot1" style="position:absolute;width:12px;height:12px;border:2px solid rgba(0,255,136,.4);border-radius:50%;top:28%;left:14%"></div>
+    </div>
+    <!-- Phase 1: Framework vs Scaffolding -->
+    <div class="phase" id="s3-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s3-p1-title" class="body-title" style="font-size:48px;color:#00FF88">脚手架 vs 框架</div>
+        <div id="s3-p1-sep" class="sep-line" style="background:#00FF88;margin:16px auto"></div>
+        <div class="compare-cols" style="margin-top:20px">
+          <div class="compare-col" style="background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.2)">
+            <div id="s3-fw-label" style="font-size:32px;font-weight:700;color:#FF5050;margin-bottom:12px">框架</div>
+            <div class="body-text" style="font-size:28px">把你包起来</div>
+            <div class="body-text" style="font-size:28px;margin-top:8px">所有调用经过它</div>
+            <div class="body-text" style="font-size:28px;margin-top:8px">运行时依赖重</div>
+          </div>
+          <div class="compare-col" style="background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.2)">
+            <div id="s3-sc-label" style="font-size:32px;font-weight:700;color:#00FF88;margin-bottom:12px">脚手架</div>
+            <div class="body-text" style="font-size:28px">搭好梯子就退出</div>
+            <div class="body-text" style="font-size:28px;margin-top:8px">Agent 直接调用原生工具</div>
+            <div class="body-text" style="font-size:28px;margin-top:8px">零运行时依赖</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Direct call tools -->
+    <div class="phase" id="s3-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s3-p2-title" class="body-title" style="font-size:44px;color:#00D4FF">直接调用原生工具</div>
+        <div id="s3-p2-sep" class="sep-line" style="background:#00D4FF;margin:16px auto"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:24px" id="s3-tools">
+          <div class="tag-pill" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.25);font-size:30px;padding:12px 24px">yt-dlp</div>
+          <div class="tag-pill" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.25);font-size:30px;padding:12px 24px">gh CLI</div>
+          <div class="tag-pill" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.25);font-size:30px;padding:12px 24px">Jina Reader</div>
+          <div class="tag-pill" style="background:rgba(180,130,255,.12);color:#B482FF;border:1px solid rgba(180,130,255,.25);font-size:30px;padding:12px 24px">Exa</div>
+        </div>
+        <div id="s3-p2-note" class="body-text" style="margin-top:32px;font-size:32px;text-align:center;color:#a0a0c0">
+          好处：出问题直接找上游<br>坏处：每个工具得单独装
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S4: ARCHITECTURE (48.240-77.064s) ==================== -->
+  <div class="clip" id="s4" data-start="48.24" data-duration="28.824">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#080820 0%,#0a0a2e 50%,#080818 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(0,100,255,.18);top:5%;right:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,212,255,.1);bottom:20%;left:-5%"></div>
+      <div style="position:absolute;inset:0;opacity:.02;background:repeating-conic-gradient(from 0deg at 60% 40%,transparent 0deg,rgba(0,100,255,.12) 2deg,transparent 4deg)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(0,100,255,.06) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s4-pulse1" style="position:absolute;width:300px;height:300px;border:1px solid rgba(0,100,255,.12);border-radius:50%;top:20%;right:10%"></div>
+      <div id="s4-pulse2" style="position:absolute;width:200px;height:200px;border:1px solid rgba(0,212,255,.1);border-radius:50%;bottom:25%;left:15%"></div>
+      <div id="s4-connector" style="position:absolute;width:1px;height:100%;left:50%;top:0;background:linear-gradient(180deg,transparent,rgba(0,212,255,.08) 30%,rgba(0,212,255,.08) 70%,transparent)"></div>
+    </div>
+    <!-- Phase 1: 3-layer architecture -->
+    <div class="phase" id="s4-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s4-p1-title" class="body-title" style="font-size:46px;color:#4488FF">三层架构</div>
+        <div id="s4-p1-sep" class="sep-line" style="background:#4488FF;margin:16px auto"></div>
+        <div style="margin-top:20px">
+          <div id="s4-layer1" style="background:rgba(0,100,255,.12);border:1px solid rgba(0,100,255,.25);border-radius:12px;padding:18px;margin-bottom:12px">
+            <div style="font-size:28px;font-weight:700;color:#4488FF">Layer 1: SKILL.md 路由</div>
+            <div class="body-text" style="font-size:26px">告诉 Agent 用什么命令</div>
+          </div>
+          <div id="s4-layer2" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);border-radius:12px;padding:18px;margin-bottom:12px">
+            <div style="font-size:28px;font-weight:700;color:#00D4FF">Layer 2: Channel 插件层</div>
+            <div class="body-text" style="font-size:26px">每平台独立模块 · 检测工具状态</div>
+          </div>
+          <div id="s4-layer3" style="background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.18);border-radius:12px;padding:18px">
+            <div style="font-size:28px;font-weight:700;color:#00FF88">Layer 3: 上游工具</div>
+            <div class="body-text" style="font-size:26px">原生工具链</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Tier 0 platforms -->
+    <div class="phase" id="s4-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s4-p2-title" class="body-title" style="font-size:44px;color:#00FF88">Tier 0 · 装好即用</div>
+        <div id="s4-p2-sep" class="sep-line" style="background:#00FF88;margin:16px auto"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px" id="s4-tier0">
+          <div class="tier-badge" style="background:rgba(0,255,136,.12);color:#00FF88;border:1px solid rgba(0,255,136,.25)">网页搜索(Jina)</div>
+          <div class="tier-badge" style="background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.25)">视频网站(yt-dlp)</div>
+          <div class="tier-badge" style="background:rgba(0,212,255,.12);color:#00D4FF;border:1px solid rgba(0,212,255,.25)">代码仓库(gh)</div>
+          <div class="tier-badge" style="background:rgba(180,130,255,.12);color:#B482FF;border:1px solid rgba(180,130,255,.25)">技术社区(API)</div>
+        </div>
+        <div id="s4-p2-divider" style="margin:28px auto;width:60px;height:2px;background:rgba(255,255,255,.1)"></div>
+        <div id="s4-p2-subtitle" class="body-title" style="font-size:40px;color:#FFB800">Tier 1 · 需要凭据</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px" id="s4-tier1">
+          <div class="tier-badge" style="background:rgba(255,80,80,.1);color:#FF6B6B;border:1px solid rgba(255,80,80,.2)">社交平台</div>
+          <div class="tier-badge" style="background:rgba(0,212,255,.1);color:#00D4FF;border:1px solid rgba(0,212,255,.2)">视频网站</div>
+          <div class="tier-badge" style="background:rgba(255,105,180,.1);color:#FF69B4;border:1px solid rgba(255,105,180,.2)">内容社区</div>
+          <div class="tier-badge" style="background:rgba(255,184,0,.1);color:#FFB800;border:1px solid rgba(255,184,0,.2)">资讯社区</div>
+          <div class="tier-badge" style="background:rgba(0,255,136,.1);color:#00FF88;border:1px solid rgba(0,255,136,.2)">财经论坛</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 3: Tier 2 -->
+    <div class="phase" id="s4-p3" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s4-p3-title" class="body-title" style="font-size:44px;color:#FF6B6B">Tier 2 · 配置复杂</div>
+        <div id="s4-p3-sep" class="sep-line" style="background:#FF6B6B;margin:16px auto"></div>
+        <div style="display:flex;gap:24px;justify-content:center;margin-top:24px" id="s4-tier2">
+          <div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,107,107,.2);border-radius:12px;padding:24px 36px;text-align:center">
+            <div style="font-size:36px;font-weight:700;color:#FF6B6B">短视频平台</div>
+            <div class="body-text" style="font-size:26px;margin-top:8px">MCP 协议</div>
+          </div>
+          <div style="background:rgba(0,0,0,.3);border:1px solid rgba(0,100,200,.2);border-radius:12px;padding:24px 36px;text-align:center">
+            <div style="font-size:36px;font-weight:700;color:#4488FF">职场社交</div>
+            <div class="body-text" style="font-size:26px;margin-top:8px">Playwright</div>
+          </div>
+        </div>
+        <div id="s4-p3-summary" class="body-text" style="margin-top:36px;font-size:32px;color:#a0a0c0;text-align:center">
+          三个难度等级，从零配置到高级定制
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S5: PLATFORMS (77.064-104.880s) ==================== -->
+  <div class="clip" id="s5" data-start="77.064" data-duration="27.816">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(145deg,#0a0a1a 0%,#1a0d2e 40%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(180,130,255,.2);top:-5%;right:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(255,184,0,.15);bottom:10%;left:5%"></div>
+      <div style="position:absolute;inset:0;opacity:.02;background-image:repeating-radial-gradient(circle at 30% 70%,transparent 0px,transparent 30px,rgba(180,130,255,.06) 31px,transparent 32px)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.5) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s5-wave1" style="position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(0deg,rgba(180,130,255,.04),transparent)"></div>
+      <div id="s5-dot1" style="position:absolute;width:6px;height:6px;background:#B482FF;border-radius:50%;top:18%;left:10%;opacity:.5"></div>
+      <div id="s5-dot2" style="position:absolute;width:8px;height:8px;background:#FFB800;border-radius:50%;top:45%;right:8%;opacity:.5"></div>
+    </div>
+    <!-- Phase 1: Global platforms -->
+    <div class="phase" id="s5-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s5-p1-title" class="body-title" style="font-size:44px;color:#B482FF">全球平台</div>
+        <div id="s5-p1-sep" class="sep-line" style="background:#B482FF;margin:16px auto"></div>
+        <div style="margin-top:16px">
+          <div class="list-item"><div class="list-num" style="color:#B482FF">●</div><div class="list-text"><strong style="color:#fff">Web</strong> · Jina Reader · 免费无需 Key</div></div>
+          <div class="list-item"><div class="list-num" style="color:#FF5050">●</div><div class="list-text"><strong style="color:#fff">视频网站</strong> · yt-dlp · <span style="color:#FFB800">15 万星</span></div></div>
+          <div class="list-item"><div class="list-num" style="color:#00D4FF">●</div><div class="list-text"><strong style="color:#fff">代码仓库</strong> · 官方 CLI</div></div>
+          <div class="list-item"><div class="list-num" style="color:#00FF88">●</div><div class="list-text"><strong style="color:#fff">Exa</strong> · 全网语义搜索 · 免费无需 Key</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Chinese platforms -->
+    <div class="phase" id="s5-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s5-p2-title" class="body-title" style="font-size:44px;color:#FFB800">中文平台全覆盖</div>
+        <div id="s5-p2-sep" class="sep-line" style="background:#FFB800;margin:16px auto"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px" id="s5-cn">
+          <div class="tier-badge" style="background:rgba(0,212,255,.1);color:#00D4FF;border:1px solid rgba(0,212,255,.2);font-size:28px;padding:10px 20px">视频网站</div>
+          <div class="tier-badge" style="background:rgba(255,105,180,.1);color:#FF69B4;border:1px solid rgba(255,105,180,.2);font-size:28px;padding:10px 20px">社交平台</div>
+          <div class="tier-badge" style="background:rgba(0,255,136,.1);color:#00FF88;border:1px solid rgba(0,255,136,.2);font-size:28px;padding:10px 20px">短视频</div>
+          <div class="tier-badge" style="background:rgba(255,184,0,.1);color:#FFB800;border:1px solid rgba(255,184,0,.2);font-size:28px;padding:10px 20px">资讯社区</div>
+          <div class="tier-badge" style="background:rgba(0,100,200,.1);color:#4488FF;border:1px solid rgba(0,100,200,.2);font-size:28px;padding:10px 20px">内容平台</div>
+          <div class="tier-badge" style="background:rgba(0,255,136,.1);color:#00FF88;border:1px solid rgba(0,255,136,.2);font-size:28px;padding:10px 20px">财经论坛</div>
+          <div class="tier-badge" style="background:rgba(180,130,255,.1);color:#B482FF;border:1px solid rgba(180,130,255,.2);font-size:28px;padding:10px 20px">技术社区</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 3: Zero cost -->
+    <div class="phase" id="s5-p3" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s5-p3-title" class="body-title grad-text" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:48px">零成本理念</div>
+        <div id="s5-p3-sep" class="sep-line" style="background:#FFB800;margin:16px auto"></div>
+        <div id="s5-p3-box" style="margin-top:24px;background:rgba(255,184,0,.08);border:1px solid rgba(255,184,0,.2);border-radius:16px;padding:28px">
+          <div class="body-text" style="font-size:34px;color:#fff;text-align:center">所有上游工具 <span style="color:#00FF88;font-weight:700">完全免费</span></div>
+          <div class="body-text" style="font-size:30px;color:#a0a0c0;margin-top:16px;text-align:center">唯一可能花费：服务器代理</div>
+          <div class="body-accent" style="font-size:52px;color:#FFB800;text-align:center;margin-top:16px">$1<span style="font-size:30px;color:#a0a0c0"> / 月</span></div>
+        </div>
+        <div id="s5-p3-extras" style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+          <div class="tier-badge" style="background:rgba(255,140,50,.1);color:#FF8C32;border:1px solid rgba(255,140,50,.2)">RSS 订阅</div>
+          <div class="tier-badge" style="background:rgba(0,100,200,.1);color:#4488FF;border:1px solid rgba(0,100,200,.2)">职场社交</div>
+          <div class="tier-badge" style="background:rgba(180,130,255,.1);color:#B482FF;border:1px solid rgba(180,130,255,.2)">播客平台</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S6: COOKIE (104.880-125.496s) ==================== -->
+  <div class="clip" id="s6" data-start="104.88" data-duration="20.616">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a1a14 0%,#0d1a1e 50%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,200,100,.15);top:5%;left:10%"></div>
+      <div style="position:absolute;inset:0;opacity:.02;background:repeating-radial-gradient(circle at 50% 70%,transparent 0px,transparent 40px,rgba(0,200,100,.08) 41px,transparent 42px)"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 40%,rgba(0,200,100,.05) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s6-shield" style="position:absolute;width:120px;height:140px;border:2px solid rgba(0,200,100,.15);border-radius:16px 16px 60px 60px;top:20%;right:12%"></div>
+      <div id="s6-dot1" style="position:absolute;width:10px;height:10px;background:#00C864;border-radius:50%;top:35%;left:8%;opacity:.5"></div>
+    </div>
+    <!-- Phase 1: Cookie extraction -->
+    <div class="phase" id="s6-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s6-p1-title" class="body-title" style="font-size:46px;color:#00C864">凭据自动提取</div>
+        <div id="s6-p1-sep" class="sep-line" style="background:#00C864;margin:16px auto"></div>
+        <div class="body-text" style="font-size:32px;margin-top:12px;color:#c0c0d8">支持主流浏览器，一次覆盖多平台</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px" id="s6-browsers">
+          <div class="tag-pill" style="background:rgba(0,200,100,.1);color:#00C864;border:1px solid rgba(0,200,100,.2);font-size:28px">Chrome</div>
+          <div class="tag-pill" style="background:rgba(255,140,50,.1);color:#FF8C32;border:1px solid rgba(255,140,50,.2);font-size:28px">Firefox</div>
+          <div class="tag-pill" style="background:rgba(0,212,255,.1);color:#00D4FF;border:1px solid rgba(0,212,255,.2);font-size:28px">Edge</div>
+          <div class="tag-pill" style="background:rgba(180,130,255,.1);color:#B482FF;border:1px solid rgba(180,130,255,.2);font-size:28px">Brave</div>
+        </div>
+        <div class="body-text" style="font-size:30px;margin-top:20px;color:#a0a0c0">一次覆盖社交 · 视频 · 资讯 · 财经</div>
+      </div>
+    </div>
+    <!-- Phase 2: Security -->
+    <div class="phase" id="s6-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s6-p2-title" class="body-title" style="font-size:44px;color:#00C864">安全三重保护</div>
+        <div id="s6-p2-sep" class="sep-line" style="background:#00C864;margin:16px auto"></div>
+        <div style="margin-top:16px">
+          <div id="s6-sec1" style="background:rgba(0,200,100,.06);border-left:4px solid #00C864;padding:16px 20px;margin-bottom:12px;border-radius:0 12px 12px 0">
+            <div style="font-size:30px;font-weight:700;color:#00C864">权限 600</div>
+            <div class="body-text" style="font-size:26px">配置文件只有你能读写</div>
+          </div>
+          <div id="s6-sec2" style="background:rgba(0,212,255,.06);border-left:4px solid #00D4FF;padding:16px 20px;margin-bottom:12px;border-radius:0 12px 12px 0">
+            <div style="font-size:30px;font-weight:700;color:#00D4FF">脱敏输出</div>
+            <div class="body-text" style="font-size:26px">日志不泄露凭据信息</div>
+          </div>
+          <div id="s6-sec3" style="background:rgba(255,184,0,.06);border-left:4px solid #FFB800;padding:16px 20px;border-radius:0 12px 12px 0">
+            <div style="font-size:30px;font-weight:700;color:#FFB800">Safe + Dry-run</div>
+            <div class="body-text" style="font-size:26px">生产环境先预览再执行</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S7: INSTALL (125.496-142.632s) ==================== -->
+  <div class="clip" id="s7" data-start="125.496" data-duration="17.136">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a20 0%,#0d1a28 50%,#080818 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(0,136,204,.18);top:0;left:20%"></div>
+      <div class="glow" style="width:350px;height:350px;background:rgba(0,255,136,.1);bottom:15%;right:5%"></div>
+      <div style="position:absolute;inset:0;opacity:.025;background:repeating-conic-gradient(from 45deg at 70% 80%,transparent 0deg,rgba(0,136,204,.1) 1deg,transparent 2deg)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s7-arrow1" style="position:absolute;width:2px;height:120px;background:linear-gradient(180deg,rgba(0,136,204,.3),transparent);top:12%;left:50%"></div>
+      <div id="s7-arrow2" style="position:absolute;width:2px;height:80px;background:linear-gradient(180deg,rgba(0,255,136,.25),transparent);top:45%;left:50%"></div>
+    </div>
+    <!-- Phase 1: Install flow -->
+    <div class="phase" id="s7-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s7-p1-title" class="body-title" style="font-size:44px;color:#00D4FF">一条命令搞定</div>
+        <div id="s7-p1-code" style="margin:24px auto;background:rgba(0,0,0,.4);border:1px solid rgba(0,212,255,.2);border-radius:12px;padding:20px;font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;color:#00D4FF;text-align:center">agent-reach install --env=auto</div>
+        <div style="margin-top:20px">
+          <div id="s7-step1" class="list-item"><div class="list-num" style="color:#00D4FF">1</div><div class="list-text">自动检测环境</div></div>
+          <div id="s7-step2" class="list-item"><div class="list-num" style="color:#00D4FF">2</div><div class="list-text">安装 Node.js + gh CLI + mcporter</div></div>
+          <div id="s7-step3" class="list-item"><div class="list-num" style="color:#00D4FF">3</div><div class="list-text">按需装各平台上游工具</div></div>
+          <div id="s7-step4" class="list-item"><div class="list-num" style="color:#00D4FF">4</div><div class="list-text">自动从浏览器提取凭据</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Doctor -->
+    <div class="phase" id="s7-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s7-p2-title" class="body-title" style="font-size:44px;color:#00FF88">一键诊断</div>
+        <div id="s7-p2-sep" class="sep-line" style="background:#00FF88;margin:16px auto"></div>
+        <div id="s7-p2-code" style="margin:20px auto;background:rgba(0,0,0,.4);border:1px solid rgba(0,255,136,.2);border-radius:12px;padding:20px;font-family:'JetBrains Mono','Consolas',monospace;font-size:28px;color:#00FF88;text-align:center">agent-reach doctor</div>
+        <div id="s7-p2-desc" class="body-text" style="margin-top:16px;font-size:32px;color:#c0c0d8">所有渠道状态 · 一目了然</div>
+        <div id="s7-p2-time" style="margin-top:28px;display:flex;align-items:center;justify-content:center;gap:12px">
+          <div style="font-size:64px;font-weight:900;color:#FFB800">5</div>
+          <div style="font-size:36px;color:#a0a0c0">分钟搞定全部</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S8: USECASES (142.632-163.848s) ==================== -->
+  <div class="clip" id="s8" data-start="142.632" data-duration="21.216">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#14100a 0%,#1a0d0a 40%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(255,140,50,.2);top:-5%;right:-5%"></div>
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.03"><filter id="s8-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#s8-noise)"/></svg>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(255,140,50,.05) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s8-ray1" style="position:absolute;top:50%;left:0;width:100%;height:1px;background:linear-gradient(90deg,rgba(255,184,0,.15),transparent 50%)"></div>
+      <div id="s8-ray2" style="position:absolute;top:30%;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent 50%,rgba(255,140,50,.12))"></div>
+      <div id="s8-dot1" style="position:absolute;width:8px;height:8px;background:#FFB800;border-radius:50%;top:20%;right:15%;opacity:.5"></div>
+    </div>
+    <!-- Phase 1: Use cases 1-3 -->
+    <div class="phase" id="s8-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s8-p1-title" class="body-title" style="font-size:44px;color:#FFB800">五大应用场景</div>
+        <div id="s8-p1-sep" class="sep-line" style="background:#FFB800;margin:16px auto"></div>
+        <div style="margin-top:16px">
+          <div id="s8-uc1" style="background:rgba(255,184,0,.06);border-left:4px solid #FFB800;padding:14px 18px;margin-bottom:10px;border-radius:0 10px 10px 0">
+            <div style="font-size:30px;font-weight:700;color:#FFB800">Agent 互联网能力</div>
+            <div class="body-text" style="font-size:26px">核心定位 · AI Agent 的万能钥匙</div>
+          </div>
+          <div id="s8-uc2" style="background:rgba(0,212,255,.06);border-left:4px solid #00D4FF;padding:14px 18px;margin-bottom:10px;border-radius:0 10px 10px 0">
+            <div style="font-size:30px;font-weight:700;color:#00D4FF">社交媒体监控</div>
+            <div class="body-text" style="font-size:26px">多平台一站搜完</div>
+          </div>
+          <div id="s8-uc3" style="background:rgba(0,255,136,.06);border-left:4px solid #00FF88;padding:14px 18px;border-radius:0 10px 10px 0">
+            <div style="font-size:30px;font-weight:700;color:#00FF88">技术信息聚合</div>
+            <div class="body-text" style="font-size:26px">GitHub Issue · 技术社区一键抓取</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Use cases 4-5 -->
+    <div class="phase" id="s8-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s8-uc4" style="background:rgba(255,140,50,.06);border-left:4px solid #FF8C32;padding:14px 18px;margin-bottom:10px;border-radius:0 10px 10px 0">
+          <div style="font-size:30px;font-weight:700;color:#FF8C32">金融市场信息</div>
+          <div class="body-text" style="font-size:26px">财经社区实时行情和热帖</div>
+        </div>
+        <div id="s8-uc5" style="background:rgba(180,130,255,.06);border-left:4px solid #B482FF;padding:14px 18px;border-radius:0 10px 10px 0">
+          <div style="font-size:30px;font-weight:700;color:#B482FF">内容创作辅助</div>
+          <div class="body-text" style="font-size:26px">视频字幕提取 · 播客转文字</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S9: RISKS (163.848-186.408s) ==================== -->
+  <div class="clip" id="s9" data-start="163.848" data-duration="22.56">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a0a0a 0%,#140d0d 50%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(255,60,60,.12);top:0;left:10%"></div>
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.03"><filter id="s9-noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#s9-noise)"/></svg>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,60,60,.04) 0%,transparent 60%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s9-warn1" style="position:absolute;width:8px;height:8px;background:#FF4040;border-radius:50%;top:18%;right:20%;opacity:.4"></div>
+      <div id="s9-warn2" style="position:absolute;width:6px;height:6px;background:#FF8C32;border-radius:50%;top:55%;left:10%;opacity:.4"></div>
+      <div id="s9-line1" style="position:absolute;width:100%;height:1px;top:40%;left:0;background:linear-gradient(90deg,transparent,rgba(255,60,60,.06),transparent)"></div>
+    </div>
+    <!-- Phase 1: Risks 1-3 -->
+    <div class="phase" id="s9-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s9-p1-title" class="body-title" style="font-size:46px;color:#FF5050">风险提示</div>
+        <div id="s9-p1-sep" class="sep-line" style="background:#FF5050;margin:16px auto"></div>
+        <div style="margin-top:16px">
+          <div id="s9-r1" class="list-item"><div class="list-num" style="color:#FF5050">1</div><div class="list-text">上游工具基于<strong style="color:#FF5050">逆向工程</strong>，平台反爬随时可能失效</div></div>
+          <div id="s9-r2" class="list-item"><div class="list-num" style="color:#FF8C32">2</div><div class="list-text">凭据<strong style="color:#FF8C32">会过期</strong>，需定期更新</div></div>
+          <div id="s9-r3" class="list-item"><div class="list-num" style="color:#FFB800">3</div><div class="list-text">非官方 API 有<strong style="color:#FFB800">封号风险</strong>，建议用小号</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Risks 4-5 -->
+    <div class="phase" id="s9-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s9-r4" class="list-item"><div class="list-num" style="color:#00D4FF">4</div><div class="list-text"><strong style="color:#00D4FF">Windows 兼容性有限</strong>，部分命令仅支持 Linux</div></div>
+        <div id="s9-r5" class="list-item"><div class="list-num" style="color:#B482FF">5</div><div class="list-text"><strong style="color:#B482FF">不适合</strong>大规模采集和商业用途</div></div>
+        <div id="s9-note" style="margin-top:32px;background:rgba(255,80,80,.06);border:1px solid rgba(255,80,80,.15);border-radius:12px;padding:20px;text-align:center">
+          <div class="body-text" style="font-size:30px;color:#a0a0c0">诚实告知风险比吹嘘功能更重要</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S10: RECOMMENDATION (186.408-209.400s) ==================== -->
+  <div class="clip" id="s10" data-start="186.408" data-duration="22.992">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0a0a1a 0%,#1a1828 40%,#0a0a14 100%)"></div>
+      <div class="glow" style="width:600px;height:600px;background:rgba(255,184,0,.18);top:-5%;left:-10%"></div>
+      <div class="glow" style="width:400px;height:400px;background:rgba(0,212,255,.1);bottom:10%;right:-5%"></div>
+      <div class="grid-bg" style="opacity:.02"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.4) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s10-ring1" style="position:absolute;width:400px;height:400px;border:1px solid rgba(255,184,0,.08);border-radius:50%;top:15%;right:-5%"></div>
+      <div id="s10-dot1" style="position:absolute;width:8px;height:8px;background:#FFB800;border-radius:50%;top:25%;left:15%;opacity:.5"></div>
+    </div>
+    <!-- Phase 1: Recommendation -->
+    <div class="phase" id="s10-p1">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s10-p1-title" class="body-title" style="font-size:44px;color:#FFB800">推荐人群</div>
+        <div id="s10-p1-sep" class="sep-line" style="background:#FFB800;margin:16px auto"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px" id="s10-audience">
+          <div class="tag-pill" style="background:rgba(0,212,255,.1);color:#00D4FF;border:1px solid rgba(0,212,255,.2);font-size:28px;padding:10px 22px">个人开发者</div>
+          <div class="tag-pill" style="background:rgba(0,255,136,.1);color:#00FF88;border:1px solid rgba(0,255,136,.2);font-size:28px;padding:10px 22px">研究人员</div>
+          <div class="tag-pill" style="background:rgba(255,184,0,.1);color:#FFB800;border:1px solid rgba(255,184,0,.2);font-size:28px;padding:10px 22px">AI Agent 用户</div>
+        </div>
+        <div style="margin-top:24px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap" id="s10-stats">
+          <div style="text-align:center"><div style="font-size:48px;font-weight:900;color:#00D4FF">253</div><div style="font-size:24px;color:#a0a0c0">commits</div></div>
+          <div style="text-align:center"><div style="font-size:48px;font-weight:900;color:#00FF88">15</div><div style="font-size:24px;color:#a0a0c0">贡献者</div></div>
+          <div style="text-align:center"><div style="font-size:48px;font-weight:900;color:#FFB800">4</div><div style="font-size:24px;color:#a0a0c0">语言文档</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Phase 2: Project info -->
+    <div class="phase" id="s10-p2" style="opacity:0">
+      <div class="phase-inner" style="text-align:center">
+        <div id="s10-p2-card" style="background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.15);border-radius:16px;padding:32px">
+          <div id="s10-p2-name" class="hero-title grad-text" style="background-image:linear-gradient(135deg,#FFB800,#FF8C32);font-size:72px">Agent Reach</div>
+          <div id="s10-p2-sep2" style="margin:16px auto;width:80px;height:3px;background:#FFB800;border-radius:2px"></div>
+          <div class="body-text" style="font-size:32px;color:#c0c0d8">作者: Neo Reid</div>
+          <div class="body-text" style="font-size:30px;color:#a0a0c0;margin-top:8px">MIT 协议 · 零成本 · 活跃迭代</div>
+        </div>
+        <div id="s10-p2-verdict" class="body-accent" style="margin-top:28px;font-size:34px;color:#a0a0c0;text-align:center">
+          商业级稳定性 · 不适合<br>个人用户 · <span style="color:#00FF88;font-weight:700">值得尝试</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== S11: CTA (209.400-211.992s) ==================== -->
+  <div class="clip" id="s11" data-start="209.4" data-duration="2.592">
+    <div class="layer-bg">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0a1a 0%,#1a140a 100%)"></div>
+      <div class="glow" style="width:500px;height:500px;background:rgba(255,184,0,.25);top:30%;left:50%;margin-left:-250px"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.5) 100%)"></div>
+    </div>
+    <div class="layer-fx">
+      <div id="s11-dot1" style="position:absolute;width:6px;height:6px;background:#FFB800;border-radius:50%;top:25%;left:20%;opacity:.4"></div>
+      <div id="s11-dot2" style="position:absolute;width:8px;height:8px;background:#00D4FF;border-radius:50%;top:40%;right:25%;opacity:.3"></div>
+      <div id="s11-ring1" style="position:absolute;width:200px;height:200px;border:1px solid rgba(255,184,0,.1);border-radius:50%;top:35%;left:50%;margin-left:-100px"></div>
+    </div>
+    <div class="layer-content" style="padding:180px 90px 220px 90px">
+      <div style="text-align:center">
+        <div id="s11-title" style="font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:52px;font-weight:800;color:#FFB800">关注 GitHub 星探</div>
+        <div id="s11-sub" style="font-size:36px;color:#a0a0c0;margin-top:12px">下期见</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+window.__timelines = {};
+var tl = gsap.timeline({ paused: true });
+
+// Phase switch times (absolute, from phase_timings.json)
+// S1=0, S2=10.536, S3=25.992, S4=48.24, S5=77.064, S6=104.88
+// S7=125.496, S8=142.632, S9=163.848, S10=186.408, S11=209.4
+
+// === S1: HOOK (0s) ===
+tl.from('#s1-label', {scale:0.8, duration:0.15, ease:'power3.out'}, 0);
+tl.from('#s1-title', {scale:0.7, duration:0.15, ease:'power3.out'}, 0);
+tl.from('#s1-sep', {scaleX:0, duration:0.2, ease:'power3.out'}, 0.1);
+tl.from('#s1-sub', {scale:0.85, duration:0.15, ease:'power3.out'}, 0.15);
+tl.from('#s1-desc', {y:30, duration:0.2, ease:'power3.out'}, 0.2);
+tl.to('#s1-ring1', {scale:1.1, duration:4, ease:'sine.inOut', repeat:200, yoyo:true}, 0);
+tl.to('#s1-ring2', {scale:1.15, duration:5, ease:'sine.inOut', repeat:200, yoyo:true}, 0);
+
+// === S2: WHAT (10.536s) ===
+tl.from('#s2-name', {scale:0.8, duration:0.2, ease:'power3.out'}, 10.536);
+tl.from('#s2-sep', {scaleX:0, duration:0.2, ease:'power3.out'}, 10.636);
+tl.from('#s2-desc', {y:20, duration:0.2, ease:'power3.out'}, 10.736);
+tl.from('#s2-stats', {scale:0.9, duration:0.25, ease:'power3.out'}, 10.836);
+tl.to('#s2-dot1', {y:-10, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 10.536);
+tl.to('#s2-dot2', {y:-8, duration:2.5, ease:'sine.inOut', repeat:200, yoyo:true}, 10.536);
+tl.to('#s2-dot3', {y:-12, duration:3.5, ease:'sine.inOut', repeat:200, yoyo:true}, 10.536);
+
+// === S3: PHILOSOPHY (25.992s, phase2 at 33.212s) ===
+tl.from('#s3-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 25.992);
+tl.from('#s3-p1-sep', {scaleX:0, duration:0.2, ease:'power3.out'}, 26.092);
+tl.from('#s3-fw-label', {scale:0.85, duration:0.2, ease:'power3.out'}, 26.192);
+tl.from('#s3-sc-label', {scale:0.85, duration:0.2, ease:'power3.out'}, 26.292);
+// Phase switch at 33.212
+tl.to('#s3-p1', {opacity:0, duration:0.3}, 33.212);
+tl.fromTo('#s3-p2', {opacity:0}, {opacity:1, duration:0.3}, 33.212);
+tl.from('#s3-p2-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 33.212);
+tl.from('#s3-tools', {scale:0.9, duration:0.25, ease:'power3.out'}, 33.312);
+tl.from('#s3-p2-note', {y:20, duration:0.2, ease:'power3.out'}, 33.512);
+// FX
+tl.to('#s3-line1', {height:300, duration:4, ease:'sine.inOut', repeat:200, yoyo:true}, 25.992);
+tl.to('#s3-dot1', {scale:1.5, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 25.992);
+
+// === S4: ARCHITECTURE (48.24s, phase2 at 59.68s, phase3 at 61.64s) ===
+tl.from('#s4-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 48.24);
+tl.from('#s4-layer1', {scale:0.9, duration:0.2, ease:'power3.out'}, 48.34);
+tl.from('#s4-layer2', {scale:0.9, duration:0.2, ease:'power3.out'}, 48.44);
+tl.from('#s4-layer3', {scale:0.9, duration:0.2, ease:'power3.out'}, 48.54);
+// Phase 2 at 59.68
+tl.to('#s4-p1', {opacity:0, duration:0.3}, 59.68);
+tl.fromTo('#s4-p2', {opacity:0}, {opacity:1, duration:0.3}, 59.68);
+tl.from('#s4-p2-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 59.68);
+tl.from('#s4-tier0', {scale:0.9, duration:0.25, ease:'power3.out'}, 59.78);
+tl.from('#s4-p2-subtitle', {scale:0.85, duration:0.2, ease:'power3.out'}, 59.98);
+tl.from('#s4-tier1', {scale:0.9, duration:0.25, ease:'power3.out'}, 60.08);
+// Phase 3 at 61.64
+tl.to('#s4-p2', {opacity:0, duration:0.3}, 61.64);
+tl.fromTo('#s4-p3', {opacity:0}, {opacity:1, duration:0.3}, 61.64);
+tl.from('#s4-p3-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 61.64);
+tl.from('#s4-tier2', {scale:0.9, duration:0.2, ease:'power3.out'}, 61.74);
+tl.from('#s4-p3-summary', {y:20, duration:0.2, ease:'power3.out'}, 61.94);
+// FX
+tl.to('#s4-pulse1', {scale:1.1, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 48.24);
+tl.to('#s4-pulse2', {scale:1.15, duration:4, ease:'sine.inOut', repeat:200, yoyo:true}, 48.24);
+
+// === S5: PLATFORMS (77.064s, phase2 at 85.754s, phase3 at 99.304s) ===
+tl.from('#s5-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 77.064);
+tl.from('#s5-p1-sep', {scaleX:0, duration:0.2, ease:'power3.out'}, 77.164);
+// Phase 2 at 85.754
+tl.to('#s5-p1', {opacity:0, duration:0.3}, 85.754);
+tl.fromTo('#s5-p2', {opacity:0}, {opacity:1, duration:0.3}, 85.754);
+tl.from('#s5-p2-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 85.754);
+tl.from('#s5-cn', {scale:0.9, duration:0.25, ease:'power3.out'}, 85.854);
+// Phase 3 at 99.304
+tl.to('#s5-p2', {opacity:0, duration:0.3}, 99.304);
+tl.fromTo('#s5-p3', {opacity:0}, {opacity:1, duration:0.3}, 99.304);
+tl.from('#s5-p3-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 99.304);
+tl.from('#s5-p3-box', {scale:0.9, duration:0.2, ease:'power3.out'}, 99.404);
+tl.from('#s5-p3-extras', {scale:0.9, duration:0.2, ease:'power3.out'}, 99.604);
+// FX
+tl.to('#s5-wave1', {y:-15, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 77.064);
+tl.to('#s5-dot1', {opacity:1, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 77.064);
+tl.to('#s5-dot2', {opacity:1, duration:2.5, ease:'sine.inOut', repeat:200, yoyo:true}, 77.064);
+
+// === S6: COOKIE (104.88s, phase2 at 114.54s) ===
+tl.from('#s6-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 104.88);
+tl.from('#s6-browsers', {scale:0.9, duration:0.25, ease:'power3.out'}, 104.98);
+// Phase 2 at 114.54
+tl.to('#s6-p1', {opacity:0, duration:0.3}, 114.54);
+tl.fromTo('#s6-p2', {opacity:0}, {opacity:1, duration:0.3}, 114.54);
+tl.from('#s6-p2-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 114.54);
+tl.from('#s6-sec1', {scale:0.9, duration:0.2, ease:'power3.out'}, 114.64);
+tl.from('#s6-sec2', {scale:0.9, duration:0.2, ease:'power3.out'}, 114.74);
+tl.from('#s6-sec3', {scale:0.9, duration:0.2, ease:'power3.out'}, 114.84);
+// FX
+tl.to('#s6-shield', {scale:1.05, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 104.88);
+tl.to('#s6-dot1', {y:-10, duration:2.5, ease:'sine.inOut', repeat:200, yoyo:true}, 104.88);
+
+// === S7: INSTALL (125.496s, phase2 at 140.306s) ===
+tl.from('#s7-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 125.496);
+tl.from('#s7-p1-code', {scale:0.9, duration:0.2, ease:'power3.out'}, 125.596);
+tl.from('#s7-step1', {x:-20, duration:0.15, ease:'power3.out'}, 125.696);
+tl.from('#s7-step2', {x:-20, duration:0.15, ease:'power3.out'}, 125.796);
+tl.from('#s7-step3', {x:-20, duration:0.15, ease:'power3.out'}, 125.896);
+tl.from('#s7-step4', {x:-20, duration:0.15, ease:'power3.out'}, 125.996);
+// Phase 2 at 140.306
+tl.to('#s7-p1', {opacity:0, duration:0.3}, 140.306);
+tl.fromTo('#s7-p2', {opacity:0}, {opacity:1, duration:0.3}, 140.306);
+tl.from('#s7-p2-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 140.306);
+tl.from('#s7-p2-code', {scale:0.9, duration:0.2, ease:'power3.out'}, 140.406);
+tl.from('#s7-p2-time', {scale:0.9, duration:0.2, ease:'power3.out'}, 140.606);
+// FX
+tl.to('#s7-arrow1', {height:180, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 125.496);
+tl.to('#s7-arrow2', {height:120, duration:4, ease:'sine.inOut', repeat:200, yoyo:true}, 125.496);
+
+// === S8: USECASES (142.632s, phase2 at 155.322s) ===
+tl.from('#s8-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 142.632);
+tl.from('#s8-uc1', {x:-20, duration:0.15, ease:'power3.out'}, 142.732);
+tl.from('#s8-uc2', {x:-20, duration:0.15, ease:'power3.out'}, 142.832);
+tl.from('#s8-uc3', {x:-20, duration:0.15, ease:'power3.out'}, 142.932);
+// Phase 2 at 155.322
+tl.to('#s8-p1', {opacity:0, duration:0.3}, 155.322);
+tl.fromTo('#s8-p2', {opacity:0}, {opacity:1, duration:0.3}, 155.322);
+tl.from('#s8-uc4', {x:-20, duration:0.15, ease:'power3.out'}, 155.322);
+tl.from('#s8-uc5', {x:-20, duration:0.15, ease:'power3.out'}, 155.472);
+// FX
+tl.to('#s8-ray1', {opacity:0.3, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 142.632);
+tl.to('#s8-dot1', {scale:1.5, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 142.632);
+
+// === S9: RISKS (163.848s, phase2 at 178.818s) ===
+tl.from('#s9-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 163.848);
+tl.from('#s9-r1', {x:-20, duration:0.15, ease:'power3.out'}, 163.948);
+tl.from('#s9-r2', {x:-20, duration:0.15, ease:'power3.out'}, 164.048);
+tl.from('#s9-r3', {x:-20, duration:0.15, ease:'power3.out'}, 164.148);
+// Phase 2 at 178.818
+tl.to('#s9-p1', {opacity:0, duration:0.3}, 178.818);
+tl.fromTo('#s9-p2', {opacity:0}, {opacity:1, duration:0.3}, 178.818);
+tl.from('#s9-r4', {x:-20, duration:0.15, ease:'power3.out'}, 178.818);
+tl.from('#s9-r5', {x:-20, duration:0.15, ease:'power3.out'}, 178.968);
+tl.from('#s9-note', {scale:0.9, duration:0.2, ease:'power3.out'}, 179.118);
+// FX
+tl.to('#s9-warn1', {opacity:0.8, duration:1.5, ease:'sine.inOut', repeat:200, yoyo:true}, 163.848);
+tl.to('#s9-warn2', {opacity:0.8, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 163.848);
+
+// === S10: RECOMMENDATION (186.408s, phase2 at 205.728s) ===
+tl.from('#s10-p1-title', {scale:0.85, duration:0.2, ease:'power3.out'}, 186.408);
+tl.from('#s10-audience', {scale:0.9, duration:0.25, ease:'power3.out'}, 186.508);
+tl.from('#s10-stats', {scale:0.9, duration:0.2, ease:'power3.out'}, 186.658);
+// Phase 2 at 205.728
+tl.to('#s10-p1', {opacity:0, duration:0.3}, 205.728);
+tl.fromTo('#s10-p2', {opacity:0}, {opacity:1, duration:0.3}, 205.728);
+tl.from('#s10-p2-card', {scale:0.9, duration:0.2, ease:'power3.out'}, 205.728);
+tl.from('#s10-p2-verdict', {y:20, duration:0.2, ease:'power3.out'}, 205.928);
+// FX
+tl.to('#s10-ring1', {scale:1.1, duration:4, ease:'sine.inOut', repeat:200, yoyo:true}, 186.408);
+tl.to('#s10-dot1', {y:-10, duration:3, ease:'sine.inOut', repeat:200, yoyo:true}, 186.408);
+
+// === S11: CTA (209.4s) ===
+tl.from('#s11-title', {scale:0.8, duration:0.15, ease:'power3.out'}, 209.4);
+tl.from('#s11-sub', {scale:0.85, duration:0.15, ease:'power3.out'}, 209.5);
+tl.to('#s11-ring1', {scale:1.15, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 209.4);
+tl.to('#s11-dot1', {opacity:0.8, duration:1.5, ease:'sine.inOut', repeat:200, yoyo:true}, 209.4);
+tl.to('#s11-dot2', {opacity:0.7, duration:2, ease:'sine.inOut', repeat:200, yoyo:true}, 209.4);
+
+window.__hf = {
+  duration: 211.992,
+  seek: function(t) { tl.time(t, false); }
+};
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

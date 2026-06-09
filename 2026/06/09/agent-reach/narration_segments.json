@@ -1,0 +1,352 @@
+[
+  {
+    "scene": "hook",
+    "type": "hook",
+    "text": "你的 AI 助手只能查网页，搜不了社交动态、读不了内容平台、更拿不到视频弹幕。今天介绍一个项目，十多个主流平台一次性打通。",
+    "estimated_duration": 8,
+    "emotion": "grab",
+    "emotion_intensity": 0.5,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": "AI Agent 目前无法直接访问社交媒体和中文平台，这是真实痛点",
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": { "mood": "urgent, dark, electric", "color_hint": "deep black, electric blue sparks", "density": "low" },
+      "fx": { "emotion": "attention, curiosity", "motion_style": "pulse, expand", "complexity": "css-only" },
+      "content": { "visual_type": "hero", "focus": "multi-platform in one shot", "layout_hint": { "density": "generous" } }
+    }
+  },
+  {
+    "scene": "what",
+    "type": "what",
+    "text": "Agent Reach，开源脚手架工具。它不做框架，不做 API 封装，只做一件事：把 AI Agent 接入互联网所需的工具，装好、配好、诊断好。Python 3.10 以上，MIT 协议，253 次提交，15 位贡献者。",
+    "estimated_duration": 14,
+    "emotion": "build",
+    "emotion_intensity": 0.5,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": "脚手架工具·零运行时·多平台",
+    "commentary": "定位精准的实用工具",
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "项目名称与定位",
+        "visual_type": "hero",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 1 },
+        "key_data": ["Agent Reach", "开源脚手架工具", "多平台"]
+      },
+      {
+        "focus": "核心数据",
+        "visual_type": "data",
+        "narration_anchor": { "start_sentence": 2, "end_sentence": 2 },
+        "key_data": ["Python 3.10+", "MIT协议", "253提交", "15贡献者"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "tech, professional", "color_hint": "dark navy, subtle grid", "density": "low" },
+      "fx": { "emotion": "focus, clarity", "motion_style": "steady", "complexity": "css-only" },
+      "content": { "visual_type": "hero", "focus": "project name + key stats", "layout_hint": { "density": "standard" } }
+    }
+  },
+  {
+    "scene": "philosophy",
+    "type": "how",
+    "text": "它的核心设计哲学叫脚手架模式。区别在哪？框架会把你包起来，所有调用都经过它。脚手架不同，帮你搭好梯子就退出。装完之后，Agent 直接调用 yt-dlp、gh 这些原生工具，不经过任何中间层。好处是零运行时依赖，出问题直接找上游工具。坏处是每个工具都得单独装。",
+    "estimated_duration": 18,
+    "emotion": "build",
+    "emotion_intensity": 0.6,
+    "humor_type": "analogy",
+    "character_expression": "cool",
+    "selling_points": "零依赖·最小侵入·直接调用",
+    "commentary": null,
+    "contrarian_angle": "大多数工具选择做框架，它选择做完就退出",
+    "visual_phases": [
+      {
+        "focus": "框架 vs 脚手架对比",
+        "visual_type": "compare",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 2 },
+        "key_data": ["框架: 包裹调用", "脚手架: 装完退出"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "直接调用原生工具",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 3, "end_sentence": 4 },
+        "key_data": ["yt-dlp", "gh CLI", "原生工具"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "analytical, clean", "color_hint": "dark teal background", "density": "low" },
+      "fx": { "emotion": "understanding", "motion_style": "split, compare", "complexity": "css-only" },
+      "content": { "visual_type": "compare", "focus": "framework vs scaffolding", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "architecture",
+    "type": "capabilities",
+    "text": "架构分三层。最上面是 SKILL.md 路由，告诉 Agent 遇到什么需求用什么命令。中间是 Channel 插件层，每个平台一个独立模块，检测上游工具状态。最底下是上游工具层。平台按难度分三个等级：Tier 0 装好即用，包括网页搜索、油管、GitHub 和技术社区；Tier 1 需要登录凭据，覆盖社交平台、视频网站、内容社区和财经论坛；Tier 2 配置复杂，主要是短视频平台和海外职场社交。",
+    "estimated_duration": 25,
+    "emotion": "reveal",
+    "emotion_intensity": 0.7,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": "三层架构·Tier分级·可插拔",
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "三层架构",
+        "visual_type": "timeline",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 2 },
+        "key_data": ["SKILL.md 路由", "Channel 插件层", "上游工具层"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "Tier 0 平台",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 3, "end_sentence": 3 },
+        "key_data": ["网页搜索(Jina)", "油管(yt-dlp)", "GitHub(gh)", "技术社区(API)"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "Tier 1-2 平台",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 4, "end_sentence": 5 },
+        "key_data": ["社交平台(凭据)", "视频网站(API)", "内容社区(凭据)", "财经论坛(MCP)", "短视频(复杂)", "海外职场(复杂)"],
+        "layout_hint": { "density": "compact" }
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "technical, structured", "color_hint": "deep blue grid", "density": "low" },
+      "fx": { "emotion": "architecture, clarity", "motion_style": "build-up, layer", "complexity": "css-only" },
+      "content": { "visual_type": "timeline", "focus": "3-layer architecture + Tier system", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "platforms",
+    "type": "features",
+    "text": "一共覆盖十多个平台。网页搜索用 Jina Reader，免费无需 Key。视频字幕用 yt-dlp 提取，这个工具 15 万星。代码仓库用官方 CLI。中文生态很完整：视频网站、社交平台、短视频、资讯社区、财经论坛全有。还有 RSS 订阅、播客转录，以及 Exa 全网语义搜索，免费无需 API Key。所有上游工具免费，用户唯一可能的花费是服务器代理，一个月一美元。",
+    "estimated_duration": 24,
+    "emotion": "reveal",
+    "emotion_intensity": 0.8,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": "多平台·零成本·中文全覆盖",
+    "commentary": "中文平台支持是差异化优势",
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "全球平台",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 2 },
+        "key_data": ["网页(Jina)", "视频(154K★)", "代码(官方)", "搜索(免费)"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "中文平台全覆盖",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 3, "end_sentence": 4 },
+        "key_data": ["视频网站", "社交平台", "短视频", "资讯社区", "财经论坛", "RSS", "播客"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "零成本理念",
+        "visual_type": "highlight",
+        "narration_anchor": { "start_sentence": 6, "end_sentence": 6 },
+        "key_data": ["全部免费", "代理 $1/月"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "rich, expansive", "color_hint": "dark base with warm amber glow", "density": "standard" },
+      "fx": { "emotion": "impressive, comprehensive", "motion_style": "radiate, spread", "complexity": "css-only" },
+      "content": { "visual_type": "list", "focus": "platform categories grid", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "cookie",
+    "type": "features",
+    "text": "凭据管理是项目的一大亮点。支持从 Chrome、Firefox、Edge 等主流浏览器自动提取，一次覆盖社交平台和内容社区的所有登录状态。安全方面做了三件事：配置文件权限设为 600 只有你能读写，日志输出自动脱敏不泄露凭据，还有 safe 模式和 dry-run 模式，生产环境可以先预览再执行。",
+    "estimated_duration": 18,
+    "emotion": "build",
+    "emotion_intensity": 0.6,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": "自动提取·权限控制·脱敏输出",
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "凭据自动提取",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 1 },
+        "key_data": ["Chrome", "Firefox", "Edge", "Brave", "Opera"]
+      },
+      {
+        "focus": "安全三重保护",
+        "visual_type": "data",
+        "narration_anchor": { "start_sentence": 2, "end_sentence": 2 },
+        "key_data": ["权限 0o600", "脱敏输出", "safe/dry-run"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "secure, professional", "color_hint": "dark green-teal", "density": "low" },
+      "fx": { "emotion": "trust, security", "motion_style": "shield, lock", "complexity": "css-only" },
+      "content": { "visual_type": "list", "focus": "credential security features", "layout_hint": { "density": "standard" } }
+    }
+  },
+  {
+    "scene": "install",
+    "type": "capabilities",
+    "text": "安装只需一条命令：agent-reach install --env=auto。它会自动检测环境，安装依赖，然后按需装各平台上游工具。本地模式还会自动从浏览器提取凭据。安装完运行 doctor，一键诊断所有渠道的状态。整个过程不超过五分钟。",
+    "estimated_duration": 18,
+    "emotion": "reveal",
+    "emotion_intensity": 0.7,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": "一条命令·自动检测·doctor诊断",
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "安装流程",
+        "visual_type": "timeline",
+        "narration_anchor": { "start_sentence": 0, "end_sentence": 3 },
+        "key_data": ["install --env=auto", "自动检测", "上游工具", "凭据提取"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "doctor 诊断",
+        "visual_type": "highlight",
+        "narration_anchor": { "start_sentence": 4, "end_sentence": 5 },
+        "key_data": ["全渠道状态", "< 5分钟"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "efficient, clean", "color_hint": "dark with cyan accents", "density": "low" },
+      "fx": { "emotion": "progress, flow", "motion_style": "step-by-step", "complexity": "css-only" },
+      "content": { "visual_type": "timeline", "focus": "installation steps", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "usecases",
+    "type": "usecases",
+    "text": "适合什么场景？第一，给 AI Agent 加互联网能力，这是核心定位。第二，社交媒体监控，多个平台一站搜完。第三，技术信息聚合，GitHub Issue、技术社区一键抓取。第四，金融市场信息，财经社区实时行情和热帖。第五，内容创作辅助，视频字幕提取、播客转文字。",
+    "estimated_duration": 18,
+    "emotion": "climax",
+    "emotion_intensity": 0.8,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": "Agent增强·社媒监控·技术聚合·金融信息",
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "场景 1-3",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 1, "end_sentence": 3 },
+        "key_data": ["Agent 互联网能力", "社交媒体监控", "技术信息聚合"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "场景 4-5",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 4, "end_sentence": 5 },
+        "key_data": ["金融行情", "内容创作辅助"],
+        "layout_hint": { "density": "compact" }
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "versatile, energetic", "color_hint": "warm amber base", "density": "standard" },
+      "fx": { "emotion": "excitement, possibilities", "motion_style": "expand, radiate", "complexity": "css-only" },
+      "content": { "visual_type": "list", "focus": "5 use cases", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "risks",
+    "type": "privacy",
+    "text": "但有几个风险必须说清楚。第一，上游工具多基于逆向工程，平台反爬升级随时可能失效。第二，登录凭据会过期，部分平台的需要定期更新。第三，使用非官方接口有封号风险，建议用小号。第四，Windows 兼容性有限，部分安装命令只支持 Linux。第五，不适合大规模采集和商业用途。",
+    "estimated_duration": 20,
+    "emotion": "settle",
+    "emotion_intensity": 0.6,
+    "humor_type": null,
+    "character_expression": "think",
+    "selling_points": null,
+    "commentary": "诚实告知风险比吹嘘功能更重要",
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "风险 1-3",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 1, "end_sentence": 3 },
+        "key_data": ["上游逆向工程", "凭据过期", "封号风险"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "风险 4-5",
+        "visual_type": "list",
+        "narration_anchor": { "start_sentence": 4, "end_sentence": 5 },
+        "key_data": ["Windows有限", "非商用"],
+        "layout_hint": { "density": "compact" }
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "cautious, honest", "color_hint": "muted dark, desaturated", "density": "low" },
+      "fx": { "emotion": "caution, honesty", "motion_style": "steady, calm", "complexity": "css-only" },
+      "content": { "visual_type": "list", "focus": "5 risks", "layout_hint": { "density": "compact" } }
+    }
+  },
+  {
+    "scene": "recommendation",
+    "type": "features",
+    "text": "总结一下。推荐给个人开发者、研究人员、AI Agent 用户。代码质量不错，文档中英日韩四语，253 次提交说明迭代活跃。对个人用户来说，这是一个零成本打通互联网信息的好工具。但如果你需要商业级稳定性，或者大规模数据采集，不适合。项目名叫 Agent Reach，作者 Neo Reid，MIT 协议。",
+    "estimated_duration": 22,
+    "emotion": "settle",
+    "emotion_intensity": 0.5,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": "零成本·活跃迭代·四语文档",
+    "commentary": "务实的推荐建议",
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "推荐要点",
+        "visual_type": "data",
+        "narration_anchor": { "start_sentence": 2, "end_sentence": 3 },
+        "key_data": ["253 commits", "15 贡献者", "4语言文档", "MIT协议"],
+        "layout_hint": { "density": "compact" }
+      },
+      {
+        "focus": "项目信息",
+        "visual_type": "highlight",
+        "narration_anchor": { "start_sentence": 5, "end_sentence": 5 },
+        "key_data": ["Agent Reach", "Neo Reid", "MIT"]
+      }
+    ],
+    "visual_intent": {
+      "bg": { "mood": "balanced, conclusive", "color_hint": "dark with warm amber fade", "density": "standard" },
+      "fx": { "emotion": "conclusion, summary", "motion_style": "fade, settle", "complexity": "css-only" },
+      "content": { "visual_type": "highlight", "focus": "recommendation + project info", "layout_hint": { "density": "generous" } }
+    }
+  },
+  {
+    "scene": "cta",
+    "type": "cta",
+    "text": "关注GitHub星探，下期见。",
+    "estimated_duration": 4,
+    "emotion": "summon",
+    "emotion_intensity": 0.4,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": { "mood": "warm, inviting", "color_hint": "warm amber fade", "density": "generous" },
+      "fx": null,
+      "content": { "visual_type": "highlight", "focus": "follow CTA", "layout_hint": { "density": "generous" } }
+    }
+  }
+]

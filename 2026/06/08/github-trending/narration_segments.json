@@ -1,0 +1,261 @@
+{
+  "segments": [
+    {
+      "scene": "hook",
+      "text": "6月8日几个项目杀上来，有个向量引擎比同类快两成，千万级数据只占4G内存",
+      "estimated_duration": 4,
+      "emotion": "grab",
+      "emotion_intensity": 0.3,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "narration_segment": "6月8日几个项目杀上来，有个向量引擎比同类快两成，千万级数据只占4G内存",
+      "contrarian_angle": "向量搜索引擎用Rust SIMD指令，千万向量4GB内存",
+      "visual_phases": [],
+      "visual_intent": {
+        "bg": {
+          "mood": "urgent, explosive",
+          "color_hint": "deep black base, golden glow",
+          "density": "generous"
+        },
+        "fx": {
+          "emotion": "excitement, shock",
+          "motion_style": "expanding, radiating",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "hero",
+          "focus": "震撼开场数据钩子",
+          "layout_hint": {
+            "density": "generous"
+          }
+        }
+      }
+    },
+    {
+      "scene": "turbovec",
+      "text": "开头说个猛的，turbovec，基于谷歌的TurboQuant算法，用Rust写的向量索引引擎。一千万条向量数据，传统方案要31GB内存，它只要4GB，搜索速度还比同类快12%到20%。关键是完全本地运行，数据不离开你的机器，做RAG的同学们可以关注一下",
+      "estimated_duration": 8,
+      "emotion": "build",
+      "emotion_intensity": 0.5,
+      "humor_type": "analogy",
+      "character_expression": "cool",
+      "selling_points": "极速索引·内存节省·完全本地",
+      "commentary": "一天涨了一千五百星，开发者用脚投票",
+      "contrarian_angle": "Python调用但核心是Rust SIMD指令，内存省了87%",
+      "visual_phases": [
+        {
+          "focus": "turbovec核心介绍",
+          "visual_type": "hero",
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 1
+          },
+          "key_data": [
+            "TurboQuant",
+            "Rust SIMD",
+            "4GB vs 31GB"
+          ]
+        },
+        {
+          "focus": "性能对比数据",
+          "visual_type": "data",
+          "narration_anchor": {
+            "start_sentence": 1,
+            "end_sentence": 2
+          },
+          "key_data": [
+            "快12-20%",
+            "+1,554★",
+            "完全本地"
+          ]
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "tech, focused",
+          "color_hint": "deep blue, cyan neon accents",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "precision, speed",
+          "motion_style": "scanning, sweeping",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "list",
+          "focus": "turbovec核心数据展示",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      }
+    },
+    {
+      "scene": "pg_durable",
+      "text": "第二个 pg_durable，微软出的PostgreSQL插件。它把数据库变成了工作流引擎，你在SQL里定义好步骤，每一步自动存检查点，数据库崩了也不怕，重启从上一步接着跑。以前要搭Airflow或Temporal来编排任务，现在直接在数据库里搞定",
+      "estimated_duration": 8,
+      "emotion": "reveal",
+      "emotion_intensity": 0.8,
+      "humor_type": "analogy",
+      "character_expression": "cool",
+      "selling_points": "数据库内编排·自动容错·微软出品",
+      "commentary": "再也不用维护一堆cron job了",
+      "contrarian_angle": "数据库变成工作流引擎，不需要外部编排器",
+      "visual_phases": [
+        {
+          "focus": "pg_durable原理",
+          "visual_type": "timeline",
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 1
+          },
+          "key_data": [
+            "SQL定义步骤",
+            "自动检查点",
+            "崩溃恢复"
+          ]
+        },
+        {
+          "focus": "对比传统方案",
+          "visual_type": "compare",
+          "narration_anchor": {
+            "start_sentence": 2,
+            "end_sentence": 3
+          },
+          "key_data": [
+            "无需Airflow",
+            "无需Temporal",
+            "数据库内搞定"
+          ]
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "confident, solid",
+          "color_hint": "dark teal, subtle purple",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "stability, reliability",
+          "motion_style": "steady, pulsing",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "timeline",
+          "focus": "pg_durable工作流原理",
+          "layout_hint": {
+            "density": "standard"
+          }
+        }
+      }
+    },
+    {
+      "scene": "goose",
+      "text": "第三个 goose，一个开源的AI Agent，用Rust写的，四万七千星。它不只是代码补全，能从安装依赖、写代码、跑测试一条龙搞定。支持接入任意大模型，遵循MCP协议，喜欢折腾Agent的同学可以试试",
+      "estimated_duration": 7,
+      "emotion": "build",
+      "emotion_intensity": 0.5,
+      "humor_type": null,
+      "character_expression": "think",
+      "selling_points": "全流程Agent·Rust高性能·MCP协议",
+      "commentary": "从装包到测试，一个人干完一个团队的活",
+      "contrarian_angle": "一个Agent完成从安装依赖到测试验证的全流程",
+      "visual_phases": [
+        {
+          "focus": "goose全流程能力",
+          "visual_type": "list",
+          "narration_anchor": {
+            "start_sentence": 0,
+            "end_sentence": 1
+          },
+          "key_data": [
+            "47.8K★",
+            "安装→写码→测试",
+            "任意LLM"
+          ]
+        }
+      ],
+      "visual_intent": {
+        "bg": {
+          "mood": "capable, modern",
+          "color_hint": "dark indigo, warm accent",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "capability, flow",
+          "motion_style": "flowing, connecting",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "hero",
+          "focus": "goose全流程Agent展示",
+          "layout_hint": {
+            "density": "standard"
+          }
+        }
+      }
+    },
+    {
+      "scene": "ai_tools",
+      "text": "还有两个工具类项目，AiToEarn用AI自动生成内容然后一键发到多个平台，抖音快手小红书全覆盖。tolaria是个Markdown知识库桌面应用，本地优先数据不外传，做笔记管理挺方便的",
+      "estimated_duration": 7,
+      "emotion": "reveal",
+      "emotion_intensity": 0.6,
+      "humor_type": "trivia",
+      "character_expression": "tease",
+      "selling_points": null,
+      "commentary": "一个帮你发内容，一个帮你记内容",
+      "contrarian_angle": null,
+      "visual_phases": [],
+      "visual_intent": {
+        "bg": {
+          "mood": "practical, warm",
+          "color_hint": "dark base, amber highlights",
+          "density": "low"
+        },
+        "fx": {
+          "emotion": "efficiency, tool",
+          "motion_style": "stacking, arranging",
+          "complexity": "css-only"
+        },
+        "content": {
+          "visual_type": "list",
+          "focus": "两个工具类项目快速展示",
+          "layout_hint": {
+            "density": "compact"
+          }
+        }
+      }
+    },
+    {
+      "scene": "cta",
+      "text": "对了上次说的跨平台研究技能last30days又涨了一千星，连续霸榜好几天了。关注我，下期见",
+      "estimated_duration": 6,
+      "emotion": "summon",
+      "emotion_intensity": 0.4,
+      "humor_type": null,
+      "character_expression": null,
+      "selling_points": null,
+      "commentary": null,
+      "contrarian_angle": null,
+      "visual_phases": [],
+      "visual_intent": {
+        "bg": {
+          "mood": "warm, inviting",
+          "color_hint": "warm amber fade, dark base",
+          "density": "generous"
+        },
+        "fx": null,
+        "content": {
+          "visual_type": "highlight",
+          "focus": "关注引导CTA",
+          "layout_hint": {
+            "density": "generous"
+          }
+        }
+      }
+    }
+  ]
+}

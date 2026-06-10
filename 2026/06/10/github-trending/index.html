@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.composition { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+/* === Scene 1: Hook === */
+#scene-1 .bg-grad { position: absolute; inset: 0; background-image: linear-gradient(160deg, #0a0e1a 0%, #0d1333 50%, #0f1847 100%); }
+#scene-1 .grid { position: absolute; inset: 0; background-image:
+  linear-gradient(rgba(77,168,218,0.06) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(77,168,218,0.06) 1px, transparent 1px);
+  background-size: 60px 60px; }
+#scene-1 .particle { position: absolute; width: 4px; height: 4px; border-radius: 50%; background-image: linear-gradient(135deg, #4DA8DA, #FF8C32); }
+#scene-1 .pulse-ring { position: absolute; border: 2px solid rgba(77,168,218,0.3); border-radius: 50%; }
+#scene-1 .content-inner { position: absolute; inset: 0; padding: 180px 90px 220px 90px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+#scene-1 .date-tag { font-family: 'inter', sans-serif; font-size: 28px; color: #B0BEC5; margin-bottom: 40px; letter-spacing: 4px; }
+#scene-1 .title-main { font-family: 'inter', sans-serif; font-weight: 900; font-size: 72px; line-height: 1.2; color: #FFFFFF; margin-bottom: 48px; }
+#scene-1 .highlight { background-image: linear-gradient(135deg, #FF8C32, #FFD54F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-1 .subtitle { font-family: 'inter', sans-serif; font-size: 36px; color: #B0BEC5; line-height: 1.6; max-width: 880px; }
+#scene-1 .star-flow { position: absolute; bottom: 260px; left: 90px; right: 90px; display: flex; justify-content: center; gap: 60px; }
+#scene-1 .star-item { text-align: center; }
+#scene-1 .star-num { font-family: 'SF Mono', monospace; font-weight: 900; font-size: 52px; background-image: linear-gradient(135deg, #FFD54F, #FF8C32); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-1 .star-label { font-family: 'inter', sans-serif; font-size: 22px; color: #B0BEC5; margin-top: 8px; }
+
+/* === Scene 2: Research === */
+#scene-2 .bg-grad { position: absolute; inset: 0; background-image: linear-gradient(160deg, #0a0e1a 0%, #0d1333 60%, #0f1847 100%); }
+#scene-2 .diagonal { position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(77,168,218,0.04) 80px, rgba(77,168,218,0.04) 81px); }
+#scene-2 .conn-line { position: absolute; width: 2px; background-image: linear-gradient(to bottom, rgba(77,168,218,0.6), rgba(255,140,50,0.6)); }
+#scene-2 .node-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #4DA8DA; }
+#scene-2 .content-inner { position: absolute; inset: 0; padding: 180px 90px 220px 90px; display: flex; flex-direction: column; justify-content: center; }
+#scene-2 .scene-title { font-family: 'inter', sans-serif; font-weight: 800; font-size: 48px; color: #FFFFFF; margin-bottom: 20px; }
+#scene-2 .accent { background-image: linear-gradient(135deg, #4DA8DA, #7EC8E3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-2 .divider { width: 80px; height: 4px; background-image: linear-gradient(90deg, #4DA8DA, #FF8C32); margin-bottom: 50px; border-radius: 2px; }
+#scene-2 .project-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(77,168,218,0.15); border-radius: 20px; padding: 40px; margin-bottom: 36px; }
+#scene-2 .proj-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+#scene-2 .proj-name { font-family: 'SF Mono', 'inter', sans-serif; font-weight: 700; font-size: 36px; color: #4DA8DA; }
+#scene-2 .proj-stars { font-family: 'SF Mono', monospace; font-weight: 900; font-size: 44px; background-image: linear-gradient(135deg, #FFD54F, #FF8C32); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-2 .unit { font-size: 22px; font-weight: 400; }
+#scene-2 .proj-desc { font-family: 'inter', sans-serif; font-size: 30px; color: #B0BEC5; line-height: 1.6; }
+#scene-2 .proj-tag { display: inline-block; font-family: 'inter', sans-serif; font-size: 22px; color: #FF8C32; background: rgba(255,140,50,0.1); border: 1px solid rgba(255,140,50,0.25); border-radius: 8px; padding: 6px 16px; margin-top: 16px; }
+#scene-2 .vs-block { text-align: center; padding: 10px 0; }
+#scene-2 .vs-text { font-family: 'inter', sans-serif; font-weight: 900; font-size: 28px; background-image: linear-gradient(135deg, #FF8C32, #FFD54F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* === Scene 3: Career === */
+#scene-3 .bg-grad { position: absolute; inset: 0; background-image: linear-gradient(160deg, #0a0e1a 0%, #0d1333 40%, #1a0f2e 100%); }
+#scene-3 .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(77,168,218,0.08) 1px, transparent 1px); background-size: 40px 40px; }
+#scene-3 .light-band { position: absolute; height: 3px; border-radius: 2px; background-image: linear-gradient(90deg, transparent, #4DA8DA, #FF8C32, transparent); }
+
+#scene-3 .content-inner { position: absolute; inset: 0; padding: 180px 90px 220px 90px; display: flex; flex-direction: column; justify-content: center; }
+#scene-3 .scene-title { font-family: 'inter', sans-serif; font-weight: 800; font-size: 48px; color: #FFFFFF; margin-bottom: 20px; }
+#scene-3 .accent-warm { background-image: linear-gradient(135deg, #FF8C32, #FFD54F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-3 .divider { width: 80px; height: 4px; background-image: linear-gradient(90deg, #FF8C32, #4DA8DA); margin-bottom: 50px; border-radius: 2px; }
+#scene-3 .project-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,140,50,0.15); border-radius: 20px; padding: 40px; margin-bottom: 36px; }
+#scene-3 .proj-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+#scene-3 .proj-name { font-family: 'SF Mono', 'inter', sans-serif; font-weight: 700; font-size: 36px; color: #FF8C32; }
+#scene-3 .proj-stars { font-family: 'SF Mono', monospace; font-weight: 900; font-size: 44px; background-image: linear-gradient(135deg, #FFD54F, #FF8C32); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-3 .proj-desc { font-family: 'inter', sans-serif; font-size: 30px; color: #B0BEC5; line-height: 1.6; }
+#scene-3 .flow-steps { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+#scene-3 .flow-step { font-family: 'inter', sans-serif; font-size: 22px; color: #4DA8DA; background: rgba(77,168,218,0.08); border: 1px solid rgba(77,168,218,0.2); border-radius: 8px; padding: 8px 18px; }
+#scene-3 .flow-arrow { font-size: 22px; color: #B0BEC5; display: flex; align-items: center; }
+#scene-3 .vs-block { text-align: center; padding: 10px 0; }
+#scene-3 .vs-text { font-family: 'inter', sans-serif; font-weight: 900; font-size: 28px; background-image: linear-gradient(135deg, #4DA8DA, #7EC8E3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* === Scene 4: Devtools + CTA === */
+#scene-4 .bg-grad { position: absolute; inset: 0; background-image: linear-gradient(160deg, #0a0e1a 0%, #0d1333 50%, #1a1533 100%); }
+#scene-4 .geo-shape { position: absolute; border: 1px solid rgba(77,168,218,0.06); }
+#scene-4 .prism { position: absolute; width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 70px solid rgba(77,168,218,0.08); }
+#scene-4 .disperse { position: absolute; width: 6px; height: 6px; border-radius: 50%; }
+#scene-4 .content-inner { position: absolute; inset: 0; padding: 180px 90px 220px 90px; display: flex; flex-direction: column; justify-content: center; }
+#scene-4 .scene-title { font-family: 'inter', sans-serif; font-weight: 800; font-size: 48px; color: #FFFFFF; margin-bottom: 20px; }
+#scene-4 .accent-mix { background-image: linear-gradient(135deg, #4DA8DA, #FF8C32); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-4 .divider { width: 80px; height: 4px; background-image: linear-gradient(90deg, #4DA8DA, #FF8C32); margin-bottom: 50px; border-radius: 2px; }
+#scene-4 .project-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(77,168,218,0.15); border-radius: 20px; padding: 40px; margin-bottom: 30px; }
+#scene-4 .proj-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+#scene-4 .proj-name { font-family: 'SF Mono', 'inter', sans-serif; font-weight: 700; font-size: 36px; color: #4DA8DA; }
+#scene-4 .proj-stars { font-family: 'SF Mono', monospace; font-weight: 900; font-size: 44px; background-image: linear-gradient(135deg, #FFD54F, #FF8C32); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#scene-4 .proj-desc { font-family: 'inter', sans-serif; font-size: 30px; color: #B0BEC5; line-height: 1.6; }
+#scene-4 .proj-badge { display: inline-block; font-family: 'inter', sans-serif; font-size: 22px; color: #4DA8DA; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.25); border-radius: 8px; padding: 6px 16px; margin-top: 16px; }
+#scene-4 .cta-block { margin-top: 40px; text-align: center; padding: 50px 0; }
+#scene-4 .cta-title { font-family: 'inter', sans-serif; font-weight: 900; font-size: 44px; background-image: linear-gradient(135deg, #FF8C32, #FFD54F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+#scene-4 .cta-sub { font-family: 'inter', sans-serif; font-size: 30px; color: #B0BEC5; line-height: 1.6; }
+#scene-4 .cta-channel { font-family: 'inter', sans-serif; font-weight: 800; font-size: 36px; color: #FFFFFF; margin-top: 24px; padding: 16px 40px; border: 2px solid #FF8C32; border-radius: 16px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="main" data-width="1080" data-height="1920" data-duration="57.432" data-start="0">
+
+  <!-- Scene 1: Hook -->
+  <div id="scene-1" style="position:absolute;inset:0;" data-duration="9.168">
+    <div class="bg-grad"></div>
+    <div class="grid"></div>
+    <!-- fx -->
+    <div class="particle" style="left:120px;bottom:200px;width:6px;height:6px;"></div>
+    <div class="particle" style="left:340px;bottom:300px;"></div>
+    <div class="particle" style="left:560px;bottom:150px;width:5px;height:5px;"></div>
+    <div class="particle" style="left:780px;bottom:280px;"></div>
+    <div class="particle" style="left:950px;bottom:180px;width:3px;height:3px;"></div>
+    <div class="particle" style="left:200px;bottom:400px;width:5px;height:5px;"></div>
+    <div class="particle" style="left:680px;bottom:350px;width:3px;height:3px;"></div>
+    <div class="particle" style="left:450px;bottom:500px;"></div>
+    <div class="pulse-ring" style="width:200px;height:200px;left:440px;top:600px;"></div>
+    <div class="pulse-ring" style="width:300px;height:300px;left:390px;top:550px;"></div>
+    <!-- content -->
+    <div class="content-inner">
+      <div class="date-tag">2026 · 06 · 10</div>
+      <div class="title-main"><span class="highlight">AI 全面接管</span><br>打工人</div>
+      <div class="subtitle">GitHub 今日杀入的项目<br>全是 AI 替人干活的</div>
+    </div>
+    <div class="star-flow">
+      <div class="star-item"><div class="star-num">+3191</div><div class="star-label">last30days</div></div>
+      <div class="star-item"><div class="star-num">+1801</div><div class="star-label">turbovec</div></div>
+      <div class="star-item"><div class="star-num">+1110</div><div class="star-label">career-ops</div></div>
+      <div class="star-item"><div class="star-num">+443</div><div class="star-label">agent-skills</div></div>
+    </div>
+  </div>
+
+  <!-- Scene 2: Research -->
+  <div id="scene-2" style="position:absolute;inset:0;" data-duration="16.608">
+    <div class="bg-grad"></div>
+    <div class="diagonal"></div>
+    <!-- fx -->
+    <div class="conn-line" style="left:540px;top:200px;height:600px;"></div>
+    <div class="conn-line" style="left:200px;top:400px;height:400px;"></div>
+    <div class="conn-line" style="left:880px;top:400px;height:400px;"></div>
+    <div class="node-dot" style="left:535px;top:200px;background:#4DA8DA;"></div>
+    <div class="node-dot" style="left:195px;top:400px;background:#FF8C32;"></div>
+    <div class="node-dot" style="left:875px;top:400px;background:#4DA8DA;"></div>
+    <div class="node-dot" style="left:535px;top:800px;background:#FF8C32;"></div>
+    <!-- content -->
+    <div class="content-inner">
+      <div class="scene-title">调研 + 向量 <span class="accent">搜索</span></div>
+      <div class="divider"></div>
+      <div class="project-card" id="card-1">
+        <div class="proj-header">
+          <div class="proj-name">last30days-skill</div>
+          <div class="proj-stars">37.7K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">一个技能文件跨 7 个平台做深度调研<br>自动合成摘要，今天 +3191 星</div>
+        <div class="proj-tag">AI Agent 跨平台调研</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="project-card" id="card-2">
+        <div class="proj-header">
+          <div class="proj-name">turbovec</div>
+          <div class="proj-stars">10.3K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">Rust 重写向量搜索核心，Python 只做接口<br>比纯 Python 快一个数量级，今天 +1801 星</div>
+        <div class="proj-tag">Rust + Python 向量索引</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: Career -->
+  <div id="scene-3" style="position:absolute;inset:0;" data-duration="12.72">
+    <div class="bg-grad"></div>
+    <div class="dots"></div>
+    <!-- fx -->
+    <div class="light-band" style="left:0;top:400px;width:100%;"></div>
+    <div class="light-band" style="left:0;top:900px;width:100%;"></div>
+    <div class="light-band" style="left:0;top:1400px;width:100%;"></div>
+    <!-- content -->
+    <div class="content-inner">
+      <div class="scene-title">求职 + 产品 <span class="accent-warm">管理</span></div>
+      <div class="divider"></div>
+      <div class="project-card" id="card-career">
+        <div class="proj-header">
+          <div class="proj-name">career-ops</div>
+          <div class="proj-stars">51.8K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">从简历生成到面试准备全链路自动化的求职工具</div>
+        <div class="flow-steps">
+          <div class="flow-step">简历生成</div><div class="flow-arrow">→</div>
+          <div class="flow-step">岗位匹配</div><div class="flow-arrow">→</div>
+          <div class="flow-step">面试准备</div>
+        </div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="project-card" id="card-pm">
+        <div class="proj-header">
+          <div class="proj-name">pm-skills</div>
+          <div class="proj-stars">13.5K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">产品经理的 AI 技能集，竞品分析需求拆解优先级排序<br>不用写一行代码，今天 +806 星</div>
+        <div class="flow-steps">
+          <div class="flow-step">竞品分析</div><div class="flow-arrow">→</div>
+          <div class="flow-step">需求拆解</div><div class="flow-arrow">→</div>
+          <div class="flow-step">优先级排序</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Devtools + CTA -->
+  <div id="scene-4" style="position:absolute;inset:0;" data-duration="18.936">
+    <div class="bg-grad"></div>
+    <!-- geo bg -->
+    <div class="geo-shape" style="width:120px;height:120px;top:200px;left:100px;transform:rotate(15deg);"></div>
+    <div class="geo-shape" style="width:80px;height:80px;top:600px;right:150px;transform:rotate(30deg);"></div>
+    <div class="geo-shape" style="width:160px;height:160px;top:1200px;left:50px;transform:rotate(-10deg);"></div>
+    <div class="geo-shape" style="width:100px;height:100px;top:1600px;right:80px;transform:rotate(45deg);"></div>
+    <!-- fx -->
+    <div class="prism" style="left:200px;top:300px;transform:rotate(20deg);"></div>
+    <div class="prism" style="right:300px;top:800px;transform:rotate(-15deg);border-bottom-color:rgba(255,140,50,0.08);"></div>
+    <div class="prism" style="left:400px;top:1500px;transform:rotate(10deg);"></div>
+    <div class="disperse" style="left:150px;top:500px;background:#4DA8DA;"></div>
+    <div class="disperse" style="left:350px;top:350px;background:#FF8C32;"></div>
+    <div class="disperse" style="right:200px;top:600px;background:#FFD54F;"></div>
+    <div class="disperse" style="right:400px;top:450px;background:#4DA8DA;"></div>
+    <div class="disperse" style="left:500px;top:700px;background:#FF8C32;"></div>
+    <!-- content -->
+    <div class="content-inner">
+      <div class="scene-title">重构 + Agent <span class="accent-mix">技能</span></div>
+      <div class="divider"></div>
+      <div class="project-card" id="card-tolaria">
+        <div class="proj-header">
+          <div class="proj-name">tolaria</div>
+          <div class="proj-stars">14.4K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">AI 代码重构平台，技术债一键操作<br>2789 次提交，重度开发验证</div>
+        <div class="proj-badge">2789 commits · 真实重度开发</div>
+      </div>
+      <div class="project-card" id="card-agent">
+        <div class="proj-header">
+          <div class="proj-name">agent-skills</div>
+          <div class="proj-stars">49.9K<span class="unit">★</span></div>
+        </div>
+        <div class="proj-desc">Chrome 团队核心成员 Addy Osmani 整理<br>AI 编码生产级技能集</div>
+        <div class="proj-badge">by Addy Osmani · Google Chrome</div>
+      </div>
+      <div class="cta-block">
+        <div class="cta-title">AI 正在接管整个工作流</div>
+        <div class="cta-sub">不只是写代码<br>调研·求职·重构·产品管理</div>
+        <div class="cta-channel">关注「GitHub星探」</div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgm" src="bgm.wav" data-volume="0.13" data-start="0" data-duration="57.432" loop="false"></audio>
+  <audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+</div>
+
+<script>
+const DURATIONS = [9.168, 16.608, 12.72, 18.936];
+const TOTAL = 57.432;
+const OFFSETS = [0, 9.168, 25.776, 38.496];
+
+const scenes = [
+  document.getElementById('scene-1'),
+  document.getElementById('scene-2'),
+  document.getElementById('scene-3'),
+  document.getElementById('scene-4')
+];
+
+// Scene visibility: all scenes start hidden via GSAP, master timeline controls order
+const master = gsap.timeline({ paused: true });
+
+// Scene visibility control via GSAP (not CSS)
+scenes.forEach(s => { gsap.set(s, { autoAlpha: 0 }); });
+master.set(scenes[0], { autoAlpha: 1 }, 0);
+
+// === Scene 1 animations (0 - 9.168) ===
+const s1 = gsap.timeline();
+s1.from('#scene-1 .date-tag', { y: -60, duration: 0.6, ease: 'power2.out' })
+  .from('#scene-1 .title-main', { scale: 0.5, duration: 0.8, ease: 'back.out(1.7)' }, 0.2)
+  .from('#scene-1 .subtitle', { y: 40, duration: 0.6, ease: 'power2.out' }, 0.8)
+  .from('#scene-1 .star-flow .star-item', { y: 60, stagger: 0.15, duration: 0.5, ease: 'power2.out' }, 1.2)
+  .from('#scene-1 .particle', { y: 400, stagger: 0.08, duration: 2.5, ease: 'none', repeat: 2 }, 0)
+  .from('#scene-1 .pulse-ring', { scale: 0.3, stagger: 0.3, duration: 2, ease: 'power1.out', repeat: 2 }, 0.5);
+master.add(s1, 0);
+
+// Scene 1 -> 2 transition
+master.set(scenes[0], { autoAlpha: 0 }, OFFSETS[1]);
+master.set(scenes[1], { autoAlpha: 1 }, OFFSETS[1]);
+
+// === Scene 2 animations (9.168 - 25.776) ===
+const s2 = gsap.timeline();
+s2.set('#scene-2 .vs-block', { scale: 0 })
+  .set('#scene-2 #card-2', { x: 1100 })
+  .set('#scene-2 #card-2 .proj-stars', { scale: 0 })
+  .set('#scene-2 #card-2 .proj-desc', { y: 20 })
+  .set('#scene-2 #card-2 .proj-tag', { scale: 0.8 })
+  .from('#scene-2 .scene-title', { x: -200, duration: 0.7, ease: 'power3.out' })
+  .from('#scene-2 .divider', { scaleX: 0, duration: 0.5 }, 0.3)
+  .from('#scene-2 #card-1', { x: -1100, duration: 0.7, ease: 'power3.out' }, 0.6)
+  .from('#scene-2 #card-1 .proj-stars', { scale: 0, duration: 0.5, ease: 'back.out(2)' }, 1.0)
+  .from('#scene-2 #card-1 .proj-desc', { y: 20, duration: 0.4 }, 1.2)
+  .from('#scene-2 #card-1 .proj-tag', { scale: 0.8, duration: 0.3 }, 1.4)
+  .to('#scene-2 .vs-block', { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 5.0)
+  .to('#scene-2 #card-2', { x: 0, duration: 0.7, ease: 'power3.out' }, 5.5)
+  .to('#scene-2 #card-2 .proj-stars', { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 5.9)
+  .to('#scene-2 #card-2 .proj-desc', { y: 0, duration: 0.4 }, 6.1)
+  .to('#scene-2 #card-2 .proj-tag', { scale: 1, duration: 0.3 }, 6.3)
+  .from('#scene-2 .conn-line', { scaleY: 0, transformOrigin: 'top center', stagger: 0.2, duration: 1.0 }, 1.0)
+  .from('#scene-2 .node-dot', { scale: 0, stagger: 0.15, duration: 0.5, ease: 'back.out(2)' }, 1.5);
+master.add(s2, OFFSETS[1]);
+
+// Scene 2 -> 3 transition
+master.set(scenes[1], { autoAlpha: 0 }, OFFSETS[2]);
+master.set(scenes[2], { autoAlpha: 1 }, OFFSETS[2]);
+
+// === Scene 3 animations (25.776 - 38.496) ===
+const s3 = gsap.timeline();
+s3.set('#scene-3 .vs-block', { scale: 0 })
+  .set('#scene-3 #card-pm', { x: 1100 })
+  .set('#scene-3 #card-pm .proj-stars', { scale: 0 })
+  .set('#scene-3 #card-pm .flow-step', { y: 30 })
+  .from('#scene-3 .scene-title', { x: -200, duration: 0.7, ease: 'power3.out' })
+  .from('#scene-3 .divider', { scaleX: 0, duration: 0.5 }, 0.3)
+  .from('#scene-3 #card-career', { x: -1100, duration: 0.7, ease: 'power3.out' }, 0.5)
+  .from('#scene-3 #card-career .proj-stars', { scale: 0, duration: 0.5, ease: 'back.out(2)' }, 0.9)
+  .from('#scene-3 #card-career .flow-step', { y: 30, stagger: 0.1, duration: 0.3 }, 1.2)
+  .to('#scene-3 .vs-block', { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 4.5)
+  .to('#scene-3 #card-pm', { x: 0, duration: 0.7, ease: 'power3.out' }, 5.0)
+  .to('#scene-3 #card-pm .proj-stars', { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 5.4)
+  .to('#scene-3 #card-pm .flow-step', { y: 0, stagger: 0.1, duration: 0.3 }, 5.7)
+  .from('#scene-3 .light-band', { scaleX: 0, stagger: 0.3, duration: 1.2 }, 0.5);
+master.add(s3, OFFSETS[2]);
+
+// Scene 3 -> 4 transition
+master.set(scenes[2], { autoAlpha: 0 }, OFFSETS[3]);
+master.set(scenes[3], { autoAlpha: 1 }, OFFSETS[3]);
+
+// === Scene 4 animations (38.496 - 57.432) ===
+const s4 = gsap.timeline();
+s4.set('#scene-4 #card-agent', { y: 400, opacity: 0 })
+  .set('#scene-4 #card-agent .proj-stars', { scale: 0 })
+  .set('#scene-4 #card-agent .proj-badge', { scale: 0.8, opacity: 0 })
+  .set('#scene-4 .cta-block', { y: 300, opacity: 0 })
+  .set('#scene-4 .cta-title', { scale: 0.6, opacity: 0 })
+  .set('#scene-4 .cta-channel', { scale: 0, opacity: 0 })
+  .from('#scene-4 .scene-title', { x: -200, duration: 0.7, ease: 'power3.out' })
+  .from('#scene-4 .divider', { scaleX: 0, duration: 0.5 }, 0.3)
+  .from('#scene-4 #card-tolaria', { y: -1100, duration: 0.7, ease: 'power3.out' }, 0.5)
+  .from('#scene-4 #card-tolaria .proj-stars', { scale: 0, duration: 0.5, ease: 'back.out(2)' }, 0.9)
+  .from('#scene-4 #card-tolaria .proj-badge', { scale: 0.8, duration: 0.3 }, 1.3)
+  .to('#scene-4 #card-agent', { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 6.0)
+  .to('#scene-4 #card-agent .proj-stars', { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 6.4)
+  .to('#scene-4 #card-agent .proj-badge', { scale: 1, opacity: 1, duration: 0.3 }, 6.8)
+  .to('#scene-4 .cta-block', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 10.5)
+  .to('#scene-4 .cta-title', { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' }, 11.0)
+  .to('#scene-4 .cta-channel', { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(3)' }, 12.0)
+  .from('#scene-4 .prism', { scale: 0, stagger: 0.3, duration: 1.2 }, 0.5)
+  .from('#scene-4 .disperse', { scale: 0, stagger: 0.1, duration: 0.8, ease: 'back.out(2)' }, 1.0);
+master.add(s4, OFFSETS[3]);
+
+// Register timeline for HyperFrames
+window.__timelines = window.__timelines || {};
+window.__timelines['main'] = master;
+window.__hf = {
+  duration: 57.432,
+  getDuration: () => master.duration(),
+  seek: (t) => { master.time(t); },
+  play: () => { master.play(); },
+  pause: () => { master.pause(); }
+};
+</script>
+</body>
+</html>

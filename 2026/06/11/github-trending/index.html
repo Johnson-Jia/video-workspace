@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;overflow:hidden;font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif}
+#composition{position:relative;width:1080px;height:1920px;overflow:hidden;background:#0A0E1A}
+.scene{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0}
+.scene .bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
+.scene .fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.scene .content{position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;padding:180px 90px 220px 90px}
+.safe-area{display:flex;flex-direction:column;justify-content:center;width:100%;height:100%}
+</style>
+</head>
+<body>
+<div id="composition" data-composition-id="main" data-width="1080" data-height="1920" data-duration="52.24" data-start="0">
+<audio id="narration" data-track-index="1" data-volume="1" data-start="0" src="narration.mp3" preload="auto"></audio>
+<audio id="bgm" data-track-index="2" data-volume="0.16" data-start="0" src="bgm.wav" preload="auto"></audio>
+
+<!-- ==================== Scene 0: Hook (0 – 4.99s) ==================== -->
+<div class="scene" id="scene-0" data-duration="4.99">
+  <div class="bg">
+    <div style="width:100%;height:100%;background:radial-gradient(ellipse 60% 50% at 50% 40%,#1A1040 0%,#0A0E1A 100%)"></div>
+  </div>
+  <div class="fx">
+    <div id="fx0-orb1" style="position:absolute;top:200px;left:200px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#FF8C3240,#FFD70010,transparent 70%);filter:blur(60px)"></div>
+    <div id="fx0-orb2" style="position:absolute;top:900px;right:150px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,#4DA8DA30,transparent 70%);filter:blur(80px)"></div>
+  </div>
+  <div class="content">
+    <div class="safe-area" style="text-align:center;gap:40px">
+      <div id="s0-date" style="font-size:42px;color:#FF8C32;font-weight:700;letter-spacing:4px">6月11日</div>
+      <div id="s0-title" style="font-size:78px;color:#F1F5F9;font-weight:900;line-height:1.2;margin-top:20px">GitHub 杀入几个猛项目</div>
+      <div id="s0-sub" style="font-size:52px;color:#FFD700;font-weight:700;margin-top:30px">苹果居然自己做了个容器工具</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Scene 1: apple/container + MoneyPrinterTurbo (4.99 – 19.65s) ==================== -->
+<div class="scene" id="scene-1" data-duration="14.66">
+  <div class="bg">
+    <div style="width:100%;height:100%;background:linear-gradient(160deg,#111827 0%,#0D1B2A 50%,#111827 100%)"></div>
+  </div>
+  <div class="fx">
+    <div id="fx1-glow1" style="position:absolute;top:100px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,#4DA8DA18,transparent 70%);filter:blur(100px)"></div>
+    <div id="fx1-glow2" style="position:absolute;bottom:300px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#FF8C3215,transparent 70%);filter:blur(80px)"></div>
+    <div id="fx1-line1" style="position:absolute;top:0;left:540px;width:2px;height:100%;background:linear-gradient(to bottom,transparent,#4DA8DA40,transparent)"></div>
+  </div>
+  <div class="content">
+    <div class="safe-area" style="gap:60px">
+      <div id="s1-card1" style="background:#0D1B2A80;border:1px solid #4DA8DA30;border-radius:20px;padding:50px 40px">
+        <div style="font-size:36px;color:#4DA8DA;font-weight:700;margin-bottom:16px">apple/container</div>
+        <div style="font-size:44px;color:#F1F5F9;font-weight:800;line-height:1.3">Apple Silicon 轻量容器<br>跑Linux可能不用装Docker</div>
+        <div style="font-size:60px;color:#FF8C32;font-weight:900;margin-top:24px">+1611 ★</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Swift · 29.8K⭐</div>
+      </div>
+      <div id="s1-card2" style="background:#1B283880;border:1px solid #FF8C3220;border-radius:20px;padding:50px 40px">
+        <div style="font-size:36px;color:#FF8C32;font-weight:700;margin-bottom:16px">MoneyPrinterTurbo</div>
+        <div style="font-size:44px;color:#F1F5F9;font-weight:800;line-height:1.3">AI一键生成带字幕配音的短视频<br>普通人也能批量做视频</div>
+        <div style="font-size:60px;color:#FFD700;font-weight:900;margin-top:24px">85K ★</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Python · 今日+1389</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Scene 2: superpowers + supervision (19.65 – 35.61s) ==================== -->
+<div class="scene" id="scene-2" data-duration="15.96">
+  <div class="bg">
+    <div style="width:100%;height:100%;background:linear-gradient(200deg,#1A1040 0%,#0F172A 60%,#1A1040 100%)"></div>
+  </div>
+  <div class="fx">
+    <div id="fx2-burst" style="position:absolute;top:400px;left:50%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,#FFD70012,transparent 60%);filter:blur(120px);transform:translateX(-50%)"></div>
+    <div id="fx2-dot1" style="position:absolute;top:300px;left:100px;width:8px;height:8px;border-radius:50%;background:#4DA8DA"></div>
+    <div id="fx2-dot2" style="position:absolute;top:600px;right:200px;width:6px;height:6px;border-radius:50%;background:#FF8C32"></div>
+    <div id="fx2-dot3" style="position:absolute;top:1000px;left:300px;width:10px;height:10px;border-radius:50%;background:#FFD700"></div>
+    <div id="fx2-rect" style="position:absolute;top:500px;left:400px;width:280px;height:180px;border:2px solid #4DA8DA40;border-radius:8px"></div>
+  </div>
+  <div class="content">
+    <div class="safe-area" style="gap:60px">
+      <div id="s2-card1" style="background:#1A104080;border:1px solid #FFD70030;border-radius:20px;padding:50px 40px">
+        <div style="font-size:36px;color:#FFD700;font-weight:700;margin-bottom:16px">superpowers</div>
+        <div style="font-size:44px;color:#F1F5F9;font-weight:800;line-height:1.3">用Shell脚本定义AI Agent方法论<br>最简单的语言写最复杂的AI编排</div>
+        <div style="font-size:72px;color:#FFD700;font-weight:900;margin-top:24px">223.6K ★</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Shell · 今日+1104</div>
+      </div>
+      <div id="s2-card2" style="background:#0F172A80;border:1px solid #4DA8DA25;border-radius:20px;padding:50px 40px">
+        <div style="font-size:36px;color:#4DA8DA;font-weight:700;margin-bottom:16px">roboflow/supervision</div>
+        <div style="font-size:44px;color:#F1F5F9;font-weight:800;line-height:1.3">计算机视觉工具封装成几行代码<br>目标检测、跟踪、分割直接调用</div>
+        <div style="font-size:56px;color:#4DA8DA;font-weight:900;margin-top:24px">43.6K ★</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Python · 今日+695</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Scene 3: maigret + last30days (35.61 – 49.70s) ==================== -->
+<div class="scene" id="scene-3" data-duration="14.09">
+  <div class="bg">
+    <div style="width:100%;height:100%;background:linear-gradient(135deg,#0D1B2A 0%,#1B2838 40%,#0D1B2A 100%)"></div>
+  </div>
+  <div class="fx">
+    <div id="fx3-node1" style="position:absolute;top:350px;left:150px;width:12px;height:12px;border-radius:50%;background:#FF8C32;box-shadow:0 0 20px #FF8C3260"></div>
+    <div id="fx3-node2" style="position:absolute;top:500px;right:250px;width:10px;height:10px;border-radius:50%;background:#4DA8DA;box-shadow:0 0 16px #4DA8DA50"></div>
+    <div id="fx3-node3" style="position:absolute;top:700px;left:400px;width:8px;height:8px;border-radius:50%;background:#FFD700;box-shadow:0 0 14px #FFD70040"></div>
+    <div id="fx3-line" style="position:absolute;top:0;right:200px;width:1px;height:100%;background:linear-gradient(to bottom,transparent,#FF8C3230,transparent)"></div>
+    <div id="fx3-glow" style="position:absolute;bottom:200px;left:50%;width:500px;height:300px;border-radius:50%;background:radial-gradient(circle,#FF8C3210,transparent 70%);filter:blur(100px);transform:translateX(-50%)"></div>
+  </div>
+  <div class="content">
+    <div class="safe-area" style="gap:60px">
+      <div id="s3-card1" style="background:#0D1B2A80;border:1px solid #FF8C3225;border-radius:20px;padding:50px 40px">
+        <div style="font-size:36px;color:#FF8C32;font-weight:700;margin-bottom:16px">maigret</div>
+        <div style="font-size:44px;color:#F1F5F9;font-weight:800;line-height:1.3">输入用户名从3000+网站收集档案<br>开源版情报收集工具</div>
+        <div style="font-size:50px;color:#FF8C32;font-weight:900;margin-top:24px">3000+ 站点</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Python · 32K⭐</div>
+      </div>
+      <div id="s3-card2" style="background:#1B283880;border:1px solid #4DA8DA20;border-radius:20px;padding:40px">
+        <div style="font-size:36px;color:#4DA8DA;font-weight:700;margin-bottom:12px">last30days-skill</div>
+        <div style="font-size:40px;color:#F1F5F9;font-weight:700;line-height:1.3">AI跨平台研究 连续霸榜</div>
+        <div style="font-size:50px;color:#4DA8DA;font-weight:900;margin-top:16px">+2535 ★</div>
+        <div style="font-size:30px;color:#94A3B8;margin-top:8px">Python · 39.1K⭐</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Scene 4: CTA (49.70 – 52.24s) ==================== -->
+<div class="scene" id="scene-4" data-duration="2.54">
+  <div class="bg">
+    <div style="width:100%;height:100%;background:radial-gradient(ellipse 70% 60% at 50% 50%,#111827 0%,#0A0E1A 100%)"></div>
+  </div>
+  <div class="fx">
+    <div id="fx4-ring" style="position:absolute;top:50%;left:50%;width:400px;height:400px;border-radius:50%;border:2px solid #FF8C3230;transform:translate(-50%,-50%)"></div>
+  </div>
+  <div class="content">
+    <div class="safe-area" style="text-align:center;gap:30px">
+      <div id="s4-cta" style="font-size:68px;color:#FF8C32;font-weight:900;line-height:1.3">关注我<br>每天更新GitHub热门</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+// Timeline registry — standalone, HyperFrames will discover this
+window.__timelines = window.__timelines || {};
+// HyperFrames player API (single-line for gate regex compatibility)
+window.__hf = { timelines: window.__timelines, duration: 52.24, seek: function(t) { for (var k in window.__timelines) { window.__timelines[k].time(t); } }, getDuration: function() { return 52.24; } };
+
+(function() {
+  var main = gsap.timeline({ paused: true });
+
+  // Scene 0: Hook (0 – 4.99s)
+  var s0 = gsap.timeline();
+  s0.set("#scene-0", { opacity: 1 })
+    .from("#s0-date", { opacity: 0, y: -40, duration: 0.4 }, 0.2)
+    .from("#s0-title", { opacity: 0, y: 30, duration: 0.5 }, 0.5)
+    .from("#s0-sub", { opacity: 0, scale: 0.8, duration: 0.4 }, 1.0)
+    .from("#fx0-orb1", { scale: 0, duration: 0.6 }, 0.1)
+    .from("#fx0-orb2", { scale: 0, duration: 0.6 }, 0.3)
+    .to("#scene-0", { opacity: 0, duration: 0.4 }, 4.59);
+  main.add(s0, 0);
+
+  // Scene 1: apple/container + MoneyPrinterTurbo (4.99 – 19.65s)
+  var s1 = gsap.timeline();
+  s1.set("#scene-1", { opacity: 1 })
+    .from("#s1-card1", { opacity: 0, x: -60, duration: 0.5 }, 0.3)
+    .from("#s1-card2", { opacity: 0, x: 60, duration: 0.5 }, 0.6)
+    .from("#fx1-line1", { scaleY: 0, duration: 0.4 }, 0.1)
+    .from("#fx1-glow1", { scale: 0, duration: 0.5 }, 0.2)
+    .from("#fx1-glow2", { scale: 0, duration: 0.5 }, 0.4)
+    .to("#scene-1", { opacity: 0, duration: 0.4 }, 14.26);
+  main.add(s1, 4.99);
+
+  // Scene 2: superpowers + supervision (19.65 – 35.61s)
+  var s2 = gsap.timeline();
+  s2.set("#scene-2", { opacity: 1 })
+    .from("#s2-card1", { opacity: 0, y: 40, duration: 0.5 }, 0.3)
+    .from("#s2-card2", { opacity: 0, y: 40, duration: 0.5 }, 0.7)
+    .from("#fx2-burst", { scale: 0, duration: 0.6 }, 0.1)
+    .from("#fx2-rect", { scale: 0.5, opacity: 0, duration: 0.4 }, 0.5)
+    .from("#fx2-dot1", { scale: 0, duration: 0.3 }, 0.2)
+    .from("#fx2-dot2", { scale: 0, duration: 0.3 }, 0.4)
+    .from("#fx2-dot3", { scale: 0, duration: 0.3 }, 0.6)
+    .to("#scene-2", { opacity: 0, duration: 0.4 }, 15.56);
+  main.add(s2, 19.65);
+
+  // Scene 3: maigret + last30days (35.61 – 49.70s)
+  var s3 = gsap.timeline();
+  s3.set("#scene-3", { opacity: 1 })
+    .from("#s3-card1", { opacity: 0, x: -50, duration: 0.5 }, 0.3)
+    .from("#s3-card2", { opacity: 0, x: 50, duration: 0.4 }, 1.5)
+    .from("#fx3-node1", { scale: 0, duration: 0.3 }, 0.1)
+    .from("#fx3-node2", { scale: 0, duration: 0.3 }, 0.3)
+    .from("#fx3-node3", { scale: 0, duration: 0.3 }, 0.5)
+    .from("#fx3-line", { scaleY: 0, duration: 0.4 }, 0.2)
+    .from("#fx3-glow", { scale: 0, duration: 0.5 }, 0.4)
+    .to("#scene-3", { opacity: 0, duration: 0.4 }, 13.69);
+  main.add(s3, 35.61);
+
+  // Scene 4: CTA (49.70 – 52.24s)
+  var s4 = gsap.timeline();
+  s4.set("#scene-4", { opacity: 1 })
+    .from("#s4-cta", { opacity: 0, scale: 0.7, duration: 0.4 }, 0.1)
+    .from("#fx4-ring", { scale: 0, duration: 0.5 }, 0.0)
+    .to("#scene-4", { opacity: 0, duration: 0.3 }, 2.24);
+  main.add(s4, 49.70);
+
+  window.__timelines["main"] = main;
+
+  // HyperFrames player API — reference the shared registry
+  window.__hf = window.__hf || {};
+  window.__hf.timelines = window.__timelines;
+  window.__hf.duration = 52.24;
+  window.__hf.seek = function(t) { for (var k in window.__timelines) { window.__timelines[k].time(t); } };
+  window.__hf.getDuration = function() { return 52.24; };
+})();
+</script>
+</body>
+</html>

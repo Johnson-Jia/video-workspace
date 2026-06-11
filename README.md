@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**26 天 · 62 条视频 · 5 个系列 · 全自动**
+**29 天 · 67 条视频 · 5 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -63,11 +63,11 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月11日 | [GitHub 每日热门](2026/06/11/github-trending/) |
+| 6月10日 | [GitHub 每日热门](2026/06/10/github-trending/) |
+| 6月9日 | [GitHub 每日热门](2026/06/09/github-trending/) |
 | 6月8日 | [GitHub 每日热门](2026/06/08/github-trending/) |
 | 6月7日 | [GitHub 每日热门](2026/06/07/github-trending/) |
-| 6月6日 | [GitHub 每日热门](2026/06/06/github-trending/) |
-| 6月5日 | [GitHub 每日热门](2026/06/05/github-trending/) |
-| 6月3日 | [GitHub 每日热门](2026/06/03/github-trending/) |
 
 ### 周度汇总 · Weekly
 
@@ -81,14 +81,13 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月9日 | [Agent Reach](2026/06/09/agent-reach/) |
 | 6月7日 | [PaddleOCR 深度解析](2026/06/07/paddleocr-deep-dive/) |
 | 6月6日 | [NOMAD：断网生存知识服务器](2026/06/06/project-nomad/) |
-| 6月6日 | [频道介绍：GitHub 星探](2026/06/06/github-star-intro/) |
 | 6月5日 | [OpenTalking 数字人全链路框架](2026/06/05/opentalking-deep/) |
 | 6月3日 | [RuView 虚假开源项目揭露](2026/06/03/ruview-expose/) |
-| 6月3日 | [二次元开源生态 6 赛道盘点](2026/06/03/anime-opensource-biz/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 62 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 67 条视频。
 <!-- END RECENT -->
 
 ---
@@ -156,18 +155,21 @@ workspace/
 ## BGM 素材库
 
 <!-- BEGIN BGM -->
-`bgm/` 目录按风格分类存储配乐，每种风格 10 首变体。来源为 Pixabay 无版权音乐（免版税，可商用）。当前共 **15** 种风格：
+`bgm/` 目录按风格分类存储配乐，每种风格 10 首变体。来源为 Pixabay 无版权音乐（免版税，可商用）。当前共 **18** 种风格：
 
 | 风格 | 适用场景 |
 |------|---------|
 | Bold Energetic | 科技动态、项目盘点 |
 | Chill Lofi | 轻松氛围、日常分享 |
+| Cinematic Grand | 电影级质感、宏大叙事 |
 | Clean Corporate | 专业解读、行业报告 |
 | Dark Premium | 深度分析、产品评测 |
 | Epic Trailer | 震撼开场、重磅发布 |
+| Epic Uplifting | 高潮推进、成就展示 |
 | Inspiring Motivational | 激励叙事、成长故事 |
 | Jewel Rich | 高端质感、精品推荐 |
 | Monochrome | 极简风格、数据展示 |
+| Motivational Energy | 积极向上、行动力驱动 |
 | Nature Earth | 自然主题、环保话题 |
 | Neon Electric | 前沿科技、赛博朋克 |
 | Pastel Soft | 生活化、治愈话题 |

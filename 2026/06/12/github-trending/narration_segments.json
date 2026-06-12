@@ -1,0 +1,114 @@
+{
+  "voice": "zh-CN-YunjianNeural",
+  "rate": "+25%",
+  "voice_override": true,
+  "orientation": "portrait",
+  "segments": [
+    {
+      "scene": "s1-hook",
+      "scene_id": 1,
+      "scene_type": "hook",
+      "visual_type": "hook-shock",
+      "narration_segment": "苹果居然自己做了个容器工具",
+      "emotion": "shock",
+      "estimated_duration": 3.5,
+      "contrarian_angle": "容器一直是 Docker 的活，苹果亲自下场做容器工具",
+      "notes": "纯钩子，反直觉/冲突模式。前5秒零废话，不含项目名。钩子句11字，口语化"
+    },
+    {
+      "scene": "s2-body",
+      "scene_id": 2,
+      "scene_type": "body",
+      "visual_type": "project-card",
+      "narration_segment": "apple/container，苹果用 Swift 写的轻量容器工具，专为自家芯片优化。三万两千星，开发者以后可能不用再装 Docker 桌面版了。",
+      "emotion": "intrigue",
+      "estimated_duration": 7.0,
+      "project": "apple/container",
+      "contrarian_angle": "苹果跨界做容器（Docker 的活），Mac 开发者可能不再依赖 Docker Desktop",
+      "data_points": ["32.3K Star", "+2419", "Swift"],
+      "notes": "从反直觉自然过渡到项目介绍"
+    },
+    {
+      "scene": "s3-body",
+      "scene_id": 3,
+      "scene_type": "body",
+      "visual_type": "project-card",
+      "narration_segment": "今天涨星最猛的是 agent-skills，单日三千二百星。AI 编程助手现在不靠变聪明，靠装技能，像给手机装 App 一样装上专业能力。同一个赛道，superpowers 已经二十二万星，技能框架成了今年最大的风口。",
+      "emotion": "awe",
+      "estimated_duration": 9.0,
+      "projects": ["addyosmani/agent-skills", "obra/superpowers"],
+      "contrarian_angle": "AI 不是在变聪明而是在装技能；技能框架涨到22万星=今年最大风口",
+      "data_points": ["54.6K Star", "+3275", "224.8K Star"],
+      "visual_phases": [
+        {
+          "phase_id": 1,
+          "narration_part": "今天涨星最猛的是 agent-skills，单日三千二百星。AI 编程助手现在不靠变聪明，靠装技能，像给手机装 App 一样装上专业能力。",
+          "char_count": 47,
+          "time_start": 0,
+          "time_end": 5.0
+        },
+        {
+          "phase_id": 2,
+          "narration_part": "同一个赛道，superpowers 已经二十二万星，技能框架成了今年最大的风口。",
+          "char_count": 33,
+          "time_start": 5.0,
+          "time_end": 9.0
+        }
+      ],
+      "notes": "双项目快速切换，agent-skills 聚焦今日最高涨星，superpowers 聚焦总量巨头"
+    },
+    {
+      "scene": "s4-body",
+      "scene_id": 4,
+      "scene_type": "body",
+      "visual_type": "project-card",
+      "narration_segment": "连产品经理的工作流都被技能化了。pm-skills 把 PM 从需求发现到产品上线的全流程拆成一百多个可调用的 Agent 技能，单日涨了快两千星。",
+      "emotion": "recognition",
+      "estimated_duration": 6.5,
+      "project": "phuryn/pm-skills",
+      "contrarian_angle": "PM 工作流被技能化，产品经理的能力也被拆成可调用技能",
+      "data_points": ["16.2K Star", "+1944", "100+ Agent 技能"],
+      "notes": "强调能力技能化的广度——不只是开发者，PM 也被覆盖"
+    },
+    {
+      "scene": "s5-body",
+      "scene_id": 5,
+      "scene_type": "body",
+      "visual_type": "project-card",
+      "narration_segment": "技能装得越多，安全问题越大。NVIDIA 官方出了 SkillSpector，专门给 AI 技能做安全扫描，检测恶意代码和漏洞。另一边 openmed 把医疗 AI 坚持放在本地跑，不碰云端，保护病人隐私数据。",
+      "emotion": "tension",
+      "estimated_duration": 8.5,
+      "projects": ["NVIDIA/SkillSpector", "maziyarpanahi/openmed"],
+      "contrarian_angle": "AI 技能需要杀毒软件（NVIDIA 官方）；医疗 AI 坚持本地化保护隐私",
+      "data_points": ["2.6K Star", "+308", "2.7K Star", "+427"],
+      "visual_phases": [
+        {
+          "phase_id": 1,
+          "narration_part": "技能装得越多，安全问题越大。NVIDIA 官方出了 SkillSpector，专门给 AI 技能做安全扫描，检测恶意代码和漏洞。",
+          "char_count": 46,
+          "time_start": 0,
+          "time_end": 5.0
+        },
+        {
+          "phase_id": 2,
+          "narration_part": "另一边 openmed 把医疗 AI 坚持放在本地跑，不碰云端，保护病人隐私数据。",
+          "char_count": 33,
+          "time_start": 5.0,
+          "time_end": 8.5
+        }
+      ],
+      "notes": "安全+隐私双主题，从技能安全过渡到医疗隐私"
+    },
+    {
+      "scene": "s6-cta",
+      "scene_id": 6,
+      "scene_type": "cta",
+      "visual_type": "cta",
+      "narration_segment": "今天这六个项目，技能生态和安全隐私各有看点。关注我，每天带你刷 GitHub。",
+      "emotion": "resolve",
+      "estimated_duration": 4.0,
+      "contrarian_angle": null,
+      "notes": "CTA 收束，温和引导，不提搜索、不提平台名"
+    }
+  ]
+}

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1080px;height:1920px;}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 90px 220px 90px;}
+/* phase-2+ 默认隐藏，由 GSAP 在正确时间点恢复（消灭 phase_visibility 门禁误报）*/
+.phase:not(.phase-1){opacity:0;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  /* 底色提亮：L≥12%（hsl 第三参数），保留分析师深色屏幕感但不黑屏 */
+  --bg-deep: #131b33;        /* hsl(226,46%,14%) 分析师深蓝底，L=14% */
+  --bg-card: #1a2440;        /* 卡片底，L≈18% */
+  --accent-warm: #f9a825;    /* 金/琥珀 — 价值、机会、金钱 */
+  --accent-cool: #00f5d4;    /* 霓虹青 — 数据、理性、科技 */
+  --accent-alert: #ff5a5f;   /* 警示红 — 失败、红线 */
+  --accent-violet: #9d6bff;  /* 紫 — 转折、洞察 */
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.72);
+  --text3: rgba(255,255,255,0.5);
+  --line: rgba(255,255,255,0.14);
+}
+
+/* ════════════════════════════════════════════
+ * bg 层 keyframes（组件库动画，全局共享）
+ * 底色由各场景 layer-bg 内 inline 渐变提供（L≥12%）
+ * ════════════════════════════════════════════ */
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:.5} 50%{opacity:.85} }
+@keyframes glassShimmer { 0%,100%{opacity:.18} 50%{opacity:.26} }
+@keyframes beamRotate { 0%{transform:translate(-50%,-50%) rotate(0)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes pulseGlow { 0%,100%{opacity:.35;transform:translate(-50%,-50%) scale(1)} 50%{opacity:.6;transform:translate(-50%,-50%) scale(1.12)} }
+@keyframes driftSlow { 0%{transform:translateX(0)} 100%{transform:translateX(-60px)} }
+@keyframes rippleExpand { 0%{transform:scale(.4);opacity:.5} 100%{transform:scale(2.4);opacity:0} }
+@keyframes hexPulse { 0%,100%{opacity:.4} 50%{opacity:.75} }
+@keyframes meshShift { 0%{background-position:0 0} 100%{background-position:120px 60px} }
+@keyframes emberRise { 0%{transform:translateY(0);opacity:0} 20%{opacity:.6} 100%{transform:translateY(-260px);opacity:0} }
+@keyframes coreSpin { 0%{transform:translate(-50%,-50%) rotate(0)} 100%{transform:translate(-50%,-50%) rotate(-360deg)} }
+@keyframes alertBlink { 0%,100%{opacity:.4} 50%{opacity:.85} }
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+
+/* ════════════════════════════════════════════
+ * 文字层级（字号全部 ≥ render-safety §3.1 竖屏标准）
+ * §1b 监控：全量扫描所有 class font-size ≥32px，内联同理
+ * 全局兜底：.layer-content color:var(--text) + font-size:48px
+ * ════════════════════════════════════════════ */
+.layer-content { color:var(--text); font-size:48px; }   /* 兜底：color 白色 + font-size 48px 最小底线 */
+.t-hero { font-size:128px; font-weight:900; line-height:1.05; letter-spacing:-2px; color:var(--text); }
+.t-xl { font-size:92px; font-weight:800; line-height:1.1; color:var(--text); letter-spacing:-1px; }
+.t-lg { font-size:66px; font-weight:700; line-height:1.15; color:var(--text); }
+.t-md { font-size:54px; font-weight:600; line-height:1.3; color:var(--text2); }   /* 正文 ≥38 */
+.t-sm { font-size:50px; font-weight:500; line-height:1.35; color:var(--text2); }  /* 描述 ≥38 */
+.t-em { color:var(--accent-warm); font-weight:800; font-size:inherit; }
+.t-em-c { color:var(--accent-cool); font-weight:800; font-size:inherit; }
+.t-em-r { color:var(--accent-alert); font-weight:800; font-size:inherit; }
+.t-em-v { color:var(--accent-violet); font-weight:800; font-size:inherit; }
+
+/* ════════════════════════════════════════════
+ * 数字 / 数据值（统一默认白色，杜绝裸用 .num-* 继承黑色）
+ * ════════════════════════════════════════════ */
+.num-mega { font-size:200px; font-weight:900; line-height:1; letter-spacing:-4px; color:var(--text); }
+.num-xl { font-size:140px; font-weight:900; line-height:1; letter-spacing:-3px; color:var(--text); }
+.num-lg { font-size:116px; font-weight:800; line-height:1; letter-spacing:-2px; color:var(--text); }
+.num-md { font-size:88px; font-weight:800; line-height:1; color:var(--text); }
+.dval { font-size:66px; font-weight:800; line-height:1; color:var(--text); }       /* 数据值 ≥38 */
+.dval-w { color:var(--accent-warm); }
+.dval-c { color:var(--accent-cool); }
+.dval-r { color:var(--accent-alert); }
+
+/* ════════════════════════════════════════════
+ * 标注 / 辅助信息（全部 ≥32）
+ * ════════════════════════════════════════════ */
+.cap { font-size:46px; font-weight:600; color:var(--text2); }                       /* 标注 ≥32 */
+.lbl { font-size:44px; font-weight:600; color:var(--text3); letter-spacing:1px; }  /* 标签 ≥32 */
+.dkey { font-size:44px; font-weight:600; color:var(--text3); }                      /* 数据键 ≥32 */
+.pill {
+  display:inline-block; font-size:42px; font-weight:700;                            /* 胶囊 ≥32 */
+  padding:8px 26px; border-radius:24px;
+  background:rgba(249,168,37,0.16); color:var(--accent-warm);
+  border:1px solid rgba(249,168,37,0.4);
+}
+.pill-c { background:rgba(0,245,212,0.14); color:var(--accent-cool); border-color:rgba(0,245,212,0.4); }
+.pill-r { background:rgba(255,90,95,0.16); color:var(--accent-alert); border-color:rgba(255,90,95,0.4); }
+.pill-v { background:rgba(157,107,255,0.16); color:var(--accent-violet); border-color:rgba(157,107,255,0.4); }
+
+/* ════════════════════════════════════════════
+ * 容器组件（content 层布局）
+ * ════════════════════════════════════════════ */
+.dcard {
+  background:rgba(26,36,64,0.72); border:1px solid var(--line);
+  border-radius:24px; padding:40px 44px;
+  backdrop-filter:blur(6px);
+  font-size:50px; color:var(--text); line-height:1.3;
+}
+.dcard-glow { box-shadow:0 0 60px rgba(0,245,212,0.12), inset 0 1px 0 rgba(255,255,255,0.08); }
+
+/* 对比双栏 */
+.vs-row { display:flex; gap:36px; width:100%; }
+.vs-col { flex:1; display:flex; flex-direction:column; gap:18px; }
+.vs-bar {
+  height:64px; border-radius:14px; display:flex; align-items:center; padding:0 28px;
+  font-size:40px; font-weight:800; color:#0a1020;
+}
+.vs-bar-cool { background:linear-gradient(90deg,var(--accent-cool),#3afff0); }
+.vs-bar-alert { background:linear-gradient(90deg,var(--accent-alert),#ff8a8e); }
+.vs-bar-warm { background:linear-gradient(90deg,var(--accent-warm),#ffd166); }
+.vs-bar-mute { background:linear-gradient(90deg,#5a6580,#8a93ad); }
+
+/* KPI 网格 */
+.kpi-row { display:flex; gap:28px; width:100%; }
+.kpi { flex:1; }
+.kpi-line { height:8px; border-radius:6px; background:rgba(255,255,255,0.1); margin-top:14px; overflow:hidden; }
+.kpi-line > i { display:block; height:100%; border-radius:6px; }
+
+/* 时间轴 */
+.tl-item { display:flex; gap:30px; align-items:flex-start; }
+.tl-dot {
+  flex:0 0 28px; width:28px; height:28px; border-radius:50%; margin-top:10px;
+  background:var(--accent-warm); box-shadow:0 0 24px rgba(249,168,37,0.6);
+}
+.tl-time { font-size:44px; font-weight:800; color:var(--accent-warm); }             /* 时间轴 ≥32 */
+
+/* 结论框 */
+.verdict {
+  border-left:8px solid var(--accent-warm); padding:24px 36px;
+  background:linear-gradient(90deg,rgba(249,168,37,0.14),transparent);
+  border-radius:0 20px 20px 0;
+  font-size:54px; line-height:1.35; color:var(--text); font-weight:600;
+}
+.verdict-c { border-color:var(--accent-cool); background:linear-gradient(90deg,rgba(0,245,212,0.14),transparent); }
+.verdict-r { border-color:var(--accent-alert); background:linear-gradient(90deg,rgba(255,90,95,0.14),transparent); }
+
+/* 通用排版辅助 */
+.stack { display:flex; flex-direction:column; }
+.gap-sm { gap:14px; } .gap-md { gap:26px; } .gap-lg { gap:44px; }
+.center { align-items:center; justify-content:center; text-align:center; }
+.muted { color:var(--text3); font-size:inherit; }
+.divider { height:2px; background:var(--line); border-radius:2px; }
+
+/* ════════════════════════════════════════════
+ * fx 层装饰动画 class（约定标记）
+ * LLM 在 layer-fx 子元素上用这些 class，
+ * s6_assemble_html.py 自动注入对应 GSAP 动画。
+ * 元素的颜色/位置/大小由内联 style 自由控制。
+ * ════════════════════════════════════════════ */
+.fx-pulse { position:absolute; pointer-events:none; }
+.fx-drift  { position:absolute; pointer-events:none; }
+.fx-spin   { position:absolute; pointer-events:none; }
+.fx-blink  { position:absolute; pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="341.07" data-width="1080" data-height="1920">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.22" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="3.22">
+<!-- 场景: hook | 时长: 3.2s -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,#22305a 0%,#161e3a 45%,#101630 100%)"></div>
+  <div style="position:absolute;top:42%;left:50%;width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.24),transparent 62%);filter:blur(50px);transform:translate(-50%,-50%);animation:pulseGlow 3.2s ease-in-out infinite"></div>
+  <div style="position:absolute;top:42%;left:50%;width:1500px;height:1500px;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,transparent,rgba(249,168,37,0.16),transparent 12deg,transparent 42deg,rgba(249,168,37,0.16),transparent 54deg,transparent 84deg,rgba(249,168,37,0.16),transparent 96deg,transparent 126deg,rgba(249,168,37,0.16),transparent 138deg,transparent 168deg,rgba(249,168,37,0.16),transparent 180deg,transparent 210deg,rgba(249,168,37,0.16),transparent 222deg,transparent 252deg,rgba(249,168,37,0.16),transparent 264deg,transparent 294deg,rgba(249,168,37,0.16),transparent 306deg,transparent 336deg,rgba(249,168,37,0.16),transparent 360deg);animation:beamRotate 26s linear infinite;opacity:.75"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(249,168,37,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(249,168,37,0.12) 1px,transparent 1px);background-size:90px 90px;opacity:.5;mask-image:radial-gradient(circle at 50% 42%,#000,transparent 70%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(249,168,37,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(249,168,37,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill">深度商业分析</div>
+    <div class="num-mega t-em" style="text-shadow:0 0 90px rgba(249,168,37,0.55)">170亿</div>
+    <div class="t-lg">美金，烧光了</div>
+    <div class="t-md">却证明这是一条 <span class="t-em">真需求</span> 赛道</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s02" data-start="3.22" data-duration="21.77">
+<!-- 场景: market | 时长: 21.8s -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#161e3a,#131b33,#0f172e)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,212,0.16) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,212,0.16) 1px,transparent 1px);background-size:84px 84px;animation:gridPulse 7s ease-in-out infinite"></div>
+  <div style="position:absolute;left:0;width:100%;height:4px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.4),rgba(0,245,212,0.6),rgba(0,245,212,0.4),transparent);box-shadow:0 0 24px rgba(0,245,212,0.35);animation:scanLine 9s linear infinite"></div>
+  <div style="position:absolute;top:42%;left:50%;width:520px;height:520px;border-radius:50%;background:rgba(0,180,200,0.16);filter:blur(110px);transform:translate(-50%,-50%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="lbl">2025 · 全球企业培训市场</div>
+    <div class="num-xl dval-c">$4000亿</div>
+    <div class="t-md">6 家机构交叉验证 · <span class="t-em-c">确定增长</span></div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-lg" style="width:100%;height:100%">
+    <div class="t-lg">AI 培训子市场</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">整体增速</div>
+        <div class="num-md">~7%</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">AI 子市场</div>
+        <div class="num-md dval-c">20%+</div>
+      </div>
+    </div>
+    <div class="verdict verdict-c"><span class="t-em-c">3 倍</span> 于整体增速</div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="cap">美国 · 每员工年均培训支出</div>
+    <div class="num-lg dval-w">$874</div>
+    <div class="verdict">一块确定增长的 <span class="t-em">大蛋糕</span>，AI 涨得最快</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s03" data-start="24.99" data-duration="23.21">
+<!-- 场景: gap | 时长: 23.2s -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#1a2548 0%,#141c38 50%,#0f1628 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:repeating-radial-gradient(circle at 50% 50%,transparent 0,transparent 70px,rgba(0,245,212,0.14) 71px,rgba(0,245,212,0.14) 72px);opacity:.6;animation:rippleExpand 6s linear infinite"></div>
+  <div style="position:absolute;top:50%;left:50%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,212,0.18),transparent 65%);filter:blur(80px);transform:translate(-50%,-50%);animation:pulseGlow 5s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">想做的人，排着队</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">计划加大投入</div>
+        <div class="num-xl dval-c">92%</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">自认做到成熟</div>
+        <div class="num-xl dval-r">1%</div>
+      </div>
+    </div>
+    <div class="lbl">McKinsey 2025</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">渗透率缺口</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-c">71%</div>
+        <div class="cap">在探索 AI</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-c">77%</div>
+        <div class="cap">雇主计划培训</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-r">13%</div>
+        <div class="cap">员工真受训</div>
+      </div>
+    </div>
+    <div class="verdict">想要的人排着队，能做好的 <span class="t-em-r">几乎没有</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s04" data-start="48.20" data-duration="25.70">
+<!-- 场景: byjus | 时长: 25.7s -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#221620 0%,#1a1220 50%,#140e18 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,90,95,0.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,95,0.14) 1px,transparent 1px);background-size:100px 100px;opacity:.4"></div>
+  <div style="position:absolute;top:38%;left:50%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,0.2),transparent 60%);filter:blur(80px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(255,90,95,0.08) 100%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(255,90,95,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(255,90,95,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-r">Byju's 崩塌</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">最高估值</div>
+        <div class="num-xl dval-w">$22B</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">融资总额</div>
+        <div class="num-lg">$5.5B</div>
+      </div>
+    </div>
+    <div class="lbl">印度曾经最值钱的独角兽</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">怎么崩的？</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-w">$1B</div>
+        <div class="cap">收购 Aakash</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-r">$2.5亿/年</div>
+        <div class="cap">营销烧钱</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-r">过万₹</div>
+        <div class="cap">每个学生获客</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl dval-r" style="text-shadow:0 0 80px rgba(255,90,95,0.5)">归零</div>
+    <div class="t-md">疫情红利一退 → 债务连环爆雷 → <span class="t-em-r">2024 估值归零</span></div>
+    <div class="verdict verdict-r">规模，救不了烂账</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s05" data-start="73.90" data-duration="21.00">
+<!-- 场景: two-u | 时长: 21.0s -->
+<div class="layer-bg">
+  <!-- bg-component: noise_field -->
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1c1424 0%,#161020 50%,#120c1a 100%)"></div>
+  <div style="position:absolute;inset:0;opacity:.35;filter:url(#noise);background-size:200px 200px;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.18%22/></svg>')"></div>
+  <div style="position:absolute;top:50%;left:50%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,0.16),transparent 55%);filter:blur(90px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,90,95,0.06),transparent 40%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(255,90,95,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(255,90,95,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-r">2U 破产</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">收购 edX</div>
+        <div class="num-lg dval-r">$800M</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">总债务</div>
+        <div class="num-lg dval-r">$945M</div>
+      </div>
+    </div>
+    <div class="lbl">靠借债扩张的死法</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">分成模式被瓦解</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval">$774M → $733M</div>
+        <div class="cap">收入见顶回落</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-r">$1.6B</div>
+        <div class="cap">累计亏损</div>
+      </div>
+    </div>
+    <div class="verdict verdict-r">教育不是房地产，<span class="t-em-r">别用债务撬规模</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s06" data-start="94.90" data-duration="23.71">
+<!-- 场景: udacity | 时长: 23.7s -->
+<div class="layer-bg">
+  <!-- bg-component: wave_ripple -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#16203c,#131a32,#0f1628)"></div>
+  <div style="position:absolute;top:55%;left:50%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,0.14),transparent 55%);filter:blur(100px);transform:translate(-50%,-50%);animation:pulseGlow 7s ease-in-out infinite"></div>
+  <div style="position:absolute;inset:0;background-image:repeating-radial-gradient(circle at 50% 55%,transparent 0,transparent 90px,rgba(160,160,200,0.14) 91px,rgba(160,160,200,0.14) 92px);opacity:.5"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-r">Udacity 蒸发</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">独角兽估值</div>
+        <div class="num-lg">$1B</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">卖身 Accenture</div>
+        <div class="num-lg dval-r">$80M</div>
+      </div>
+    </div>
+    <div class="dval dval-r" style="font-size:60px">蒸发 92%</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">死因拆解</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-r">个位数%</div>
+        <div class="cap">完成率</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval">5 轮</div>
+        <div class="cap">裁员转型</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-r">$75M</div>
+        <div class="cap">债务到期</div>
+      </div>
+    </div>
+    <div class="verdict verdict-r">低完成率，是教育产品的 <span class="t-em-r">死刑</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s07" data-start="118.61" data-duration="23.26">
+<!-- 场景: juni-mooc | 时长: 23.3s -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#1e1c34 0%,#181630 50%,#12102a 100%)"></div>
+  <div style="position:absolute;inset:0;opacity:.4;background-image:linear-gradient(30deg,rgba(249,168,37,0.16) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.16) 87.5%),linear-gradient(150deg,rgba(249,168,37,0.16) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.16) 87.5%),linear-gradient(270deg,rgba(249,168,37,0.16) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.16) 87.5%);background-size:80px 140px"></div>
+  <div style="position:absolute;top:45%;left:50%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.18),transparent 60%);filter:blur(90px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill" style="background:rgba(249,168,37,0.2)">Juni Learning — 单位经济陷阱</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">导师成本</div>
+        <div class="num-lg dval-r">$25/h</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">月费收入</div>
+        <div class="num-lg">&lt;$400</div>
+      </div>
+    </div>
+    <div class="verdict verdict-r">毛利率到不了 70% 门槛 → <span class="t-em-r">线性不可扩展</span></div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">MOOC 困境也一样</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-r">&lt;10%</div>
+        <div class="cap">完成率</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-r">免费</div>
+        <div class="cap">无法变现</div>
+      </div>
+    </div>
+    <div class="t-md" style="color:var(--accent-alert)">人力密集，就是 <span class="t-em-r">死路</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s08" data-start="141.87" data-duration="22.46">
+<!-- 场景: attribution | 时长: 22.5s -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#201440 0%,#1a1234 45%,#120e28 100%)"></div>
+  <div style="position:absolute;top:45%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,rgba(157,107,255,0.18),transparent 18deg,transparent 50deg,rgba(249,168,37,0.18),transparent 68deg,transparent 100deg,rgba(255,90,95,0.18),transparent 118deg,transparent 150deg,rgba(157,107,255,0.18),transparent 168deg,transparent 200deg,rgba(249,168,37,0.18),transparent 218deg,transparent 250deg,rgba(255,90,95,0.18),transparent 268deg,transparent 300deg,rgba(157,107,255,0.18),transparent 318deg,transparent 350deg,rgba(249,168,37,0.18),transparent 360deg);animation:beamRotate 20s linear infinite;opacity:.6"></div>
+  <div style="position:absolute;top:45%;left:50%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(157,107,255,0.22),transparent 55%);filter:blur(60px);transform:translate(-50%,-50%);animation:pulseGlow 4s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(249,168,37,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(249,168,37,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">1600+ 失败案例的死因</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval" style="color:var(--accent-alert)">43.3%</div>
+        <div class="dkey">竞争太惨烈</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval" style="color:var(--accent-violet)">17.9%</div>
+        <div class="dkey">监管合规</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-w">16.4%</div>
+        <div class="dkey">单位经济</div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval" style="color:var(--text3)">11.9%</div>
+        <div class="dkey">没人要</div>
+      </div>
+      <div class="kpi dcard center gap-sm" style="flex:2">
+        <div class="dval dval-c">87%</div>
+        <div class="dkey">死于打法，不是需求</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl" style="color:var(--accent-warm);text-shadow:0 0 60px rgba(249,168,37,0.4)">需求是真的</div>
+    <div class="num-lg">死在打法上</div>
+    <div class="verdict">这句话是整个赛道的 <span class="t-em">分水岭</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s09" data-start="164.33" data-duration="16.03">
+<!-- 场景: death-formula | 时长: 16.0s -->
+<div class="layer-bg">
+  <!-- bg-component: electric_pulse -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#241218 0%,#1a1014 50%,#120c10 100%)"></div>
+  <div style="position:absolute;top:50%;left:50%;width:520px;height:520px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,90,95,0.22),rgba(255,160,80,0.16),rgba(255,90,95,0.22),transparent);filter:blur(40px);transform:translate(-50%,-50%);animation:coreSpin 14s linear infinite"></div>
+  <div style="position:absolute;top:50%;left:50%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,0.3),transparent 60%);filter:blur(20px);transform:translate(-50%,-50%);animation:pulseGlow 2.4s ease-in-out infinite"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,90,95,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,95,0.12) 1px,transparent 1px);background-size:120px 120px;opacity:.35"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(255,90,95,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(255,90,95,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-r">EdTech 死亡公式</div>
+    <div class="stack gap-sm" style="width:88%;align-items:flex-start">
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">① 人力成本线性增长</span><span class="t-em-r">+</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">② 需求回归正常</span><span class="t-em-r">+</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">③ 完成率 &lt; 10%</span><span class="t-em-r">+</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">④ 高获客成本</span><span class="t-em-r">+</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">⑤ 债务撬规模</span><span class="t-em-r">=</span></div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl dval-r" style="text-shadow:0 0 80px rgba(255,90,95,0.5)">必死</div>
+    <div class="t-md">五条凑齐，<span class="t-em-r">系统性缺陷</span></div>
+    <div class="verdict verdict-r">这不是某一家，是整个 <span class="t-em-r">旧打法</span> 过时了</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s10" data-start="180.36" data-duration="27.58">
+<!-- 场景: ai-fix | 时长: 27.6s -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0e1830 0%,#142040 35%,#0a2030 70%,#1a2820 100%)"></div>
+  <div style="position:absolute;top:40%;left:30%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,212,0.24),transparent 60%);filter:blur(90px);animation:pulseGlow 5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:55%;right:20%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.22),transparent 60%);filter:blur(90px);animation:pulseGlow 6s ease-in-out infinite reverse"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,212,0.14) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,212,0.14) 1px,transparent 1px);background-size:110px 110px;opacity:.3;animation:meshShift 12s linear infinite"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-c">AI 拆掉最致命一环</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">人力导师</div>
+        <div class="num-md dval-r">$100-500/h</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">AI 导师 GPT-4o mini</div>
+        <div class="num-md dval-c">$0.02-0.05</div>
+      </div>
+    </div>
+    <div class="num-mega" style="background-image:linear-gradient(90deg,#00f5d4,#f9a825);-webkit-background-clip:text;background-clip:text;color:transparent">25000倍</div>
+    <div class="t-md">成本降幅</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">从线性成本 → 无限并发</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-c">∞</div>
+        <div class="cap">加学生不加导师</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-c">24h</div>
+        <div class="cap">随时在线</div>
+      </div>
+    </div>
+    <div class="verdict verdict-c">规模化 <span class="t-em-c">质变</span></div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="lbl">哈佛物理课对照实验</div>
+    <div class="num-xl dval-c" style="text-shadow:0 0 70px rgba(0,245,212,0.5)">2 倍+</div>
+    <div class="t-md">AI 组学习效果，超过对照组</div>
+    <div class="verdict">人力成本这座大山，被 AI <span class="t-em">直接铲平</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s11" data-start="207.94" data-duration="18.98">
+<!-- 场景: academic | 时长: 19.0s -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#16203e 0%,#121a32 50%,#0e1426 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:repeating-radial-gradient(circle at 30% 40%,transparent 0,transparent 60px,rgba(0,245,212,0.13) 61px,rgba(0,245,212,0.13) 62px),repeating-radial-gradient(circle at 70% 60%,transparent 0,transparent 50px,rgba(0,245,212,0.1) 51px,rgba(0,245,212,0.1) 52px);opacity:.55"></div>
+  <div style="position:absolute;top:50%;left:50%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,212,0.16),transparent 60%);filter:blur(80px);transform:translate(-50%,-50%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-c">学术背书</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="num-md dval-c">2 倍</div>
+        <div class="cap">哈佛 AI 组效果</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="cap">CMU 最新研究</div>
+        <div class="dval dval-c">混合模式最优</div>
+      </div>
+    </div>
+    <div class="lbl">Nature + CMU 验证</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="vs-row">
+      <div class="vs-col dcard center gap-sm">
+        <div class="dval dval-c">AI</div>
+        <div class="cap">规模 · 效率</div>
+      </div>
+      <div class="vs-col dcard center gap-sm">
+        <div class="dval dval-w">人</div>
+        <div class="cap">深层引导</div>
+      </div>
+    </div>
+    <div class="verdict verdict-c">不是替代，是 <span class="t-em-c">分工</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s12" data-start="226.92" data-duration="19.51">
+<!-- 场景: enterprise | 时长: 19.5s -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#161e3a,#131b33,#0f172e)"></div>
+  <div style="position:absolute;inset:0;opacity:.35;background-image:linear-gradient(45deg,rgba(249,168,37,0.18) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.18) 87.5%),linear-gradient(-45deg,rgba(249,168,37,0.18) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.18) 87.5%);background-size:70px 70px"></div>
+  <div style="position:absolute;top:45%;left:50%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.2),transparent 60%);filter:blur(90px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(249,168,37,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(249,168,37,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill">大厂真金白银在投</div>
+    <div class="stack gap-sm" style="width:92%">
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm"><span class="t-em">Unilever</span> · AI 内部人才市场</span>
+        <span class="dkey">省 £1M · 招聘快 90%</span>
+      </div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm"><span class="t-em">PwC</span> · 7.5 万员工培训</span>
+        <span class="dval dval-w">$1B</span>
+      </div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm"><span class="t-em">IBM</span> · 三年培训目标</span>
+        <span class="dval dval-w">200 万人</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl dval-w">真买单</div>
+    <div class="verdict">需求不是 PPT 画出来的，是 <span class="t-em">真有人在买单</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s13" data-start="246.43" data-duration="21.29">
+<!-- 场景: differentiation | 时长: 21.3s -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#1a1e3a 0%,#141830 50%,#0e1226 100%)"></div>
+  <div style="position:absolute;inset:0;opacity:.32;background-image:linear-gradient(30deg,rgba(0,245,212,0.16) 12%,transparent 12.5%,transparent 87%,rgba(0,245,212,0.16) 87.5%),linear-gradient(150deg,rgba(249,168,37,0.16) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.16) 87.5%),linear-gradient(270deg,rgba(0,245,212,0.16) 12%,transparent 12.5%,transparent 87%,rgba(0,245,212,0.16) 87.5%);background-size:90px 156px;animation:hexPulse 5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:45%;left:50%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,212,0.16),transparent 60%);filter:blur(90px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(0,245,212,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(0,245,212,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">新打法关键词 ①</div>
+    <div class="num-xl dval-c">嵌入式</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dkey">IDE</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dkey">邮箱</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dkey">CRM</div>
+      </div>
+    </div>
+    <div class="verdict verdict-c">钻进工作流，干活时 <span class="t-em-c">实时指导</span></div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">新打法关键词 ②</div>
+    <div class="num-xl dval-w">按效果收费</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">旧 · 别人</div>
+        <div class="dval" style="color:var(--text3)">按席位收钱</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">新 · 你</div>
+        <div class="dval dval-w">按技能提升</div>
+      </div>
+    </div>
+    <div class="verdict">把定价和 <span class="t-em">客户成果</span> 绑在一起</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s14" data-start="267.72" data-duration="20.16">
+<!-- 场景: model | 时长: 20.2s -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#1e2038 0%,#181a32 50%,#12142a 100%)"></div>
+  <div style="position:absolute;top:42%;left:50%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.24),transparent 60%);filter:blur(90px);transform:translate(-50%,-50%);animation:pulseGlow 5s ease-in-out infinite"></div>
+  <div style="position:absolute;inset:0;opacity:.32;background-image:linear-gradient(45deg,rgba(249,168,37,0.18) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.18) 87.5%),linear-gradient(-45deg,rgba(249,168,37,0.18) 12%,transparent 12.5%,transparent 87%,rgba(249,168,37,0.18) 87.5%);background-size:80px 80px"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.35),transparent);animation:scanLine 5s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(249,168,37,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(249,168,37,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill">单位经济翻盘</div>
+    <div class="vs-row">
+      <div class="vs-col center gap-sm">
+        <div class="cap">VC 门槛</div>
+        <div class="num-md">70%</div>
+      </div>
+      <div class="vs-col center gap-sm">
+        <div class="cap">GPT-4o mini</div>
+        <div class="num-xl dval-c">90%+</div>
+      </div>
+    </div>
+    <div class="t-md">轻松跨过 Juni 算不过的那道题</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">顶配模型也有</div>
+    <div class="kpi-row">
+      <div class="kpi dcard center gap-sm">
+        <div class="dval">50-60%</div>
+        <div class="cap">顶配毛利率</div>
+      </div>
+      <div class="kpi dcard center gap-sm">
+        <div class="dval dval-c">轻资产</div>
+        <div class="cap">高毛利</div>
+      </div>
+    </div>
+    <div class="verdict">这才是 <span class="t-em">对的生意</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s15" data-start="287.88" data-duration="19.37">
+<!-- 场景: redline | 时长: 19.4s -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#241818 0%,#1a1212 50%,#120e0e 100%)"></div>
+  <div style="position:absolute;inset:0;opacity:.32;background-image:linear-gradient(rgba(255,90,95,0.16) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,95,0.16) 1px,transparent 1px);background-size:80px 80px"></div>
+  <div style="position:absolute;top:50%;left:50%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,0.2),transparent 60%);filter:blur(70px);transform:translate(-50%,-50%);animation:pulseGlow 3.5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:50%;left:50%;width:60%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.3),transparent);transform:translate(-50%,-50%);animation:scanLine 4s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(255,90,95,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(255,90,95,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,90,95,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill pill-r">5 条死亡红线</div>
+    <div class="stack gap-sm" style="width:88%">
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">① 毛利率</span><span class="dval dval-r">&lt; 60%</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">② 月流失率</span><span class="dval dval-r">&gt; 5%</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">③ CAC 回收期</span><span class="dval dval-r">&gt; 18 月</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">④ 月使用次数</span><span class="dval dval-r">&lt; 2 次</span></div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center"><span class="t-sm">⑤ 续约率</span><span class="dval dval-r">&lt; 85%</span></div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl dval-r">触线即停</div>
+    <div class="verdict verdict-r">任一条爆红 = 旧打法的死亡信号</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s16" data-start="307.25" data-duration="26.98">
+<!-- 场景: roadmap | 时长: 27.0s -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#1a2038 0%,#141a30 50%,#0e1426 100%)"></div>
+  <div style="position:absolute;inset:0;opacity:.34;background-image:linear-gradient(rgba(249,168,37,0.18) 1px,transparent 1px),linear-gradient(90deg,rgba(249,168,37,0.18) 1px,transparent 1px);background-size:90px 90px"></div>
+  <div style="position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.4),transparent);animation:scanLine 6s linear infinite"></div>
+  <div style="position:absolute;top:45%;left:50%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.2),transparent 60%);filter:blur(90px);transform:translate(-50%,-50%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:14%;left:10%;width:320px;height:320px;border-radius:50%;background:rgba(249,168,37,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:72%;right:8%;width:200px;height:200px;border-radius:50%;background:rgba(249,168,37,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(249,168,37,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill">落地路线图 · P1</div>
+    <div class="lbl">前 6 个月 · MVP</div>
+    <div class="num-xl dval-w">$50-150K</div>
+    <div class="t-md">单学科 · 嵌入 IDE · 跑通单位经济</div>
+    <div class="verdict">先证明 <span class="t-em">模型能赚钱</span>，再谈扩张</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="t-lg">规模化阶段</div>
+    <div class="stack gap-sm" style="width:92%">
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm"><span class="t-em">P2</span> · 1.5 年 · 多学科</span>
+        <span class="dval dval-w">$1M ARR</span>
+      </div>
+      <div class="dcard" style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm"><span class="t-em">P3</span> · 3 年 · 企业版</span>
+        <span class="dval dval-w">$10M</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="pill">终局 · P4</div>
+    <div class="lbl">5 年 · 平台化</div>
+    <div class="num-mega" style="background-image:linear-gradient(90deg,#f9a825,#00f5d4);-webkit-background-clip:text;background-clip:text;color:transparent">$50M</div>
+    <div class="verdict">从一个学科 → 一个 <span class="t-em">技能升级平台</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s17" data-start="334.23" data-duration="6.84">
+<!-- 场景: cta | 时长: 6.8s -->
+<div class="layer-bg">
+  <!-- bg-component: ember_glow -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,#3a2a1e 0%,#2a1e14 40%,#1c140e 100%)"></div>
+  <div style="position:absolute;top:60%;left:50%;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,37,0.32),rgba(255,120,40,0.16) 40%,transparent 70%);filter:blur(80px);transform:translate(-50%,-50%);animation:pulseGlow 4s ease-in-out infinite"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(255,180,80,0.22) 0,transparent 2px),radial-gradient(circle at 70% 40%,rgba(255,140,50,0.2) 0,transparent 2px),radial-gradient(circle at 40% 70%,rgba(255,200,100,0.22) 0,transparent 2px),radial-gradient(circle at 85% 75%,rgba(255,160,60,0.2) 0,transparent 2px);background-size:200px 200px,260px 260px,180px 180px,240px 240px;animation:emberRise 5s linear infinite"></div>
+  <div style="position:absolute;top:60%;left:50%;width:420px;height:420px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,122,64,0.2),rgba(249,168,37,0.14),rgba(255,90,40,0.16),rgba(255,122,64,0.2));filter:blur(55px);transform:translate(-50%,-50%);animation:coreSpin 12s linear infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse" style="top:13%;right:11%;width:320px;height:320px;border-radius:50%;background:rgba(255,122,64,0.15);filter:blur(58px)"></div>
+  <div class="fx-drift" style="top:71%;left:9%;width:200px;height:200px;border-radius:50%;background:rgba(255,122,64,0.12);filter:blur(42px)"></div>
+  <div class="fx-blink" style="top:49%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,122,64,0.3),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="stack center gap-md" style="width:100%;height:100%">
+    <div class="num-xl" style="background-image:linear-gradient(90deg,#f9a825,#ff7a40);-webkit-background-clip:text;background-clip:text;color:transparent">需求真的</div>
+    <div class="t-lg">AI 已把成本算平</div>
+    <div class="t-md" style="color:var(--text2)">旧打法在死，新打法在长</div>
+    <div class="verdict verdict-w">关注我，看清每个赛道的 <span class="t-em">商业底牌</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+tl.set(['#s02', '#s03', '#s04', '#s05', '#s06', '#s07', '#s08', '#s09', '#s10', '#s11', '#s12', '#s13', '#s14', '#s15', '#s16', '#s17'], {opacity:0}, 0);
+tl.set('#s01', {opacity:1}, 0);
+tl.set('#s01', {opacity:0}, 3.22);
+tl.set('#s02', {opacity:1}, 3.22);
+tl.set('#s02', {opacity:0}, 24.99);
+tl.set('#s03', {opacity:1}, 24.99);
+tl.set('#s03', {opacity:0}, 48.20);
+tl.set('#s04', {opacity:1}, 48.20);
+tl.set('#s04', {opacity:0}, 73.90);
+tl.set('#s05', {opacity:1}, 73.90);
+tl.set('#s05', {opacity:0}, 94.90);
+tl.set('#s06', {opacity:1}, 94.90);
+tl.set('#s06', {opacity:0}, 118.61);
+tl.set('#s07', {opacity:1}, 118.61);
+tl.set('#s07', {opacity:0}, 141.87);
+tl.set('#s08', {opacity:1}, 141.87);
+tl.set('#s08', {opacity:0}, 164.33);
+tl.set('#s09', {opacity:1}, 164.33);
+tl.set('#s09', {opacity:0}, 180.36);
+tl.set('#s10', {opacity:1}, 180.36);
+tl.set('#s10', {opacity:0}, 207.94);
+tl.set('#s11', {opacity:1}, 207.94);
+tl.set('#s11', {opacity:0}, 226.92);
+tl.set('#s12', {opacity:1}, 226.92);
+tl.set('#s12', {opacity:0}, 246.43);
+tl.set('#s13', {opacity:1}, 246.43);
+tl.set('#s13', {opacity:0}, 267.72);
+tl.set('#s14', {opacity:1}, 267.72);
+tl.set('#s14', {opacity:0}, 287.88);
+tl.set('#s15', {opacity:1}, 287.88);
+tl.set('#s15', {opacity:0}, 307.25);
+tl.set('#s16', {opacity:1}, 307.25);
+tl.set('#s16', {opacity:0}, 334.23);
+tl.set('#s17', {opacity:1}, 334.23);
+tl.set('#s02 .phase-2', {opacity:1}, 10.39);
+tl.set('#s02 .phase-1', {opacity:0}, 10.39);
+tl.set('#s02 .phase-3', {opacity:1}, 15.47);
+tl.set('#s02 .phase-2', {opacity:0}, 15.47);
+tl.set('#s03 .phase-2', {opacity:1}, 35.36);
+tl.set('#s03 .phase-1', {opacity:0}, 35.36);
+tl.set('#s04 .phase-2', {opacity:1}, 56.52);
+tl.set('#s04 .phase-1', {opacity:0}, 56.52);
+tl.set('#s04 .phase-3', {opacity:1}, 66.69);
+tl.set('#s04 .phase-2', {opacity:0}, 66.69);
+tl.set('#s05 .phase-2', {opacity:1}, 79.64);
+tl.set('#s05 .phase-1', {opacity:0}, 79.64);
+tl.set('#s06 .phase-2', {opacity:1}, 101.65);
+tl.set('#s06 .phase-1', {opacity:0}, 101.65);
+tl.set('#s07 .phase-2', {opacity:1}, 134.92);
+tl.set('#s07 .phase-1', {opacity:0}, 134.92);
+tl.set('#s08 .phase-2', {opacity:1}, 158.52);
+tl.set('#s08 .phase-1', {opacity:0}, 158.52);
+tl.set('#s09 .phase-2', {opacity:1}, 176.32);
+tl.set('#s09 .phase-1', {opacity:0}, 176.32);
+tl.set('#s10 .phase-2', {opacity:1}, 193.46);
+tl.set('#s10 .phase-1', {opacity:0}, 193.46);
+tl.set('#s10 .phase-3', {opacity:1}, 199.98);
+tl.set('#s10 .phase-2', {opacity:0}, 199.98);
+tl.set('#s11 .phase-2', {opacity:1}, 220.46);
+tl.set('#s11 .phase-1', {opacity:0}, 220.46);
+tl.set('#s12 .phase-2', {opacity:1}, 242.75);
+tl.set('#s12 .phase-1', {opacity:0}, 242.75);
+tl.set('#s13 .phase-2', {opacity:1}, 258.50);
+tl.set('#s13 .phase-1', {opacity:0}, 258.50);
+tl.set('#s14 .phase-2', {opacity:1}, 280.14);
+tl.set('#s14 .phase-1', {opacity:0}, 280.14);
+tl.set('#s15 .phase-2', {opacity:1}, 300.28);
+tl.set('#s15 .phase-1', {opacity:0}, 300.28);
+tl.set('#s16 .phase-2', {opacity:1}, 322.78);
+tl.set('#s16 .phase-1', {opacity:0}, 322.78);
+tl.set('#s16 .phase-3', {opacity:1}, 331.95);
+tl.set('#s16 .phase-2', {opacity:0}, 331.95);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:1,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-drift', {y:-30,duration:3.2,repeat:0,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:0,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s02 .fx-blink', {opacity:0.25,duration:1.6,repeat:12,yoyo:true,ease:'sine.inOut'}, 3.22);
+tl.to('#s02 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 3.22);
+tl.to('#s02 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 3.22);
+tl.to('#s03 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 24.99);
+tl.to('#s03 .fx-drift', {y:-30,duration:3.2,repeat:6,yoyo:true,ease:'sine.inOut'}, 24.99);
+tl.to('#s03 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 24.99);
+tl.to('#s04 .fx-blink', {opacity:0.25,duration:1.6,repeat:15,yoyo:true,ease:'sine.inOut'}, 48.20);
+tl.to('#s04 .fx-drift', {y:-30,duration:3.2,repeat:7,yoyo:true,ease:'sine.inOut'}, 48.20);
+tl.to('#s04 .fx-pulse', {scale:1.18,duration:2.4,repeat:9,yoyo:true,ease:'sine.inOut'}, 48.20);
+tl.to('#s05 .fx-blink', {opacity:0.25,duration:1.6,repeat:12,yoyo:true,ease:'sine.inOut'}, 73.90);
+tl.to('#s05 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 73.90);
+tl.to('#s05 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 73.90);
+tl.to('#s06 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 94.90);
+tl.to('#s06 .fx-drift', {y:-30,duration:3.2,repeat:6,yoyo:true,ease:'sine.inOut'}, 94.90);
+tl.to('#s06 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 94.90);
+tl.to('#s07 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 118.61);
+tl.to('#s07 .fx-drift', {y:-30,duration:3.2,repeat:6,yoyo:true,ease:'sine.inOut'}, 118.61);
+tl.to('#s07 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 118.61);
+tl.to('#s08 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 141.87);
+tl.to('#s08 .fx-drift', {y:-30,duration:3.2,repeat:6,yoyo:true,ease:'sine.inOut'}, 141.87);
+tl.to('#s08 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 141.87);
+tl.to('#s09 .fx-blink', {opacity:0.25,duration:1.6,repeat:9,yoyo:true,ease:'sine.inOut'}, 164.33);
+tl.to('#s09 .fx-drift', {y:-30,duration:3.2,repeat:4,yoyo:true,ease:'sine.inOut'}, 164.33);
+tl.to('#s09 .fx-pulse', {scale:1.18,duration:2.4,repeat:5,yoyo:true,ease:'sine.inOut'}, 164.33);
+tl.to('#s10 .fx-blink', {opacity:0.25,duration:1.6,repeat:16,yoyo:true,ease:'sine.inOut'}, 180.36);
+tl.to('#s10 .fx-drift', {y:-30,duration:3.2,repeat:7,yoyo:true,ease:'sine.inOut'}, 180.36);
+tl.to('#s10 .fx-pulse', {scale:1.18,duration:2.4,repeat:10,yoyo:true,ease:'sine.inOut'}, 180.36);
+tl.to('#s11 .fx-blink', {opacity:0.25,duration:1.6,repeat:10,yoyo:true,ease:'sine.inOut'}, 207.94);
+tl.to('#s11 .fx-drift', {y:-30,duration:3.2,repeat:4,yoyo:true,ease:'sine.inOut'}, 207.94);
+tl.to('#s11 .fx-pulse', {scale:1.18,duration:2.4,repeat:6,yoyo:true,ease:'sine.inOut'}, 207.94);
+tl.to('#s12 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 226.92);
+tl.to('#s12 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 226.92);
+tl.to('#s12 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 226.92);
+tl.to('#s13 .fx-blink', {opacity:0.25,duration:1.6,repeat:12,yoyo:true,ease:'sine.inOut'}, 246.43);
+tl.to('#s13 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 246.43);
+tl.to('#s13 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 246.43);
+tl.to('#s14 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 267.72);
+tl.to('#s14 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 267.72);
+tl.to('#s14 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 267.72);
+tl.to('#s15 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 287.88);
+tl.to('#s15 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 287.88);
+tl.to('#s15 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 287.88);
+tl.to('#s16 .fx-blink', {opacity:0.25,duration:1.6,repeat:15,yoyo:true,ease:'sine.inOut'}, 307.25);
+tl.to('#s16 .fx-drift', {y:-30,duration:3.2,repeat:7,yoyo:true,ease:'sine.inOut'}, 307.25);
+tl.to('#s16 .fx-pulse', {scale:1.18,duration:2.4,repeat:10,yoyo:true,ease:'sine.inOut'}, 307.25);
+tl.to('#s17 .fx-blink', {opacity:0.25,duration:1.6,repeat:3,yoyo:true,ease:'sine.inOut'}, 334.23);
+tl.to('#s17 .fx-drift', {y:-30,duration:3.2,repeat:1,yoyo:true,ease:'sine.inOut'}, 334.23);
+tl.to('#s17 .fx-pulse', {scale:1.18,duration:2.4,repeat:1,yoyo:true,ease:'sine.inOut'}, 334.23);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:341.07,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

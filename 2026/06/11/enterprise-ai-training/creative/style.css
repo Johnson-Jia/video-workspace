@@ -1,0 +1,140 @@
+:root {
+  /* 底色提亮：L≥12%（hsl 第三参数），保留分析师深色屏幕感但不黑屏 */
+  --bg-deep: #131b33;        /* hsl(226,46%,14%) 分析师深蓝底，L=14% */
+  --bg-card: #1a2440;        /* 卡片底，L≈18% */
+  --accent-warm: #f9a825;    /* 金/琥珀 — 价值、机会、金钱 */
+  --accent-cool: #00f5d4;    /* 霓虹青 — 数据、理性、科技 */
+  --accent-alert: #ff5a5f;   /* 警示红 — 失败、红线 */
+  --accent-violet: #9d6bff;  /* 紫 — 转折、洞察 */
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.72);
+  --text3: rgba(255,255,255,0.5);
+  --line: rgba(255,255,255,0.14);
+}
+
+/* ════════════════════════════════════════════
+ * bg 层 keyframes（组件库动画，全局共享）
+ * 底色由各场景 layer-bg 内 inline 渐变提供（L≥12%）
+ * ════════════════════════════════════════════ */
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:.5} 50%{opacity:.85} }
+@keyframes glassShimmer { 0%,100%{opacity:.18} 50%{opacity:.26} }
+@keyframes beamRotate { 0%{transform:translate(-50%,-50%) rotate(0)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes pulseGlow { 0%,100%{opacity:.35;transform:translate(-50%,-50%) scale(1)} 50%{opacity:.6;transform:translate(-50%,-50%) scale(1.12)} }
+@keyframes driftSlow { 0%{transform:translateX(0)} 100%{transform:translateX(-60px)} }
+@keyframes rippleExpand { 0%{transform:scale(.4);opacity:.5} 100%{transform:scale(2.4);opacity:0} }
+@keyframes hexPulse { 0%,100%{opacity:.4} 50%{opacity:.75} }
+@keyframes meshShift { 0%{background-position:0 0} 100%{background-position:120px 60px} }
+@keyframes emberRise { 0%{transform:translateY(0);opacity:0} 20%{opacity:.6} 100%{transform:translateY(-260px);opacity:0} }
+@keyframes coreSpin { 0%{transform:translate(-50%,-50%) rotate(0)} 100%{transform:translate(-50%,-50%) rotate(-360deg)} }
+@keyframes alertBlink { 0%,100%{opacity:.4} 50%{opacity:.85} }
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+
+/* ════════════════════════════════════════════
+ * 文字层级（字号全部 ≥ render-safety §3.1 竖屏标准）
+ * §1b 监控：全量扫描所有 class font-size ≥32px，内联同理
+ * 全局兜底：.layer-content color:var(--text) + font-size:48px
+ * ════════════════════════════════════════════ */
+.layer-content { color:var(--text); font-size:48px; }   /* 兜底：color 白色 + font-size 48px 最小底线 */
+.t-hero { font-size:128px; font-weight:900; line-height:1.05; letter-spacing:-2px; color:var(--text); }
+.t-xl { font-size:92px; font-weight:800; line-height:1.1; color:var(--text); letter-spacing:-1px; }
+.t-lg { font-size:66px; font-weight:700; line-height:1.15; color:var(--text); }
+.t-md { font-size:54px; font-weight:600; line-height:1.3; color:var(--text2); }   /* 正文 ≥38 */
+.t-sm { font-size:50px; font-weight:500; line-height:1.35; color:var(--text2); }  /* 描述 ≥38 */
+.t-em { color:var(--accent-warm); font-weight:800; font-size:inherit; }
+.t-em-c { color:var(--accent-cool); font-weight:800; font-size:inherit; }
+.t-em-r { color:var(--accent-alert); font-weight:800; font-size:inherit; }
+.t-em-v { color:var(--accent-violet); font-weight:800; font-size:inherit; }
+
+/* ════════════════════════════════════════════
+ * 数字 / 数据值（统一默认白色，杜绝裸用 .num-* 继承黑色）
+ * ════════════════════════════════════════════ */
+.num-mega { font-size:200px; font-weight:900; line-height:1; letter-spacing:-4px; color:var(--text); }
+.num-xl { font-size:140px; font-weight:900; line-height:1; letter-spacing:-3px; color:var(--text); }
+.num-lg { font-size:116px; font-weight:800; line-height:1; letter-spacing:-2px; color:var(--text); }
+.num-md { font-size:88px; font-weight:800; line-height:1; color:var(--text); }
+.dval { font-size:66px; font-weight:800; line-height:1; color:var(--text); }       /* 数据值 ≥38 */
+.dval-w { color:var(--accent-warm); }
+.dval-c { color:var(--accent-cool); }
+.dval-r { color:var(--accent-alert); }
+
+/* ════════════════════════════════════════════
+ * 标注 / 辅助信息（全部 ≥32）
+ * ════════════════════════════════════════════ */
+.cap { font-size:46px; font-weight:600; color:var(--text2); }                       /* 标注 ≥32 */
+.lbl { font-size:44px; font-weight:600; color:var(--text3); letter-spacing:1px; }  /* 标签 ≥32 */
+.dkey { font-size:44px; font-weight:600; color:var(--text3); }                      /* 数据键 ≥32 */
+.pill {
+  display:inline-block; font-size:42px; font-weight:700;                            /* 胶囊 ≥32 */
+  padding:8px 26px; border-radius:24px;
+  background:rgba(249,168,37,0.16); color:var(--accent-warm);
+  border:1px solid rgba(249,168,37,0.4);
+}
+.pill-c { background:rgba(0,245,212,0.14); color:var(--accent-cool); border-color:rgba(0,245,212,0.4); }
+.pill-r { background:rgba(255,90,95,0.16); color:var(--accent-alert); border-color:rgba(255,90,95,0.4); }
+.pill-v { background:rgba(157,107,255,0.16); color:var(--accent-violet); border-color:rgba(157,107,255,0.4); }
+
+/* ════════════════════════════════════════════
+ * 容器组件（content 层布局）
+ * ════════════════════════════════════════════ */
+.dcard {
+  background:rgba(26,36,64,0.72); border:1px solid var(--line);
+  border-radius:24px; padding:40px 44px;
+  backdrop-filter:blur(6px);
+  font-size:50px; color:var(--text); line-height:1.3;
+}
+.dcard-glow { box-shadow:0 0 60px rgba(0,245,212,0.12), inset 0 1px 0 rgba(255,255,255,0.08); }
+
+/* 对比双栏 */
+.vs-row { display:flex; gap:36px; width:100%; }
+.vs-col { flex:1; display:flex; flex-direction:column; gap:18px; }
+.vs-bar {
+  height:64px; border-radius:14px; display:flex; align-items:center; padding:0 28px;
+  font-size:40px; font-weight:800; color:#0a1020;
+}
+.vs-bar-cool { background:linear-gradient(90deg,var(--accent-cool),#3afff0); }
+.vs-bar-alert { background:linear-gradient(90deg,var(--accent-alert),#ff8a8e); }
+.vs-bar-warm { background:linear-gradient(90deg,var(--accent-warm),#ffd166); }
+.vs-bar-mute { background:linear-gradient(90deg,#5a6580,#8a93ad); }
+
+/* KPI 网格 */
+.kpi-row { display:flex; gap:28px; width:100%; }
+.kpi { flex:1; }
+.kpi-line { height:8px; border-radius:6px; background:rgba(255,255,255,0.1); margin-top:14px; overflow:hidden; }
+.kpi-line > i { display:block; height:100%; border-radius:6px; }
+
+/* 时间轴 */
+.tl-item { display:flex; gap:30px; align-items:flex-start; }
+.tl-dot {
+  flex:0 0 28px; width:28px; height:28px; border-radius:50%; margin-top:10px;
+  background:var(--accent-warm); box-shadow:0 0 24px rgba(249,168,37,0.6);
+}
+.tl-time { font-size:44px; font-weight:800; color:var(--accent-warm); }             /* 时间轴 ≥32 */
+
+/* 结论框 */
+.verdict {
+  border-left:8px solid var(--accent-warm); padding:24px 36px;
+  background:linear-gradient(90deg,rgba(249,168,37,0.14),transparent);
+  border-radius:0 20px 20px 0;
+  font-size:54px; line-height:1.35; color:var(--text); font-weight:600;
+}
+.verdict-c { border-color:var(--accent-cool); background:linear-gradient(90deg,rgba(0,245,212,0.14),transparent); }
+.verdict-r { border-color:var(--accent-alert); background:linear-gradient(90deg,rgba(255,90,95,0.14),transparent); }
+
+/* 通用排版辅助 */
+.stack { display:flex; flex-direction:column; }
+.gap-sm { gap:14px; } .gap-md { gap:26px; } .gap-lg { gap:44px; }
+.center { align-items:center; justify-content:center; text-align:center; }
+.muted { color:var(--text3); font-size:inherit; }
+.divider { height:2px; background:var(--line); border-radius:2px; }
+
+/* ════════════════════════════════════════════
+ * fx 层装饰动画 class（约定标记）
+ * LLM 在 layer-fx 子元素上用这些 class，
+ * s6_assemble_html.py 自动注入对应 GSAP 动画。
+ * 元素的颜色/位置/大小由内联 style 自由控制。
+ * ════════════════════════════════════════════ */
+.fx-pulse { position:absolute; pointer-events:none; }
+.fx-drift  { position:absolute; pointer-events:none; }
+.fx-spin   { position:absolute; pointer-events:none; }
+.fx-blink  { position:absolute; pointer-events:none; }

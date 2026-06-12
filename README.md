@@ -115,7 +115,7 @@
 ```
 workspace/
 ├── covers/                              # 系列封面模板（daily / weekly / spotlight / tech-dispatch / internet-reports）
-├── bgm/                                 # BGM 素材库（10 种风格 × 5 首变体，跨项目复用）
+├── bgm/                                 # BGM 素材库（17 种风格 × 2-10 首变体，跨项目复用）
 ├── sources/                             # 内容源文件（报告、数据、参考资料）
 │
 └── <YYYY>/<MM>/<DD>/                    # 按日期归档的视频项目
@@ -155,7 +155,7 @@ workspace/
 ## BGM 素材库
 
 <!-- BEGIN BGM -->
-`bgm/` 目录按风格分类存储配乐，每种风格 10 首变体。来源为 Pixabay 无版权音乐（免版税，可商用）。当前共 **18** 种风格：
+`bgm/` 目录按风格分类存储配乐，每种风格 2-10 首变体。来源为 Pixabay 无版权音乐（免版税，可商用）。当前共 **17** 种风格：
 
 | 风格 | 适用场景 |
 |------|---------|
@@ -174,7 +174,6 @@ workspace/
 | Neon Electric | 前沿科技、赛博朋克 |
 | Pastel Soft | 生活化、治愈话题 |
 | Retro 80s | 复古怀旧、霓虹回忆 |
-| Suspense Thriller | 悬疑揭秘、紧张氛围 |
 | Upbeat Pop | 活力节奏、轻松愉快 |
 | Warm Editorial | 温暖叙事、人物故事 |
 <!-- END BGM -->

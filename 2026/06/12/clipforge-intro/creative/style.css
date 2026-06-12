@@ -1,0 +1,469 @@
+:root {
+  --bg-deep: #040810;
+  --amber: #FFB800;
+  --gold: #FFD700;
+  --cyan: #64FFDA;
+  --mint: #4DD0B0;
+  --fire: #FF6B00;
+  --cream: #F0E8DA;
+  --text-dim: rgba(240,232,218,0.55);
+}
+
+/* =============================================
+ * Keyframes — extracted from bg components
+ * prefixed with sNN- to avoid cross-scene collision
+ * ============================================= */
+
+/* s01: vignette_glow */
+@keyframes s01-vignettePulse {
+  0%, 100% { opacity: 0.10; }
+  50% { opacity: 0.16; }
+}
+@keyframes s01-warmBreath {
+  0%, 100% { transform: scale(1); opacity: 0.10; }
+  50% { transform: scale(1.06); opacity: 0.18; }
+}
+@keyframes s01-warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes s01-lightStreak {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+@keyframes s01-floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes s01-glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+
+/* s02: gradient_mesh */
+@keyframes s02-waveSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes s02-glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes s02-floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes s02-prismShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.18; }
+}
+
+/* s03: light_field */
+@keyframes s03-orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+@keyframes s03-glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes s03-starDot {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+@keyframes s03-prismShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.18; }
+}
+
+/* s04: aurora_flow */
+@keyframes s04-auroraFlow {
+  0%, 100% { transform: translateX(-8%) scaleY(1); }
+  50% { transform: translateX(8%) scaleY(1.12); }
+}
+@keyframes s04-auroraCurtain {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.5; }
+  50% { transform: scaleY(1.15) translateY(-10px); opacity: 0.8; }
+}
+@keyframes s04-glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes s04-starTwinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.55; }
+}
+
+/* s05: radial_beams */
+@keyframes s05-beamRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes s05-glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes s05-glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+@keyframes s05-floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes s05-warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes s05-beamBreath {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* s06: ember_glow */
+@keyframes s06-emberRise {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
+  50% { transform: translateY(-40px) scale(1.08); opacity: 0.48; }
+}
+@keyframes s06-emberFloat {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50% { transform: translateY(-60px) translateX(10px); opacity: 0.9; }
+}
+@keyframes s06-warmShift {
+  0%, 100% { opacity: 0.30; }
+  50% { opacity: 0.40; }
+}
+@keyframes s06-glassShimmer {
+  0%, 100% { opacity: 0.30; }
+  50% { opacity: 0.40; }
+}
+@keyframes s06-cracklePulse {
+  0%, 100% { opacity: 0.28; }
+  30% { opacity: 0.50; }
+  60% { opacity: 0.22; }
+}
+@keyframes s06-hotSpotBreath {
+  0%, 100% { opacity: 0.32; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.06); }
+}
+
+/* s07: nebula_cloud */
+@keyframes s07-orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+@keyframes s07-starTwinkle {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+@keyframes s07-brightStarTwinkle {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 0.95; }
+}
+@keyframes s07-glassShimmer {
+  0%, 100% { opacity: 0.30; }
+  50% { opacity: 0.40; }
+}
+@keyframes s07-dustDrift {
+  0%, 100% { transform: translate(0, 0) rotate(-25deg); opacity: 0.12; }
+  50% { transform: translate(15px, -10px) rotate(-25deg); opacity: 0.18; }
+}
+@keyframes s07-focusBreath {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50% { opacity: 0.40; transform: scale(1.05); }
+}
+@keyframes s07-auroraWave {
+  0%, 100% { transform: translateX(-15px) scaleY(1); opacity: 0.7; }
+  50% { transform: translateX(15px) scaleY(1.25); opacity: 1; }
+}
+
+/* s08: starforce_ocean */
+@keyframes s08-starWave1 {
+  0%, 100% { transform: translateX(-50%) translateY(0) scaleY(1); opacity: 0.45; }
+  50% { transform: translateX(-50%) translateY(-12px) scaleY(1.12); opacity: 0.62; }
+}
+@keyframes s08-starWave2 {
+  0%, 100% { transform: translateX(-50%) translateY(0) scaleY(1.1); opacity: 0.38; }
+  50% { transform: translateX(-50%) translateY(-18px) scaleY(0.95); opacity: 0.55; }
+}
+@keyframes s08-starVortexSpin {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+@keyframes s08-starFlowDrift {
+  0% { transform: translateX(-40%) translateY(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.55; }
+  100% { transform: translateX(60%) translateY(40px); opacity: 0; }
+}
+@keyframes s08-starPourDown {
+  0%, 100% { opacity: 0.32; transform: translateX(-50%) scaleY(1); }
+  50% { opacity: 0.50; transform: translateX(-50%) scaleY(1.08); }
+}
+@keyframes s08-starCoreFlare {
+  0%, 100% { opacity: 0.42; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.62; transform: translateX(-50%) scale(1.12); }
+}
+@keyframes s08-starSpeckFloat {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 0.7; }
+  100% { transform: translateY(-90px); opacity: 0; }
+}
+@keyframes s08-glassShimmer {
+  0%, 100% { opacity: 0.26; }
+  50% { opacity: 0.36; }
+}
+
+/* =============================================
+ * Content classes — warm starlight design system
+ * ============================================= */
+
+/* Gradient text utility classes */
+.grad-amber {
+  background-image: linear-gradient(135deg, #FFB800, #FFD700, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-goldcyan {
+  background-image: linear-gradient(135deg, #FFD700, #64FFDA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-fire {
+  background-image: linear-gradient(135deg, #FFB800, #FF6B00, #FF3D00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-amber-cyan {
+  background-image: linear-gradient(135deg, #FFB800, #FFD700, #64FFDA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hook mega text (s01) */
+.hook-mega {
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 6px;
+  margin-bottom: 32px;
+}
+
+/* Scene headline */
+.scene-headline {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Body text line */
+.body-line {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--cream);
+  text-align: center;
+}
+
+/* Caption / sub text */
+.caption {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Accent dot separator */
+.accent-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin: 0 12px;
+  vertical-align: middle;
+  box-shadow: 0 0 12px rgba(255,184,0,0.5);
+}
+
+/* Glow divider line */
+.divider-glow {
+  width: 120px;
+  height: 2px;
+  background-image: linear-gradient(90deg, transparent, var(--amber), transparent);
+  margin: 28px auto;
+  border: none;
+}
+
+/* Triple card layout for proof/multiply */
+.triple-card {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.triple-num {
+  font-size: 68px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.triple-label {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+
+/* Quote / highlight text */
+.quote-main {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 20px;
+}
+.quote-sub {
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-dim);
+}
+
+/* Big metric number */
+.metric-big {
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Vertical timeline for multiply */
+.timeline-step {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.timeline-arrow {
+  width: 2px;
+  height: 24px;
+  background-image: linear-gradient(180deg, var(--amber), transparent);
+  margin: 0 auto 4px;
+}
+
+/* Phase layout helpers */
+.phase-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+/* Climax phase-specific */
+.climax-mega {
+  font-size: 96px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 8px;
+}
+
+.climax-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.climax-row-label {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--cream);
+}
+.climax-row-sub {
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* Footer branding */
+.brand-footer {
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  margin-top: 40px;
+}
+
+/* What-if question */
+.whatif-q {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  margin-bottom: 36px;
+}
+.whatif-mark {
+  font-size: 72px;
+  font-weight: 900;
+}
+
+/* Multiply timeline emphasis */
+.multiply-emphasis {
+  font-size: 52px;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 28px;
+}
+
+/* You scene warmth */
+.you-main {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 28px;
+}
+.you-accent {
+  background-image: linear-gradient(135deg, #FFB800, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* CTA scene */
+.cta-main {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 20px;
+}
+.cta-sub {
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+/* Proof gold quote at bottom */
+.proof-gold {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 32px;
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2160">
+<title>cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-deep:#030810;
+  --bg-mid:#0a1020;
+  --amber:#FFB800;
+  --amber-deep:#FF8C00;
+  --gold:#FFD700;
+  --fire:#FF6B00;
+  --cyan:#64FFDA;
+  --cyan-deep:#4DD0B0;
+  --cream:#F0E8DA;
+  --muted:rgba(255,255,255,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  width:2160px;height:3840px;
+  background:var(--bg-deep);
+  font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.cover{
+  position:relative;width:2160px;height:3840px;
+  background:radial-gradient(ellipse at 50% 38%, #0b1322 0%, #060c18 50%, var(--bg-deep) 100%);
+  overflow:hidden;
+}
+
+/* L1 大气光团：琥珀左上 + 青色右下 */
+.glow-warm{
+  position:absolute;top:-380px;left:-380px;width:1860px;height:1860px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,184,0,0.14) 0%, rgba(255,140,0,0.07) 38%, transparent 70%);
+  filter:blur(200px);
+}
+.glow-cool{
+  position:absolute;bottom:-440px;right:-420px;width:1960px;height:1960px;border-radius:50%;
+  background:radial-gradient(circle, rgba(100,255,218,0.12) 0%, rgba(77,208,176,0.06) 40%, transparent 72%);
+  filter:blur(200px);
+}
+
+/* L2 点阵网格 */
+.dot-grid{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.07) 2px, transparent 2px);
+  background-size:160px 160px;
+  opacity:0.55;
+}
+
+/* L3 星座图 */
+.constellation{
+  position:absolute;inset:0;width:2160px;height:3840px;
+  pointer-events:none;
+}
+
+/* 顶部条：date + scene-label + badge */
+.top-bar{
+  position:absolute;top:210px;left:0;right:0;
+  display:flex;justify-content:center;align-items:center;gap:52px;
+  z-index:10;
+}
+.date{
+  font-family:'JetBrains Mono','Courier New',monospace;
+  font-size:74px;font-weight:700;color:var(--amber);
+  letter-spacing:10px;
+}
+.scene-label{
+  font-size:64px;font-weight:300;
+  color:rgba(255,255,255,0.50);letter-spacing:14px;
+}
+.badge{
+  display:inline-flex;align-items:center;
+  padding:20px 64px;border-radius:64px;
+  background:linear-gradient(135deg, rgba(255,184,0,0.20), rgba(255,140,0,0.12));
+  border:3px solid rgba(255,184,0,0.50);
+  color:var(--amber);font-size:60px;font-weight:700;letter-spacing:8px;
+}
+
+/* L4 标题区 */
+.title-block{
+  position:absolute;top:1240px;left:0;right:0;
+  text-align:center;z-index:10;
+}
+.main-title{
+  font-size:420px;font-weight:900;line-height:1;letter-spacing:32px;
+  background-image:linear-gradient(135deg, #FFB800 0%, #FF8C00 22%, #FFFFFF 50%, #64FFDA 78%, #4DD0B0 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  display:inline-block;
+  padding-left:32px;
+}
+.title-dot{
+  display:inline-block;width:46px;height:46px;border-radius:50%;
+  background:var(--amber);
+  box-shadow:0 0 60px rgba(255,184,0,0.55), 0 0 120px rgba(255,140,0,0.30);
+  margin:0 48px;vertical-align:middle;
+  transform:translateY(-150px);
+}
+.divider{
+  width:1040px;height:5px;margin:150px auto 0;
+  background:linear-gradient(90deg, transparent 0%, rgba(255,184,0,0.38) 30%, rgba(100,255,218,0.38) 70%, transparent 100%);
+  border-radius:3px;
+}
+.data-subtitle{
+  margin-top:120px;
+  font-size:150px;font-weight:300;
+  color:rgba(255,255,255,0.40);letter-spacing:14px;
+}
+
+/* 数据卡片 */
+.cards-row{
+  position:absolute;top:2760px;left:0;right:0;
+  display:flex;justify-content:center;gap:84px;
+  z-index:10;
+}
+.card{
+  width:560px;padding:74px 36px;
+  background:linear-gradient(180deg, rgba(255,184,0,0.07), rgba(100,255,218,0.03));
+  border:2px solid rgba(255,184,0,0.24);
+  border-radius:36px;
+  text-align:center;
+}
+.card-num{
+  font-family:'JetBrains Mono','Courier New',monospace;
+  font-size:150px;font-weight:700;line-height:1;
+  background-image:linear-gradient(135deg, #FFB800, #FF8C00);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.card-label{
+  margin-top:36px;
+  font-size:52px;font-weight:400;
+  color:rgba(255,255,255,0.58);letter-spacing:8px;
+}
+
+/* L5 底栏 */
+.footer-bar{
+  position:absolute;bottom:190px;left:0;right:0;
+  display:flex;justify-content:center;align-items:center;gap:40px;
+  z-index:10;
+}
+.footer-name{
+  font-size:96px;font-weight:600;
+  color:rgba(255,255,255,0.48);letter-spacing:16px;
+}
+.footer-dot{
+  width:18px;height:18px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 20px rgba(255,184,0,0.5);
+}
+.footer-tag{
+  font-size:96px;font-weight:300;
+  color:rgba(255,255,255,0.28);letter-spacing:16px;
+}
+</style>
+</head>
+<body>
+<div class="cover" data-composition-id="cover" data-width="2160" data-height="3840" data-start="0" data-duration="5">
+
+  <!-- L1 大气光团 -->
+  <div class="glow-warm"></div>
+  <div class="glow-cool"></div>
+
+  <!-- L2 点阵网格 -->
+  <div class="dot-grid"></div>
+
+  <!-- L3 星座图：8 白星 + 4 琥珀 + 4 青 + 连接线 + 微粒子 -->
+  <svg class="constellation" viewBox="0 0 2160 3840" xmlns="http://www.w3.org/2000/svg">
+    <!-- 连接线（上方星座） -->
+    <line x1="280" y1="360" x2="420" y2="540" stroke="rgba(255,184,0,0.20)" stroke-width="2.5"/>
+    <line x1="420" y1="540" x2="650" y2="290" stroke="rgba(255,184,0,0.16)" stroke-width="2"/>
+    <line x1="420" y1="540" x2="540" y2="820" stroke="rgba(255,255,255,0.12)" stroke-width="1.8"/>
+    <line x1="540" y1="820" x2="380" y2="920" stroke="rgba(255,184,0,0.15)" stroke-width="1.8"/>
+    <line x1="1880" y1="330" x2="1620" y2="860" stroke="rgba(100,255,218,0.14)" stroke-width="1.8"/>
+    <line x1="1620" y1="860" x2="1480" y2="620" stroke="rgba(100,255,218,0.12)" stroke-width="1.8"/>
+    <!-- 连接线（下方星座） -->
+    <line x1="1780" y1="2960" x2="1620" y2="2810" stroke="rgba(100,255,218,0.18)" stroke-width="2.5"/>
+    <line x1="1620" y1="2810" x2="1880" y2="2730" stroke="rgba(100,255,218,0.15)" stroke-width="2"/>
+    <line x1="1780" y1="2960" x2="1880" y2="3310" stroke="rgba(255,255,255,0.11)" stroke-width="1.8"/>
+    <line x1="1880" y1="3310" x2="1720" y2="3310" stroke="rgba(100,255,218,0.14)" stroke-width="1.8"/>
+    <line x1="1720" y1="3310" x2="1560" y2="3370" stroke="rgba(100,255,218,0.13)" stroke-width="1.8"/>
+
+    <!-- 白色亮星 8 个（外光晕 + 实心） -->
+    <circle cx="280" cy="360" r="26" fill="rgba(255,255,255,0.13)"/>
+    <circle cx="280" cy="360" r="10" fill="rgba(255,255,255,0.88)"/>
+    <circle cx="1880" cy="330" r="26" fill="rgba(255,255,255,0.13)"/>
+    <circle cx="1880" cy="330" r="10" fill="rgba(255,255,255,0.88)"/>
+    <circle cx="1080" cy="250" r="22" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="1080" cy="250" r="8" fill="rgba(255,255,255,0.78)"/>
+    <circle cx="540" cy="820" r="22" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="540" cy="820" r="8" fill="rgba(255,255,255,0.80)"/>
+    <circle cx="1620" cy="860" r="24" fill="rgba(255,255,255,0.12)"/>
+    <circle cx="1620" cy="860" r="9" fill="rgba(255,255,255,0.82)"/>
+    <circle cx="250" cy="2700" r="24" fill="rgba(255,255,255,0.12)"/>
+    <circle cx="250" cy="2700" r="9" fill="rgba(255,255,255,0.80)"/>
+    <circle cx="480" cy="3220" r="22" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="480" cy="3220" r="8" fill="rgba(255,255,255,0.74)"/>
+
+    <!-- 琥珀星 4 个（左上暖光团区，双层强发光） -->
+    <circle cx="420" cy="540" r="46" fill="rgba(255,184,0,0.10)"/>
+    <circle cx="420" cy="540" r="30" fill="rgba(255,184,0,0.18)"/>
+    <circle cx="420" cy="540" r="14" fill="#FFB800"/>
+    <circle cx="650" cy="290" r="40" fill="rgba(255,140,0,0.10)"/>
+    <circle cx="650" cy="290" r="26" fill="rgba(255,140,0,0.16)"/>
+    <circle cx="650" cy="290" r="12" fill="#FF8C00"/>
+    <circle cx="380" cy="920" r="38" fill="rgba(255,184,0,0.10)"/>
+    <circle cx="380" cy="920" r="24" fill="rgba(255,184,0,0.15)"/>
+    <circle cx="380" cy="920" r="12" fill="#FFB800"/>
+    <circle cx="1480" cy="620" r="38" fill="rgba(255,140,0,0.09)"/>
+    <circle cx="1480" cy="620" r="24" fill="rgba(255,140,0,0.14)"/>
+    <circle cx="1480" cy="620" r="11" fill="#FF8C00"/>
+
+    <!-- 青色星 4 个（右下冷光团区，双层强发光） -->
+    <circle cx="1780" cy="2960" r="44" fill="rgba(100,255,218,0.10)"/>
+    <circle cx="1780" cy="2960" r="28" fill="rgba(100,255,218,0.17)"/>
+    <circle cx="1780" cy="2960" r="13" fill="#64FFDA"/>
+    <circle cx="1620" cy="2810" r="40" fill="rgba(77,208,176,0.09)"/>
+    <circle cx="1620" cy="2810" r="26" fill="rgba(77,208,176,0.15)"/>
+    <circle cx="1620" cy="2810" r="12" fill="#4DD0B0"/>
+    <circle cx="1880" cy="2730" r="38" fill="rgba(100,255,218,0.09)"/>
+    <circle cx="1880" cy="2730" r="24" fill="rgba(100,255,218,0.14)"/>
+    <circle cx="1880" cy="2730" r="11" fill="#64FFDA"/>
+    <circle cx="1560" cy="3370" r="38" fill="rgba(77,208,176,0.09)"/>
+    <circle cx="1560" cy="3370" r="24" fill="rgba(77,208,176,0.14)"/>
+    <circle cx="1560" cy="3370" r="11" fill="#4DD0B0"/>
+
+    <!-- 微粒子散落（纹理层） -->
+    <circle cx="900" cy="460" r="4" fill="rgba(255,184,0,0.30)"/>
+    <circle cx="1450" cy="970" r="3.5" fill="rgba(100,255,218,0.28)"/>
+    <circle cx="350" cy="2500" r="4" fill="rgba(255,184,0,0.26)"/>
+    <circle cx="1700" cy="3580" r="3.5" fill="rgba(100,255,218,0.25)"/>
+    <circle cx="760" cy="870" r="3" fill="rgba(255,255,255,0.32)"/>
+    <circle cx="1300" cy="2700" r="3" fill="rgba(255,255,255,0.26)"/>
+  </svg>
+
+  <!-- 顶部条：第1层 date + 第2层 scene-label + 第3层 badge -->
+  <div class="top-bar">
+    <span class="date">2026</span>
+    <span class="scene-label">频道自我介绍</span>
+    <span class="badge">频道介绍</span>
+  </div>
+
+  <!-- L4 标题区：第4层 main-title + 第5层 divider + 第6层 data-subtitle -->
+  <div class="title-block">
+    <div class="main-title">星火<span class="title-dot"></span>燎原</div>
+    <div class="divider"></div>
+    <div class="data-subtitle">照亮每一个想表达的人</div>
+  </div>
+
+  <!-- 第7层 数据卡片（ClipForge 真实特征） -->
+  <div class="cards-row">
+    <div class="card">
+      <div class="card-num">65</div>
+      <div class="card-label">组件火种</div>
+    </div>
+    <div class="card">
+      <div class="card-num">9</div>
+      <div class="card-label">阶锻造管线</div>
+    </div>
+    <div class="card">
+      <div class="card-num">4</div>
+      <div class="card-label">引擎之心</div>
+    </div>
+  </div>
+
+  <!-- L5 底栏 -->
+  <div class="footer-bar">
+    <span class="footer-name">GitHub星探</span>
+    <span class="footer-dot"></span>
+    <span class="footer-tag">频道介绍</span>
+  </div>
+
+</div>
+</body>
+</html>

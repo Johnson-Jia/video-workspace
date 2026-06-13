@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "project": "career-ops-deep",
+    "mode": "single-project-deep",
+    "target_duration_s": 180,
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "scenes": 9
+  },
+  "segments": [
+    {
+      "id": 1,
+      "scene": "s1-hook",
+      "label": "hook",
+      "duration_estimate_s": 13,
+      "visual_phases": [{"label": "740→1 数据冲击"}],
+      "text": "740 个职位评估，100 多份简历，最后拿到 1 个 offer。换别人可能就崩溃了，他没把这当失败——他把这 740 次反复试错的经验，做成了一套开源系统，叫 Career-Ops。",
+      "emphasis": ["740", "100", "1", "Career-Ops"]
+    },
+    {
+      "id": 2,
+      "scene": "s2-what",
+      "label": "what",
+      "duration_estimate_s": 24,
+      "visual_phases": [
+        {"label": "项目定位", "narration_anchor": 0},
+        {"label": "技术栈与数据", "narration_anchor": 6}
+      ],
+      "text": "作者 Santiago 是 AI 自动化方向的工程师，他用 Node.js 写扫描器，Go 写终端看板，搭出一个 AI 驱动的求职管道系统。231 次提交、62 个贡献者，从职位扫描到简历评估，再到简历生成，全流程自动化。它不替你投简历，做的是更值钱的事——帮你判断哪些职位值得投。",
+      "emphasis": ["Santiago", "Node.js", "Go", "231", "62"]
+    },
+    {
+      "id": 3,
+      "scene": "s3-philosophy",
+      "label": "philosophy",
+      "peak": true,
+      "duration_estimate_s": 32,
+      "visual_phases": [
+        {"label": "Prompt-as-Code 揭示", "narration_anchor": 0},
+        {"label": "传统 vs Career-Ops 对比", "narration_anchor": 3},
+        {"label": "从调用接口到维护知识", "narration_anchor": 7}
+      ],
+      "text": "它最特别的设计，叫 Prompt-as-Code，提示词即代码。传统系统，AI 的行为逻辑写死在代码里，改一行要重新部署；这个项目把智能全部装进 Markdown 文件，AI 直接读这些文件，就知道该怎么评估、怎么写简历。零编译，零部署，改完刷新就生效。更妙的是，AI 能通过对话实时修改这些规则——等于让 AI 自己定制自己的行为。它把 AI 应用从调用接口，变成了维护知识。",
+      "emphasis": ["Prompt-as-Code", "Markdown", "零编译", "零部署", "维护知识"]
+    },
+    {
+      "id": 4,
+      "scene": "s4-scan",
+      "label": "scan",
+      "duration_estimate_s": 22,
+      "visual_phases": [
+        {"label": "7 平台 150 家覆盖", "narration_anchor": 0},
+        {"label": "零 Token 验证机制", "narration_anchor": 5}
+      ],
+      "text": "先看核心功能，职位扫描。它对接了 7 个招聘平台的公开接口，Greenhouse、Ashby、Lever 这些，覆盖 150 多家欧美科技公司。关键是纯抓数据，零消耗 AI Token，扫一圈成本几乎为零。它还能用浏览器逐个打开链接，自动验证职位有没有过期，省掉一堆无效投递。",
+      "emphasis": ["7", "Greenhouse", "Ashby", "Lever", "150", "零消耗"]
+    },
+    {
+      "id": 5,
+      "scene": "s5-eval",
+      "label": "eval",
+      "duration_estimate_s": 24,
+      "visual_phases": [
+        {"label": "A-D 维度拆解", "narration_anchor": 0},
+        {"label": "E-G 维度 + 1-5 量化", "narration_anchor": 5}
+      ],
+      "text": "再看另一个核心功能，A 到 G 七维评估。AI 同时读你的简历和职位描述，从角色概要、CV 匹配、级别策略、薪酬研究、定制化建议、面试准备，到职位合法性，七个维度逐一拆解，最后汇总成 1 到 5 分。它本质做的事，是把模糊的直觉判断，变成可比较、可追溯的数字。",
+      "emphasis": ["A-G", "七维", "1", "5"]
+    },
+    {
+      "id": 6,
+      "scene": "s6-data-contract",
+      "label": "data-contract",
+      "duration_estimate_s": 26,
+      "visual_phases": [
+        {"label": "用户层 vs 系统层", "narration_anchor": 0},
+        {"label": "状态与逻辑解耦", "narration_anchor": 6}
+      ],
+      "text": "架构上有个精妙设计，叫数据契约。系统把所有文件分成两层——用户层装你的简历、个人配置和评分结果，系统每次更新都绕开它，绝不触碰；系统层装评分逻辑和工具脚本，可以放心升级。两条线彻底分开，你的求职数据，永远不会被一次更新覆盖掉。这种状态和逻辑解耦的思路，是大系统才有的工程素养。",
+      "emphasis": ["数据契约", "用户层", "系统层", "解耦"]
+    },
+    {
+      "id": 7,
+      "scene": "s7-limits",
+      "label": "limits",
+      "duration_estimate_s": 28,
+      "visual_phases": [
+        {"label": "地域限制", "narration_anchor": 0},
+        {"label": "AI 偏差 + 硬件依赖", "narration_anchor": 3},
+        {"label": "反对盲目海投", "narration_anchor": 7}
+      ],
+      "text": "但要诚实说它的边界。一是地域：它只对接欧美招聘平台，Boss 直聘、拉勾、猎聘这些国内平台，用不了。二，AI 评分是推理建议，不是精确计算，可能存在偏差，别当成唯一标准。三，硬件依赖：运行要装 Node.js、Playwright，还要拉一个 Chromium 浏览器，部署有点门槛。它也明确反对盲目海投——评估低于 4 分的职位，不建议投，宁可少投，不要乱投。",
+      "emphasis": ["欧美", "Boss", "拉勾", "猎聘", "Node.js", "Playwright", "Chromium", "4"]
+    },
+    {
+      "id": 8,
+      "scene": "s8-usecase",
+      "label": "usecase",
+      "duration_estimate_s": 24,
+      "visual_phases": [
+        {"label": "适合谁 + 真实案例", "narration_anchor": 0},
+        {"label": "脚手架而非成品", "narration_anchor": 5}
+      ],
+      "text": "它最适合谁？AI、机器学习、自动化方向的工程师，尤其想投海外公司的。作者本人就是用这套系统，从 740 个职位里筛出真正值得投的，最后拿到了 offer。如果你投的是国内岗位，需要做不少定制改造，比如自己接一个国内平台的 Provider。我的建议很直接：把它当开源的脚手架，而不是开箱即用的成品。",
+      "emphasis": ["AI", "机器学习", "740", "offer", "脚手架"]
+    },
+    {
+      "id": 9,
+      "scene": "s9-cta",
+      "label": "cta",
+      "duration_estimate_s": 11,
+      "visual_phases": [{"label": "价值总结 + 关注"}],
+      "text": "Career-Ops 的价值，不在替你决定，而在帮你看清。一个把求职做成工程的开源系统。想看更多开源项目，关注我。",
+      "emphasis": ["帮你看清", "替你决定"]
+    }
+  ]
+}

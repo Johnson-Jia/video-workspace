@@ -1,0 +1,141 @@
+:root {
+  --bg-deep: #0f0f1a;
+  --accent-warm: #fbbf24;
+  --accent-cool: #a78bfa;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --font-title: 'Noto Serif SC','Songti SC','SimSun',serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 自定义组件 CSS（字号下限 32px · 文字必有 text-shadow）
+ * 基础层（.clip, .layer-*, .phase, .fx-*）由 assemble 脚本自动注入
+ * ============================================ */
+
+/* 文字可读性：深色背景全局投影（极轻，不压暗白字、不蒙渐变文字）*/
+.layer-content {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+/* 渐变文字豁免：渐变 + text-shadow 会发暗（R-S6-023），强制无阴影 */
+[class*="phase"] [style*="background-clip"],
+[style*="-webkit-background-clip:text"] {
+  text-shadow: none !important;
+}
+
+/* 技术平台徽章 */
+.tech-badge {
+  display: inline-block;
+  font-family: var(--font-data);
+  font-size: 32px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0,212,255,0.35);
+  background: rgba(0,212,255,0.08);
+  color: #00D4FF;
+  letter-spacing: 0.5px;
+}
+
+/* 维度卡片 */
+.dim-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 680px;
+  padding: 16px 26px;
+  border-radius: 10px;
+  background: rgba(16,185,129,0.06);
+  border-left: 4px solid #10B981;
+}
+.dim-card .dim-label {
+  font-family: var(--font-data);
+  font-size: 36px;
+  font-weight: 700;
+  color: #10B981;
+  min-width: 40px;
+}
+.dim-card .dim-name {
+  font-family: var(--font-body);
+  font-size: 32px;
+  color: var(--text);
+}
+
+/* 分层对比 */
+.layer-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px;
+  border-radius: 14px;
+  min-width: 380px;
+}
+.layer-box .layer-icon {
+  font-size: 44px;
+}
+.layer-box .layer-title {
+  font-family: var(--font-title);
+  font-size: 40px;
+  font-weight: 900;
+}
+.layer-box .layer-desc {
+  font-family: var(--font-body);
+  font-size: 32px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* 告警项 */
+.caution-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.caution-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.caution-text {
+  font-family: var(--font-body);
+  font-size: 34px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.caution-text .sub {
+  color: var(--text2);
+  font-size: 32px;
+}
+.caution-text .highlight-red {
+  color: #FF5252;
+  font-weight: 700;
+}
+
+/* 对比行 */
+.compare-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 34px;
+  line-height: 1.6;
+}
+.compare-row .check {
+  color: #10B981;
+  font-weight: 700;
+  font-size: 40px;
+}
+.compare-row .cross {
+  color: #FF5252;
+  font-weight: 700;
+  font-size: 40px;
+}

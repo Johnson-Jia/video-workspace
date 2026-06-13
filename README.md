@@ -117,6 +117,7 @@ workspace/
 ├── covers/                              # 系列封面模板（daily / weekly / spotlight / tech-dispatch / internet-reports）
 ├── bgm/                                 # BGM 素材库（17 种风格 × 2-10 首变体，跨项目复用）
 ├── sources/                             # 内容源文件（报告、数据、参考资料）
+├── evolution/                           # 评估系统（模式检测、规则阈值进化、项目评估轨迹）
 │
 └── <YYYY>/<MM>/<DD>/                    # 按日期归档的视频项目
     ├── github-trending/                 #   每日 GitHub 热门视频

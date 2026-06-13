@@ -1,0 +1,288 @@
+[
+  {
+    "id": "T-20260530T092931Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-30T09:29:31.320372+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T092950Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-05-30T09:29:50.860386+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content_ready.txt"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T092956Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T09:29:56.876714+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:scene_ids_match",
+            "details": "场景 ID 缺失（GSAP 动画将失效）: schema-truth → 缺少 id=\"schema\"; skeleton-slots → 缺少 id=\"skeleton\"; self-evolution → 缺少 id=\"self\""
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient); s7: glow+grid 三件套 (gradient); s8: glow+grid 三件套 (gradient, grid); s9: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 3 个场景 fx 层为空/不可见 (s3, s7, s14)"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 406 kbps < 500 kbps（疑似黑屏）。分辨率 1080x1920, 时长 601.0s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T095403Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T09:54:03.080456+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:scene_ids_match",
+            "details": "场景 ID 缺失（GSAP 动画将失效）: schema-truth → 缺少 id=\"schema\"; skeleton-slots → 缺少 id=\"skeleton\"; self-evolution → 缺少 id=\"self\""
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient); s7: glow+grid 三件套 (gradient); s8: glow+grid 三件套 (gradient, grid); s9: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 3 个场景 fx 不合格 (s3(空), s7(空), s14(空))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 406 kbps < 500 kbps（疑似黑屏）。分辨率 1080x1920, 时长 601.0s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          },
+          {
+            "rule_id": "gate:fx_animation_present",
+            "details": "R-R-013: 17 个场景 fx 层无 GSAP 动画 (s3, s4, s5, s6, s7, s8)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T104756Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T10:47:56.117669+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (glow, gradient); s5: glow+grid 三件套 (glow, gradient, grid); s6: glow+grid 三件套 (glow, gradient); s12: glow+grid 三件套 (glow, gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 11 个场景 fx 不合格 (s1(仅1元素), s3(空), s4(空), s5(空), s6(空), s7(空))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 226 kbps < 500 kbps（疑似黑屏）。分辨率 1080x1920, 时长 174.7s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "data-duration 不匹配 actual_duration: 场景1: HTML=174.68s vs actual=4.01s (偏差 170.67s); 场景2: HTML=4.01s vs actual=16.68s (偏差 12.67s); 场景4: HTML=16.66s vs actual=27.26s (偏差 10.60s); 场景5: HTML=27.26s vs actual=15.41s (偏差 11.85s); 场景6: HTML=15.41s vs actual=19.56s (偏差 4.15s); 场景7: HTML=19.56s vs actual=15.29s (偏差 4.27s)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T140405Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T14:04:05.861730+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 疑似黑屏（大小比率 10.2% < 40%，正常应 >50%）"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (glow, gradient); s5: glow+grid 三件套 (glow, gradient, grid); s6: glow+grid 三件套 (glow, gradient); s12: glow+grid 三件套 (glow, gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 11 个场景 fx 不合格 (s1(仅1元素), s3(空), s4(空), s5(空), s6(空), s7(空))"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "data-duration 不匹配 actual_duration: 场景1: HTML=174.68s vs actual=4.01s (偏差 170.67s); 场景2: HTML=4.01s vs actual=16.68s (偏差 12.67s); 场景4: HTML=16.66s vs actual=27.26s (偏差 10.60s); 场景5: HTML=27.26s vs actual=15.41s (偏差 11.85s); 场景6: HTML=15.41s vs actual=19.56s (偏差 4.15s); 场景7: HTML=19.56s vs actual=15.29s (偏差 4.27s)"
+          },
+          {
+            "rule_id": "gate:portrait_typography_valid",
+            "details": "R-R-016: 发现 1 个 section-tag 小徽章（禁止作为场景标题）; R-R-015: 10 个场景文字过小 (竖屏最低28px): s2(最小24px<28px), s3(最小22px<28px), s4(最小24px<28px), s5(最小22px<28px), s6(最小22px<28px), s7(最小22px<28px)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T162448Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T16:24:48.981799+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:scene_ids_match",
+            "details": "场景 ID 缺失（GSAP 动画将失效）: s1_pain → 缺少 id=\"s1_pain\"; s1_catalyst → 缺少 id=\"s1_catalyst\"; s1_discovery → 缺少 id=\"s1_discovery\"; s1_positioning → 缺少 id=\"s1_positioning\"; s2_philosophy → 缺少 id=\"s2_philosophy\"; s2_schema → 缺少 id=\"s2_schema\"; s3_pipeline_overview → 缺少 id=\"s3_pipeline_overview\"; s3_golden_3s → 缺少 id=\"s3_golden_3s\"; s4_engine_4atoms → 缺少 id=\"s4_engine_4atoms\"; s4_engine_scale → 缺少 id=\"s4_engine_scale\"; s4_positive_rules → 缺少 id=\"s4_positive_rules\"; s5_three_layers → 缺少 id=\"s5_three_layers\"; s5_skeleton_slots → 缺少 id=\"s5_skeleton_slots\"; s5_components → 缺少 id=\"s5_components\"; s6_av_sync → 缺少 id=\"s6_av_sync\"; s7_evolution → 缺少 id=\"s7_evolution\"; s7_playback → 缺少 id=\"s7_playback\"; s8_accidents → 缺少 id=\"s8_accidents\"; s9_achievement → 缺少 id=\"s9_achievement\""
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 疑似黑屏（大小比率 5.4% < 40%，正常应 >50%）"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T162555Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-30T16:25:55.484066+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\2026\\05\\30\\clipforge-vibecoding",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

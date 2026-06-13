@@ -1,0 +1,58 @@
+[
+  {
+    "id": "T-20260604T122201Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-04T12:22:01.109598+00:00",
+    "project_dir": "D:\\AI-Agent\\video-clipforge\\workspace\\_gate_test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "index.html 缺少 window.__hf 声明，HyperFrames 渲染会失败（45s 超时）"
+          },
+          {
+            "rule_id": "gate:composition_structure",
+            "details": "composition 结构缺陷: 缺少 data-composition-id 包裹层; 缺少 window.__timelines 声明; GSAP timeline 未设置 {paused: true}"
+          },
+          {
+            "rule_id": "gate:root_attributes_complete",
+            "details": "未找到 data-composition-id=\"main\" 的根组合"
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output.mp4 缺失，无法验证 no_bgm 版本"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频文件缺失: output.mp4"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "segment_durations.json 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "bgm.wav 缺失"
+          },
+          {
+            "rule_id": "gate:gradient_text_no_dark_shadow",
+            "details": "R-S6-023: 1 处渐变文字搭配黑色 text-shadow （应使用同色系发光）。违规: CSS规则 '.star-num' 黑色 text-shadow 命中渐变类: star-num"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

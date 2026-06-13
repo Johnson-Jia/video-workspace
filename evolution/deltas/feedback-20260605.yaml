@@ -1,0 +1,164 @@
+# ClipForge Feedback Report — 2026-06-05 三维分析校准
+# 数据范围：2026-05-13 ~ 2026-06-04，44 个项目，21 个有机器评分
+# 分析方法：三维象限分析（Reach × Retention × Depth）
+
+meta:
+  analysis_date: "2026-06-05"
+  data_range: "2026-05-13 ~ 2026-06-04"
+  total_projects: 44
+  with_machine_score: 21
+  method: "三维象限分析"
+
+calibration_summary:
+  verdict: "OVERESTIMATED_SYSTEMIC"
+  description: "机器评分系统性偏乐观，21 个项目中 14 个被高估（67%），0 个被低估"
+  overestimated: 14
+  underestimated: 0
+  consistent: 7
+  root_cause: "软评分 gate 检查维度偏重结构合规（HTML/音频/封面），未评估内容吸引力和选题相关性"
+
+quadrant_distribution:
+  STAR: 4        # 高触达 + 高留存
+  HIDDEN_GEM: 3  # 低触达 + 高留存
+  CLICKBAIT: 2   # 高触达 + 低留存
+  UNDERPERFORM: 35  # 低触达 + 低留存
+
+top_performers:
+  - project: "2026/05/24/github-trending"
+    plays: 279227
+    c5: 0.4609
+    cfull: 0.0475
+    quadrant: STAR
+    hook_keyword: "炸"
+    note: "单日爆发型 hook，'炸了' 用词配合震撼数据"
+
+  - project: "2026/05/19/github-trending"
+    plays: 113869
+    c5: 0.4677
+    cfull: 0.0585
+    quadrant: STAR
+    hook_keyword: "涨星最快"
+    note: "早期高播放，该词现已疲劳"
+
+  - project: "2026/06/01/github-trending"
+    plays: 112561
+    c5: 0.3697
+    cfull: 0.0477
+    quadrant: CLICKBAIT
+    hook_keyword: "冲上"
+    note: "高触达但留存偏低，hook 吸引但内容节奏可优化"
+
+  - project: "2026/05/28/glm-vs-qwen-compare"
+    plays: 34809
+    c5: 0.5306
+    cfull: 0.1061
+    quadrant: HIDDEN_GEM
+    hook_keyword: "对比/冲突"
+    note: "全项目最高 5s 完播率(53.1%)和全播率(10.6%)，反转型 hook 效果显著"
+
+hook_calibration:
+  fatigued_words:
+    - word: "最猛"
+      avg_plays: 8000
+      avg_c5: 0.296
+      status: "DEPRECATED"
+      action: "从 hook_anchors 和模板中移除"
+  effective_patterns:
+    - pattern: "反直觉/冲突型"
+      avg_c5: 0.50
+      best_example: "glm-vs-qwen-compare (53.1% 5s)"
+      action: "提升为优先级 1"
+    - pattern: "动作+数字型（杀入/冲上）"
+      avg_plays: 49000
+      action: "新增为优先级 2"
+    - pattern: "炸（单次）"
+      peak_plays: 279000
+      constraint: "不可连续使用"
+
+content_calibration:
+  segment_guidance:
+    finding: "7 段以上视频全播率显著下降"
+    recommendation: "标准模式控制在 5-6 段"
+  topic_guidance:
+    finding: "非技术选题（银发经济/教育政策/非 GitHub 专题）播放量均低于基线"
+    recommendation: "维持开源/编程聚焦，避免选题漂移"
+  rhythm_guidance:
+    finding: "专题类视频(单项目深度/对比) 5s 完播率 > 日榜盘点"
+    recommendation: "Trending:专题 = 2:1 节奏"
+
+per_project_calibration:
+  # --- OVERESTIMATED cases (machine HIGH, actual LOW/MEDIUM) ---
+  - project: "workspace/2026/06/03/ruview-expose"
+    machine_score: 1.0
+    plays: 0
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "非技术选题，机器评分未检测内容相关性"
+
+  - project: "workspace/2026/06/04/github-trending"
+    machine_score: 0.97
+    plays: 0
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "发布时间过短，数据未成熟"
+
+  - project: "workspace/2026/05/30/ai-agent-commercial-value"
+    machine_score: 0.92
+    plays: 1204
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "非 trending 选题，内容偏离频道定位"
+
+  - project: "workspace/2026/06/02/ai-gamedev-report"
+    machine_score: 1.0
+    plays: 2181
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "报告类内容，受众不匹配"
+
+  - project: "workspace/2026/05/31/github-trending"
+    machine_score: 0.97
+    plays: 6030
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "结构合规但 hook 吸引力不足"
+
+  - project: "workspace/2026/06/03/github-trending"
+    machine_score: 0.97
+    plays: 4939
+    actual: "LOW"
+    verdict: "OVERESTIMATED"
+    diagnosis: "结构合规但内容吸引力低"
+
+  # --- CONSISTENT cases (reliable calibration samples) ---
+  - project: "workspace/2026/06/01/github-trending-weekly"
+    machine_score: 0.97
+    plays: 59057
+    actual: "HIGH"
+    verdict: "CONSISTENT"
+
+  - project: "workspace/2026/05/28/glm-vs-qwen-compare"
+    machine_score: 0.8
+    plays: 34809
+    actual: "MEDIUM"
+    verdict: "CONSISTENT"
+
+  - project: "workspace/2026/05/20/github-trending"
+    machine_score: 0.8
+    plays: 42805
+    actual: "MEDIUM"
+    verdict: "CONSISTENT"
+
+actions_taken:
+  - target: "categories/github.md → CONFIG hook_anchors"
+    change: "移除 '涨星最快/N 个项目/天涨近/最高涨星/涨星最多'，新增 '杀入/冲上/实测/翻车/居然/砍掉'"
+  - target: "categories/github.md → hook_templates"
+    change: "数据源更新为 2026-06-05 三维分析；新增'动作+数字'优先级 2；标记'最猛'为 DEPRECATED"
+  - target: "categories/github.md → selection_strategy"
+    change: "新增 2:1 节奏建议、≤6 段数限制、选题聚焦要求"
+
+pending_actions:
+  - id: "D-20260605-R-CAL-gate_checker"
+    status: "requires_human_review"
+    description: "gate_checker 评分偏乐观，需校准阈值——67% 项目被高估"
+    recommendation: "引入内容相关性检查（选题是否匹配频道定位）和 hook 吸引力评估维度"

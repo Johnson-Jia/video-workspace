@@ -1,0 +1,253 @@
+[
+  {
+    "id": "T-20260531T000444Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-31T00:04:44.497720+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (glow, gradient); s4: glow+grid 三件套 (glow, gradient); s7: glow+grid 三件套 (glow, gradient); s8: glow+grid 三件套 (glow, gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 2 个场景 fx 不合格 (s7(仅0元素), s8(仅0元素))"
+          },
+          {
+            "rule_id": "gate:portrait_typography_valid",
+            "details": "R-R-015: 2 个场景文字过小 (竖屏最低36px): s3(最小26px<36px), s7(最小30px<36px)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260531T000551Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-31T00:05:51.491713+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (glow, gradient); s4: glow+grid 三件套 (glow, gradient); s8: glow+grid 三件套 (glow, gradient)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260531T071244Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-31T07:12:44.403376+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:composition_structure",
+            "details": "composition 结构缺陷: __timelines 未注册任何 timeline"
+          },
+          {
+            "rule_id": "gate:root_attributes_complete",
+            "details": "未找到 data-composition-id=\"main\" 的根组合"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: glow+grid 三件套 (gradient); s2: glow+grid 三件套 (gradient); s3: glow+grid 三件套 (gradient); s4: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 5 个场景 fx 不合格 (s2(空), s4(空), s6(空), s9(空), s10(空))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 480 kbps < 500 kbps（疑似黑屏）。分辨率 1920x1080, 时长 284.2s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "segment_durations.json 解析失败: 'list' object has no attribute 'get'"
+          },
+          {
+            "rule_id": "gate:portrait_typography_valid",
+            "details": "R-R-015: 11 个场景文字过小 (横屏最低32px): s1(最小28px<32px), s2(最小20px<32px), s3(最小24px<32px), s4(最小20px<32px), s5(最小20px<32px), s6(最小18px<32px)"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "A/V 漂移风险: bgm=284.12s > 旁白=283.97s (超出 0.15s > 容差 0.15s)。HyperFrames 会以最长音频轨为准渲染，BGM 超长导致视频尾段无旁白。修复: ffmpeg -y -i bgm.wav -t 283.97 -c:a pcm_s16le bgm.wav"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260611T014115Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-11T01:41:15.998337+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content.md"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260611T014116Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-11T01:41:16.046171+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260611T014116Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-06-11T01:41:16.122950+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 0.85,
+        "hard_violations": [],
+        "soft_issues": [
+          "预估/实际总偏差 100.0% > 20% (est=0s act=53s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260611T014116Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-11T01:41:16.205107+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260611T014116Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-06-11T01:41:16.278317+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "R-S7-006: 缺少平台文案: 抖音, 视频号, 小红书（需 ## 抖音、## 视频号、## 小红书）"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

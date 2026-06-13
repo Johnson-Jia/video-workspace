@@ -1,0 +1,29 @@
+delta:
+  approved_by: null
+  confidence: 0.85
+  created_at: '2026-06-08T07:47:31.101581+00:00'
+  id: D-20260608-R-THRESHOLD-c5s-update
+  new_rule:
+    class: QUALITY
+    detection:
+      keywords: []
+      semantic_check: true
+    guardrail: attribution.py _DOUYIN_THRESHOLDS['5s_completion_low'] != 0.40
+    id: R-THRESHOLD-c5s-update
+    pattern: 5s 完播率低阈值使用旧值 0.38
+    positive: '抖音归因阈值更新: 5s_completion_low=0.40, 5s_completion_high=0.44 (基于 41 个样本重新校准)'
+    scope: GLOBAL
+    severity: HARD
+    source: '2026-06-08: >=44%→48,522 | 38-44%→21,154 | <38%→13,218，40%是更精准的分水岭'
+    type: FORBIDDEN_LOGIC
+  operation: ADDED
+  source: deep_analysis.2026-06-08
+  target_rule: R-THRESHOLD-c5s-update
+requires_human_review: false
+shadow_validation:
+  delta_id: D-20260608-R-THRESHOLD-c5s-update
+  reason: 通过影子校验
+  requires_human_review: false
+  safe: true
+  total_traces: 255
+  violations_before: 148

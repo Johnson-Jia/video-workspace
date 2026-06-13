@@ -1,0 +1,242 @@
+[
+  {
+    "id": "T-20260610T031537Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-10T03:15:37.747010+00:00",
+    "project_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\cleanup-test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content.md"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260610T031537Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-10T03:15:37.793142+00:00",
+    "project_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\cleanup-test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: narration_segments.json"
+          },
+          {
+            "rule_id": "gate:json_valid",
+            "details": "JSON 解析失败 narration_segments.json: Expecting value: line 1 column 1 (char 0)"
+          },
+          {
+            "rule_id": "gate:hook_pattern_verified",
+            "details": "narration_segments.json 解析失败: Expecting value: line 1 column 1 (char 0)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260610T031537Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-06-10T03:15:37.910413+00:00",
+    "project_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\cleanup-test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: segment_durations.json"
+          },
+          {
+            "rule_id": "gate:json_valid",
+            "details": "JSON 文件缺失: segment_durations.json"
+          },
+          {
+            "rule_id": "gate:loudnorm_verified",
+            "details": "音频文件缺失: narration.mp3"
+          },
+          {
+            "rule_id": "gate:bgm_volume_set",
+            "details": "segment_durations.json 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_duration_covers",
+            "details": "bgm.wav 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_silence_valid",
+            "details": "BGM 文件缺失: bgm.wav"
+          },
+          {
+            "rule_id": "gate:narration_sample_rate_valid",
+            "details": "narration.mp3 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_volume_provenance_valid",
+            "details": "segment_durations.json 缺失，无法验证 bgm_volume 来源"
+          },
+          {
+            "rule_id": "gate:bgm_volume_table_valid",
+            "details": "segment_durations.json 缺失"
+          },
+          {
+            "rule_id": "gate:duration_in_range",
+            "details": "时长文件缺失"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260610T031538Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-10T03:15:38.273336+00:00",
+    "project_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\cleanup-test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: index.html"
+          },
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "index.html 缺少 window.__hf 声明，HyperFrames 渲染会失败（45s 超时）"
+          },
+          {
+            "rule_id": "gate:composition_structure",
+            "details": "composition 结构缺陷: 缺少 data-composition-id 包裹层; 缺少 window.__timelines 声明; GSAP timeline 未设置 {paused: true}"
+          },
+          {
+            "rule_id": "gate:root_attributes_complete",
+            "details": "未找到 data-composition-id=\"main\" 的根组合"
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 缺失"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "未找到视频流"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "segment_durations.json 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "bgm.wav 缺失"
+          },
+          {
+            "rule_id": "gate:pre_render_deps",
+            "details": "FAIL: composition 根元素缺少 data-width\nFAIL: composition 根元素缺少 data-height"
+          },
+          {
+            "rule_id": "gate:html_structure_valid",
+            "details": "安全区 padding 缺失：.phase 和 .scene-wrap 均无 padding（内容将贴边缘）"
+          },
+          {
+            "rule_id": "gate:output_media_valid",
+            "details": "output.mp4 不存在或为空; output_no_bgm.mp4 不存在或为空; final.mp4 采样率=未知，应为 48000"
+          },
+          {
+            "rule_id": "gate:bgm_isolation_valid",
+            "details": "BGM 隔离校验：输出文件缺失"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260610T031538Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-06-10T03:15:38.604028+00:00",
+    "project_dir": "C:\\Users\\admin\\AppData\\Local\\Temp\\cleanup-test",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: final.mp4"
+          },
+          {
+            "rule_id": "gate:final_duration_close_to_output",
+            "details": "无法获取 final.mp4 时长"
+          },
+          {
+            "rule_id": "gate:cover_layers_present",
+            "details": "cover.html 缺失，无法检查封面结构"
+          },
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "douyin.md 缺失"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

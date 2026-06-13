@@ -1,0 +1,32 @@
+delta:
+  approved_by: null
+  confidence: 0.9
+  created_at: '2026-06-13T13:43:40.333084+00:00'
+  id: D-20260613-R-S3-008
+  new_rule:
+    class: EXPERIENTIAL
+    detection:
+      keywords: []
+      semantic_check: true
+    guardrail: segments[0].text 前 15 字不包含任何 hook_anchors 关键词或数字
+    id: R-S3-008
+    pattern: hook 场景第一句不含动作词/数字锚定/反直觉陈述
+    positive: hook 第一句必须包含至少一个：(a)动作词（杀入/冲上/炸）(b)量化数字 (c)反直觉转折。多平台数据：action hook 受众广度
+      0.55 是平铺 0.40 的 1.4x
+    scope: SKILL
+    severity: HARD
+    skill: stage3-scenes
+    source: 'auto_evolve: N=61, action=0.55 vs plain=0.40 (1.4x, 多平台 reach_composite)'
+    type: FORBIDDEN_ACTION
+  observation_days: 3
+  operation: ADDED
+  source: auto_evolve
+  target_rule: R-S3-008
+requires_human_review: false
+shadow_validation:
+  delta_id: D-20260613-R-S3-008
+  reason: 通过影子校验
+  requires_human_review: false
+  safe: true
+  total_traces: 393
+  violations_before: 216

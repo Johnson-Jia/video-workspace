@@ -1,0 +1,681 @@
+[
+  {
+    "id": "T-20260531T234855Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-31T23:48:55.936660+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 seek 函数"
+          },
+          {
+            "rule_id": "gate:root_attributes_complete",
+            "details": "<audio> 元素缺少 data-start=\"0\": audio#1, audio#2"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: 类型不足 (空); s2: 类型不足 (scan); s3: 类型不足 (空); s4: 类型不足 (空); s5: 类型不足 (空); s6: 类型不足 (空)"
+          },
+          {
+            "rule_id": "gate:adjacent_bg_diversity",
+            "details": "R-R-012: 5 对相邻同质 (2 种风格/8 场景, 需≥3); s3↔s4; s4↔s5; s5↔s6; s6↔s7"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 6 个场景 fx 不合格 (s1(仅1元素), s2(仅1元素), s3(仅1元素), s5(仅1元素), s7(仅1元素), s8(仅0元素))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 314 kbps < 500 kbps（疑似黑屏）。分辨率 1080x1920, 时长 40.4s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          },
+          {
+            "rule_id": "gate:portrait_typography_valid",
+            "details": "R-R-015: 1 个场景文字过小 (竖屏最低36px): s1(最小32px<36px)"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "A/V 漂移风险: bgm=40.47s > 旁白=40.22s (超出 0.25s > 容差 0.15s)。HyperFrames 会以最长音频轨为准渲染，BGM 超长导致视频尾段无旁白。修复: ffmpeg -y -i bgm.wav -t 40.22 -c:a pcm_s16le bgm.wav"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T002052Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-01T00:20:52.320618+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "index.html 缺少 window.__hf 声明，HyperFrames 渲染会失败（45s 超时）"
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 疑似黑屏（大小比率 31.1% < 40%，正常应 >50%）"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: 类型不足 (空); s2: 类型不足 (空); s3: 类型不足 (空); s4: 类型不足 (空); s5: 类型不足 (空); s6: 类型不足 (空)"
+          },
+          {
+            "rule_id": "gate:adjacent_bg_diversity",
+            "details": "R-R-012: 7 对相邻同质 (1 种风格/8 场景, 需≥3); s1↔s2; s2↔s3; s3↔s4; s4↔s5"
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "data-duration 不匹配 actual_duration: 场景1: HTML=40.22s vs actual=4.96s (偏差 35.26s); 场景2: HTML=4.96s vs actual=7.19s (偏差 2.23s); 场景3: HTML=7.19s vs actual=5.61s (偏差 1.58s); 场景5: HTML=6.03s vs actual=5.16s (偏差 0.87s); 场景7: HTML=5.32s vs actual=3.98s (偏差 1.34s); 场景8: HTML=3.98s vs actual=1.97s (偏差 2.01s)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T002354Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-01T00:23:54.758421+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 疑似黑屏（大小比率 31.1% < 40%，正常应 >50%）"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: glow+grid 三件套 (gradient); s2: glow+grid 三件套 (gradient, grid); s3: 类型不足 (beams); s4: glow+grid 三件套 (gradient); s5: 类型不足 (空); s6: glow+grid 三件套 (gradient)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T002612Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-01T00:26:12.515015+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T002915Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-01T00:29:15.905094+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T003217Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-01T00:32:17.719575+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T003218Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-01T00:32:18.295539+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T003219Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-06-01T00:32:19.141069+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 0.85,
+        "hard_violations": [],
+        "soft_issues": [
+          "预估/实际总偏差 100.0% > 20% (est=0s act=40s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T003219Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-01T00:32:19.948479+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260601T003220Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-06-01T00:32:20.766397+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260531T233911Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-05-31T23:39:11.457412+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hook_pattern_verified",
+            "details": "segments 为空"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260531T233935Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-05-31T23:39:35.029353+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hook_pattern_verified",
+            "details": "hook 场景的 narration_segment 为空"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260531T233959Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-05-31T23:39:59.323871+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  },
+  {
+    "id": "T-20260531T234213Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-05-31T23:42:13.696507+00:00",
+    "project_dir": "2026/06/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 0.85,
+        "hard_violations": [],
+        "soft_issues": [
+          "预估/实际总偏差 100.0% > 20% (est=0s act=40s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "douyin",
+      "title": "注意了，今天 GitHub 有个项目把域名注册做成了免费",
+      "title_full": "注意了，今天 GitHub 有个项目把域名注册做成了免费\n另一个项目给 AI 加了长期记忆，关掉对话下次还记得\n这些信息差你错过了可能要等很久 \n你知道哪些服务本来收费结果被开源干掉了吗？评论区说说 \n#GitHub #开源项目 #程序员 #AI #科技圈",
+      "published_at": "2026-05-27 10:10:36",
+      "plays": 20135,
+      "completion_rate": 0.047712,
+      "completion_5s_rate": 0.437931,
+      "bounce_2s_rate": 0.326077,
+      "avg_watch_duration": 13.581244,
+      "likes": 516,
+      "shares": 96,
+      "comments": 8,
+      "saves": 614,
+      "profile_visits": 205,
+      "followers_gained": 172,
+      "share_rate": 0.004768,
+      "like_rate": 0.025627,
+      "save_rate": 0.030494,
+      "comment_rate": 0.000397
+    }
+  }
+]

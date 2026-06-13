@@ -1,0 +1,232 @@
+[
+  {
+    "id": "T-20260530T050021Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-05-30T05:00:21.370000+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T050025Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-05-30T05:00:25.261554+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T050025Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T05:00:25.636021+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: glow+grid 三件套 (gradient); s3: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient); s8: glow+grid 三件套 (gradient); s10: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:html_no_css_visibility",
+            "details": "R-S6-013: 发现 CSS class 切换可见性模式（1 处），HyperFrames 通过 GSAP seek 驱动，不会切换 class。正确方式：GSAP timeline .set()/.fromTo() 控制场景可见性"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T050025Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-30T05:00:25.861381+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T073436Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-30T07:34:36.177997+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:hf_api_present",
+            "details": "window.__hf 缺少 duration 字段"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s1: glow+grid 三件套 (gradient); s3: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient); s8: glow+grid 三件套 (gradient); s10: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:html_no_css_visibility",
+            "details": "R-S6-013: 发现 CSS class 切换可见性模式（1 处），HyperFrames 通过 GSAP seek 驱动，不会切换 class。正确方式：GSAP timeline .set()/.fromTo() 控制场景可见性"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T073453Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-05-30T07:34:53.442447+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 0.85,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: bgm.wav"
+          },
+          {
+            "rule_id": "gate:bgm_duration_covers",
+            "details": "bgm.wav 缺失"
+          },
+          {
+            "rule_id": "gate:bgm_silence_valid",
+            "details": "BGM 文件缺失: bgm.wav"
+          }
+        ],
+        "soft_issues": [
+          "预估/实际总偏差 20.3% > 20% (est=611s act=508s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T073505Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-05-30T07:35:05.987507+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content_ready.txt"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260530T073506Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-30T07:35:06.377146+00:00",
+    "project_dir": "2026/05/30/ai-agent-business-value",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

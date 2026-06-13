@@ -1,0 +1,60 @@
+[
+  {
+    "id": "T-20260612T180607Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-12T18:06:07.142288+00:00",
+    "project_dir": "C:/Users/admin/AppData/Local/Temp/tmpswj01pui",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 0.85,
+        "hard_violations": [
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output.mp4 缺失，无法验证 no_bgm 版本"
+          },
+          {
+            "rule_id": "gate:bg_component_source",
+            "details": "R-R-021: 1个无标记(s01)"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-009: s01: 类型不足 (beams)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 1 个场景 fx 不合格 (s01(仅0元素,需≥3))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频文件缺失: output.mp4"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "bgm.wav 缺失"
+          },
+          {
+            "rule_id": "gate:pre_render_deps",
+            "details": "FAIL: 引用文件不存在: narration.mp3\r\nFAIL: 引用文件不存在: bgm.wav\r\nFAIL: bgm.wav 被 HTML 引用但不存在\r\nFAIL: narration.mp3 被 HTML 引用但不存在"
+          },
+          {
+            "rule_id": "gate:output_media_valid",
+            "details": "output.mp4 不存在或为空"
+          }
+        ],
+        "soft_issues": [
+          "SOFT: index.html 未加载 design.md 声明的字体 [title=Liu Jian Mao Cao]。渲染时降级为系统 fallback，视觉偏离字体气质设计。检查 s6_assemble_html.py 的 GOOGLE_FONT_MAP 是否包含该字体"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

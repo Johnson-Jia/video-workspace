@@ -1,0 +1,164 @@
+[
+  {
+    "id": "T-20260604T051818Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-04T05:18:18.685040+00:00",
+    "project_dir": "2026/06/04/opentalking-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content_ready.txt"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260604T051818Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-04T05:18:18.719252+00:00",
+    "project_dir": "2026/06/04/opentalking-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 0.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260604T051818Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-06-04T05:18:18.719252+00:00",
+    "project_dir": "2026/06/04/opentalking-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:json_valid",
+            "details": "segment_durations.json 缺少必要字段: meta"
+          },
+          {
+            "rule_id": "gate:bgm_volume_set",
+            "details": "BGM 音量未设置: meta.bgm_volume"
+          },
+          {
+            "rule_id": "gate:bgm_silence_valid",
+            "details": "旁白总时长为 0，无法检查 BGM 覆盖"
+          },
+          {
+            "rule_id": "gate:narration_sample_rate_valid",
+            "details": "R-S4-004: narration.mp3 采样率 24000 Hz = raw edge-tts 输出，loudnorm.sh 未执行。预期 >= 44100 Hz。修复: bash .claude/commands/clipforge/scripts/loudnorm.sh narration.mp3"
+          },
+          {
+            "rule_id": "gate:bgm_volume_provenance_valid",
+            "details": "R-S4-005: bgm_volume=0 无溯源标记（bgm_volume_source 缺失），bgm_orig.wav 也不存在。修复: bash .claude/commands/clipforge/scripts/bgm_pipeline.sh"
+          },
+          {
+            "rule_id": "gate:bgm_volume_table_valid",
+            "details": "meta.bgm_mean_db 缺失 — bgm_gap_check.py 未写入溯源数据。修复: bash .claude/commands/clipforge/scripts/bgm_pipeline.sh"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260604T051818Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-04T05:18:18.883001+00:00",
+    "project_dir": "2026/06/04/opentalking-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:scene_ids_match",
+            "details": "场景 ID 缺失（GSAP 动画将失效）: scene-1 → 缺少 id=\"scene\"; scene-2 → 缺少 id=\"scene\"; scene-3 → 缺少 id=\"scene\"; scene-4 → 缺少 id=\"scene\"; scene-5 → 缺少 id=\"scene\"; scene-6 → 缺少 id=\"scene\"; scene-7 → 缺少 id=\"scene\"; scene-8 → 缺少 id=\"scene\"; scene-9 → 缺少 id=\"scene\"; scene-10 → 缺少 id=\"scene\"; scene-11 → 缺少 id=\"scene\""
+          },
+          {
+            "rule_id": "gate:data_duration_source_valid",
+            "details": "data-duration 不匹配 actual_duration: 场景1: HTML 有 11 段但 segment_durations 仅 0 段"
+          },
+          {
+            "rule_id": "gate:phase_timings_valid",
+            "details": "phase_timings.json 缺失，但有 11 个多 phase 场景 (scene-1, scene-2, scene-3, scene-4)。骨架 fallback 会用文本比例估算（精度 ±30%），建议运行 phase_calibrator.py 获取精确校准"
+          },
+          {
+            "rule_id": "gate:phase_visibility_present",
+            "details": "R-S6-022: 11 个 phase 无可见性恢复: scene-1 .phase-2, scene-2 .phase-2, scene-3 .phase-2, scene-4 .phase-2, scene-5 .phase-2, scene-6 .phase-2。Phase 2+ 在骨架中被设为 opacity:0 但从未恢复 → 空白帧"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260604T051818Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-06-04T05:18:18.981550+00:00",
+    "project_dir": "2026/06/04/opentalking-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

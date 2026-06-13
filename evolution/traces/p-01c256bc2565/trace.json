@@ -1,0 +1,249 @@
+[
+  {
+    "id": "T-20260531T103001Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-31T10:30:01.669452+00:00",
+    "project_dir": "2026/05/31/clipforge-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:cover_layers_present",
+            "details": "R-S7-003: 封面禁止引用外部脚本（动画库会导致白屏截图），发现: https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+          },
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "R-S7-006: 缺少平台文案: 抖音, 视频号, 小红书（需 ## 抖音、## 视频号、## 小红书）; 缺少评论区自评（需 ## 评论区自评 段落）"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "xiaohongshu",
+      "title": "一行文字到成片，我让AI自己做了条短视频 |",
+      "published_at": "2026-06-01",
+      "type": "视频",
+      "impressions": 9209,
+      "plays": 2962,
+      "cover_ctr": 0.065,
+      "likes": 27,
+      "comments": 5,
+      "saves": 44,
+      "followers_gained": 5,
+      "shares": 6,
+      "avg_watch_duration": 34.0,
+      "save_rate": 0.014855,
+      "like_rate": 0.009115,
+      "save_to_like_ratio": 1.63
+    }
+  },
+  {
+    "id": "T-20260531T103043Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-31T10:30:43.957700+00:00",
+    "project_dir": "2026/05/31/clipforge-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:cover_layers_present",
+            "details": "R-S7-003: 封面禁止 JavaScript 动画代码（fromTo opacity:0 等会导致白屏），发现非法内容: ,pause:function()"
+          },
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "R-S7-006: 评论区缺少项目介绍格式: 搜索方式（如 'GitHub搜索: RuView'）"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "xiaohongshu",
+      "title": "一行文字到成片，我让AI自己做了条短视频 |",
+      "published_at": "2026-06-01",
+      "type": "视频",
+      "impressions": 9209,
+      "plays": 2962,
+      "cover_ctr": 0.065,
+      "likes": 27,
+      "comments": 5,
+      "saves": 44,
+      "followers_gained": 5,
+      "shares": 6,
+      "avg_watch_duration": 34.0,
+      "save_rate": 0.014855,
+      "like_rate": 0.009115,
+      "save_to_like_ratio": 1.63
+    }
+  },
+  {
+    "id": "T-20260531T103059Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-31T10:30:59.470193+00:00",
+    "project_dir": "2026/05/31/clipforge-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "xiaohongshu",
+      "title": "一行文字到成片，我让AI自己做了条短视频 |",
+      "published_at": "2026-06-01",
+      "type": "视频",
+      "impressions": 9209,
+      "plays": 2962,
+      "cover_ctr": 0.065,
+      "likes": 27,
+      "comments": 5,
+      "saves": 44,
+      "followers_gained": 5,
+      "shares": 6,
+      "avg_watch_duration": 34.0,
+      "save_rate": 0.014855,
+      "like_rate": 0.009115,
+      "save_to_like_ratio": 1.63
+    }
+  },
+  {
+    "id": "T-20260531T103111Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-05-31T10:31:11.949315+00:00",
+    "project_dir": "2026/05/31/clipforge-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:composition_structure",
+            "details": "composition 结构缺陷: __timelines 未注册任何 timeline"
+          },
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output_no_bgm.mp4 疑似黑屏（大小比率 39.4% < 40%，正常应 >50%）"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-011: s2: glow+grid 三件套 (gradient); s3: glow+grid 三件套 (gradient); s4: glow+grid 三件套 (gradient); s5: glow+grid 三件套 (gradient); s6: glow+grid 三件套 (gradient); s7: glow+grid 三件套 (gradient)"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 16 个场景 fx 不合格 (s2(仅0元素), s3(仅1元素), s4(仅1元素), s5(仅0元素), s6(仅0元素), s7(空))"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频码率异常: 481 kbps < 500 kbps（疑似黑屏）。分辨率 1920x1080, 时长 503.0s。常见原因：index.html 使用 CSS class 切换可见性而非 GSAP timeline"
+          },
+          {
+            "rule_id": "gate:portrait_typography_valid",
+            "details": "R-R-015: 14 个场景文字过小 (横屏最低32px): s4(最小24px<32px), s5(最小26px<32px), s6(最小22px<32px), s7(最小22px<32px), s8(最小20px<32px), s9(最小24px<32px)"
+          },
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "A/V 漂移风险: bgm=503.00s > 旁白=501.61s (超出 1.39s > 容差 0.15s)。HyperFrames 会以最长音频轨为准渲染，BGM 超长导致视频尾段无旁白。修复: ffmpeg -y -i bgm.wav -t 501.61 -c:a pcm_s16le bgm.wav"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "xiaohongshu",
+      "title": "一行文字到成片，我让AI自己做了条短视频 |",
+      "published_at": "2026-06-01",
+      "type": "视频",
+      "impressions": 9209,
+      "plays": 2962,
+      "cover_ctr": 0.065,
+      "likes": 27,
+      "comments": 5,
+      "saves": 44,
+      "followers_gained": 5,
+      "shares": 6,
+      "avg_watch_duration": 34.0,
+      "save_rate": 0.014855,
+      "like_rate": 0.009115,
+      "save_to_like_ratio": 1.63
+    }
+  },
+  {
+    "id": "T-20260531T103216Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-05-31T10:32:16.668076+00:00",
+    "project_dir": "2026/05/31/clipforge-deep-dive",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": {
+      "platform": "xiaohongshu",
+      "title": "一行文字到成片，我让AI自己做了条短视频 |",
+      "published_at": "2026-06-01",
+      "type": "视频",
+      "impressions": 9209,
+      "plays": 2962,
+      "cover_ctr": 0.065,
+      "likes": 27,
+      "comments": 5,
+      "saves": 44,
+      "followers_gained": 5,
+      "shares": 6,
+      "avg_watch_duration": 34.0,
+      "save_rate": 0.014855,
+      "like_rate": 0.009115,
+      "save_to_like_ratio": 1.63
+    }
+  }
+]

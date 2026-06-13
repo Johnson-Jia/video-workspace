@@ -1,0 +1,90 @@
+# GitHub Trending 2026-06-13 — 内容素材
+
+> 数据源：raw_trending.json（Python + gh API 双源验证 + web-reader 三源交叉，13/13 一致）
+> 选取策略：跨圈补充（6 个项目覆盖 6 个不同方向），Agent 技能类同质化只取 1 个代表
+> 真实性验证：6/6 通过 gh API（账号年龄 / sf_ratio / watchers / README / 贡献者），0 HARD 触发
+> 合规修订：原 MasterDnsVPN 和 iptv-org 涉及违法违规内容已剔除，替换为 PowerToys 和 LMCache；openmed 描述中性化，聚焦本地推理框架能力
+
+## hook 方向
+
+优先级 1（反直觉）+ 优先级 2（动作+数字）组合：
+"6月13日 GitHub 杀入几个猛项目，Apple 官方开源了个容器工具，单日冲上三千五百星"
+
+反直觉锚点：Apple 用 Swift（移动开发语言）写 Linux 容器（服务端基础设施），跨界反差。
+动作锚点：杀入、冲上。数字锚点：单日涨三千五百星（今日最高涨星）。
+
+## 入选项目（6 个）
+
+### 1. apple/container — 单日 +3513（今日最高涨星）
+
+- 英文描述：A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, and optimized for Apple silicon.
+- 中文描述：Apple 官方开源的轻量级 Linux 容器工具，用 Swift 编写，专为 Apple 芯片优化，在 Mac 上通过轻量级虚拟机创建和运行 Linux 容器。
+- 数据：35027 总星 / 975 fork / 151 watchers / Swift
+- 反直觉角度（contrarian_angle）：Apple 用 Swift（iPhone 开发语言）写容器（服务端工具），还开源了。Mac 开发者终于不用装 Docker Desktop 了，原生跑 Linux 容器。
+- 场景类型：钩子潜力 #1（反直觉 + 最高涨星）
+
+### 2. obra/superpowers — 单日 +1276（最高总星 225K）
+
+- 英文描述：An agentic skills framework & software development methodology that works.
+- 中文描述：一个可用的 Agent 技能框架与软件开发方法论，让 AI 编程 Agent 拥有可复用的工程技能。
+- 数据：225964 总星（今日榜单最高总星）/ 20083 fork / 848 watchers / Shell
+- 反直觉角度：把"开发方法论"打包成 Agent 能直接调用的技能包，22 万星说明这套方法论被大量开发者验证有效。
+- 场景类型：连续霸榜（Agent 技能类代表，避免同质化只取这一个）
+- 备注：今日榜单中 agent-skills / pm-skills / agency-agents / superpowers 四个 Agent 技能项目同质化，只取总星最高的 superpowers 代表该方向。
+
+### 3. maziyarpanahi/openmed — 单日 +517（涨星加速）
+
+- 英文描述：open-source healthcare ai
+- 中文描述：开源的医疗领域 AI 框架，支持本地运行（on-device / on-premise），可做 PII 检测、命名实体识别，模型可选 DeepSeek / Qwen / BERT。
+- 数据：3182 总星 / 304 fork / 24 watchers / Python
+- 反直觉角度：这类 AI 框架通常跑在云端，openmed 让推理在本地设备完成，敏感数据不离开本机。
+- 场景类型：涨星加速（昨日 +427 → 今日 +517）
+- 备注：中性化描述，聚焦本地推理框架能力，不展开特定行业资质场景。
+
+### 4. mattermost/mattermost — 单日 +391（涨星加速 15 倍）
+
+- 英文描述：Mattermost is an open source platform for secure collaboration across the entire software development lifecycle..
+- 中文描述：Mattermost 是一个开源的安全协作平台，覆盖整个软件开发生命周期（可自托管的团队通讯工具）。
+- 数据：37618 总星 / 8712 fork / 532 watchers / TypeScript
+- 反直觉角度：11 年老项目（2015 年创建）突然单日涨星加速（昨日 +26 → 今日 +391，15 倍）。企业级自托管协作工具，数据完全自主可控。
+- 场景类型：涨星加速（霸榜老项目复苏）
+
+### 5. microsoft/PowerToys — 单日 +104（替换 MasterDnsVPN，官方效率工具）
+
+- 英文描述：Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows
+- 中文描述：微软官方的 Windows 效率工具合集，提供窗口管理、批量重命名、颜色拾取等实用工具，提升 Windows 生产力和自定义能力。
+- 数据：134321 总星 / 8063 fork / Swift → C / Windows
+- 反直觉角度：微软自己做的 Windows 增强工具，13 万星说明连微软都承认系统自带功能不够用，需要这套官方补强。开源让用户参与改进。
+- 场景类型：跨圈补充（效率工具方向）
+- 替换原因：原项目 MasterDnsVPN 涉及违法违规内容，零容忍剔除。
+
+### 6. LMCache/LMCache — 单日 +17（替换 iptv-org，推理加速）
+
+- 英文描述：LMCache: Supercharge Your LLM with the Fastest KV Cache Layer
+- 中文描述：为大语言模型（LLM）提供最快的 KV 缓存层，加速推理。支持 vLLM、CUDA、AMD ROCm。
+- 数据：8628 总星 / 1289 fork / Python
+- 反直觉角度：大模型推理的瓶颈常常在 KV cache，这个项目专攻这一层，把推理速度拉满。
+- 场景类型：跨圈补充（AI 推理优化方向）
+- 替换原因：原项目 iptv-org 涉及版权侵权内容，零容忍剔除。
+
+## 跨圈覆盖验证
+
+| 项目 | 方向 |
+|------|------|
+| apple/container | 基础设施 / 容器 |
+| obra/superpowers | AI / Agent |
+| maziyarpanahi/openmed | AI / 本地推理 |
+| mattermost/mattermost | 协作 / 通讯 |
+| microsoft/PowerToys | 效率工具 / Windows |
+| LMCache/LMCache | AI / 推理加速 |
+
+6 个项目覆盖 6 个不同方向 ✅
+
+## 真实性验证记录
+
+- apple/container ✅ Apple 官方组织，2025-05 创建，35027 star
+- obra/superpowers ✅ sf_ratio 11，watchers 848，多人贡献
+- maziyarpanahi/openmed ✅ owner 13 年老号（2013）·884 粉丝·39 仓库，README 18KB，904 commits
+- mattermost/mattermost ✅ 2015 年官方组织，11 年老项目
+- microsoft/PowerToys ✅ 微软官方组织，134321 star，Windows 生态核心工具
+- LMCache/LMCache ✅ 8628 star，1289 fork，Python，活跃推送

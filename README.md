@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**30 天 · 69 条视频 · 5 个系列 · 全自动**
+**31 天 · 72 条视频 · 5 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -63,11 +63,11 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月13日 | [GitHub 每日热门](2026/06/13/github-trending/) |
 | 6月12日 | [GitHub 每日热门](2026/06/12/github-trending/) |
 | 6月11日 | [GitHub 每日热门](2026/06/11/github-trending/) |
 | 6月10日 | [GitHub 每日热门](2026/06/10/github-trending/) |
 | 6月9日 | [GitHub 每日热门](2026/06/09/github-trending/) |
-| 6月8日 | [GitHub 每日热门](2026/06/08/github-trending/) |
 
 ### 周度汇总 · Weekly
 
@@ -81,13 +81,13 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月13日 | [GLM-5.2 同日开源](2026/06/13/glm-5-2-release/) |
+| 6月13日 | [Career-Ops：求职即工程](2026/06/13/career-ops-deep/) |
 | 6月12日 | [ClipForge 频道介绍](2026/06/12/clipforge-intro/) |
 | 6月11日 | [企业 AI 培训：成本砍到 1/25000](2026/06/11/enterprise-ai-training/) |
 | 6月9日 | [Agent Reach](2026/06/09/agent-reach/) |
-| 6月7日 | [PaddleOCR 深度解析](2026/06/07/paddleocr-deep-dive/) |
-| 6月6日 | [NOMAD：断网生存知识服务器](2026/06/06/project-nomad/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 69 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 72 条视频。
 <!-- END RECENT -->
 
 ---

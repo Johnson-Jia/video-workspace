@@ -1,0 +1,131 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  /* 色温翻转双色族 */
+  --steel: #3b6ea8;       /* 关门阶段钢蓝 */
+  --cyan: #00f5d4;        /* 冷青 */
+  --amber: #f9a825;       /* 开门阶段琥珀金 */
+  --ember: #ff7a18;       /* 暖橙 */
+  --danger: #e23b3b;      /* 危机红 */
+}
+
+/* ============================================
+ * 自定义组件 CSS
+ * 渐变文字一律 background-image（禁 background 简写，R-S6-021）
+ * 渐变文字用同色系 text-shadow（禁黑色 text-shadow，R-S6-023）
+ * text-shadow 只设具体元素，不用 * 通配
+ * ============================================ */
+
+/* ── 渐变文字（按色温族，同色系辉光增强可读） ── */
+.grad-danger {
+  background-image: linear-gradient(180deg,#ffffff 0%,#ffd9d9 38%,#ff5a5a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 6px 30px rgba(226,59,59,0.42);
+}
+.grad-cool {
+  background-image: linear-gradient(180deg,#ffffff 0%,#bfeaff 45%,#3b9bd6 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 6px 30px rgba(0,180,220,0.38);
+}
+.grad-warm {
+  background-image: linear-gradient(180deg,#fff6d6 0%,#ffd36b 42%,#f9a825 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 6px 30px rgba(249,168,37,0.42);
+}
+.grad-gold {
+  background-image: linear-gradient(180deg,#fff3c4 0%,#ffcf3a 50%,#c98a00 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 6px 30px rgba(255,180,30,0.42);
+}
+
+/* ── 标题基础（渐变文字的辉光由 .grad-* 提供；.t-sub 纯色文字保留黑色阴影增强层次） ── */
+.t-hero {
+  font-family: var(--font-title); font-weight: var(--title-weight);
+  line-height: 0.92; letter-spacing: -3px; text-align: center;
+}
+.t-sub {
+  font-family: var(--font-body); font-weight: 500; text-align: center;
+  color: rgba(255,255,255,0.78); letter-spacing: 1px;
+  text-shadow: 0 3px 16px rgba(0,0,0,0.6);
+}
+
+/* ── 数据大字（渐变填充时辉光由 .grad-* 提供） ── */
+.data-num {
+  font-family: var(--font-data); font-weight: 800; line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+/* ── 药丸标签 ── */
+.pill {
+  display: inline-block; font-family: var(--font-body); font-weight: 600;
+  font-size: 32px; padding: 14px 34px; border-radius: 999px;
+  background: rgba(255,255,255,0.08); color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(6px); letter-spacing: 1px;
+}
+.pill-warm { background: rgba(249,168,37,0.14); border-color: rgba(249,168,37,0.5); color:#ffd98a; }
+.pill-cool { background: rgba(0,245,212,0.10); border-color: rgba(0,245,212,0.42); color:#aef6ec; }
+
+/* ── 证据截图框（推文截图作为客观证据） ── */
+.ev-frame {
+  position: relative; border-radius: 22px; overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.28);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  background: #0a0a14;
+}
+.ev-frame.cool { border-color: rgba(0,245,212,0.45); box-shadow:0 24px 70px rgba(0,0,0,0.6),0 0 60px rgba(0,245,212,0.10); }
+.ev-frame.warm { border-color: rgba(249,168,37,0.5); box-shadow:0 24px 70px rgba(0,0,0,0.6),0 0 60px rgba(249,168,37,0.12); }
+.ev-img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
+
+/* 截图证据标签（流式徽章，置于截图框上方；改流式布局以免安全区越界） */
+.ev-tag {
+  display:inline-block; font-family:var(--font-body); font-weight:700;
+  font-size:32px; padding:10px 22px; border-radius:10px; color:#fff;
+  background: rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); letter-spacing:1px;
+}
+
+/* ── 引用块（宣言） ── */
+.quote {
+  font-family: var(--font-title); font-weight: 800; line-height: 1.18;
+  text-align: center; letter-spacing: -1px;
+}
+.quote .qm { font-family: var(--font-title); font-size: 34px; vertical-align: -0.2em; opacity:0.5; }
+
+/* ── 对比双栏 ── */
+.vs-col {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border-radius:20px; padding:40px 20px;
+}
+.vs-col.cool { background: linear-gradient(180deg,rgba(0,120,160,0.18),rgba(0,80,120,0.06)); border:1.5px solid rgba(0,200,230,0.35); }
+.vs-col.warm { background: linear-gradient(180deg,rgba(180,120,30,0.18),rgba(120,70,10,0.05)); border:1.5px solid rgba(249,168,37,0.4); }
+.vs-label { font-family:var(--font-body); font-weight:600; font-size:34px; margin-bottom:14px; letter-spacing:1px; }
+
+/* ── 亮点卡片（GLM-5.2 能力） ── */
+.feat-card {
+  width:100%; border-radius:18px; padding:26px 34px; margin:10px 0;
+  background: linear-gradient(100deg,rgba(249,168,37,0.13),rgba(255,160,40,0.04));
+  border-left: 5px solid var(--amber);
+  display:flex; align-items:center; gap:26px;
+}
+.feat-k { font-family:var(--font-data); font-weight:800; font-size:46px; color:#ffd36b; min-width:150px; }
+.feat-v { font-family:var(--font-body); font-weight:600; font-size:38px; color:#fff; line-height:1.2; }
+
+/* ── 警示横条（hook 下架） ── */
+.alert-bar {
+  font-family:var(--font-data); font-weight:700; font-size:34px; letter-spacing:4px;
+  padding:10px 0; color:#ff7a7a; text-align:center;
+  border-top:1.5px solid rgba(226,59,59,0.4); border-bottom:1.5px solid rgba(226,59,59,0.4);
+}
+
+/* ── content 内容容器：垂直居中（R-S6-028） ── */
+.stage {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  width:100%; height:100%; text-align:center; gap:30px;
+}

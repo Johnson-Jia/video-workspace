@@ -10,18 +10,16 @@
 
 数据驱动 · 开源解读 · 行业趋势
 
-[![Git LFS](https://img.shields.io/badge/Git_LFS-Enabled-orange)](https://git-lfs.github.com/)
-
 </div>
 
 ---
 
 <div align="center">
 
-**「什么样的人会关注一个讲开源项目的频道？——那些心里还相信好东西应该属于所有人的人。」**
+**「什么样的人会关注一个讲开源项目的频道？——那些心里还相信好东西应该分享给所有人的人。」**
 
 <a href="2026/06/06/github-star-intro/">
-<img src="2026/06/06/github-star-intro/cover_thumb.png" width="320" alt="观看频道介绍" />
+<img src="2026/06/12/clipforge-intro/cover_temp.png" width="320" alt="观看频道介绍" />
 </a>
 
 </div>

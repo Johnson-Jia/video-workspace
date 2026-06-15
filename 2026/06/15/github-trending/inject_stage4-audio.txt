@@ -1,0 +1,66 @@
+## 目标
+音频资产就绪，旁白和 BGM 已合成且技术参数合规
+
+## 成功标准
+- segment_durations.json 存在且含 meta + segments
+- narration.mp3 经过 loudnorm 标准化（max_volume >= -10 dB）
+- bgm.wav 存在且音量已通过 bgm_pipeline.sh 校准
+
+## 行为准则（必须遵守）
+- **[HARD]** 所有表述使用限定性语言，如'可能'、'通常'、'值得关注' （自检: 输出包含'必装'、'必备'、'神器'、'最强'、'最好'等词视为违规）
+- **[HARD]** 只展示项目名称/产品名称，链接放评论区 （自检: 画面或旁白包含 github.com/xxx 或 https://xxx.com 形式的 URL）
+- **[HARD]** 只描述能力，不说获取路径：说'能做什么'，不说'去哪下载/怎么安装' （自检: 旁白或评论区出现'下载安装包'、'双击安装'、'打开浏览器就能用'等表述）
+- **[HARD]** 使用技术类别描述（如'大语言模型'、'AI 助手'），不点品牌名 （自检: 出现'GPT'、'DeepSeek'、'通义千问'等具体品牌名）
+- **[HARD]** 画面文字全部使用中文，仅项目名和技术缩写保留英文 （自检: 画面包含 TRENDING TODAY、TOP 3、FOLLOW 等非中文文字）
+- **[HARD · 机器拦截: check_no_real_person_name]** 使用泛化表述（如'国内高校团队'、'研究团队'），不提具体姓名 （自检: 旁白、画面文字或发布文案中出现真实人名（如教授/学者/企业家姓名），触发平台个人隐私保护审核 → 不适宜公开）
+- **[HARD · 机器拦截: check_no_school_name]** 使用'国内高校'、'国内研究机构'等泛化表述 （自检: 出现'中科大'、'清华'、'北大'、'浙大'等具体学校名或'XX实验室'等机构名，触发平台隐私保护审核）
+- **[HARD · 机器拦截: check_no_competitor_attack]** 只正面描述自身项目特点，不提竞品名称和缺点。如需对比，用'同类方案侧重 XX'等中性表述 （自检: 旁白或画面出现竞品名称+负面描述（如'LiveTalking缺XX'、'XX不如'），触发平台'贬低同行/恶意竞争'审核）
+- **[HARD]** 使用限定性表述（'表现不错'、'值得关注'、'颇有亮点'） （自检: '别人没做的事'、'远超预期'、'都方便'等绝对化/夸大用语，触发平台'虚假宣传'审核）
+- **[HARD · 机器拦截: check_no_search_cTA]** 只列项目名和 owner/repo 路径（如 apple/container），不写'去 GitHub 搜索''搜名字就能' （自检: '去GitHub搜'、'GitHub搜索:'、'搜项目名'、'感兴趣...搜'等表述触发平台'导流'判定限流）
+- **[HARD · 机器拦截: check_douyin_platforms_complete]** douyin.md 全文零链接，项目只以 owner/repo 文本路径形式出现在评论区自评段 （自检: douyin.md 出现 https://... 形式 URL，平台判定导流并限流）
+- **[HARD]** 使用分段 TTS 实测 actual_duration 作为时长数据来源 （自检: segment_durations.json 中存在 estimated_duration 字段）
+- **[HARD]** BGM 音量通过 segment_durations.json 的 meta.bgm_volume 字段传递到 Stage 6 （自检: segment_durations.json 缺少 meta.bgm_volume 字段）
+- **[HARD]** narration.mp3 必须经过 loudnorm 两遍标准化，max_volume >= -10 dB （自检: narration.mp3 的 max_volume < -10 dB）
+- **[HARD]** bgm.wav 保持原始音量，混音衰减由 HTML data-volume 控制 （自检: 对 bgm.wav 使用了 volume 或 gain 滤镜）
+- **[HARD]** output_no_bgm.mp4 从 narration.mp3 合成，不从 output.mp4 提取音频轨 （自检: 使用 ffmpeg -i output.mp4 -vn 方式提取音频）
+- **[HARD]** BGM 循环使用 FFmpeg -stream_loop 扩展 WAV 文件 （自检: bgm.wav 短于视频总时长且依赖 HTML loop 属性）
+- **[HARD]** 使用叙事感音色 YunjianNeural，保持自然口吻 （自检: TTS 命令中使用 zh-CN-YunyangNeural 音色）
+- **[HARD]** BGM 必须覆盖旁白总时长的 95% 以上。短于旁白时：(1) 差距 ≤3x 用 stream_loop 循环 (2) 差距 >3x 执行 bgm_pipeline.sh --extend 多首拼接（3s xfade 交叉淡入） （自检: bgm.wav 时长 < 旁白时长 × 0.95）
+- **[HARD]** ≥3min 视频必须生成 bgm_playlist.json，含 ≥2 种情绪段（hook→mysterious、climax→epic、reflection→contemplative），由 bgm_pipeline.sh Step 8 按顺序 crossfade 合并 （自检: 视频 ≥3min 但无 bgm_playlist.json 或 segments 长度 < 2）
+- **[HARD]** hook 场景（前 3-5s）必须是纯钩子：震撼数据/反问/强对比/悬念，正文从第 2 个场景开始 （自检: hook 场景旁白包含项目介绍或功能说明等正文内容）
+- **[HARD]** 钩子句控制在 12 字以内，口语化，一击即中 （自检: hook narration_segment 超过 12 个中文字符）
+- **[HARD]** 音频从第一帧立即全音量播放，确保 hook 冲击力 （自检: narration 或 BGM 使用了 afade=t=in 淡入效果）
+- **[HARD]** 时长 >15 秒的场景必须拆分为多个 visual phase，每 phase 8-15 秒 （自检: narration_segments.json 中存在 duration >15 且 visual_phases 为空的场景）
+- **[HARD]** Phase 断点按旁白话题转换对齐，用字数比例换算时间戳 （自检: Phase 断点使用 gap = duration / phase_count 均分计算）
+
+## 参考偏好（建议遵守）
+- [SOFT] 正文自然提及，文案末尾温和引导 （自检: 正文中出现'点赞关注'、'一键三连'等诱导互动词）
+- [SOFT] 使用通用表述如'每天更新'、'关注获取每日热门' （自检: CTA 包含具体时间如'每天7点'、'每晚8点'）
+
+## 偏好引导（来自 Skill 声明和历史经验）
+- [HIGH] BGM 选曲优先考虑纯音乐（无人声），避免与 TTS 旁白冲突
+- [MEDIUM] 科技类内容倾向电子/氛围乐，人文类倾向钢琴/弦乐
+
+## 本次制作策略：探索（主动采集冷门维度数据）
+本次刻意探索低数据维度：P-cover-other, P-hook-action_number, P-hook-number_anchor。选题/钩子/封面优先尝试这些维度，
+即使历史上非最优——目的是为自进化采集真实表现数据，拓宽经验池。
+
+## 成功经验（来自历史高分案例，供参考）
+- 封面配色偏「标题含cool_含cool」（4 条多平台样本，受众广度 0.66）
+- hook 偏好 number_anchor 模式（16 条多平台样本，留存 0.62，广度 0.58）
+
+## 流程约束（必须按字面精确遵守）
+- 规则 R-A-*: **按字面精确匹配** — 音频技术参数是流程层硬约束：loudnorm、音量通道、分段 TTS、TTS 音色固定、BGM 音量控制机制
+- 规则 R-G-*: **按字面精确匹配** — 全局安全规则是流程层约束，精确遵守
+
+## 新鲜度预警（防同质化 — 主动差异化）
+- 与近 5 期相似度：hook 0% / 项目集 12% / 叙事模板 0%（主导：project）
+- 近期已用 hook（避开相似句式/数字锚点）：
+  · 6月14日，GitHub杀入几个猛项目，AI Agent占了一半，还有个工具把大
+  · 旗舰模型，上线4天，全网下架。
+  · 6月13日 GitHub 杀入几个猛项目，Apple 官方开源了个容器工具，单日
+  · 740 个职位评估，100 多份简历，最后拿到 1 个 offer。换别人可能就
+  · 苹果居然自己做了个容器工具
+- 近期高频项目（避免重复展开，可一带而过）：obra/superpowers, apple/container, lmcache/lmcache, nvidia/skillspector, addyosmani/agent-skills, microsoft/powertoys
+- 本次选题/钩子请主动差异化：换题材角度、换数字锚点、换叙事结构
+

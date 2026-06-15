@@ -1,0 +1,29 @@
+{
+  "topic_type": "周汇总·AI Skills 生态爆发",
+  "topic_pattern": "topic-weekly-summary",
+  "angle": "第24周 GitHub 最大看点不是单个项目，而是 6 个 AI skills 项目集体上榜——AI 编程工具带出了一个新兴的「技能市场」赛道；同时用组四非 AI 跨域（苹果容器/PowerToys/mattermost/音乐服务器）平衡 AI 占比，破除纯 AI 盘点的同质疲劳",
+  "novelty_strategy": "① hook 弃用连续 5 期高频的'X月X日杀入几个猛项目'动作句式，改用数字锚定+'集体上榜'现象陈述（6 个 skills 项目 / 15 万星 markitdown）；② 叙事用周汇总分组结构（4 组不同色彩）而非日榜线性盘点，避开近期 hyper-pace 盘点模板；③ 强化组四非 AI 跨域篇幅（4 个项目占 1 场景），平衡本周 AI 占 10/13 的同质风险；④ 反复出现的 apple/container/PowerToys/SkillSpector/superpowers 只在所属组内一带而过，不重复展开",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "recent_similarity": {
+    "hook_sim": "近 5 期 hook 全部是'X月X日 GitHub 杀入几个猛项目'动作+数字句式，相似度极高，本期必须弃用该句式",
+    "project_jaccard": "与近 5 期项目集重合约 0.35-0.45（apple/container/PowerToys/SkillSpector/superpowers 重复），通过一带而过 + 周汇总聚合视角降低展开重合",
+    "template_sim": "近 5 期均为日榜线性盘点（hyper-pace），本期改周汇总分组叙事（contrast-arc + 4 组色彩分区），模板差异化"
+  },
+  "project_type_mix": "AI Skills 生态 6 / AI Agent 视觉 2 / AI 工具 1 / 非 AI 跨域 4 —— 组四是同质化平衡器，强化其叙事比重",
+  "avoid_recent": [
+    "apple/container — 06-11/13/14 连续 3 期展开，本期仅在组四聚合提及",
+    "microsoft/PowerToys — 06-13/14 连续展开，本期仅在组四聚合提及",
+    "obra/superpowers — 06-13/14 连续展开，本期并入组一 skills 聚合",
+    "NVIDIA/SkillSpector — 06-14 已展开，本期并入组一 skills 聚合",
+    "lmcache/lmcache — 近期高频，本期未入选"
+  ],
+  "hook_design": {
+    "mode": "数字锚定 + 现象陈述（避开杀入/猛项目疲劳词）",
+    "draft": "第24周，6 个 AI 技能项目集体上榜",
+    "rationale": "12 字以内，前 5s 纯钩子（周次+数字+现象），不含项目名/功能，符合 weekly_mode 周次铁律和 hook 铁律"
+  }
+}

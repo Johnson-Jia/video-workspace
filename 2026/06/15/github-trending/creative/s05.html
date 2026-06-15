@@ -1,0 +1,41 @@
+<!-- 场景: swc | 时长: 9.9s | bg: electric_pulse | emotion: climax 0.9 -->
+<div class="layer-bg">
+  <!-- bg-component: electric_pulse -->
+</div>
+<div class="layer-fx">
+  <!-- 中央 Rust 速度爆发（持续脉冲） -->
+  <div class="fx-pulse fx-glow" style="top:42%;left:50%;width:780px;height:540px;background:radial-gradient(ellipse,rgba(255,107,53,0.45) 0%,rgba(255,107,53,0.15) 40%,transparent 70%);transform:translate(-50%,-50%)"></div>
+  <!-- 速度线条（横向飞驰，持续脉冲） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,107,53,0.7),transparent);box-shadow:0 0 12px rgba(255,107,53,0.5)"></div>
+  <div class="fx-pulse" style="position:absolute;top:58%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.6),transparent);box-shadow:0 0 12px rgba(0,212,255,0.5);animation-delay:0.4s"></div>
+  <div class="fx-pulse" style="position:absolute;top:72%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,107,53,0.5),transparent);box-shadow:0 0 10px rgba(255,107,53,0.4);animation-delay:0.9s"></div>
+  <!-- 火星粒子（持续闪烁） -->
+  <div class="fx-blink" style="top:26%;left:24%;width:14px;height:14px;border-radius:50%;background:#ff6b35;box-shadow:0 0 18px rgba(255,107,53,0.95)"></div>
+  <div class="fx-blink" style="top:34%;left:78%;width:12px;height:12px;border-radius:50%;background:#ffae42;box-shadow:0 0 16px rgba(255,174,66,0.9);animation-delay:0.5s"></div>
+  <div class="fx-blink" style="top:66%;left:20%;width:12px;height:12px;border-radius:50%;background:#ff6b35;box-shadow:0 0 16px rgba(255,107,53,0.9);animation-delay:1s"></div>
+  <div class="fx-blink" style="top:74%;left:80%;width:14px;height:14px;border-radius:50%;background:#ffae42;box-shadow:0 0 18px rgba(255,174,66,0.95);animation-delay:1.4s"></div>
+  <!-- 漂浮 Rust 代码符号 -->
+  <div class="fx-drift" style="top:22%;left:16%;font-family:var(--font-data);font-size:48px;font-weight:800;color:rgba(255,107,53,0.5)">fn</div>
+  <div class="fx-drift" style="top:78%;left:84%;font-family:var(--font-data);font-size:44px;font-weight:800;color:rgba(255,174,66,0.45);animation-delay:1.2s">cargo</div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="center-stack" style="gap:28px">
+    <div class="pfc-cat grad-orange">Rust 重写 Web 工具链</div>
+    <h2 class="scene-title grad-orange" style="font-size:200px">swc</h2>
+    <div class="cmp-row" style="margin-top:8px">
+      <div class="cmp-col" style="border-color:rgba(255,255,255,0.15)">
+        <div class="cmp-label">传统 JS 工具链</div>
+        <div class="cmp-val" style="color:var(--text2)">1×</div>
+        <div style="font-family:var(--font-body);font-size:32px;color:var(--text3)">基准速度</div>
+      </div>
+      <div class="cmp-col" style="border-color:rgba(255,107,53,0.6);background:rgba(255,107,53,0.08)">
+        <div class="cmp-label" style="color:var(--accent-orange)">swc · Rust</div>
+        <div class="cmp-val grad-orange">数十倍</div>
+        <div style="font-family:var(--font-body);font-size:32px;color:var(--accent-orange)">编译 / 打包 / 转译</div>
+      </div>
+    </div>
+    <div class="stat-line" style="font-size:42px;color:var(--accent-orange)">★ 33,000 · 主流框架底层采用</div>
+  </div>
+</div>
+</div>

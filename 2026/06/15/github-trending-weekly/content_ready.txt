@@ -1,0 +1,92 @@
+# 2026-06-15 第24周 GitHub Weekly 选取项目素材
+
+> 周汇总模式，13 个项目分 4 组（AI Skills 生态 / AI Agent 视觉 / AI 工具 / 非 AI 跨域）
+> 本周主题：AI agent skills 生态爆发（6 个 skills 项目上榜）
+> 数据质量：weekly 20 项目，gh API 验证 20/20，活跃度 100%，双源交叉
+> 13 候选真实性全部 PASS（S/F 比 4-35:1 正常，watchers>=20，size 有实质内容；watch% 偏低是大型项目规模效应非刷榜）
+
+## 组一：AI Agent Skills 生态（本周主题）
+
+### 1. addyosmani/agent-skills
+语言: Shell | 59,470★
+中文描述: 面向 AI 编程 agent 的生产级工程技能集
+原文: Production-grade engineering skills for AI coding agents.
+反直觉角度: 给 AI 编程助手配一套"工程规范"技能，让它按团队标准写代码而非自由发挥
+
+### 2. safishamsi/graphify
+语言: Python | 67,149★
+中文描述: AI 编程助手技能，把代码、数据库 schema、文档等变成可查询的知识图谱
+原文: AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph.
+反直觉角度: 把整个项目（代码+数据库+基建）织成一张知识图谱，AI 查询时不再"瞎猜"
+
+### 3. mvanhorn/last30days-skill
+语言: Python | 42,002★
+中文描述: AI agent 技能，跨 Reddit、X、YouTube、HN 等平台做 30 天主题研究并生成综述
+原文: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary
+反直觉角度: 让 AI agent 自动跑遍多个社区做"文献综述"，而非只依赖单一模型知识
+
+### 4. Leonxlnx/taste-skill
+语言: Shell | 43,687★
+中文描述: 给 AI 好品味的技能，阻止 AI 生成无聊平庸的套话内容
+原文: Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop
+反直觉角度: 专治 AI"车轱辘话"，给模型装一个"品味过滤器"
+
+### 5. phuryn/pm-skills
+语言: - | 18,063★
+中文描述: 产品经理技能市场，100+ agentic 技能、命令和插件，覆盖从发现到增长的全流程
+原文: PM Skills Marketplace: 100+ agentic skills, commands, and plugins — from discovery to strategy, execution, launch, and growth.
+反直觉角度: 产品经理也能给 AI agent 配技能包，把产品全流程自动化
+
+### 6. NVIDIA/SkillSpector
+语言: Python | 5,274★
+中文描述: AI agent 技能的安全扫描器，检测漏洞、恶意模式和安全风险
+原文: Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.
+反直觉角度: AI 帮人写代码，它反过来审 AI 技能安不安全——用 AI 审 AI 的安全博弈
+
+## 组二：AI Agent 与视觉
+
+### 7. aaif-goose/goose
+语言: Rust | 49,375★
+中文描述: 开源可扩展的 AI agent，超越代码建议，能安装、执行、编辑和测试，支持任意大语言模型
+原文: an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
+反直觉角度: 不只写代码建议，还能动手"执行/测试"的 agent，Rust 写的快
+
+### 8. roboflow/supervision
+语言: Python | 44,193★
+中文描述: 可复用的计算机视觉工具集
+原文: We write your reusable computer vision tools. 💜
+反直觉角度: 把 CV 开发常用工具（检测/标注/追踪）打包成可复用模块
+
+## 组三：AI 工具
+
+### 9. microsoft/markitdown
+语言: Python | 153,353★（本周最高总星）
+中文描述: 把文件和办公文档转换成 Markdown 的 Python 工具
+原文: Python tool for converting files and office documents to Markdown.
+反直觉角度: 微软官方开源，把 Word/PDF/Excel 等统统转成 Markdown，喂给大模型的标准预处理
+
+## 组四：非 AI 跨域
+
+### 10. apple/container
+语言: Swift | 36,965★
+中文描述: 在 Mac 上用轻量虚拟机创建和运行 Linux 容器的工具，Swift 编写，针对 Apple 芯片优化
+原文: A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, and optimized for Apple silicon.
+反直觉角度: 苹果亲自下场做容器工具，Swift 原生 + Apple 芯片优化
+
+### 11. microsoft/PowerToys
+语言: C | 134,876★
+中文描述: 微软 Windows 生产力增强与自定义工具集
+原文: Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows
+反直觉角度: 微软官方的 Windows 效率工具大礼包，老牌常青树
+
+### 12. mattermost/mattermost
+语言: TypeScript | 37,816★
+中文描述: 覆盖软件开发全生命周期的开源安全协作平台
+原文: Mattermost is an open source platform for secure collaboration across the entire software development lifecycle..
+反直觉角度: 开源自部署的协作平台，主打安全可控（对标商业协作工具）
+
+### 13. music-assistant/server
+语言: Python | 2,179★
+中文描述: 免费开源的媒体库管理器，连接流媒体服务和多种联网音箱，需运行在常开设备
+原文: Music Assistant is a free, opensource Media library manager that connects to your streaming services and a wide range of connected speakers. The server is the beating heart, the core of Music Assistant and must run on an always-on device like a Raspberry Pi, a NAS or an Intel NUC or alike.
+反直觉角度: 把分散在各平台的音乐和家里各种音箱统一到一个本地服务器（树莓派就能跑）

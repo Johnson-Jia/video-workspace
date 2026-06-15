@@ -1,0 +1,334 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --accent-cool2: #00d4ff;
+  --accent-purple: #a855f7;
+  --accent-green: #34d399;
+  --accent-orange: #ff6b35;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --text3: rgba(255,255,255,0.4);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 通用组件层（LLM 追加）
+ * ============================================ */
+
+/* 渐变文字（background-image 独立属性，禁 background 简写 R-S6-021） */
+.grad-warm {
+  background-image: linear-gradient(135deg, #ffe082 0%, #f9a825 50%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(249,168,37,0.35);
+}
+.grad-cool {
+  background-image: linear-gradient(135deg, #7ef9ff 0%, #00f5d4 50%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(0,212,255,0.35);
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #d8b4fe 0%, #a855f7 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(168,85,247,0.35);
+}
+.grad-orange {
+  background-image: linear-gradient(135deg, #fed7aa 0%, #ff6b35 50%, #dc2626 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255,107,53,0.35);
+}
+.grad-green {
+  background-image: linear-gradient(135deg, #bbf7d0 0%, #34d399 50%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(52,211,153,0.35);
+}
+
+/* 通用：场景大标题 */
+.scene-title {
+  font-family: var(--font-title);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* 项目名等宽体 */
+.mono {
+  font-family: var(--font-data);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 数据值（涨星等） */
+.dval {
+  font-family: var(--font-data);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* 标签药丸 */
+.pill {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 34px;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: var(--text2);
+  white-space: nowrap;
+}
+
+/* 数据标签（项目卡片左侧 label） */
+.dkey {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 34px;
+  color: var(--text3);
+  letter-spacing: 0.02em;
+}
+
+/* 正文描述 */
+.body-txt {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text2);
+}
+
+/* 项目卡片（全屏型） */
+.pfc-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.pfc-rank {
+  font-family: var(--font-data);
+  font-weight: 800;
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text3);
+}
+.pfc-name {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  font-family: var(--font-data);
+  font-weight: 800;
+  font-size: 64px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pfc-cat {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pfc-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 8px;
+}
+.pfc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pfc-desc {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.35;
+  color: var(--text);
+}
+.pfc-meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 34px;
+  color: var(--text3);
+}
+.pfc-stars {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 220px;
+}
+.pfc-star-num {
+  font-family: var(--font-data);
+  font-weight: 800;
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.pfc-delta {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.01em;
+}
+.pfc-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  max-width: 880px;
+}
+.pfc-point {
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 32px;
+  border: 1.5px solid currentColor;
+  background: rgba(255,255,255,0.04);
+}
+
+/* compare 布局：左右两栏 */
+.cmp-row {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+.cmp-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 24px;
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+}
+.cmp-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+}
+.cmp-val {
+  font-family: var(--font-data);
+  font-weight: 800;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-align: center;
+}
+
+/* data 布局：label-value 行 */
+.data-row {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.data-row:last-child { border-bottom: none; }
+.data-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 36px;
+  color: var(--text2);
+}
+.data-value {
+  font-family: var(--font-data);
+  font-weight: 800;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* hook 主标题 */
+.hook-num {
+  font-family: var(--font-data);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* CTA 标签组 */
+.cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  max-width: 760px;
+}
+.cta-pill {
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 36px;
+  border: 1.5px solid currentColor;
+  background: rgba(255,255,255,0.05);
+}
+
+/* 内容容器：内联 flex 居中（保险） */
+.center-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+}
+
+/* 信息卡条（CTA 行号、统计等） */
+.stat-line {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  font-family: var(--font-data);
+  font-weight: 700;
+}
+
+/* 修复 2026-06-15：小标签文字看不到（background-clip:text 冲突，区分有无 background）
+   - cta-pill/pfc-point 有 background:rgba 胶囊 → background 简写重置渐变 image + color:transparent
+     → 透明裁到文字 → 文字+边框消失 → 改 border-box + 纯场景色
+   - pfc-cat 无 background → 用 grad-* 默认 clip:text 渐变文字（清晰），只去 text-shadow 防模糊
+     （之前误给 pfc-cat 加 border-box → 青渐变变青背景 + 青文字 = 同色看不清）*/
+.cta-pill, .pfc-point {
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  text-shadow: none;
+}
+.pfc-cat {
+  text-shadow: none;  /* 防 text-shadow 发光模糊；保留 grad-* clip:text 渐变文字 */
+}
+.cta-pill.grad-warm { color: var(--accent-warm); }
+.pfc-point.grad-cool { color: var(--accent-cool); }

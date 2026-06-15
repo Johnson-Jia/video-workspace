@@ -1,0 +1,37 @@
+<!-- 场景: aisuite | 时长: 11.8s | bg: hex_grid | emotion: reveal 0.7 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+<div class="layer-fx">
+  <!-- 中央切换开关光环（脉冲） -->
+  <div class="fx-pulse fx-glow" style="top:50%;left:50%;width:520px;height:520px;background:radial-gradient(circle,rgba(0,245,212,0.32) 0%,transparent 65%);transform:translate(-50%,-50%)"></div>
+  <!-- 四个模型节点光点（持续闪烁，象征多模型汇聚） -->
+  <div class="fx-blink" style="top:24%;left:22%;width:16px;height:16px;border-radius:50%;background:#00f5d4;box-shadow:0 0 18px rgba(0,245,212,0.9)"></div>
+  <div class="fx-blink" style="top:24%;left:78%;width:16px;height:16px;border-radius:50%;background:#a855f7;box-shadow:0 0 18px rgba(168,85,247,0.9);animation-delay:0.4s"></div>
+  <div class="fx-blink" style="top:76%;left:22%;width:16px;height:16px;border-radius:50%;background:#f9a825;box-shadow:0 0 18px rgba(249,168,37,0.9);animation-delay:0.8s"></div>
+  <div class="fx-blink" style="top:76%;left:78%;width:16px;height:16px;border-radius:50%;background:#00d4ff;box-shadow:0 0 18px rgba(0,212,255,0.9);animation-delay:1.2s"></div>
+  <!-- 汇聚射线（中心向四角延伸，持续脉冲） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;width:760px;height:760px;transform:translate(-50%,-50%);background:repeating-conic-gradient(from 45deg,rgba(0,245,212,0.12) 0deg,transparent 4deg,transparent 86deg,rgba(0,245,212,0.1) 90deg);border-radius:50%;mask:radial-gradient(circle,transparent 25%,#000 28%,#000 50%,transparent 55%);-webkit-mask:radial-gradient(circle,transparent 25%,#000 28%,#000 50%,transparent 55%)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="center-stack" style="gap:32px">
+    <div class="pfc-cat grad-cool">多模型统一接口</div>
+    <h2 class="scene-title grad-warm" style="font-size:140px">aisuite</h2>
+    <div class="body-txt" style="font-size:42px;color:var(--text);text-align:center;max-width:820px">一套接口，切换所有大语言模型</div>
+    <div class="cmp-row" style="margin-top:8px">
+      <div class="cmp-col" style="border-color:rgba(255,107,107,0.3)">
+        <div class="cmp-label">传统方式</div>
+        <div class="cmp-val" style="color:#ff6b6b">每家单独适配</div>
+        <div style="font-family:var(--font-body);font-size:32px;color:var(--text3)">重复工程</div>
+      </div>
+      <div class="cmp-col" style="border-color:rgba(0,245,212,0.5);background:rgba(0,245,212,0.06)">
+        <div class="cmp-label" style="color:var(--accent-cool)">aisuite</div>
+        <div class="cmp-val grad-cool">一个开关</div>
+        <div style="font-family:var(--font-body);font-size:32px;color:var(--text2)">即切即用</div>
+      </div>
+    </div>
+    <div class="stat-line" style="font-size:42px;color:var(--accent-warm)">★ 14,000+ · 一键切换</div>
+  </div>
+</div>
+</div>

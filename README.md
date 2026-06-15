@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**32 天 · 73 条视频 · 5 个系列 · 全自动**
+**33 天 · 75 条视频 · 5 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -16,7 +16,7 @@
 
 <div align="center">
 
-**「什么样的人会关注一个讲开源项目的频道？——那些心里还相信好东西应该分享给所有人的人。」**
+**「什么样的人会关注一个讲开源项目的频道？——那些心里还相信"好东西应该分享给所有人"的人。」**
 
 <a href="2026/06/06/github-star-intro/">
 <img src="2026/06/12/clipforge-intro/cover_temp.png" width="320" alt="观看频道介绍" />
@@ -61,19 +61,19 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月15日 | [GitHub 每日热门](2026/06/15/github-trending/) |
 | 6月14日 | [GitHub 每日热门](2026/06/14/github-trending/) |
 | 6月13日 | [GitHub 每日热门](2026/06/13/github-trending/) |
 | 6月12日 | [GitHub 每日热门](2026/06/12/github-trending/) |
 | 6月11日 | [GitHub 每日热门](2026/06/11/github-trending/) |
-| 6月10日 | [GitHub 每日热门](2026/06/10/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月15日 | [GitHub 周度热门汇总](2026/06/15/github-trending-weekly/) |
 | 6月8日 | [GitHub 周度热门汇总](2026/06/08/github-trending-weekly/) |
 | 6月1日 | [GitHub 周度热门汇总](2026/06/01/github-trending-weekly/) |
-| 5月25日 | [GitHub 周度热门汇总](2026/05/25/github-trending-weekly/) |
 
 ### 深度解析
 
@@ -85,7 +85,7 @@
 | 6月11日 | [企业 AI 培训：成本砍到 1/25000](2026/06/11/enterprise-ai-training/) |
 | 6月9日 | [Agent Reach](2026/06/09/agent-reach/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 73 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 75 条视频。
 <!-- END RECENT -->
 
 ---

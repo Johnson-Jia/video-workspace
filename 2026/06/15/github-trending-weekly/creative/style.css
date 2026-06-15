@@ -1,0 +1,116 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+  /* 4 组色谱 */
+  --g1-cyan: #00D4FF;       /* 组一 AI Skills 冷青 */
+  --g1-cyan-deep: #0EA5B7;
+  --g2-purple: #A855F7;     /* 组二 Agent 视觉 紫 */
+  --g2-purple-deep: #6D28D9;
+  --g3-blue: #3B82F6;       /* 组三 AI 工具 宝石蓝 */
+  --g3-blue-deep: #1E40AF;
+  --g4-amber: #F59E0B;      /* 组四 非 AI 暖橙金 */
+  --g4-gold: #FBBF24;
+  --gold: #FBBF24;          /* 通用金 */
+}
+
+/* ============================================
+ * LLM 自定义组件层
+ * ============================================ */
+
+/* ── 通用排版 ── */
+.hook-title{font-family:var(--font-title);font-weight:400;letter-spacing:2px;line-height:1.1;}
+.scene-title{font-family:var(--font-title);font-weight:400;letter-spacing:1px;line-height:1.15;}
+.body-text{font-family:var(--font-body);font-weight:400;line-height:1.4;}
+.data-text{font-family:var(--font-data);font-weight:700;letter-spacing:1px;}
+
+/* 渐变文字（禁 background 简写，用 background-image） */
+.grad-gold{background-image:linear-gradient(135deg,#FBBF24 0%,#F59E0B 50%,#FBBF24 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 28px rgba(245,158,11,0.45);}
+.grad-cyan{background-image:linear-gradient(135deg,#00D4FF 0%,#0EA5B7 50%,#00D4FF 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 28px rgba(0,212,255,0.4);}
+.grad-purple{background-image:linear-gradient(135deg,#A855F7 0%,#6D28D9 50%,#A855F7 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 28px rgba(168,85,247,0.4);}
+.grad-blue{background-image:linear-gradient(135deg,#3B82F6 0%,#1E40AF 50%,#3B82F6 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 28px rgba(59,130,246,0.4);}
+.grad-amber{background-image:linear-gradient(135deg,#FBBF24 0%,#F59E0B 50%,#FBBF24 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 28px rgba(251,191,36,0.45);}
+
+/* ── 周次徽章（hook） ── */
+.week-badge{display:inline-block;padding:14px 38px;border:2px solid rgba(251,191,36,0.6);
+  border-radius:50px;background:rgba(251,191,36,0.08);font-family:var(--font-data);
+  font-weight:700;font-size:40px;letter-spacing:3px;color:#FBBF24;
+  text-shadow:0 0 18px rgba(251,191,36,0.6);box-shadow:0 0 40px rgba(251,191,36,0.15),inset 0 0 20px rgba(251,191,36,0.08);}
+
+/* ── 组标题（组一/二/三/四 标识） ── */
+.group-tag{display:inline-flex;align-items:center;gap:14px;padding:12px 30px;
+  border-radius:8px;font-family:var(--font-data);font-weight:700;font-size:32px;
+  letter-spacing:2px;margin-bottom:28px;}
+.group-tag .dot{width:14px;height:14px;border-radius:50%;}
+.group-tag.g1{background:rgba(0,212,255,0.10);border:1.5px solid rgba(0,212,255,0.5);color:#00D4FF;}
+.group-tag.g1 .dot{background:#00D4FF;box-shadow:0 0 12px rgba(0,212,255,0.7);}
+.group-tag.g2{background:rgba(168,85,247,0.10);border:1.5px solid rgba(168,85,247,0.5);color:#A855F7;}
+.group-tag.g2 .dot{background:#A855F7;box-shadow:0 0 12px rgba(168,85,247,0.7);}
+.group-tag.g3{background:rgba(59,130,246,0.10);border:1.5px solid rgba(59,130,246,0.5);color:#3B82F6;}
+.group-tag.g3 .dot{background:#3B82F6;box-shadow:0 0 12px rgba(59,130,246,0.7);}
+.group-tag.g4{background:rgba(245,158,11,0.10);border:1.5px solid rgba(245,158,11,0.5);color:#F59E0B;}
+.group-tag.g4 .dot{background:#F59E0B;box-shadow:0 0 12px rgba(245,158,11,0.7);}
+
+/* ── 项目卡片（聚合列表） ── */
+.proj-card{width:100%;display:flex;align-items:flex-start;gap:22px;padding:20px 26px;margin-bottom:16px;
+  border-radius:14px;background:rgba(255,255,255,0.035);border-left:4px solid;
+  backdrop-filter:blur(6px);}
+.proj-card.c-cyan{border-left-color:#00D4FF;box-shadow:0 0 30px rgba(0,212,255,0.06);}
+.proj-card.c-purple{border-left-color:#A855F7;box-shadow:0 0 30px rgba(168,85,247,0.06);}
+.proj-card.c-blue{border-left-color:#3B82F6;box-shadow:0 0 30px rgba(59,130,246,0.06);}
+.proj-card.c-amber{border-left-color:#F59E0B;box-shadow:0 0 30px rgba(245,158,11,0.06);}
+.proj-rank{flex-shrink:0;font-family:var(--font-data);font-weight:800;font-size:42px;
+  line-height:1;min-width:56px;text-align:center;}
+.proj-main{flex:1;min-width:0;}
+.proj-name{font-family:var(--font-data);font-weight:700;font-size:38px;line-height:1.2;
+  color:#fff;margin-bottom:6px;word-break:keep-all;}
+.proj-desc{font-family:var(--font-body);font-weight:400;font-size:32px;line-height:1.35;color:rgba(255,255,255,0.78);}
+.proj-stars{flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.proj-stars .num{font-family:var(--font-data);font-weight:700;font-size:48px;line-height:1;}
+
+/* ── 标语条（组结论） ── */
+.verdict{width:100%;padding:18px 28px;border-radius:12px;
+  background:rgba(255,255,255,0.04);border-left:5px solid;
+  font-family:var(--font-body);font-weight:500;font-size:34px;line-height:1.4;
+  margin-top:18px;}
+.verdict.v-cyan{border-left-color:#00D4FF;color:#B3EFFF;}
+.verdict.v-purple{border-left-color:#A855F7;color:#E9D5FF;}
+.verdict.v-amber{border-left-color:#F59E0B;color:#FDE68A;}
+
+/* ── 大数字（markitdown 15.3万星） ── */
+.mega-num{font-family:var(--font-data);font-weight:800;font-size:200px;line-height:0.95;letter-spacing:-4px;}
+.mega-label{font-family:var(--font-body);font-weight:400;font-size:38px;letter-spacing:6px;color:rgba(255,255,255,0.7);}
+
+/* ── highlight 句（组四定位） ── */
+.hl-line{font-family:var(--font-title);font-weight:400;font-size:80px;line-height:1.3;letter-spacing:2px;color:#fff;}
+.hl-sub{font-family:var(--font-body);font-weight:400;font-size:36px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:20px;}
+
+/* ── CTA ── */
+.cta-title{font-family:var(--font-title);font-weight:400;font-size:120px;line-height:1.1;letter-spacing:4px;}
+.cta-channel{font-family:var(--font-data);font-weight:700;font-size:48px;letter-spacing:3px;margin-top:30px;}
+.cta-pill{display:inline-block;padding:14px 32px;border-radius:40px;font-family:var(--font-body);
+  font-size:32px;margin:8px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.4);color:#FBBF24;}
+
+/* ── 周次时间区间条（组一 phase-1） ── */
+.date-range{display:inline-flex;align-items:center;gap:16px;padding:12px 32px;border-radius:50px;
+  background:rgba(0,212,255,0.08);border:1.5px solid rgba(0,212,255,0.45);font-family:var(--font-data);
+  font-weight:700;font-size:34px;color:#00D4FF;letter-spacing:2px;margin-bottom:24px;}
+
+/* ── phase 顶部间距微调 ── */
+.phase > * + *{margin-top:0;}

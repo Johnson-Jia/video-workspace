@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>金句结尾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; }
+  .composition { position:relative; width:1080px; height:1920px; background:#0a0612; overflow:hidden; font-family:'Noto Sans SC',sans-serif; }
+  .glow-red { position:absolute; width:920px;height:920px;border-radius:50%;
+    background:radial-gradient(circle,#5a0a18 0%,transparent 70%);filter:blur(90px);
+    top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.7; }
+  .glow-gold { position:absolute; width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle,#3a2a00 0%,transparent 70%);filter:blur(80px);
+    top:34%;left:50%;transform:translate(-50%,-50%);opacity:0.55; }
+  .vignette { position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,0.65) 100%); }
+  .quote { position:absolute;top:34%;left:0;right:0;text-align:center;z-index:5; }
+  .line1 { font-family:'Ma Shan Zheng',cursive;font-size:140px;color:#e63946;
+    filter:drop-shadow(0 0 38px rgba(230,57,70,0.85));line-height:1.2;letter-spacing:8px; }
+  .line2 { font-family:'Ma Shan Zheng',cursive;font-size:106px;color:#ffb700;
+    filter:drop-shadow(0 0 32px rgba(255,183,0,0.85));line-height:1.2;letter-spacing:8px;margin-top:14px; }
+  .clap { position:absolute;bottom:15%;left:0;right:0;text-align:center;z-index:6; }
+  .clap-emoji { font-size:92px;display:block;margin-bottom:10px;letter-spacing:8px; }
+  .clap-text { font-family:'Noto Sans SC',sans-serif;font-size:82px;font-weight:700;color:#ffffff;
+    letter-spacing:8px;text-shadow:0 2px 18px rgba(0,0,0,0.7); }
+</style>
+</head>
+<body>
+<div class="composition" data-composition-id="quote" data-width="1080" data-height="1920" data-start="0" data-duration="6.5">
+  <div class="glow-red"></div>
+  <div class="glow-gold"></div>
+  <div class="vignette"></div>
+  <div class="quote">
+    <div class="line1" id="l1">先有华为后有天</div>
+    <div class="line2" id="l2">盘古从此降人间</div>
+  </div>
+  <div class="clap" id="clap">
+    <span class="clap-emoji">👏👏👏</span>
+    <span class="clap-text">鼓掌！</span>
+  </div>
+</div>
+<script>
+window.__timelines = {};
+var tl = gsap.timeline({ paused: true });
+tl.set('#l1', { scale: 0.82 }, 0);
+tl.to('#l1', { scale: 1, duration: 0.7, ease: 'power3.out' }, 0);
+tl.set('#l2', { opacity: 0, y: 40 }, 0);
+tl.to('#l2', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.5);
+tl.set('#clap', { opacity: 0, scale: 0.5 }, 0);
+tl.to('#clap', { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.8)' }, 3.8);
+window.__hf = { duration: 6.5, seek: function (t) { tl.time(t, false); } };
+window.__timelines["quote"] = tl;
+</script>
+</body>
+</html>

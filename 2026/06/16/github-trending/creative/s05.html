@@ -1,0 +1,90 @@
+<!-- 场景: topic4_cua | 时长: 7.1s | emotion: climax 0.85 | 项目: trycua/cua -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#06080c,#0c1420,#06080c)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(64,156,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(64,156,255,0.05) 1px,transparent 1px);background-size:70px 70px"></div>
+  <!-- 中心聚光 -->
+  <div style="position:absolute;top:42%;left:50%;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(64,156,255,0.22) 0%,transparent 60%);filter:blur(90px);transform:translate(-50%,-50%);
+    animation:heroBreathCool 4.5s ease-in-out infinite"></div>
+  <!-- 等高线纹理（机械感） -->
+  <div style="position:absolute;top:50%;left:50%;width:800px;height:800px;border-radius:50%;opacity:0.10;
+    background:repeating-radial-gradient(circle,transparent 0px,transparent 20px,rgba(64,156,255,0.12) 20px,rgba(64,156,255,0.12) 21px);
+    filter:blur(1.5px);transform:translate(-50%,-50%)"></div>
+  <!-- 节点闪烁 -->
+  <div style="position:absolute;top:30%;left:38%;width:11px;height:11px;border-radius:50%;
+    background:rgba(64,156,255,0.9);box-shadow:0 0 14px rgba(64,156,255,0.7);animation:fxPulse 3s ease-in-out infinite"></div>
+  <div style="position:absolute;top:60%;left:62%;width:10px;height:10px;border-radius:50%;
+    background:rgba(100,180,255,0.85);box-shadow:0 0 12px rgba(100,180,255,0.65);animation:fxPulse 4s ease-in-out infinite 1.2s"></div>
+  <div style="position:absolute;top:48%;left:75%;width:9px;height:9px;border-radius:50%;
+    background:rgba(120,200,255,0.8);box-shadow:0 0 11px rgba(120,200,255,0.6);animation:fxPulse 3.5s ease-in-out infinite 2s"></div>
+  <!-- 棱镜色散 -->
+  <div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+    background:linear-gradient(90deg,rgba(64,156,255,0.5),rgba(0,229,255,0.4),rgba(120,200,255,0.5));filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- 双扫描线（机械扫描感） -->
+  <div style="position:absolute;left:0;top:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(64,156,255,0.45),rgba(0,229,255,0.65),rgba(64,156,255,0.45),transparent);
+    filter:blur(1.2px);animation:fxStreak 6s ease-in-out infinite"></div>
+  <div style="position:absolute;left:0;top:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(64,156,255,0.30),rgba(120,200,255,0.45),transparent);
+    filter:blur(1.2px);animation:fxStreak 9s ease-in-out infinite 2.5s"></div>
+  <!-- 双轨道光点 -->
+  <div style="position:absolute;top:24%;left:16%;width:14px;height:14px;border-radius:50%;
+    background:rgba(64,156,255,0.9);box-shadow:0 0 18px rgba(64,156,255,0.7);animation:fxPulse 3.5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:72%;left:82%;width:12px;height:12px;border-radius:50%;
+    background:rgba(0,229,255,0.85);box-shadow:0 0 16px rgba(0,229,255,0.65);animation:fxPulse 4.5s ease-in-out infinite 1s"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<!-- 旁白: cua 更猛，让AI agent真正操控你的桌面，点鼠标敲键盘开软件，三大操作系统通吃 -->
+<div class="pfc">
+  <div class="pfc-glow" style="width:520px;height:520px;opacity:0.20;background:#409cff;top:180px;left:-120px;animation:heroBreathCool 4s ease-in-out infinite"></div>
+  <div class="pfc-glow" style="width:460px;height:460px;opacity:0.16;background:var(--accent-cool);bottom:280px;right:-100px;animation:heroBreathWarm 5s ease-in-out infinite"></div>
+  <div class="pfc-grid" style="background-image:linear-gradient(rgba(64,156,255,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(64,156,255,0.045) 1px,transparent 1px)"></div>
+
+  <!-- 顶部带：排名 + 类别（电蓝，机械控制感） + 项目名 -->
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank" style="color:#409cff">#04</span>
+      <span class="pfc-category" style="color:#409cff">AI Agent 操控桌面</span>
+    </div>
+    <div class="pfc-use" style="font-size:52px;font-weight:800;line-height:1.1;background-image:linear-gradient(135deg,#ffe082,#f9a825,#ff6b35);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;letter-spacing:.02em">AI操作整台电脑</div>
+    <div class="pfc-name">cua</div>
+  </div>
+
+  <!-- 中部带：avatar + 描述 + 涨星进度条 -->
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#409cff,var(--accent-cool),#409cff)"></div>
+      <img class="pfc-avatar" src="assets/avatars/trycua.png" alt="">
+    </div>
+    <div class="pfc-desc">开源 Computer-Use Agent 基础设施 · 沙箱 + SDK + 基准，跨三大系统</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-bar-head">
+        <span class="pfc-bar-label">总星数 / 今日</span>
+        <span class="pfc-bar-val" style="color:#409cff">18K ★ · +57</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:40%;background:linear-gradient(90deg,var(--accent-cool),#409cff)"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic" style="color:#409cff;background:rgba(64,156,255,0.10);border-color:rgba(64,156,255,0.30)">macOS</span>
+        <span class="pfc-topic" style="color:#409cff;background:rgba(64,156,255,0.10);border-color:rgba(64,156,255,0.30)">Linux</span>
+        <span class="pfc-topic" style="color:#409cff;background:rgba(64,156,255,0.10);border-color:rgba(64,156,255,0.30)">Windows</span>
+        <span class="pfc-topic" style="color:#409cff;background:rgba(64,156,255,0.10);border-color:rgba(64,156,255,0.30)">沙箱 + SDK</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部带：三词卖点 + 评语 -->
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">操控桌面</span>
+      <span class="pfc-sell-item">跨三系统</span>
+      <span class="pfc-sell-item">开源基础设施</span>
+    </div>
+    <div class="pfc-commentary" style="border-left-color:#409cff">AI 不再只在聊天框里回话</div>
+  </div>
+</div>
+</div>
+</div>

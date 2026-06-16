@@ -1,0 +1,97 @@
+<!-- 场景: topic3_aieng | 时长: 8.4s | emotion: climax 0.9 | 项目: rohitg00/ai-engineering-from-scratch -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0d0420 0%,#2a0848 50%,#1a0430 100%)"></div>
+  <!-- 色带 1：洋红 -->
+  <div style="position:absolute;top:20%;left:0;width:100%;height:300px;
+    background:linear-gradient(90deg,transparent,hsla(310,70%,50%,0.18),transparent);
+    transform:rotate(-8deg);animation:fxDrift 22s ease-in-out infinite 0s"></div>
+  <!-- 色带 2：紫 -->
+  <div style="position:absolute;top:55%;left:0;width:100%;height:250px;
+    background:linear-gradient(90deg,transparent,hsla(270,60%,50%,0.20),transparent);
+    transform:rotate(5deg);animation:fxDrift 25s ease-in-out infinite 5s"></div>
+  <!-- 色带 3：青紫交叠 -->
+  <div style="position:absolute;top:38%;left:-5%;width:110%;height:180px;
+    background:linear-gradient(90deg,transparent 15%,hsla(290,65%,50%,0.18),hsla(180,55%,45%,0.10),transparent 85%);
+    filter:blur(30px);animation:fxDrift 28s ease-in-out infinite 10s"></div>
+  <!-- 中心辉光（脉冲） -->
+  <div style="position:absolute;top:42%;left:50%;width:580px;height:580px;border-radius:50%;
+    background:radial-gradient(circle,rgba(199,125,255,0.25) 0%,transparent 60%);filter:blur(80px);transform:translate(-50%,-50%);
+    animation:heroBreathWarm 4s ease-in-out infinite"></div>
+  <!-- 紫色漂浮粒子 -->
+  <div style="position:absolute;top:25%;left:65%;width:6px;height:6px;border-radius:50%;
+    background:hsla(290,80%,65%,0.7);box-shadow:0 0 12px hsla(290,70%,55%,0.5);animation:fxDrift 7s ease-in-out infinite 0s"></div>
+  <div style="position:absolute;top:50%;left:30%;width:5px;height:5px;border-radius:50%;
+    background:hsla(270,75%,60%,0.6);box-shadow:0 0 10px hsla(270,65%,50%,0.4);animation:fxDrift 9s ease-in-out infinite 3s"></div>
+  <div style="position:absolute;top:70%;left:55%;width:5px;height:5px;border-radius:50%;
+    background:hsla(310,70%,62%,0.55);box-shadow:0 0 10px hsla(310,60%,52%,0.4);animation:fxDrift 8s ease-in-out infinite 5s"></div>
+  <!-- 棱镜色散 -->
+  <div style="position:absolute;top:30%;left:-10%;width:120%;height:200px;opacity:0.18;
+    background:linear-gradient(90deg,transparent,rgba(255,100,200,0.5),rgba(100,100,255,0.5),rgba(200,100,255,0.5),transparent);
+    filter:blur(60px);transform:rotate(-3deg)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 径向光束旋转（climax 视觉爆发） -->
+  <div style="position:absolute;top:50%;left:50%;width:1400px;height:1400px;
+    transform:translate(-50%,-50%);animation:fxOrbit 60s linear infinite;
+    background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(199,125,255,0.06) 1.5deg,transparent 3deg,transparent 24deg)"></div>
+  <!-- 双轨道光点 -->
+  <div style="position:absolute;top:22%;left:18%;width:16px;height:16px;border-radius:50%;
+    background:rgba(199,125,255,0.9);box-shadow:0 0 20px rgba(199,125,255,0.7);animation:fxPulse 3s ease-in-out infinite"></div>
+  <div style="position:absolute;top:75%;left:80%;width:14px;height:14px;border-radius:50%;
+    background:rgba(255,120,200,0.9);box-shadow:0 0 18px rgba(255,120,200,0.7);animation:fxPulse 4s ease-in-out infinite 1.2s"></div>
+  <div style="position:absolute;top:48%;left:8%;width:12px;height:12px;border-radius:50%;
+    background:rgba(180,150,255,0.85);box-shadow:0 0 14px rgba(180,150,255,0.6);animation:fxPulse 3.5s ease-in-out infinite 2s"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<!-- 旁白: ai-engineering-from-scratch，三万三千星的开源AI工程课，从agent到强化学习一个仓库覆盖整个AI工程师技能树 -->
+<div class="pfc">
+  <div class="pfc-glow" style="width:520px;height:520px;opacity:0.20;background:#c77dff;top:180px;left:-120px;animation:heroBreathWarm 4s ease-in-out infinite"></div>
+  <div class="pfc-glow" style="width:460px;height:460px;opacity:0.16;background:#ff79c6;bottom:280px;right:-100px;animation:heroBreathCool 5s ease-in-out infinite"></div>
+  <div class="pfc-grid" style="background-image:linear-gradient(rgba(199,125,255,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(199,125,255,0.045) 1px,transparent 1px)"></div>
+
+  <!-- 顶部带：排名 + 类别（紫色渐变，climax 强调） + 项目名 -->
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank" style="color:#c77dff">#03</span>
+      <span class="pfc-category" style="color:#c77dff">33K 星 · 全栈 AI 工程课</span>
+    </div>
+    <div class="pfc-use" style="font-size:52px;font-weight:800;line-height:1.1;background-image:linear-gradient(135deg,#ffe082,#f9a825,#ff6b35);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;letter-spacing:.02em">AI工程师速成</div>
+    <div class="pfc-name">ai-engineering-from-scratch</div>
+  </div>
+
+  <!-- 中部带：avatar + 描述 + 涨星进度条 -->
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#c77dff,#ff79c6,#c77dff)"></div>
+      <img class="pfc-avatar" src="assets/avatars/rohitg00.png" alt="">
+    </div>
+    <div class="pfc-desc">从零学 AI 工程 · 一份仓库覆盖整个 AI 工程师技能树</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-bar-head">
+        <span class="pfc-bar-label">总星数 / 今日</span>
+        <span class="pfc-bar-val" style="color:#c77dff">33K ★ · +538</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:70%;background:linear-gradient(90deg,#ff79c6,#c77dff)"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic" style="color:#c77dff;background:rgba(199,125,255,0.10);border-color:rgba(199,125,255,0.30)">Agent</span>
+        <span class="pfc-topic" style="color:#c77dff;background:rgba(199,125,255,0.10);border-color:rgba(199,125,255,0.30)">生成式 AI</span>
+        <span class="pfc-topic" style="color:#c77dff;background:rgba(199,125,255,0.10);border-color:rgba(199,125,255,0.30)">强化学习</span>
+        <span class="pfc-topic" style="color:#c77dff;background:rgba(199,125,255,0.10);border-color:rgba(199,125,255,0.30)">群体智能</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部带：三词卖点 + 评语 -->
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">33K 星</span>
+      <span class="pfc-sell-item">全栈 AI</span>
+      <span class="pfc-sell-item">从零到交付</span>
+    </div>
+    <div class="pfc-commentary" style="border-left-color:#c77dff">一份仓库覆盖整个 AI 工程师技能树</div>
+  </div>
+</div>
+</div>
+</div>

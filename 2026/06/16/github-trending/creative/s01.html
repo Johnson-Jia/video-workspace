@@ -1,0 +1,58 @@
+<!-- 场景: hook | 时长: 4.7s | emotion: grab 0.4 -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,#080612 0%,#1a1030 45%,#2a1505 100%)"></div>
+  <div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 18%;animation:fxOrbit 80s linear infinite;
+    background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(255,200,0,0.06) 2deg,transparent 4deg,transparent 28deg)"></div>
+  <div style="position:absolute;top:14%;left:28%;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,180,40,0.28) 0%,transparent 60%);filter:blur(80px);
+    animation:heroBreathWarm 4s ease-in-out infinite"></div>
+  <div style="position:absolute;bottom:200px;right:-80px;width:480px;height:480px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,245,212,0.20) 0%,transparent 60%);filter:blur(100px);
+    animation:heroBreathCool 5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:30%;left:55%;width:6px;height:6px;border-radius:50%;
+    background:hsla(45,90%,65%,0.7);box-shadow:0 0 12px hsla(45,80%,55%,0.5);animation:fxDrift 6s ease-in-out infinite 0s"></div>
+  <div style="position:absolute;top:48%;left:30%;width:4px;height:4px;border-radius:50%;
+    background:hsla(38,85%,60%,0.6);box-shadow:0 0 10px hsla(38,75%,50%,0.4);animation:fxDrift 8s ease-in-out infinite 2s"></div>
+  <div style="position:absolute;top:62%;left:60%;width:5px;height:5px;border-radius:50%;
+    background:hsla(50,80%,62%,0.55);box-shadow:0 0 10px hsla(50,70%,52%,0.4);animation:fxDrift 7s ease-in-out infinite 4s"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,180,40,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,180,40,0.04) 1px,transparent 1px);background-size:48px 48px;opacity:0.6"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,transparent 35%,rgba(0,0,0,0.55) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 特效层：横向光带扫过 + 双轨道光点（0%帧可见，CSS animation 循环态） -->
+  <div style="position:absolute;top:38%;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(255,200,40,0.55),rgba(0,245,212,0.7),rgba(255,200,40,0.55),transparent);
+    filter:blur(1.5px);animation:fxStreak 5s ease-in-out infinite"></div>
+  <div style="position:absolute;top:62%;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(0,245,212,0.45),rgba(255,200,40,0.55),transparent);
+    filter:blur(1.5px);animation:fxStreak 6s ease-in-out infinite 1.5s"></div>
+  <div style="position:absolute;top:25%;left:20%;width:14px;height:14px;border-radius:50%;
+    background:rgba(255,200,40,0.85);box-shadow:0 0 18px rgba(255,200,40,0.7);animation:fxPulse 3s ease-in-out infinite"></div>
+  <div style="position:absolute;top:72%;left:78%;width:12px;height:12px;border-radius:50%;
+    background:rgba(0,245,212,0.85);box-shadow:0 0 16px rgba(0,245,212,0.7);animation:fxPulse 4s ease-in-out infinite 1s"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<!-- 旁白: 6月16日 6个项目杀入GitHub榜单，AI agent占了4个 -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-badge">6 月 16 日 GitHub 榜单</div>
+    <div class="hero-tagline">今日热点速览</div>
+  </div>
+  <div class="hero-mid">
+    <div class="hero-eyebrow">AI AGENT 赛道爆发</div>
+    <div class="hero-title">6 个项目<span class="grad-warm">杀入榜单</span></div>
+    <div class="hero-sub">其中 <span class="grad-cool" style="font-weight:800">4 个</span> 是 AI agent 主题</div>
+  </div>
+  <div class="hero-bot">
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num grad-warm">6</span><span class="hero-stat-label">入选项目</span></div>
+      <div class="hero-stat"><span class="hero-stat-num grad-cool">4</span><span class="hero-stat-label">AI agent 相关</span></div>
+      <div class="hero-stat"><span class="hero-stat-num grad-warm">+1079</span><span class="hero-stat-label">今日最高涨星</span></div>
+    </div>
+    <div class="hero-bar"></div>
+  </div>
+</div>
+</div>
+</div>

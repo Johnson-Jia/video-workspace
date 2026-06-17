@@ -1,0 +1,114 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.4);
+  --danger: #ff5a5a;
+  --font-title: 'Noto Serif SC','Songti SC','SimSun',serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * content 层组件样式（金融科技研报调性）
+ * ============================================ */
+
+/* 标签药丸 */
+.ct-tag{display:inline-block;font-family:var(--font-data);font-size:32px;letter-spacing:3px;color:var(--accent-cool);border:1px solid rgba(0,245,212,0.42);padding:7px 22px;border-radius:30px;background:rgba(0,245,212,0.07)}
+.ct-tag.warm{color:var(--accent-warm);border-color:rgba(249,168,37,0.45);background:rgba(249,168,37,0.08)}
+.ct-tag.danger{color:var(--danger);border-color:rgba(255,90,90,0.45);background:rgba(255,90,90,0.08)}
+
+/* 渐变文字（background-image 禁简写，双 -webkit-） */
+.grad-warm{background-image:linear-gradient(135deg,#ffe082 0%,#f9a825 55%,#ff6b35 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 0 12px rgba(249,168,37,0.32)}
+.grad-cool{background-image:linear-gradient(135deg,#00f5d4 0%,#22b8cf 55%,#3a86ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.grad-dual{background-image:linear-gradient(95deg,#f9a825 0%,#ff6b35 38%,#00f5d4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.grad-red{background-image:linear-gradient(135deg,#ff8a8a 0%,#ff5a5a 55%,#c81e1e 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* 大数字 */
+.big-num{font-family:var(--font-data);font-weight:700;line-height:0.95}
+.num-xl{font-size:200px}
+.num-lg{font-size:150px}
+.num-md{font-size:104px}
+
+/* 主标题 */
+.ct-title{font-family:var(--font-title);font-weight:var(--title-weight);font-size:88px;line-height:1.18;color:var(--text)}
+.ct-title.sm{font-size:68px}
+.ct-sub{font-family:var(--font-body);font-size:36px;line-height:1.5;color:var(--text2)}
+.ct-sub.sm{font-size:32px}
+
+/* === hero 布局 === */
+.ct-hero{align-items:center;text-align:center;justify-content:center;gap:30px;width:100%}
+
+/* === highlight 布局 === */
+.ct-highlight{align-items:center;text-align:center;justify-content:center;gap:34px;width:100%}
+.hl-box{padding:42px 54px;background:rgba(249,168,37,0.09);border:2px solid rgba(249,168,37,0.38);border-radius:18px;backdrop-filter:blur(8px)}
+.hl-box.cool{background:rgba(0,245,212,0.08);border-color:rgba(0,245,212,0.36)}
+
+/* === list 布局（序号+文字，左对齐成列） === */
+.ct-list{display:flex;flex-direction:column;gap:22px;width:100%;align-items:stretch}
+.ct-item{display:flex;align-items:center;gap:26px;background:rgba(255,255,255,0.045);border-left:5px solid var(--accent-cool);padding:24px 30px;border-radius:10px}
+.ct-item.warm{border-left-color:var(--accent-warm)}
+.ct-item.danger{border-left-color:var(--danger);background:rgba(255,90,90,0.05)}
+.ct-item .it-num{font-family:var(--font-data);font-weight:700;font-size:44px;color:var(--accent-warm);min-width:64px;flex-shrink:0}
+.ct-item .it-txt{font-family:var(--font-body);font-size:37px;line-height:1.4;color:var(--text);flex:1}
+
+/* === data 布局（标签+数值行） === */
+.ct-data{display:flex;flex-direction:column;gap:20px;width:100%}
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:24px 32px;background:rgba(0,245,212,0.06);border-radius:12px;border:1px solid rgba(0,245,212,0.2)}
+.data-row.warm{background:rgba(249,168,37,0.07);border-color:rgba(249,168,37,0.25)}
+.d-label{font-family:var(--font-body);font-size:35px;color:var(--text2)}
+.d-value{font-family:var(--font-data);font-weight:700;font-size:48px;color:var(--accent-cool)}
+.d-value.warm{color:var(--accent-warm)}
+.d-value.red{color:var(--danger)}
+
+/* === compare 布局（双栏冷暖对比） === */
+.ct-compare{display:flex;flex-direction:row;width:100%;gap:0;align-items:stretch;flex:1;min-height:900px}
+.col{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:50px 26px;border-radius:14px}
+.col-bad{background:rgba(255,90,90,0.07);border:1px solid rgba(255,90,90,0.28)}
+.col-good{background:rgba(0,245,212,0.08);border:1px solid rgba(0,245,212,0.32)}
+.col-label{font-family:var(--font-data);font-size:32px;letter-spacing:3px}
+.col-bad .col-label{color:var(--danger)}
+.col-good .col-label{color:var(--accent-cool)}
+.col-val{font-family:var(--font-data);font-weight:700;font-size:78px;color:var(--text);text-align:center;line-height:1.1}
+.col-note{font-family:var(--font-body);font-size:32px;color:var(--text2);text-align:center;line-height:1.4}
+.vs-bar{width:3px;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.35),transparent);margin:0 4px}
+
+/* === timeline 布局（垂直节点） === */
+.ct-timeline{display:flex;flex-direction:column;width:100%;gap:0}
+.tl-row{display:flex;align-items:center;gap:24px;padding:14px 0}
+.tl-dot{width:26px;height:26px;border-radius:50%;background:var(--accent-warm);box-shadow:0 0 14px rgba(249,168,37,0.65);flex-shrink:0}
+.tl-dot.cool{background:var(--accent-cool);box-shadow:0 0 14px rgba(0,245,212,0.6)}
+.tl-conn{width:3px;height:30px;background:linear-gradient(180deg,rgba(249,168,37,0.5),rgba(249,168,37,0.15));margin-left:11px}
+.tl-txt{font-family:var(--font-body);font-size:35px;color:var(--text);line-height:1.35}
+.tl-txt b{color:var(--accent-warm);font-weight:700;font-family:var(--font-data)}
+
+/* === 三档卡片（定价/Phase） === */
+.ct-cards3{display:flex;flex-direction:row;gap:18px;width:100%}
+.tcard{flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 16px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12)}
+.tcard.hot{background:rgba(249,168,37,0.1);border:2px solid rgba(249,168,37,0.4)}
+.tc-name{font-family:var(--font-data);font-size:32px;color:var(--accent-cool);letter-spacing:1px}
+.tcard.hot .tc-name{color:var(--accent-warm)}
+.tc-price{font-family:var(--font-data);font-weight:700;font-size:54px;color:var(--text)}
+.tc-desc{font-family:var(--font-body);font-size:32px;color:var(--text2);text-align:center;line-height:1.35}
+
+/* 章节序号（大数字水印） */
+.chap-no{font-family:var(--font-data);font-weight:700;font-size:160px;color:rgba(249,168,37,0.12);line-height:1}
+
+/* ============================================
+ * CSS 循环动画（0%帧可见，HyperFrames 安全）
+ * ============================================ */
+@keyframes breathGlow{0%,100%{opacity:0.45}50%{opacity:0.82}}
+@keyframes softPulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.06);opacity:1}}
+@keyframes gradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes ringExpand{0%,100%{transform:scale(0.92);opacity:0.3}50%{transform:scale(1.25);opacity:0.7}}
+@keyframes dash{to{stroke-dashoffset:-200}}
+
+.flow-text{background-size:200% 100%;animation:gradFlow 4s ease-in-out infinite}
+.pulse-it{animation:softPulse 3s ease-in-out infinite}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:breathGlow 4.5s ease-in-out infinite}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid;animation:ringExpand 5s ease-in-out infinite}
+.scan-h{position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent-cool),transparent);opacity:0.5;animation:scanMove 6s ease-in-out infinite}
+@keyframes scanMove{0%,100%{top:18%}50%{top:82%}}

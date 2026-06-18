@@ -1,0 +1,52 @@
+{
+  "date": "2026-06-18",
+  "category": "github",
+  "topic_type": "github_trending_daily",
+  "title_seed": "6月18日 GitHub 涨星榜 · AI 砍 99% token + 免 root 清预装",
+  "angle": "数字锚定 + 反直觉并列：单日涨星最猛的几个项目里，一个把 AI 看代码的输入直接砍掉 99%，另一个让你免 root 卸掉厂商预装。涨幅数据（+1523 / +1161）做硬锚点，'砍掉 99% token' 做反直觉爆点。",
+  "narrative_template": "hyper_pace",
+  "novelty_strategy": "主动差异化近 5 期：(1) 避开 'AI agent 占了一半' 重复句式，本期叙事重心从'智能'移到'效率/隐私/设计/协作'多元方向；(2) 数字锚点换成涨幅绝对值（+1523/+1161）+ 百分比（砍掉 99% token），区别于近期'参数从一亿暴涨到万亿'的指数句式；(3) 收尾 3 个 A 档普通人可用的项目（清预装/设计/项目管理），主动拉开与 C 档开发者的距离，平衡受众广度。",
+  "hook_strategy": {
+    "pattern": "number_anchor",
+    "primary_anchor": "砍掉 99% token",
+    "secondary_anchors": ["+1523", "+1161"],
+    "first_sentence": "6月18日，几个项目杀入涨星榜，有个把AI看代码的输入，砍掉了99%。",
+    "must_include_keywords": ["砍掉"]
+  },
+  "target_freshness": {
+    "hook_similarity_max": 0.20,
+    "project_overlap_max": 0.30,
+    "narrative_similarity_max": 0.20,
+    "diff_direction": ["换数字锚点为涨幅绝对值", "换题材重心为效率/隐私/设计", "收尾 A 档拉广度"]
+  },
+  "avoid_recent": {
+    "hooks": [
+      "今天6个项目冲上热榜",
+      "九年。参数从一亿暴涨到万亿",
+      "6月16日 6个项目杀入榜单，AI agent占了一半",
+      "13万亿，利润却不到百分之五",
+      "第24周，AI 集体进化出技能"
+    ],
+    "high_frequency_projects": [
+      "meshery/meshery",
+      "nvidia/skillspector",
+      "universal-debloater-alliance/universal-android-debloater-next-generation"
+    ],
+    "note": "Universal-Debloater 近期高频但本期作为 A 档拉广度收尾项目保留，作为可操作实用信息（R-PAT-high-save-rate）展开，不一带而过"
+  },
+  "segments_plan": {
+    "mode": "standard",
+    "scene_count": 6,
+    "scene0_hook": "数字锚定 + 反直觉（砍掉 99% token）",
+    "scenes": [
+      {"idx": 1, "project": "codebase-memory-mcp", "tier": "C", "role": "反直觉爆点（钩子展开）"},
+      {"idx": 2, "project": "mattpocock/skills", "tier": "B", "role": "涨幅王 +1523"},
+      {"idx": 3, "project": "Agent-Reach", "tier": "B", "role": "涨幅第二 +1161"},
+      {"idx": 4, "project": "Universal-Debloater", "tier": "A", "role": "可操作·免 root 清预装（R-PAT 展开点）"},
+      {"idx": 5, "project": "penpot", "tier": "A", "role": "可操作·免费设计工具"},
+      {"idx": 6, "project": "plane", "tier": "A", "role": "可操作·免费项目管理 + 结尾争议提问"}
+    ]
+  },
+  "audience_strategy": "A 档（Universal-Debloater / penpot / plane）讲 '你能直接用'；B 档（skills / Agent-Reach）讲 '开发者/会用命令行的人'；C 档（codebase-memory-mcp）讲 '给做 AI 编程的开发者'，不伪装成普通人可用",
+  "ending_strategy": "争议/站队提问：codebase-memory-mcp 和 Agent-Reach 你站谁 + 关注我下期见"
+}

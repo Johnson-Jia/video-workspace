@@ -1,0 +1,58 @@
+# GitHub Trending 内容素材 — 2026-06-18
+
+> 数据源：raw_trending.json（python_requests + gh_api 三源验证，20 项目，活跃度 90%，16 新条目不重复昨日）
+> 选取：6 个项目（A 档 3 个约占半、B 档 2 个、C 档 1 个；覆盖 AI/智能体、开发者效率、隐私工具、设计、协作、AI agent 六方向）
+> 真实性：6/6 通过 gh API HARD 验证（star/fork 比、watcher、owner 年龄、README、仓库体积均正常，0 剔除）
+
+## Hook 候选
+
+- 反直觉钩子（优先级 1，首选）：codebase-memory-mcp —— "有个工具把 AI 看代码的输入砍掉了 99%"（索引成知识图谱后省 99% token，对应 hook 示例"砍掉 95%"的升级版）
+- 动作+数字钩子（优先级 2）：mattpocock/skills 单日 +1523（涨幅王）、Agent-Reach +1161（涨幅第二）—— "6 月 18 日 GitHub 涨星最猛的项目，有个工具把 AI 输入砍掉了 99%"
+
+## 选取项目（按叙事顺序：钩子 → 涨幅 → 普通人可用收尾）
+
+### 1. DeusData/codebase-memory-mcp | C | 5.4K★ (+371) | 钩子担当
+高性能代码智能 MCP 服务器，把代码库索引成持久化知识图谱，毫秒级查询、省 99% token（原: High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.）
+- avatar: assets/avatars/DeusData.png
+- 用途: AI秒懂整个代码库
+- 受众: C开发者向（给做 AI 编程的开发者）
+- 反直觉角度：不用把整个代码库喂给 AI，先索引成图谱，AI 输入直接砍掉 99%，查得还更快
+
+### 2. mattpocock/skills | Shell | 133.7K★ (+1523) | 涨幅王
+给真正工程师的 skills 集合，直接来自作者的 .claude 目录（原: Skills for Real Engineers. Straight from my .claude directory.）
+- avatar: assets/avatars/mattpocock.png
+- 用途: 偷师资深工程师技能
+- 受众: B半可用（开发者直接用，普通人了解思路）
+
+### 3. Panniantong/Agent-Reach | Python | 33.3K★ (+1161) | 涨幅第二
+给你的 AI agent 装上眼睛看全网，一个 CLI 读遍 Twitter、Reddit、YouTube、GitHub、B 站、小红书，零 API 费用（原: Give your AI agent eyes to see the entire internet. Read &amp; search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.）
+- avatar: assets/avatars/Panniantong.png
+- 用途: 让AI替你刷全网
+- 受众: B半可用（CLI 工具，配好就能让 agent 替你抓全网内容）
+
+### 4. Universal-Debloater-Alliance/universal-android-debloater-next-generation | Rust | 7.7K★ (+457) | A 档
+用 Rust 写的跨平台 GUI，通过 ADB 给未 root 的安卓设备清理预装软件，提升隐私、安全和续航（原: Cross-platform GUI written in Rust using ADB to debloat non-rooted Android devices. Improve your privacy, the security and battery life of your device.）
+- avatar: assets/avatars/Universal-Debloater-Alliance.png
+- 用途: 免root清安卓预装
+- 受众: A普通可用
+- 反直觉角度：不用 root、不用刷机，一个图形工具就能卸掉厂商塞的预装，手机立刻清净还省电
+
+### 5. penpot/penpot | Clojure | 50.1K★ (+70) | A 档
+开源设计工具，打通设计和代码协作（原: Penpot: The open-source design tool for design and code collaboration）
+- avatar: assets/avatars/penpot.png
+- 用途: 免费用Figma替代
+- 受众: A普通可用（浏览器即开，设计师和程序员都能上手）
+
+### 6. makeplane/plane | TypeScript | 51.3K★ (+89) | A 档
+开源的 Jira、Linear、Monday、ClickUp 替代品，现代化项目管理平台，管理任务、迭代、文档和分流（原: 🔥🔥🔥 Open-source Jira, Linear, Monday, and ClickUp alternative. Plane is a modern project management platform to manage tasks, sprints, docs, and triage.）
+- avatar: assets/avatars/makeplane.png
+- 用途: 免费的项目管理台
+- 受众: A普通可用（小团队自建即可替代付费项目管理软件）
+
+---
+
+## 受众分档汇总
+
+- A 普通可用（3 个，约占半）：Universal-Debloater、penpot、plane
+- B 半可用（2 个）：mattpocock/skills、Agent-Reach
+- C 开发者向（1 个，≤半）：codebase-memory-mcp

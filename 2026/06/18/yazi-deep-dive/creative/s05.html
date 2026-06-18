@@ -1,0 +1,47 @@
+<!-- 场景: s5_arch | 时长: 8.4s | 技术架构图：31模块6层 + 依赖箭头 + 数据流 -->
+<div class="layer-bg"><!-- bg-component: scan_grid --></div>
+<div class="layer-fx">
+  <div class="fx-aura" style="top:8%;left:50%;transform:translateX(-50%);width:620px;height:620px;background:rgba(0,212,255,0.22);animation:breathGlow 5s ease-in-out infinite"></div>
+  <div class="fx-aura" style="bottom:6%;right:6%;width:380px;height:380px;background:rgba(255,107,53,0.16);animation:breathGlow 4.5s ease-in-out infinite;animation-delay:1s"></div>
+  <div class="fx-ring pulse-it" style="top:16%;left:50%;transform:translate(-50%,-50%);width:360px;height:360px;border-color:rgba(0,212,255,0.24)"></div>
+  <div class="scan-h"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="ct-hero" style="gap:12px">
+  <div class="big-num" style="font-size:48px;color:#fff">31模块 · <span class="grad-cool">6层</span> 架构</div>
+  <div class="arch-diagram">
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L6</span><span class="arch-tier-name">入口</span></div>
+      <div class="arch-modules"><span class="arch-mod key">yazi-fm</span><span class="arch-mod">yazi-cli</span></div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L5</span><span class="arch-tier-name">编排</span></div>
+      <div class="arch-modules"><span class="arch-mod">actor</span><span class="arch-mod">plugin</span><span class="arch-mod">parser</span></div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L4</span><span class="arch-tier-name">核心</span></div>
+      <div class="arch-modules"><span class="arch-mod key">core</span><span class="arch-mod">scheduler</span><span class="arch-mod">dds</span></div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L3</span><span class="arch-tier-name">能力</span></div>
+      <div class="arch-modules"><span class="arch-mod key">adapter</span><span class="arch-mod">sftp</span><span class="arch-mod">vfs</span><span class="arch-mod">term</span></div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L2</span><span class="arch-tier-name">共享</span></div>
+      <div class="arch-modules"><span class="arch-mod">shared</span><span class="arch-mod">shim</span></div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-tier">
+      <div class="arch-tier-label"><span class="arch-tier-num">L1</span><span class="arch-tier-name">编译期</span></div>
+      <div class="arch-modules"><span class="arch-mod">macro</span><span class="arch-mod">codegen</span><span class="arch-mod">ffi</span></div>
+    </div>
+  </div>
+  <div class="arch-flow"><span>输入</span><span>→</span><span style="color:var(--accent-warm)">Core</span><span>→</span><span>渲染</span></div>
+</div>
+</div>
+</div>

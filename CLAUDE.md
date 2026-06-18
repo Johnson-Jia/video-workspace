@@ -12,6 +12,7 @@
 
 ## 规则
 
+- 默认在当前 workspace 目录内操作。workspace 与父目录 `video-clipforge` 是两个独立 git 仓库，禁止 `cd` / `git -C` 到父目录执行 git 或文件写操作（会误操作另一个仓库）——除非用户明确要求操作其他目录
 - 不要删除或修改 `.env-checked`、`.gitignore`、`.gitattributes`
 - 不要自动提交大文件（视频、音频）到 git
 - 视频制作工作流遵循上级目录 `clipforge` 的管线定义

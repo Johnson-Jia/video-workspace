@@ -1,0 +1,34 @@
+<!-- 场景: performance | 时长: 14.9s | 性能边界诚实：scrollback慢/缺流控/macOS延迟/worse-is-better代价 -->
+<div class="layer-bg">
+<!-- bg-component: vignette_glow -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0a12,#0e0e18,#0a0a12)"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,179,0,0.10) 0%,transparent 55%)"></div>
+<div style="position:absolute;top:50%;left:50%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,179,0,0.13) 0%,transparent 65%);filter:blur(70px);transform:translate(-50%,-50%);animation:glowPulse 8s ease-in-out infinite"></div>
+<div style="position:absolute;top:20%;left:15%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,82,82,0.10) 0%,transparent 70%);filter:blur(80px);animation:noiseDrift 20s ease-in-out infinite"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(0,0,0,0.55) 100%)"></div>
+<div style="position:absolute;top:30%;left:40%;width:2px;height:2px;border-radius:50%;background:rgba(255,210,150,0.32);box-shadow:0 0 5px rgba(255,210,150,0.25);animation:dustFloat 6s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:55%;left:30%;width:2px;height:2px;border-radius:50%;background:rgba(255,180,120,0.28);box-shadow:0 0 4px rgba(255,180,120,0.2);animation:dustFloat 7s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:65%;left:65%;width:2px;height:2px;border-radius:50%;background:rgba(255,200,140,0.26);box-shadow:0 0 4px rgba(255,200,140,0.2);animation:dustFloat 5.5s ease-in-out infinite 4s"></div>
+<div style="position:absolute;top:0;left:45%;width:1.5px;height:100%;background:linear-gradient(transparent 20%,rgba(255,179,0,0.06) 50%,transparent 80%);animation:beamBreath 8s ease-in-out infinite"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.015) 0%,transparent 35%,transparent 65%,rgba(255,255,255,0.02) 100%);animation:glassShimmer 9s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-aura" style="top:14%;left:50%;transform:translateX(-50%);width:540px;height:540px;background:rgba(255,179,0,0.24);animation:breathGlow 5s ease-in-out infinite"></div>
+  <div class="fx-aura" style="bottom:14%;right:8%;width:420px;height:420px;background:rgba(255,82,82,0.18);animation:breathGlow 4.5s ease-in-out infinite;animation-delay:1s"></div>
+  <div class="fx-ring pulse-it" style="top:26%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;border-color:rgba(255,179,0,0.28)"></div>
+  <div class="scan-h" style="background:linear-gradient(90deg,transparent,var(--accent-warm),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="ct-hero" style="gap:20px">
+  <span class="ct-tag warn">性能边界 也得诚实讲</span>
+  <div class="ct-title" style="font-size:56px">不是<span class="grad-warm">全能</span>，是 worse-is-better</div>
+  <div class="perf-list">
+    <div class="perf-item"><span class="pi-tag">慢</span><div class="pi-body"><span class="pi-head">滚动历史一大就变慢</span><span class="pi-desc">复制模式尤其明显</span></div></div>
+    <div class="perf-item"><span class="pi-tag">缺</span><div class="pi-body"><span class="pi-head">没有流控和背压机制</span><span class="pi-desc">高速输出可能丢字符</span></div></div>
+    <div class="perf-item"><span class="pi-tag">延</span><div class="pi-body"><span class="pi-head">macOS 复制可能有延迟</span><span class="pi-desc">社区确证的真实痛点</span></div></div>
+  </div>
+  <div class="perf-foot">这些不是营销话术，是<span class="grad-cool" style="font-weight:800">务实的代价</span></div>
+</div>
+</div>
+</div>

@@ -1,0 +1,71 @@
+# tmux 深度解析 — 视频详细素材（严格依据评估报告，禁止虚幻构思）
+
+> 数据源：tmux-EVALUATION.md（源码精读 🟢 + 多源验证 🟡）。所有结论带溯源，低置信度（🔴）不采用。
+
+## 钩子候选（深度解析 = 痛点优先，禁纯技术反差）
+- **主推（痛点）**：SSH 一断，跑了一半的命令就没了。有个 2007 年的工具，让终端会话永不掉线
+- 备选（数字锚定）：一个二进制，既是客户端又是服务器——tmux 用了近 20 年的架构
+- 备选（反差）：开箱难用的终端工具，却是远程开发的刚需
+- 钩子方向：含利益翻译的痛点/数字钩子优先；文案合规底线由 stage 门禁把关
+
+## 建议场景顺序（深度解析 8-10 场景，2-3min）
+
+### 1. hook（痛点开场）
+SSH 远程跑任务，网络一断全没了。tmux 让会话存活在后台，重连恢复，长任务不丢。
+- 视觉：断线动画 → tmux 会话存活
+- 溯源：🟢 架构决定 + 🟡 多源（Red Hat/Reddit/NixOS）
+
+### 2. tmux 是什么（定位）
+终端复用器：一个屏幕开多个终端，可 detach 后台、reattach 恢复。Nicholas Marriott 2007 年开发，ISC 许可，当前 next-3.7。
+- 溯源：🟢 README:3-5, configure.ac:3
+
+### 3. 架构哲学①：client-server 自我孵化（核心）
+同一个 tmux 二进制，运行时自动决定当 client 还是 server。client 连不上就 fork 出 server 守护进程，flock 文件锁防止重复启动。用户无需"启动服务"。
+- 溯源：🟢 tmux.c:575 → client.c:104-181
+- 视觉：一个二进制 → 分裂 client/server + socket 连接
+
+### 4. 架构哲学②：会话与终端解耦（持久化根基）
+session/window/pane 存活在 server 进程内，与 client 终端无关。client 断开只丢"显示通道"，状态完整保留。这是 SSH 断线不丢任务的根。
+- 溯源：🟢 server.c:212-217
+- 视觉：client 断开 → server 内 session/window/pane 保留
+
+### 5. 架构图（进程拓扑 + 渲染分层）
+- 进程拓扑：用户终端 → tmux client（Unix socket + imsg 协议）→ tmux server（libevent 事件循环）
+- 对象模型：session → window → window_pane → pty
+- 渲染分层（性能关键）：grid（字符存储，懒分配+紧凑压缩）→ screen（显示）→ tty（终端能力）
+- 溯源：🟢 源码（client.c/server.c/grid.c/tty.c）
+- 视觉：client-server 拓扑图 + 渲染三层
+
+### 6. 核心功能速览
+会话持久化、窗口/窗格分割（3.7 新增浮动窗格）、复制模式（vi/emacs 键位）、~65 命令可编程、格式化 #{...}、控制模式 -CC（IDE 集成）、popup、状态栏、粘贴、结对共享、truecolor/Sixel/OSC8 超链接、文件传输
+- 溯源：🟢 Makefile.am + man
+
+### 7. 软硬件限制（诚实）
+官方 6 平台（BSD系+Linux+macOS+Solaris）+ 5 适配；强制 libevent+ncurses；无原生 Windows（仅 Cygwin/WSL）；强制 UTF-8 locale。
+- 溯源：🟢 README/configure.ac
+
+### 8. 性能边界（诚实，已知缺陷）
+大滚动历史会变慢（copy mode 尤甚）；缺流控/背压机制；macOS 复制可能延迟。这些是社区确证的真实痛点（非营销话术）。
+- 溯源：🟢 issue #3352 + 🟡 iTerm2 #7899
+
+### 9. 适用场景 + 推荐
+SSH 远程持久会话（核心价值，不可替代）、多窗格、结对、CI/长任务、无 GUI 服务器。
+推荐：远程开发→tmux 首选；追求零配置→Zellij；纯本地+WezTerm→可不引入；重度用户→tmux+dotfiles。
+- 溯源：🟢架构 + 🟡社区共识
+
+### 10. CTA + 结尾提问
+关注 GitHub 星探（或对应频道），下期见。
+- 结尾提问候选（站队/二选一，轮换）：「tmux 和 Zellij 你站谁」「远程开发你离不开 tmux 吗」
+- 提问方向：站队或二选一任一，仅结尾 1 个，正文不提问
+
+## 受众分档
+- C 开发者向（SSH/终端/服务器/可编程终端用户）
+- 但 SSH 远程开发受众广泛（后端/运维/科研），hook 突出"SSH 断线不丢任务"普适痛点
+
+## 数据可信度声明
+所有结论来自评估报告（源码精读 🟢 + 多源验证 🟡）。视频严格依据报告，不杜撰功能/性能/数字。低置信度（🔴）内容不采用。架构图/哲学/功能/限制/场景/建议均可在报告 + 源码复核。
+
+## 排除/验证
+- tmux 非 GitHub Trending 项目（评估报告分析），无 raw_trending.json → description_fidelity_valid 优雅跳过
+- 无排除列表项目（非 trending）
+- 真实性：源码可复核（D:/AI-Agent/github-analyze/tmux），报告 🟢 溯源

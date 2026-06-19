@@ -1,0 +1,161 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #FF8C32;
+  --accent-warm-2: #FFB347;
+  --accent-cool: #4DA8DA;
+  --accent-cool-2: #00D4FF;
+  --accent-green: #2EC4B6;
+  --accent-purple: #9B7EDE;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --font-title: 'Inter',sans-serif;
+  --font-body: 'Noto Sans SC',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============ 共用渐变文字（content 层，遵循 R-S6-021）============ */
+.grad-warm {
+  background-image: linear-gradient(135deg, #FFD27A 0%, #FF8C32 55%, #FF6B35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.grad-cool {
+  background-image: linear-gradient(135deg, #9BD7F2 0%, #4DA8DA 50%, #00D4FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.grad-green {
+  background-image: linear-gradient(135deg, #7BE6D8 0%, #2EC4B6 60%, #1FA89B 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #C9B3F2 0%, #9B7EDE 55%, #6B5BD4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* ============ SCENE 1: HOOK — 知识图谱拟人钩子 ============ */
+.hk-stage { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:42px; text-align:center; }
+.hk-eyebrow {
+  font-family: 'JetBrains Mono','Consolas',monospace;
+  font-size: 34px; font-weight: 700; letter-spacing: 0.32em;
+  color: rgba(255,179,71,0.78); text-transform: uppercase;
+}
+.hk-title {
+  font-family: 'Inter',sans-serif;
+  font-size: 92px; font-weight: 900; line-height: 1.12; letter-spacing: -0.01em;
+  max-width: 880px;
+}
+.hk-sub {
+  font-family: 'Noto Sans SC',sans-serif;
+  font-size: 38px; font-weight: 500; line-height: 1.45;
+  color: rgba(255,255,255,0.7); max-width: 760px;
+}
+.hk-orb {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, rgba(255,210,122,0.95), rgba(255,140,50,0.55) 45%, rgba(255,107,53,0.18) 70%, transparent 100%);
+  box-shadow: 0 0 80px rgba(255,140,50,0.45), inset 0 0 30px rgba(255,255,255,0.25);
+}
+
+/* ============ SCENE 2: codebase-memory-mcp — ProjectFullCard 知识图谱 ============ */
+.pfc { position:relative; width:100%; height:100%;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding: 180px 90px 220px 90px; }
+.pfc-glow-a { position:absolute; width:560px; height:560px; border-radius:50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.28), rgba(77,168,218,0.10) 50%, transparent 70%);
+  filter: blur(120px); top:180px; left:-140px; z-index:0; }
+.pfc-glow-b { position:absolute; width:480px; height:480px; border-radius:50%;
+  background: radial-gradient(circle, rgba(155,126,222,0.22), transparent 65%);
+  filter: blur(110px); bottom:240px; right:-120px; z-index:0; }
+.pfc-top { position:relative; z-index:2; display:flex; flex-direction:column; gap:18px; width:100%; }
+.pfc-rank-row { display:flex; align-items:baseline; gap:28px; }
+.pfc-rank { font-family:'JetBrains Mono',monospace; font-size:84px; font-weight:800; line-height:0.9;
+  color:#FF8C32; text-shadow:0 0 50px rgba(255,140,50,0.4); }
+.pfc-cat { font-family:'JetBrains Mono',monospace; font-size:36px; font-weight:700;
+  letter-spacing:0.14em; color:#4DA8DA; text-transform:uppercase; }
+.pfc-use { font-family:'Inter',sans-serif; font-size:52px; font-weight:800; line-height:1.1; }
+.pfc-name { font-family:'JetBrains Mono',monospace; font-size:62px; font-weight:800; color:#fff;
+  letter-spacing:-0.02em; line-height:1.05; width:100%; word-break:break-word; }
+.pfc-mid { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:36px; width:100%; }
+.pfc-avatar-wrap { position:relative; width:220px; height:220px; display:flex; align-items:center; justify-content:center; }
+.pfc-avatar-ring { position:absolute; inset:-16px; border-radius:50%;
+  background: conic-gradient(from 0deg, #4DA8DA, #9B7EDE, #00D4FF, #4DA8DA);
+  filter: blur(14px); opacity:0.55; }
+.pfc-avatar { position:relative; z-index:1; width:220px; height:220px; border-radius:50%;
+  object-fit:cover; border:3px solid rgba(255,255,255,0.85);
+  box-shadow:0 0 50px rgba(0,0,0,0.5); }
+.pfc-desc { font-family:'Noto Sans SC',sans-serif; font-size:38px; font-weight:600; line-height:1.35;
+  color:#fff; text-align:center; max-width:820px; }
+.pfc-data-bar { width:100%; max-width:820px; display:flex; flex-direction:column; gap:14px; }
+.pfc-bar-head { display:flex; justify-content:space-between; align-items:baseline; }
+.pfc-bar-label { font-size:32px; font-weight:500; color:rgba(255,255,255,0.6); }
+.pfc-bar-val { font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:800; color:#FF8C32; }
+.pfc-bar-track { width:100%; height:14px; border-radius:999px; background:rgba(255,255,255,0.1); overflow:hidden; }
+.pfc-bar-fill { height:100%; border-radius:999px;
+  background: linear-gradient(90deg, #4DA8DA, #00D4FF, #FF8C32); }
+.pfc-topics { display:flex; flex-wrap:wrap; gap:12px; }
+.pfc-topic { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:600;
+  padding:8px 20px; border-radius:999px; color:#4DA8DA;
+  background:rgba(77,168,218,0.10); border:1px solid rgba(77,168,218,0.32); }
+.pfc-bottom { position:relative; z-index:2; display:flex; flex-direction:column; gap:24px; width:100%; }
+.pfc-selling { display:flex; flex-wrap:wrap; gap:14px; }
+.pfc-sell { font-family:'Noto Sans SC',sans-serif; font-size:32px; font-weight:700; padding:10px 24px;
+  border-radius:14px; color:#fff; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.18); }
+.pfc-comment { font-family:'Noto Sans SC',sans-serif; font-size:34px; font-weight:500; line-height:1.4;
+  color:rgba(255,255,255,0.72); border-left:4px solid #FF8C32; padding-left:22px; }
+
+/* ============ SCENE 3: privacy-tools — 双项目并列（compare）============ */
+.dual { display:flex; flex-direction:column; width:100%; height:100%; gap:28px; justify-content:center; }
+.dual-head { text-align:center; }
+.dual-head-title { font-family:'Inter',sans-serif; font-size:54px; font-weight:800; line-height:1.15; }
+.dual-cards { display:flex; flex-direction:row; gap:24px; width:100%; align-items:stretch; }
+.dual-card { flex:1; display:flex; flex-direction:column; gap:18px; padding:28px 26px;
+  background: rgba(255,255,255,0.045); border:1px solid rgba(46,196,182,0.28);
+  border-radius:22px; backdrop-filter: blur(6px); }
+.dual-card-rank { font-family:'JetBrains Mono',monospace; font-size:38px; font-weight:800; color:#2EC4B6; }
+.dual-card-name { font-family:'JetBrains Mono',monospace; font-size:38px; font-weight:700; color:#fff;
+  line-height:1.1; word-break:break-word; }
+.dual-card-desc { font-family:'Noto Sans SC',sans-serif; font-size:32px; font-weight:500; line-height:1.35;
+  color:rgba(255,255,255,0.82); }
+.dual-card-tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+.dual-tag { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:600;
+  padding:8px 20px; border-radius:999px; color:#2EC4B6;
+  background:rgba(46,196,182,0.12); border:1px solid rgba(46,196,182,0.35); }
+.dual-tag.new { color:#FF8C32; background:rgba(255,140,50,0.12); border-color:rgba(255,140,50,0.4); }
+.dual-card-stars { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:700; color:#FF8C32;
+  margin-top:auto; }
+.dual-foot { text-align:center; font-family:'Noto Sans SC',sans-serif; font-size:34px; font-weight:600;
+  color:rgba(255,255,255,0.7); }
+
+/* ============ SCENE 4: insomnia — ProjectFullCard API 客户端 ============ */
+/* 复用 .pfc* 类，配色通过 inline 覆盖 */
+
+/* ============ SCENE 5: glm5-timesfm — 双 AI 模型并列 ============ */
+.dual-card.purple { border-color: rgba(155,126,222,0.32); }
+.dual-card.purple .dual-card-rank { color:#9B7EDE; }
+.dual-card.purple .dual-tag { color:#9B7EDE; background:rgba(155,126,222,0.12); border-color:rgba(155,126,222,0.36); }
+.dual-card.purple .dual-tag.new { color:#FF8C32; background:rgba(255,140,50,0.12); border-color:rgba(255,140,50,0.4); }
+.dual-card.purple .dual-card-stars { color:#FF8C32; }
+.timeline-mini { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+.tl-step { display:flex; align-items:center; gap:14px; }
+.tl-dot { width:14px; height:14px; border-radius:50%; background:#9B7EDE; box-shadow:0 0 10px rgba(155,126,222,0.6); flex-shrink:0; }
+.tl-line { width:2px; height:22px; background:rgba(155,126,222,0.4); margin-left:6px; }
+.tl-text { font-family:'Noto Sans SC',sans-serif; font-size:32px; font-weight:600; color:rgba(255,255,255,0.82); }
+.data-rows { display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+.data-row { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+.data-key { font-family:'Noto Sans SC',sans-serif; font-size:32px; font-weight:500; color:rgba(255,255,255,0.6); }
+.data-val { font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:700; color:#00D4FF; }
+
+/* ============ SCENE 6: CTA — 收束提问 ============ */
+.cta-stage { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:48px; text-align:center; }
+.cta-q { font-family:'Inter',sans-serif; font-size:78px; font-weight:900; line-height:1.15;
+  max-width:880px; letter-spacing:-0.01em; }
+.cta-divider { width:160px; height:4px; border-radius:999px;
+  background: linear-gradient(90deg, transparent, #FF8C32, #FFB347, transparent); }
+.cta-channel { font-family:'Noto Sans SC',sans-serif; font-size:46px; font-weight:700; color:#fff; }
+.cta-channel .cta-star { color:#FFB347; }
+.cta-pills { display:flex; flex-wrap:wrap; gap:16px; justify-content:center; max-width:780px; }
+.cta-pill { font-family:'Noto Sans SC',sans-serif; font-size:32px; font-weight:600; padding:12px 28px;
+  border-radius:999px; color:#fff; background:rgba(255,255,255,0.06); border:1px solid rgba(255,179,71,0.32); }

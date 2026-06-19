@@ -1,0 +1,70 @@
+<!-- 场景: architecture | 时长: 29.6s | 架构图三阶段：进程拓扑 / 对象模型嵌套 / 渲染三层 -->
+<div class="layer-bg">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,163,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,163,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,255,163,0.3),rgba(0,255,163,0.5),rgba(0,255,163,0.3),transparent);box-shadow:0 0 20px rgba(0,255,163,0.3);animation:scanLine 8s linear infinite"></div>
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,179,0,0.2),rgba(255,179,0,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+<div style="position:absolute;top:38%;left:50%;width:460px;height:460px;border-radius:50%;background:rgba(0,255,163,0.12);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+<div style="position:absolute;top:25%;left:38%;width:12px;height:12px;border-radius:50%;background:rgba(0,255,163,0.9);box-shadow:0 0 14px rgba(0,255,163,0.7);animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:60%;left:66%;width:10px;height:10px;border-radius:50%;background:rgba(255,179,0,0.85);box-shadow:0 0 12px rgba(255,179,0,0.6);animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:72%;left:28%;width:11px;height:11px;border-radius:50%;background:rgba(0,255,163,0.8);box-shadow:0 0 13px rgba(0,255,163,0.65);animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:45%;left:78%;width:9px;height:9px;border-radius:50%;background:rgba(57,208,216,0.85);box-shadow:0 0 11px rgba(57,208,216,0.6);animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+<div style="position:absolute;top:55%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,255,163,0.4),rgba(255,179,0,0.6),rgba(0,255,163,0.4),transparent);filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;border-top:2px solid rgba(0,255,163,0.45);border-left:2px solid rgba(0,255,163,0.45);animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;border-top:2px solid rgba(0,255,163,0.45);border-right:2px solid rgba(0,255,163,0.45);animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;border-bottom:2px solid rgba(0,255,163,0.45);border-left:2px solid rgba(0,255,163,0.45);animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;border-bottom:2px solid rgba(0,255,163,0.45);border-right:2px solid rgba(0,255,163,0.45);animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;font-family:'JetBrains Mono',monospace;color:rgba(0,255,163,0.4);font-size:14px;animation:tickFade 6s ease-in-out infinite"><span>| tmux</span><span>| 3.7</span><span>| ipc</span><span>| tty</span></div>
+<div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);animation:glassShimmer 8s ease-in-out infinite"></div>
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;background:linear-gradient(90deg,rgba(0,255,163,0.5),rgba(255,179,0,0.4),rgba(57,208,216,0.5));filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-aura" style="top:8%;left:50%;transform:translateX(-50%);width:620px;height:620px;background:rgba(0,255,163,0.22);animation:breathGlow 5s ease-in-out infinite"></div>
+  <div class="fx-aura" style="bottom:6%;right:6%;width:380px;height:380px;background:rgba(255,179,0,0.18);animation:breathGlow 4.5s ease-in-out infinite;animation-delay:1s"></div>
+  <div class="fx-ring pulse-it" style="top:16%;left:50%;transform:translate(-50%,-50%);width:360px;height:360px;border-color:rgba(0,255,163,0.24)"></div>
+  <div class="scan-h"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="ct-hero" style="gap:14px">
+  <span class="arch-phase-label">① 进程拓扑</span>
+  <div class="arch-head"><span class="grad-cool">落到代码上</span>的一条链路</div>
+  <div class="topo-flow">
+    <div class="topo-node"><span class="tn-icon">▣</span><div class="tn-body"><span class="tn-name">用户终端</span><span class="tn-en">user terminal</span></div></div>
+    <div class="topo-arrow"></div>
+    <div class="topo-node"><span class="tn-icon">◐</span><div class="tn-body"><span class="tn-name">tmux client</span><span class="tn-sub">客户端</span></div></div>
+    <div class="topo-conn">↕ Unix 域套接字 · imsg 协议</div>
+    <div class="topo-node amber"><span class="tn-icon">◑</span><div class="tn-body"><span class="tn-name">tmux server</span><span class="tn-sub">守护进程</span></div></div>
+    <div class="topo-conn">↕ libevent 事件循环</div>
+  </div>
+</div>
+</div>
+<div class="phase phase-2">
+<div class="ct-hero" style="gap:14px">
+  <span class="arch-phase-label">② 对象模型</span>
+  <div class="arch-head">层层<span class="grad-cool">嵌套</span>的状态树</div>
+  <div class="nest-stack">
+    <div class="nest-tier t1"><span class="nt-level">L1</span><span class="nt-name">session</span><span class="nt-desc">会话</span></div>
+    <div class="nest-tier t2"><span class="nt-level">L2</span><span class="nt-name">window</span><span class="nt-desc">winlink</span></div>
+    <div class="nest-tier t3"><span class="nt-level">L3</span><span class="nt-name">window_pane</span><span class="nt-desc">窗格</span></div>
+    <div class="nest-tier t4"><span class="nt-level">L4</span><span class="nt-name">pty</span><span class="nt-desc">forkpty</span></div>
+    <div class="nest-mgr"><span class="nm-tag">mgr</span><span class="nm-text">红黑树 + 队列 统一管理</span></div>
+  </div>
+</div>
+</div>
+<div class="phase phase-3">
+<div class="ct-hero" style="gap:14px">
+  <span class="arch-phase-label">③ 渲染分层</span>
+  <div class="arch-head">性能的<span class="grad-warm">关键</span>：三层流水线</div>
+  <div class="render-pipe">
+    <div class="rp-tier g1"><span class="rp-num">G</span><div class="rp-body"><span class="rp-name">grid</span><span class="rp-desc">字符存储 · 懒分配 + 紧凑 cell 压缩</span></div></div>
+    <div class="rp-arrow"></div>
+    <div class="rp-tier g2"><span class="rp-num">S</span><div class="rp-body"><span class="rp-name">screen</span><span class="rp-desc">显示状态 / 重绘</span></div></div>
+    <div class="rp-arrow"></div>
+    <div class="rp-tier g3"><span class="rp-num">T</span><div class="rp-body"><span class="rp-name">tty</span><span class="rp-desc">终端能力 · terminfo 适配</span></div></div>
+    <div class="rp-foot">⟶ 字符 → 显示 → 适配</div>
+  </div>
+</div>
+</div>
+</div>

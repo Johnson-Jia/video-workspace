@@ -1,0 +1,521 @@
+[
+  {
+    "scene": "hook",
+    "type": "hook",
+    "estimated_duration": 5,
+    "text": "网一断，命令全没了。",
+    "emotion": "grab",
+    "emotion_intensity": 0.6,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": {
+        "mood": "urgent, dark, dramatic",
+        "color_hint": "deep black base with amber alert glow, broken connection sparks",
+        "density": "generous"
+      },
+      "fx": {
+        "emotion": "loss, then rescue",
+        "motion_style": "connection break → reconnect pulse",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "hero",
+        "focus": "SSH 断线痛点 → 会话存活救赎，琥珀色大数字 2007",
+        "layout_hint": {
+          "density": "generous"
+        }
+      }
+    }
+  },
+  {
+    "scene": "what",
+    "type": "what",
+    "estimated_duration": 10,
+    "text": "有个 2007 年的老工具，能让终端会话永不掉线。它叫 tmux，一个终端复用器。一个屏幕能开多个终端，可以 detach 退到后台，再 reattach 恢复。ISC 许可，现在到了 3.7。",
+    "emotion": "build",
+    "emotion_intensity": 0.45,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": {
+        "mood": "focused, technical, calm",
+        "color_hint": "dark terminal base, terminal green accent",
+        "density": "low"
+      },
+      "fx": {
+        "emotion": "clarity, introduction",
+        "motion_style": "typing reveal, cursor blink",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "hero",
+        "focus": "tmux 项目名大字 + 一句话定位 + 多窗格演示",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "philosophy1",
+    "type": "how",
+    "estimated_duration": 12,
+    "text": "tmux 最巧的地方，是同一个二进制，既是客户端，又是服务器。运行时它自己决定当哪个角色。客户端连不上，就 fork 出一个服务器守护进程，用文件锁防止重复启动。用户根本不用操心怎么启动服务。",
+    "emotion": "build",
+    "emotion_intensity": 0.7,
+    "humor_type": "analogy",
+    "character_expression": "think",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "一个二进制身兼 client+server",
+        "visual_type": "highlight",
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 0
+        },
+        "key_data": [
+          "同一个二进制",
+          "client",
+          "server",
+          "运行时自动决定角色"
+        ]
+      },
+      {
+        "focus": "连不上就 fork server + flock 文件锁防重复",
+        "visual_type": "timeline",
+        "narration_anchor": {
+          "start_sentence": 1,
+          "end_sentence": 3
+        },
+        "key_data": [
+          "连不上 → fork server 守护进程",
+          "flock 文件锁",
+          "防重复启动",
+          "用户无需启动服务"
+        ]
+      }
+    ],
+    "visual_intent": {
+      "bg": {
+        "mood": "technical, revealing, confident",
+        "color_hint": "dark base, terminal green topology lines",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "insight, mechanism",
+        "motion_style": "binary splits into client/server, socket connects",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "timeline",
+        "focus": "二进制分裂 client/server + socket 连接 + flock 锁",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "philosophy2",
+    "type": "how",
+    "estimated_duration": 11,
+    "text": "这就引出第二层：会话和终端，是彻底解耦的。session、window、pane 都活在服务器进程里，跟你的终端窗口没关系。客户端断开，只是丢了一条显示通道，状态完整保留。这才是 SSH 断线不丢任务的根。",
+    "emotion": "reveal",
+    "emotion_intensity": 0.85,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "会话与终端解耦：状态活在 server 进程",
+        "visual_type": "compare",
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 1
+        },
+        "key_data": [
+          "session/window/pane",
+          "活在 server 进程",
+          "与 client 终端无关"
+        ]
+      },
+      {
+        "focus": "client 断开只丢显示通道，状态完整保留",
+        "visual_type": "highlight",
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 3
+        },
+        "key_data": [
+          "client 断开",
+          "只丢显示通道",
+          "状态完整保留",
+          "SSH 断线不丢任务的根"
+        ]
+      }
+    ],
+    "visual_intent": {
+      "bg": {
+        "mood": "revealing, confident, structural",
+        "color_hint": "dark base, server node amber glow",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "structure, persistence",
+        "motion_style": "client disconnects, server state persists with pulse",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "compare",
+        "focus": "client 断开 vs server session 保留对比",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "architecture",
+    "type": "tech",
+    "estimated_duration": 20,
+    "text": "落到代码上，是一条清晰的链路。用户终端连到 tmux 客户端，再通过 Unix 域套接字和 imsg 协议，接到服务器守护进程，整个事件循环跑在 libevent 上。对象模型是层层嵌套的：session 下面是 window，window 下面是 window_pane，再往下才是 pty，用红黑树和队列统一管理。渲染分了三层：grid 存字符，做懒分配和紧凑压缩；screen 管显示和重绘；tty 负责适配不同终端的能力。这三层，是它性能的关键。",
+    "emotion": "climax",
+    "emotion_intensity": 0.85,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "进程拓扑：用户终端 → client → Unix socket/imsg → server(libevent)",
+        "visual_type": "timeline",
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 1
+        },
+        "key_data": [
+          "用户终端",
+          "tmux client",
+          "Unix 域套接字",
+          "imsg 协议",
+          "server 守护进程",
+          "libevent 事件循环"
+        ]
+      },
+      {
+        "focus": "对象模型：session → window → window_pane → pty（红黑树+队列）",
+        "visual_type": "list",
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 2
+        },
+        "key_data": [
+          "session",
+          "window(winlink)",
+          "window_pane",
+          "pty(forkpty)",
+          "红黑树 + 队列管理"
+        ]
+      },
+      {
+        "focus": "渲染三层：grid 字符存储 → screen 显示/重绘 → tty 终端能力",
+        "visual_type": "timeline",
+        "narration_anchor": {
+          "start_sentence": 3,
+          "end_sentence": 4
+        },
+        "key_data": [
+          "grid 字符存储",
+          "懒分配 + 紧凑 cell 压缩",
+          "screen 显示状态/重绘",
+          "tty 终端能力 terminfo",
+          "性能关键"
+        ]
+      }
+    ],
+    "visual_intent": {
+      "bg": {
+        "mood": "structural, deep, architectural",
+        "color_hint": "deep black, terminal green topology + amber server node",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "architecture, depth",
+        "motion_style": "ASCII-style topology nodes light up sequentially, scanline background",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "timeline",
+        "focus": "三阶段架构图：进程拓扑 → 对象模型嵌套 → 渲染三层",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "features",
+    "type": "capabilities",
+    "estimated_duration": 13,
+    "text": "功能层面，tmux 给得很足。会话能持久化，窗口窗格随便分，3.7 还加了浮动窗格。复制模式支持 vi 和 emacs 键位，带行号。命令系统有大约 65 条命令，可编程，配置和键绑定共用一套。还有控制模式 -CC，让 IDE 能程序化驱动它。终端能力也没落下：真彩色、256 色、Sixel 图像、OSC8 超链接、斜体，都支持。",
+    "emotion": "settle",
+    "emotion_intensity": 0.55,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "会话持久化 + 窗格分割（含 3.7 浮动窗格）",
+        "visual_type": "list",
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 1
+        },
+        "key_data": [
+          "会话持久化",
+          "窗口/窗格分割",
+          "3.7 浮动窗格"
+        ]
+      },
+      {
+        "focus": "复制模式 + 可编程命令系统",
+        "visual_type": "list",
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 3
+        },
+        "key_data": [
+          "复制模式 vi/emacs",
+          "带行号",
+          "约 65 条命令",
+          "可编程",
+          "配置/键绑定共用"
+        ]
+      },
+      {
+        "focus": "控制模式 -CC（IDE 集成）+ 终端能力",
+        "visual_type": "data",
+        "narration_anchor": {
+          "start_sentence": 4,
+          "end_sentence": 5
+        },
+        "key_data": [
+          "控制模式 -CC",
+          "IDE 程序化驱动",
+          "真彩色/256色/Sixel/OSC8/斜体"
+        ]
+      }
+    ],
+    "visual_intent": {
+      "bg": {
+        "mood": "capable, organized, technical",
+        "color_hint": "dark base, terminal green feature pills",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "capability, density",
+        "motion_style": "feature cards stagger in",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "list",
+        "focus": "核心功能卡片列表（持久化/窗格/复制/命令/控制模式/终端能力）",
+        "layout_hint": {
+          "density": "compact"
+        }
+      }
+    }
+  },
+  {
+    "scene": "limits",
+    "type": "tech",
+    "estimated_duration": 10,
+    "text": "但限制也得说清楚。平台覆盖官方 6 个，加上适配一共 11 个。强制依赖 libevent 和 ncurses，原生 Windows 不支持，只能走 Cygwin 或 WSL。还强制 UTF-8 环境，否则直接报错退出。",
+    "emotion": "settle",
+    "emotion_intensity": 0.5,
+    "humor_type": "sarcasm",
+    "character_expression": "think",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": {
+        "mood": "honest, grounded, cautionary",
+        "color_hint": "dark base, amber warning accents",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "honesty, boundary",
+        "motion_style": "platform icons grid, warning markers",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "data",
+        "focus": "平台/依赖/Windows/UTF-8 限制清单",
+        "layout_hint": {
+          "density": "compact"
+        }
+      }
+    }
+  },
+  {
+    "scene": "performance",
+    "type": "capabilities",
+    "estimated_duration": 11,
+    "text": "性能边界也得诚实讲。滚动历史一大，就会变慢，复制模式尤其明显。它还缺流控和背压机制，macOS 上复制可能有延迟。这些是社区确证的真实痛点，不是营销话术，是 worse-is-better 哲学的代价。",
+    "emotion": "settle",
+    "emotion_intensity": 0.45,
+    "humor_type": null,
+    "character_expression": "think",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": {
+        "mood": "honest, measured, grounded",
+        "color_hint": "dark base, muted amber for known issues",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "transparency, realism",
+        "motion_style": "issue tags fade in steadily",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "list",
+        "focus": "已知性能缺陷：大历史变慢 / 缺流控 / macOS 延迟 + worse-is-better 代价",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "usecases",
+    "type": "usecases",
+    "estimated_duration": 18,
+    "text": "所以它最适合谁？SSH 远程持久会话，这是它的核心价值，目前少见同类方案。Claude Code 社区里很多人就拿 tmux 保持会话，长任务断线不丢进度——不过 Claude Code 在 tmux 里得额外配置，SSH 下还可能闪烁，官方离开终端主推的其实是 Remote Control 那套。还有多窗格工作流、结对编程、CI 长任务、日志监控、无图形界面的服务器。推荐上，远程开发选 tmux 比较稳妥；追求零配置的新手，可以看 Zellij；纯本地配 WezTerm，其实未必需要它；重度用户，搭配 dotfiles 才舒服。",
+    "emotion": "summon",
+    "emotion_intensity": 0.55,
+    "humor_type": null,
+    "character_expression": "cool",
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [
+      {
+        "focus": "核心价值：SSH 远程持久会话",
+        "visual_type": "highlight",
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 1
+        },
+        "key_data": [
+          "SSH 远程持久会话（核心·不可替代）",
+          "断线不丢任务"
+        ]
+      },
+      {
+        "focus": "Claude Code 社区工作流 + 诚实边界",
+        "visual_type": "list",
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 2
+        },
+        "key_data": [
+          "Claude Code 社区流行用 tmux 保持会话",
+          "长任务断线不丢进度",
+          "注意：tmux 里需额外配置",
+          "SSH 可能闪烁",
+          "官方主推 Remote Control"
+        ]
+      },
+      {
+        "focus": "其他场景 + 推荐矩阵",
+        "visual_type": "compare",
+        "narration_anchor": {
+          "start_sentence": 3,
+          "end_sentence": 4
+        },
+        "key_data": [
+          "多窗格/结对/CI/日志/无GUI",
+          "远程→tmux 首选",
+          "零配置→Zellij",
+          "WezTerm→可不引入",
+          "重度→tmux+dotfiles"
+        ]
+      }
+    ],
+    "visual_intent": {
+      "bg": {
+        "mood": "practical, advisory, warm",
+        "color_hint": "dark base, terminal green + amber balance",
+        "density": "standard"
+      },
+      "fx": {
+        "emotion": "guidance, clarity",
+        "motion_style": "scenario cards + recommendation matrix appear",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "compare",
+        "focus": "适用场景列表 + 推荐矩阵（tmux/Zellij/WezTerm/dotfiles）",
+        "layout_hint": {
+          "density": "standard"
+        }
+      }
+    }
+  },
+  {
+    "scene": "cta",
+    "type": "cta",
+    "estimated_duration": 7,
+    "text": "tmux 和 Zellij，你站谁？关注 GitHub 星探，下期见。",
+    "emotion": "summon",
+    "emotion_intensity": 0.4,
+    "humor_type": null,
+    "character_expression": null,
+    "selling_points": null,
+    "commentary": null,
+    "contrarian_angle": null,
+    "visual_phases": [],
+    "visual_intent": {
+      "bg": {
+        "mood": "warm, inviting, curious",
+        "color_hint": "warm amber fade, dark base",
+        "density": "generous"
+      },
+      "fx": {
+        "emotion": "invitation, curiosity",
+        "motion_style": "soft glow pulse, question mark emphasis",
+        "complexity": "css-only"
+      },
+      "content": {
+        "visual_type": "highlight",
+        "focus": "站队提问 tmux vs Zellij + 关注 GitHub 星探 CTA",
+        "layout_hint": {
+          "density": "generous"
+        }
+      }
+    }
+  }
+]

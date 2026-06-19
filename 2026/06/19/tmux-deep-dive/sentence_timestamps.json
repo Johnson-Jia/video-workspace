@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "source": "edge-tts-srt"
+  },
+  "segments": [
+    {
+      "scene": "hook",
+      "segment_index": 0,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "网一断，命令全没了。",
+          "start": 0.1,
+          "end": 2.47
+        }
+      ]
+    },
+    {
+      "scene": "what",
+      "segment_index": 1,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "有个 2007 年的老工具，能让终端会话永不掉线。",
+          "start": 0.1,
+          "end": 4.14
+        },
+        {
+          "index": 1,
+          "text": "它叫 tmux，一个终端复用器。",
+          "start": 4.09,
+          "end": 6.4
+        },
+        {
+          "index": 2,
+          "text": "一个屏幕能开多个终端，可以 detach 退到后台，再 reattach 恢复。",
+          "start": 6.4,
+          "end": 10.76
+        },
+        {
+          "index": 3,
+          "text": "ISC 许可，现在到了 3.7。",
+          "start": 10.76,
+          "end": 13.35
+        }
+      ]
+    },
+    {
+      "scene": "philosophy1",
+      "segment_index": 2,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "tmux 最巧的地方，是同一个二进制，既是客户端，又是服务器。",
+          "start": 0.1,
+          "end": 4.51
+        },
+        {
+          "index": 1,
+          "text": "运行时它自己决定当哪个角色。",
+          "start": 4.46,
+          "end": 6.91
+        },
+        {
+          "index": 2,
+          "text": "客户端连不上，就 fork 出一个服务器守护进程，用文件锁防止虫复启动。",
+          "start": 6.91,
+          "end": 12.01
+        },
+        {
+          "index": 3,
+          "text": "用户根本不用操心怎么启动服务。",
+          "start": 12.01,
+          "end": 14.89
+        }
+      ]
+    },
+    {
+      "scene": "philosophy2",
+      "segment_index": 3,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "这就引出第二层：会话和终端，是彻底解耦的。",
+          "start": 0.1,
+          "end": 3.79
+        },
+        {
+          "index": 1,
+          "text": "session、window、pane 都活在服务器进程里，跟你的终端窗口没关系。",
+          "start": 3.74,
+          "end": 8.51
+        },
+        {
+          "index": 2,
+          "text": "客户端断开，只是丢了一条显示通道，状态完整保留。",
+          "start": 8.51,
+          "end": 12.64
+        },
+        {
+          "index": 3,
+          "text": "这才是 SSH 断线不丢任务的根。",
+          "start": 12.64,
+          "end": 15.63
+        }
+      ]
+    },
+    {
+      "scene": "architecture",
+      "segment_index": 4,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "落到代码上，是一条清晰的链路。",
+          "start": 0.1,
+          "end": 2.79
+        },
+        {
+          "index": 1,
+          "text": "用户终端连到 tmux 客户端，再通过 Unix 域套接字和 imsg 协议，接到服务器守护进程，整个事件循环跑在 libevent 上。",
+          "start": 2.74,
+          "end": 10.75
+        },
+        {
+          "index": 2,
+          "text": "对象模型是层层嵌套的：session 下面是 window，window 下面是 window_pane，再往下才是 pty，用红黑树和队列统一管理。",
+          "start": 10.75,
+          "end": 19.38
+        },
+        {
+          "index": 3,
+          "text": "渲染分了三层：grid 存字符，做懒分配和紧凑压缩；screen 管显示和重绘；tty 负责适配不同终端的能力。",
+          "start": 19.38,
+          "end": 26.92
+        },
+        {
+          "index": 4,
+          "text": "这三层，是它性能的关键。",
+          "start": 26.92,
+          "end": 29.55
+        }
+      ]
+    },
+    {
+      "scene": "features",
+      "segment_index": 5,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "功能层面，tmux 给得很足。",
+          "start": 0.1,
+          "end": 2.26
+        },
+        {
+          "index": 1,
+          "text": "会话能持久化，窗口窗格随便分，3.7 还加了浮动窗格。",
+          "start": 2.21,
+          "end": 6.85
+        },
+        {
+          "index": 2,
+          "text": "复制模式支持 vi 和 emacs 键位，带航号。",
+          "start": 6.85,
+          "end": 10.1
+        },
+        {
+          "index": 3,
+          "text": "命令系统有大约 65 条命令，可编程，配置和键绑定共用一套。",
+          "start": 10.1,
+          "end": 15.15
+        },
+        {
+          "index": 4,
+          "text": "还有控制模式 -CC，让 IDE 能程序化驱动它。",
+          "start": 15.15,
+          "end": 18.77
+        },
+        {
+          "index": 5,
+          "text": "终端能力也没落下：真彩色、256 色、Sixel 图像、OSC8 超链接、斜体，都支持。",
+          "start": 18.77,
+          "end": 25.93
+        }
+      ]
+    },
+    {
+      "scene": "limits",
+      "segment_index": 6,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "但限制也得说清楚。",
+          "start": 0.1,
+          "end": 1.82
+        },
+        {
+          "index": 1,
+          "text": "平台覆盖官方 6 个，加上适配一共 11 个。",
+          "start": 1.77,
+          "end": 5.16
+        },
+        {
+          "index": 2,
+          "text": "强制依赖 libevent 和 ncurses，原生 Windows 不支持，只能走 Cygwin 或 WSL。",
+          "start": 5.16,
+          "end": 10.63
+        },
+        {
+          "index": 3,
+          "text": "还强制 UTF-8 环境，否则直接报错退出。",
+          "start": 10.63,
+          "end": 14.45
+        }
+      ]
+    },
+    {
+      "scene": "performance",
+      "segment_index": 7,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "性能边界也得诚实讲。",
+          "start": 0.1,
+          "end": 2.17
+        },
+        {
+          "index": 1,
+          "text": "滚动历史一大，就会变慢，复制模式尤其明显。",
+          "start": 2.12,
+          "end": 5.78
+        },
+        {
+          "index": 2,
+          "text": "它还缺流控和背压机制，macOS 上复制可能有延迟。",
+          "start": 5.78,
+          "end": 9.52
+        },
+        {
+          "index": 3,
+          "text": "这些是社区确证的真实痛点，不是营销话术，是 worse-is-better 哲学的代价。",
+          "start": 9.52,
+          "end": 14.88
+        }
+      ]
+    },
+    {
+      "scene": "usecases",
+      "segment_index": 8,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "所以它最适合谁？",
+          "start": 0.1,
+          "end": 1.77
+        },
+        {
+          "index": 1,
+          "text": "SSH 远程持久会话，这是它的核心价值，目前少见同类方案。",
+          "start": 1.72,
+          "end": 6.55
+        },
+        {
+          "index": 2,
+          "text": "克劳德扣得,社区里很多人就拿 tmux 保持会话，常任务断线不丢进度——不过,克劳德扣得,在 tmux 里得额外配置，SSH 下还可能闪烁，官方离开终端主推的其实是 Remote Control 那套。",
+          "start": 6.55,
+          "end": 18.87
+        },
+        {
+          "index": 3,
+          "text": "还有多窗格工作流、结对编程、CI 常任务、日志监控、无图形界面的服务器。",
+          "start": 18.87,
+          "end": 24.64
+        },
+        {
+          "index": 4,
+          "text": "推荐上，远程开发选 tmux 比较稳妥；追求零配置的新手，可以看 Zellij；纯本地配 WezTerm，其实未必需要它；重度用户，搭配 dotfiles 才舒服。",
+          "start": 24.64,
+          "end": 34.32
+        }
+      ]
+    },
+    {
+      "scene": "cta",
+      "segment_index": 9,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "tmux 和 Zellij，你站谁？",
+          "start": 0.1,
+          "end": 1.98
+        },
+        {
+          "index": 1,
+          "text": "关注 GitHub 星探，下期见。",
+          "start": 1.93,
+          "end": 4.43
+        }
+      ]
+    }
+  ]
+}

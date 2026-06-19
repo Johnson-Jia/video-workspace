@@ -1,0 +1,54 @@
+<!-- 场景: features | 时长: 26.0s | 功能速览（3 阶段）：持久化+窗格 / 复制+命令 / 控制模式+终端能力 -->
+<div class="layer-bg">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(160deg,#070b14 0,#0a1018 50%,#070b14 100%)"></div>
+<div style="position:absolute;inset:0;opacity:0.16;background-image:radial-gradient(circle at 50% 50%,rgba(0,255,163,0.4) 1.2px,transparent 1.8px);background-size:46px 80px;animation:gridPulse 9s ease-in-out infinite"></div>
+<div style="position:absolute;top:38%;left:50%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,163,0.14) 0%,transparent 70%);filter:blur(90px);transform:translate(-50%,-50%);animation:glowPulse 10s ease-in-out infinite"></div>
+<div style="position:absolute;top:0;left:40%;width:1.5px;height:100%;background:linear-gradient(transparent 15%,rgba(0,255,163,0.07) 50%,transparent 85%);animation:beamBreath 7s ease-in-out infinite"></div>
+<div style="position:absolute;top:0;left:62%;width:1.5px;height:100%;background:linear-gradient(transparent 20%,rgba(57,208,216,0.06) 50%,transparent 80%);animation:beamBreath 9s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:28%;left:32%;width:11px;height:11px;border-radius:50%;background:rgba(0,255,163,0.9);box-shadow:0 0 13px rgba(0,255,163,0.7);animation:gridNodeBlink 3.5s ease-in-out infinite"></div>
+<div style="position:absolute;top:62%;left:62%;width:10px;height:10px;border-radius:50%;background:rgba(57,208,216,0.85);box-shadow:0 0 12px rgba(57,208,216,0.6);animation:gridNodeBlink 4s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;top:72%;left:28%;width:9px;height:9px;border-radius:50%;background:rgba(0,255,163,0.8);box-shadow:0 0 11px rgba(0,255,163,0.55);animation:gridNodeBlink 4.5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:42%;left:75%;width:3px;height:3px;border-radius:50%;background:hsla(160,60%,55%,0.45);box-shadow:0 0 6px hsla(160,55%,45%,0.35);animation:starDot 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:58%;left:22%;width:3px;height:3px;border-radius:50%;background:hsla(180,60%,55%,0.45);box-shadow:0 0 6px hsla(180,55%,45%,0.35);animation:starDot 4s ease-in-out infinite 2s"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.018) 0%,transparent 35%,transparent 65%,rgba(255,255,255,0.02) 100%);animation:glassShimmer 9s ease-in-out infinite"></div>
+<div style="position:absolute;bottom:18%;left:-10%;width:120%;height:150px;opacity:0.14;background:linear-gradient(90deg,transparent,rgba(0,255,163,0.4),rgba(57,208,216,0.4),transparent);filter:blur(60px);animation:prismShimmer 11s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-aura" style="top:12%;left:10%;width:480px;height:480px;background:rgba(0,255,163,0.26);animation:breathGlow 5s ease-in-out infinite"></div>
+  <div class="fx-aura" style="bottom:12%;right:8%;width:440px;height:440px;background:rgba(57,208,216,0.22);animation:breathGlow 4.5s ease-in-out infinite;animation-delay:1s"></div>
+  <div class="fx-ring pulse-it" style="top:26%;left:50%;transform:translate(-50%,-50%);width:360px;height:360px;border-color:rgba(0,255,163,0.26)"></div>
+  <div class="scan-h"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="ct-hero" style="gap:20px">
+  <span class="ct-tag cool">功能层面 给得很足 · 一</span>
+  <div class="feat-grid">
+    <div class="feat-card"><span class="fc-icon">∞</span><div class="fc-text"><span class="fc-head">会话持久化</span><span class="fc-sub">detach 再 reattach</span></div></div>
+    <div class="feat-card"><span class="fc-icon">⊞</span><div class="fc-text"><span class="fc-head">窗格分割</span><span class="fc-sub">3.7 加浮动窗格</span></div></div>
+  </div>
+  <div class="ct-sub" style="font-size:36px">一个屏幕<span class="grad-cool" style="font-weight:800">随便分</span>，窗口窗格自由</div>
+</div>
+</div>
+<div class="phase phase-2">
+<div class="ct-hero" style="gap:20px">
+  <span class="ct-tag warm">功能层面 给得很足 · 二</span>
+  <div class="feat-grid">
+    <div class="feat-card amber"><span class="fc-icon">⎘</span><div class="fc-text"><span class="fc-head">复制模式</span><span class="fc-sub">vi / emacs 键位 + 行号</span></div></div>
+    <div class="feat-card"><span class="fc-icon">⌘</span><div class="fc-text"><span class="fc-head">命令可编程</span><span class="fc-sub">约 65 条 · 配置键绑定共用</span></div></div>
+  </div>
+  <div class="ct-sub" style="font-size:36px"><span class="grad-warm" style="font-weight:800">两套键位</span>，命令系统灵活</div>
+</div>
+</div>
+<div class="phase phase-3">
+<div class="ct-hero" style="gap:20px">
+  <span class="ct-tag cool">功能层面 给得很足 · 三</span>
+  <div class="feat-grid">
+    <div class="feat-card amber"><span class="fc-icon">⚙</span><div class="fc-text"><span class="fc-head">控制模式 -CC</span><span class="fc-sub">IDE 程序化驱动</span></div></div>
+    <div class="feat-card"><span class="fc-icon">▦</span><div class="fc-text"><span class="fc-head">终端能力</span><span class="fc-sub">真彩色 · Sixel · OSC8 · 斜体</span></div></div>
+  </div>
+  <div class="ct-sub" style="font-size:36px">能力<span class="grad-cool" style="font-weight:800">没落下</span>，现代终端全支持</div>
+</div>
+</div>
+</div>

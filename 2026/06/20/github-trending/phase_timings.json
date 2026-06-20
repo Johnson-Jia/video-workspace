@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "bgm_source": "neon-electric-2.mp3",
+    "bgm_volume": 0.36,
+    "bgm_volume_source": "formula",
+    "bgm_mean_db": -19.3,
+    "bgm_max_db": -3.2,
+    "bgm_narr_max_db": -1.0,
+    "bgm_gap_target": 9,
+    "bgm_peak_tier": "balanced",
+    "bgm_tier_basis": "lra",
+    "bgm_lra": 3.8,
+    "bgm_peak_spread": 16.1,
+    "bgm_mean_gap": 9,
+    "bgm_peak_gap": 11,
+    "calibration_source": "edge-tts-srt"
+  },
+  "stats": {
+    "total_scenes": 2,
+    "total_phases": 4,
+    "anchor_calibrated": 2,
+    "auto_split": 2
+  },
+  "scenes": [
+    {
+      "scene": "headroom",
+      "segment_index": 1,
+      "global_start": 2.93,
+      "duration": 12.46,
+      "phases": [
+        {
+          "phase": 1,
+          "start_offset": 0.0,
+          "end_offset": 12.39,
+          "sentences": [
+            0,
+            1
+          ],
+          "calibration": "sentence-anchor"
+        },
+        {
+          "phase": 2,
+          "start_offset": 12.39,
+          "end_offset": 12.46,
+          "sentences": [
+            1
+          ],
+          "calibration": "anchor-invalid"
+        }
+      ]
+    },
+    {
+      "scene": "penpot_insomnia",
+      "segment_index": 4,
+      "global_start": 29.58,
+      "duration": 13.32,
+      "phases": [
+        {
+          "phase": 1,
+          "start_offset": 0.0,
+          "end_offset": 13.25,
+          "sentences": [
+            0,
+            1
+          ],
+          "calibration": "sentence-anchor"
+        },
+        {
+          "phase": 2,
+          "start_offset": 13.25,
+          "end_offset": 13.32,
+          "sentences": [
+            1
+          ],
+          "calibration": "anchor-invalid"
+        }
+      ]
+    }
+  ]
+}

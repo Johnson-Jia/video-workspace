@@ -1,0 +1,107 @@
+<!-- 场景: worldmonitor | 时长: 6.3s | 全球情报仪表盘，AI 实时聚合 -->
+<div class="layer-bg">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(180,30%,4%) 0%,hsl(185,25%,8%) 50%,hsl(180,30%,4%) 100%)"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat4" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(180,70%,50%,0.13)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(180,70%,50%,0.13)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat4)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(180,80%,55%,0.10) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,hsla(180,80%,50%,0.20),hsla(180,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:58%;right:18%;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,hsla(160,70%,50%,0.12),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:24%;left:38%;width:14px;height:14px;border-radius:50%;
+  background:hsla(180,90%,60%,0.9);box-shadow:0 0 16px hsla(180,80%,55%,0.8),0 0 32px hsla(180,70%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+<div style="position:absolute;top:48%;left:62%;width:10px;height:10px;border-radius:50%;
+  background:hsla(170,85%,58%,0.85);box-shadow:0 0 14px hsla(170,75%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:68%;left:32%;width:12px;height:12px;border-radius:50%;
+  background:hsla(185,80%,55%,0.8);box-shadow:0 0 14px hsla(185,70%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:38%;left:72%;width:9px;height:9px;border-radius:50%;
+  background:hsla(175,85%,60%,0.85);box-shadow:0 0 12px hsla(175,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<!-- 节点连线（情报网络）-->
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="42%" y1="26%" x2="64%" y2="50%" stroke="hsla(180,70%,55%,0.25)" stroke-width="1.2"/>
+  <line x1="64%" y1="50%" x2="34%" y2="70%" stroke="hsla(180,70%,55%,0.22)" stroke-width="1.2"/>
+  <line x1="34%" y1="70%" x2="74%" y2="40%" stroke="hsla(180,70%,55%,0.20)" stroke-width="1"/>
+  <line x1="42%" y1="26%" x2="74%" y2="40%" stroke="hsla(180,70%,55%,0.18)" stroke-width="1"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:200px;height:200px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(180,70%,50%,0.12),transparent,hsla(170,60%,45%,0.10));
+  border:1.5px solid hsla(180,70%,55%,0.25);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:0;left:0;width:100%;height:90px;background:linear-gradient(180deg,rgba(4,16,16,0.7),transparent)"></div>
+<div style="position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(0deg,rgba(4,16,16,0.7),transparent)"></div>
+
+<div style="position:absolute;top:120px;right:60px;display:flex;flex-direction:column;gap:32px;opacity:0.45;
+  font-family:'JetBrains Mono',monospace;color:rgba(20,184,166,0.5);font-size:13px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>LIVE</span><span>57K</span><span>+300</span><span>5 协议</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 全球节点光环 -->
+  <div class="fx-aura" style="top:30%;left:32%;width:340px;height:340px;background:rgba(20,184,166,0.4);"></div>
+  <div class="fx-aura" style="bottom:28%;right:26%;width:320px;height:320px;background:rgba(0,212,255,0.35);animation-delay:-2s;"></div>
+  <!-- 实时数据点（全球情报节点）-->
+  <div class="fx-particle" style="top:22%;left:36%;width:12px;height:12px;background:#14B8A6;box-shadow:0 0 14px rgba(20,184,166,0.7);"></div>
+  <div class="fx-particle" style="top:40%;right:30%;width:12px;height:12px;background:#00D4FF;box-shadow:0 0 14px rgba(0,212,255,0.65);animation-delay:-1s;"></div>
+  <div class="fx-particle" style="bottom:32%;left:34%;width:11px;height:11px;background:#7BE6D8;box-shadow:0 0 12px rgba(123,230,216,0.6);animation-delay:-2s;"></div>
+  <!-- 扫描线（实时监测）-->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(20,184,166,0.6),transparent);"></div>
+  <!-- 中心脉冲环 -->
+  <div class="fx-ring" style="top:36%;left:42%;width:200px;height:200px;border-color:rgba(20,184,166,0.5);"></div>
+  <!-- 上下数据流（信息聚合）-->
+  <div class="fx-beam" style="top:48%;background:linear-gradient(90deg,transparent,rgba(20,184,166,0.4),rgba(0,212,255,0.4),transparent);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="wm-stage">
+    <div class="wm-eyebrow">GLOBAL · LIVE · AI</div>
+    <div class="wm-title grad-teal">全球情报<br>聚到一个仪表盘</div>
+    <div class="wm-cards">
+      <div class="wm-card">
+        <div class="wm-card-cat">NEWS</div>
+        <div class="wm-card-text">全球新闻</div>
+      </div>
+      <div class="wm-card">
+        <div class="wm-card-cat">GEOPOLITICS</div>
+        <div class="wm-card-text">地缘动态</div>
+      </div>
+      <div class="wm-card">
+        <div class="wm-card-cat">INFRA</div>
+        <div class="wm-card-text">基建状态</div>
+      </div>
+    </div>
+    <div class="wm-foot">koala73 / worldmonitor · AI 实时帮你梳理 · 57.2K ★</div>
+  </div>
+</div>
+</div>

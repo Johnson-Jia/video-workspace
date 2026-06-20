@@ -1,0 +1,126 @@
+<!-- 场景: penpot_insomnia | 时长: 13.3s | 双 GUI 工具 climax（2 phase：penpot 卡 / insomnia 协议）-->
+<div class="layer-bg">
+<!-- bg-component: gradient_mesh -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#08081a 0%,#101a30 45%,#0a0818 100%)"></div>
+
+<div style="position:absolute;top:0;left:0;width:60%;height:60%;
+  background:radial-gradient(circle at 30% 30%,rgba(0,212,255,0.22),transparent 60%);
+  filter:blur(60px);animation:meshShift 16s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:20%;right:0;width:55%;height:60%;
+  background:radial-gradient(circle at 70% 40%,rgba(255,140,50,0.20),transparent 60%);
+  filter:blur(70px);animation:meshShift 18s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;bottom:0;left:20%;width:60%;height:50%;
+  background:radial-gradient(circle at 50% 60%,rgba(155,126,222,0.18),transparent 65%);
+  filter:blur(70px);animation:meshShift 20s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:35%;left:35%;width:520px;height:520px;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(0,212,255,0.14),rgba(255,140,50,0.12),rgba(155,126,222,0.14),rgba(0,212,255,0.14));
+  filter:blur(60px);animation:meshRotate 24s linear infinite"></div>
+
+<div style="position:absolute;inset:0;opacity:0.5;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:90px 90px"></div>
+
+<div style="position:absolute;top:18%;left:22%;width:14px;height:14px;border-radius:50%;
+  background:rgba(0,212,255,0.9);box-shadow:0 0 16px rgba(0,212,255,0.7);
+  animation:meshNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;right:24%;width:12px;height:12px;border-radius:50%;
+  background:rgba(255,140,50,0.85);box-shadow:0 0 14px rgba(255,140,50,0.65);
+  animation:meshNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;bottom:25%;left:30%;width:13px;height:13px;border-radius:50%;
+  background:rgba(155,126,222,0.85);box-shadow:0 0 14px rgba(155,126,222,0.6);
+  animation:meshNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;right:18%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.55);
+  animation:meshNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:0;left:0;width:100%;height:90px;background:linear-gradient(180deg,rgba(8,8,24,0.7),transparent)"></div>
+<div style="position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(0deg,rgba(8,8,24,0.7),transparent)"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.018) 0%,transparent 35%,rgba(255,200,120,0.02) 65%,transparent 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 双工具对照光晕（左冷右暖，对照两工具）-->
+  <div class="fx-aura" style="top:28%;left:14%;width:380px;height:380px;background:rgba(0,212,255,0.45);"></div>
+  <div class="fx-aura" style="top:28%;right:14%;width:380px;height:380px;background:rgba(255,140,50,0.4);animation-delay:-2s;"></div>
+  <!-- 中线分隔脉冲 -->
+  <div class="fx-ring" style="top:38%;left:calc(50% - 100px);width:200px;height:200px;border-color:rgba(255,255,255,0.3);"></div>
+  <!-- 数据节点 -->
+  <div class="fx-particle" style="top:24%;left:24%;width:14px;height:14px;background:#00D4FF;box-shadow:0 0 16px rgba(0,212,255,0.75);"></div>
+  <div class="fx-particle" style="top:24%;right:24%;width:13px;height:13px;background:#FF8C32;box-shadow:0 0 14px rgba(255,140,50,0.65);animation-delay:-1s;"></div>
+  <div class="fx-particle" style="bottom:26%;left:26%;width:13px;height:13px;background:#9B7EDE;box-shadow:0 0 14px rgba(155,126,222,0.65);animation-delay:-2s;"></div>
+  <div class="fx-particle" style="bottom:26%;right:26%;width:12px;height:12px;background:#FFB347;box-shadow:0 0 14px rgba(255,179,71,0.6);animation-delay:-0.5s;"></div>
+  <!-- 横向光带 -->
+  <div class="fx-beam" style="top:50%;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.4),rgba(255,255,255,0.3),rgba(255,140,50,0.4),transparent);"></div>
+  <!-- 扫描线 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.55),rgba(255,140,50,0.5),transparent);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="dual">
+    <div class="dual-head">
+      <div class="dual-head-title grad-cool">商业软件的高门槛能力，开源免费复刻</div>
+    </div>
+    <div class="dual-cards">
+      <div class="dual-card">
+        <div class="dual-card-rank">#04 · 连续霸榜</div>
+        <div class="dual-card-name">penpot / penpot</div>
+        <div class="dual-card-desc">开源设计协作工具，商业设计协同能力被它免费复刻</div>
+        <div class="dual-card-tags">
+          <span class="dual-tag">开源免费</span>
+          <span class="dual-tag">设计协作</span>
+        </div>
+        <div class="dual-card-stars">50.5K ★ · Clojure</div>
+      </div>
+      <div class="dual-card">
+        <div class="dual-card-rank">#05 · +291 ★</div>
+        <div class="dual-card-name">Kong / insomnia</div>
+        <div class="dual-card-desc">五种协议的接口调试，统一进一个客户端</div>
+        <div class="dual-card-tags">
+          <span class="dual-tag new">NEW 上榜</span>
+          <span class="dual-tag">API 客户端</span>
+        </div>
+        <div class="dual-card-stars">38.9K ★ · 5 协议</div>
+      </div>
+    </div>
+    <div class="dual-foot">两个 GUI 工具，A 档普通人可用</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="dual">
+    <div class="dual-head">
+      <div class="dual-head-title grad-cool">一个客户端，调通五种协议</div>
+    </div>
+    <div class="dual-cards">
+      <div class="dual-card">
+        <div class="dual-card-rank">设计协同开源版</div>
+        <div class="dual-card-name">penpot</div>
+        <div class="dual-card-desc">连涨多日仍在榜，免费替代付费设计协作</div>
+        <div class="dual-card-tags">
+          <span class="dual-tag">Figma 替代</span>
+          <span class="dual-tag">连涨多日</span>
+        </div>
+        <div class="dual-card-stars">A 档 · 浏览器即开</div>
+      </div>
+      <div class="dual-card">
+        <div class="dual-card-rank">五协议统一可视化</div>
+        <div class="dual-card-name">insomnia</div>
+        <div class="dual-card-desc">接口调试一站搞定，本地/云端/Git 存储</div>
+        <div class="proto-row">
+          <span class="proto-pill">GraphQL</span>
+          <span class="proto-pill">REST</span>
+          <span class="proto-pill">WebSocket</span>
+          <span class="proto-pill">gRPC</span>
+          <span class="proto-pill">SSE</span>
+        </div>
+        <div class="dual-card-stars">A 档 · 桌面 GUI</div>
+      </div>
+    </div>
+    <div class="dual-foot">桌面 GUI，普通人也能上手</div>
+  </div>
+</div>
+</div>

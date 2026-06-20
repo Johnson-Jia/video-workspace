@@ -1,0 +1,142 @@
+<!-- 场景: headroom | 时长: 12.5s | 单日涨星王，反直觉钩子王（2 phase：项目卡 + 压缩原理） -->
+<div class="layer-bg">
+<!-- bg-component: contour_lines -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040814 0%,#0a1828 50%,#040814 100%)"></div>
+
+<div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 35% 45%,transparent 0px,transparent 80px,rgba(0,180,220,0.06) 80px,rgba(0,180,220,0.06) 82px);animation:contourPulse 9s ease-in-out infinite,terrainRise 14s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;opacity:0.5;background:repeating-radial-gradient(circle at 38% 48%,transparent 0px,transparent 130px,rgba(0,200,220,0.03) 130px,rgba(0,200,220,0.03) 132px);animation:contourShift 22s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:38%;left:28%;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,200,220,0.14) 0%,transparent 70%);filter:blur(90px);
+  animation:glowPulse 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:55%;right:20%;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,140,50,0.12),transparent 65%);filter:blur(80px);
+  animation:glowPulse 12s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:0;left:32%;width:2px;height:100%;
+  background:linear-gradient(transparent 10%,rgba(0,200,220,0.10) 50%,transparent 90%);
+  animation:beamBreath 7s ease-in-out infinite"></div>
+<div style="position:absolute;top:0;left:68%;width:1.5px;height:100%;
+  background:linear-gradient(transparent 20%,rgba(0,200,220,0.06) 50%,transparent 80%);
+  animation:beamBreath 9s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:14px;height:14px;border-radius:50%;
+  background:rgba(0,235,220,0.9);box-shadow:0 0 16px rgba(0,235,220,0.65);
+  animation:annotationPulse 4s ease-in-out infinite"></div>
+<div style="position:absolute;top:52%;left:62%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,220,200,0.85);box-shadow:0 0 14px rgba(0,220,200,0.55);
+  animation:annotationPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;top:70%;left:40%;width:11px;height:11px;border-radius:50%;
+  background:rgba(255,180,80,0.8);box-shadow:0 0 13px rgba(255,180,80,0.6);
+  animation:annotationPulse 6s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:120px;height:2px;
+  background:linear-gradient(90deg,rgba(0,235,220,0.5),transparent);
+  transform:rotate(-25deg);transform-origin:left center"></div>
+<div style="position:absolute;top:52%;left:62%;width:100px;height:2px;
+  background:linear-gradient(90deg,rgba(0,220,200,0.45),transparent);
+  transform:rotate(20deg);transform-origin:left center"></div>
+
+<div style="position:absolute;top:0;left:0;width:100%;height:90px;background:linear-gradient(180deg,rgba(4,8,20,0.7),transparent)"></div>
+<div style="position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(0deg,rgba(4,8,20,0.7),transparent)"></div>
+
+<div style="position:absolute;top:120px;left:60px;display:flex;flex-direction:column;gap:32px;opacity:0.4;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,200,220,0.5);font-size:13px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>95%</span><span>75%</span><span>60%</span><span>30%</span><span>10%</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 压缩数据流（上下行 stream 表达"输入被压缩"）-->
+  <div class="fx-stream" style="left:18%;background:linear-gradient(180deg,transparent,rgba(0,212,255,0.7),transparent);"></div>
+  <div class="fx-stream" style="left:40%;background:linear-gradient(180deg,transparent,rgba(255,140,50,0.6),transparent);animation-delay:-1s;"></div>
+  <div class="fx-stream" style="left:62%;background:linear-gradient(180deg,transparent,rgba(0,212,255,0.6),transparent);animation-delay:-2s;"></div>
+  <div class="fx-stream" style="left:82%;background:linear-gradient(180deg,transparent,rgba(77,168,218,0.55),transparent);animation-delay:-0.5s;"></div>
+  <!-- 数据节点（token 被压缩成的小亮点）-->
+  <div class="fx-particle" style="top:24%;left:28%;width:14px;height:14px;background:#00D4FF;box-shadow:0 0 16px rgba(0,212,255,0.75);"></div>
+  <div class="fx-particle" style="top:30%;right:26%;width:13px;height:13px;background:#4DA8DA;box-shadow:0 0 14px rgba(77,168,218,0.65);animation-delay:-1s;"></div>
+  <div class="fx-particle" style="bottom:26%;left:24%;width:13px;height:13px;background:#FF8C32;box-shadow:0 0 14px rgba(255,140,50,0.65);animation-delay:-2s;"></div>
+  <div class="fx-particle" style="bottom:22%;right:22%;width:12px;height:12px;background:#00D4FF;box-shadow:0 0 14px rgba(0,212,255,0.6);animation-delay:-0.5s;"></div>
+  <!-- 压缩扫描线 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.6),transparent);"></div>
+  <!-- 连接光环 -->
+  <div class="fx-ring" style="top:36%;left:42%;width:200px;height:200px;border-color:rgba(0,212,255,0.4);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="pfc">
+    <div class="pfc-glow-a"></div>
+    <div class="pfc-glow-b"></div>
+
+    <div class="pfc-top">
+      <div class="pfc-rank-row">
+        <span class="pfc-rank">#01</span>
+        <span class="pfc-cat">LLM INPUT COMPRESS</span>
+      </div>
+      <div class="pfc-use grad-cool">单日涨星王 · AI 输入省六到九成</div>
+      <div class="pfc-name">chopratejas /<br>headroom</div>
+    </div>
+
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring"></div>
+        <img class="pfc-avatar" src="assets/avatars/chopratejas.png" alt="">
+      </div>
+      <div class="pfc-desc">把日志、文件、检索分块在送进 AI 前先压一道 · 答案几乎不变</div>
+      <div class="pfc-data-bar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">单日涨星（今日居首）</span>
+          <span class="pfc-bar-val">+3938 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:100%;"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic">60-95% 更少 token</span>
+          <span class="pfc-topic">答案几乎一样</span>
+          <span class="pfc-topic">省大半成本</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">库 / 代理 / MCP</span>
+        <span class="pfc-sell">三种接入</span>
+        <span class="pfc-sell">Python 实现</span>
+      </div>
+      <div class="pfc-comment">单日近四千星，开发者用脚投票</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="compress-flow">
+    <div class="cf-title grad-cool">砍掉一大半输入，AI 给的答案竟然几乎一样</div>
+    <div class="cf-pipe">
+      <div class="cf-step">
+        <div class="cf-step-num">01</div>
+        <div class="cf-step-text">日志 · 文件 · 检索分块</div>
+      </div>
+      <div class="cf-arrow">→</div>
+      <div class="cf-step">
+        <div class="cf-step-num">02</div>
+        <div class="cf-step-text">送进 AI 前先压一道</div>
+      </div>
+      <div class="cf-arrow">→</div>
+      <div class="cf-step">
+        <div class="cf-step-num">03</div>
+        <div class="cf-step-text">答案几乎不变</div>
+      </div>
+    </div>
+    <div class="cf-result">
+      <div class="cf-stat"><div class="cf-stat-val">60-95%</div><div class="cf-stat-lbl">更少 token</div></div>
+      <div class="cf-stat"><div class="cf-stat-val">≈ 同</div><div class="cf-stat-lbl">答案几乎一样</div></div>
+      <div class="cf-stat"><div class="cf-stat-val">省 ↓</div><div class="cf-stat-lbl">大半成本</div></div>
+    </div>
+  </div>
+</div>
+</div>

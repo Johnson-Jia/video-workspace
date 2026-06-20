@@ -1,0 +1,63 @@
+# content_ready.txt — 2026-06-20 GitHub Trending（标准模式 6 项目）
+
+> 数据源: raw_trending.json（daily, 15 项目已抓取+gh验证+avatar下载）
+> 选取策略: headroom 反直觉钩子王 + 4 个 A 档 GUI 工具（约占一半→实际 4/6）+ 1 个连续霸榜快速带过
+> 真实性验证: 6 项目全部 0 HARD 通过（详见 content.md）
+> 受众分布: A 普通可用 4 / B 半可用 1 / C 开发者向 1（C 档 ≤1/3 ✓）
+
+---
+
+1. chopratejas/headroom | Python | 38590★ (+3938) | 单日涨星王·新上榜
+   avatar: assets/avatars/chopratejas.png
+   用途: AI省一半成本
+   受众: B半可用
+   描述: 把工具输出、日志、文件和 RAG 分块在送入大模型前先压缩，减少 60-95% 的 token，答案却基本不变。提供库、代理、MCP server 三种接入方式。（原: Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.）
+   反直觉角度: 喂给 AI 的内容砍掉一大半，AI 给的答案竟然几乎一样 —— 反"信息越多越准"的常识
+   核心指标: +3938 ★（单日涨星王）/ 60-95% 更少 token
+
+2. palmier-io/palmier-pro | Swift | 1861★ (+749) | 新上榜
+   avatar: assets/avatars/palmier-io.png
+   用途: AI帮你剪视频
+   受众: A普通可用
+   描述: 为 AI 而生的 macOS 视频编辑器。（原: macOS video editor built for AI）
+   反直觉角度: 视频剪辑这种重手工活，交给 AI 在桌面端完成
+   核心指标: +749 ★（新上榜）/ macOS 桌面 GUI
+
+3. koala73/worldmonitor | TypeScript | 57214★ (+300) | 新上榜
+   avatar: assets/avatars/koala73.png
+   用途: 一眼看全球动态
+   受众: A普通可用
+   描述: 实时全球情报仪表盘。AI 驱动的新闻聚合、地缘监控和基础设施追踪，集成在统一的态势感知界面中。（原: Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface）
+   反直觉角度: 全球新闻/地缘/基建动态，被一个仪表盘聚合到一屏实时呈现
+   核心指标: 57214 ★ 总星 / +300 单日
+
+4. penpot/penpot | Clojure | 50572★ (+213) | 连续霸榜
+   avatar: assets/avatars/penpot.png
+   用途: 免费用Figma替代
+   受众: A普通可用
+   描述: Penpot：面向设计与代码协作的开源设计工具。（原: Penpot: The open-source design tool for design and code collaboration）
+   反直觉角度: 商业设计软件的高门槛协作能力，被一个开源工具免费复刻
+   核心指标: 50572 ★ 总星 / 开源免费
+
+5. Kong/insomnia | TypeScript | 38966★ (+291) |
+   avatar: assets/avatars/Kong.png
+   用途: 调试接口可视化
+   受众: A普通可用
+   描述: 面向 GraphQL、REST、WebSockets、SSE 和 gRPC 的开源跨平台 API 客户端，支持云端、本地和 Git 存储。（原: The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC. With Cloud, Local and Git storage.）
+   反直觉角度: 五种协议的接口调试，被一个桌面客户端统一可视化
+   核心指标: 38966 ★ 总星 / 5 种协议统一客户端
+
+6. DeusData/codebase-memory-mcp | C | 8186★ (+1055) | 连续霸榜（6/18 已展开，快速带过）
+   avatar: assets/avatars/DeusData.png
+   用途: AI读懂整个代码库
+   受众: C开发者向
+   描述: 高性能代码智能 MCP server。把代码库索引成持久化知识图谱，平均仓库毫秒级完成。支持 158 种语言、亚毫秒查询、99% 更少 token。单个静态二进制，零依赖。（原: High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.）
+   反直觉角度: 整个代码库被记进一张图谱，AI 查代码像查地图
+   核心指标: +1055 ★ 单日（连续霸榜增量）/ 158 种语言
+
+---
+
+## 备注
+- 排除列表过滤: ruvnet/RuView 不在今日榜，无需排除
+- 剔除可疑项目: 无（6 候选全部通过真实性验证）
+- 题材轮换: 近 5 期 [AI安全多元/AI-Agent/工具/daily/工具]，本次仍属工具大类但换子角度（AI 输入工程 + GUI 工具混合），AI 类项目 2 个（headroom + palmier-pro）≤1/3，避免 6 月 AI Agent 同质化崩盘复现

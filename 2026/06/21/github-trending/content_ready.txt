@@ -1,0 +1,65 @@
+# GitHub Trending 每日盘点素材 — 2026-06-21
+# 数据源：raw_trending.json（17 项目）+ gh API 实时数据交叉验证
+# 选取：6 个项目（钩子潜力 + 涨星加速 + 跨圈覆盖 + 受众 A 档占一半）
+# 真实性验证：6/6 通过（owner 均 2 年以上老号，star/fork 比 5-15:1，watchers 合理，无刷榜特征）
+# 排除列表检查：ruvnet/RuView 未出现在候选中
+
+## 钩子候选
+- 反直觉钩子（优先级 1）：headroom 把喂给大模型的内容先压一道，token 少六到九成五，答案不变 —— 对应"有个工具把 AI 输入砍掉了95%"
+- 动作+数字（优先级 2）：单日涨星 headroom +3786、Pake +2398
+
+## 入选项目（按钩子 / 热度 / 多样性排序）
+
+1. chopratejas/headroom | Python | 41,990★ (+3,786) | 把 AI 工具的输出、日志、文件先压一道再喂给大模型，token 少六到九成五，答案不变，提供库、代理、MCP 三种接法（原: Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.）
+   avatar: assets/avatars/chopratejas.png
+   用途: 帮AI省token
+   受众: B半可用
+   反直觉角度: 少给材料反而答案一样准，颠覆"喂得越多越准"的常识
+
+2. tw93/Pake | Rust | 54,876★ (+2,398) | 一条命令把任何网页打包成桌面应用，体积小、启动快（原: 🤱🏻 Turn any webpage into a desktop app with one command.）
+   avatar: assets/avatars/tw93.png
+   用途: 网页秒变app
+   受众: A普通可用
+   反直觉角度: 不用 Electron 那套笨重方案，靠 Rust 内嵌浏览器做出轻量桌面应用
+
+3. mattpocock/skills | Shell | 138,301★ (+1,360) | 一位工程师公开的 .claude 实用技能合集，整理好拿来即用（原: Skills for Real Engineers. Straight from my .claude directory.）
+   avatar: assets/avatars/mattpocock.png
+   用途: 抄大佬技能包
+   受众: A普通可用
+   反直觉角度: 一个人 .claude 目录里的技能整理，总星 13.8 万，盖过众多大厂项目
+
+4. palmier-io/palmier-pro | Swift | 3,444★ (+904) | 专为 AI 打造的 macOS 视频编辑器（原: macOS video editor built for AI）
+   avatar: assets/avatars/palmier-io.png
+   用途: AI帮你剪片
+   受众: A普通可用
+   反直觉角度: 视频编辑器反过来"为 AI 设计"，把 AI 能力做成剪辑的主轴
+
+5. DeusData/codebase-memory-mcp | C | 9,405★ (+1,267) | 高性能代码知识图谱 MCP 服务，把整个代码库索引成可查询的图谱，平均仓库毫秒级入库，支持 158 种语言，单个二进制零依赖（原: High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.）
+   avatar: assets/avatars/DeusData.png
+   用途: AI秒懂代码库
+   受众: C开发者向
+   反直觉角度: 让 AI 不必每次重读代码，"记住"整个仓库，查询不到一毫秒
+
+6. pppscn/SmsForwarder | Kotlin | 26,502★ (+134) | 监控安卓手机的短信、来电、APP 通知，按规则转发到钉钉、企业微信、飞书、邮箱、Telegram 等（原: 短信转发器——监控Android手机短信、来电、APP通知，并根据指定规则转发到其他手机：钉钉群自定义机器人、钉钉企业内机器人、企业微信群机器人、飞书机器人、企业微信应用消息、邮箱、bark、webhook、Telegram机器人、Server酱、PushPlus、手机短信等。包括主动控制服务端与客户端，让你轻松远程发短信、查短信、查通话、查话簿、查电量等。（V3.0 新增）PS.这个APK主要是学习与自用，如有BUG请提ISSUE，同时欢迎大家提PR指正）
+   avatar: assets/avatars/pppscn.png
+   用途: 短信自动转发
+   受众: A普通可用
+   反直觉角度: 一部旧安卓手机化身通知中枢，把分散的短信和验证码集中推到常用渠道
+
+## 受众分档统计
+- A 普通可用：Pake、palmier-pro、SmsForwarder、skills（4 个）
+- B 半可用：headroom（1 个）
+- C 开发者向：codebase-memory-mcp（1 个）
+A 档占多数（4/6），C 档 ≤1/3（1/6），符合受众筛选约束
+
+## 跨圈覆盖
+AI 与视频（headroom、palmier-pro）+ 桌面工具（Pake）+ 通知实用（SmsForwarder）+ 开发者工具（skills、codebase-memory-mcp）= 5 个方向
+
+## 真实性验证记录（gh API，2026-06-21）
+- 6/6 通过，0 个 HARD，0 个警告
+- headroom: owner 2013 年注册、43 个公开仓库, star/fork 14.5, watchers 134
+- Pake: owner 2014 年注册、1.16 万粉丝, star/fork 5.0, watchers 269
+- palmier-pro: 组织号、6 个公开仓库, star/fork 12.1, watchers 20
+- SmsForwarder: owner 2013 年注册、33 个公开仓库, star/fork 8.1, watchers 126
+- skills: owner 2017 年注册、2.5 万粉丝、222 个公开仓库, star/fork 11.5, watchers 889
+- codebase-memory-mcp: owner 2021 年注册、22 个公开仓库, star/fork 13.2, watchers 41

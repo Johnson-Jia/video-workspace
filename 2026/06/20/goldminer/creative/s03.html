@@ -1,0 +1,130 @@
+<!-- 场景: why_fail | 时长: 40.1s | 死因三段拆解（3 phase：单位经济 / doom loop / 押金违法崩盘） -->
+<div class="layer-bg">
+<!-- bg-component: contour_lines -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0805 0%,#1a0e00 50%,#0A0805 100%)"></div>
+<div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 30% 40%,transparent 0px,transparent 78px,rgba(255,184,0,0.08) 78px,rgba(255,184,0,0.08) 80px);animation:contourPulse 8s ease-in-out infinite,terrainRise 12s ease-in-out infinite"></div>
+<div style="position:absolute;inset:0;opacity:0.55;background:repeating-radial-gradient(circle at 32% 42%,transparent 0px,transparent 120px,rgba(255,107,0,0.04) 120px,rgba(255,107,0,0.04) 122px);animation:contourShift 20s ease-in-out infinite"></div>
+<div style="position:absolute;top:40%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,0,0.16) 0%,transparent 70%);filter:blur(80px);
+  animation:glowPulse 10s ease-in-out infinite"></div>
+<div style="position:absolute;top:0;left:30%;width:2px;height:100%;
+  background:linear-gradient(transparent 10%,rgba(255,184,0,0.10) 50%,transparent 90%);
+  animation:beamBreath 6s ease-in-out infinite"></div>
+<div style="position:absolute;top:0;left:68%;width:1.5px;height:100%;
+  background:linear-gradient(transparent 20%,rgba(255,107,0,0.06) 50%,transparent 80%);
+  animation:beamBreath 8s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:38%;left:28%;width:16px;height:16px;border-radius:50%;
+  background:rgba(255,184,0,0.95);box-shadow:0 0 16px rgba(255,184,0,0.6);
+  animation:annotationPulse 4s ease-in-out infinite"></div>
+<div style="position:absolute;top:38%;left:28%;width:120px;height:2px;
+  background:linear-gradient(90deg,rgba(255,184,0,0.55),transparent);
+  transform:rotate(-25deg);transform-origin:left center"></div>
+<div style="position:absolute;top:52%;left:42%;width:12px;height:12px;border-radius:50%;
+  background:rgba(255,107,0,0.9);box-shadow:0 0 14px rgba(255,107,0,0.5);
+  animation:annotationPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;top:30%;left:55%;width:10px;height:10px;border-radius:50%;
+  background:rgba(255,61,0,0.85);box-shadow:0 0 12px rgba(255,61,0,0.45);
+  animation:annotationPulse 6s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:38%;left:28%;width:4px;height:4px;border-radius:50%;
+  background:hsla(42,75%,60%,0.55);box-shadow:0 0 8px hsla(42,65%,50%,0.45);animation:starDot 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:52%;left:42%;width:3px;height:3px;border-radius:50%;
+  background:hsla(35,70%,55%,0.45);box-shadow:0 0 6px hsla(35,60%,45%,0.35);animation:starDot 4s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:200px;right:70px;display:flex;flex-direction:column;gap:35px;opacity:0.45;
+  font-family:'JetBrains Mono',monospace;color:rgba(255,184,0,0.45);font-size:32px;
+  animation:tickFade 7s ease-in-out infinite">
+  <span>$3</span><span>$2</span><span>$1</span><span>$0.5</span><span>$0</span>
+</div>
+<div style="position:absolute;inset:0;
+  background:linear-gradient(145deg,rgba(255,255,255,0.025) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.025) 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+<div style="position:absolute;bottom:20%;left:-10%;width:120%;height:150px;opacity:0.18;
+  background:linear-gradient(90deg,transparent,rgba(255,184,0,0.45),rgba(255,107,0,0.4),rgba(255,61,0,0.35),transparent);
+  filter:blur(60px);transform:rotate(2deg);animation:prismShimmer 11s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura fx-pulse" style="top:30%;left:25%;width:520px;height:520px;background:radial-gradient(circle,rgba(255,61,0,0.32),transparent 65%);filter:blur(70px)"></div>
+<div class="fx-aura fx-pulse" style="top:55%;left:55%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,107,0,0.22),transparent 70%);filter:blur(80px)"></div>
+<div class="fx-particle fx-drift" style="top:62%;left:40%;width:7px;height:7px;background:#FF3D00;box-shadow:0 0 13px #FF3D00"></div>
+<div class="fx-particle fx-drift" style="top:68%;left:55%;width:6px;height:6px;background:#FF6B00;box-shadow:0 0 12px #FF6B00"></div>
+<div class="fx-particle fx-drift" style="top:58%;left:62%;width:5px;height:5px;background:#FFB800;box-shadow:0 0 11px #FFB800"></div>
+<div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(255,107,0,0.55),transparent)"></div>
+<div class="fx-beam" style="top:42%;background:linear-gradient(90deg,transparent,rgba(255,184,0,0.40),transparent)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1" style="gap:28px">
+  <div class="title-brush grad-fire" style="font-size:82px;text-align:center">死因 · 一笔算不平的账</div>
+  <div class="dual-row">
+    <span class="lbl">每车日收</span>
+    <span class="val">$0.5–1</span>
+  </div>
+  <div class="dual-row bad">
+    <span class="lbl">每车日成本</span>
+    <span class="val">$2–3</span>
+  </div>
+  <div class="card-frame warn" style="margin-top:6px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+      <span style="font-family:var(--font-body);font-weight:700;font-size:34px;color:#FFE082">盈亏平衡需</span>
+      <span class="data-num" style="font-size:52px;color:#FFD700">80%</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <span style="font-family:var(--font-body);font-weight:700;font-size:34px;color:#FF8A3D">实际只有</span>
+      <span class="data-num grad-fire" style="font-size:60px">20–30%</span>
+    </div>
+  </div>
+</div>
+
+<div class="phase phase-2" style="gap:22px">
+  <div class="title-brush grad-fire" style="font-size:74px;text-align:center">盲目扩张 → 死循环</div>
+  <div class="tl-node">
+    <div class="tl-num">1</div>
+    <div class="tl-body">
+      <div class="tl-head">正常做法：单城算平</div>
+      <div class="tl-sub">先在一座城把单位经济跑正</div>
+    </div>
+  </div>
+  <div class="tl-node">
+    <div class="tl-num">2</div>
+    <div class="tl-body">
+      <div class="tl-head">它偏不：杀进 250 城</div>
+      <div class="tl-sub">账没算平就 blitzscaling</div>
+    </div>
+  </div>
+  <div class="tl-node">
+    <div class="tl-num">3</div>
+    <div class="tl-body">
+      <div class="tl-head">城越多 → 闲置越多</div>
+      <div class="tl-sub">利用率只 20–30%，车堆着</div>
+    </div>
+  </div>
+  <div class="tl-node">
+    <div class="tl-num">4</div>
+    <div class="tl-body">
+      <div class="tl-head">被砸越多 → 搬运越贵</div>
+      <div class="tl-sub">vandalism + rebalancing 成本爆炸</div>
+    </div>
+  </div>
+</div>
+
+<div class="phase phase-3" style="gap:30px">
+  <div class="title-brush grad-fire" style="font-size:74px;text-align:center">挪用押金 · 违法</div>
+  <div class="card-frame warn">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+      <span style="font-family:var(--font-body);font-weight:700;font-size:36px;color:#FFE082">2018 资本断粮</span>
+      <span class="data-num grad-fire" style="font-size:54px">$2.2B 债务压顶</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+      <span style="font-family:var(--font-body);font-weight:700;font-size:36px;color:#FF8A3D">百万辆小黄车</span>
+      <span class="data-num" style="font-size:48px;color:#FF6B00">锈成废铁</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <span style="font-family:var(--font-body);font-weight:700;font-size:36px;color:#FF6B00">押金退不出</span>
+      <span class="data-num" style="font-size:48px;color:#FF3D00">信任崩盘</span>
+    </div>
+  </div>
+  <div class="verdict grad-gold" style="font-size:80px;margin-top:6px">
+    不是愿景错了<br><span class="grad-fire" style="font-weight:400">是商业纪律崩了</span>
+  </div>
+</div>
+</div>

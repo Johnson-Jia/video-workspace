@@ -1,0 +1,28 @@
+<!-- 场景: cta | 时长: 4.61s | 站队二选一 + 关注引导（胶囊元素纯色，禁 grad-* 防文字透明事故） -->
+<div class="layer-bg">
+<!-- bg-component: light_field -->
+</div>
+<div class="layer-fx">
+  <!-- 温暖收束粒子（暖金，呼应 hook）-->
+  <div class="fx-particle fx-pulse" style="top:24%;left:22%;width:14px;height:14px;background:#FFD27A;box-shadow:0 0 16px rgba(255,210,122,0.75);"></div>
+  <div class="fx-particle fx-drift" style="top:30%;right:22%;width:13px;height:13px;background:#FFB800;box-shadow:0 0 14px rgba(255,184,0,0.65);animation-delay:-1s;"></div>
+  <div class="fx-particle fx-pulse" style="bottom:28%;left:24%;width:14px;height:14px;background:#FF8C32;box-shadow:0 0 14px rgba(255,140,50,0.65);animation-delay:-1.5s;"></div>
+  <!-- 收束光环 -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 140px);left:calc(50% - 140px);width:280px;height:280px;border-color:rgba(255,184,0,0.45);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="cta-stage">
+    <!-- cta-title 无 background，可继续用 grad-warm 渐变 -->
+    <div class="cta-title grad-warm">你站谁？</div>
+    <div class="cta-vs">
+      <!-- 胶囊元素（有 background/border）禁用 grad-*，改纯色 color 防文字透明事故 -->
+      <div class="cta-side" style="border-color:rgba(20,184,166,0.65);color:#14B8A6;">Pake</div>
+      <div class="cta-vs-sign">VS</div>
+      <div class="cta-side" style="border-color:rgba(233,75,208,0.65);color:#E94BD0;">palmier-pro</div>
+    </div>
+    <!-- cta-follow 胶囊元素，纯色 color（CSS 已设 #FFB800），不放 grad-* 类 -->
+    <div class="cta-follow">关注我 · 下期见</div>
+  </div>
+</div>
+</div>

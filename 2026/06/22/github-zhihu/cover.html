@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1920px; height:1080px; background:#0d1117; font-family:'PingFang SC','Microsoft YaHei',sans-serif; color:#e6edf3; overflow:hidden; position:relative; }
+  .grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(48,54,61,.45) 1px,transparent 1px),linear-gradient(90deg,rgba(48,54,61,.45) 1px,transparent 1px); background-size:64px 64px; opacity:.55; }
+  .glow1 { position:absolute; top:-220px; right:-120px; width:760px; height:760px; background:radial-gradient(circle,#00e5a0 .22,transparent 70%); filter:blur(50px); }
+  .glow2 { position:absolute; bottom:-220px; left:-120px; width:660px; height:660px; background:radial-gradient(circle,#f0883e .18,transparent 70%); filter:blur(50px); }
+  .container { position:relative; z-index:1; padding:88px 120px; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+  .week-label { font-family:'JetBrains Mono',monospace; font-size:34px; color:#00e5a0; letter-spacing:3px; margin-bottom:18px; }
+  .week-label span { color:#7d8590; }
+  .title { font-size:98px; font-weight:800; line-height:1.08; letter-spacing:-1px; }
+  .title .accent { color:#00e5a4; }
+  .title .star { color:#f0883e; }
+  .subtitle { font-size:31px; color:#9da7b3; margin-top:26px; letter-spacing:1px; }
+  .cards { display:flex; gap:36px; margin:30px 0; }
+  .card { flex:1; background:rgba(22,27,34,.88); border:1px solid #30363d; border-radius:18px; padding:40px 34px; position:relative; }
+  .card .rank { position:absolute; top:26px; right:30px; font-family:'JetBrains Mono',monospace; font-size:22px; color:#7d8590; letter-spacing:1px; }
+  .card .num { font-family:'JetBrains Mono',monospace; font-size:64px; font-weight:800; color:#f0883e; }
+  .card .num-label { font-size:21px; color:#7d8590; margin-top:6px; }
+  .card .name { font-family:'JetBrains Mono',monospace; font-size:27px; color:#e6edf3; margin-top:24px; word-break:break-all; line-height:1.25; }
+  .card .desc { font-size:22px; color:#9da7b3; margin-top:12px; }
+  .footer { display:flex; gap:56px; font-size:27px; color:#7d8590; border-top:1px solid #30363d; padding-top:32px; }
+  .footer .item .v { font-weight:700; }
+  .footer .item .v.warm { color:#f0883e; }
+  .footer .item .v.cool { color:#00e5a0; }
+  .footer .item .v.light { color:#e6edf3; }
+</style></head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <div class="container">
+    <div class="top">
+      <div class="week-label">2026年6月 · <span>第25周（6.15 - 6.21）</span></div>
+      <div class="title"><span class="accent">GitHub</span> 热门开源项目<span class="star">盘点</span></div>
+      <div class="subtitle">14 个项目里 8 个是 AI · 周冠军一周涨 1.6 万星</div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="rank">TOP 1</div><div class="num">+16102★</div><div class="num-label">本周涨星</div><div class="name">chopratejas/headroom</div><div class="desc">压缩 AI 输入省九成 token</div></div>
+      <div class="card"><div class="rank">TOP 2</div><div class="num">+8233★</div><div class="num-label">本周涨星</div><div class="name">Panniantong/Agent-Reach</div><div class="desc">给 AI 装眼睛读全网</div></div>
+      <div class="card"><div class="rank">TOP 3</div><div class="num">+6372★</div><div class="num-label">本周涨星</div><div class="name">DeusData/codebase-memory-mcp</div><div class="desc">代码库变知识图谱</div></div>
+    </div>
+    <div class="footer">
+      <div class="item">本周累计涨星 <span class="v warm">5.9 万★</span></div>
+      <div class="item">深度解读 <span class="v light">14 个项目</span></div>
+      <div class="item">覆盖 <span class="v cool">5 大方向</span></div>
+    </div>
+  </div>
+</body></html>

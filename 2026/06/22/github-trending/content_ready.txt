@@ -1,0 +1,65 @@
+# GitHub Trending 每日盘点素材 — 2026-06-22
+# 数据源：raw_trending.json（17 项目）+ gh API 实时数据交叉验证
+# 选取：6 个项目（5 新上榜 + 1 连续霸榜快速带过），最大化新鲜度，避开 06-21 的 headroom/Pake/skills/codebase-memory-mcp/SmsForwarder
+# 真实性验证：6/6 通过（owner 均 2 年以上老号，star/fork 6-13:1，watchers 合理；deer-flow 字节官方 410 仓库）
+# 排除列表检查：ruvnet/RuView 未出现；另避开金融敏感 daily_stock_analysis / 泄露敏感 system_prompts_leaks / 低活跃 OpenMontage+spiderfoot
+
+## 钩子候选（避开 06-17~06-21 的砍token/skills 138K/codebase 图谱/IP 声音主题）
+- 字节开源 SuperAgent（deer-flow 72K★）：大厂开源反差
+- 754 安全技能（cybersecurity-skills）：数字锚定
+- 全球情报 dashboard（worldmonitor 58K★）：视野钩子
+
+## 入选项目（按钩子 / 新鲜度排序）
+
+1. bytedance/deer-flow | Python | 72,544★ (+415) | 字节开源的长期任务 SuperAgent 框架，能自主研究、写代码、创作，靠沙箱/记忆/工具/子 agent/消息网关处理几分钟到几小时的任务（原: An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.）
+   avatar: assets/avatars/bytedance.png
+   用途: AI自主干活
+   受众: C开发者向
+   反直觉角度: 字节把能自主跑几小时的 AI agent 开源了，7.2 万星
+
+2. koala73/worldmonitor | TypeScript | 58,042★ (+253) | 实时全球情报 dashboard，AI 聚合新闻、地缘监测、基础设施追踪，统一态势感知界面（原: Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface）
+   avatar: assets/avatars/koala73.png
+   用途: 全球情报一屏看
+   受众: A普通可用
+   反直觉角度: 一个开源项目做出情报机构级的态势感知看板
+
+3. mukul975/Anthropic-Cybersecurity-Skills | Python | 17,645★ (+445) | 给 AI agent 的 754 个结构化网络安全技能，映射 5 大安全框架，适配 Claude Code/Copilot/Cursor 等 20+ 平台（原: 754 structured cybersecurity skills for AI agents · Mapped to 5 frameworks: MITRE ATT&amp;CK, NIST CSF 2.0, MITRE ATLAS, D3FEND &amp; NIST AI RMF · agentskills.io standard · Works with Claude Code, GitHub Copilot, Codex CLI, Cursor, Gemini CLI &amp; 20+ platforms · 26 security domains · Apache 2.0）
+   avatar: assets/avatars/mukul975.png
+   用途: AI学安全防身
+   受众: C开发者向
+   反直觉角度: 给 AI 塞 754 个安全技能，让它自己懂攻防
+
+4. palmier-io/palmier-pro | Swift | 5,031★ (+1,829) | 专为 AI 打造的 macOS 视频编辑器（原: macOS video editor built for AI）
+   avatar: assets/avatars/palmier-io.png
+   用途: AI帮你剪片
+   受众: A普通可用
+   反直觉角度: 视频编辑器反过来为 AI 设计（06-21 已详细介绍，本期快速带过，提增量 +1,829）
+
+5. topoteretes/cognee | Python | 18,624★ (+361) | 开源 AI 记忆平台，给 AI agent 跨会话的持久长期记忆，自托管知识图谱引擎（原: Cognee is the open-source AI memory platform for agents. Give your AI agents persistent long-term memory across sessions with a self-hosted knowledge graph engine.）
+   avatar: assets/avatars/topoteretes.png
+   用途: AI长记性了
+   受众: C开发者向
+   反直觉角度: 让 AI 不再金鱼记忆，跨会话记住一切
+
+6. byoungd/English-level-up-tips | - | 53,988★ (+121) | 一份离谱的英语学习指南/教程（原: An advanced guide to learn English which might benefit you a lot 🎉 . 离谱的英语学习指南/英语学习教程/英语学习/学英语）
+   avatar: assets/avatars/byoungd.png
+   用途: 程序员学英语
+   受众: A普通可用
+   反直觉角度: 一份英语学习指南 5.4 万星，程序员圈现象级
+
+## 受众分档统计
+- A 普通可用：worldmonitor、palmier-pro、English-level-up-tips（3 个）
+- C 开发者向：deer-flow、cybersecurity-skills、cognee（3 个）
+A 档占一半（3/6），C 档占一半（3/6，≤一半合规）
+
+## 跨圈覆盖
+AI agent（deer-flow、cognee）+ 情报（worldmonitor）+ 安全（cybersecurity）+ 视频（palmier-pro）+ 学习（English）= 5 方向
+
+## 真实性验证记录（gh API，2026-06-22）
+- 6/6 通过，0 个 HARD，0 个警告
+- deer-flow: 字节官方 410 仓库 1.8 万粉丝, star/fork 7.4, watchers 315
+- worldmonitor: owner 2011 年 22 仓库, star/fork 6.3, watchers 361
+- cybersecurity-skills: owner 2018 年 31 仓库, star/fork 8.3, watchers 133
+- palmier-pro: 组织号 6 仓库, star/fork 13.2, watchers 28（06-21 已验证）
+- English-level-up-tips: owner 2015 年 17 仓库, star/fork 9.7, watchers 936
+- cognee: 组织号 2023 年 12 仓库, star/fork 9.5, watchers 71

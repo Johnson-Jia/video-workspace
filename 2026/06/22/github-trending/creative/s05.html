@@ -1,0 +1,110 @@
+<!-- 场景: cognee | 时长: 9.34s | topoteretes/cognee 开源 AI 记忆平台 1.8 万星（蓝青神经图谱 + 跨会话连接） -->
+<div class="layer-bg">
+<!-- bg-component: contour_lines -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg,#050E1C 0%,#0A1F38 55%,#041224 100%)"></div>
+
+<div style="position:absolute;top:38%;left:50%;width:1000px;height:1000px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:repeating-radial-gradient(circle,transparent 0px,transparent 50px,hsla(190,80%,55%,0.10) 50px,hsla(190,80%,55%,0.10) 52px);
+  filter:blur(2px);opacity:0.55;
+  mask-image:radial-gradient(circle,#000 30%,transparent 70%);
+  -webkit-mask-image:radial-gradient(circle,#000 30%,transparent 70%);
+  animation:waveSway 30s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:38%;left:50%;width:760px;height:760px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:repeating-radial-gradient(circle,transparent 0px,transparent 80px,hsla(210,70%,55%,0.08) 80px,hsla(210,70%,55%,0.08) 82px);
+  filter:blur(2px);opacity:0.5;
+  mask-image:radial-gradient(circle,#000 30%,transparent 70%);
+  -webkit-mask-image:radial-gradient(circle,#000 30%,transparent 70%);
+  animation:waveSway 26s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:14%;left:25%;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,0.22) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:18%;right:25%;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(20,224,168,0.18) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 12s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:22%;left:62%;width:4px;height:4px;border-radius:50%;
+  background:hsla(190,80%,62%,0.60);box-shadow:0 0 10px hsla(190,70%,52%,0.50);animation:floatParticle 7s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:28%;width:3px;height:3px;border-radius:50%;
+  background:hsla(175,75%,58%,0.55);box-shadow:0 0 9px hsla(175,65%,48%,0.45);animation:floatParticle 9s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:72%;left:56%;width:3px;height:3px;border-radius:50%;
+  background:hsla(195,80%,58%,0.50);box-shadow:0 0 8px hsla(195,70%,48%,0.40);animation:floatParticle 8s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,0.025) 0%,transparent 40%,rgba(20,224,168,0.03) 60%,transparent 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:32%;left:-10%;width:120%;height:200px;opacity:0.14;
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,0.5),rgba(20,224,168,0.5),transparent);
+  filter:blur(60px);transform:rotate(-3deg);animation:prismShimmer 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 38%,transparent 30%,rgba(0,0,0,0.50) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 神经节点粒子（知识图谱连接） -->
+  <div class="fx-particle fx-pulse" style="top:20%;left:22%;width:14px;height:14px;background:#00D4FF;box-shadow:0 0 16px rgba(0,212,255,0.80);"></div>
+  <div class="fx-particle fx-drift" style="top:28%;right:22%;width:13px;height:13px;background:#14E0A8;box-shadow:0 0 14px rgba(20,224,168,0.70);animation-delay:-1s;"></div>
+  <div class="fx-particle fx-pulse" style="bottom:26%;left:22%;width:14px;height:14px;background:#9BE5FF;box-shadow:0 0 14px rgba(155,229,255,0.65);animation-delay:-2s;"></div>
+  <div class="fx-particle fx-drift" style="bottom:22%;right:24%;width:12px;height:12px;background:#14E0A8;box-shadow:0 0 12px rgba(20,224,168,0.60);animation-delay:-0.5s;"></div>
+  <!-- 神经扫描带 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.50),rgba(20,224,168,0.45),transparent);"></div>
+  <!-- 知识图谱环（跨会话连接） -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 120px);left:calc(50% - 120px);width:240px;height:240px;border-color:rgba(0,212,255,0.45);"></div>
+  <div class="fx-pulse-ring" style="top:calc(50% - 80px);left:calc(50% - 80px);width:160px;height:160px;border-color:rgba(20,224,168,0.40);animation-delay:-1.2s;"></div>
+  <!-- 轨道粒子（知识节点环绕） -->
+  <div class="fx-orbit" style="background:#00D4FF;box-shadow:0 0 12px rgba(0,212,255,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="pfc">
+    <div class="pfc-glow-a" style="background:#00D4FF;"></div>
+    <div class="pfc-glow-b" style="background:#14E0A8;"></div>
+
+    <div class="pfc-top">
+      <div class="pfc-rank-row">
+        <span class="pfc-rank grad-teal">#04</span>
+        <span class="pfc-cat grad-teal">开源 AI 记忆平台</span>
+      </div>
+      <div class="pfc-use grad-teal">AI 长记性了</div>
+      <div class="pfc-name"><span class="pfc-owner">topoteretes /</span> <span class="pfc-repo">cognee</span></div>
+    </div>
+
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#00D4FF,#14E0A8,#00D4FF);"></div>
+        <img class="pfc-avatar" src="assets/avatars/topoteretes.png" alt="">
+      </div>
+      <div class="pfc-desc">给 agent 跨会话持久长期记忆<br>自托管知识图谱引擎</div>
+      <div class="pfc-data-bar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">总星标（记忆平台量级）</span>
+          <span class="pfc-bar-val grad-teal">18,624 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:30%;background:linear-gradient(90deg,#4DA8DA,#00D4FF,#14E0A8);"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic">Python</span>
+          <span class="pfc-topic">知识图谱</span>
+          <span class="pfc-topic">自托管</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">跨会话</span>
+        <span class="pfc-sell">长期记忆</span>
+        <span class="pfc-sell">不再金鱼</span>
+      </div>
+      <div class="pfc-comment" style="border-left-color:#00D4FF;">让 AI 不再金鱼记忆，跨会话记住一切</div>
+    </div>
+  </div>
+</div>
+</div>

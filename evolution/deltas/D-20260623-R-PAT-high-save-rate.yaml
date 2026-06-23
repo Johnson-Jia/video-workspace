@@ -1,8 +1,8 @@
 delta:
   approved_by: null
   confidence: 0.85
-  created_at: '2026-06-21T16:11:10.061001+00:00'
-  id: D-20260621-R-PAT-high-save-rate
+  created_at: '2026-06-23T07:39:01.983116+00:00'
+  id: D-20260623-R-PAT-high-save-rate
   new_rule:
     class: EXPERIENTIAL
     detection:
@@ -11,11 +11,11 @@ delta:
     guardrail: 所有场景均为泛泛描述，无具体工具名/数据/步骤
     id: R-PAT-high-save-rate
     pattern: 内容缺少'值得收藏'的实用信息
-    positive: 视频中至少 1 个场景必须包含可操作的实用信息。多平台数据：高收藏(>3%)受众广度是低收藏(<1%)的 1.9x
+    positive: 视频中至少 1 个场景必须包含可操作的实用信息。多平台数据：高收藏(>3%)受众广度是低收藏(<1%)的 2.1x
     scope: SKILL
     severity: SOFT
     skill: stage3-scenes
-    source: 'auto_evolve: 高/低收藏广度比=1.9x, 增长留存差=0.08 (多平台综合)'
+    source: 'auto_evolve: 高/低收藏广度比=2.1x, 增长留存差=0.14 (多平台综合)'
     type: REQUIRED_METHOD
   observation_days: 3
   operation: ADDED
@@ -23,9 +23,9 @@ delta:
   target_rule: R-PAT-high-save-rate
 requires_human_review: false
 shadow_validation:
-  delta_id: D-20260621-R-PAT-high-save-rate
+  delta_id: D-20260623-R-PAT-high-save-rate
   reason: 通过影子校验
   requires_human_review: false
   safe: true
-  total_traces: 589
-  violations_before: 257
+  total_traces: 623
+  violations_before: 258

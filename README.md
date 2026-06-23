@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**36 天 · 80 条视频 · 5 个系列 · 全自动**
+**41 天 · 88 条视频 · 6 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -61,31 +61,31 @@
 
 | 日期 | 作品 |
 |:---|:---|
-| 6月18日 | [GitHub 每日热门](2026/06/18/github-trending/) |
-| 6月17日 | [GitHub 每日热门](2026/06/17/github-trending/) |
-| 6月16日 | [GitHub 每日热门](2026/06/16/github-trending/) |
-| 6月15日 | [GitHub 每日热门](2026/06/15/github-trending/) |
-| 6月14日 | [GitHub 每日热门](2026/06/14/github-trending/) |
+| 6月23日 | [GitHub 每日热门](2026/06/23/github-trending/) |
+| 6月22日 | [GitHub 每日热门](2026/06/22/github-trending/) |
+| 6月21日 | [GitHub 每日热门](2026/06/21/github-trending/) |
+| 6月20日 | [GitHub 每日热门](2026/06/20/github-trending/) |
+| 6月19日 | [GitHub 每日热门](2026/06/19/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月22日 | [GitHub 周度热门汇总](2026/06/22/github-trending-weekly/) |
 | 6月15日 | [GitHub 周度热门汇总](2026/06/15/github-trending-weekly/) |
 | 6月8日 | [GitHub 周度热门汇总](2026/06/08/github-trending-weekly/) |
-| 6月1日 | [GitHub 周度热门汇总](2026/06/01/github-trending-weekly/) |
 
 ### 深度解析
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月20日 | [ofo 小黄车：22亿美金烧光](2026/06/20/goldminer/) |
+| 6月19日 | [tmux：终端永不掉线](2026/06/19/tmux-deep-dive/) |
 | 6月18日 | [Yazi：4万星终端看图利器](2026/06/18/yazi-deep-dive/) |
 | 6月16日 | [建筑投标 SaaS：13万亿薄利市场](2026/06/16/construction-bid-saas/) |
 | 6月13日 | [GLM-5.2 同日开源](2026/06/13/glm-5-2-release/) |
-| 6月13日 | [Career-Ops：求职即工程](2026/06/13/career-ops-deep/) |
-| 6月12日 | [ClipForge 频道介绍](2026/06/12/clipforge-intro/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 80 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 88 条视频。
 <!-- END RECENT -->
 
 ---

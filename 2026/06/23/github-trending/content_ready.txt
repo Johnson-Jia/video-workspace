@@ -1,0 +1,72 @@
+# GitHub Trending 每日盘点素材 — 2026-06-23
+# 数据源：raw_trending.json（16 项目）+ gh API 实时数据交叉验证
+# 今日主题：GitHub 涨星被"AI 做视频"占领（涨星王 OpenMontage + palmier-pro 都是 AI 视频方向）
+# 选取：6 个项目（5 个首次详细讲 + 1 个连续霸榜快速带过），最大化新鲜度
+# 新鲜度约束：避开 06-22 已详细讲的 deer-flow / worldmonitor / cybersecurity-skills / cognee / English 主题
+# 真实性验证：6/6 通过（详见末尾记录）
+# 排除列表检查：ruvnet/RuView 未出现；金融分析类、低活跃(>30天未推送)项目已泛化剔除
+
+## 钩子候选（避开近 N 期的 SuperAgent / 安全技能 / 情报看板 / 砍token / skills 主题）
+- 主钩子（反直觉+数字）：OpenMontage 把写代码的 AI 助手变成了做视频的工作室，单日涨近三千星
+- 备选反直觉：airllm 用 4GB 显存的破显卡跑 70B 顶级大模型
+- 主题钩子：今天 GitHub 涨星最猛的，AI 做视频的占了一半
+
+## 入选项目（按钩子 / 新鲜度排序）
+
+1. calesthio/OpenMontage | Python | 11,906★ (+2,935) | 开源的 AI 视频制作系统，12 条流水线、52 个工具、500 多个 agent 技能，能把 AI 编程助手变成一整套视频制作工作室（原: World's first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.）
+   avatar: assets/avatars/calesthio.png
+   用途: AI帮你做视频
+   受众: B半可用（需配合 AI 编程助手）
+   反直觉角度: 把写代码的 AI 助手变成了做视频的工作室（角色错位）；今日涨星王 +2935，昨日仅 +993，单日 3 倍加速冲上榜首
+
+2. palmier-io/palmier-pro | Swift | 7,288★ (+2,462) | 专为 AI 打造的 macOS 视频编辑器（原: macOS video editor built for AI）
+   avatar: assets/avatars/palmier-io.png
+   用途: AI帮你剪片
+   受众: A普通可用（Mac 桌面应用）
+   反直觉角度: 视频编辑器反过来为 AI 设计（06-22 已详细介绍，本期快速带过，提增量 +2,462，今日第二）
+
+3. penpot/penpot | Clojure | 52,844★ (+730) | 开源的设计协作工具，打通设计稿和代码（原: Penpot: The open-source design tool for design and code collaboration）
+   avatar: assets/avatars/penpot.png
+   用途: 免费用设计软件
+   受众: A普通可用（浏览器即开）
+   反直觉角度: Figma 的免费开源平替，设计师不用再付订阅费
+
+4. Stirling-Tools/Stirling-PDF | TypeScript | 82,860★ (+691) | GitHub 上星标数名列前茅的 PDF 应用，任何设备都能编辑 PDF（原: #1 PDF Application on GitHub that lets you edit PDFs on any device anywhere）
+   avatar: assets/avatars/Stirling-Tools.png
+   用途: 免费编辑PDF
+   受众: A普通可用（Docker / 网页）
+   反直觉角度: 本地编辑 PDF 不传云端，隐私不外泄的刚需工具
+
+5. garrytan/gstack | TypeScript | 113,109★ (+649) | 直接照搬 Garry Tan 的 Claude Code 配置：23 个工具分别当 CEO、设计师、工程经理、发布经理、文档工程师和 QA（原: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA）
+   avatar: assets/avatars/garrytan.png
+   用途: 抄大佬AI配置
+   受众: B半可用（需用 Claude Code）
+   反直觉角度: YC 总裁公开了自己的 Claude Code 配置，相当于把硅谷大佬的作业直接抄过来用
+
+6. lyogavin/airllm | Jupyter Notebook | 21,034★ (+187) | 单张 4GB 显存的 GPU 就能跑 70B 大模型推理（原: AirLLM 70B inference with single 4GB GPU）
+   avatar: assets/avatars/lyogavin.png
+   用途: 破卡跑顶级模型
+   受众: C开发者向（给跑大模型的开发者）
+   反直觉角度: 4GB 显存的破显卡，跑起 70B 参数的顶级大模型，大象塞进小盒子
+
+## 受众分档统计
+- A 普通可用：palmier-pro、penpot、Stirling-PDF（3 个）
+- B 半可用：OpenMontage、gstack（2 个）
+- C 开发者向：airllm（1 个）
+A 档占一半（3/6），C 档 1 个（≤一半合规）
+
+## 跨圈覆盖
+AI 视频（OpenMontage、palmier-pro）+ 设计（penpot）+ 文档工具（Stirling-PDF）+ AI 编程配置（gstack）+ 大模型推理（airllm）= 5 方向
+
+## 结尾提问方向（禁站队对抗式，用中性互动）
+- 候选：「这几个 AI 做视频的工具，你最想试哪个」「写代码的 AI 帮你做视频，这个你会用上吗」
+- 禁「你站谁 / 敢说真香吗」类对抗式
+
+## 真实性验证记录（gh API，2026-06-23）
+- 6/6 通过，0 个 HARD 触发；palmier-pro 1 个 watchers 警告（新项目常见，组织号 2 年 + ratio 正常 + README 充实，综合通过）
+- calesthio/OpenMontage: owner 2025-05 注册 1 年老号, 6 仓库, 443 粉丝; star/fork 7.7, watchers 85(0.7%); README 35KB; 活跃
+- palmier-io/palmier-pro: 组织号 2024-06 注册 2 年, 6 仓库; star/fork 14.5, watchers 29(0.4%); README 5KB; 活跃
+- penpot/penpot: 老牌项目 2015 创建 10 年; star/fork 15.6, watchers 271(0.5%); 仓库 380MB
+- Stirling-Tools/Stirling-PDF: 2023 创建 3 年; 82K★; star/fork 11.4, watchers 240(0.3%); 仓库 300MB
+- garrytan/gstack: owner 2008 注册 18 年老号(YC 总裁本人), 18 仓库, 1.17 万粉丝; star/fork 6.7, watchers 687(0.6%); README 45KB
+- lyogavin/airllm: owner 2011 注册 15 年老号, 66 仓库, 783 粉丝; star/fork 8.7, watchers 232(1.1%); README 14KB

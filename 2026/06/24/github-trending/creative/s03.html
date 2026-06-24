@@ -1,0 +1,109 @@
+<!-- 场景: clone_gstack | 时长: 16.6s | ai-website-cloner 克隆网站 + gstack 抄大佬配置（金紫菱形 · 高潮爆点 · 不提人名品牌） -->
+<div class="layer-bg">
+<!-- bg-component: electric_pulse -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,hsl(280,25%,4%),hsl(265,20%,7%),hsl(275,22%,5%))"></div>
+
+<!-- 等高线纹理（contour 类型，repeating-radial-gradient 打破 glow+grid 三件套） -->
+<div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 45%,transparent 0px,transparent 90px,hsla(40,70%,55%,0.05) 90px,hsla(40,70%,55%,0.05) 92px);animation:contourPulse 8s ease-in-out infinite"></div>
+
+<!-- SVG 噪点纹理（noise 类型的额外纹理层） -->
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.18;mix-blend-mode:overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="nz-s03"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 0.85  0 0 0 0 0.6  0 0 0 0.5 0"/></filter>
+  <rect width="100%" height="100%" filter="url(#nz-s03)"/>
+</svg>
+
+<div style="position:absolute;inset:0;animation:latticeDrift 24s ease-in-out infinite;
+  background-image:
+    repeating-linear-gradient(45deg,transparent,transparent 59px,hsla(40,70%,55%,0.055) 59px,hsla(40,70%,55%,0.055) 60px),
+    repeating-linear-gradient(-45deg,transparent,transparent 59px,hsla(280,60%,60%,0.05) 59px,hsla(280,60%,60%,0.05) 60px);
+  background-size:85px 85px"></div>
+
+<div style="position:absolute;top:25%;left:20%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,hsla(38,80%,50%,0.20),hsla(35,60%,40%,0.08),transparent 70%);
+  filter:blur(90px)"></div>
+<div style="position:absolute;top:50%;left:55%;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,hsla(280,60%,50%,0.16),hsla(270,45%,35%,0.06),transparent 70%);
+  filter:blur(85px);animation:latticeDrift 22s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:28%;left:38%;width:5px;height:5px;border-radius:50%;
+  background:hsla(45,90%,65%,0.7);box-shadow:0 0 12px hsla(45,80%,55%,0.6);animation:floatParticle 6s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:55%;left:35%;width:4px;height:4px;border-radius:50%;
+  background:hsla(280,80%,65%,0.6);box-shadow:0 0 10px hsla(280,70%,55%,0.5);animation:floatParticle 8s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:68%;left:60%;width:4px;height:4px;border-radius:50%;
+  background:hsla(38,85%,60%,0.55);box-shadow:0 0 9px hsla(38,75%,50%,0.45);animation:floatParticle 7s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:0;left:35%;width:2px;height:100%;
+  background:linear-gradient(transparent 15%,hsla(40,80%,55%,0.10) 50%,transparent 85%);
+  animation:beamBreath 6s ease-in-out infinite"></div>
+
+<!-- conic 径向光束（复刻能量的发散，conic-gradient 提供 beams 类型打破 glow+grid） -->
+<div style="position:absolute;top:50%;left:50%;width:1400px;height:1400px;border-radius:50%;
+  transform:translate(-50%,-50%);opacity:0.22;
+  background:conic-gradient(from 0deg,
+    transparent 0deg,hsla(40,85%,60%,0.18) 8deg,transparent 16deg,
+    transparent 80deg,hsla(280,75%,62%,0.14) 88deg,transparent 96deg,
+    transparent 160deg,hsla(40,80%,58%,0.16) 168deg,transparent 176deg,
+    transparent 240deg,hsla(280,70%,60%,0.12) 248deg,transparent 256deg,
+    transparent 320deg,hsla(42,82%,60%,0.14) 328deg,transparent 336deg);
+  filter:blur(2px);animation:beamRotate 50s linear infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,220,150,0.02) 0%,transparent 40%,rgba(220,180,255,0.025) 60%,transparent 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:-10%;width:120%;height:200px;opacity:0.18;
+  background:linear-gradient(90deg,transparent,rgba(255,179,71,0.5),rgba(176,123,255,0.5),transparent);
+  filter:blur(60px);transform:rotate(-3deg);animation:prismShimmer 10s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 金紫双色脉冲粒子（复刻/抄大佬的尊贵感） -->
+  <div class="fx-particle" style="top:18%;left:22%;width:14px;height:14px;background:#FFC857;box-shadow:0 0 16px rgba(255,200,87,0.80);animation:fxAura 4.5s ease-in-out infinite;"></div>
+  <div class="fx-particle" style="top:26%;right:22%;width:13px;height:13px;background:#B07BFF;box-shadow:0 0 14px rgba(176,123,255,0.70);animation:fxFloat 4s ease-in-out infinite -1s;"></div>
+  <div class="fx-particle" style="bottom:24%;left:22%;width:14px;height:14px;background:#FFE8B0;box-shadow:0 0 14px rgba(255,232,176,0.65);animation:fxAura 4.5s ease-in-out infinite -2s;"></div>
+  <div class="fx-particle" style="bottom:20%;right:24%;width:12px;height:12px;background:#D4B8FF;box-shadow:0 0 12px rgba(212,184,255,0.60);animation:fxFloat 4s ease-in-out infinite -0.5s;"></div>
+  <!-- 复刻扫描带 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(255,200,87,0.55),rgba(176,123,255,0.45),transparent);"></div>
+  <!-- 中央锁定环 -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 140px);left:calc(50% - 140px);width:280px;height:280px;border-color:rgba(255,200,87,0.45);"></div>
+  <div class="fx-pulse-ring" style="top:calc(50% - 90px);left:calc(50% - 90px);width:180px;height:180px;border-color:rgba(176,123,255,0.40);animation-delay:-1.2s;"></div>
+  <!-- 复刻冲击光束 -->
+  <div class="fx-beam" style="top:42%;background:linear-gradient(90deg,transparent,rgba(255,200,87,0.40),rgba(176,123,255,0.35),transparent);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="dual-stage">
+    <!-- ai-website-cloner：一条命令克隆网站 -->
+    <div class="mini-card">
+      <div class="mini-rank-row">
+        <span class="mini-rank grad-amber">#02</span>
+        <span class="mini-use grad-amber">AI 帮你克隆网站</span>
+      </div>
+      <div class="mini-name"><span class="pfc-owner">JCodesMore /</span> <span class="pfc-repo">ai-website-cloner-template</span></div>
+      <div class="mini-desc">一条命令克隆任意网站<br>看上的网页直接复刻</div>
+      <div class="mini-row">
+        <span class="mini-stars grad-amber">18,517 ★</span>
+        <span class="mini-tag">+827 · 一条命令</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="list-stage">
+    <div class="list-head">
+      <div class="list-eyebrow">#03 · 硅谷知名投资人 · 公开配置</div>
+      <div class="list-title grad-purple">23 个 AI 角色</div>
+    </div>
+    <div class="role-grid">
+      <div class="role-chip" style="border-color:rgba(255,200,87,0.45);background:rgba(255,200,87,0.10);">CEO</div>
+      <div class="role-chip">设计师</div>
+      <div class="role-chip">工程经理</div>
+      <div class="role-chip">发布经理</div>
+      <div class="role-chip">文档工程师</div>
+      <div class="role-chip" style="border-color:rgba(255,200,87,0.45);background:rgba(255,200,87,0.10);">QA</div>
+    </div>
+    <div class="list-stars grad-amber">114,032 ★</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:500;color:rgba(255,255,255,0.48);letter-spacing:0.04em;">garrytan / gstack</div>
+    <div style="font-size:38px;font-weight:700;color:#FFB347;border:2px solid rgba(255,179,71,0.50);background:rgba(255,140,50,0.10);padding:12px 36px;border-radius:999px;letter-spacing:0.02em;">抄大佬作业 · 直接搬回家</div>
+  </div>
+</div>
+</div>

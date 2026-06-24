@@ -1,0 +1,111 @@
+<!-- 场景: loot | 时长: 28.0s | 淘金核心：教训 + AI 出海点子（3 phase） -->
+<div class="layer-bg">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0805,#1a1200,#0A0805)"></div>
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPatGold" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(42,85%,55%,0.15)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(42,85%,55%,0.15)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPatGold)"/>
+</svg>
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(45,90%,55%,0.13) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+<div style="position:absolute;top:30%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(45,90%,55%,0.28),hsla(42,70%,42%,0.10),transparent 70%);
+  filter:blur(100px)"></div>
+<div style="position:absolute;top:60%;left:55%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(35,80%,50%,0.13),transparent 70%);
+  filter:blur(80px)"></div>
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(45,95%,60%,0.95);box-shadow:0 0 16px hsla(45,85%,55%,0.8),0 0 32px hsla(45,75%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(42,90%,58%,0.9);box-shadow:0 0 14px hsla(42,80%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(38,85%,55%,0.85);box-shadow:0 0 14px hsla(38,75%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(45,85%,55%,0.16),transparent,hsla(35,75%,45%,0.12));
+  border:1.5px solid hsla(45,85%,55%,0.30);
+  animation:holoHexSpin 20s linear infinite"></div>
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(45,85%,55%,0.45);border-left:2px solid hsla(45,85%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(45,85%,55%,0.45);border-right:2px solid hsla(45,85%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(45,85%,55%,0.45);border-left:2px solid hsla(45,85%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(45,85%,55%,0.45);border-right:2px solid hsla(45,85%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.02) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.025) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura fx-pulse" style="top:28%;left:25%;width:540px;height:540px;background:radial-gradient(circle,rgba(255,215,0,0.38),transparent 65%);filter:blur(70px)"></div>
+<div class="fx-aura fx-pulse" style="top:55%;left:55%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,184,0,0.25),transparent 70%);filter:blur(80px)"></div>
+<div class="fx-particle fx-drift" style="top:60%;left:38%;width:8px;height:8px;background:#FFD700;box-shadow:0 0 16px #FFD700"></div>
+<div class="fx-particle fx-drift" style="top:65%;left:52%;width:7px;height:7px;background:#FFB800;box-shadow:0 0 14px #FFB800"></div>
+<div class="fx-particle fx-drift" style="top:55%;left:60%;width:6px;height:6px;background:#FFE082;box-shadow:0 0 13px #FFE082"></div>
+<div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(255,215,0,0.55),transparent)"></div>
+<div class="fx-beam" style="top:35%;background:linear-gradient(90deg,transparent,rgba(255,215,0,0.45),transparent)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1" style="gap:30px">
+  <div class="channel-tag">LOOT · 残骸淘金</div>
+  <div class="title-brush grad-gold" style="font-size:88px;text-align:center;line-height:1.15">
+    淘到的<br>头一个教训
+  </div>
+  <div class="card-frame gold">
+    <div style="font-family:var(--font-body);font-weight:700;font-size:38px;color:#FFE082;line-height:1.4;margin-bottom:14px">
+      受监管行业 · <span class="grad-fire" style="font-weight:900">政策风险能要命</span>
+    </div>
+    <div style="font-family:var(--font-body);font-weight:400;font-size:32px;color:var(--text2);line-height:1.4">
+      不是慢慢变大 · 是可能一夜清零
+    </div>
+    <div style="font-family:var(--font-body);font-weight:700;font-size:34px;color:#FFD700;line-height:1.4;margin-top:10px">
+      做教育 · 医疗 · 金融 · 提前想好退路
+    </div>
+  </div>
+</div>
+
+<div class="phase phase-2" style="gap:28px">
+  <div class="channel-tag">LOOT · 能偷的点子</div>
+  <div class="title-brush grad-gold" style="font-size:74px;text-align:center;line-height:1.15">
+    别绑死教培<br>用大模型出海
+  </div>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <span class="pill">大模型教学 90%</span>
+    <span class="pill pill-fire">成本近乎为零</span>
+  </div>
+</div>
+
+<div class="phase phase-3" style="gap:18px">
+  <div class="title-brush grad-fire" style="font-size:54px;text-align:center">点子细节 · 关键两步</div>
+  <div class="tl-node">
+    <div class="tl-num">1</div>
+    <div class="tl-body">
+      <div class="tl-head">关键环节交给真人</div>
+      <div class="tl-sub">动机 · 文化 · 复杂问题</div>
+    </div>
+  </div>
+  <div class="tl-node">
+    <div class="tl-num">2</div>
+    <div class="tl-body">
+      <div class="tl-head">转去印度 · 东南亚 · 拉美</div>
+      <div class="tl-sub">还没管死的市场</div>
+    </div>
+  </div>
+</div>
+</div>

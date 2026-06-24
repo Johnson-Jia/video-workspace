@@ -1,0 +1,72 @@
+# GitHub Trending 每日盘点素材 — 2026-06-24
+# 数据源：raw_trending.json（16 项目）+ gh API 实时数据交叉验证 16/16，15/16 active
+# 今日主题：GitHub 涨星被「克隆/抄/复刻」类工具占场（AI视频工作室 + 网站克隆器 + 大佬配置 + 多市场情报）
+# 选取：6 个项目全部新详讲，最大化新鲜度（避开用户指定的 palmier-pro / codebase-memory-mcp 高频项）
+# 新鲜度约束：避开 06-23「AI做视频当道·角色错位」主题、06-22「砍token/个人vs大厂」主题
+# 真实性验证：用户预验证 16/16 通过
+# 排除列表检查：ruvnet/RuView 未出现；金融类项目措辞中性化（聚焦 LLM 数据分析技术能力，不提具体股票/买卖建议）
+
+## 钩子候选（避开近 7 期 hook 主题：AI做视频角色错位/砍token/个人vs大厂/单日涨星/淘金/周榜）
+- 主钩子（反直觉·复刻主题）：今天 GitHub，涨星王是个能帮你做视频的 AI 工作室，单日冲上三千五百星
+- 备选反直觉：硅谷知名投资人公开了自己的 AI 编程配置，相当于把大佬作业直接抄过来用
+- 主题钩子：今天 GitHub 三个项目，都在帮你「抄」专业能力——抄做视频、抄做网站、抄大佬配置
+
+## 入选项目（按钩子 / 新鲜度排序）
+
+1. calesthio/OpenMontage | Python | 15,523★ (+3,590) | 开源的 agentic 视频制作系统，12 条流水线、52 个工具、500 多个 agent 技能，能把 AI 编程助手变成一整套视频制作工作室（原: World's first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.）
+   avatar: assets/avatars/calesthio.png
+   用途: AI帮你做视频
+   受众: A普通可用（开源全栈工具）
+   反直觉角度: 把写代码的 AI 助手变成做视频的工作室（角色错位）；今日涨星王 +3590，3 倍加速冲上榜首
+
+2. JCodesMore/ai-website-cloner-template | TypeScript | 18,517★ (+827) | 一条命令就能用 AI 编程 agent 克隆任意网站（原: Clone any website with one command using AI coding agents）
+   avatar: assets/avatars/JCodesMore.png
+   用途: AI帮你克隆网站
+   受众: A普通可用（一条命令即用）
+   反直觉角度: 看上的网站一条命令就能复刻，把专业前端开发平民化
+
+3. garrytan/gstack | TypeScript | 114,032★ (+1,012) | 直接照搬硅谷知名投资人的 Claude Code 配置：23 个工具分别当 CEO、设计师、工程经理、发布经理、文档工程师和 QA（原: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA）
+   avatar: assets/avatars/garrytan.png
+   用途: 抄大佬AI配置
+   受众: B半可用（需用 Claude Code）
+   反直觉角度: 硅谷知名投资人公开了自己的 AI 编程配置，相当于把大佬的作业直接抄过来用（不提具体人名/品牌）
+
+4. ZhuLinsen/daily_stock_analysis | Python | 46,991★ (+1,121) | LLM 驱动的多市场数据分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行（原: LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs.）
+   avatar: assets/avatars/ZhuLinsen.png
+   用途: AI梳理多市场数据
+   受众: B半可用（需配置数据源）
+   反直觉角度: 中文开源项目用 LLM 自动梳理多市场数据，把专业金融数据分析平民化（措辞聚焦 LLM 数据分析技术能力，不提具体股票/买卖建议/收益预测，规避证券投资咨询资质）
+
+5. koala73/worldmonitor | TypeScript | 59,055★ (+279) | 实时全球情报看板，AI 聚合新闻、地缘监测、基础设施追踪，统一态势感知界面（原: Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface）
+   avatar: assets/avatars/koala73.png
+   用途: 一眼看全球动态
+   受众: A普通可用（看板即开）
+   反直觉角度: 一个开源项目做出情报机构级的全球态势感知看板（06-22 已讲但角度换为「全球情报看板」，本期不重复展开只提数据增量）
+
+6. byoungd/English-level-up-tips | - | 54,485★ (+151) | 一份可能让你受益匪浅的英语进阶指南（原: An advanced guide to learn English which might benefit you a lot 🎉 . 人生进阶指南 离谱的人生 离谱的英语学习指南/英语学习教程/英语学习/学英语）
+   avatar: assets/avatars/byoungd.png
+   用途: 进阶学英语
+   受众: A普通可用（学习指南）
+   反直觉角度: 非技术题材差异化（程序员圈现象级英语指南，5万4千星），打破纯工具/纯 AI 扎堆
+
+## 受众分档统计
+- A 普通可用：OpenMontage、ai-website-cloner-template、worldmonitor、English-level-up-tips（4 个）
+- B 半可用：gstack、daily_stock_analysis（2 个）
+- C 开发者向：0 个
+A 档超一半（4/6），C 档 0 个（合规）
+
+## 跨圈覆盖
+AI 视频工作室（OpenMontage）+ 网站克隆（ai-website-cloner）+ AI 编程配置（gstack）+ LLM 多市场数据分析（daily_stock）+ 全球情报（worldmonitor）+ 英语学习（English）= 6 方向，AI 类 3/6 占一半未扎堆，含中文项目+非技术学习题材
+
+## 结尾提问方向（禁站队对抗式，用中性互动；避开 06-23「最想试哪个」句式）
+- 候选：「这几个能帮你复刻专业能力的工具，你会用上哪个」「做视频/克隆网站/抄大佬配置，你会先试哪个」
+- 禁「你站谁 / 敢说真香吗」类对抗式；禁与 06-23「最想试哪个」完全同款句式
+
+## 真实性验证记录（用户预验证，2026-06-24）
+- 16/16 项目 gh API 验证通过，15/16 active
+- calesthio/OpenMontage: 今日 +3590 涨星王，3 倍加速（昨日 +993）
+- garrytan/gstack: owner 2008 注册 18 年老号（硅谷知名投资人本人），18 仓库，1.17 万粉丝；star/fork 6.7，README 45KB
+- ZhuLinsen/daily_stock_analysis: 中文项目，46991★，LLM 驱动数据分析
+- JCodesMore/ai-website-cloner-template: 18517★，一条命令克隆网站
+- koala73/worldmonitor: 59055★，全球情报看板（06-22 已验证通过）
+- byoungd/English-level-up-tips: 54485★，英语进阶指南（06-22 已验证通过）

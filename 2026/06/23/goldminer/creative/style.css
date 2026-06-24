@@ -1,0 +1,123 @@
+:root {
+  --bg-deep: #0A0805;
+  --bg-mid: #1a1200;
+  --accent-warm: #FFB800;
+  --accent-warm2: #D4A017;
+  --accent-fire: #FF6B00;
+  --accent-ember: #FF3D00;
+  --text: #FFFFFF;
+  --text2: rgba(255,235,180,0.65);
+  --text3: rgba(255,200,120,0.45);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+}
+
+.grad-gold {
+  background-image: linear-gradient(135deg, #FFE082 0%, #FFB800 45%, #FF6B00 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(255,184,0,0.35);
+}
+.grad-fire {
+  background-image: linear-gradient(135deg, #FFB800 0%, #FF6B00 50%, #FF3D00 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(255,107,0,0.4);
+}
+.grad-sand {
+  background-image: linear-gradient(180deg, #FFE082 0%, #D4A017 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.title-brush {
+  font-family: var(--font-title);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 4px;
+}
+.data-num {
+  font-family: var(--font-data);
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+.pill {
+  display: inline-flex; align-items: center;
+  padding: 10px 22px; border-radius: 999px;
+  font-family: var(--font-body); font-weight: 700; font-size: 32px;
+  background: rgba(255,184,0,0.10);
+  border: 1.5px solid rgba(255,184,0,0.45);
+  color: #FFD700;
+  white-space: nowrap;
+}
+.pill-fire {
+  background: rgba(255,107,0,0.12);
+  border-color: rgba(255,107,0,0.55);
+  color: #FF8A3D;
+}
+.pill-dark {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,235,180,0.25);
+  color: var(--text2);
+}
+.channel-tag {
+  font-family: var(--font-data); font-weight: 700;
+  font-size: 32px; letter-spacing: 6px;
+  color: rgba(255,215,128,0.55);
+}
+.dual-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 22px 32px; border-radius: 18px;
+  background: rgba(255,184,0,0.06);
+  border: 1px solid rgba(255,184,0,0.2);
+}
+.dual-row .lbl {
+  font-family: var(--font-body); font-weight: 400; font-size: 36px;
+  color: var(--text2);
+}
+.dual-row .val {
+  font-family: var(--font-data); font-weight: 700; font-size: 48px;
+  color: #FFD700;
+}
+.dual-row.bad .val { color: #FF6B00; }
+.dual-row.good .val { color: #FFD700; }
+.tl-node {
+  display: flex; align-items: flex-start; gap: 22px; width: 100%;
+  margin-bottom: 22px;
+}
+.tl-num {
+  flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-data); font-weight: 700; font-size: 36px;
+  background: linear-gradient(135deg, #FFB800, #FF6B00);
+  color: #1a0a00;
+  box-shadow: 0 0 20px rgba(255,107,0,0.5);
+}
+.tl-body { flex: 1; padding-top: 4px; }
+.tl-head {
+  font-family: var(--font-body); font-weight: 700; font-size: 38px;
+  color: #FFE082; margin-bottom: 6px;
+}
+.tl-sub {
+  font-family: var(--font-body); font-weight: 400; font-size: 32px;
+  color: var(--text2); line-height: 1.4;
+}
+.card-frame {
+  width: 100%; padding: 34px 38px; border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255,184,0,0.08), rgba(255,107,0,0.04));
+  border: 1px solid rgba(255,184,0,0.35);
+}
+.card-frame.warn {
+  background: linear-gradient(135deg, rgba(255,61,0,0.10), rgba(255,107,0,0.05));
+  border-color: rgba(255,61,0,0.45);
+}
+.card-frame.gold {
+  background: linear-gradient(135deg, rgba(255,224,130,0.12), rgba(255,184,0,0.06));
+  border-color: rgba(255,224,130,0.55);
+}
+.verdict {
+  font-family: var(--font-title); font-weight: 400;
+  font-size: 96px; line-height: 1.15; letter-spacing: 6px;
+  text-align: center;
+}

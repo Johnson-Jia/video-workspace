@@ -1,0 +1,25 @@
+{
+  "topic_type": "容器/基建 + AI Agent 盘点",
+  "topic_pattern": "topic-container",
+  "angle": "苹果不用 Docker，自研 Swift 原生容器（反直觉主角 apple/container）；OpenMontage 连续霸榜降级快速带过，不作主钩子",
+  "novelty_strategy": {
+    "hook_axis": "反直觉/冲突（优先级1）：大厂不用行业标配、自己造更轻的原生工具。apple/container 未讲过，主角担当",
+    "number_anchor": "42,168★ 总星 / 单日 +1,746★（apple/container），作为反直觉钩子的数字背书而非裸报",
+    "narrative_structure": "contrast-arc：以「苹果 vs 行业惯例」开场制造冲突 → 逐个揭晓 6 个项目 → 中性互动收尾",
+    "differentiation": "换掉近 7 期所有 hook 主题：禁 AI做视频 / 单日涨星 / .claude目录 / 砍AI输入 / 个人vs大厂 / 声音克隆 / IP淘汰。改用「大厂自造工具反直觉」全新主题"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "系统容器(Swift) / 成长型agent / 网站克隆 / agentIDE / git工具 / AI视频（6 方向全覆盖，避免单一 AI Agent 扎堆；A 档 2 个、B 档 4 个，A 档约占 1/3）",
+  "avoid_recent": [
+    "calesthio/openmontage（近 2 期已展开 2 次，本期降为连续霸榜快速带过，3-4s 仅提单日 +3,703 星增量，不作主钩子）",
+    "palmier-io/palmier-pro（近 7 期高频，避免重复展开）",
+    "ruvnet/ruview（永久排除列表，零容忍）"
+  ],
+  "ending_question": "中性二选一：「这6个项目，你最想尝试哪个？」（禁站队对抗式，问题类型=想尝试，与近期轮换）",
+  "exploration_mode": "exploit",
+  "applied_patterns": ["P-hook-number_anchor (HIGH)", "P-hook-action_number (MEDIUM)", "P-cover-other (MEDIUM, stage7)"]
+}

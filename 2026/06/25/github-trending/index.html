@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1080px;height:1920px;}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 90px 220px 90px;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.6),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'JetBrains Mono','Consolas','PingFang SC','Microsoft YaHei',monospace;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 800;
+}
+
+/* ============================================
+ * 自定义组件 CSS（content 层文字特效 + 卡片）
+ * bg 层由 bg-component 注入，fx 用 fx-* 原语
+ * ============================================ */
+
+/* ── 通用文字特效（text-effects.md 配方） ── */
+.grad-amber {
+  background-image: linear-gradient(135deg, #ffe082 0%, #f9a825 50%, #ff6b35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(249,168,37,0.35);
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #7ef9ff 0%, #00f5d4 50%, #00d4ff 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(0,245,212,0.35);
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #d8b9ff 0%, #a855f7 50%, #7c3aed 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(168,85,247,0.35);
+}
+.grad-teal {
+  background-image: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #14b8a6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(52,211,153,0.35);
+}
+.grad-warmsoft {
+  background-image: linear-gradient(135deg, #ffe082 0%, #ffb74d 50%, #ff8a65 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(255,167,38,0.32);
+}
+.grad-navy {
+  background-image: linear-gradient(135deg, #93c5fd 0%, #3b82f6 50%, #1e40af 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 12px rgba(59,130,246,0.35);
+}
+
+/* ── s01 hook：反直觉大字 ── */
+.hook-eyebrow {
+  font-family: 'JetBrains Mono';
+  font-size: 36px; font-weight: 700;
+  color: var(--accent-warm);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  opacity: 0.85;
+}
+.hook-title {
+  font-family: 'JetBrains Mono';
+  font-size: 132px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 0 16px rgba(249,168,37,0.45), 0 0 28px rgba(0,245,212,0.22);
+}
+.hook-strike {
+  position: relative; display: inline-block;
+  font-family: 'JetBrains Mono';
+  font-size: 110px; font-weight: 900;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: -0.01em;
+}
+.hook-strike::after {
+  content: ""; position: absolute;
+  left: -4%; top: 52%; width: 108%; height: 8px;
+  background: linear-gradient(90deg, transparent, #ff3b30 20%, #ff3b30 80%, transparent);
+  box-shadow: 0 0 18px rgba(255,59,48,0.7);
+  transform: rotate(-4deg);
+}
+.hook-reveal {
+  font-family: 'JetBrains Mono';
+  font-size: 108px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -0.02em;
+}
+.hook-tag {
+  font-family: 'Noto Sans SC';
+  font-size: 34px; font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+
+/* ── ProjectFullCard 自定义（与组件库结构一致，纵向三带） ── */
+.pfc {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 180px 90px 220px 90px;
+}
+.pfc-glow-w, .pfc-glow-c {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-w { width: 520px; height: 520px; opacity: 0.20; background: var(--accent-warm); top: 180px; left: -120px; }
+.pfc-glow-c { width: 460px; height: 460px; opacity: 0.18; background: var(--accent-cool); bottom: 280px; right: -100px; }
+
+.pfc-top { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-family: 'JetBrains Mono';
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: 0 0 60px rgba(249,168,37,0.45);
+}
+.pfc-cat {
+  font-family: 'Noto Sans SC';
+  font-size: 38px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  font-family: 'Noto Sans SC';
+  font-size: 54px; font-weight: 800; line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: 'JetBrains Mono';
+  line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner { font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+.pfc-repo { font-size: 60px; font-weight: 800; color: #fff; }
+
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 36px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative; width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-family: 'Noto Sans SC';
+  font-size: 40px; font-weight: 600; line-height: 1.35;
+  color: #fff; text-align: center; max-width: 820px;
+}
+.pfc-databar { width: 100%; max-width: 820px; display: flex; flex-direction: column; gap: 14px; }
+.pfc-bar-head { display: flex; justify-content: space-between; align-items: baseline; }
+.pfc-bar-label { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 500; color: var(--text2); }
+.pfc-bar-val { font-family: 'JetBrains Mono'; font-size: 42px; font-weight: 800; color: var(--accent-warm); }
+.pfc-bar-track { width: 100%; height: 16px; border-radius: 999px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.pfc-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm)); transform-origin: left center; }
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; }
+.pfc-topic {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  padding: 8px 22px; border-radius: 999px;
+  color: var(--accent-cool);
+  background: rgba(0,245,212,0.10); border: 1px solid rgba(0,245,212,0.3);
+}
+
+.pfc-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  padding: 10px 26px; border-radius: 14px; color: #fff;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
+}
+.pfc-comment {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: rgba(255,255,255,0.75);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+
+/* ── s04 list phase（ai_website_cloner phase-2） ── */
+.phase-header {
+  font-family: 'Noto Sans SC';
+  font-size: 48px; font-weight: 800; letter-spacing: 0.04em;
+  color: var(--accent-cool);
+}
+.phase-items { width: 88%; display: flex; flex-direction: column; gap: 20px; }
+.phase-item {
+  display: flex; align-items: baseline; gap: 22px;
+  font-family: 'Noto Sans SC';
+  font-size: 38px; font-weight: 500; color: #fff;
+}
+.phase-item .pi-num {
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 800;
+  color: var(--accent-warm); min-width: 56px;
+}
+
+/* ── s05 双项目并列（orca + no-mistakes） ── */
+.dual-row {
+  width: 100%; display: flex; flex-direction: row; gap: 36px;
+  align-items: stretch;
+}
+.dual-card {
+  flex: 1; display: flex; flex-direction: column; gap: 18px;
+  padding: 32px 28px; border-radius: 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.dual-card.left { border-top: 4px solid var(--accent-cool); }
+.dual-card.right { border-top: 4px solid var(--accent-warm); }
+.dual-owner {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.55); letter-spacing: 0.04em;
+}
+.dual-repo {
+  font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 800;
+  color: #fff; word-break: break-word; line-height: 1.05;
+}
+.dual-desc {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 500;
+  color: rgba(255,255,255,0.78); line-height: 1.35;
+}
+.dual-data {
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 800;
+  color: var(--accent-warm);
+}
+.dual-avatar-wrap { position: relative; width: 130px; height: 130px; align-self: flex-start; }
+.dual-avatar-ring { position: absolute; inset: -10px; border-radius: 50%; background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm)); filter: blur(12px); opacity: 0.5; }
+.dual-avatar { position: relative; z-index: 1; width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); }
+
+/* ── s06 CTA ── */
+.cta-eyebrow {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 700;
+  color: var(--accent-cool); letter-spacing: 0.15em; text-transform: uppercase;
+}
+.cta-title {
+  font-family: 'JetBrains Mono'; font-size: 96px; font-weight: 900;
+  line-height: 1.05; letter-spacing: -0.02em;
+}
+.cta-sub {
+  font-family: 'Noto Sans SC'; font-size: 40px; font-weight: 600;
+  color: rgba(255,255,255,0.85); letter-spacing: 0.02em;
+}
+.cta-pills { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+.cta-pill {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 700;
+  padding: 14px 32px; border-radius: 999px; color: #fff;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ── s06 OpenMontage 霸榜条（phase-1） ── */
+.montage-strip {
+  width: 100%; display: flex; flex-direction: column; gap: 18px;
+  align-items: center;
+}
+.montage-badge {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--accent-warm); letter-spacing: 0.1em;
+}
+.montage-name {
+  font-family: 'JetBrains Mono'; font-size: 64px; font-weight: 800;
+  color: #fff; word-break: break-word;
+}
+.montage-owner {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+.montage-data {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 800;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes beamRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes beamBreath {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes gridDotBreath {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.10; }
+}
+@keyframes spotlightShift {
+  0%, 100% { opacity: 0.18; transform: translateX(0); }
+  50% { opacity: 0.28; transform: translateX(15px); }
+}
+@keyframes waveDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120px); }
+}
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.14; }
+  50% { opacity: 0.25; }
+}
+@keyframes shapeFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50% { transform: translateY(-20px) rotate(45deg); opacity: 0.18; }
+}
+@keyframes shapeFloat2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.06; }
+  50% { transform: translateY(-15px) rotate(-30deg); opacity: 0.14; }
+}
+@keyframes slateVignette {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.22; }
+}
+@keyframes cornerLineGlow {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.20; }
+}
+@keyframes bluePulse {
+  0%, 100% { opacity: 0.20; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+@keyframes brightStarTwinkle {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 0.95; }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.30; }
+  50% { opacity: 0.40; }
+}
+@keyframes dustDrift {
+  0%, 100% { transform: translate(0, 0) rotate(-25deg); opacity: 0.12; }
+  50% { transform: translate(15px, -10px) rotate(-25deg); opacity: 0.18; }
+}
+@keyframes focusBreath {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50% { opacity: 0.40; transform: scale(1.05); }
+}
+@keyframes auroraWave {
+  0%, 100% { transform: translateX(-15px) scaleY(1); opacity: 0.7; }
+  50% { transform: translateX(15px) scaleY(1.25); opacity: 1; }
+}
+
+@keyframes hexPulse { 0%,100%{opacity:0.5} 50%{opacity:0.85} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes hexScanRotate { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes hexNodePulse { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes holoHexSpin { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(60deg)} }
+@keyframes cornerBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+
+@keyframes arcRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes arcRotateReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes pulseExpand {
+  0% { transform: scale(0.85); opacity: 0.65; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes coreBreathe {
+  0%, 100% { opacity: 0.44; transform: scale(1); }
+  50% { opacity: 0.60; transform: scale(1.08); }
+}
+@keyframes scatterPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.2); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.30; }
+  50% { opacity: 0.40; }
+}
+@keyframes lightningFlicker {
+  0%, 100% { opacity: 0.25; }
+  15% { opacity: 0.50; }
+  30% { opacity: 0.15; }
+  45% { opacity: 0.45; }
+  60%, 100% { opacity: 0.20; }
+}
+
+@keyframes vignettePulse {
+  0%, 100% { opacity: 0.10; }
+  50% { opacity: 0.16; }
+}
+@keyframes warmBreath {
+  0%, 100% { transform: scale(1); opacity: 0.10; }
+  50% { transform: scale(1.06); opacity: 0.18; }
+}
+@keyframes warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes lightStreak {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="69.22" data-width="1080" data-height="1920">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.37" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="5.74">
+<!-- 场景: hook | 时长: 5.7s -->
+<div class="layer-bg" data-bg-types="beams,glow,gradient,particles,vignette">
+<!-- bg-component: radial_beams -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0800,#1a1200,#0a0800)"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:beamRotate 60s linear infinite;
+  background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(255,200,0,0.05) 2deg,transparent 4deg,transparent 28deg)"></div>
+
+<div style="position:absolute;top:15%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,200,0,0.25) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:55%;width:4px;height:4px;border-radius:50%;
+  background:hsla(45,90%,65%,0.6);box-shadow:0 0 10px hsla(45,80%,55%,0.5);animation:floatParticle 6s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:35%;width:3px;height:3px;border-radius:50%;
+  background:hsla(38,85%,60%,0.5);box-shadow:0 0 8px hsla(38,75%,50%,0.4);animation:floatParticle 8s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:65%;left:60%;width:3px;height:3px;border-radius:50%;
+  background:hsla(50,80%,62%,0.45);box-shadow:0 0 7px hsla(50,70%,52%,0.35);animation:floatParticle 7s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1.5px solid hsla(40,80%,55%,0.12);animation:warmRing 5s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1px solid hsla(45,70%,50%,0.08);animation:warmRing 5s ease-out infinite 2.5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(255,255,255,0.03) 0%,transparent 25%,transparent 75%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:5%;left:15%;width:700px;height:700px;border-radius:50%;opacity:0.025;
+  background:conic-gradient(from 0deg,rgba(255,50,50,0.5),rgba(255,200,50,0.4),rgba(50,255,100,0.5),rgba(50,100,255,0.5),rgba(200,50,255,0.4),rgba(255,50,50,0.5));
+  filter:blur(60px);animation:beamBreath 12s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 35%,transparent 30%,rgba(0,0,0,0.5) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 震撼冲击：星爆射线 + 扩散脉冲环（情绪 grab，反直觉冲击） -->
+  <div class="fx-aura" style="top:38%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(249,168,37,0.35),transparent 60%);filter:blur(40px)"></div>
+  <div class="fx-pulse-ring" style="top:50%;left:50%;width:200px;height:200px;border:3px solid rgba(249,168,37,0.45);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div class="fx-pulse-ring" style="top:50%;left:50%;width:200px;height:200px;border:2px solid rgba(0,245,212,0.35);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div class="fx-beam" style="top:0;left:20%;width:4px;height:100%;background:linear-gradient(180deg,transparent,rgba(0,245,212,0.25),transparent);transform:rotate(18deg)"></div>
+  <div class="fx-beam" style="top:0;left:75%;width:4px;height:100%;background:linear-gradient(180deg,transparent,rgba(249,168,37,0.22),transparent);transform:rotate(-22deg)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="hook-eyebrow">6月25日 · GITHUB 榜</div>
+  <div style="display:flex;flex-direction:column;gap:14px;align-items:center;margin-top:12px">
+    <div class="hook-strike">苹果 用 Docker</div>
+    <div class="hook-reveal grad-amber">没用！</div>
+  </div>
+  <div class="hook-tag" style="margin-top:28px">自己用 Swift 造了个更轻的容器</div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s02" data-start="5.74" data-duration="13.78">
+<!-- 场景: apple_container | 时长: 13.8s -->
+<div class="layer-bg" data-bg-types="dots,glow,gradient,particles,wave">
+<!-- bg-component: clean_slate -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, hsla(215,45%,14%,1) 0%, hsla(220,40%,11%,1) 50%, hsla(218,38%,9%,1) 100%)"></div>
+
+<div style="position:absolute;top:25%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, hsla(215,55%,28%,0.35), hsla(220,45%,18%,0.12), transparent 65%);
+  filter:blur(90px);animation:spotlightShift 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:55%;
+  background:radial-gradient(ellipse 90% 100% at 45% 0%, hsla(215,50%,30%,0.22), hsla(220,40%,20%,0.10) 50%, transparent 75%);
+  animation:spotlightShift 22s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle, hsla(215,40%,50%,0.08) 1px, transparent 1px);
+  background-size:60px 60px;animation:gridDotBreath 25s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40px;left:40px;width:120px;height:2px;
+  background:linear-gradient(90deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+<div style="position:absolute;top:40px;left:40px;width:2px;height:80px;
+  background:linear-gradient(180deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:40px;right:40px;width:100px;height:2px;
+  background:linear-gradient(270deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+<div style="position:absolute;bottom:40px;right:40px;width:2px;height:70px;
+  background:linear-gradient(0deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;bottom:60px;left:0;width:calc(100% + 120px);height:40px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      hsla(215,42%,45%,0.10) 30px, hsla(215,42%,45%,0.10) 31px);
+  transform:perspective(500px) rotateX(45deg);
+  animation:waveDrift 30s linear infinite"></div>
+
+<div style="position:absolute;top:25%;right:18%;width:60px;height:60px;opacity:0.08;
+  border:1px solid hsla(215,48%,50%,0.5);
+  transform:rotate(45deg);
+  animation:shapeFloat 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:22%;width:40px;height:40px;opacity:0.06;
+  border:1px solid hsla(215,45%,48%,0.5);border-radius:50%;
+  animation:shapeFloat2 22s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:70%;right:30%;width:25px;height:25px;opacity:0.06;
+  border:1px solid hsla(220,42%,45%,0.4);
+  animation:shapeFloat 16s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:32%;left:48%;width:3px;height:3px;border-radius:50%;
+  background:hsla(215,55%,58%,0.55);box-shadow:0 0 6px hsla(215,50%,52%,0.40),0 0 12px hsla(215,45%,45%,0.20);
+  animation:bluePulse 8s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:60%;left:25%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,50%,55%,0.45);box-shadow:0 0 4px hsla(215,45%,48%,0.30);
+  animation:bluePulse 10s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:45%;left:72%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,52%,52%,0.40);box-shadow:0 0 4px hsla(215,48%,45%,0.28);
+  animation:bluePulse 12s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(45deg,
+    transparent 42%, hsla(215,45%,38%,0.06) 46%, hsla(215,45%,38%,0.06) 46.5%,
+    transparent 47%);
+  animation:cornerLineGlow 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 75% 70% at 50% 48%, transparent 0%, hsla(215,30%,5%,0.30) 70%, hsla(220,35%,3%,0.50) 100%);
+  animation:slateVignette 25s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 精准扫描：扫描线 + 数据流（emotion precision/confidence，Apple tech 隐喻） -->
+  <div class="fx-scan" style="left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.5),transparent)"></div>
+  <div class="fx-stream" style="top:15%;left:28%;width:2px;height:280px;background:linear-gradient(180deg,transparent,rgba(0,212,255,0.4),transparent)"></div>
+  <div class="fx-stream" style="top:55%;left:70%;width:2px;height:320px;background:linear-gradient(180deg,transparent,rgba(0,212,255,0.35),transparent)"></div>
+  <div class="fx-aura" style="top:45%;left:50%;width:500px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,255,0.20),transparent 65%);filter:blur(50px)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="pfc">
+    <div class="pfc-glow-w"></div>
+    <div class="pfc-glow-c"></div>
+    <div class="pfc-top">
+      <div class="pfc-header-row">
+        <span class="pfc-rank">#02</span>
+        <span class="pfc-cat">系统容器 · 苹果官方</span>
+      </div>
+      <div class="pfc-use grad-cyan">Mac一键跑容器</div>
+      <div class="pfc-name"><span class="pfc-owner">apple /</span> <span class="pfc-repo">container</span></div>
+    </div>
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring"></div>
+        <img class="pfc-avatar" src="assets/avatars/apple.png" alt="">
+      </div>
+      <div class="pfc-desc">在 Mac 上用轻量虚拟机跑 Linux 容器 · 为 Apple 芯片优化</div>
+      <div class="pfc-databar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">今日涨星</span>
+          <span class="pfc-bar-val">+1,746 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:48%"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic">Swift 原生</span>
+          <span class="pfc-topic">轻量虚拟机</span>
+          <span class="pfc-topic">Apple 芯片</span>
+        </div>
+      </div>
+    </div>
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">原生轻量</span>
+        <span class="pfc-sell">芯片优化</span>
+        <span class="pfc-sell">即装即用</span>
+      </div>
+      <div class="pfc-comment">苹果亲自下场 · 四万二千星</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="pfc">
+    <div class="pfc-glow-w"></div>
+    <div class="pfc-glow-c"></div>
+    <div class="pfc-top">
+      <div class="pfc-header-row">
+        <span class="pfc-rank">#02</span>
+        <span class="pfc-cat">系统容器 · 苹果官方</span>
+      </div>
+      <div class="pfc-use grad-cyan">Mac一键跑容器</div>
+      <div class="pfc-name"><span class="pfc-owner">apple /</span> <span class="pfc-repo">container</span></div>
+    </div>
+    <div class="pfc-mid">
+      <div style="font-family:'JetBrains Mono';font-size:64px;font-weight:800" class="grad-amber">42,168 ★</div>
+      <div style="font-family:'Noto Sans SC';font-size:40px;font-weight:600;color:#fff;text-align:center">总星数 · 全球开发者信赖</div>
+      <div class="pfc-databar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">今日增量</span>
+          <span class="pfc-bar-val">+1,746 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:48%"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic">不用 Docker</span>
+          <span class="pfc-topic">Mac 即装即用</span>
+        </div>
+      </div>
+    </div>
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">告别 Docker</span>
+        <span class="pfc-sell">原生 Swift</span>
+        <span class="pfc-sell">四万二千星</span>
+      </div>
+      <div class="pfc-comment">不用再装 Docker 那一套</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s03" data-start="19.52" data-duration="11.30">
+<!-- 场景: hermes_agent | 时长: 11.3s -->
+<div class="layer-bg" data-bg-types="glow,gradient,particles,wave">
+<!-- bg-component: nebula_cloud -->
+<div style="position:absolute;inset:0;background:linear-gradient(160deg,hsl(260,30%,10%),hsl(240,25%,13%),hsl(255,28%,11%))"></div>
+
+<div style="position:absolute;top:12%;left:8%;width:550px;height:550px;border-radius:50%;
+  background:radial-gradient(circle,hsla(280,65%,42%,0.34),hsla(270,50%,30%,0.13),transparent 70%);
+  filter:blur(100px);animation:orbDrift 24s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:45%;left:45%;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,hsla(350,55%,38%,0.28),hsla(340,45%,28%,0.10),transparent 70%);
+  filter:blur(90px);animation:orbDrift 28s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:62%;left:5%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(220,60%,42%,0.26),hsla(230,45%,30%,0.10),transparent 70%);
+  filter:blur(85px);animation:orbDrift 22s ease-in-out infinite 12s"></div>
+
+<div style="position:absolute;top:25%;left:-10%;width:120%;height:180px;
+  background:linear-gradient(90deg,transparent 5%,hsla(265,40%,50%,0.12) 20%,hsla(250,35%,45%,0.08) 50%,hsla(280,38%,48%,0.10) 80%,transparent 95%);
+  filter:blur(50px);transform:rotate(-25deg);animation:dustDrift 30s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:22%;left:62%;width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle,hsla(300,70%,65%,0.30),hsla(290,55%,50%,0.10),transparent 60%);
+  filter:blur(40px);animation:focusBreath 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;left:-10%;width:120%;height:100px;
+  background:linear-gradient(90deg,transparent 5%,hsla(160,62%,50%,0.10) 20%,hsla(180,55%,45%,0.08) 40%,hsla(150,65%,48%,0.12) 60%,hsla(170,58%,46%,0.08) 80%,transparent 95%);
+  filter:blur(40px);animation:auroraWave 12s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:70%;left:-10%;width:120%;height:70px;
+  background:linear-gradient(90deg,transparent 10%,hsla(140,55%,45%,0.08) 30%,hsla(170,50%,40%,0.06) 55%,hsla(130,60%,42%,0.09) 75%,transparent 90%);
+  filter:blur(35px);animation:auroraWave 16s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:12%;left:65%;width:5px;height:5px;border-radius:50%;background:white;opacity:0.75;box-shadow:0 0 12px rgba(255,255,255,0.8),0 0 25px rgba(200,180,255,0.3);animation:brightStarTwinkle 4s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:42%;left:78%;width:5px;height:5px;border-radius:50%;background:white;opacity:0.80;box-shadow:0 0 14px rgba(255,255,255,0.85),0 0 28px rgba(180,200,255,0.3);animation:brightStarTwinkle 3.5s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:82%;left:18%;width:4px;height:4px;border-radius:50%;background:white;opacity:0.70;box-shadow:0 0 10px rgba(255,255,255,0.75),0 0 22px rgba(220,200,255,0.25);animation:starTwinkle 5.5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:28%;left:25%;width:2px;height:2px;border-radius:50%;background:white;opacity:0.55;box-shadow:0 0 7px rgba(255,255,255,0.6);animation:starTwinkle 5s ease-in-out infinite 1.5s"></div>
+
+<div style="position:absolute;top:55%;left:40%;width:2px;height:2px;border-radius:50%;background:white;opacity:0.50;box-shadow:0 0 6px rgba(255,255,255,0.55);animation:starTwinkle 6s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:70%;left:60%;width:2px;height:2px;border-radius:50%;background:white;opacity:0.58;box-shadow:0 0 7px rgba(255,255,255,0.65);animation:starTwinkle 4.5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:35%;left:52%;width:2px;height:2px;border-radius:50%;background:white;opacity:0.52;box-shadow:0 0 6px rgba(255,255,255,0.6);animation:starTwinkle 4s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:8%;left:42%;width:2px;height:2px;border-radius:50%;background:white;opacity:0.56;box-shadow:0 0 7px rgba(255,255,255,0.6);animation:starTwinkle 3s ease-in-out infinite 2.5s"></div>
+
+<div style="position:absolute;top:18%;left:80%;width:1px;height:1px;border-radius:50%;background:white;opacity:0.35;box-shadow:0 0 3px rgba(255,255,255,0.3)"></div>
+
+<div style="position:absolute;top:48%;left:15%;width:1px;height:1px;border-radius:50%;background:white;opacity:0.30;box-shadow:0 0 3px rgba(255,255,255,0.25)"></div>
+
+<div style="position:absolute;top:75%;left:48%;width:1px;height:1px;border-radius:50%;background:white;opacity:0.32;box-shadow:0 0 3px rgba(255,255,255,0.28)"></div>
+
+<div style="position:absolute;top:60%;left:85%;width:1px;height:1px;border-radius:50%;background:white;opacity:0.28;box-shadow:0 0 3px rgba(255,255,255,0.25)"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 35%,transparent 65%,rgba(255,255,255,0.06) 100%);
+  animation:glassShimmer 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:20%;right:-5%;width:40%;height:250px;opacity:0.26;
+  background:linear-gradient(180deg,rgba(255,80,180,0.45),rgba(80,120,255,0.35),rgba(180,80,255,0.45));
+  filter:blur(80px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- 成长脉冲：光环扩散 + 漂浮粒子（emotion curiosity/wonder，成长/进化隐喻） -->
+  <div class="fx-pulse-ring" style="top:42%;left:50%;width:240px;height:240px;border:2px solid rgba(168,85,247,0.40);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div class="fx-pulse-ring" style="top:42%;left:50%;width:240px;height:240px;border:2px solid rgba(0,245,212,0.30);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div class="fx-aura" style="top:45%;left:50%;width:520px;height:520px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(168,85,247,0.22),transparent 65%);filter:blur(55px)"></div>
+  <div class="fx-particle" style="top:22%;left:18%;width:10px;height:10px;background:rgba(216,185,255,0.6);border-radius:50%;filter:blur(1px)"></div>
+  <div class="fx-particle" style="top:68%;left:78%;width:8px;height:8px;background:rgba(0,245,212,0.5);border-radius:50%;filter:blur(1px)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="pfc">
+    <div class="pfc-glow-w" style="background:#a855f7"></div>
+    <div class="pfc-glow-c"></div>
+    <div class="pfc-top">
+      <div class="pfc-header-row">
+        <span class="pfc-rank">#03</span>
+        <span class="pfc-cat">成长型 AGENT</span>
+      </div>
+      <div class="pfc-use grad-purple">AI陪你成长</div>
+      <div class="pfc-name"><span class="pfc-owner">NousResearch /</span> <span class="pfc-repo">hermes-agent</span></div>
+    </div>
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#a855f7,#00f5d4,#a855f7)"></div>
+        <img class="pfc-avatar" src="assets/avatars/NousResearch.png" alt="">
+      </div>
+      <div class="pfc-desc">陪你一起成长的 agent · 不再问完就扔</div>
+      <div class="pfc-databar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">今日涨星</span>
+          <span class="pfc-bar-val">+1,174 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:33%;background:linear-gradient(90deg,#00f5d4,#a855f7)"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic" style="color:#c4b5fd;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.35)">长期记忆</span>
+          <span class="pfc-topic" style="color:#c4b5fd;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.35)">伙伴交互</span>
+          <span class="pfc-topic" style="color:#c4b5fd;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.35)">持续进化</span>
+        </div>
+      </div>
+    </div>
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">会成长</span>
+        <span class="pfc-sell">长期记忆</span>
+        <span class="pfc-sell">伙伴式</span>
+      </div>
+      <div class="pfc-comment">二十万星 · 成长型 agent</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="pfc">
+    <div class="pfc-glow-w" style="background:#a855f7"></div>
+    <div class="pfc-glow-c"></div>
+    <div class="pfc-top">
+      <div class="pfc-header-row">
+        <span class="pfc-rank">#03</span>
+        <span class="pfc-cat">成长型 AGENT</span>
+      </div>
+      <div class="pfc-use grad-purple">AI陪你成长</div>
+      <div class="pfc-name"><span class="pfc-owner">NousResearch /</span> <span class="pfc-repo">hermes-agent</span></div>
+    </div>
+    <div class="pfc-mid">
+      <div style="font-family:'JetBrains Mono';font-size:64px;font-weight:800" class="grad-purple">202,025 ★</div>
+      <div style="font-family:'Noto Sans SC';font-size:40px;font-weight:600;color:#fff;text-align:center;line-height:1.35">不是一次性工具<br>而是会成长的伙伴</div>
+      <div class="pfc-databar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">反直觉理念</span>
+          <span class="pfc-bar-val">陪你成长</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:88%;background:linear-gradient(90deg,#00f5d4,#a855f7)"></div></div>
+      </div>
+    </div>
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">会进化</span>
+        <span class="pfc-sell">二十万星</span>
+      </div>
+      <div class="pfc-comment">把 AI 当成会进化的伙伴</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s04" data-start="30.82" data-duration="12.74">
+<!-- 场景: ai_website_cloner | 时长: 12.7s -->
+<div class="layer-bg" data-bg-types="beams,geometry,glow,gradient,particles">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(160,20%,4%),hsl(170,15%,8%),hsl(160,20%,4%))"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(150,80%,55%,0.10) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(150,80%,50%,0.22),hsla(155,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(140,60%,45%,0.10),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,90%,60%,0.9);box-shadow:0 0 16px hsla(150,80%,55%,0.8),0 0 32px hsla(150,70%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(160,85%,58%,0.85);box-shadow:0 0 14px hsla(160,75%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(145,80%,55%,0.8);box-shadow:0 0 14px hsla(145,70%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:40%;left:78%;width:9px;height:9px;border-radius:50%;
+  background:hsla(155,85%,60%,0.85);box-shadow:0 0 12px hsla(155,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(150,70%,50%,0.12),transparent,hsla(170,60%,45%,0.10));
+  border:1.5px solid hsla(150,70%,55%,0.25);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:50%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,hsla(120,60%,50%,0.5),hsla(160,50%,45%,0.4),hsla(200,60%,50%,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- 镜像揭示：双向扫描 + 网格脉冲（emotion surprise/cleverness，clone/mirror 隐喻） -->
+  <div class="fx-scan" style="left:0;top:30%;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(52,211,153,0.55),transparent)"></div>
+  <div class="fx-scan" style="left:0;top:62%;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,0.45),transparent)"></div>
+  <div class="fx-grid" style="inset:0;background-image:linear-gradient(rgba(52,211,153,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(52,211,153,0.06) 1px,transparent 1px);background-size:60px 60px"></div>
+  <div class="fx-aura" style="top:45%;left:50%;width:480px;height:480px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(52,211,153,0.20),transparent 65%);filter:blur(50px)"></div>
+  <div class="fx-beam" style="top:20%;left:85%;width:3px;height:60%;background:linear-gradient(180deg,transparent,rgba(249,168,37,0.30),transparent);transform:rotate(8deg)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="pfc">
+    <div class="pfc-glow-w"></div>
+    <div class="pfc-glow-c" style="background:#34d399"></div>
+    <div class="pfc-top">
+      <div class="pfc-header-row">
+        <span class="pfc-rank">#04</span>
+        <span class="pfc-cat">网站克隆 · 一条命令</span>
+      </div>
+      <div class="pfc-use grad-teal">一键克隆网站</div>
+      <div class="pfc-name"><span class="pfc-owner">JCodesMore /</span> <span class="pfc-repo">ai-website-cloner-template</span></div>
+    </div>
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#34d399,#00f5d4,#34d399)"></div>
+        <img class="pfc-avatar" src="assets/avatars/JCodesMore.png" alt="">
+      </div>
+      <div class="pfc-desc">一条命令 · 用 AI agent 克隆任意网站前端</div>
+      <div class="pfc-databar">
+        <div class="pfc-bar-head">
+          <span class="pfc-bar-label">今日涨星</span>
+          <span class="pfc-bar-val">+693 ★</span>
+        </div>
+        <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:20%;background:linear-gradient(90deg,#00f5d4,#34d399)"></div></div>
+        <div class="pfc-topics">
+          <span class="pfc-topic" style="color:#6ee7b7;background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.35)">前端复刻</span>
+          <span class="pfc-topic" style="color:#6ee7b7;background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.35)">AI agent</span>
+          <span class="pfc-topic" style="color:#6ee7b7;background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.35)">NextJS</span>
+        </div>
+      </div>
+    </div>
+    <div class="pfc-bottom">
+      <div class="pfc-selling">
+        <span class="pfc-sell">一条命令</span>
+        <span class="pfc-sell">任意网站</span>
+        <span class="pfc-sell">前端复刻</span>
+      </div>
+      <div class="pfc-comment">一键克隆 · 涨近七百星</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:36px;width:100%">
+    <div class="phase-header grad-teal">拿来做什么？</div>
+    <div class="phase-items">
+      <div class="phase-item"><span class="pi-num">01</span><span>研究布局结构</span></div>
+      <div class="phase-item"><span class="pi-num">02</span><span>学习交互实现</span></div>
+      <div class="phase-item"><span class="pi-num">03</span><span>快速复刻参考</span></div>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:24px;margin-top:8px">
+      <span style="font-family:'JetBrains Mono';font-size:44px;font-weight:800" class="grad-amber">+693 ★</span>
+      <span style="font-family:'Noto Sans SC';font-size:36px;color:var(--text2)">19,267 ★ 总星</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s05" data-start="43.56" data-duration="16.37">
+<!-- 场景: orca_nomistakes | 时长: 16.4s -->
+<div class="layer-bg" data-bg-types="beams,glow,gradient,particles">
+<!-- bg-component: electric_pulse -->
+<div style="position:absolute;inset:0;background:linear-gradient(160deg,hsl(220,30%,9%),hsl(200,25%,12%))"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;
+  background:repeating-conic-gradient(from 0deg,transparent 0deg,transparent 14deg,hsla(190,40%,50%,0.015) 15deg,transparent 16deg);
+  opacity:0.6"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:arcRotate 45s linear infinite;
+  background:conic-gradient(from 0deg,
+    transparent 0deg,hsla(180,72%,52%,0.15) 25deg,transparent 50deg,
+    transparent 90deg,hsla(185,67%,50%,0.11) 115deg,transparent 140deg,
+    transparent 180deg,hsla(175,72%,52%,0.13) 205deg,transparent 230deg,
+    transparent 270deg,hsla(190,62%,47%,0.09) 295deg,transparent 320deg)"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:arcRotateReverse 70s linear infinite;
+  background:conic-gradient(from 45deg,
+    transparent 0deg,hsla(200,60%,60%,0.08) 30deg,transparent 60deg,
+    transparent 120deg,hsla(210,55%,55%,0.06) 150deg,transparent 180deg,
+    transparent 240deg,hsla(195,58%,58%,0.07) 270deg,transparent 300deg)"></div>
+
+<div style="position:absolute;top:25%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(185,92%,62%,0.44),hsla(190,72%,47%,0.16),transparent 50%);
+  filter:blur(60px);animation:coreBreathe 5s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:32%;left:32%;width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,hsla(190,50%,92%,0.20),hsla(195,60%,75%,0.08),transparent 60%);
+  filter:blur(30px)"></div>
+
+<div style="position:absolute;top:calc(35% - 80px);left:calc(35% - 80px);width:160px;height:160px;border-radius:50%;
+  border:2px solid hsla(190,82%,57%,0.34);animation:pulseExpand 4s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(35% - 80px);left:calc(35% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1.5px solid hsla(190,72%,52%,0.27);animation:pulseExpand 4s ease-out infinite 1.5s"></div>
+
+<div style="position:absolute;top:calc(35% - 80px);left:calc(35% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1px solid hsla(185,67%,50%,0.20);animation:pulseExpand 4s ease-out infinite 3s"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:4px;height:4px;border-radius:50%;
+  background:hsla(190,85%,65%,0.7);box-shadow:0 0 10px hsla(190,80%,58%,0.5);
+  animation:scatterPulse 3s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:42%;left:48%;width:3px;height:3px;border-radius:50%;
+  background:hsla(195,80%,62%,0.6);box-shadow:0 0 8px hsla(195,75%,55%,0.45);
+  animation:scatterPulse 3.5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:40%;left:22%;width:3px;height:3px;border-radius:50%;
+  background:hsla(185,82%,60%,0.6);box-shadow:0 0 8px hsla(185,78%,52%,0.4);
+  animation:scatterPulse 4s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:26%;left:28%;width:3px;height:3px;border-radius:50%;
+  background:hsla(200,78%,58%,0.55);box-shadow:0 0 7px hsla(200,72%,50%,0.4);
+  animation:scatterPulse 3.2s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:22%;left:33%;width:1.5px;height:110px;
+  background:linear-gradient(180deg,hsla(190,80%,70%,0.22),hsla(195,70%,60%,0.12),transparent);
+  transform:rotate(-8deg);filter:blur(0.5px);animation:lightningFlicker 4s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:20%;left:37%;width:1px;height:90px;
+  background:linear-gradient(180deg,hsla(185,75%,68%,0.18),hsla(190,65%,58%,0.10),transparent);
+  transform:rotate(14deg);filter:blur(0.5px);animation:lightningFlicker 5s ease-in-out infinite 1.5s"></div>
+
+<div style="position:absolute;top:15%;left:30%;width:1px;height:140px;
+  background:linear-gradient(180deg,hsla(195,72%,66%,0.15),hsla(200,62%,55%,0.08),transparent);
+  transform:rotate(-3deg);filter:blur(0.5px);animation:lightningFlicker 6s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;bottom:-5%;left:-10%;width:120%;height:300px;
+  background:radial-gradient(ellipse at 35% 75%,hsla(220,28%,12%,0.70),hsla(215,22%,8%,0.40),transparent 65%);
+  filter:blur(50px)"></div>
+
+<div style="position:absolute;bottom:-3%;left:-10%;width:120%;height:200px;
+  background:radial-gradient(ellipse at 65% 70%,hsla(210,25%,14%,0.60),hsla(205,20%,10%,0.30),transparent 60%);
+  filter:blur(40px)"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 45%,transparent 25%,hsla(220,30%,2%,0.35) 80%,hsla(220,35%,2%,0.52) 100%)"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(150deg,rgba(255,255,255,0.05) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.06) 100%);
+  animation:glassShimmer 7s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 并行流 + 防护脉冲（emotion power/protection，fleet + guard 隐喻） -->
+  <div class="fx-stream" style="top:10%;left:25%;width:2px;height:100%;background:linear-gradient(180deg,transparent,rgba(59,130,246,0.45),transparent)"></div>
+  <div class="fx-stream" style="top:10%;left:50%;width:2px;height:100%;background:linear-gradient(180deg,transparent,rgba(0,245,212,0.40),transparent)"></div>
+  <div class="fx-stream" style="top:10%;left:75%;width:2px;height:100%;background:linear-gradient(180deg,transparent,rgba(59,130,246,0.40),transparent)"></div>
+  <div class="fx-pulse-ring" style="top:50%;left:50%;width:280px;height:280px;border:2px solid rgba(59,130,246,0.35);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div class="fx-aura" style="top:50%;left:50%;width:560px;height:560px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(59,130,246,0.20),transparent 65%);filter:blur(55px)"></div>
+  <div class="fx-bolt" style="top:18%;left:88%;width:3px;height:140px;background:linear-gradient(180deg,rgba(255,167,38,0.6),transparent);clip-path:polygon(40% 0,100% 30%,50% 50%,90% 100%,0 70%,40% 50%)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:30px;width:100%;height:100%;justify-content:center">
+    <div style="font-family:'Noto Sans SC';font-size:42px;font-weight:700;letter-spacing:0.06em" class="grad-navy">还有两个值得一看</div>
+    <div class="dual-row">
+      <div class="dual-card left">
+        <div class="dual-avatar-wrap">
+          <div class="dual-avatar-ring"></div>
+          <img class="dual-avatar" src="assets/avatars/stablyai.png" alt="">
+        </div>
+        <div class="dual-owner">stablyai /</div>
+        <div class="dual-repo grad-cyan">orca</div>
+        <div class="dual-desc">ADE · 并行跑一整支 AI agent 舰队</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="dual-data">6,746 ★</div>
+          <div style="font-family:'Noto Sans SC';font-size:32px;color:var(--text2)">桌面 + 手机 · 一份订阅</div>
+        </div>
+      </div>
+      <div class="dual-card right">
+        <div class="dual-avatar-wrap">
+          <div class="dual-avatar-ring"></div>
+          <img class="dual-avatar" src="assets/avatars/kunchenguid.png" alt="">
+        </div>
+        <div class="dual-owner">kunchenguid /</div>
+        <div class="dual-repo grad-amber">no-mistakes</div>
+        <div class="dual-desc">git push 保护 · 防止误推代码</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="dual-data">2,041 ★</div>
+          <div style="font-family:'Noto Sans SC';font-size:32px;color:var(--text2)">小 hook 挡大灾难</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;height:100%;justify-content:center">
+    <div style="font-family:'Noto Sans SC';font-size:40px;font-weight:700;letter-spacing:0.04em" class="grad-amber">小 hook · 挡大灾难</div>
+    <div class="dual-card right" style="width:78%;padding:36px 32px">
+      <div class="dual-owner">kunchenguid /</div>
+      <div class="dual-repo grad-amber">no-mistakes</div>
+      <div class="dual-desc">给 git push 加个保护 · 一个小 hook 挡住灾难性失误</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
+        <span class="pfc-sell">防误推</span>
+        <span class="pfc-sell">git hook</span>
+        <span class="pfc-sell">Go 实现</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="clip" id="s06" data-start="59.93" data-duration="9.29">
+<!-- 场景: openmontage_pass_cta | 时长: 9.3s -->
+<div class="layer-bg" data-bg-types="glow,gradient,particles,vignette">
+<!-- bg-component: vignette_glow -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, #0c0c14 0%, #141420 50%, #0a0a12 100%)"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:600px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(38,70%,55%,0.15),hsla(25,50%,40%,0.05),transparent 70%);
+  filter:blur(100px);animation:warmBreath 10s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(42% - 80px);left:calc(42% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1.5px solid hsla(38,70%,55%,0.10);animation:warmRing 6s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(42% - 80px);left:calc(42% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1px solid hsla(42,60%,50%,0.07);animation:warmRing 6s ease-out infinite 3s"></div>
+
+<div style="position:absolute;top:38%;left:-20%;width:40%;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,hsla(40,60%,55%,0.15),hsla(42,70%,60%,0.20),hsla(40,60%,55%,0.15),transparent);
+  filter:blur(3px);animation:lightStreak 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:35%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(40,80%,65%,0.5);box-shadow:0 0 8px hsla(40,70%,55%,0.4);animation:floatParticle 8s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:40%;width:3px;height:3px;border-radius:50%;
+  background:hsla(45,75%,60%,0.4);box-shadow:0 0 6px hsla(45,65%,50%,0.3);animation:floatParticle 10s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:55%;left:65%;width:2px;height:2px;border-radius:50%;
+  background:hsla(38,70%,58%,0.35);box-shadow:0 0 5px hsla(38,60%,48%,0.25);animation:floatParticle 7s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:0;left:0;width:100%;height:90px;background:linear-gradient(180deg,#000 55%,transparent)"></div>
+<div style="position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(0deg,#000 55%,transparent)"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(0,0,0,0.55) 80%,rgba(0,0,0,0.75) 100%)"></div>
+
+<div style="position:absolute;top:35%;left:30%;width:480px;height:360px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(45,80%,65%,0.08),transparent 60%);
+  filter:blur(60px);animation:vignettePulse 8s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,220,150,0.015) 0%,transparent 40%,rgba(255,200,120,0.02) 60%,transparent 100%);
+  animation:glassShimmer 10s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- 收束柔光：暖光呼吸 + 漂浮粒子（emotion reflection/invitation） -->
+  <div class="fx-aura" style="top:45%;left:50%;width:620px;height:620px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(249,168,37,0.25),transparent 65%);filter:blur(60px)"></div>
+  <div class="fx-particle" style="top:25%;left:22%;width:8px;height:8px;background:rgba(255,224,130,0.6);border-radius:50%;filter:blur(1px)"></div>
+  <div class="fx-particle" style="top:70%;left:75%;width:6px;height:6px;background:rgba(0,245,212,0.5);border-radius:50%;filter:blur(1px)"></div>
+  <div class="fx-particle" style="top:55%;left:15%;width:10px;height:10px;background:rgba(255,183,77,0.5);border-radius:50%;filter:blur(2px)"></div>
+  <div class="fx-beam" style="top:0;left:40%;width:2px;height:100%;background:linear-gradient(180deg,transparent,rgba(249,168,37,0.20),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="montage-strip">
+    <div class="montage-badge">连续霸榜</div>
+    <div class="montage-owner">calesthio /</div>
+    <div class="montage-name grad-warmsoft">OpenMontage</div>
+    <div class="montage-data grad-amber">+3,703 ★ 今日</div>
+    <div style="font-family:'Noto Sans SC';font-size:36px;color:var(--text2);text-align:center">19,251 ★ 总星 · 开源 agentic 视频制作系统</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:32px;width:100%">
+    <div class="cta-eyebrow">6个今日热榜</div>
+    <div class="cta-title grad-warmsoft">你最想<br>尝试哪个？</div>
+    <div class="cta-sub">关注我 · 下期见</div>
+    <div class="cta-pills">
+      <span class="cta-pill">苹果容器</span>
+      <span class="cta-pill">成长 agent</span>
+      <span class="cta-pill">网站克隆</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+tl.set(['#s02', '#s03', '#s04', '#s05', '#s06'], {opacity:0}, 0);
+tl.set('#s01', {opacity:1}, 0);
+tl.set('#s01', {opacity:0}, 5.74);
+tl.set('#s02', {opacity:1}, 5.74);
+tl.set('#s02', {opacity:0}, 19.52);
+tl.set('#s03', {opacity:1}, 19.52);
+tl.set('#s03', {opacity:0}, 30.82);
+tl.set('#s04', {opacity:1}, 30.82);
+tl.set('#s04', {opacity:0}, 43.56);
+tl.set('#s05', {opacity:1}, 43.56);
+tl.set('#s05', {opacity:0}, 59.93);
+tl.set('#s06', {opacity:1}, 59.93);
+tl.set(['#s02 .phase-2'], {opacity:0}, 5.74);
+tl.set('#s02 .phase-2', {opacity:1}, 13.17);
+tl.set('#s02 .phase-1', {opacity:0}, 13.17);
+tl.set(['#s03 .phase-2'], {opacity:0}, 19.52);
+tl.set('#s03 .phase-2', {opacity:1}, 27.21);
+tl.set('#s03 .phase-1', {opacity:0}, 27.21);
+tl.set(['#s04 .phase-2'], {opacity:0}, 30.82);
+tl.set('#s04 .phase-2', {opacity:1}, 38.74);
+tl.set('#s04 .phase-1', {opacity:0}, 38.74);
+tl.set(['#s05 .phase-2'], {opacity:0}, 43.56);
+tl.set('#s05 .phase-2', {opacity:1}, 59.87);
+tl.set('#s05 .phase-1', {opacity:0}, 59.87);
+tl.set(['#s06 .phase-2'], {opacity:0}, 59.93);
+tl.set('#s06 .phase-2', {opacity:1}, 64.54);
+tl.set('#s06 .phase-1', {opacity:0}, 64.54);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:69.22,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

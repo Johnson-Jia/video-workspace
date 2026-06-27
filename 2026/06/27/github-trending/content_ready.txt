@@ -1,0 +1,59 @@
+# GitHub Trending 内容素材 — 2026-06-27
+
+数据源: raw_trending.json（python_requests + gh_api 三源交叉验证，17 项目，活跃 94%）
+选取规则: 钩子潜力 + 新上榜 + 涨星加速；A 档约一半；覆盖 AI / 工具 / 隐私 三方向
+差异化策略: 近期 AI 主题扎堆（Google+AI 说明书、AI 做视频），本期主动轮换为「工具主导 + 隐私收尾」，避开高频项目 OpenMontage / ai-website-cloner / gstack
+真实性: 6 个入选项目全部通过 gh API 验证（账号年龄、Star/Fork 比、Watcher、公开仓库数均正常）
+
+## hook 候选（动作 + 数字 + 利益翻译，禁裸报数字；避开近期「Google 给 AI 写说明书」「AI 做视频」主题）
+- 6月27日 GitHub 涨星最猛的几个，工具占了一大半，有个能把 PDF 秒变成 AI 能读的格式
+- 今天 GitHub 榜上，好几款能自己上手用的工具，还有一个不用账号也能聊天的
+
+## 项目素材（按今日涨星排序）
+
+### 1. google-labs-code/design.md ｜ TypeScript ｜ 21.2K★（+2319 今日涨星最高）｜ Fork 1.7K
+描述：给 AI 编程助手描述视觉设计的规范格式，让 AI 持续、结构化地理解一整套设计系统（原: A format specification for describing a visual identity to coding agents. DESIGN.md gives agents a persistent, structured understanding of a design system.）
+avatar: assets/avatars/google-labs-code.png
+用途: AI看懂设计稿
+受众: B半可用（面向开发者/AI 编程助手的规范文档）
+钩子角度: 今天单日涨 2300 多星，让 AI 像设计师一样吃透视觉规范（用「设计规范」角度，不用「Google 出品」角度）
+
+### 2. Panniantong/Agent-Reach ｜ Python ｜ 42.3K★（+1164）｜ Fork 3.4K
+描述：给你的 AI 智能体一双能看遍整个互联网的眼睛，读取并搜索各大社交和内容平台，一个命令行搞定，零 API 费用（原: Give your AI agent eyes to see the entire internet. Read &amp; search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.）
+avatar: assets/avatars/Panniantong.png
+用途: AI能上网看
+受众: B半可用（命令行工具，面向给 AI 配能力的开发者）
+钩子角度: 让 AI 能自己上网查资料、扒内容
+⚠️ 文案注意: 抖音不点名小红书/B站等竞品平台，用「各大社交平台/全网」代称
+
+### 3. mauriceboe/TREK ｜ TypeScript ｜ 7.6K★（+1063）｜ Fork 648
+描述：一个自托管的旅行和行程规划器，支持实时协作、互动地图、PWA、单点登录、预算管理、打包清单等功能（原: A self-hosted travel/trip planner with real-time collaboration, interactive maps, PWA support, SSO, budgets, packing lists, and more.）
+avatar: assets/avatars/mauriceboe.png
+用途: 自托管旅行规划
+受众: A普通可用（自托管网页应用，有可视化界面，装上就能用）
+钩子角度: 自己搭一个不依赖大厂的旅行规划工具，行程和地图都在自己手里
+
+### 4. opendatalab/MinerU ｜ Python ｜ 70.4K★（+944）｜ Fork 5.9K
+描述：把 PDF、Office 等复杂文档转换成大模型能直接用的 Markdown/JSON 格式，喂给 AI 工作流（原: Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.）
+avatar: assets/avatars/opendatalab.png
+用途: 文档转AI格式
+受众: A半可用（有桌面版和命令行，普通人也能跑）
+钩子角度: 让 AI 能真正读懂你的 PDF 和文档
+
+### 5. IceWhaleTech/CasaOS ｜ Go ｜ 35.3K★（+612）｜ Fork 2.0K
+描述：CasaOS——一个简单、易用、优雅的开源个人云系统（原: CasaOS - A simple, easy-to-use, elegant open-source Personal Cloud system.）
+avatar: assets/avatars/IceWhaleTech.png
+用途: 自建家庭云盘
+受众: A普通可用（Docker/网页界面，普通人可上手，老牌项目快速带过）
+钩子角度: 把旧电脑或小主机变成自己的私人云盘
+
+### 6. simplex-chat/simplex-chat ｜ Haskell ｜ 12.5K★（+191）｜ Fork 707
+描述：早早做到完全不使用任何用户标识的消息网络，设计上 100% 注重隐私，有 iOS、安卓和桌面版（原: SimpleX - the first messaging network operating without user identifiers of any kind - 100% private by design! iOS, Android and desktop apps 📱!）
+avatar: assets/avatars/simplex-chat.png
+用途: 无ID加密聊天
+受众: A普通可用（手机/桌面 App，普通人直接装）
+钩子角度（反直觉收尾）: 不用手机号、不用账号、不用任何 ID 也能聊天
+
+## 结尾提问（中性二选一，禁站队对抗式）
+- 这几个里，你最想试试哪个？
+- 自己搭工具（TREK/CasaOS）和 用现成 AI（design.md/Agent-Reach），你更想用哪个？

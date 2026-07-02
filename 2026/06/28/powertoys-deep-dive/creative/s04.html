@@ -1,0 +1,48 @@
+<!-- 场景: arch-runner | 时长: 21.2s -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+<div class="layer-fx">
+  <!-- Runner→Module 连接线脉冲 -->
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(0,120,212,0.18),transparent 65%);filter:blur(40px);transform:translate(-50%,-50%);"></div>
+  <!-- 连接节点连线（SVG 节点拓扑） -->
+  <svg class="fx-beam" style="position:absolute;top:50%;left:50%;width:760px;height:540px;transform:translate(-50%,-50%);opacity:0.55" viewBox="0 0 760 540">
+    <line x1="380" y1="270" x2="120" y2="100" stroke="rgba(0,245,212,0.5)" stroke-width="2" stroke-dasharray="6 6"/>
+    <line x1="380" y1="270" x2="640" y2="100" stroke="rgba(0,245,212,0.5)" stroke-width="2" stroke-dasharray="6 6"/>
+    <line x1="380" y1="270" x2="80" y2="420" stroke="rgba(42,157,255,0.5)" stroke-width="2" stroke-dasharray="6 6"/>
+    <line x1="380" y1="270" x2="680" y2="420" stroke="rgba(42,157,255,0.5)" stroke-width="2" stroke-dasharray="6 6"/>
+  </svg>
+  <!-- 数据流闪烁点 -->
+  <div class="fx-particle" style="position:absolute;top:32%;left:48%;width:8px;height:8px;border-radius:50%;background:hsla(180,90%,60%,0.9);box-shadow:0 0 10px hsla(180,85%,55%,0.7);"></div>
+  <div class="fx-particle" style="position:absolute;top:68%;left:52%;width:8px;height:8px;border-radius:50%;background:hsla(205,90%,60%,0.9);box-shadow:0 0 10px hsla(205,85%,55%,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="s4-content">
+  <div class="s4-eyebrow">核心架构 · ARCHITECTURE</div>
+  <div class="s4-headline"><span class="grad-cyan">一个调度核心</span><br>加一堆标准化插件</div>
+  <div class="s4-arch">
+    <div class="s4-mod" style="top:30px;left:60px;"><span class="m-name">Module</span><span class="m-tag">插件</span></div>
+    <div class="s4-mod" style="top:30px;right:60px;"><span class="m-name">Module</span><span class="m-tag">插件</span></div>
+    <div class="s4-mod" style="bottom:30px;left:30px;"><span class="m-name">Module</span><span class="m-tag">插件</span></div>
+    <div class="s4-mod" style="bottom:30px;right:30px;"><span class="m-name">Module</span><span class="m-tag">插件</span></div>
+    <div class="s4-runner">
+      <span class="r-name">Runner</span>
+      <span class="r-tag">调度核心 · 主进程</span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="phase phase-2">
+<div class="s4-content">
+  <div class="s4-eyebrow">Runner 职责 · DUTIES</div>
+  <div class="s4-headline">把<span class="em">设置面板</span>和各工具<br>用<span class="em">命名管道</span>桥接通信</div>
+  <div class="s4-list">
+    <div class="s4-row"><span class="idx">01</span><span class="txt">加载所有工具</span></div>
+    <div class="s4-row"><span class="idx">02</span><span class="txt">守住系统托盘</span></div>
+    <div class="s4-row"><span class="idx">03</span><span class="txt">注册全局快捷键</span></div>
+    <div class="s4-row"><span class="idx">04</span><span class="txt">命名管道桥接设置面板</span></div>
+  </div>
+</div>
+</div>
+</div>

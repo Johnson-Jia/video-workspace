@@ -1,0 +1,70 @@
+# content_ready — 6/29 GitHub Trending 入选项目（5 个，标准模式）
+
+## 视频方向
+6 月 29 日 GitHub 涨星最猛的 5 个 AI 工具，一半普通人能直接上手省掉重复活
+
+## 入选项目（按涨星 + 受众档位平衡选取，全部新上榜，与近 5 期零重叠）
+
+1. DeusData/codebase-memory-mcp | C | 19,557★ (+2,162) | 把代码库索引成知识图谱的智能服务，支持 158 种语言毫秒级查询（原: High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.）
+   - 中文译义：高性能代码智能服务，把整个代码库索引成持久知识图谱，普通仓库毫秒级完成，支持 158 种语言，查询亚毫秒级，省 99% 的 token
+   - 用途：让 AI 看懂整个代码库
+   - 受众: C 开发者向（需写代码集成，给做工程的开发者用）
+   - 钩子角度：单日涨 2162 星今日 top + 数字锚点（158 语言/毫秒级）
+   - avatar: assets/avatars/DeusData.png
+
+2. altic-dev/FluidVoice | Swift | 3,696★ (+491) | macOS 上目前较快的离线语音听写 app（原: FluidVoice - Fastest macOS Offline Dictation app - Voice to Text fully Local. One ⭐ takes us a long way :))）
+   - 中文译义：macOS 平台的离线语音听写应用，把语音转成文字，完全本地运行数据不外传
+   - 用途：语音转文字不联网
+   - 受众: A 普通可用（桌面 app 即开即用）
+   - 钩子角度：端侧离线 + 隐私（不外传）+ 普通人能用
+   - avatar: assets/avatars/altic-dev.png
+
+3. HKUDS/Vibe-Trading | Python | 14,279★ (+490) | 个人交易 agent（原: "Vibe-Trading: Your Personal Trading Agent"）
+   - 中文译义：个人交易智能体，研究型项目探索 AI 辅助交易决策
+   - 用途：AI 帮你看盘做决策
+   - 受众: B 半可用（需配置，研究型项目）
+   - 钩子角度：AI 替你盯盘 + 港大研究团队（泛化表述，不提具体校名）
+   - avatar: assets/avatars/HKUDS.png
+
+4. browser-use/video-use | Python | 10,999★ (+324) | 用代码 agent 编辑视频（原: Edit videos with coding agents）
+   - 中文译义：用写代码的方式让智能体编辑视频，反直觉的视频剪辑思路
+   - 用途：写代码剪视频
+   - 受众: A/B 普通可用（browser-use 出品，门槛中等）
+   - 钩子角度：反直觉（不用拖时间线，写代码剪）+ 数字锚点（万星）
+   - avatar: assets/avatars/browser-use.png
+
+5. usestrix/strix | Python | 26,693★ (+88) | 开源 AI 找漏洞并修复的工具（原: Open-source AI hackers to find and fix your app’s vulnerabilities.）
+   - 中文译义：开源的 AI 安全工具，自动找出应用里的漏洞并修复
+   - 用途：AI 帮你查漏洞修 bug
+   - 受众: A/B 普通可用（可 Docker 部署，门槛中等）
+   - 钩子角度：AI 替你做安全审计 + 危机感（你的应用可能正在被攻击）
+   - avatar: assets/avatars/usestrix.png
+
+## 钩子角度汇总（供 stage3 hook 选择）
+- 数字锚点 top：单日 +2162（codebase-memory-mcp 今日涨星最高）
+- 反直觉：用代码剪视频（video-use）
+- 端侧隐私：语音听写不联网（FluidVoice）
+- 危机感：AI 帮你查漏洞（strix）
+
+## 受众档位分布
+A 普通可用：FluidVoice、video-use、strix（3 个）
+B 半可用：Vibe-Trading（1 个）
+C 开发者向：codebase-memory-mcp（1 个）
+A 档占 3/5（约一半以上），符合 audience_filter 约束
+
+## 真实性验证（authenticity_verification）
+- DeusData/codebase-memory-mcp: 老号(2021) + 22 个公开仓库 + 76 watcher，SF 比 257:1 偏高但 MCP 热门赛道合理，0 HARD
+- altic-dev/FluidVoice: owner 290 天 + 14 个公开仓库 + 10 watcher，SF 比 370:1 偏高（macOS app watcher 普遍低），0 HARD
+- HKUDS/Vibe-Trading: 港大实验室号(2022) + 89 个公开仓库 + 90 watcher，SF 比 5.4:1 正常，0 HARD ✅
+- browser-use/video-use: browser-use 官方号(2024) + 48 个公开仓库 + 63 watcher，SF 比 7.2:1 正常，0 HARD ✅
+- usestrix/strix: owner(2024-11) + 3 个公开仓库 + 128 watcher，SF 比 9:1 正常，0 HARD ✅
+
+## 排除项目（不入选原因，附原始描述保真锚点）
+- simplex-chat/simplex-chat: 6/28 已入片（原: SimpleX - the first messaging network operating without user identifiers of any kind - 100% private by design! iOS, Android and desktop apps 📱!）
+- ripienaar/free-for-dev: 6/28 已入片（原: A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev）
+- commaai/openpilot: 6/28 已入片（原: openpilot is an operating system for robotics. Currently, it upgrades the driver assistance system on 300+ supported cars.）
+- xbtlin/ai-berkshire: 含巴菲特人名（check_no_real_person_name HARD 风险）（原: AI 时代的伯克希尔：基于 Claude Code / Codex 的价值投资研究框架。巴菲特·芒格·段永平·李录四大师方法论 + 多Agent并行研究。| AI-era Berkshire: a value investing research framework built for Claude Code / Codex. 4 masters' methodologies + multi-agent adversarial analysis.）
+- opendatalab/MinerU: 6/27 已入片（原: Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.）
+- ByteByteGoHq/system-design-101: stale（pushed 450 天前，活跃度不达标）（原: Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.）
+- cupy/cupy: 纯 GPU 计算库 C 档，已有 1 个 C 档（codebase-memory-mcp），不扎堆（原: NumPy &amp; SciPy for GPU）
+- Robbyant/lingbot-map: 3D 前馈重建纯研究库 C 档，已满 C 档配额（原: A feed-forward 3D foundation model for reconstructing scenes from streaming data）

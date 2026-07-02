@@ -1,0 +1,53 @@
+<!-- 场景: why_fail | 时长: 26.7s | bg: gradient_mesh | phases: 3 -->
+<div class="layer-bg">
+<!-- bg-component: gradient_mesh -->
+<div style="position:absolute;inset:0;background:#08060A"></div>
+<div style="position:absolute;top:5%;left:5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,hsla(35,88%,55%,0.22),transparent 65%);filter:blur(80px);animation:waveSway 18s ease-in-out infinite"></div>
+<div style="position:absolute;top:50%;right:8%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,hsla(15,85%,50%,0.20),transparent 65%);filter:blur(75px);animation:waveSway 22s ease-in-out infinite 4s"></div>
+<div style="position:absolute;bottom:8%;left:30%;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,hsla(45,90%,58%,0.18),transparent 65%);filter:blur(70px);animation:waveSway 20s ease-in-out infinite 8s"></div>
+<div style="position:absolute;top:35%;left:40%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,hsla(8,80%,45%,0.16),transparent 65%);filter:blur(65px);animation:waveSway 24s ease-in-out infinite 2s"></div>
+<div style="position:absolute;inset:0;background-image:linear-gradient(hsla(40,80%,50%,0.05) 1px,transparent 1px),linear-gradient(90deg,hsla(40,80%,50%,0.05) 1px,transparent 1px);background-size:80px 80px;opacity:0.6"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,hsla(5,18%,3%,0.55) 100%)"></div>
+</div>
+<div class="layer-fx">
+<!-- fx1: 警示扫描线 -->
+<div class="fx-scan" style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,hsla(15,90%,55%,0.45),transparent);filter:blur(1.5px);animation:fxScanMove 6s ease-in-out infinite"></div>
+<!-- fx2: 危险脉冲光晕 -->
+<div class="fx-glow-amber" style="top:40%;right:15%;width:240px;height:240px;background:radial-gradient(circle,hsla(8,85%,52%,0.30),transparent 70%);animation:fxAura 5s ease-in-out infinite"></div>
+<!-- fx3: 底部警示带 -->
+<div style="position:absolute;bottom:12%;left:-60%;width:120%;height:140px;background:linear-gradient(100deg,transparent,hsla(8,80%,50%,0.14),transparent);filter:blur(36px);animation:fxBeamSweep 8s ease-in-out infinite"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:28px">
+  <div class="tag-pill tag-pill-warn" style="font-size:32px">它怎么死的？</div>
+  <div class="card center-block" style="max-width:860px">
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:14px" class="list-row">
+      <div style="font-family:var(--font-data);font-size:42px;font-weight:700;color:var(--amber);min-width:60px">01</div>
+      <div style="font-size:34px;color:var(--text);line-height:1.3">铁律叫<strong style="color:var(--gold)">超本地密度</strong></div>
+    </div>
+    <div style="font-size:34px;color:var(--text2);line-height:1.4">用户只骑 100 米内能找到的车</div>
+    <div style="font-size:34px;color:var(--gold);line-height:1.4;margin-top:8px">谁先把一个街区铺满，谁就赢</div>
+  </div>
+</div>
+<div class="phase phase-2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px">
+  <div class="card-soft center-block" style="max-width:860px;display:flex;flex-direction:column;gap:18px">
+    <div style="font-size:34px;color:var(--text);font-weight:700;text-align:center">投放量残酷对比</div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:32px;margin-bottom:6px"><span style="color:var(--gold)">小鸣单车</span><span style="font-family:var(--font-data);color:var(--gold)">6 万辆</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.6%"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:32px;margin-bottom:6px"><span style="color:var(--amber)">ofo</span><span style="font-family:var(--font-data);color:var(--amber)">1000 万 + 辆</span></div>
+      <div class="bar-track"><div class="bar-fill bar-fill-amber" style="width:100%"></div></div>
+    </div>
+    <div style="font-size:32px;color:var(--amber-warn);text-align:center;font-weight:600">密度不够 → 车找不到人，人等不到车</div>
+  </div>
+</div>
+<div class="phase phase-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px">
+  <div class="card-soft center-block" style="max-width:860px;display:flex;flex-direction:column;gap:14px">
+    <div class="list-row"><div style="font-family:var(--font-data);font-size:38px;font-weight:700;color:var(--amber);min-width:60px">02</div><div style="font-size:32px;color:var(--text)">对手免费骑行补贴 → 用户全跑了</div></div>
+    <div class="list-row"><div style="font-family:var(--font-data);font-size:38px;font-weight:700;color:var(--amber);min-width:60px">03</div><div style="font-size:32px;color:var(--text)">每辆车贬值 + 维修成本反而更高</div></div>
+  </div>
+  <div style="font-family:var(--font-title);font-size:68px;line-height:1.1;font-weight:400" class="grad-amber glow-amber">真正输的是一场必须赢的密度战</div>
+</div>
+</div>

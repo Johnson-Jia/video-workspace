@@ -1,0 +1,168 @@
+:root {
+  --bg-deep: #0A0805;
+  --bg-deeper: #050302;
+  --gold: #FFB800;
+  --gold-sand: #D4A017;
+  --amber: #FF6B00;
+  --amber-warn: #8B2500;
+  --text: #F5E6C8;
+  --text2: rgba(245,230,200,0.62);
+  --card-bg: rgba(26,16,8,0.88);
+  --card-bg-soft: rgba(40,24,10,0.78);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+}
+
+/* Ma Shan Zheng @font-face 由 assemble _FONT_SRCS 自动注入（file:// 完整路径），
+   此处不再手写兜底（../assets/ 路径穿越会触发 render invalid_parent_traversal 错误） */
+
+/* === 暖金渐变文字（禁纯白端点，同色系高饱和） === */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FFB800 0%, #FF6B00 55%, #D4A017 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.grad-amber {
+  background-image: linear-gradient(135deg, #FF6B00 0%, #FFB800 60%, #8B2500 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* 渐变文字同色系发光（禁黑色阴影，记忆 feedback-gradient-text-shadow-gate）*/
+.glow-gold {
+  text-shadow: 0 0 18px rgba(255,184,0,0.55), 0 2px 6px rgba(255,107,0,0.35);
+}
+.glow-amber {
+  text-shadow: 0 0 18px rgba(255,107,0,0.55), 0 2px 6px rgba(139,37,0,0.4);
+}
+/* 纯色文字（非渐变）才用深色描边 */
+.stroke-dark {
+  -webkit-text-stroke: 1.5px rgba(10,8,5,0.7);
+}
+
+/* === 卡片（bg 0.88 不透明挡光晕） === */
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,184,0,0.28);
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,184,0,0.12);
+  position: relative;
+}
+.card-soft {
+  background: var(--card-bg-soft);
+  border: 1px solid rgba(255,107,0,0.22);
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+
+/* === 数据条（1500万 vs 22亿 对比） === */
+.bar-track {
+  width: 100%;
+  height: 24px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #FFB800, #FF6B00);
+  box-shadow: 0 0 16px rgba(255,184,0,0.4);
+}
+.bar-fill-amber {
+  background: linear-gradient(90deg, #FF6B00, #8B2500);
+  box-shadow: 0 0 16px rgba(255,107,0,0.4);
+}
+
+/* === 胶囊标签（纯场景色，小标签禁 grad-clip:text） === */
+.tag-pill {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(255,184,0,0.14);
+  border: 1px solid rgba(255,184,0,0.45);
+  color: var(--gold);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.tag-pill-amber {
+  background: rgba(255,107,0,0.14);
+  border-color: rgba(255,107,0,0.45);
+  color: var(--amber);
+}
+.tag-pill-warn {
+  background: rgba(139,37,0,0.20);
+  border-color: rgba(255,107,0,0.55);
+  color: #FF8C40;
+}
+
+/* === 单车剪影（CSS 实现，残骸意象） === */
+.bike-icon {
+  width: 72px; height: 44px;
+  position: relative;
+  flex-shrink: 0;
+}
+.bike-icon::before, .bike-icon::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 32px; height: 32px;
+  border: 4px solid var(--gold);
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(255,184,0,0.3);
+}
+.bike-icon::before { left: 0; }
+.bike-icon::after { right: 0; }
+/* === 铲子图标（FleetOS 卖铲子给挖金的人） === */
+.shovel {
+  width: 56px; height: 56px;
+  position: relative;
+  flex-shrink: 0;
+}
+.shovel::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0;
+  width: 6px; height: 36px;
+  background: var(--gold-sand);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+.shovel::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 28px; height: 20px;
+  background: linear-gradient(180deg, var(--gold), var(--amber));
+  transform: translateX(-50%);
+  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
+  box-shadow: 0 0 14px rgba(255,184,0,0.55);
+}
+
+/* === 列表行（图标+文字垂直成列，左对齐） === */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+}
+
+/* === 中央 max-width 块居中兜底 === */
+.center-block { margin: 0 auto; }
+
+/* === fx 光晕（glow blur≤30） === */
+.fx-glow-amber {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(26px);
+  pointer-events: none;
+}

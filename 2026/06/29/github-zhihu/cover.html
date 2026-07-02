@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>cover</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1920px; height:1080px; overflow:hidden; }
+  body {
+    background: #0d1117;
+    font-family: 'Inter','JetBrains Mono','PingFang SC','Microsoft YaHei',sans-serif;
+    color: #c9d1d9;
+    position: relative;
+  }
+  /* 网格背景 */
+  .grid-bg {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(48,54,61,0.45) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48,54,61,0.45) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index:1;
+  }
+  /* 渐变光晕 */
+  .glow-1 {
+    position:absolute; top:-200px; right:-150px; width:780px; height:780px;
+    background: radial-gradient(circle, rgba(0,229,160,0.28) 0%, rgba(0,229,160,0) 65%);
+    z-index:2; filter: blur(8px);
+  }
+  .glow-2 {
+    position:absolute; bottom:-220px; left:-180px; width:760px; height:760px;
+    background: radial-gradient(circle, rgba(240,136,62,0.24) 0%, rgba(240,136,62,0) 65%);
+    z-index:2; filter: blur(8px);
+  }
+  /* 主容器 */
+  .wrap {
+    position:relative; z-index:10;
+    width:1920px; height:1080px;
+    padding: 90px 120px 80px;
+    display:flex; flex-direction:column;
+  }
+  /* 顶部 badge */
+  .topbar {
+    display:flex; align-items:center; gap:18px;
+    margin-bottom: 36px;
+  }
+  .badge {
+    display:inline-flex; align-items:center; gap:10px;
+    background: rgba(0,229,160,0.12);
+    border: 1px solid rgba(0,229,160,0.45);
+    color:#00e5a0;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-size: 26px; font-weight:600;
+    letter-spacing: 1px;
+  }
+  .badge .dot {
+    width:12px; height:12px; border-radius:50%;
+    background:#00e5a0;
+    box-shadow:0 0 14px #00e5a0;
+  }
+  .week-pill {
+    background: rgba(240,136,62,0.14);
+    border: 1px solid rgba(240,136,62,0.5);
+    color:#f0883e;
+    padding: 12px 26px; border-radius:999px;
+    font-size: 26px; font-weight:600;
+  }
+  /* 标题区 */
+  .title-block { margin-bottom: 50px; }
+  .t-main {
+    font-size: 86px; font-weight: 800;
+    color:#f0f6fc; line-height:1.15;
+    letter-spacing: 1px;
+  }
+  .t-main .accent { color:#00e5a0; }
+  .t-sub {
+    margin-top: 22px;
+    font-size: 38px; font-weight:500;
+    color:#8b949e; letter-spacing: 2px;
+  }
+  /* TOP3 卡片 */
+  .top3 {
+    display:flex; gap:36px;
+    margin-bottom: 48px;
+  }
+  .card {
+    flex:1;
+    background: linear-gradient(160deg, rgba(22,27,34,0.95) 0%, rgba(13,17,23,0.95) 100%);
+    border:1px solid rgba(48,54,61,0.9);
+    border-radius: 22px;
+    padding: 32px 34px 36px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card.gold { border-color: rgba(240,136,62,0.7); box-shadow: 0 0 40px rgba(240,136,62,0.18); }
+  .card.silver { border-color: rgba(0,229,160,0.55); box-shadow: 0 0 40px rgba(0,229,160,0.14); }
+  .card.bronze { border-color: rgba(139,148,158,0.6); }
+  .rank-tag {
+    position:absolute; top:24px; right:28px;
+    font-size: 64px; font-weight:800;
+    color: rgba(255,255,255,0.08);
+    font-family:'JetBrains Mono',monospace;
+    line-height:1;
+  }
+  .card.gold .rank-tag { color: rgba(240,136,62,0.22); }
+  .card.silver .rank-tag { color: rgba(0,229,160,0.20); }
+  .lang-dot {
+    width:14px; height:14px; border-radius:50%;
+    display:inline-block; margin-right:10px; vertical-align:middle;
+  }
+  .lang-python { background:#3572A5; }
+  .lang-c { background:#555555; }
+  .lang-ts { background:#3178c6; }
+  .lang-py2 { background:#3572A5; }
+  .c-lang {
+    font-size:24px; color:#8b949e; font-weight:500;
+    margin-bottom:14px;
+  }
+  .c-name {
+    font-family:'JetBrains Mono','Consolas',monospace;
+    font-size: 40px; font-weight:700;
+    color:#f0f6fc; line-height:1.2;
+    margin-bottom: 10px;
+    word-break: break-all;
+  }
+  .c-desc {
+    font-size:22px; color:#8b949e;
+    line-height:1.45;
+    margin-bottom: 22px;
+    min-height: 64px;
+  }
+  .c-stars {
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom: 10px;
+  }
+  .star-big {
+    font-size: 56px; font-weight:800;
+    color:#f0883e; font-family:'JetBrains Mono',monospace;
+    line-height:1;
+  }
+  .star-label {
+    font-size:22px; color:#8b949e;
+  }
+  .c-week {
+    font-size:24px; color:#00e5a0; font-weight:600;
+    font-family:'JetBrains Mono',monospace;
+  }
+  /* 底部统计条 */
+  .stats-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top: 36px;
+    border-top: 1px solid rgba(48,54,61,0.8);
+  }
+  .stat-item {
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .stat-num {
+    font-size: 52px; font-weight:800;
+    color:#f0f6fc; font-family:'JetBrains Mono',monospace;
+    line-height:1;
+  }
+  .stat-num .unit { font-size:30px; color:#8b949e; font-weight:600; }
+  .stat-label {
+    font-size:24px; color:#8b949e;
+    letter-spacing:1px;
+  }
+  .stat-divider {
+    width:1px; height:70px; background:rgba(48,54,61,0.9);
+  }
+  .footer-brand {
+    display:flex; align-items:center; gap:14px;
+    color:#8b949e; font-size:26px;
+  }
+  .footer-brand .gh-mark {
+    width:34px; height:34px;
+    border-radius:50%;
+    background:#f0f6fc;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:#0d1117; font-weight:900; font-size:24px;
+    font-family:'JetBrains Mono',monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <span class="badge"><span class="dot"></span>GITHUB 热门开源</span>
+      <span class="week-pill">第 27 周 · 06.22 - 06.29</span>
+    </div>
+
+    <div class="title-block">
+      <div class="t-main">2026年6月 <span class="accent">GitHub 周榜</span> 盘点</div>
+      <div class="t-sub">AI Agent 基建全栈化 · 视频生产流水线 Agent 化</div>
+    </div>
+
+    <div class="top3">
+      <!-- TOP1 -->
+      <div class="card gold">
+        <div class="rank-tag">#1</div>
+        <div class="c-lang"><span class="lang-dot lang-python"></span>Python</div>
+        <div class="c-name">calesthio/OpenMontage</div>
+        <div class="c-desc">Agent 驱动的开源视频生产系统，把 AI 编程助手变成视频工作室</div>
+        <div class="c-stars">
+          <span class="star-big">26.9K</span>
+          <span class="star-label">★ 总星</span>
+        </div>
+        <div class="c-week">本周 +18,703 ★</div>
+      </div>
+      <!-- TOP2 -->
+      <div class="card silver">
+        <div class="rank-tag">#2</div>
+        <div class="c-lang"><span class="lang-dot lang-c"></span>C</div>
+        <div class="c-name">DeusData/codebase-memory-mcp</div>
+        <div class="c-desc">代码库索引为知识图谱的 MCP 服务，毫秒级查询省 99% Token</div>
+        <div class="c-stars">
+          <span class="star-big">19.6K</span>
+          <span class="star-label">★ 总星</span>
+        </div>
+        <div class="c-week">本周 +8,926 ★</div>
+      </div>
+      <!-- TOP3 -->
+      <div class="card bronze">
+        <div class="rank-tag">#3</div>
+        <div class="c-lang"><span class="lang-dot lang-py2"></span>Python</div>
+        <div class="c-name">Panniantong/Agent-Reach</div>
+        <div class="c-desc">给 Agent 装眼睛看遍全网，零 API 费用覆盖 Twitter/B站/小红书</div>
+        <div class="c-stars">
+          <span class="star-big">44.5K</span>
+          <span class="star-label">★ 总星</span>
+        </div>
+        <div class="c-week">本周 +7,692 ★</div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num">22<span class="unit"> 个项目</span></div>
+        <div class="stat-label">本周上榜</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">5<span class="unit"> 大分类</span></div>
+        <div class="stat-label">深度解读</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">3000+<span class="unit"> 字</span></div>
+        <div class="stat-label">知乎深度</div>
+      </div>
+      <div class="footer-brand">
+        <span class="gh-mark">★</span>
+        <span>GitHub 星探 · 周榜盘点</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

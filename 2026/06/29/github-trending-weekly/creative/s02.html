@@ -1,0 +1,76 @@
+<!-- 场景: ai_agent | 时长: 13.49s | 领域色 冷蓝 #4DA8DA（仅视觉） -->
+<div class="layer-bg" style="--domain-color:#4DA8DA;--domain-glow:rgba(77,168,218,0.22)">
+  <!-- bg-component: scan_grid -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0A1830,#040810)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(77,168,218,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(77,168,218,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+  <div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(77,168,218,0.35),rgba(77,168,218,0.5),rgba(77,168,218,0.35),transparent);box-shadow:0 0 20px rgba(77,168,218,0.3);animation:scanLine 8s linear infinite"></div>
+  <div style="position:absolute;top:40%;left:50%;width:480px;height:480px;border-radius:50%;background:rgba(77,168,218,0.12);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;background:rgba(77,168,218,0.9);box-shadow:0 0 14px rgba(77,168,218,0.7);animation:gridNodeBlink 3s ease-in-out infinite"></div>
+  <div style="position:absolute;top:65%;left:62%;width:10px;height:10px;border-radius:50%;background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1: 扫描光带（数据流） -->
+  <div style="position:absolute;top:0;left:30%;width:2px;height:100%;background:linear-gradient(transparent 10%,rgba(77,168,218,0.4) 50%,transparent 90%);animation:beamBreath 6s ease-in-out infinite"></div>
+  <div style="position:absolute;top:0;left:68%;width:1.5px;height:100%;background:linear-gradient(transparent 20%,rgba(0,220,255,0.3) 50%,transparent 80%);animation:beamBreath 8s ease-in-out infinite 3s"></div>
+  <!-- fx 2: 数据节点闪烁 -->
+  <div class="fx-dot fx-pulse" style="position:absolute;top:22%;left:18%;width:10px;height:10px;border-radius:50%;background:#4DA8DA;box-shadow:0 0 18px #4DA8DA;animation:annotationPulse 4s ease-in-out infinite"></div>
+  <div class="fx-dot fx-drift" style="position:absolute;top:78%;left:85%;width:8px;height:8px;border-radius:50%;background:#00f5d4;box-shadow:0 0 16px #00f5d4;animation:annotationPulse 5s ease-in-out infinite 1.5s"></div>
+  <div class="fx-dot fx-spin" style="position:absolute;top:15%;left:88%;width:6px;height:6px;border-radius:50%;background:#4DA8DA;box-shadow:0 0 14px #4DA8DA;animation:starDot 3s ease-in-out infinite"></div>
+  <div class="fx-dot fx-blink" style="position:absolute;top:85%;left:12%;width:7px;height:7px;border-radius:50%;background:#00f5d4;box-shadow:0 0 15px #00f5d4;animation:starDot 3.5s ease-in-out infinite 1s"></div>
+</div>
+<div class="layer-content" style="--domain-color:#4DA8DA;--domain-glow:rgba(77,168,218,0.22)">
+<div class="phase phase-1">
+  <div class="domain-title">AI Agent</div>
+  <div class="domain-subtitle">本周涨星最猛的领域 · 4 个项目</div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-card-row">
+        <img class="proj-avatar" src="assets/avatars/calesthio.png" alt="">
+        <div class="proj-main">
+          <div class="proj-name">calesthio / OpenMontage</div>
+          <div class="proj-use">AI 编程助手变视频工作室</div>
+        </div>
+        <div class="proj-stars">
+          <div class="proj-stars-val">+18,703</div>
+          <div class="proj-stars-label">本周涨星</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <div class="domain-title">AI Agent</div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-card-row">
+        <img class="proj-avatar" src="assets/avatars/DeusData.png" alt="">
+        <div class="proj-main">
+          <div class="proj-name">DeusData / codebase-memory-mcp</div>
+          <div class="proj-use">代码库索引成知识图谱</div>
+        </div>
+        <div class="proj-stars"><div class="proj-stars-val">+8,926</div><div class="proj-stars-label">本周涨星</div></div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-card-row">
+        <img class="proj-avatar" src="assets/avatars/Panniantong.png" alt="">
+        <div class="proj-main">
+          <div class="proj-name">Panniantong / Agent-Reach</div>
+          <div class="proj-use">一条命令读遍全网</div>
+        </div>
+        <div class="proj-stars"><div class="proj-stars-val">+7,692</div><div class="proj-stars-label">本周涨星</div></div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-card-row">
+        <img class="proj-avatar" src="assets/avatars/topoteretes.png" alt="">
+        <div class="proj-main">
+          <div class="proj-name">topoteretes / cognee</div>
+          <div class="proj-use">给 AI 装长期记忆</div>
+        </div>
+        <div class="proj-stars"><div class="proj-stars-val">+6,064</div><div class="proj-stars-label">本周涨星</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

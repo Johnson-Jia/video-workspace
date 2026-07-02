@@ -1,0 +1,504 @@
+:root {
+  --bg-deep: #080818;
+  --bg-deeper: #050510;
+  --accent-warm: #FF8C32;
+  --accent-gold: #FFD23F;
+  --accent-cool: #4DA8DA;
+  --accent-cyan: #00D4FF;
+  --accent-red: #FF3B30;
+  --text: #F5F5F5;
+  --text2: rgba(245,245,245,0.65);
+  --text3: rgba(245,245,245,0.45);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --safe-pad: 180px 90px 220px 90px;
+}
+
+/* ============================================
+ * 全局基础：phase 安全区 + 居中
+ * padding 在 .phase 一层（单层 padding 原则）
+ * ============================================ */
+.phase {
+  position: absolute;
+  inset: 0;
+  padding: 180px 90px 220px 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  opacity: 1;
+}
+
+/* ============================================
+ * BG 组件层（铺满全画幅，z:1）
+ * ============================================ */
+
+/* ── electric_pulse（hook 场景）── */
+.bg-electric-pulse {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, #1a1240 0%, #0a0820 50%, #050510 100%);
+}
+.bgp-core {
+  position: absolute; top: 38%; left: 50%;
+  width: 280px; height: 280px; transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,140,50,0.55) 0%, rgba(255,140,50,0.15) 40%, transparent 70%);
+  filter: blur(20px);
+}
+.bgp-ring {
+  position: absolute; top: 38%; left: 50%; transform: translate(-50%,-50%);
+  border-radius: 50%; border: 3px solid rgba(255,210,63,0.35);
+}
+.bgp-ring-1 { width: 420px; height: 420px; }
+.bgp-ring-2 { width: 620px; height: 620px; border-color: rgba(77,168,218,0.25); }
+.bgp-arc {
+  position: absolute;
+  top: calc(38% - 260px); left: calc(50% - 260px);
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: rgba(255,140,50,0.5);
+  border-right-color: rgba(255,210,63,0.4);
+  animation: arcSpin 8s linear infinite;
+}
+.bgp-arc-ccw { animation: arcSpin 10s linear infinite reverse; border-top-color: rgba(77,168,218,0.45); border-left-color: rgba(0,212,255,0.35); border-right-color: transparent; }
+.bgp-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(5,5,16,0.7) 100%);
+}
+@keyframes arcSpin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+
+/* ── gradient_mesh（codebase 场景）── */
+.bg-mesh {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0a1830 0%, #0d0a2a 50%, #050a18 100%);
+}
+.mesh-blob {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35;
+}
+.mesh-blob.b1 { width: 600px; height: 600px; background: #4DA8DA; top: -100px; left: -100px; }
+.mesh-blob.b2 { width: 500px; height: 500px; background: #6B4FBB; bottom: -80px; right: -80px; opacity: 0.3; }
+.mesh-blob.b3 { width: 400px; height: 400px; background: #00D4FF; top: 40%; left: 40%; opacity: 0.18; }
+.mesh-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(77,168,218,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(77,168,218,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── light_field（FluidVoice 场景）── */
+.bg-lightfield {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #2a1a0a 0%, #1a0f08 50%, #0a0608 100%);
+}
+.lf-glow {
+  position: absolute; border-radius: 50%; filter: blur(140px);
+}
+.lf-glow-warm { width: 700px; height: 700px; background: #FF8C32; opacity: 0.28; top: -120px; right: -120px; }
+.lf-glow-soft { width: 500px; height: 500px; background: #FFD23F; opacity: 0.18; bottom: -80px; left: -60px; }
+.lf-gradient {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(10,6,8,0.6) 100%);
+}
+
+/* ── cosmic_void（Vibe-Trading 场景）── */
+.bg-cosmic {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 30%, #1a0f3a 0%, #0a0820 50%, #050510 100%);
+}
+.cos-nebula {
+  position: absolute; border-radius: 50%; filter: blur(100px);
+}
+.cos-nebula.c1 { width: 600px; height: 600px; background: #FFD23F; opacity: 0.22; top: -100px; right: -80px; }
+.cos-nebula.c2 { width: 500px; height: 500px; background: #FF8C32; opacity: 0.18; bottom: -100px; left: -100px; }
+.cos-stars {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(2px 2px at 85% 25%, rgba(255,210,63,0.5), transparent),
+    radial-gradient(1px 1px at 15% 70%, rgba(77,168,218,0.5), transparent);
+}
+.cos-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(5,5,16,0.75) 100%);
+}
+
+/* ── virtual_universe（video-use 场景）── */
+.bg-vuni {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a0a2a 0%, #0a0a2a 50%, #050518 100%);
+}
+.vuni-glow {
+  position: absolute; border-radius: 50%; filter: blur(130px);
+}
+.vuni-glow.v1 { width: 600px; height: 600px; background: #B94FFF; opacity: 0.25; top: -100px; left: -80px; }
+.vuni-glow.v2 { width: 500px; height: 500px; background: #FF3B7F; opacity: 0.22; bottom: -80px; right: -100px; }
+.vuni-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(185,79,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185,79,255,0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: perspective(800px) rotateX(60deg); transform-origin: center bottom;
+}
+.vuni-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(5,5,24,0.7) 100%);
+}
+
+/* ── dark_cipher（strix 场景）── */
+.bg-cipher {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0808 50%, #0a0408 100%);
+}
+.cip-glow {
+  position: absolute; border-radius: 50%; filter: blur(140px);
+}
+.cip-glow.c-red { width: 650px; height: 650px; background: #FF3B30; opacity: 0.25; top: -120px; left: -100px; }
+.cip-glow.c-orange { width: 500px; height: 500px; background: #FF8C32; opacity: 0.2; bottom: -80px; right: -80px; }
+.cip-matrix {
+  position: absolute; inset: 0; opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255,59,48,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,59,48,0.4) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.cip-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(10,4,8,0.75) 100%);
+}
+
+/* ============================================
+ * FX 特效层（z:2，pointer-events:none）
+ * ============================================ */
+.layer-fx { pointer-events: none; }
+
+/* ── hook 场景：爆裂射线 + 火花 ── */
+.fx-burst-ray {
+  position: absolute; top: 38%; left: 50%;
+  width: 4px; height: 380px;
+  background: linear-gradient(to top, transparent, rgba(255,210,63,0.7), transparent);
+  transform-origin: bottom center;
+  opacity: 0.55;
+}
+.fx-burst-ray.r1 { transform: translate(-50%,-100%) rotate(0deg); }
+.fx-burst-ray.r2 { transform: translate(-50%,-100%) rotate(60deg); }
+.fx-burst-ray.r3 { transform: translate(-50%,-100%) rotate(120deg); }
+.fx-burst-ray.r4 { transform: translate(-50%,-100%) rotate(180deg); }
+.fx-burst-ray.r5 { transform: translate(-50%,-100%) rotate(240deg); }
+.fx-burst-ray.r6 { transform: translate(-50%,-100%) rotate(300deg); }
+.fx-spark {
+  position: absolute; width: 12px; height: 12px; border-radius: 50%;
+  background: #FFD23F; box-shadow: 0 0 20px rgba(255,210,63,0.8);
+}
+.fx-spark.s1 { top: 25%; left: 30%; opacity: 0.7; }
+.fx-spark.s2 { top: 30%; right: 25%; opacity: 0.6; background: #FF8C32; }
+.fx-spark.s3 { bottom: 35%; left: 28%; opacity: 0.65; background: #4DA8DA; box-shadow: 0 0 20px rgba(77,168,218,0.8); }
+.fx-spark.s4 { bottom: 30%; right: 30%; opacity: 0.6; }
+
+/* ── codebase 场景：光球 + 扫描线 + 节点连线 ── */
+.fx-orb {
+  position: absolute; border-radius: 50%; filter: blur(40px);
+}
+.fx-orb.o1 { width: 200px; height: 200px; background: #4DA8DA; opacity: 0.35; top: 15%; left: 10%; }
+.fx-orb.o2 { width: 160px; height: 160px; background: #00D4FF; opacity: 0.3; top: 60%; right: 12%; }
+.fx-orb.o3 { width: 120px; height: 120px; background: #6B4FBB; opacity: 0.28; bottom: 20%; left: 20%; }
+.fx-scanline {
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.6), transparent);
+  top: 50%; opacity: 0.5;
+}
+.fx-node {
+  position: absolute; width: 18px; height: 18px; border-radius: 50%;
+  background: #FFD23F; box-shadow: 0 0 16px rgba(255,210,63,0.7);
+}
+.fx-node.n1 { top: 22%; left: 18%; }
+.fx-node.n2 { top: 68%; right: 22%; }
+.fx-node.n3 { top: 45%; left: 50%; }
+.fx-link {
+  position: absolute; height: 2px; transform-origin: left center;
+  background: linear-gradient(90deg, rgba(77,168,218,0.5), transparent);
+}
+.fx-link.l1 { top: 25%; left: 20%; width: 280px; transform: rotate(25deg); }
+.fx-link.l2 { top: 50%; left: 50%; width: 240px; transform: rotate(-30deg); }
+
+/* ── FluidVoice 场景：声波 + 浮点 + 脉冲 ── */
+.fx-wave {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  border-radius: 50%; border: 3px solid rgba(255,140,50,0.4);
+}
+.fx-wave.w1 { width: 360px; height: 360px; opacity: 0.5; }
+.fx-wave.w2 { width: 520px; height: 520px; opacity: 0.35; border-color: rgba(255,210,63,0.3); }
+.fx-wave.w3 { width: 680px; height: 680px; opacity: 0.22; border-color: rgba(255,140,50,0.25); }
+.fx-dot {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: #FFD23F; box-shadow: 0 0 14px rgba(255,210,63,0.7);
+}
+.fx-dot.d1 { top: 20%; left: 22%; opacity: 0.6; }
+.fx-dot.d2 { top: 75%; right: 25%; opacity: 0.55; background: #FF8C32; }
+.fx-dot.d3 { top: 35%; right: 18%; opacity: 0.5; }
+.fx-dot.d4 { bottom: 25%; left: 28%; opacity: 0.5; }
+.fx-pulse {
+  position: absolute; width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,140,50,0.3) 0%, transparent 70%);
+  filter: blur(20px);
+}
+.fx-pulse.p1 { top: 30%; right: 30%; }
+
+/* ── Vibe-Trading 场景：K线 + 趋势线 ── */
+.fx-tick {
+  position: absolute; width: 3px; border-radius: 2px;
+}
+.fx-tick.t1 { top: 30%; left: 18%; height: 80px; background: #00D4AA; box-shadow: 0 0 12px rgba(0,212,170,0.6); }
+.fx-tick.t2 { top: 45%; left: 30%; height: 120px; background: #FF3B30; box-shadow: 0 0 12px rgba(255,59,48,0.6); }
+.fx-tick.t3 { top: 25%; right: 22%; height: 100px; background: #00D4AA; box-shadow: 0 0 12px rgba(0,212,170,0.6); }
+.fx-candle {
+  position: absolute; width: 24px; border-radius: 4px;
+}
+.fx-candle.cd1 { top: 40%; left: 45%; height: 70px; background: linear-gradient(180deg, #00D4AA, rgba(0,212,170,0.3)); opacity: 0.7; }
+.fx-candle.cd2 { top: 50%; right: 35%; height: 90px; background: linear-gradient(180deg, #FF3B30, rgba(255,59,48,0.3)); opacity: 0.65; }
+.fx-candle.cd3 { top: 35%; right: 12%; height: 60px; background: linear-gradient(180deg, #00D4AA, rgba(0,212,170,0.3)); opacity: 0.6; }
+.fx-trendline {
+  position: absolute; left: 15%; right: 15%; top: 55%; height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255,210,63,0.7), transparent);
+  transform: rotate(-8deg); opacity: 0.6;
+}
+
+/* ── video-use 场景：代码符号 + 胶片帧 ── */
+.fx-codebracket {
+  position: absolute; font-family: 'JetBrains Mono', monospace;
+  font-size: 90px; font-weight: 900; color: rgba(185,79,255,0.4);
+  text-shadow: 0 0 30px rgba(185,79,255,0.5);
+}
+.fx-codebracket.cb1 { top: 18%; left: 12%; }
+.fx-codebracket.cb2 { bottom: 22%; right: 14%; color: rgba(255,59,127,0.35); text-shadow: 0 0 30px rgba(255,59,127,0.5); }
+.fx-film {
+  position: absolute; width: 140px; height: 90px; border-radius: 6px;
+  border: 2px solid rgba(185,79,255,0.4);
+  background: linear-gradient(135deg, rgba(185,79,255,0.15), rgba(255,59,127,0.1));
+}
+.fx-film.fm1 { top: 25%; right: 18%; transform: rotate(8deg); opacity: 0.65; }
+.fx-film.fm2 { top: 55%; left: 15%; transform: rotate(-6deg); opacity: 0.6; }
+.fx-film.fm3 { bottom: 28%; right: 28%; transform: rotate(12deg); opacity: 0.55; }
+
+/* ── strix 场景：警报框 + 盾牌 + 扫描 ── */
+.fx-alert {
+  position: absolute; border: 3px solid; border-radius: 12px;
+  animation: alertBlink 1.6s ease-in-out infinite;
+}
+.fx-alert.a1 { top: 22%; right: 18%; width: 120px; height: 80px; border-color: rgba(255,59,48,0.6); opacity: 0.6; }
+.fx-alert.a2 { bottom: 30%; left: 16%; width: 100px; height: 70px; border-color: rgba(255,140,50,0.55); opacity: 0.55; animation-delay: 0.6s; }
+@keyframes alertBlink { 0%,100% { opacity: 0.6; } 50% { opacity: 0.25; } }
+.fx-shield {
+  position: absolute; width: 100px; height: 120px;
+  border: 3px solid rgba(255,210,63,0.5); border-radius: 50% 50% 50% 50% / 30% 30% 60% 60%;
+  background: radial-gradient(circle, rgba(255,210,63,0.15), transparent);
+  box-shadow: 0 0 30px rgba(255,210,63,0.3);
+}
+.fx-shield.sh1 { top: 40%; right: 30%; opacity: 0.6; }
+.fx-cta-arrow {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 4px; background: linear-gradient(90deg, transparent, #FFD23F);
+  border-radius: 2px; opacity: 0.7;
+}
+
+/* ============================================
+ * HOOK 场景样式
+ * ============================================ */
+.hook-phase {
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+.hook-date {
+  font-size: 40px; font-weight: 600; color: var(--text2);
+  letter-spacing: 0.12em;
+  font-family: var(--font-data);
+}
+.hook-big-num {
+  display: flex; align-items: baseline; justify-content: center; gap: 8px;
+  margin: 10px 0;
+}
+.hnum-val {
+  font-size: 220px; font-weight: 900; line-height: 0.9;
+  font-family: var(--font-data);
+  background-image: linear-gradient(135deg, #FFD23F 0%, #FF8C32 50%, #FF6B35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 80px rgba(255,140,50,0.4);
+  letter-spacing: -0.03em;
+}
+.hnum-unit {
+  font-size: 96px; font-weight: 800; color: var(--accent-gold);
+  font-family: var(--font-data);
+}
+.hook-big-label {
+  font-size: 38px; font-weight: 600; color: var(--accent-cool);
+  letter-spacing: 0.08em;
+}
+.hook-title {
+  font-size: 72px; font-weight: 900; color: var(--text);
+  line-height: 1.1; margin-top: 20px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.hook-sub {
+  font-size: 44px; font-weight: 600; color: var(--accent-gold);
+  margin-top: 8px;
+}
+
+/* ============================================
+ * ProjectFullCard 组件 CSS（assemble 不注入，手补）
+ * 安全区用 absolute inset 防溢出（feedback-pfc-safezone-overflow）
+ * ============================================ */
+.project-full-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 520px; height: 520px; opacity: 0.2;
+  background: var(--accent-warm);
+  top: 60px; left: -120px;
+}
+.pfc-glow-cool {
+  width: 460px; height: 460px; opacity: 0.18;
+  background: var(--accent-cool);
+  bottom: 60px; right: -100px;
+}
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+
+/* ── 顶部带 ── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 20px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: 0 0 60px rgba(255,140,50,0.4);
+  font-family: var(--font-data);
+}
+.pfc-category {
+  font-size: 38px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--accent-cool); text-transform: uppercase;
+}
+.pfc-use {
+  font-size: 52px; font-weight: 800; line-height: 1.1;
+  background-image: linear-gradient(135deg, #ffe082 0%, #FFD23F 50%, #FF8C32 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800; color: #fff;
+}
+
+/* ── 中部带 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 36px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.5;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-size: 40px; font-weight: 600; line-height: 1.35;
+  color: #fff; text-align: center; max-width: 820px;
+}
+.pfc-data-bar { width: 100%; max-width: 820px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label { font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.65); }
+.pfc-bar-val { font-size: 40px; font-weight: 800; color: var(--accent-warm); font-family: var(--font-data); }
+.pfc-bar-track {
+  width: 100%; height: 16px; border-radius: 999px;
+  background: rgba(255,255,255,0.1); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+  transform-origin: left center;
+}
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.pfc-topic {
+  font-size: 32px; font-weight: 600; padding: 8px 22px;
+  border-radius: 999px; color: var(--accent-cool);
+  background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.3);
+}
+
+/* ── 底部带 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 24px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.pfc-sell-item {
+  font-size: 32px; font-weight: 700; padding: 10px 26px;
+  border-radius: 14px; color: #fff;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: rgba(255,255,255,0.75);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+
+/* ── CTA（仅 strix 场景）── */
+.pfc-cta {
+  margin-top: 16px;
+  font-size: 38px; font-weight: 700;
+  color: var(--accent-gold);
+  text-align: center;
+  letter-spacing: 0.04em;
+  background-image: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}

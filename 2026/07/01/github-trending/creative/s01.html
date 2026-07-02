@@ -1,0 +1,65 @@
+<!-- 场景: hook | 时长: 10.3s -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+<!-- 渐变底色 -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0800,#1a1200,#0a0800)"></div>
+<!-- 径向光束 -->
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:beamRotate 60s linear infinite;
+  background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(255,200,0,0.05) 2deg,transparent 4deg,transparent 28deg)"></div>
+<!-- 中心光晕（脉冲动画） -->
+<div style="position:absolute;top:15%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,200,0,0.25) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 8s ease-in-out infinite"></div>
+<!-- 金色漂浮粒子 1 -->
+<div style="position:absolute;top:30%;left:55%;width:4px;height:4px;border-radius:50%;
+  background:hsla(45,90%,65%,0.6);box-shadow:0 0 10px hsla(45,80%,55%,0.5);animation:floatParticle 6s ease-in-out infinite 0s"></div>
+<!-- 金色漂浮粒子 2 -->
+<div style="position:absolute;top:50%;left:35%;width:3px;height:3px;border-radius:50%;
+  background:hsla(38,85%,60%,0.5);box-shadow:0 0 8px hsla(38,75%,50%,0.4);animation:floatParticle 8s ease-in-out infinite 2s"></div>
+<!-- 金色漂浮粒子 3 -->
+<div style="position:absolute;top:65%;left:60%;width:3px;height:3px;border-radius:50%;
+  background:hsla(50,80%,62%,0.45);box-shadow:0 0 7px hsla(50,70%,52%,0.35);animation:floatParticle 7s ease-in-out infinite 4s"></div>
+<!-- 扩散光环 1 -->
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1.5px solid hsla(40,80%,55%,0.12);animation:warmRing 5s ease-out infinite 0s"></div>
+<!-- 扩散光环 2 -->
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1px solid hsla(45,70%,50%,0.08);animation:warmRing 5s ease-out infinite 2.5s"></div>
+<!-- 玻璃折射高光 -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(255,255,255,0.03) 0%,transparent 25%,transparent 75%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 7s ease-in-out infinite"></div>
+<!-- 棱镜色散环（呼吸动画） -->
+<div style="position:absolute;top:5%;left:15%;width:700px;height:700px;border-radius:50%;opacity:0.025;
+  background:conic-gradient(from 0deg,rgba(255,50,50,0.5),rgba(255,200,50,0.4),rgba(50,255,100,0.5),rgba(50,100,255,0.5),rgba(200,50,255,0.4),rgba(255,50,50,0.5));
+  filter:blur(60px);animation:beamBreath 12s ease-in-out infinite"></div>
+<!-- 暗角 -->
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 35%,transparent 30%,rgba(0,0,0,0.5) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <div class="fx-glow warm"></div>
+  <div class="fx-glow cool"></div>
+  <div class="fx-scanline"></div>
+  <div class="fx-particle" style="top:25%;left:20%;"></div>
+  <div class="fx-particle" style="top:70%;left:75%;background:var(--accent-warm);box-shadow:0 0 12px rgba(249,168,37,0.8);"></div>
+  <div class="fx-particle" style="top:45%;left:50%;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="hook-wrap">
+  <div class="hook-eyebrow">7月1日 · GitHub</div>
+  <div class="hook-numbers">
+    <div class="hook-num-block">
+      <div class="hook-big">433</div>
+      <div class="hook-num-label">健身动作</div>
+    </div>
+    <div class="hook-num-block cool">
+      <div class="hook-big">95<span style="font-size:120px;">%</span></div>
+      <div class="hook-num-label">token 省掉</div>
+    </div>
+  </div>
+  <div class="hook-sub">几个猛项目，一半你能直接用</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,124 @@
+:root {
+  --bg-deep: #0A0805;
+  --gold-main: #FFB800;
+  --gold-sand: #D4A017;
+  --gold-amber: #FF6B00;
+  --gold-light: #C9A961;
+  --text: #FFFFFF;
+  --text2: rgba(255,235,180,0.72);
+  --text-dim: rgba(255,220,160,0.5);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+}
+
+/* ============================================
+ * 淘金暖金风组件 CSS（goldminer 专属）
+ * 基础层（.clip, .layer-*, .phase, .fx-*）
+ * 由 assemble 脚本自动注入，无需重复
+ * ============================================ */
+
+.gm-title { font-family: var(--font-title); font-weight: var(--title-weight); color: var(--text); }
+.gm-body { font-family: var(--font-body); color: var(--text2); }
+.gm-data { font-family: var(--font-data); font-weight: 700; color: var(--gold-main); }
+
+/* 渐变文字（background-image 非 background 简写；禁纯白端点，用同色系高饱和） */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FFB800 0%, #FF6B00 50%, #D4A017 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.grad-amber {
+  background-image: linear-gradient(135deg, #FF6B00 0%, #FFB800 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.grad-sand {
+  background-image: linear-gradient(135deg, #FFB800 0%, #C9A961 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 字描边（深色底配亮字提升对比） */
+.stroke-dark {
+  text-shadow:
+    -1px -1px 0 rgba(10,8,5,0.85),
+    1px -1px 0 rgba(10,8,5,0.85),
+    -1px 1px 0 rgba(10,8,5,0.85),
+    2px 2px 4px rgba(0,0,0,0.6);
+}
+.stroke-gold {
+  text-shadow:
+    0 0 8px rgba(255,184,0,0.45),
+    2px 2px 4px rgba(0,0,0,0.55);
+}
+
+/* 卡片背景（bg 0.85-0.92 不透明深色，挡 fx 光晕透出） */
+.gm-card {
+  background: rgba(13,9,5,0.88);
+  border: 1px solid rgba(255,184,0,0.28);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,184,0,0.12);
+}
+.gm-card-warm {
+  background: linear-gradient(135deg, rgba(40,28,8,0.85), rgba(13,9,5,0.92));
+  border: 1px solid rgba(255,107,0,0.3);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(255,107,0,0.12), inset 0 1px 0 rgba(255,184,0,0.15);
+}
+
+/* 胶囊标签（纯场景色，禁 grad-* clip:text 透明冲突） */
+.gm-pill {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(255,184,0,0.14);
+  border: 1px solid rgba(255,184,0,0.42);
+  color: var(--gold-main);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+.gm-pill-amber {
+  background: rgba(255,107,0,0.16);
+  border-color: rgba(255,107,0,0.48);
+  color: var(--gold-amber);
+}
+
+.gm-hero { font-family: var(--font-title); font-weight: var(--title-weight); line-height: 1.12; }
+.gm-mega { font-family: var(--font-data); font-weight: 700; line-height: 0.95; letter-spacing: -2px; }
+
+/* 列表行（图标/序号+文字，flex-start 让标记垂直成列） */
+.gm-list { display: flex; flex-direction: column; gap: 16px; }
+.gm-list-row { display: flex; align-items: flex-start; gap: 14px; }
+.gm-list-marker {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,184,0,0.16);
+  border: 1.5px solid rgba(255,184,0,0.55);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-data); font-weight: 700; color: var(--gold-main);
+  font-size: 32px;
+}
+
+/* 双栏对比 */
+.gm-compare { display: flex; gap: 22px; align-items: stretch; }
+.gm-compare-col {
+  flex: 1;
+  padding: 18px;
+  border-radius: 12px;
+  background: rgba(13,9,5,0.82);
+  border-top: 3px solid var(--gold-main);
+}
+
+/* fx 光球（glow blur ≤30px） */
+.fx-orb { position: absolute; border-radius: 50%; pointer-events: none; }

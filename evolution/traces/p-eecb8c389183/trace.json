@@ -1,0 +1,339 @@
+[
+  {
+    "id": "T-20260630T234023Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-30T23:40:23.260243+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: content.md"
+          },
+          {
+            "rule_id": "gate:description_fidelity_valid",
+            "details": "描述保真度不达标: 项目描述锚点缺失（content_ready.txt 未内嵌原始 description）: usestrix/strix, xbtlin/ai-berkshire, google/agents-cli"
+          },
+          {
+            "rule_id": "gate:no_forbidden_speech",
+            "details": "发现违禁词: content_ready.txt: '第一'; content_ready.txt: '神器'"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260630T234303Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-06-30T23:43:03.382198+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260630T234439Z-stage0.5-topic-plan",
+    "skill_id": "stage0.5-topic-plan",
+    "timestamp": "2026-06-30T23:44:39.520414+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260630T234631Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-30T23:46:31.684535+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260630T234908Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-06-30T23:49:08.766470+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 0.85,
+        "hard_violations": [],
+        "soft_issues": [
+          "预估/实际总偏差 44.3% > 20% (est=41s act=74s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260630T235823Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-06-30T23:58:23.255077+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:bg_component_source",
+            "details": "R-R-021: 7个无标记(s01,s02,s03,s04)"
+          },
+          {
+            "rule_id": "gate:bg_visual_diversity",
+            "details": "R-R-009: s01: 类型不足 (空); s02: 类型不足 (空); s03: 类型不足 (空); s04: 类型不足 (空); s05: 类型不足 (空); s06: 类型不足 (空)"
+          },
+          {
+            "rule_id": "gate:adjacent_bg_diversity",
+            "details": "R-R-010: 6 对相邻同质 (1 种风格/7 场景, 需≥3); s01↔s02; s02↔s03; s03↔s04; s04↔s05"
+          },
+          {
+            "rule_id": "gate:fx_layer_not_empty",
+            "details": "R-R-008: 1 个场景 fx 不合格 (s07(仅1种fx类型,需≥2))"
+          },
+          {
+            "rule_id": "gate:gradient_text_no_dark_shadow",
+            "details": "R-S6-023: 2 处渐变文字搭配黑色 text-shadow （应使用同色系发光）。违规: CSS规则 '.cta-question' 黑色 text-shadow 命中渐变类: cta-question; DOM 元素 class='cta-question' 同时携带渐变类 (cta-question) + 阴影类 (cta-question)"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001350Z-stage0.5-topic-plan",
+    "skill_id": "stage0.5-topic-plan",
+    "timestamp": "2026-07-01T00:13:50.719118+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001350Z-stage1-content",
+    "skill_id": "stage1-content",
+    "timestamp": "2026-07-01T00:13:50.805882+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001350Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-07-01T00:13:50.894058+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001350Z-stage4-audio",
+    "skill_id": "stage4-audio",
+    "timestamp": "2026-07-01T00:13:50.979896+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 0.85,
+        "hard_violations": [],
+        "soft_issues": [
+          "预估/实际总偏差 44.3% > 20% (est=41s act=74s)，可能 TTS 语速配置错误（如用了 +0% 而非 +25%）"
+        ]
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001351Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-01T00:13:51.073362+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001351Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-07-01T00:13:51.168949+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260701T001403Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-07-01T00:14:03.128862+00:00",
+    "project_dir": "2026/07/01/github-trending",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

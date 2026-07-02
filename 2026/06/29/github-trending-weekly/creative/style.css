@@ -1,0 +1,240 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 5 领域色（仅视觉用：标题渐变/卡片边框/标签/光晕） */
+  --domain-ai: #4DA8DA;        /* AI Agent */
+  --domain-video: #FF8C32;     /* 视频媒体 */
+  --domain-tools: #9B6BFF;     /* AI 编程工具 */
+  --domain-data: #F9A825;      /* 数据情报 */
+  --domain-sec: #3CC68A;       /* 安全隐私 */
+
+  /* 字描边（补偿卡片透明背景的可读性，HARD：禁靠不透明底挡 fx） */
+  --text-shadow-strong: 0 2px 8px rgba(0,0,0,0.85), 0 0 24px rgba(0,0,0,0.55);
+  --text-shadow-data: 0 2px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.6);
+}
+
+/* ============================================
+ * 周榜分组卡片 — 自定义（assemble 不注入组件 CSS，手写）
+ * 卡片 bg alpha 0.6（fx 透 40%），字深色描边保清晰
+ * ============================================ */
+
+/* 领域场景标题（领域名，禁颜色词） */
+.domain-title {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 78px;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-align: center;
+  /* 渐变文字：background-image 非 background 简写（grad-text 铁律） */
+  background-image: linear-gradient(135deg, var(--domain-color, #fff) 0%, #ffffff 60%, var(--domain-color, #fff) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* 渐变文字不可见时用描边兜底可见性 */
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.8));
+  margin-bottom: 36px;
+}
+.domain-subtitle {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.78);
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-shadow: var(--text-shadow-strong);
+  margin-bottom: 44px;
+}
+
+/* 项目卡片网格（分组场景纵向堆叠 N 张卡） */
+.proj-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* 单项目卡：bg alpha 0.6 让 fx 透过 40% 可见（HARD 新规则） */
+.proj-card {
+  position: relative;
+  width: 100%;
+  /* alpha 0.6：fx 透过 40%；不再 0.82 挡死 */
+  background: rgba(10, 10, 28, 0.6);
+  border: 2px solid var(--domain-color, rgba(255,255,255,0.25));
+  border-radius: 22px;
+  padding: 24px 32px;
+  /* 卡片边缘领域色光晕（视觉领域标识，非文字颜色） */
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 0 32px rgba(0,0,0,0.5),
+    0 0 60px var(--domain-glow, transparent);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+}
+.proj-card::before {
+  /* 左侧领域色色环条（视觉领域标识） */
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 8px;
+  background: var(--domain-color, #4DA8DA);
+  box-shadow: 0 0 18px var(--domain-color, #4DA8DA);
+}
+
+.proj-card-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+}
+.proj-avatar {
+  flex: 0 0 auto;
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--domain-color, rgba(255,255,255,0.5));
+  box-shadow: 0 0 18px rgba(0,0,0,0.6);
+}
+.proj-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.proj-name {
+  font-family: var(--font-data);
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  word-break: break-word;
+  /* 字描边补偿透明底可读性（HARD） */
+  text-shadow: var(--text-shadow-strong);
+}
+.proj-use {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--domain-color, #4DA8DA);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.85);
+}
+.proj-stars {
+  flex: 0 0 auto;
+  text-align: right;
+  font-family: var(--font-data);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.proj-stars-val {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--domain-color, #f9a825);
+  line-height: 1;
+  text-shadow: var(--text-shadow-data);
+}
+.proj-stars-label {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+
+/* hook / cta 场景的大数字 hero */
+.hero-week {
+  font-family: var(--font-data);
+  font-size: 200px;
+  font-weight: 900;
+  line-height: 0.9;
+  text-align: center;
+  background-image: linear-gradient(135deg, #ffe082 0%, #f9a825 45%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 6px 24px rgba(249,168,37,0.45));
+  letter-spacing: -0.02em;
+}
+.hero-headline {
+  font-family: var(--font-title);
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: var(--text-shadow-strong);
+  letter-spacing: 0.01em;
+}
+.hero-data-row {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.hero-stat-val {
+  font-family: var(--font-data);
+  font-size: 72px;
+  font-weight: 800;
+  color: #f9a825;
+  text-shadow: var(--text-shadow-data);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 32px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.85);
+  letter-spacing: 0.05em;
+}
+
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 88px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  background-image: linear-gradient(135deg, #4DA8DA 0%, #ffffff 50%, #f9a825 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.8));
+  letter-spacing: 0.02em;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: var(--text-shadow-strong);
+  letter-spacing: 0.06em;
+}
+
+/* phase 内容布局辅助 */
+.phase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

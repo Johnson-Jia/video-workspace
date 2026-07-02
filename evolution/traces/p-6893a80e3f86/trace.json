@@ -1,0 +1,38 @@
+[
+  {
+    "id": "T-20260630T091033Z-stage3-scenes",
+    "skill_id": "stage3-scenes",
+    "timestamp": "2026-06-30T09:10:33.400093+00:00",
+    "project_dir": "2026/06/30/github-trending-weekly",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: narration_segments.json"
+          },
+          {
+            "rule_id": "gate:json_valid",
+            "details": "JSON 文件缺失: narration_segments.json"
+          },
+          {
+            "rule_id": "gate:hook_pattern_verified",
+            "details": "narration_segments.json 缺失，无法校验 hook 模式"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**44 天 · 93 条视频 · 6 个系列 · 全自动**
+**50 天 · 103 条视频 · 6 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -48,6 +48,7 @@
 
 | 月份 | 链接 |
 |:---|:---|
+| 2026 年 7 月 | [GitHub Trending 7 月榜单](sources/github-trending/2026-07.md) |
 | 2026 年 6 月 | [GitHub Trending 6 月榜单](sources/github-trending/2026-06.md) |
 | 2026 年 5 月 | [GitHub Trending 5 月榜单](sources/github-trending/2026-05.md) |
 <!-- END MONTHLY -->
@@ -61,31 +62,31 @@
 
 | 日期 | 作品 |
 |:---|:---|
-| 6月26日 | [GitHub 每日热门](2026/06/26/github-trending/) |
-| 6月25日 | [GitHub 每日热门](2026/06/25/github-trending/) |
-| 6月24日 | [GitHub 每日热门](2026/06/24/github-trending/) |
-| 6月23日 | [GitHub 每日热门](2026/06/23/github-trending/) |
-| 6月22日 | [GitHub 每日热门](2026/06/22/github-trending/) |
+| 7月2日 | [GitHub 每日热门](2026/07/02/github-trending/) |
+| 7月1日 | [GitHub 每日热门](2026/07/01/github-trending/) |
+| 6月30日 | [GitHub 每日热门](2026/06/30/github-trending/) |
+| 6月29日 | [GitHub 每日热门](2026/06/29/github-trending/) |
+| 6月28日 | [GitHub 每日热门](2026/06/28/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 6月29日 | [GitHub 周度热门汇总](2026/06/29/github-trending-weekly/) |
 | 6月22日 | [GitHub 周度热门汇总](2026/06/22/github-trending-weekly/) |
 | 6月15日 | [GitHub 周度热门汇总](2026/06/15/github-trending-weekly/) |
-| 6月8日 | [GitHub 周度热门汇总](2026/06/08/github-trending-weekly/) |
 
 ### 深度解析
 
 | 日期 | 作品 |
 |:---|:---|
+| 7月2日 | [小鸣单车：1500万美金烧光](2026/07/02/goldminer/) |
+| 6月30日 | [学吧100：1亿美金烧光](2026/06/30/goldminer/) |
+| 6月28日 | [PowerToys：微软30+效率工具](2026/06/28/powertoys-deep-dive/) |
 | 6月25日 | [微贷网：1.1亿美金烧光](2026/06/25/goldminer/) |
 | 6月23日 | [魔力耳朵：5000万美金烧光](2026/06/23/goldminer/) |
-| 6月20日 | [ofo 小黄车：22亿美金烧光](2026/06/20/goldminer/) |
-| 6月19日 | [tmux：终端永不掉线](2026/06/19/tmux-deep-dive/) |
-| 6月18日 | [Yazi：4万星终端看图利器](2026/06/18/yazi-deep-dive/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 93 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 103 条视频。
 <!-- END RECENT -->
 
 ---

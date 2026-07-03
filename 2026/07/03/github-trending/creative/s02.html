@@ -1,0 +1,108 @@
+<!-- 场景: strix | 时长: 9.07s | usestrix/strix AI 白帽渗透（霓虹青 + 安全扫描 + 漏洞检测） -->
+<div class="layer-bg">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1828,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(77,168,218,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(77,168,218,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.35),rgba(0,212,255,0.55),rgba(0,212,255,0.35),transparent);box-shadow:0 0 20px rgba(0,212,255,0.35);animation:scanLine 8s linear infinite"></div>
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(77,168,218,0.25),rgba(77,168,218,0.40),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:440px;height:440px;border-radius:50%;background:rgba(0,150,200,0.14);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:38%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,0.4),rgba(77,168,218,0.55),rgba(0,212,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,212,255,0.50);border-left:2px solid rgba(0,212,255,0.50);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,212,255,0.50);border-right:2px solid rgba(0,212,255,0.50);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,212,255,0.50);border-left:2px solid rgba(0,212,255,0.50);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,212,255,0.50);border-right:2px solid rgba(0,212,255,0.50);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>SCAN</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.18;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(100,200,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- 霓虹青脉冲粒子（漏洞检测节点） -->
+  <div class="fx-particle fx-pulse" style="top:18%;left:22%;width:14px;height:14px;background:#00D4FF;box-shadow:0 0 16px rgba(0,212,255,0.85);"></div>
+  <div class="fx-particle fx-drift" style="top:26%;right:22%;width:13px;height:13px;background:#4DA8DA;box-shadow:0 0 14px rgba(77,168,218,0.75);animation-delay:-1s;"></div>
+  <div class="fx-particle fx-pulse" style="bottom:24%;left:22%;width:14px;height:14px;background:#9BE5FF;box-shadow:0 0 14px rgba(155,229,255,0.70);animation-delay:-2s;"></div>
+  <div class="fx-particle fx-drift" style="bottom:20%;right:24%;width:12px;height:12px;background:#00D4FF;box-shadow:0 0 12px rgba(0,212,255,0.65);animation-delay:-0.5s;"></div>
+  <!-- 安全扫描带 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(0,212,255,0.55),transparent);"></div>
+  <!-- 中央盾形锁定环 -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 120px);left:calc(50% - 120px);width:240px;height:240px;border-color:rgba(0,212,255,0.50);"></div>
+  <div class="fx-pulse-ring" style="top:calc(50% - 80px);left:calc(50% - 80px);width:160px;height:160px;border-color:rgba(77,168,218,0.40);animation-delay:-1.2s;"></div>
+  <!-- 横向检测光束 -->
+  <div class="fx-beam" style="top:42%;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.45),transparent);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="project-full-card">
+    <div class="pfc-glow-a" style="background:#00D4FF;"></div>
+    <div class="pfc-glow-b" style="background:#4DA8DA;"></div>
+
+    <div class="pfc-top">
+      <div class="pfc-rank-row">
+        <span class="pfc-rank grad-cyan">#01</span>
+        <span class="pfc-cat grad-cyan">AI 白帽 · 渗透测试</span>
+      </div>
+      <div class="pfc-use grad-cyan">AI 帮你查安全漏洞</div>
+      <div class="pfc-name"><span class="pfc-owner">usestrix /</span> <span class="pfc-repo">strix</span></div>
+    </div>
+
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#00D4FF,#4DA8DA,#00D4FF);"></div>
+        <img class="pfc-avatar" src="assets/avatars/usestrix.png" alt="">
+      </div>
+      <div class="pfc-desc">开源 AI 渗透工具<br>自动扫描应用 · 普通人也能做安全体检</div>
+      <div class="pfc-stars-block">
+        <div class="pfc-stars-num grad-cyan">32,101 ★</div>
+        <div class="pfc-stars-label">总星标 · 今日 +2,167</div>
+      </div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">Python</span>
+        <span class="pfc-topic">AI 白帽</span>
+        <span class="pfc-topic">漏洞扫描</span>
+      </div>
+    </div>
+
+    <div class="pfc-bottom">
+      <div class="pfc-comment" style="border-left-color:#00D4FF;">三万星项目，让 AI 当白帽帮你查漏洞</div>
+    </div>
+  </div>
+</div>
+</div>

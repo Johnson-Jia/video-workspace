@@ -1,0 +1,121 @@
+<!-- 场景: career-ops | 时长: 9.19s | santifer/career-ops 14 模式求职（青绿稳重 + 流程节点） -->
+<div class="layer-bg">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#02160e,#04241a,#02160e)"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat7" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(160,75%,45%,0.14)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(160,75%,45%,0.14)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat7)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(160,80%,50%,0.12) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,hsla(160,80%,48%,0.22),hsla(165,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,hsla(155,70%,45%,0.12),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(160,90%,55%,0.9);box-shadow:0 0 16px hsla(160,80%,50%,0.8),0 0 32px hsla(160,70%,45%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(170,85%,55%,0.85);box-shadow:0 0 14px hsla(170,75%,50%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(155,80%,52%,0.82);box-shadow:0 0 14px hsla(155,70%,48%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:40%;left:78%;width:9px;height:9px;border-radius:50%;
+  background:hsla(165,85%,58%,0.85);box-shadow:0 0 12px hsla(165,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(160,70%,48%,0.14),transparent,hsla(175,60%,45%,0.10));
+  border:1.5px solid hsla(160,70%,52%,0.28);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(160,70%,55%,0.45);border-left:2px solid hsla(160,70%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(160,70%,55%,0.45);border-right:2px solid hsla(160,70%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(160,70%,55%,0.45);border-left:2px solid hsla(160,70%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(160,70%,55%,0.45);border-right:2px solid hsla(160,70%,55%,0.45);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:50%;right:-8%;width:50%;height:200px;opacity:0.16;
+  background:linear-gradient(90deg,hsla(150,70%,50%,0.5),hsla(170,60%,48%,0.4),hsla(190,65%,50%,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- 青绿脉冲粒子（求职流程节点） -->
+  <div class="fx-particle fx-pulse" style="top:18%;left:22%;width:14px;height:14px;background:#14E0A8;box-shadow:0 0 18px rgba(20,224,168,0.85);"></div>
+  <div class="fx-particle fx-drift" style="top:26%;right:22%;width:13px;height:13px;background:#7BF0CF;box-shadow:0 0 16px rgba(123,240,207,0.75);animation-delay:-1s;"></div>
+  <div class="fx-particle fx-pulse" style="bottom:24%;left:22%;width:14px;height:14px;background:#2EC4B6;box-shadow:0 0 16px rgba(46,196,182,0.70);animation-delay:-2s;"></div>
+  <div class="fx-particle fx-drift" style="bottom:20%;right:24%;width:12px;height:12px;background:#14E0A8;box-shadow:0 0 14px rgba(20,224,168,0.65);animation-delay:-0.5s;"></div>
+  <!-- 流程扫描带 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(20,224,168,0.55),transparent);"></div>
+  <!-- 中央流程环 -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 130px);left:calc(50% - 130px);width:260px;height:260px;border-color:rgba(20,224,168,0.50);"></div>
+  <div class="fx-pulse-ring" style="top:calc(50% - 85px);left:calc(50% - 85px);width:170px;height:170px;border-color:rgba(46,196,182,0.40);animation-delay:-1.2s;"></div>
+  <!-- 流程光束 -->
+  <div class="fx-beam" style="top:48%;background:linear-gradient(90deg,transparent,rgba(20,224,168,0.45),transparent);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="project-full-card">
+    <div class="pfc-glow-a" style="background:#14E0A8;"></div>
+    <div class="pfc-glow-b" style="background:#2EC4B6;"></div>
+
+    <div class="pfc-top">
+      <div class="pfc-rank-row">
+        <span class="pfc-rank grad-green">#06</span>
+        <span class="pfc-cat grad-green">AI 求职 · 14 模式系统</span>
+      </div>
+      <div class="pfc-use grad-green">AI 帮你跑求职</div>
+      <div class="pfc-name"><span class="pfc-owner">santifer /</span> <span class="pfc-repo">career-ops</span></div>
+    </div>
+
+    <div class="pfc-mid">
+      <div class="pfc-avatar-wrap">
+        <div class="pfc-avatar-ring" style="background:conic-gradient(from 0deg,#14E0A8,#2EC4B6,#14E0A8);"></div>
+        <img class="pfc-avatar" src="assets/avatars/santifer.png" alt="">
+      </div>
+      <div class="pfc-desc">投简历 / 准备面试 / 批量处理<br>14 模式覆盖找工作每个环节</div>
+      <div class="pfc-stars-block">
+        <div class="pfc-stars-num grad-green">57,772 ★</div>
+        <div class="pfc-stars-label">总星标 · 今日 +322</div>
+      </div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">JavaScript</span>
+        <span class="pfc-topic">14 模式</span>
+        <span class="pfc-topic">求职全流程</span>
+      </div>
+    </div>
+
+    <div class="pfc-bottom">
+      <div class="pfc-comment" style="border-left-color:#14E0A8;">找工作每个环节都能交出去，AI 替你跑</div>
+    </div>
+  </div>
+</div>
+</div>

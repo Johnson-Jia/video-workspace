@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**53 天 · 129 条视频 · 6 个系列 · 全自动**
+**54 天 · 131 条视频 · 6 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -62,19 +62,19 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 7月6日 | [GitHub 每日热门](2026/07/06/github-trending/) |
 | 7月5日 | [GitHub 每日热门](2026/07/05/github-trending/) |
 | 7月4日 | [GitHub 每日热门](2026/07/04/github-trending/) |
 | 7月3日 | [GitHub 每日热门](2026/07/03/github-trending/) |
 | 7月2日 | [GitHub 每日热门](2026/07/02/github-trending/) |
-| 7月1日 | [GitHub 每日热门](2026/07/01/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 7月6日 | [GitHub 周度热门汇总](2026/07/06/github-trending-weekly/) |
 | 6月29日 | [GitHub 周度热门汇总](2026/06/29/github-trending-weekly/) |
 | 6月22日 | [GitHub 周度热门汇总](2026/06/22/github-trending-weekly/) |
-| 6月15日 | [GitHub 周度热门汇总](2026/06/15/github-trending-weekly/) |
 
 ### 深度解析
 
@@ -86,7 +86,7 @@
 | 7月5日 | [AI转型 E03：预算4块成本](2026/07/05/tutorial-e03-cost/) |
 | 7月5日 | [AI转型 E03：ROI与老板三问](2026/07/05/tutorial-e03-roi/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 129 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 131 条视频。
 <!-- END RECENT -->
 
 ---

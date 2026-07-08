@@ -1,0 +1,138 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-green: #10B981;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.92);
+}
+
+/* ============================================
+ * Tutorial E02 cta 段 — E03 预告 + 合集引导 + 互动（横屏 reveal §6.16）
+ * 1 场景：E03 预告 + 合集引导 + 互动问题
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 28px;
+  padding: 60px 120px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 28px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 50%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— E03 预告卡 —— */
+.tut-cta-next {
+  border-radius: 22px; padding: 28px 36px;
+  border: 2px solid rgba(251,191,36,0.55);
+  background: linear-gradient(165deg, rgba(251,191,36,0.10), rgba(15,23,42,0.60));
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center;
+}
+.tut-cta-next .cn-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+}
+.tut-cta-next .cn-title {
+  font-family: var(--font-title); font-size: 80px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 0 20px rgba(251,191,36,0.30);
+}
+.tut-cta-next .cn-subtitle {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700;
+  color: var(--tut-white); -webkit-text-fill-color: var(--tut-white);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+.tut-cta-next .cn-points {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-blue-white); -webkit-text-fill-color: var(--tut-blue-white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-cta-next .cn-pt { display: inline-flex; align-items: center; gap: 8px; }
+.tut-cta-next .cn-pt-ico { font-size: 36px; }
+.tut-cta-next .cn-pt-sep { color: var(--tut-gray); -webkit-text-fill-color: var(--tut-gray); }
+.tut-cta-next .cn-warn {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; font-style: italic;
+  color: var(--tut-gold); -webkit-text-fill-color: var(--tut-gold);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+  padding-top: 4px;
+}
+
+/* —— 合集引导 —— */
+.tut-cta-series {
+  border-radius: 20px; padding: 22px 32px;
+  border: 2px solid rgba(59,130,246,0.55);
+  background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.60));
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.tut-cta-series .cs-head {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 0 14px rgba(59,130,246,0.22);
+}
+.tut-cta-series .cs-from {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600;
+  color: var(--tut-blue-white); -webkit-text-fill-color: var(--tut-blue-white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-cta-series .cs-actions {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  flex-wrap: wrap;
+}
+.tut-cta-series .cs-act {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 22px; border-radius: 999px;
+  border: 1.5px solid;
+}
+.tut-cta-series .cs-act-follow {
+  color: var(--tut-gold); -webkit-text-fill-color: var(--tut-gold);
+  border-color: rgba(251,191,36,0.55);
+  background: rgba(251,191,36,0.10);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-cta-series .cs-act-repo {
+  color: var(--tut-blue); -webkit-text-fill-color: var(--tut-blue);
+  border-color: rgba(59,130,246,0.55);
+  background: rgba(59,130,246,0.10);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-cta-series .cs-ico { font-size: 34px; }
+
+/* —— 互动问题 —— */
+.tut-cta-question {
+  display: flex; align-items: center; justify-content: center; gap: 26px;
+  padding: 22px 36px; border-radius: 18px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(90deg, rgba(16,185,129,0.08), rgba(15,23,42,0.50));
+}
+.tut-cta-question .cq-icon { font-size: 64px; line-height: 1; }
+.tut-cta-question .cq-body { display: flex; flex-direction: column; gap: 4px; }
+.tut-cta-question .cq-line {
+  font-family: var(--font-title); font-size: 42px; font-weight: 900; line-height: 1.25;
+  color: var(--tut-white); -webkit-text-fill-color: var(--tut-white);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+.tut-cta-question .cq-hl { font-size: 46px; }
+.tut-cta-question .cq-tail {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; font-style: italic;
+  color: var(--tut-blue-white); -webkit-text-fill-color: var(--tut-blue-white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+  padding-top: 4px;
+}

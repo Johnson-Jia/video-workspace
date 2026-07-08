@@ -1,0 +1,43 @@
+<!-- 场景: scene-5 | CTA 收官 | 时长: 17.83s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg" data-bg-types="gradient,glow,grid,scan,particles">
+<!-- bg-component: clean_slate -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制，收官温暖） -->
+  <div class="fx-aura" style="top:18%;left:14%;width:340px;height:340px;background:radial-gradient(circle,rgba(251,191,36,0.24),transparent 70%);"></div>
+  <div class="fx-aura" style="top:68%;right:10%;width:320px;height:320px;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);"></div>
+  <div class="fx-particle" style="top:30%;left:80%;width:8px;height:8px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:72%;left:18%;width:7px;height:7px;background:rgba(96,165,250,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene" style="justify-content:flex-start;gap:22px;">
+  <!-- 单 phase div，含 3 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: E02 下集预告卡 + 12 集合集徽章（同屏 grid） — narration「下集 E02，讲思想转变...」 -->
+  <div class="tut-region tut-cta" data-reveal="0" data-reveal-dir="left">
+    <div class="cta-e02">
+      <span class="e02-badge">E02 · 下集</span>
+      <div class="e02-title">思想转变</div>
+      <div class="e02-sub">为什么转型的起手不是上工具，是先转型思想</div>
+    </div>
+    <div class="cta-collection">
+      <div class="col-badge">
+        <span class="col-num">12</span>
+        <span class="col-unit">集</span>
+      </div>
+      <div class="col-label">深度解析合集</div>
+      <div class="col-sub">总纲 → 6 个实施阶段</div>
+    </div>
+  </div>
+
+  <!-- Region 2: 互动问句区 — narration「你的团队开始用 AI 了吗？教程仓库在评论区，clone 下来就能跑」 -->
+  <div class="tut-region tut-interact" data-reveal="11.5" data-reveal-dir="left">
+    <span class="interact-lead">互动 · 你自查了吗</span>
+    <div class="interact-q">你的团队开始用 AI 了吗</div>
+    <span class="interact-lead" style="color:var(--tut-gray);opacity:0.85;">教程仓库在评论区 · clone 下来就能跑</span>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 可选：cinema 后处理原语 -->
+</div>

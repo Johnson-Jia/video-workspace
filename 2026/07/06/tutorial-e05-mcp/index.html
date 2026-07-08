@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 段6 — MCP 网关 + 跳过判断（横屏 reveal §6.16）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+  padding: 28px 90px 28px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#C4B5FD 0%,#DDD6FE 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-mcp-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tut-mcp-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-mcp-title .title-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-mcp-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— MCP 网关流程 —— */
+.tut-mcp-flow { width: 100%; }
+.flow-row {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: 14px;
+}
+.flow-node {
+  flex: 1;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center;
+}
+.fn-purple {
+  border-color: rgba(196,181,253,0.6);
+  background: linear-gradient(165deg, rgba(167,139,250,0.13), rgba(15,23,42,0.88));
+}
+.fn-gold {
+  border-color: rgba(252,211,77,0.65);
+  background: linear-gradient(165deg, rgba(251,191,36,0.13), rgba(15,23,42,0.88));
+}
+.fn-blue {
+  border-color: rgba(147,197,253,0.6);
+  background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88));
+}
+.fn-icon {
+  font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 900;
+  color: var(--tut-white); line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.fn-name {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.fn-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.2;
+}
+.flow-arrow {
+  display: flex; align-items: center;
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— CLI 优先提示 —— */
+.tut-mcp-cli { width: 100%; }
+.cli-card {
+  border-radius: 16px; padding: 10px 26px;
+  border: 2.5px solid rgba(147,197,253,0.6);
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88), rgba(248,113,113,0.12));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.cli-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.cli-main {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900; line-height: 1.15;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.cm-key { font-weight: 900; }
+.cm-arrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-blue);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cm-dot {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cli-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 跳过决策卡（金边强调） —— */
+.tut-mcp-skip { width: 100%; }
+.skip-card {
+  border-radius: 18px; padding: 12px 24px;
+  border: 4px solid rgba(252,211,77,0.85);
+  background: linear-gradient(165deg, rgba(251,191,36,0.12), rgba(15,23,42,0.92));
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: 0 0 0 1px rgba(252,211,77,0.25) inset;
+}
+.skip-header { text-align: center; }
+.skip-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.skip-questions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.sq-item {
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 2px solid rgba(110,231,183,0.45);
+  background: rgba(16,185,129,0.08);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-align: center;
+}
+.sq-q {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sq-a {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+}
+.sq-no { color: var(--tut-green); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+.skip-verdict {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.sv-line {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border-radius: 12px;
+  padding: 8px 14px;
+  border: 2px solid;
+}
+.sv-skip {
+  border-color: rgba(110,231,183,0.55);
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88));
+}
+.sv-do {
+  border-color: rgba(252,211,77,0.55);
+  background: linear-gradient(90deg, rgba(251,191,36,0.12), rgba(15,23,42,0.88));
+}
+.sv-icon {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1;
+}
+.sv-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-action {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-tool {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-fallback {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border-radius: 12px;
+  padding: 8px 14px;
+  border: 2px dashed rgba(110,231,183,0.45);
+  background: rgba(15,23,42,0.6);
+}
+.sf-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sf-tool {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sf-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes hexPulse { 0%,100%{opacity:0.5} 50%{opacity:0.85} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes hexScanRotate { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes hexNodePulse { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes holoHexSpin { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(60deg)} }
+@keyframes cornerBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="52.37" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.28" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="52.37">
+<!-- 场景: seg1 | 时长: ~52s | bg: hex_grid | MCP 网关 + CLI 优先 + 跳过判断决策卡 -->
+<div class="layer-bg" data-bg-types="beams,geometry,glow,gradient,particles">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(160,20%,4%),hsl(170,15%,8%),hsl(160,20%,4%))"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(150,80%,55%,0.10) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(150,80%,50%,0.22),hsla(155,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(140,60%,45%,0.10),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,90%,60%,0.9);box-shadow:0 0 16px hsla(150,80%,55%,0.8),0 0 32px hsla(150,70%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(160,85%,58%,0.85);box-shadow:0 0 14px hsla(160,75%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(145,80%,55%,0.8);box-shadow:0 0 14px hsla(145,70%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:40%;left:78%;width:9px;height:9px;border-radius:50%;
+  background:hsla(155,85%,60%,0.85);box-shadow:0 0 12px hsla(155,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(150,70%,50%,0.12),transparent,hsla(170,60%,45%,0.10));
+  border:1.5px solid hsla(150,70%,55%,0.25);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:50%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,hsla(120,60%,50%,0.5),hsla(160,50%,45%,0.4),hsla(200,60%,50%,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+
+<div class="layer-fx">
+  <div class="fx-pulse" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);width:780px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:780px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:74%;left:50%;transform:translateX(-50%);width:820px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:74%;left:20%;width:320px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 16px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:74%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:74%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-mcp-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-purple-bg-inline">E05 · 段6</div>
+      <h1 class="title-h1"><span class="grad-purple">MCP 网关</span></h1>
+      <div class="title-sub">封装企业服务 · <span class="grad-gold">这集可以跳过</span></div>
+    </div>
+
+    <!-- 区域 2：MCP 网关流程（reveal 3，left） -->
+    <div class="tut-region tut-mcp-flow" data-reveal="3" data-reveal-dir="left">
+      <div class="flow-row">
+        <div class="flow-node fn-purple">
+          <div class="fn-icon">⚙</div>
+          <div class="fn-name grad-purple">企业内部服务</div>
+          <div class="fn-note">注册中心 / 内部 API</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-gold">
+          <div class="fn-icon">⇄</div>
+          <div class="fn-name grad-gold">MCP 零代码封装</div>
+          <div class="fn-note">工具定义常驻</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-blue">
+          <div class="fn-icon">●</div>
+          <div class="fn-name grad-blue">AI Agent 调用</div>
+          <div class="fn-note">无命令行等价物场景</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：CLI 优先提示（reveal 14，top） -->
+    <div class="tut-region tut-mcp-cli" data-reveal="14" data-reveal-dir="top">
+      <div class="cli-card">
+        <div class="cli-tag grad-blue-bg-inline">CLI 优先原则</div>
+        <div class="cli-main">
+          <span class="cm-key grad-blue">命令行能搞定</span>
+          <span class="cm-arrow">→</span>
+          <span class="cm-key grad-gold">别用 MCP</span>
+          <span class="cm-dot">·</span>
+          定义常驻 <span class="cm-key grad-red">烧 token</span>
+        </div>
+        <div class="cli-sub">gh · kubectl 能完成的就别封装</div>
+      </div>
+    </div>
+
+    <!-- 区域 4：跳过决策卡（reveal 24，fade） — 金边强调 -->
+    <div class="tut-region tut-mcp-skip" data-reveal="24" data-reveal-dir="fade">
+      <div class="skip-card">
+        <div class="skip-header">
+          <span class="skip-tag grad-gold-bg-inline">跳过判断 · 这集可以跳过</span>
+        </div>
+        <div class="skip-questions">
+          <div class="sq-item">
+            <span class="sq-q">代码库大？</span>
+            <span class="sq-a sq-no">单仓库几万行内</span>
+          </div>
+          <div class="sq-item">
+            <span class="sq-q">项目多？</span>
+            <span class="sq-a sq-no">无多仓库微服务</span>
+          </div>
+          <div class="sq-item">
+            <span class="sq-q">业务复杂？</span>
+            <span class="sq-a sq-no">知识不算复杂</span>
+          </div>
+        </div>
+        <div class="skip-verdict">
+          <div class="sv-line sv-skip">
+            <span class="sv-icon">✓</span>
+            <span class="sv-label">三都否则</span>
+            <span class="sv-action grad-green">直接跳过本阶段</span>
+            <span class="sv-tool">CLAUDE.md + grep + 良好代码组织</span>
+          </div>
+          <div class="sv-line sv-do">
+            <span class="sv-icon">!</span>
+            <span class="sv-label">大型组织</span>
+            <span class="sv-action grad-gold">才值得投入</span>
+            <span class="sv-tool">多仓库 · 百万行 · 复杂业务</span>
+          </div>
+          <div class="sv-fallback">
+            <span class="sf-label">跳过团队降级方案：</span>
+            <span class="sf-tool grad-green">grep + 人审 + git diff</span>
+            <span class="sf-note">能力降级 · 闭环能跑</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.to('#s01 [data-reveal="0"]', {opacity:1,duration:0.5}, 0.00);
+tl.fromTo('#s01 [data-reveal="3"]', {opacity:0,x:-40}, {opacity:1,x:0,duration:0.5}, 3.00);
+tl.fromTo('#s01 [data-reveal="14"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 14.00);
+tl.to('#s01 [data-reveal="24"]', {opacity:1,duration:0.5}, 24.00);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:31,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:20,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:52.37,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程色板（design.md color_direction — 钩子段三数据语义色） */
+  --tut-bg: #0F172A;
+  --tut-primary: #1E3A8A;
+  --tut-primary-2: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E01 钩子段 — 数据飞升冲击（横屏教程 reveal §6.16）
+ * 一屏三数据卡同屏 + data-reveal 依次淡入 + count-up
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region grid）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 44px;
+  padding: 70px 140px 70px 140px;
+}
+
+.tut-region {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* —— 标题区 —— */
+.tut-hero { text-align: center; }
+.tut-hero .tut-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+.tut-hero .tut-title {
+  font-family: var(--font-title);
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  /* 渐变标题（横屏增强 §6.12，禁白色端点）— 三色渐变呼应三数据 */
+  background-image: linear-gradient(92deg, #FBBF24 0%, #3B82F6 50%, #10B981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-hero .tut-underline {
+  display: block;
+  width: 280px;
+  height: 6px;
+  margin: 22px auto 0;
+  background: linear-gradient(90deg, var(--tut-gold), var(--tut-primary-2), var(--tut-green));
+  border-radius: 3px;
+  transform-origin: center center;
+  transform: scaleX(0);
+}
+
+/* —— 三数据卡 grid（横向并列 16:9 居中）—— */
+.tut-burst {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  width: 100%;
+  align-items: stretch;
+}
+.tut-burst .burst-card {
+  border-radius: 22px;
+  padding: 44px 36px 40px;
+  border: 2px solid;
+  background: rgba(15,23,42,0.55);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.tut-burst .burst-card.gold {
+  border-color: rgba(251,191,36,0.60);
+  background: linear-gradient(165deg, rgba(251,191,36,0.12), rgba(15,23,42,0.60));
+  box-shadow: 0 0 50px rgba(251,191,36,0.10) inset;
+}
+.tut-burst .burst-card.blue {
+  border-color: rgba(59,130,246,0.60);
+  background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.60));
+  box-shadow: 0 0 50px rgba(59,130,246,0.10) inset;
+}
+.tut-burst .burst-card.green {
+  border-color: rgba(16,185,129,0.60);
+  background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.60));
+  box-shadow: 0 0 50px rgba(16,185,129,0.10) inset;
+}
+.tut-burst .burst-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 22px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  letter-spacing: 0.06em;
+}
+.tut-burst .burst-card.gold  .burst-tag { background: rgba(251,191,36,0.20); color: #FEF3C7; }
+.tut-burst .burst-card.blue  .burst-tag { background: rgba(59,130,246,0.20); color: #BFDBFE; }
+.tut-burst .burst-card.green .burst-tag { background: rgba(16,185,129,0.20); color: #A7F3D0; }
+
+/* count-up 数字大字（核心冲击） */
+.tut-burst .burst-num {
+  font-family: var(--font-data);
+  font-size: 150px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 8px 0 14px;
+}
+.tut-burst .burst-card.gold  .burst-num { color: var(--tut-gold);  text-shadow: 0 0 18px rgba(251,191,36,0.30); }
+.tut-burst .burst-card.blue  .burst-num { color: var(--tut-primary-2); text-shadow: 0 0 18px rgba(59,130,246,0.30); }
+.tut-burst .burst-card.green .burst-num { color: var(--tut-green); text-shadow: 0 0 18px rgba(16,185,129,0.30); }
+/* count-up 前缀符号（+/-）：GSAP textContent 只控数字，prefix 由 ::before attr 注入，重 render 不丢 */
+[data-count-prefix]::before { content: attr(data-count-prefix); }
+.tut-burst .burst-num .num-unit {
+  font-size: 64px;
+  font-weight: 700;
+  vertical-align: super;
+  margin-left: 4px;
+  opacity: 0.92;
+}
+
+.tut-burst .burst-label {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-white);
+  line-height: 1.25;
+}
+
+/* —— 注释行（三卡下方，灰色严谨口径）—— */
+.tut-note {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-gray);
+  line-height: 1.5;
+  padding: 18px 24px;
+  border-top: 1px solid rgba(148,163,184,0.25);
+}
+.tut-note .note-sep {
+  display: inline-block;
+  margin: 0 14px;
+  opacity: 0.7;
+}
+.tut-note strong {
+  color: var(--tut-blue-white);
+  font-weight: 700;
+}
+
+/* —— 悬念 hero（场景 2）—— */
+.tut-hook {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.tut-hook .hook-q {
+  font-family: var(--font-title);
+  font-size: 168px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  /* 渐变大字（主色蓝渐变，禁白色端点） */
+  background-image: linear-gradient(92deg, #60A5FA 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-hook .hook-sub {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+  letter-spacing: 0.1em;
+}
+.tut-hook .hook-underline {
+  display: block;
+  width: 360px;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--tut-primary-2), transparent);
+  border-radius: 3px;
+  transform-origin: center center;
+  transform: scaleX(0);
+}
+
+/* 悬念场景：三数据卡缩小保留顶部（作为问题背景，不消失） */
+.tut-minirow {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  width: 100%;
+}
+.tut-minirow .mini-card {
+  border-radius: 14px;
+  padding: 16px 24px;
+  border: 1.5px solid;
+  background: rgba(15,23,42,0.55);
+  text-align: center;
+  min-width: 220px;
+}
+.tut-minirow .mini-card.gold  { border-color: rgba(251,191,36,0.45); }
+.tut-minirow .mini-card.blue  { border-color: rgba(59,130,246,0.45); }
+.tut-minirow .mini-card.green { border-color: rgba(16,185,129,0.45); }
+.tut-minirow .mini-num {
+  font-family: var(--font-data);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.0;
+}
+.tut-minirow .mini-card.gold  .mini-num { color: var(--tut-gold); }
+.tut-minirow .mini-card.blue  .mini-num { color: var(--tut-primary-2); }
+.tut-minirow .mini-card.green .mini-num { color: var(--tut-green); }
+.tut-minirow .mini-label {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+/* —— 承接条（指向介绍段）—— */
+.tut-handoff {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), rgba(15,23,42,0.4));
+  border: 1.5px solid rgba(96,165,250,0.45);
+}
+.tut-handoff .handoff-txt {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--tut-white);
+}
+.tut-handoff .handoff-arrow {
+  font-family: var(--font-data);
+  font-size: 40px;
+  color: var(--tut-primary-2);
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* —— 入场辅助：data-reveal="0" 场景开始即显示 —— */
+.tut-region[data-reveal="0"] { opacity: 1; }

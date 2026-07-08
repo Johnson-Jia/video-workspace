@@ -1,0 +1,22 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 80,
+    "emotion": "教程-业务知识RAG",
+    "text": "第一件套，业务知识 RAG。通用大模型不懂你的业务——产品手册、内部规范它都没读过。RAG 的做法是：先检索知识库片段，再喂给模型，让它开卷考试。核心是两阶段检索：第一阶段多路召回，优先找全；第二阶段 CrossEncoder 重排，精度提上去。还要做多租户隔离——把租户标识拼进过滤表达式，A 公司的知识 B 公司查不到，default 是全租户共享。业务 RAG 让 AI 准确回答业务问题，幻觉大幅下降。这是给 AI 装上业务记忆。",
+    "narration": "第一件套，业务知识 RAG。通用大模型不懂你的业务——产品手册、内部规范它都没读过。RAG 的做法是：先检索知识库片段，再喂给模型，让它开卷考试。核心是两阶段检索：第一阶段多路召回，优先找全；第二阶段 CrossEncoder 重排，精度提上去。还要做多租户隔离——把租户标识拼进过滤表达式，A 公司的知识 B 公司查不到，default 是全租户共享。业务 RAG 让 AI 准确回答业务问题，幻觉大幅下降。这是给 AI 装上业务记忆。",
+    "hook_anchors": ["第一件套", "业务知识 RAG", "通用大模型", "不懂你的业务", "产品手册", "内部规范", "RAG 的做法", "检索知识库片段", "喂给模型", "开卷考试", "两阶段检索", "第一阶段", "多路召回", "找全", "第二阶段", "CrossEncoder 重排", "精度", "多租户隔离", "租户标识", "过滤表达式", "A 公司的知识", "B 公司查不到", "default", "全租户共享", "幻觉大幅下降", "业务记忆"],
+    "visual_type": "tutorial_rag_code",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「业务知识 RAG」+ 副「让 AI 开卷考试」fade-in", "duration_share": 0.10},
+      {"phase": 2, "start_offset": 9, "focus": "RAG 原理卡 reveal（知识库→向量化→检索→模型回答 流程）左滑入", "duration_share": 0.20},
+      {"phase": 3, "start_offset": 22, "focus": "代码块头部 reveal + 注释行「两阶段检索：召回优先 → 重排提精度」打字", "duration_share": 0.12},
+      {"phase": 4, "start_offset": 30, "focus": "代码块流程行 reveal「三路并发召回 → 按原文去重 → CrossEncoder 重排 → 过滤低分」逐段点亮", "duration_share": 0.20},
+      {"phase": 5, "start_offset": 46, "focus": "代码块注释「多租户隔离」+ expr 行打字 'corp_code in [租户A, default]'", "duration_share": 0.20},
+      {"phase": 6, "start_offset": 62, "focus": "收尾金句「幻觉大幅下降 · 给 AI 装上业务记忆」reveal", "duration_share": 0.18}
+    ],
+    "bg_component": "hex_grid"
+  }
+]

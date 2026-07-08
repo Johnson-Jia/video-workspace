@@ -1,0 +1,31 @@
+<!-- 场景: cta | 时长: 6.65s | 收尾召唤 · 综合 5 领域色渐变 -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0A0E27 0%,#1A0B2E 50%,#0A0E27 100%)"></div>
+  <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 50%,transparent 0px,transparent 80px,rgba(249,168,37,0.045) 80px,rgba(249,168,37,0.045) 82px);animation:contourPulse 9s ease-in-out infinite"></div>
+  <div style="position:absolute;top:50%;left:50%;width:1100px;height:1100px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,255,0.10) 0%,rgba(255,184,0,0.08) 35%,rgba(255,59,123,0.05) 55%,transparent 75%);filter:blur(80px);animation:glowPulse 8s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1: 5 色综合收束光带 -->
+  <div style="position:absolute;top:0;left:25%;width:2px;height:100%;background:linear-gradient(transparent 10%,rgba(0,212,255,0.32) 50%,transparent 90%);animation:beamBreath 6s ease-in-out infinite"></div>
+  <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:linear-gradient(transparent 10%,rgba(255,184,0,0.30) 50%,transparent 90%);animation:beamBreath 7s ease-in-out infinite 1s"></div>
+  <div style="position:absolute;top:0;left:75%;width:2px;height:100%;background:linear-gradient(transparent 10%,rgba(255,59,123,0.28) 50%,transparent 90%);animation:beamBreath 8s ease-in-out infinite 2s"></div>
+  <!-- fx 2: 温暖闪烁星点（5 色散布） -->
+  <div class="fx-dot fx-pulse" style="position:absolute;top:25%;left:18%;width:8px;height:8px;border-radius:50%;background:#00D4FF;box-shadow:0 0 18px #00D4FF;animation:starDot 3s ease-in-out infinite"></div>
+  <div class="fx-dot fx-drift" style="position:absolute;top:28%;left:82%;width:7px;height:7px;border-radius:50%;background:#FFB800;box-shadow:0 0 16px #FFB800;animation:starDot 3.5s ease-in-out infinite 0.8s"></div>
+  <div class="fx-dot fx-spin" style="position:absolute;top:72%;left:20%;width:6px;height:6px;border-radius:50%;background:#FF3B7B;box-shadow:0 0 14px #FF3B7B;animation:starDot 4s ease-in-out infinite 1.5s"></div>
+  <div class="fx-dot fx-blink" style="position:absolute;top:75%;left:80%;width:7px;height:7px;border-radius:50%;background:#00E5A0;box-shadow:0 0 15px #00E5A0;animation:starDot 3.2s ease-in-out infinite 0.3s"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <div class="cta-title">第 28 周周榜</div>
+  <div style="font-family:var(--font-body);font-size:36px;font-weight:600;color:rgba(255,255,255,0.78);text-align:center;letter-spacing:0.08em;text-shadow:var(--text-shadow-strong);margin:30px 0 50px">就 到 这</div>
+  <div class="cta-sub">13 个项目，想试哪个</div>
+  <div style="margin-top:56px;display:flex;align-items:center;gap:20px;justify-content:center">
+    <div style="width:80px;height:3px;background:linear-gradient(90deg,transparent,#00D4FF)"></div>
+    <div style="font-family:var(--font-title);font-size:54px;font-weight:900;background-image:linear-gradient(135deg,#00D4FF 0%,#ffffff 50%,#FFB800 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.7));letter-spacing:0.04em">关注 GitHub 星探</div>
+    <div style="width:80px;height:3px;background:linear-gradient(90deg,#FFB800,transparent)"></div>
+  </div>
+  <div style="font-family:var(--font-body);font-size:34px;font-weight:600;color:rgba(255,255,255,0.7);text-align:center;margin-top:32px;letter-spacing:0.1em;text-shadow:var(--text-shadow-strong)">下 周 见</div>
+</div>
+</div>

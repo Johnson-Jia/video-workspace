@@ -1,0 +1,93 @@
+<!-- 场景: seg1 | 时长: ~42s | bg: clean_slate | 思想转变：两个极端 + 拥抱验证 + 引出原理 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 三色静态光晕（红双卡 / 绿金句 / 蓝转折；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:24%;width:540px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:42%;right:24%;width:540px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:64%;left:50%;transform:translateX(-50%);width:680px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,50%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:14%;width:10px;height:10px;border-radius:50%;background:hsla(0,75%,60%,0.75);box-shadow:0 0 14px hsla(0,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;right:14%;width:10px;height:10px;border-radius:50%;background:hsla(0,75%,60%,0.75);box-shadow:0 0 14px hsla(0,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:64%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 5 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-ms-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E02 · 思想转变</div>
+      <h1 class="mt-h1">两个极端 · 都要避免</h1>
+    </div>
+
+    <!-- 区域 2-3：双卡并排（左卡 reveal=4 / 右卡 reveal=17，均 dir=left） -->
+    <div class="tut-ms-cards-row">
+
+      <!-- 左卡 — 抗拒 AI（data-reveal=4，dir=left） -->
+      <div class="tut-region tut-ms-card tut-ms-card-left" data-reveal="4" data-reveal-dir="left">
+        <div class="card-tag">极端 一</div>
+        <div class="card-head grad-red">抗拒 AI</div>
+        <div class="card-block">
+          <div class="block-label">表现</div>
+          <div class="block-items">
+            <div class="bi"><span class="bi-mark">×</span>觉得是噱头</div>
+            <div class="bi"><span class="bi-mark">×</span>怕被替代</div>
+            <div class="bi"><span class="bi-mark">×</span>碰都不碰</div>
+          </div>
+        </div>
+        <div class="card-block card-cost">
+          <div class="block-label block-label-cost">代价</div>
+          <div class="cost-text">不是 AI 替代你 · 是会用 AI 的人替代你</div>
+        </div>
+      </div>
+
+      <!-- 右卡 — 盲目崇拜（data-reveal=17，dir=left） -->
+      <div class="tut-region tut-ms-card tut-ms-card-right" data-reveal="17" data-reveal-dir="left">
+        <div class="card-tag">极端 二</div>
+        <div class="card-head grad-red">盲目崇拜</div>
+        <div class="card-block">
+          <div class="block-label">表现</div>
+          <div class="block-items">
+            <div class="bi"><span class="bi-mark">×</span>觉得它万能</div>
+            <div class="bi"><span class="bi-mark">×</span>全盘交付</div>
+            <div class="bi"><span class="bi-mark">×</span>不验证</div>
+          </div>
+        </div>
+        <div class="card-block card-cost">
+          <div class="block-label block-label-cost">代价</div>
+          <div class="cost-text">产出不可控 · 质量崩塌</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 区域 4：金句 — 拥抱 + 验证（data-reveal=24，dir=top） -->
+    <div class="tut-region tut-ms-quote" data-reveal="24" data-reveal-dir="top">
+      <div class="quote-tag grad-green-bg">正确姿态</div>
+      <div class="quote-main"><span class="grad-green">拥抱</span> <span class="quote-plus">+</span> <span class="grad-green">验证</span></div>
+      <div class="quote-sub">
+        <div class="qs-line"><span class="qs-mark qs-check">✓</span> 信任但验证</div>
+        <div class="qs-line"><span class="qs-mark qs-check">✓</span> 当资深实习生：委派任务 · 审查产出</div>
+      </div>
+    </div>
+
+    <!-- 区域 5：转折 — 引出原理（data-reveal=35，dir=fade） -->
+    <div class="tut-region tut-ms-pivot" data-reveal="35" data-reveal-dir="fade">
+      <span class="pivot-from">光有态度不够</span>
+      <span class="pivot-arrow">→</span>
+      <span class="pivot-to grad-blue">要懂原理 · 才能精准驾驭</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,117 @@
+<!-- 场景: why_fail | 时长: 35.9s | bg: dark_cipher（监控警示，深暗红裂缝） | phases: 4 -->
+<div class="layer-bg">
+<!-- bg-component: dark_cipher -->
+<div style="position:absolute;inset:0;background:linear-gradient(160deg,hsl(350,15%,4%),hsl(340,12%,7%),hsl(0,18%,3%))"></div>
+
+<div style="position:absolute;top:30%;left:50%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,hsla(355,65%,35%,0.22),hsla(345,55%,25%,0.08),transparent 70%);
+  filter:blur(110px);transform:translate(-50%,-50%);animation:emberRise 24s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:65%;left:20%;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,hsla(15,75%,40%,0.18),hsla(10,55%,30%,0.06),transparent 70%);
+  filter:blur(95px);animation:emberRise 28s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:20%;left:-10%;width:120%;height:160px;
+  background:repeating-linear-gradient(0deg,transparent 0,transparent 6px,hsla(0,40%,50%,0.06) 6px,hsla(0,40%,50%,0.06) 7px);
+  opacity:0.55;animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:80%;height:2px;transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,hsla(355,80%,55%,0.45),transparent);
+  filter:blur(1px);animation:beamBreath 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:10%;width:3px;height:280px;
+  background:linear-gradient(180deg,transparent,hsla(355,75%,50%,0.32),transparent);
+  filter:blur(1.5px);animation:beamBreath 3.5s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:30%;right:10%;width:3px;height:280px;
+  background:linear-gradient(180deg,transparent,hsla(15,80%,52%,0.30),transparent);
+  filter:blur(1.5px);animation:beamBreath 4.5s ease-in-out infinite 1.5s"></div>
+
+<div style="position:absolute;top:50%;left:50%;width:480px;height:480px;border-radius:50%;opacity:0.5;
+  background:repeating-radial-gradient(circle,transparent 0,transparent 24px,hsla(355,55%,45%,0.06) 24px,hsla(355,55%,45%,0.06) 25px);
+  filter:blur(2px);transform:translate(-50%,-50%);animation:warmRing 18s ease-out infinite"></div>
+
+<div style="position:absolute;top:25%;left:55%;width:4px;height:4px;border-radius:50%;background:hsla(355,85%,60%,0.6);box-shadow:0 0 10px hsla(355,80%,55%,0.5);animation:emberFloat 6s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:55%;left:30%;width:3px;height:3px;border-radius:50%;background:hsla(15,80%,55%,0.55);box-shadow:0 0 8px hsla(15,75%,50%,0.45);animation:emberFloat 7s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:75%;left:65%;width:3px;height:3px;border-radius:50%;background:hsla(0,75%,55%,0.50);box-shadow:0 0 7px hsla(0,70%,50%,0.4);animation:emberFloat 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,80,80,0.03) 0%,transparent 40%,rgba(255,60,60,0.04) 60%,transparent 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 45%,transparent 25%,hsla(350,30%,2%,0.65) 100%)"></div>
+</div>
+<div class="layer-fx">
+<!-- fx1: 警示扫描线（监控感） -->
+<div class="fx-scan" style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,hsla(355,90%,55%,0.50),transparent);filter:blur(1.5px);animation:fxScanMove 6s ease-in-out infinite"></div>
+<!-- fx2: 危险脉冲光晕 -->
+<div class="fx-glow-red" style="top:42%;right:14%;width:260px;height:260px;background:radial-gradient(circle,hsla(0,80%,52%,0.32),transparent 70%);animation:fxAura 5s ease-in-out infinite"></div>
+<!-- fx3: 底部警示带 -->
+<div class="fx-beam" style="position:absolute;bottom:14%;left:-60%;width:120%;height:140px;background:linear-gradient(100deg,transparent,hsla(355,80%,50%,0.16),transparent);filter:blur(36px);animation:fxBeamSweep 8s ease-in-out infinite"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px">
+  <div class="tag-pill tag-pill-warn" style="font-size:32px">死因之一 · 深科技长尾</div>
+  <div class="card center-block" style="max-width:860px;display:flex;flex-direction:column;gap:14px">
+    <div class="list-row"><div class="item-num">01</div><div style="font-size:34px;color:var(--text);line-height:1.3">L4 自动驾驶比想象中<strong style="color:var(--gold)">难太多</strong></div></div>
+    <div class="list-row"><div class="item-num">02</div><div style="font-size:34px;color:var(--text);line-height:1.3">施工区 · 暴风雨 · 传感器失灵</div></div>
+    <div class="list-row"><div class="item-num">03</div><div style="font-size:34px;color:var(--text);line-height:1.3">长尾场景数据需求<strong style="color:var(--amber)">指数级</strong></div></div>
+  </div>
+  <div class="card-soft center-block" style="max-width:860px;display:flex;gap:36px;justify-content:center;flex-wrap:wrap">
+    <div style="text-align:center">
+      <div style="font-size:32px;color:var(--text2)">年烧研发</div>
+      <div style="font-family:'JetBrains Mono';font-size:64px;font-weight:700" class="grad-amber glow-amber">$100M</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:32px;color:var(--text2)">收入水平</div>
+      <div style="font-family:'JetBrains Mono';font-size:48px;font-weight:700;color:var(--warn-red)">试点级</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px">
+  <div class="tag-pill tag-pill-warn" style="font-size:32px">时间耐力反差 · 真正的杀手</div>
+  <div class="card center-block" style="max-width:880px;display:flex;flex-direction:column;gap:18px">
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:32px;margin-bottom:6px"><span style="color:var(--gold)">技术成熟要</span><span style="font-family:'JetBrains Mono';color:var(--gold)">7-10 年</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:32px;margin-bottom:6px"><span style="color:var(--amber)">公开市场只给</span><span style="font-family:'JetBrains Mono';color:var(--amber)">3-5 年</span></div>
+      <div class="bar-track"><div class="bar-fill bar-fill-amber" style="width:42%"></div></div>
+    </div>
+    <div style="font-size:38px;color:var(--warn-red);text-align:center;font-weight:700;margin-top:8px">技术对了，时机和资本结构错了</div>
+  </div>
+</div>
+<div class="phase phase-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px">
+  <div class="tag-pill tag-pill-warn" style="font-size:32px">死因之二 · SPAC 锁死</div>
+  <div class="compare-cols center-block" style="max-width:880px">
+    <div class="compare-col card-soft" style="border-color:rgba(212,160,23,0.5)">
+      <div style="font-family:'Ma Shan Zheng';font-size:42px;color:var(--gold-sand);text-align:center;font-weight:400">私下公司</div>
+      <div style="font-size:32px;color:var(--text2);text-align:center">钱烧完能桥接融资</div>
+      <div style="font-size:32px;color:var(--gold);text-align:center">悄悄转型 · 慢慢续命</div>
+    </div>
+    <div class="compare-col card-danger">
+      <div style="font-family:'Ma Shan Zheng';font-size:42px;color:var(--amber);text-align:center;font-weight:400">公开市场（SPAC）</div>
+      <div style="font-size:32px;color:var(--text2);text-align:center">季度审视 · 股价崩盘</div>
+      <div style="font-size:32px;color:var(--warn-red);text-align:center">敌意投资人 · 无处可逃</div>
+    </div>
+  </div>
+  <div class="card-soft center-block" style="max-width:880px;display:flex;align-items:center;gap:30px;justify-content:center">
+    <div style="font-family:'JetBrains Mono';font-size:40px;font-weight:700;color:var(--gold)">$10</div>
+    <div style="font-size:42px;color:var(--amber)">→</div>
+    <div style="font-family:'JetBrains Mono';font-size:40px;font-weight:700;color:var(--warn-red)">&lt; $1</div>
+    <div style="font-size:32px;color:var(--text2)">现金剩 $50M · 想熬五年等监管？</div>
+  </div>
+</div>
+<div class="phase phase-4" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:26px">
+  <div class="bomb-icon" style="width:96px;height:96px"></div>
+  <div style="font-family:'Ma Shan Zheng';font-size:90px;line-height:1.1;font-weight:400" class="grad-red glow-red">这就是 SPAC 的定时炸弹</div>
+  <div style="font-size:34px;color:var(--text2);max-width:780px">深科技真正的杀手不是技术不行<br>是<span style="color:var(--amber)">公开市场没有耐心熬 7-10 年</span></div>
+</div>
+</div>
+<div class="layer-cinema">
+<div class="cinema-vignette"></div>
+<div class="cinema-grain"></div>
+<div class="cinema-lightflash"></div>
+</div>

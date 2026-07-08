@@ -1,0 +1,227 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 段5 — Skill 仓库两层架构（横屏 reveal §6.16）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+  padding: 28px 90px 28px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点，参照 tutorial.md + E04-cover） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#C4B5FD 0%,#DDD6FE 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-skill-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tut-skill-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-skill-title .title-h1 {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-skill-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 两层架构 —— */
+.tut-skill-arch { width: 100%; }
+.arch-stack {
+  display: flex; flex-direction: column;
+  gap: 6px; width: 100%;
+  align-items: stretch;
+}
+.arch-layer {
+  border-radius: 18px;
+  padding: 12px 22px;
+  border: 3px solid;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.arch-public {
+  border-color: rgba(252,211,77,0.65);
+  background: linear-gradient(165deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88));
+}
+.arch-project {
+  border-color: rgba(147,197,253,0.65);
+  background: linear-gradient(165deg, rgba(59,130,246,0.13), rgba(15,23,42,0.88));
+}
+.layer-label {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.ll-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.ll-owner {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.layer-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.mini-card {
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 2px solid;
+  display: flex; flex-direction: row; align-items: center; gap: 12px;
+}
+.mc-gold {
+  border-color: rgba(252,211,77,0.55);
+  background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(15,23,42,0.85));
+}
+.mc-blue {
+  border-color: rgba(147,197,253,0.55);
+  background: linear-gradient(135deg, rgba(59,130,246,0.11), rgba(15,23,42,0.85));
+}
+.mc-icon {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-white); line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mc-name {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 中间箭头 + RAG 侧挂 —— */
+.arch-bridge {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.bridge-arrow {
+  font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1;
+}
+.bridge-rag {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+  border-radius: 14px;
+  padding: 6px 18px;
+  border: 2.5px solid rgba(110,231,183,0.6);
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88));
+}
+.bridge-rag .rag-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.bridge-rag .rag-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 降 Token 诀窍 —— */
+.tut-skill-tip {
+  border-radius: 18px; padding: 10px 26px;
+  border: 3px solid rgba(252,211,77,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88), rgba(110,231,183,0.14));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.tut-skill-tip .tip-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.tut-skill-tip .tip-main {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900; line-height: 1.15;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.tm-key { font-weight: 900; }
+.tm-arrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— SkillHub —— */
+.tut-skill-hub { width: 100%; }
+.hub-card {
+  border-radius: 18px; padding: 10px 26px;
+  border: 3px solid rgba(196,181,253,0.6);
+  background: linear-gradient(90deg, rgba(167,139,250,0.13), rgba(15,23,42,0.88), rgba(167,139,250,0.13));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.hub-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.hub-line {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+}
+.hl-name {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hl-dot {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-purple);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hl-meta {
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

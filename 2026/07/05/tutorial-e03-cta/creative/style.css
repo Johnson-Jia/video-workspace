@@ -1,0 +1,162 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-gold: #FBBF24;
+  --tut-green: #10B981;
+  --tut-blue: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E03 CTA 收尾 — E04 预告 + 合集 + 互动（横屏 reveal §6.16）
+ * 1 场景 + E04 预告卡 + 合集引导条 + 互动提问
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 18px;
+  padding: 50px 90px 50px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 18px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* 渐变文字（同色系高饱和，禁白色端点） */
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FCD34D 0%,#FBBF24 100%);
+  color: #1F2937; -webkit-text-fill-color: #1F2937;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#10B981 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+
+/* —— 区域 1：E04 预告卡 —— */
+.tut-cta-next {
+  border-radius: 24px; padding: 22px 32px;
+  border: 2.5px solid rgba(251,191,36,0.55);
+  background: linear-gradient(165deg, rgba(251,191,36,0.10), rgba(15,23,42,0.88));
+  box-shadow: 0 0 32px rgba(251,191,36,0.14);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.cn-tag {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.cn-h1 {
+  font-family: var(--font-title); font-size: 84px; font-weight: 900; line-height: 1.02;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cn-modules {
+  display: flex; flex-direction: row; justify-content: center; gap: 36px; flex-wrap: wrap;
+}
+.cn-modules .cnm {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700; color: var(--tut-white);
+  display: flex; align-items: center; gap: 12px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cnm-mark { font-size: 34px; min-width: 36px; }
+.cnm-gold { color: var(--tut-gold); }
+.cn-warn {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  padding: 8px 18px; border-radius: 12px; margin-top: 4px;
+  color: #FCD34D;
+  background: rgba(251,191,36,0.10);
+  border: 1.5px solid rgba(251,191,36,0.40);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：合集引导 —— */
+.tut-cta-series {
+  border-radius: 22px; padding: 16px 30px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(90deg, rgba(16,185,129,0.10), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cs-row {
+  display: flex; flex-direction: row; align-items: center; gap: 18px;
+}
+.cs-badge {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.cs-main {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cs-sub {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cs-actions {
+  display: flex; flex-direction: row; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.csa {
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  padding: 6px 18px; border-radius: 12px; letter-spacing: 0.04em;
+}
+.csa-green {
+  color: #6EE7B7;
+  background: rgba(16,185,129,0.12);
+  border: 1.5px solid rgba(16,185,129,0.45);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.csa-blue {
+  color: #93C5FD;
+  background: rgba(59,130,246,0.12);
+  border: 1.5px solid rgba(59,130,246,0.45);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.csa-sep {
+  font-family: var(--font-data); font-size: 38px; font-weight: 900; color: var(--tut-blue-white);
+  opacity: 0.5;
+}
+
+/* —— 区域 3：互动提问 —— */
+.tut-cta-ask {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 18px 32px; border-radius: 22px;
+  border: 2.5px solid rgba(59,130,246,0.55);
+  background: linear-gradient(90deg, rgba(59,130,246,0.10), rgba(15,23,42,0.88));
+  box-shadow: 0 0 28px rgba(59,130,246,0.16);
+}
+.ca-mark {
+  font-family: var(--font-data); font-size: 80px; font-weight: 900;
+  min-width: 70px; text-align: center; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ca-text { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.ca-q {
+  font-family: var(--font-title); font-size: 50px; font-weight: 800; color: var(--tut-white);
+  line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ca-hl {
+  font-family: var(--font-title); font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ca-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

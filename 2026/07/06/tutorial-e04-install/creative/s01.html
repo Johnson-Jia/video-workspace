@@ -1,0 +1,113 @@
+<!-- 场景: seg1 | 时长: ~60.7s | bg: scan_grid | 安装 Claude Code：终端命令序列 + 智谱 GLM 认证 + 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（绿命令/紫智谱/金金句；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;left:30%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;right:10%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:12%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.75);box-shadow:0 0 14px hsla(43,85%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-inst-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E04 · 安装</div>
+      <h1 class="mt-h1">安装 <span class="grad-blue">Claude Code</span></h1>
+      <div class="title-sub">一行命令 · 终端原生 · 智谱直连</div>
+    </div>
+
+    <!-- 主体两栏：终端窗（左）+ 认证卡（右） -->
+    <div class="tut-inst-main">
+
+    <!-- 区域 2：终端窗口-安装命令（data-reveal=5，dir=top） -->
+    <div class="tut-region tut-inst-terminal" data-reveal="5" data-reveal-dir="top">
+      <div class="terminal-window">
+        <div class="term-titlebar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-title">Terminal — bash — claude-code</span>
+        </div>
+        <div class="term-body">
+          <!-- 命令1：curl install（安装命令 reveal） -->
+          <div class="term-line term-cmd-line" data-reveal="5.4" data-reveal-dir="fade">
+            <span class="term-prompt">$</span>
+            <span class="term-cmd">curl -fsSL https://claude.ai/install.sh <span class="term-pipe">|</span> bash</span>
+          </div>
+          <!-- 输出1：installed -->
+          <div class="term-output term-out-success" data-reveal="11" data-reveal-dir="fade">
+            <span class="term-check">✓</span> Claude Code installed
+          </div>
+          <!-- 命令2：BASE_URL（配置阶段 reveal） -->
+          <div class="term-line term-cmd-line" data-reveal="26" data-reveal-dir="fade">
+            <span class="term-prompt">$</span>
+            <span class="term-cmd">export <span class="term-var">ANTHROPIC_BASE_URL</span><span class="term-eq">=</span>https://open.bigmodel.cn/api/anthropic</span>
+          </div>
+          <!-- 命令3：AUTH_TOKEN -->
+          <div class="term-line term-cmd-line" data-reveal="34" data-reveal-dir="fade">
+            <span class="term-prompt">$</span>
+            <span class="term-cmd">export <span class="term-var">ANTHROPIC_AUTH_TOKEN</span><span class="term-eq">=</span><span class="term-val">你的智谱Key</span></span>
+          </div>
+          <!-- 命令4：claude -->
+          <div class="term-line term-cmd-line" data-reveal="42" data-reveal-dir="fade">
+            <span class="term-prompt">$</span>
+            <span class="term-cmd term-cmd-launch">claude</span>
+          </div>
+          <!-- 输出2：连接成功 -->
+          <div class="term-output term-out-box" data-reveal="47" data-reveal-dir="top">
+            <span class="term-check">✓</span> 已连接 GLM · 开始用吧
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：认证卡（data-reveal=16，dir=left） -->
+    <div class="tut-region tut-inst-auth" data-reveal="16" data-reveal-dir="left">
+      <div class="auth-card">
+        <div class="auth-tag">认证 · 唯一讲法</div>
+        <div class="auth-name grad-purple">智谱 GLM</div>
+        <div class="auth-features">
+          <div class="af-item"><span class="af-mark">●</span>国产模型</div>
+          <div class="af-item"><span class="af-mark">●</span>国内直连</div>
+          <div class="af-item"><span class="af-mark">●</span>免费额度练手</div>
+        </div>
+        <div class="auth-steps">
+          <span class="as-step">注册</span>
+          <span class="as-arrow">→</span>
+          <span class="as-step">创建 Key</span>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-inst-main -->
+
+    <!-- 区域 4：收尾引导（data-reveal=53，dir=top） -->
+    <div class="tut-region tut-inst-quote" data-reveal="53" data-reveal-dir="top">
+      <div class="quote-tag grad-gold-bg-inline">配置完成</div>
+      <div class="quote-main">
+        <span class="quote-mark">✓</span>
+        <span class="quote-text">智谱 <span class="quote-strong grad-gold">GLM 已就绪</span></span>
+      </div>
+      <div class="quote-correct">
+        <span class="qc-mark">→</span>
+        下一步：团队规范写进 CLAUDE.md
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

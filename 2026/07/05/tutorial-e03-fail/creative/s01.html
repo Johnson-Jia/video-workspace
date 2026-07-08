@@ -1,0 +1,83 @@
+<!-- 场景: seg1 | 时长: ~37s | bg: clean_slate | E03 段4 失败预案（止损线 / 回退 / 复盘 + 试点可止损金句） -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（红止损 / 橙回退 / 蓝复盘 / 绿金句；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:38%;left:18%;width:480px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:38%;left:50%;transform:translateX(-50%);width:480px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(38,90%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:38%;right:18%;width:480px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:900px;height:170px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,80%,62%,0.22);box-shadow:0 0 16px hsla(0,75%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,60%,0.22);box-shadow:0 0 14px hsla(0,75%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(38,90%,55%,0.22);box-shadow:0 0 14px hsla(38,85%,50%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 5 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-fail-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="ft-num grad-red-bg-inline">E03 · 失败预案</div>
+      <h1 class="ft-h1">立项就想好退路</h1>
+      <div class="ft-sub">转型有风险 · 三条兜底</div>
+    </div>
+
+    <!-- 区域 2：卡①止损线（data-reveal=3，dir=left） -->
+    <div class="tut-region tut-fail-cards" data-reveal="3" data-reveal-dir="left">
+      <div class="fcard fcard-red">
+        <div class="fcard-tag fcard-tag-red">一是 · 止损线</div>
+        <div class="fcard-main grad-red">3 个月触发复盘</div>
+        <div class="fcard-items">
+          <div class="fci"><span class="fci-mark fci-red">▲</span>AI 占比无改善</div>
+          <div class="fci"><span class="fci-mark fci-red">▲</span>产出无改善</div>
+          <div class="fci"><span class="fci-mark fci-red">▲</span>质量无改善</div>
+        </div>
+        <div class="fcard-foot fcard-foot-red">查：工具没装好 / 培训没到位 / 场景选错</div>
+      </div>
+
+      <!-- 卡②回退（同一 region 群，第二个卡 data-reveal=10，dir=top） -->
+      <div class="fcard fcard-orange fcard-r2" data-reveal="10" data-reveal-dir="top">
+        <div class="fcard-tag fcard-tag-orange">二是 · 回退</div>
+        <div class="fcard-main grad-orange">沉没成本低</div>
+        <div class="fcard-items">
+          <div class="fci"><span class="fci-mark fci-orange">●</span>工具按月付费 · 可停</div>
+          <div class="fci"><span class="fci-mark fci-orange">●</span>试点范围可控 · 可缩</div>
+          <div class="fci"><span class="fci-mark fci-orange">●</span>代码在 Git · 可回退</div>
+        </div>
+        <div class="fcard-foot fcard-foot-orange">不锁定 · 随时可撤</div>
+      </div>
+
+      <!-- 卡③复盘（第三个卡 data-reveal=17，dir=left） -->
+      <div class="fcard fcard-blue fcard-r3" data-reveal="17" data-reveal-dir="left">
+        <div class="fcard-tag fcard-tag-blue">三是 · 复盘</div>
+        <div class="fcard-main grad-blue">方法错 vs 执行错</div>
+        <div class="fcard-items">
+          <div class="fci"><span class="fci-mark fci-blue">?</span>方法错 → 调思路</div>
+          <div class="fci"><span class="fci-mark fci-blue">?</span>执行错 → 补培训</div>
+          <div class="fci"><span class="fci-mark fci-blue">!</span>调整后再小范围试</div>
+        </div>
+        <div class="fcard-foot fcard-foot-blue">不一次梭哈 · 小步迭代</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：金句（data-reveal=25，dir=fade） -->
+    <div class="tut-region tut-fail-quote" data-reveal="25" data-reveal-dir="fade">
+      <span class="fq-mark fq-mark-green">✓</span>
+      <span class="fq-main grad-green">试点验证 + 可止损</span>
+      <span class="fq-sep">·</span>
+      <span class="fq-tail">老板才敢真投</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 80,
+    "emotion": "方法论-MCP网关+跳过判断",
+    "text": "第四件套，MCP 网关。把企业内部的服务零代码封装成 MCP 工具，供 AI Agent 调用——比如把注册中心里的内部服务直接暴露给 AI。但记住一条原则：命令行能搞定的别用 MCP。每个 MCP 工具的定义常驻烧 token，能用 gh、kubectl 完成的就别封装。MCP 只用于没有命令行等价物的场景，比如连接企业内部服务。最后回到开头的反常识——这集可以跳过。判断标准看三件事：代码库大不大、项目多不多、业务复不复杂。单仓库几万行内、没有多仓库微服务、业务知识不算复杂——请直接跳过本阶段，CLAUDE.md 加 grep 加良好代码组织就够，强行建基础设施是过度工程。多仓库、百万行、复杂业务的大型组织才值得投入。跳过的团队用 grep 加人审加 git diff 替代，能力降级但闭环能跑。",
+    "narration": "第四件套，MCP 网关。把企业内部的服务零代码封装成 MCP 工具，供 AI Agent 调用——比如把注册中心里的内部服务直接暴露给 AI。但记住一条原则：命令行能搞定的别用 MCP。每个 MCP 工具的定义常驻烧 token，能用 gh、kubectl 完成的就别封装。MCP 只用于没有命令行等价物的场景，比如连接企业内部服务。最后回到开头的反常识——这集可以跳过。判断标准看三件事：代码库大不大、项目多不多、业务复不复杂。单仓库几万行内、没有多仓库微服务、业务知识不算复杂——请直接跳过本阶段，CLAUDE.md 加 grep 加良好代码组织就够，强行建基础设施是过度工程。多仓库、百万行、复杂业务的大型组织才值得投入。跳过的团队用 grep 加人审加 git diff 替代，能力降级但闭环能跑。",
+    "hook_anchors": ["第四件套", "MCP 网关", "零代码封装", "内部服务", "Agent 调用", "命令行能搞定别用 MCP", "定义常驻烧 token", "gh kubectl", "这集可以跳过", "判断标准三件事", "代码库大不大", "项目多不多", "业务复不复杂", "单仓库几万行", "过度工程", "多仓库百万行", "grep 加人审加 git diff", "能力降级闭环能跑"],
+    "visual_type": "tutorial_mcp_skip",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「MCP 网关 · 封装企业服务 + 这集可以跳过」fade-in", "duration_share": 0.08},
+      {"phase": 2, "start_offset": 5, "focus": "MCP 网关流程：企业服务 → MCP 封装 → Agent 调用（3 节点横向）reveal", "duration_share": 0.20},
+      {"phase": 3, "start_offset": 22, "focus": "CLI 优先提示卡「命令行能搞定别用 MCP / 烧 token / gh kubectl 优先」reveal", "duration_share": 0.20},
+      {"phase": 4, "start_offset": 40, "focus": "跳过决策卡（金边）：3 问 + 都否则跳过 + grep 替代方案 reveal", "duration_share": 0.52}
+    ],
+    "bg_component": "hex_grid"
+  }
+]

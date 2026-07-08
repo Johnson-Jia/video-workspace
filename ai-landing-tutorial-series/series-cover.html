@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 提效转型实战 · 合集封面</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+
+/* bg 装饰 */
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-blue{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-220px;right:-160px;pointer-events:none;}
+.glow-gold{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.13),transparent 70%);filter:blur(90px);bottom:-160px;left:-110px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+/* L 角装饰 */
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(251,191,36,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(251,191,36,0.45),transparent);}
+
+/* —— 顶部 —— */
+.header{position:relative;z-index:2;}
+.badge{display:inline-flex;align-items:center;gap:14px;font-size:26px;color:#60A5FA;letter-spacing:0.20em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 26px;border-radius:999px;font-weight:600;margin-bottom:22px;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 14px rgba(251,191,36,0.7);}
+.title{font-size:106px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(96,165,250,0.18);}
+.subtitle{font-size:36px;color:rgba(255,255,255,0.82);margin-top:14px;font-weight:500;letter-spacing:0.02em;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+
+/* —— 主体（左数据 + 右12集）—— */
+.main{position:relative;z-index:2;display:grid;grid-template-columns:440px 1fr;gap:44px;margin-top:36px;flex:1;}
+
+/* 左：数据卡 */
+.data-card{background:rgba(15,23,42,0.58);border:1.5px solid rgba(96,165,250,0.28);border-radius:22px;padding:30px 28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 0 50px rgba(59,130,246,0.08) inset;}
+.data-card-title{font-size:24px;color:#60A5FA;letter-spacing:0.16em;font-weight:700;border-bottom:1px solid rgba(96,165,250,0.25);padding-bottom:14px;display:flex;align-items:center;gap:10px;}
+.data-card-title .dc-icon{color:#FBBF24;}
+.data-row{display:flex;align-items:baseline;gap:18px;}
+.data-num{font-size:62px;font-weight:900;line-height:1;letter-spacing:-0.02em;font-family:'JetBrains Mono','Consolas',monospace;min-width:158px;}
+.data-num.gold{color:#FBBF24;text-shadow:0 0 18px rgba(251,191,36,0.22);}
+.data-num.blue{color:#60A5FA;text-shadow:0 0 18px rgba(96,165,250,0.22);}
+.data-num.green{color:#34D399;text-shadow:0 0 18px rgba(52,211,153,0.22);}
+.data-num.white{color:#ffffff;}
+.data-label{font-size:27px;color:rgba(255,255,255,0.74);font-weight:500;}
+.data-foot{font-size:22px;color:rgba(255,255,255,0.52);margin-top:6px;line-height:1.55;border-top:1px solid rgba(96,165,250,0.18);padding-top:14px;}
+.data-foot .foot-strong{color:#93C5FD;font-weight:600;}
+
+/* 右：12 集网格 */
+.episodes{display:flex;flex-direction:column;gap:18px;}
+.ep-group{display:flex;flex-direction:column;gap:11px;}
+.ep-group-title{font-size:24px;font-weight:700;letter-spacing:0.12em;display:flex;align-items:center;gap:12px;}
+.ep-group-title.methodology{color:#60A5FA;}
+.ep-group-title.practice{color:#34D399;}
+.ep-group-title .ep-icon{font-size:20px;}
+.ep-group-title .ep-sub{color:rgba(255,255,255,0.5);font-weight:500;font-size:21px;letter-spacing:0.04em;}
+.ep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.ep-card{background:rgba(59,130,246,0.10);border:1px solid rgba(96,165,250,0.30);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;min-height:64px;}
+.ep-card.practice{background:rgba(16,185,129,0.10);border-color:rgba(52,211,153,0.32);}
+.ep-card.core{background:linear-gradient(135deg,rgba(251,191,36,0.16),rgba(59,130,246,0.10));border:1.5px solid rgba(251,191,36,0.50);}
+.ep-num{font-size:27px;font-weight:900;color:#FBBF24;font-family:'JetBrains Mono',monospace;min-width:56px;letter-spacing:0.02em;}
+.ep-card.practice .ep-num{color:#34D399;}
+.ep-title{font-size:25px;color:#fff;font-weight:600;line-height:1.25;flex:1;}
+.ep-core-tag{font-size:18px;color:#FBBF24;background:rgba(251,191,36,0.20);padding:3px 11px;border-radius:6px;font-weight:700;letter-spacing:0.04em;}
+
+/* —— 底部 —— */
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:20px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:27px;color:rgba(255,255,255,0.88);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;letter-spacing:0.08em;font-family:'Inter','Noto Sans SC',sans-serif;font-size:24px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+.author .author-role{color:rgba(255,255,255,0.45);margin-left:8px;font-size:22px;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div>
+  <div class="glow-blue"></div>
+  <div class="glow-gold"></div>
+  <div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div>
+  <div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <!-- 顶部 -->
+  <div class="header">
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 企业级教程合集</div>
+    <h1 class="title"><span class="title-grad">AI 提效转型实战</span></h1>
+    <div class="subtitle">带研发团队从 0 到 <span class="sub-strong">人均产出翻倍</span> · 12 集深度解析 · 全程可运行 demo</div>
+  </div>
+
+  <!-- 主体 -->
+  <div class="main">
+    <!-- 左：核心数据 -->
+    <div class="data-card">
+      <div class="data-card-title"><span class="dc-icon">◆</span>真实战绩 · 3 个月实测</div>
+      <div class="data-row"><div class="data-num gold">+104%</div><div class="data-label">人均代码产出</div></div>
+      <div class="data-row"><div class="data-num blue">76.6%</div><div class="data-label">AI 代码占比</div></div>
+      <div class="data-row"><div class="data-num green">-16.4pp</div><div class="data-label">Bug 率下降</div></div>
+      <div class="data-row"><div class="data-num white">5+</div><div class="data-label">可运行 demo</div></div>
+      <div class="data-foot"><span class="foot-strong">80+ 人研发团队</span> · 206 仓库同比<br>相关性非因果 · 诚实标注口径</div>
+    </div>
+
+    <!-- 右：12 集 -->
+    <div class="episodes">
+      <div class="ep-group">
+        <div class="ep-group-title methodology"><span class="ep-icon">◆</span>方法论篇<span class="ep-sub">E01-E09 · 从思想转变到全员推广</span></div>
+        <div class="ep-grid">
+          <div class="ep-card"><span class="ep-num">E01</span><span class="ep-title">总纲·方法论全景</span></div>
+          <div class="ep-card"><span class="ep-num">E02</span><span class="ep-title">思想转变·5条原理</span></div>
+          <div class="ep-card"><span class="ep-num">E03</span><span class="ep-title">战略启动·要预算</span></div>
+          <div class="ep-card"><span class="ep-num">E04</span><span class="ep-title">全员赋能·CLAUDE.md</span></div>
+          <div class="ep-card"><span class="ep-num">E05</span><span class="ep-title">基础设施·给AI装眼</span></div>
+          <div class="ep-card core"><span class="ep-num">E06</span><span class="ep-title">闭环试点·OpenSpec</span><span class="ep-core-tag">核心</span></div>
+          <div class="ep-card"><span class="ep-num">E07</span><span class="ep-title">测试防护·真实案例</span></div>
+          <div class="ep-card"><span class="ep-num">E08</span><span class="ep-title">推广度量·AI占比</span></div>
+          <div class="ep-card"><span class="ep-num">E09</span><span class="ep-title">沉淀复用·Skill范式</span></div>
+        </div>
+      </div>
+      <div class="ep-group">
+        <div class="ep-group-title practice"><span class="ep-icon">◆</span>实操篇<span class="ep-sub">E10-E12 · 拿来即用</span></div>
+        <div class="ep-grid">
+          <div class="ep-card practice"><span class="ep-num">E10</span><span class="ep-title">度量实操·ai-metrics</span></div>
+          <div class="ep-card practice"><span class="ep-num">E11</span><span class="ep-title">Skill仓库·4skill</span></div>
+          <div class="ep-card practice"><span class="ep-num">E12</span><span class="ep-title">汇报材料·PPT生成</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">作者 <span class="author-name">Johnson</span><span class="author-role">技术总监 / 首席架构师</span></div>
+  </div>
+</div>
+</body>
+</html>

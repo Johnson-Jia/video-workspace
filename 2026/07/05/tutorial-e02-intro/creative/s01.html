@@ -1,0 +1,59 @@
+<!-- 场景: seg1 | 时长: ~30s | bg: clean_slate | 本集地图：思想转变 + 5 原理 = 精准交互 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 双色静态光晕（金左蓝右，呼应双栏语义；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:38%;left:25%;width:560px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:38%;right:25%;width:560px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.75);box-shadow:0 0 14px hsla(43,75%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:20%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0） -->
+    <div class="tut-region tut-map-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E02 · 思想转变与 AI 原理</div>
+      <h1 class="mt-h1">这集讲什么</h1>
+    </div>
+
+    <!-- 区域 2：两栏地图（data-reveal=5，整体从左滑入，金=思想转变 / 蓝=5 原理） -->
+    <div class="tut-region tut-map-cols" data-reveal="5" data-reveal-dir="left">
+      <div class="tut-col tut-col-left">
+        <div class="col-head grad-gold">前半段 · 思想转变</div>
+        <div class="tut-col-items">
+          <div class="ci">避开两个极端</div>
+          <div class="ci">拥抱 + 验证</div>
+        </div>
+      </div>
+      <div class="tut-col tut-col-right">
+        <div class="col-head grad-blue">后半段 · 5 条原理</div>
+        <div class="tut-col-items">
+          <div class="ci"><span class="ci-num">①</span> token 预测</div>
+          <div class="ci"><span class="ci-num">②</span> 上下文 1M</div>
+          <div class="ci"><span class="ci-num">③</span> Agent</div>
+          <div class="ci"><span class="ci-num">④</span> REACT</div>
+          <div class="ci"><span class="ci-num">⑤</span> 精准指令</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：结论行（data-reveal=22，思想转变 + 懂原理 = 精准交互） -->
+    <div class="tut-region tut-map-conclusion" data-reveal="22" data-reveal-dir="top">
+      <span class="mc-eq">=</span>
+      <span class="mc-text">思想转变 + 懂原理 <strong class="grad-green mc-strong">精准交互</strong></span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,159 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-cyan: #06B6D4;
+  --tut-gold: #FBBF24;
+  --tut-green: #10B981;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E03 段1 目标量化 — 阶梯 10/20/50（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 阶梯卡 count-up + 注解 + 金句
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 50px 100px 40px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 区域 1：标题 —— */
+.tut-goal-title {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.gt-eyebrow {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  letter-spacing: 0.10em; color: var(--tut-blue-white);
+  padding: 4px 18px; border-radius: 8px;
+  background: rgba(59,130,246,0.14);
+  border: 1.5px solid rgba(59,130,246,0.40);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gt-h1 {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gt-sub {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}
+
+/* —— 区域 2：阶梯卡 —— */
+.tut-goal-stairs {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.gs-label {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; }
+.stair {
+  border-radius: 22px; padding: 18px 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  border: 2.5px solid;
+}
+.stair-blue {
+  border-color: rgba(59,130,246,0.65);
+  background: linear-gradient(165deg, rgba(59,130,246,0.14), rgba(15,23,42,0.88));
+  box-shadow: 0 6px 20px rgba(59,130,246,0.18);
+}
+.stair-cyan {
+  border-color: rgba(6,182,212,0.65);
+  background: linear-gradient(165deg, rgba(6,182,212,0.14), rgba(15,23,42,0.88));
+  box-shadow: 0 6px 20px rgba(6,182,212,0.18);
+}
+.stair-gold {
+  border-color: rgba(251,191,36,0.70);
+  background: linear-gradient(165deg, rgba(251,191,36,0.16), rgba(15,23,42,0.88));
+  box-shadow: 0 6px 24px rgba(251,191,36,0.22);
+}
+.st-stage {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800; color: var(--tut-blue-white);
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.st-num-wrap {
+  font-family: var(--font-data); font-weight: 900; line-height: 1;
+  display: flex; align-items: baseline; justify-content: center; gap: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.st-prefix { font-size: 56px; color: var(--tut-white); }
+.st-num { font-size: 96px; }
+.stair-blue .st-num { background-image: linear-gradient(92deg,#93C5FD 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.stair-cyan .st-num { background-image: linear-gradient(92deg,#A5F3FC 0%,#06B6D4 55%,#155E75 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.stair-gold .st-num { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.st-unit { font-size: 56px; color: var(--tut-white); }
+.st-range {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.02em;
+}
+.st-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  padding: 4px 14px; border-radius: 8px;
+  letter-spacing: 0.06em; color: #FFF;
+}
+.st-tag-blue { background: linear-gradient(92deg,#3B82F6,#93C5FD); box-shadow: 0 4px 12px rgba(59,130,246,0.30); }
+.st-tag-cyan { background: linear-gradient(92deg,#06B6D4,#155E75); box-shadow: 0 4px 12px rgba(6,182,212,0.30); }
+.st-tag-gold { background: linear-gradient(92deg,#FBBF24,#FCD34D); box-shadow: 0 4px 12px rgba(251,191,36,0.30); }
+
+/* —— 区域 3：注解 —— */
+.tut-goal-note {
+  align-self: center;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-white);
+  padding: 10px 26px; border-radius: 14px;
+  background: rgba(251,191,36,0.10);
+  border: 1.5px solid rgba(251,191,36,0.40);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gn-mark {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900;
+  color: #FBBF24; min-width: 36px; text-align: center;
+}
+.gn-text strong { color: #FBBF24; }
+.gn-key { color: #FBBF24; font-weight: 800; }
+
+/* —— 区域 4：金句 —— */
+.tut-goal-quote {
+  align-self: center;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 36px; border-radius: 18px;
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88));
+  border: 2.5px solid rgba(16,185,129,0.55);
+}
+.gq-icon {
+  font-family: var(--font-data); font-size: 40px; font-weight: 900; color: var(--tut-green);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gq-big {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.gq-sub {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.02em;
+}

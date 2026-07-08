@@ -1,0 +1,95 @@
+<!-- 场景: what | 时长: 19.5s | bg: radial_beams（公司名登场，goldminer bg_pool） | phases: 3 -->
+<div class="layer-bg">
+<!-- bg-component: radial_beams -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0800,#1a1200,#0a0800)"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:beamRotate 60s linear infinite;
+  background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(255,200,0,0.06) 2deg,transparent 4deg,transparent 28deg)"></div>
+
+<div style="position:absolute;top:15%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,200,0,0.25) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:55%;width:4px;height:4px;border-radius:50%;
+  background:hsla(45,90%,65%,0.6);box-shadow:0 0 10px hsla(45,80%,55%,0.5);animation:floatParticle 6s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:35%;width:3px;height:3px;border-radius:50%;
+  background:hsla(38,85%,60%,0.5);box-shadow:0 0 8px hsla(38,75%,50%,0.4);animation:floatParticle 8s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:65%;left:60%;width:3px;height:3px;border-radius:50%;
+  background:hsla(50,80%,62%,0.45);box-shadow:0 0 7px hsla(50,70%,52%,0.35);animation:floatParticle 7s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1.5px solid hsla(40,80%,55%,0.14);animation:warmRing 5s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1px solid hsla(45,70%,50%,0.10);animation:warmRing 5s ease-out infinite 2.5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(255,255,255,0.03) 0%,transparent 25%,transparent 75%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:5%;left:15%;width:700px;height:700px;border-radius:50%;opacity:0.03;
+  background:conic-gradient(from 0deg,rgba(255,50,50,0.5),rgba(255,200,50,0.4),rgba(50,255,100,0.5),rgba(50,100,255,0.5),rgba(200,50,255,0.4),rgba(255,50,50,0.5));
+  filter:blur(60px);animation:beamBreath 12s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 35%,transparent 30%,rgba(0,0,0,0.5) 100%)"></div>
+</div>
+<div class="layer-fx">
+<!-- fx1: 暖金光环扩散（公司登场的庄严感） -->
+<div class="fx-ring" style="position:absolute;top:32%;left:50%;width:300px;height:300px;border-radius:50%;border:2px solid hsla(40,95%,60%,0.28);transform:translate(-50%,-50%);animation:warmRing 4s ease-out infinite"></div>
+<!-- fx2: 流动光带 -->
+<div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(120deg,transparent 30%,hsla(40,90%,58%,0.07) 50%,transparent 70%);animation:glassShimmer 8s ease-in-out infinite"></div>
+<!-- fx3: 顶部光束扫掠 -->
+<div class="fx-beam" style="position:absolute;top:18%;left:-60%;width:120%;height:160px;background:linear-gradient(100deg,transparent,hsla(40,92%,60%,0.18),transparent);filter:blur(38px);transform:rotate(-5deg);animation:fxBeamSweep 7s ease-in-out infinite"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:30px">
+  <div class="tag-pill" style="font-size:32px">主角登场 · 美国公司</div>
+  <div class="card center-block" style="max-width:840px;display:flex;flex-direction:column;gap:22px;align-items:center">
+    <div style="display:flex;align-items:center;gap:24px">
+      <div class="truck-icon"><div class="truck-wheel" style="left:8px"></div><div class="truck-wheel" style="right:46px"></div><div class="truck-wheel" style="right:8px"></div></div>
+      <div style="font-family:'Ma Shan Zheng';font-size:96px;line-height:1;font-weight:400" class="grad-gold glow-gold">Embark Trucks</div>
+    </div>
+    <div style="font-family:'JetBrains Mono';font-size:38px;font-weight:700;color:var(--gold-sand)">自动驾驶货运 · 让卡车自己跑长途</div>
+    <div style="font-size:36px;color:var(--text);line-height:1.4;max-width:720px">八千亿美金的美国卡车业<br>缺司机 · 人工还涨了两成五</div>
+  </div>
+</div>
+<div class="phase phase-2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:26px">
+  <div class="tag-pill-amber tag-pill" style="font-size:32px">巅峰时刻 · 2021</div>
+  <div style="display:flex;gap:32px;align-items:stretch;justify-content:center;flex-wrap:wrap;width:100%;max-width:880px" class="center-block">
+    <div class="card-soft center-block" style="text-align:center;min-width:240px;flex:1">
+      <div style="font-size:32px;color:var(--text2)">融资总额</div>
+      <div style="font-family:'JetBrains Mono';font-size:80px;font-weight:700;line-height:1.1" class="grad-gold glow-gold">$317M</div>
+      <div style="font-size:32px;color:var(--text2)">三点一七亿美金</div>
+    </div>
+    <div class="card-soft center-block" style="text-align:center;min-width:240px;flex:1;border-color:rgba(255,107,0,0.45)">
+      <div style="font-size:32px;color:var(--text2)">SPAC 借壳上市</div>
+      <div style="font-family:'JetBrains Mono';font-size:80px;font-weight:700;line-height:1.1" class="grad-amber glow-amber">$5.2B</div>
+      <div style="font-size:32px;color:var(--text2)">估值五十二亿美金</div>
+    </div>
+  </div>
+  <div style="font-size:36px;color:var(--gold);font-weight:600">市场巨大 + 需求真实 + 技术前沿</div>
+</div>
+<div class="phase phase-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:26px">
+  <div class="tag-pill tag-pill-warn" style="font-size:32px">今天呢？</div>
+  <div class="card-danger center-block" style="max-width:840px;text-align:center">
+    <div style="font-family:'Ma Shan Zheng';font-size:78px;line-height:1.1;font-weight:400" class="grad-red glow-red">停业清盘</div>
+    <div style="display:flex;gap:32px;justify-content:center;margin-top:18px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:32px;color:var(--text2)">IP 卖了</div>
+        <div style="font-family:'JetBrains Mono';font-size:64px;font-weight:700;color:var(--amber)">&lt; $50M</div>
+      </div>
+      <div>
+        <div style="font-size:32px;color:var(--text2)">投资人亏损</div>
+        <div style="font-family:'JetBrains Mono';font-size:64px;font-weight:700" class="grad-red glow-red">99%</div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:36px;color:var(--amber);font-weight:600">从五十二亿到清盘 · 一年多</div>
+</div>
+</div>
+<div class="layer-cinema">
+<div class="cinema-vignette"></div>
+</div>

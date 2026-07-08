@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E01 总纲 · 3:4 竖屏</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1080px;height:1440px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1080px;height:1440px;padding:64px 64px 56px;display:flex;flex-direction:column;background:linear-gradient(160deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-blue{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-180px;right:-160px;pointer-events:none;}
+.glow-gold{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.16),transparent 70%);filter:blur(90px);bottom:-160px;left:-120px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 80%75% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:80px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(251,191,36,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:80px;background:linear-gradient(0deg,rgba(251,191,36,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:20px;margin-bottom:24px;justify-content:center;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:80px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:24px;color:#60A5FA;letter-spacing:0.18em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 22px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+
+.title{position:relative;z-index:2;font-size:96px;font-weight:900;line-height:1.06;letter-spacing:-0.01em;text-align:center;margin-top:12px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(96,165,250,0.18);}
+.subtitle{position:relative;z-index:2;font-size:34px;color:rgba(255,255,255,0.82);margin-top:18px;font-weight:500;text-align:center;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+
+.data{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px;}
+.data-card{border-radius:20px;padding:26px 14px;border:2px solid;background:rgba(15,23,42,0.58);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.data-card.gold{border-color:rgba(251,191,36,0.55);background:linear-gradient(165deg,rgba(251,191,36,0.12),rgba(15,23,42,0.60));}
+.data-card.blue{border-color:rgba(59,130,246,0.55);background:linear-gradient(165deg,rgba(59,130,246,0.12),rgba(15,23,42,0.60));}
+.data-card.green{border-color:rgba(16,185,129,0.55);background:linear-gradient(165deg,rgba(16,185,129,0.12),rgba(15,23,42,0.60));}
+.data-num{font-size:62px;font-weight:900;line-height:1;letter-spacing:-0.02em;font-family:'JetBrains Mono','Consolas',monospace;}
+.data-card.gold .data-num{color:#FBBF24;text-shadow:0 0 18px rgba(251,191,36,0.22);}
+.data-card.blue .data-num{color:#60A5FA;text-shadow:0 0 18px rgba(96,165,250,0.22);}
+.data-card.green .data-num{color:#34D399;text-shadow:0 0 18px rgba(52,211,153,0.22);}
+.data-label{font-size:24px;color:rgba(255,255,255,0.74);font-weight:600;}
+.data-note{position:relative;z-index:2;font-size:22px;color:rgba(255,255,255,0.45);margin-top:20px;text-align:center;line-height:1.5;}
+
+.stages{position:relative;z-index:2;margin-top:36px;padding-top:30px;}
+.stages-label{font-size:23px;color:#60A5FA;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;text-align:center;}
+.stages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stage{display:flex;align-items:center;justify-content:center;padding:12px 10px;border-radius:10px;font-size:23px;font-weight:600;border:1.5px solid rgba(96,165,250,0.25);background:rgba(59,130,246,0.06);color:#93C5FD;}
+.stage-num{color:#FBBF24;font-weight:800;margin-right:6px;font-family:'JetBrains Mono',monospace;}
+.stage.is-cur{background:linear-gradient(135deg,rgba(251,191,36,0.18),rgba(59,130,246,0.10));border-color:rgba(251,191,36,0.55);color:#FEF3C7;}
+.stage.is-cur .stage-num{color:#FBBF24;}
+
+.footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:23px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:21px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 13px;border-radius:7px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:21px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-gold"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E01</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 总纲</div>
+  </div>
+
+  <h1 class="title"><span class="title-grad">80人团队3个月<br>人均产出翻倍</span></h1>
+  <div class="subtitle">AI 战略转型方法论 · <span class="sub-strong">总纲</span></div>
+
+  <div class="data">
+    <div class="data-card gold"><div class="data-num">+104%</div><div class="data-label">人均产出</div></div>
+    <div class="data-card blue"><div class="data-num">76.6%</div><div class="data-label">AI 代码</div></div>
+    <div class="data-card green"><div class="data-num">-16.4pp</div><div class="data-label">Bug 下降</div></div>
+  </div>
+  <div class="data-note">80+ 人团队 · 3 个月 · 206 仓库同比<br>相关性非因果</div>
+
+  <div class="stages">
+    <div class="stages-label">7 阶段方法论</div>
+    <div class="stages-grid">
+      <div class="stage is-cur"><span class="stage-num">0</span>总纲</div>
+      <div class="stage"><span class="stage-num">1</span>战略</div>
+      <div class="stage"><span class="stage-num">2</span>赋能</div>
+      <div class="stage"><span class="stage-num">3</span>设施</div>
+      <div class="stage"><span class="stage-num">4</span>试点</div>
+      <div class="stage"><span class="stage-num">5</span>度量</div>
+      <div class="stage"><span class="stage-num">6</span>沉淀</div>
+      <div class="stage" style="visibility:hidden">　</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

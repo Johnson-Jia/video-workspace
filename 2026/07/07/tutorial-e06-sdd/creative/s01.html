@@ -1,0 +1,89 @@
+<!-- 场景: seg1 | 时长: ~48s | bg: dark_cipher | SDD 三产物 spec/plan/tasks + 纠错左移对比（核心段） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/紫/绿/金）静态光晕 + 脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:25%;width:380px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:38%;left:25%;width:380px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:25%;width:380px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:46%;right:18%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <div class="fx-blink" style="position:absolute;top:18%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:66%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:22%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 16px hsla(43,85%,54%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-sdd-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段3 · 核心段</div>
+      <h1 class="title-h1"><span class="grad-gold">SDD 规范驱动开发</span></h1>
+      <div class="title-sub">三层产物 · <span class="grad-blue">纠错左移</span> · <span class="grad-green">质量提升一个数量级</span></div>
+    </div>
+
+    <!-- 区域 2：三产物卡片 + 左移对比（reveal 7，left）—— 核心视觉，左右两栏 -->
+    <div class="tut-region tut-sdd-main" data-reveal="7" data-reveal-dir="left">
+      <div class="sdd-split">
+
+        <!-- 左栏：三产物卡片纵排 -->
+        <div class="sdd-tri">
+          <div class="artifact-card ac-blue">
+            <div class="ac-head"><span class="ac-tag grad-blue-bg-inline">spec.md</span><span class="ac-role">WHAT</span></div>
+            <div class="ac-fmt">WHEN THEN 格式</div>
+            <div class="ac-q">回答「<span class="grad-blue">做什么</span>」</div>
+          </div>
+          <div class="artifact-card ac-purple">
+            <div class="ac-head"><span class="ac-tag grad-purple-bg-inline">plan.md</span><span class="ac-role">HOW</span></div>
+            <div class="ac-fmt">含完整代码 · 每步前后对比 · 精确文件路径</div>
+            <div class="ac-q">回答「<span class="grad-purple">怎么做</span>」</div>
+          </div>
+          <div class="artifact-card ac-green">
+            <div class="ac-head"><span class="ac-tag grad-green-bg-inline">tasks.md</span><span class="ac-role">DO</span></div>
+            <div class="ac-fmt">可追踪 checkbox 任务清单</div>
+            <div class="ac-q">回答「<span class="grad-green">做到哪了</span>」</div>
+          </div>
+        </div>
+
+        <!-- 右栏：纠错左移对比图（核心）—— 左：早发现/改Markdown(新) ← 右：晚发现/改代码(旧) -->
+        <div class="sdd-shift">
+          <div class="shift-title grad-gold-bg-inline">核心价值 · 纠错左移</div>
+          <div class="shift-flow">
+            <div class="shift-good">
+              <div class="shift-label">早发现</div>
+              <div class="shift-action green-text">改 Markdown</div>
+              <div class="shift-cost">质量可控</div>
+            </div>
+            <div class="shift-arrow">◀──── 左移 ────</div>
+            <div class="shift-bad">
+              <div class="shift-label">晚发现</div>
+              <div class="shift-action red-text">改代码</div>
+              <div class="shift-cost">质量损失大</div>
+            </div>
+          </div>
+          <div class="shift-quote"><span class="grad-gold">质量提升一个数量级</span></div>
+          <div class="shift-note">AI 初始理解往往不准 · 改 spec 比改代码快得多</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 区域 3：tasks bonus（reveal 43，fade） -->
+    <div class="tut-region tut-sdd-bonus" data-reveal="43" data-reveal-dir="fade">
+      <div class="bonus-card">
+        <div class="bonus-tag grad-green-bg-inline">tasks bonus</div>
+        <div class="bonus-text">中断自动接续 · 下一段细讲</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

@@ -1,0 +1,90 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-gold: #FBBF24;
+  --tut-blue: #3B82F6;
+  --tut-green: #10B981;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E02 介绍段 — 本集地图（横屏 reveal §6.16）
+ * 1 场景 + 两栏（思想转变 | 5 原理）+ 结论行
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 36px;
+  padding: 70px 140px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 36px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 50%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 标题区 —— */
+.tut-map-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.tut-map-title .mt-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+}
+.tut-map-title .mt-h1 {
+  font-family: var(--font-title); font-size: 88px; font-weight: 900; line-height: 1.04;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#3B82F6 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(59,130,246,0.22);
+}
+
+/* —— 两栏（思想转变 | 5 原理）—— */
+.tut-map-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 44px; width: 100%;
+  align-items: stretch;
+}
+.tut-col {
+  border-radius: 22px; padding: 36px 36px 32px;
+  border: 2px solid; background: rgba(15,23,42,0.55);
+  display: flex; flex-direction: column; gap: 18px;
+}
+.tut-col-left { border-color: rgba(251,191,36,0.55); background: linear-gradient(165deg, rgba(251,191,36,0.10), rgba(15,23,42,0.60)); }
+.tut-col-right { border-color: rgba(59,130,246,0.55); background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.60)); }
+.tut-col .col-head {
+  font-family: var(--font-title); font-size: 42px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgba(255,255,255,0.16);
+}
+.tut-col-items { display: flex; flex-direction: column; gap: 14px; }
+.tut-col-items .ci {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: var(--tut-white);
+  display: flex; align-items: center; gap: 14px; line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-col-left .ci::before { content: "▸"; color: var(--tut-gold); font-size: 30px; }
+.tut-col-right .ci-num { font-family: var(--font-data); color: var(--tut-blue); font-weight: 800; min-width: 48px; }
+
+/* —— 结论行（= 精准交互）—— */
+.tut-map-conclusion {
+  display: flex; justify-content: center; align-items: center; gap: 24px;
+  padding: 22px 40px; border-radius: 18px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(90deg, rgba(16,185,129,0.10), rgba(15,23,42,0.50));
+}
+.tut-map-conclusion .mc-eq { font-family: var(--font-data); font-size: 44px; font-weight: 900; color: var(--tut-green); }
+.tut-map-conclusion .mc-text {
+  font-family: var(--font-body); font-size: 40px; font-weight: 700; color: var(--tut-white);
+  text-shadow: 0 0 12px rgba(16,185,129,0.18);
+}
+.tut-map-conclusion .mc-strong { font-size: 48px; }

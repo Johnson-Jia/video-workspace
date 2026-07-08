@@ -1,0 +1,162 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 pain — 三痛点纵排（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 三卡纵排（图标+痛点+一句话+解法胶囊）+ 结论金条
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 36px 90px 32px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-pain-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-pain-title .pain-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-pain-title .pain-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-pain-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 三卡纵排 —— */
+.tut-pain-cards { width: 100%; }
+.pc-list {
+  display: flex; flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.pain-row {
+  border-radius: 18px;
+  padding: 16px 22px;
+  border: 3px solid;
+  display: grid;
+  grid-template-columns: 90px 1fr 280px;
+  align-items: center;
+  gap: 20px;
+}
+.pain-row-red { border-color: rgba(248,113,113,0.6); background: linear-gradient(90deg, rgba(248,113,113,0.12), rgba(15,23,42,0.90)); }
+.pain-row-purple { border-color: rgba(196,181,253,0.6); background: linear-gradient(90deg, rgba(167,139,250,0.12), rgba(15,23,42,0.90)); }
+.pain-row-blue { border-color: rgba(147,197,253,0.6); background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.90)); }
+
+.pr-icon-box {
+  width: 90px; height: 90px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(15,23,42,0.6);
+  border: 2px solid rgba(255,255,255,0.08);
+}
+.pain-row-red .pr-icon-box { border-color: rgba(248,113,113,0.4); }
+.pain-row-purple .pr-icon-box { border-color: rgba(196,181,253,0.4); }
+.pain-row-blue .pr-icon-box { border-color: rgba(147,197,253,0.4); }
+.pr-icon {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+.pr-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pr-head {
+  display: flex; align-items: baseline; gap: 16px;
+}
+.pr-idx {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}
+.pr-name {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.05;
+}
+.pr-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.3;
+}
+
+.pr-solve {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  border-left: 2px dashed rgba(251,191,36,0.4);
+  padding-left: 20px;
+}
+.solve-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.solve-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}
+
+/* —— 结论金条 —— */
+.tut-pain-conclusion {
+  border-radius: 22px; padding: 14px 32px;
+  border: 3px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(248,113,113,0.14), rgba(15,23,42,0.88), rgba(251,191,36,0.14));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.concl-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.concl-main {
+  font-family: 'Inter'; font-size: 40px; font-weight: 900; line-height: 1.1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+.cm-key { font-weight: 900; }
+.cm-dots { font-family: 'JetBrains Mono'; color: var(--tut-gold); }

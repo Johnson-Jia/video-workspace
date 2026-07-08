@@ -1,0 +1,138 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 intro — 单点容易端到端难 + 三堵墙预告 + 路线图
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 90px 56px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 22px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— 左对齐建立视觉锚点 */
+.tut-intro-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-intro-title .hook-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-intro-title .intro-h1 {
+  font-family: 'Inter'; font-size: 82px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-intro-title .title-sub {
+  font-family: 'Inter'; font-size: 42px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 三堵墙卡 —— */
+.tut-intro-walls { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.wall-grid {
+  display: flex; align-items: stretch; justify-content: center; gap: 28px;
+  width: 100%;
+}
+.wall-card {
+  border-radius: 22px;
+  padding: 20px 26px;
+  border: 3px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
+  min-width: 320px;
+  max-width: 440px;
+  flex: 1;
+}
+.wall-red { border-color: rgba(248,113,113,0.65); background: linear-gradient(165deg, rgba(248,113,113,0.14), rgba(15,23,42,0.88)); }
+.wall-purple { border-color: rgba(196,181,253,0.65); background: linear-gradient(165deg, rgba(167,139,250,0.14), rgba(15,23,42,0.88)); }
+.wall-blue { border-color: rgba(147,197,253,0.65); background: linear-gradient(165deg, rgba(59,130,246,0.14), rgba(15,23,42,0.88)); }
+.wall-icon {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.wall-name {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900; letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.05;
+}
+.wall-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.3;
+}
+
+/* —— 路线图 —— */
+.tut-intro-route {
+  border-radius: 22px; padding: 14px 28px;
+  border: 3px solid rgba(251,191,36,0.55);
+  background: linear-gradient(90deg, rgba(251,191,36,0.10), rgba(15,23,42,0.88), rgba(251,191,36,0.10));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.route-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.route-row {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  flex-wrap: nowrap;
+}
+.route-node {
+  display: flex; align-items: center; gap: 8px;
+}
+.route-dot {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-bg);
+  background: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  width: 44px; height: 44px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.route-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  white-space: nowrap;
+}
+.route-sep {
+  font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 900;
+  line-height: 1;
+}

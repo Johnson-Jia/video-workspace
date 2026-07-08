@@ -1,0 +1,105 @@
+<!-- 场景: seg1 | 时长: ~35s | bg: dark_cipher | 断点续传（tasks状态机动画+案例数据卡） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/金/绿）静态光晕 + 脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:900px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;left:18%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;left:50%;transform:translateX(-50%);width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;right:18%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- 状态机位置脉冲锚点 -->
+  <div class="fx-blink" style="position:absolute;top:44%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.9);box-shadow:0 0 18px hsla(43,85%,54%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;right:20%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-rs-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段6</div>
+      <h1 class="title-h1"><span class="grad-gold">中断自动接续</span></h1>
+      <div class="title-sub"><span class="grad-blue">tasks 状态机</span> · 任务中断后重新接入，继续执行</div>
+    </div>
+
+    <!-- 区域 2：状态机三态（reveal 3，left）—— 核心动画 -->
+    <div class="tut-region tut-rs-statemachine" data-reveal="4" data-reveal-dir="left">
+      <div class="sm-row">
+        <!-- 状态 1：待办 -->
+        <div class="sm-card sm-todo">
+          <div class="sm-box">[ ]</div>
+          <div class="sm-label grad-blue">待办</div>
+          <div class="sm-desc">空框 · 未启动</div>
+        </div>
+        <!-- 流转箭头 -->
+        <div class="sm-arrow">→</div>
+        <!-- 状态 2：进行中（脉冲高亮） -->
+        <div class="sm-card sm-doing">
+          <div class="sm-box">[~]</div>
+          <div class="sm-label grad-gold">进行中</div>
+          <div class="sm-desc">in_progress · 活跃</div>
+        </div>
+        <div class="sm-arrow">→</div>
+        <!-- 状态 3：完成（打勾） -->
+        <div class="sm-card sm-done">
+          <div class="sm-box">[x]</div>
+          <div class="sm-label grad-green">完成</div>
+          <div class="sm-desc">达成 · 打勾</div>
+        </div>
+      </div>
+      <div class="sm-extra">
+        <span class="sm-extra-tag">另有</span>
+        <span class="sm-extra-item">deleted 已删</span>
+        <span class="sm-extra-item">blocked 阻塞</span>
+      </div>
+    </div>
+
+    <!-- 区域 3+4：流程链(左) + 案例数据卡(右) 并排，利用画布宽度 -->
+    <div class="tut-region tut-rs-bottom" data-reveal="11" data-reveal-dir="left">
+      <div class="rs-bottom-row">
+
+        <!-- 左：中断接续流程链 -->
+        <div class="resume-card">
+          <div class="resume-tag grad-blue-bg-inline">中断接续流程</div>
+          <div class="resume-chain">
+            <div class="rc-step"><span class="rc-icon">⏏</span><span class="rc-text">Claude 退出</span></div>
+            <div class="rc-arrow">→</div>
+            <div class="rc-step"><span class="rc-icon">↻</span><span class="rc-text">重进项目</span></div>
+            <div class="rc-arrow">→</div>
+            <div class="rc-step"><span class="rc-icon">⊗</span><span class="rc-text grad-gold">扫 [x] 标记</span></div>
+            <div class="rc-arrow">→</div>
+            <div class="rc-step"><span class="rc-icon">▶</span><span class="rc-text grad-green">续行下一任务</span></div>
+          </div>
+          <div class="resume-rule">devflow 恢复判定 · 扫 <span class="mono-x">[x]</span> 自动恢复到<span class="grad-blue">正确阶段</span></div>
+        </div>
+
+        <!-- 右：真实案例数据卡 -->
+        <div class="case-card">
+          <div class="case-tag grad-gold-bg-inline">真实案例 · 跨周中断接续</div>
+          <div class="case-title">某业务组重构<span class="grad-gold">个人中心</span></div>
+          <div class="case-data">
+            <div class="cd-item"><div class="cd-num grad-gold">十二</div><div class="cd-label">Controller</div></div>
+            <div class="cd-sep">·</div>
+            <div class="cd-item"><div class="cd-num grad-gold">两百一十一</div><div class="cd-label">API</div></div>
+            <div class="cd-sep">·</div>
+            <div class="cd-item"><div class="cd-num grad-gold">一万五</div><div class="cd-label">行代码</div></div>
+            <div class="cd-sep">·</div>
+            <div class="cd-item"><div class="cd-num grad-gold">一百一十</div><div class="cd-label">任务</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

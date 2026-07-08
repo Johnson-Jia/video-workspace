@@ -1,0 +1,42 @@
+{
+  "date": "2026-07-07",
+  "topic_type": "工具/效率 + 本地/隐私",
+  "topic_pattern": "topic-tool",
+  "angle": "本地优先 + 给 AI 立规矩：meetily 不上云的会议记录 + taste-skill 给 AI 装审美，配 macOS 用量/向量库/自托管书签，反直觉钩子是'AI 时代把数据攥自己手里'",
+  "novelty_strategy": {
+    "hook_direction": "反直觉/冲突优先（优先级 1）：meetily 会议记录全程本地不上云 + taste-skill 给 AI 装审美，利益翻译为'开会不被云端偷看 / AI 不再写套路话'。避开 07-02 教程式'第一件套/第二件套'和'杀入/猛项目'疲劳词，改用具体动作词'攥在手里/装上审美/秒看用量'",
+    "number_anchor": "2494 涨星（meetily 老项目 31 天后重新爆火的真实传播模式，非首日刷入），配 6 项目跨圈方向数（会议/审美/提示词/macOS/向量库/书签）",
+    "narrative_template": "hyper-pace 多项目盘点（6 项目 5-6 段），但每段用 contrarian_angle 锚定反直觉点，避免平铺罗列。与 07-02 'AI 转型实战合集'长叙事、07-03 工具 CLI 盘点都不同——本期强调'数据主权 + AI 规则化'主题串联"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "6 项目跨 6 方向：会议记录(meetily, A 普通可用) / AI 审美(taste-skill, C 开发者向) / 提示词资源(system_prompts_leaks, C) / macOS 工具(CodexBar, A) / 向量库(zvec, C) / 自托管书签(karakeep, A)。A:C=3:3 符合 audience_filter，避免单一类型",
+  "avoid_recent": [
+    "07-02: microsoft/AI-For-Beginners, facebook/astryx, refactoringhq/tolaria, 0xNyk/council-of-high-intelligence, yikart/AiToEarn, logto-io/logto",
+    "07-03: usestrix/strix, obra/superpowers, hasaneyldrm/exercises-dataset, browser-use/video-use, affaan-m/ECC, santifer/career-ops"
+  ],
+  "hook_strategy": {
+    "priority": 1,
+    "type": "反直觉/冲突",
+    "first_anchor": "meetily 会议记录全程本地不上云（隐私反直觉）+ 2494 涨星（数字锚定）",
+    "forbidden_fatigue_words": ["最猛", "杀入", "炸裂", "神器", "必备"],
+    "audience_phrasing": {
+      "A_tier": "meetily/CodexBar/karakeep 用'你能直接用/开会不被云端偷看/菜单栏秒看用量'",
+      "C_tier": "taste-skill/system_prompts_leaks/zvec 用'给做 XX 的开发者/给 AI 装审美/向量库工程师'"
+    }
+  },
+  "ending_question": {
+    "type": "中性二选一",
+    "candidate": "这几个你最想尝试哪个 / 会用哪个来 X",
+    "forbidden": ["你站谁", "敢说真香吗", "哪个更强"]
+  },
+  "compliance_notes": [
+    "system_prompts_leaks 用'公开整理'措辞，不渲染'泄露'猎奇",
+    "无违禁词（翻墙/盗版/破解/最强/第一/绝对/必备/神器）",
+    "项目名必报 owner/repo，禁全程用'它'",
+    "禁搜索引导（搜一下/评论区搜/去 GitHub 搜）"
+  ]
+}

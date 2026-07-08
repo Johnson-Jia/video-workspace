@@ -1,0 +1,194 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 段7 — TDD 加子代理分工
+ * bg: dark_cipher + 四代理卡片 + TDD循环 + 铁律卡
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 65px 80px 65px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题 —— 左对齐锚点 */
+.tut-td-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-td-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.tut-td-title .title-h1 {
+  font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-td-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：四代理卡片 —— 横向均分利用画布宽度 */
+.tut-td-agents { width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.agent-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px; width: 100%;
+}
+.agent-card {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 10px 8px;
+  border-radius: 14px;
+  border: 2.5px solid;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+}
+.ac-blue { border-color: rgba(96,165,250,0.75); box-shadow: 0 0 20px rgba(96,165,250,0.20); }
+.ac-green { border-color: rgba(110,231,183,0.75); box-shadow: 0 0 20px rgba(110,231,183,0.20); }
+.ac-purple { border-color: rgba(196,181,253,0.75); box-shadow: 0 0 20px rgba(167,139,250,0.20); }
+.ac-gold { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 20px rgba(251,191,36,0.20); }
+.ac-icon {
+  font-size: 44px; line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.ac-name {
+  font-family: 'Inter'; font-size: 38px; font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ac-role {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ac-rule {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center;
+}
+.agents-motto {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 3：TDD 循环 —— 圆内仅 letter+name，desc 在圆外 */
+.tut-td-cycle { width: 100%; display: flex; justify-content: center; }
+.tdd-cycle {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px;
+  padding: 14px 28px;
+  border-radius: 14px;
+  border: 2.5px solid rgba(96,165,250,0.45);
+  background: linear-gradient(90deg, rgba(15,23,42,0.85), rgba(15,23,42,0.75));
+}
+.tdd-node-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.tdd-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  border-radius: 50%;
+  width: 230px; height: 230px;
+  justify-content: center;
+  border: 3px solid;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+.tdd-red { border-color: rgba(252,165,165,0.80); background: radial-gradient(circle, rgba(239,68,68,0.18), rgba(15,23,42,0.90)); box-shadow: 0 0 22px rgba(239,68,68,0.25); }
+.tdd-green { border-color: rgba(110,231,183,0.80); background: radial-gradient(circle, rgba(16,185,129,0.18), rgba(15,23,42,0.90)); box-shadow: 0 0 22px rgba(16,185,129,0.25); }
+.tdd-blue { border-color: rgba(96,165,250,0.80); background: radial-gradient(circle, rgba(59,130,246,0.18), rgba(15,23,42,0.90)); box-shadow: 0 0 22px rgba(59,130,246,0.25); }
+.tdd-letter {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tdd-name {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  white-space: nowrap;
+}
+.tdd-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center; line-height: 1.1;
+  max-width: 260px;
+}
+.tdd-arrow {
+  font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 800;
+  color: rgba(251,191,36,0.80);
+}
+.tdd-loop {
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 800;
+  color: rgba(167,139,250,0.85);
+  padding: 4px 12px; border-radius: 8px;
+  background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.35);
+}
+
+/* —— 区域 4：铁律卡 —— 横向：tag+text+why+fix 一行利用宽度 */
+.tut-td-ironrule { width: 100%; display: flex; justify-content: stretch; }
+.iron-card {
+  border-radius: 14px; padding: 14px 32px;
+  border: 2.5px solid rgba(252,165,165,0.75);
+  background: linear-gradient(90deg, rgba(239,68,68,0.14), rgba(15,23,42,0.90));
+  display: flex; flex-direction: row; align-items: center; gap: 24px;
+  flex: 1;
+  box-shadow: 0 0 24px rgba(239,68,68,0.18);
+  flex-wrap: wrap;
+}
+.iron-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FCA5A5;
+  letter-spacing: 0.06em;
+}
+.iron-text {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.iron-why {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.88);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.iron-fix {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}

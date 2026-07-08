@@ -1,0 +1,106 @@
+<!-- 场景: seg2 | 时长: 33.05s | bg: scan_grid | ai-test-frame 5 模块架构 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+<div class="layer-fx">
+  <div class="fx-dot" style="top:18%;right:7%;width:200px;height:200px;"></div>
+  <div class="fx-blink" style="top:48%;left:46%;"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid" style="grid-template-rows:auto auto 1fr auto;">
+
+      <!-- 区域 1：标题区（reveal 0） -->
+      <div class="tut-hero tut-region" data-reveal="0" data-reveal-dir="left">
+        <div class="tut-hero-num">
+          <span class="pill">DEMO 01</span>
+          <span>ai-test-frame</span>
+        </div>
+        <h1 class="grad-blue">ai-test-frame</h1>
+        <div class="sub">最小可运行的 AI 自动化测试框架</div>
+        <div class="underline"></div>
+      </div>
+
+      <!-- 区域 2：核心思想流程（reveal 5） -->
+      <div class="tut-region" data-reveal="5" data-reveal-dir="left">
+        <div class="idea-flow">
+          <div class="idea">
+            <span class="h">编码期</span>
+            <span class="t">录制操作</span>
+          </div>
+          <span class="arr">→</span>
+          <div class="idea">
+            <span class="h">AI 生成</span>
+            <span class="t">测试类资产</span>
+          </div>
+          <span class="arr">→</span>
+          <div class="idea">
+            <span class="h">运行期</span>
+            <span class="t">确定性执行</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 3：5 模块架构列表（reveal 13） -->
+      <div class="tut-region" data-reveal="13" data-reveal-dir="left" style="display:flex;align-items:center;;justify-content:center">
+        <div class="module-list" style="width:100%;">
+          <div class="module-row">
+            <span class="m-idx">①</span>
+            <div class="m-body">
+              <span class="m-name">注册中心</span>
+              <span class="m-desc">装饰器注册测试用例</span>
+            </div>
+          </div>
+          <div class="module-row">
+            <span class="m-idx">②</span>
+            <div class="m-body">
+              <span class="m-name">软断言</span>
+              <span class="m-desc">失败不中断，继续跑完</span>
+            </div>
+          </div>
+          <div class="module-row">
+            <span class="m-idx">③</span>
+            <div class="m-body">
+              <span class="m-name">测试基类</span>
+              <span class="m-desc">通用定位 + 通用工具</span>
+            </div>
+          </div>
+          <div class="module-row">
+            <span class="m-idx">④</span>
+            <div class="m-body">
+              <span class="m-name">运行器</span>
+              <span class="m-desc">调度用例 + 汇总结果</span>
+            </div>
+          </div>
+          <div class="module-row">
+            <span class="m-idx">⑤</span>
+            <div class="m-body">
+              <span class="m-name">操作处理器</span>
+              <span class="m-desc">每种操作各对应一个</span>
+            </div>
+          </div>
+          <div class="module-row" style="border-left-color:var(--gold);background:rgba(251,191,36,0.08);">
+            <span class="m-idx">↳</span>
+            <div class="m-body">
+              <span class="m-name" style="color:var(--gold);">被测对象</span>
+              <span class="m-desc">极简商品管理页（自带示例）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 4：运行命令区（reveal 25） -->
+      <div class="tut-region" data-reveal="25" data-reveal-dir="left">
+        <div style="display:flex;align-items:center;gap:20px;">
+          <div class="term-win" style="flex:1;">
+            <div class="term-head"><span class="dot"></span><span>terminal</span></div>
+            <div class="term-line"><span class="prompt">$</span>python main.py</div>
+            <div class="term-line" style="color:var(--text-dim);font-size:32px;">通过 N · 失败 0 · 终端汇总</div>
+          </div>
+          <span class="badge-gold">开箱即跑</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

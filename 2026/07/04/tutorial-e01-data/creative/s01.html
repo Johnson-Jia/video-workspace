@@ -1,0 +1,51 @@
+<!-- 场景: scene-1 | 数据三连震撼 | 时长: 18.05s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg" data-bg-types="gradient,glow,grid,scan,particles">
+<!-- bg-component: clean_slate -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:22%;left:10%;width:340px;height:340px;background:radial-gradient(circle,rgba(251,191,36,0.22),transparent 70%);"></div>
+  <div class="fx-aura" style="top:62%;right:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);"></div>
+  <div class="fx-particle" style="top:30%;left:78%;width:8px;height:8px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:74%;left:18%;width:7px;height:7px;background:rgba(16,185,129,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 3 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区（场景开始即显示） — narration「最后看数据」 -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="left">
+    <span class="tut-eyebrow">+104% 怎么来的</span>
+    <div class="tut-title">最后看数据</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 数据三连大字 grid — narration「+104% / 76.6% / Bug 率下降 16.4 个百分点」 -->
+  <div class="tut-region tut-triple" data-reveal="2" data-reveal-dir="left">
+    <div class="tri-card gold">
+      <div class="tri-num">+104<span class="tri-unit">%</span></div>
+      <div class="tri-label">人均产出</div>
+      <div class="tri-sub">同比统计</div>
+    </div>
+    <div class="tri-card blue">
+      <div class="tri-num">76.6<span class="tri-unit">%</span></div>
+      <div class="tri-label">AI 代码占比</div>
+      <div class="tri-sub">三层识别算法</div>
+    </div>
+    <div class="tri-card green">
+      <div class="tri-num">-16.4<span class="tri-unit">pp</span></div>
+      <div class="tri-label">Bug 率下降</div>
+      <div class="tri-sub">质量同步改善</div>
+    </div>
+  </div>
+
+  <!-- Region 3: 样本口径注释条 — narration「80 多人 / 3 个月 / 206 仓库同比统计」 -->
+  <div class="tut-region tut-caliber" data-reveal="15" data-reveal-dir="left">
+    <span class="caliber-txt">80+ 人团队 · 3 个月 · 206 仓库同比</span>
+    <span class="caliber-pill">相关性非因果</span>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 可选：cinema 后处理原语 -->
+</div>

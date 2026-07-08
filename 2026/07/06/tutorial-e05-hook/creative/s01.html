@@ -1,0 +1,65 @@
+<!-- 场景: seg1 | 时长: ~22s | bg: hex_grid | AI 三痛点（瞎编/看不见/留不住）+ 反常识「这集可以跳过」 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金反常识 / 三痛点色；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:760px;height:170px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:18%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;right:18%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:760px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:11%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-hook-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E05 钩子</div>
+      <h1 class="hook-h1">给 AI 装上<span class="grad-gold">眼睛和记忆</span></h1>
+      <div class="title-sub">基础设施</div>
+    </div>
+
+    <!-- 区域 2：三痛点（data-reveal=4，dir=left） -->
+    <div class="tut-region tut-hook-pains" data-reveal="4" data-reveal-dir="left">
+      <div class="pain-grid">
+        <div class="pain-card pain-red">
+          <div class="pain-icon">?</div>
+          <div class="pain-name grad-red">瞎编</div>
+          <div class="pain-note">问业务细节就幻觉</div>
+        </div>
+        <div class="pain-card pain-purple">
+          <div class="pain-icon">◑</div>
+          <div class="pain-name grad-purple">看不见</div>
+          <div class="pain-note">改代码不知影响范围</div>
+        </div>
+        <div class="pain-card pain-blue">
+          <div class="pain-icon">⇣</div>
+          <div class="pain-name grad-blue">留不住</div>
+          <div class="pain-note">骨干调走经验带走</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：反常识钩子（data-reveal=15，dir=top） -->
+    <div class="tut-region tut-hook-twist" data-reveal="15" data-reveal-dir="top">
+      <div class="twist-tag grad-gold-bg-inline">反常识</div>
+      <div class="twist-main">这集 <span class="grad-gold">可以跳过</span> ？</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

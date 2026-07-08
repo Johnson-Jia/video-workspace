@@ -1,0 +1,565 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程 E01 段4 配色（跟钩子片段一致：金/蓝/绿 + 深蓝底） */
+  --tut-bg: #0F172A;
+  --tut-primary: #1E3A8A;
+  --tut-primary-2: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E01 段4 — 横屏教程 reveal 范式（§6.16）
+ * 一屏多区域 + data-reveal 逐步淡入（不切 phase）
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region grid）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;          /* 垂直居中 */
+  align-items: stretch;
+  gap: 26px;
+  padding: 70px 140px 70px 140px;   /* 横屏安全区内进一步留白 */
+  box-sizing: border-box;
+}
+
+/* 所有 region 初始隐藏（s6_assemble 按 data-reveal 时间点淡入后保持） */
+.tut-region {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* —— 标题区（hero）—— */
+.tut-hero { text-align: left; }
+.tut-hero .tut-eyebrow {
+  display: inline-block;
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+.tut-hero .tut-title {
+  font-family: 'Inter';
+  font-size: 84px;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  /* 渐变标题（横屏增强 §6.12，禁白色端点） */
+  background-image: linear-gradient(92deg, #93C5FD 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* 灰色诚信标题（s4 用） */
+.tut-hero.gray .tut-title {
+  background-image: linear-gradient(92deg, #CBD5E1 0%, #94A3B8 55%, #475569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-hero .tut-underline {
+  display: block;
+  width: 220px;
+  height: 6px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, var(--tut-primary-2), transparent);
+  border-radius: 3px;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+.tut-hero.gray .tut-underline {
+  background: linear-gradient(90deg, var(--tut-gray), transparent);
+}
+
+/* —— 数据三连大字（s1 hero triple）—— */
+.tut-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  width: 100%;
+}
+.tut-triple .tri-card {
+  border-radius: 18px;
+  padding: 30px 26px;
+  background: rgba(15,23,42,0.55);
+  border: 2px solid;
+  text-align: center;
+}
+.tut-triple .tri-card.gold {
+  border-color: rgba(251,191,36,0.55);
+  background: linear-gradient(160deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+}
+.tut-triple .tri-card.blue {
+  border-color: rgba(59,130,246,0.55);
+  background: linear-gradient(160deg, rgba(59,130,246,0.10), rgba(15,23,42,0.55));
+}
+.tut-triple .tri-card.green {
+  border-color: rgba(16,185,129,0.55);
+  background: linear-gradient(160deg, rgba(16,185,129,0.10), rgba(15,23,42,0.55));
+}
+.tut-triple .tri-num {
+  font-family: 'JetBrains Mono';
+  font-size: 110px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+.tut-triple .tri-card.gold .tri-num { color: var(--tut-gold); text-shadow: 0 0 22px rgba(251,191,36,0.25); }
+.tut-triple .tri-card.blue .tri-num { color: var(--tut-primary-2); text-shadow: 0 0 22px rgba(59,130,246,0.25); }
+.tut-triple .tri-card.green .tri-num { color: var(--tut-green); text-shadow: 0 0 22px rgba(16,185,129,0.25); }
+.tut-triple .tri-unit {
+  font-family: 'JetBrains Mono';
+  font-size: 44px;
+  font-weight: 700;
+  margin-left: 4px;
+  vertical-align: 0.18em;
+}
+.tut-triple .tri-label {
+  font-family: 'Noto Sans SC';
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  margin-top: 14px;
+}
+.tut-triple .tri-sub {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-gray);
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* —— 样本口径注释条 —— */
+.tut-caliber {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 32px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(148,163,184,0.10), rgba(15,23,42,0.4));
+  border: 1.5px solid rgba(148,163,184,0.35);
+}
+.tut-caliber .caliber-txt {
+  font-family: 'JetBrains Mono';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+  letter-spacing: 0.02em;
+}
+.tut-caliber .caliber-pill {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-gray);
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.18);
+  border: 1.5px solid rgba(148,163,184,0.40);
+}
+
+/* —— 三层算法流程卡（s2，纵向三卡）—— */
+.tut-algo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.tut-algo .algo-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 220px;
+  gap: 24px;
+  align-items: center;
+  border-radius: 16px;
+  padding: 22px 28px;
+  background: rgba(15,23,42,0.55);
+  border: 2px solid;
+}
+.tut-algo .algo-card.l1 {
+  border-color: rgba(59,130,246,0.55);
+  background: linear-gradient(120deg, rgba(59,130,246,0.10), rgba(15,23,42,0.55));
+}
+.tut-algo .algo-card.l2 {
+  border-color: rgba(16,185,129,0.55);
+  background: linear-gradient(120deg, rgba(16,185,129,0.10), rgba(15,23,42,0.55));
+}
+.tut-algo .algo-card.l3 {
+  border-color: rgba(251,191,36,0.55);
+  background: linear-gradient(120deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+}
+.tut-algo .algo-idx {
+  font-family: 'JetBrains Mono';
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.0;
+  text-align: center;
+}
+.tut-algo .algo-card.l1 .algo-idx { color: var(--tut-primary-2); }
+.tut-algo .algo-card.l2 .algo-idx { color: var(--tut-green); }
+.tut-algo .algo-card.l3 .algo-idx { color: var(--tut-gold); }
+.tut-algo .algo-body .algo-name {
+  font-family: 'Inter';
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--tut-white);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.tut-algo .algo-body .algo-desc {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+  line-height: 1.35;
+}
+.tut-algo .algo-tag {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.tut-algo .algo-card.l1 .algo-tag { background: rgba(59,130,246,0.20); color: #93C5FD; }
+.tut-algo .algo-card.l2 .algo-tag { background: rgba(251,191,36,0.22); color: #FDE68A; border: 1.5px solid rgba(251,191,36,0.65); }
+.tut-algo .algo-card.l3 .algo-tag { background: rgba(251,191,36,0.18); color: #FDE68A; }
+
+/* —— Excel 同比说明小字条 —— */
+.tut-excel {
+  display: block;
+  width: 100%;
+  font-family: 'JetBrains Mono';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-gray);
+  text-align: center;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+/* —— 对比双栏（感觉 vs 数据 / 相关性 vs 强相关）—— */
+.tut-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+.tut-col {
+  border-radius: 18px;
+  padding: 30px 36px;
+  border: 2px solid;
+  background: rgba(15,23,42,0.55);
+}
+.tut-col.gray {
+  border-color: rgba(148,163,184,0.55);
+  background: linear-gradient(160deg, rgba(148,163,184,0.10), rgba(15,23,42,0.55));
+}
+.tut-col.gold {
+  border-color: rgba(251,191,36,0.55);
+  background: linear-gradient(160deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+}
+.tut-col .col-tag {
+  display: inline-block;
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+}
+.tut-col.gray .col-tag { background: rgba(148,163,184,0.20); color: #CBD5E1; }
+.tut-col.gold .col-tag { background: rgba(251,191,36,0.22); color: #FDE68A; }
+.tut-col .col-h {
+  font-family: 'Inter';
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--tut-white);
+  margin-bottom: 10px;
+}
+.tut-col .col-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tut-col .col-list li {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.tut-col .col-list li::before {
+  content: "·";
+  position: absolute;
+  left: 6px;
+  top: -2px;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+}
+.tut-col.gray .col-list li::before { color: var(--tut-gray); }
+.tut-col.gold .col-list li::before { color: var(--tut-gold); }
+.tut-col .col-pill {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(251,191,36,0.20);
+  border: 1.5px solid rgba(251,191,36,0.55);
+  color: #FDE68A;
+}
+
+/* —— 代价收益对比条 —— */
+.tut-costbenefit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+}
+.tut-costbenefit .cb-card {
+  border-radius: 14px;
+  padding: 22px 30px;
+  border: 1.5px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tut-costbenefit .cb-card.cost {
+  border-color: rgba(148,163,184,0.50);
+  background: linear-gradient(120deg, rgba(148,163,184,0.10), rgba(15,23,42,0.40));
+}
+.tut-costbenefit .cb-card.benefit {
+  border-color: rgba(251,191,36,0.55);
+  background: linear-gradient(120deg, rgba(251,191,36,0.10), rgba(15,23,42,0.40));
+}
+.tut-costbenefit .cb-label {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.tut-costbenefit .cb-card.cost .cb-label { color: var(--tut-gray); }
+.tut-costbenefit .cb-card.benefit .cb-label { color: var(--tut-gold); }
+.tut-costbenefit .cb-value {
+  font-family: 'Inter';
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--tut-white);
+  line-height: 1.15;
+}
+.tut-costbenefit .cb-pill {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 4px;
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(251,191,36,0.22);
+  border: 1.5px solid rgba(251,191,36,0.60);
+  color: #FDE68A;
+}
+
+/* —— 金句区（s4 三大字横向）—— */
+.tut-quote {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.tut-quote .quote-main {
+  font-family: 'Inter';
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  /* 渐变金句（禁白色端点） */
+  background-image: linear-gradient(90deg, #FBBF24 0%, #F59E0B 50%, #B45309 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-quote .quote-main .quote-sep {
+  display: inline-block;
+  margin: 0 18px;
+  color: rgba(251,191,36,0.45);
+  -webkit-text-fill-color: rgba(251,191,36,0.45);
+}
+.tut-quote .quote-sub {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-gray);
+  margin-top: 18px;
+  letter-spacing: 0.02em;
+}
+
+/* —— CTA 收官区（s5）—— */
+.tut-cta {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 44px;
+  width: 100%;
+  align-items: stretch;
+}
+/* E02 预告卡 */
+.cta-e02 {
+  border: 3px solid rgba(251,191,36,0.65);
+  border-radius: 20px;
+  padding: 30px 36px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(15,23,42,0.55));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cta-e02 .e02-badge {
+  font-family: 'JetBrains Mono';
+  font-size: 60px;
+  font-weight: 800;
+  color: var(--tut-gold);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+.cta-e02 .e02-title {
+  font-family: 'Inter';
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.1;
+  /* 渐变（禁白色端点） */
+  background-image: linear-gradient(92deg, #93C5FD 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.cta-e02 .e02-sub {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+  line-height: 1.4;
+}
+
+/* 12 集合集徽章 */
+.cta-collection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+  border: 2px solid rgba(251,191,36,0.50);
+}
+.cta-collection .col-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.cta-collection .col-num {
+  font-family: 'JetBrains Mono';
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 1.0;
+  color: var(--tut-gold);
+  text-shadow: 0 0 24px rgba(251,191,36,0.25);
+  letter-spacing: -0.02em;
+}
+.cta-collection .col-unit {
+  font-family: 'Noto Sans SC';
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--tut-gold);
+}
+.cta-collection .col-label {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  text-align: center;
+  line-height: 1.3;
+}
+.cta-collection .col-sub {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-gray);
+  text-align: center;
+}
+
+/* 互动问句区 */
+.tut-interact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding: 22px 30px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), rgba(15,23,42,0.4));
+  border: 1.5px solid rgba(96,165,250,0.45);
+}
+.tut-interact .interact-q {
+  font-family: 'Inter';
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  /* 渐变（禁白色端点） */
+  background-image: linear-gradient(92deg, #93C5FD 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-interact .interact-lead {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-gray);
+  letter-spacing: 0.04em;
+}
+
+/* —— 入场辅助：标题区场景开始即显示（data-reveal="0"）——
+   s6_assemble 也会对该选择器 set opacity:1，此处双保险 */
+.tut-region[data-reveal="0"] { opacity: 1; }

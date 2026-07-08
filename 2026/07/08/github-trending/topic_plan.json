@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-08",
+  "topic_type": "工具/效率 + 本地/端侧 + AI 工程",
+  "topic_pattern": "topic-tool",
+  "angle": "AI 替你跑流程 + 端侧平民化：ai-job-search 让 AI 代跑求职全流程 + pocket-tts CPU 跑 TTS 不用 GPU，配 OfficeCLI 命令行操 Office / 腾讯云沙盒 / agent 技能库，反直觉钩子是'求职这件个性化的事居然能整成框架让 AI 跑'",
+  "novelty_strategy": {
+    "hook_direction": "反直觉/冲突优先（优先级 1）：ai-job-search 求职框架让 AI 评估岗位/改简历/写求职信/准备面试，利益翻译为'求职流程让 AI 替你跑'。避开 07-06 '杀入/猛项目'疲劳词和 07-07 '英文记录全屏不识别'主题，改用具体动作词'整成框架/跑流程/CPU 跑/塞进口袋'",
+    "number_anchor": "2402 涨星王（ai-job-search 单日，fork 3628 说明真有人在用），配 6 项目跨圈方向数（求职/会议/TTS/Office/沙盒/技能库）",
+    "narrative_template": "hyper-pace 多项目盘点（6 项目 6 段），但每段用 contrarian_angle 锚定反直觉点，避免平铺罗列。与 07-06 '7/6 GitHub 杀入'盘点、07-07 '英文记录'单主题都不同——本期强调'AI 替你跑流程 + 端侧平民化'主题串联，meetily 霸榜快速带过不重复展开"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "6 项目跨 6 方向：求职框架(ai-job-search, A 普通可用) / 会议纪要(meetily, A 霸榜带过) / 端侧 TTS(pocket-tts, B 半可用) / Office CLI(OfficeCLI, B 半可用) / agent 沙盒(CubeSandbox, C 开发者向) / agent 技能库(agent-skills, C 开发者向)。A:B:C=2:2:2 符合 audience_filter，避免单一类型",
+  "avoid_recent": [
+    "07-03: 6 个 AI 工具合集（hook '6个AI完成不可能任务'）",
+    "07-04: system_prompts_leaks（hook '让AI说穴位'）",
+    "07-05: AI 模型记录（hook '让AI学山歌'）",
+    "07-06: meetily/system_prompts_leaks/CodexBar/zvec/karakeep/taste-skill（hook '7/6 GitHub 杀入'）",
+    "07-07: system_prompts_leaks 单主题（hook '英文记录全屏不识别'）"
+  ],
+  "hook_strategy": {
+    "priority": 1,
+    "type": "反直觉/冲突",
+    "first_anchor": "ai-job-search 求职框架让 AI 跑全流程（求职反直觉）+ 2402 涨星王（数字锚定）",
+    "forbidden_fatigue_words": ["最猛", "杀入", "炸裂", "神器", "必备", "最强", "第一"],
+    "audience_phrasing": {
+      "A_tier": "ai-job-search/meetily 用'你能直接用/求职让 AI 替你跑/开会不上云'",
+      "B_tier": "pocket-tts/OfficeCLI 用'半可用/CPU 跑 TTS/命令行操 Office'",
+      "C_tier": "CubeSandbox/agent-skills 用'给开发者/agent 跑代码的沙盒/agent 工程技能库'"
+    }
+  },
+  "ending_question": {
+    "type": "中性二选一",
+    "candidate": "这几个你最想尝试哪个 / 会用哪个来替你跑流程",
+    "forbidden": ["你站谁", "敢说真香吗", "哪个更强"]
+  },
+  "compliance_notes": [
+    "无违禁词（翻墙/盗版/破解/最强/第一/绝对/必备/神器）",
+    "项目名必报 owner/repo，禁全程用'它'",
+    "禁搜索引导（搜一下/评论区搜/去 GitHub 搜）",
+    "meetily 霸榜 3-4s 快速带过，不重复介绍功能，只提增量'又涨了近一千八'",
+    "pocket-tts 用'CPU 跑/不用 GPU 不调 API'措辞，kyutai 是研究机构名非人名",
+    "TencentCloud 是组织名非校名，不触发校名门禁"
+  ]
+}

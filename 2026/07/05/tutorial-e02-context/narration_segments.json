@@ -1,0 +1,19 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 30,
+    "emotion": "原理-约束",
+    "text": "原理三，上下文窗口。现在模型上下文到 1M——一百万 token，听着很大。但虽大还是会填满。一个大代码库、一段长会话、一堆 MCP 工具定义，都会把它撑爆，一旦填满性能就下降。几乎所有最佳实践都在围这一个约束转：精简 CLAUDE.md、按需加载 Skill、保持干净会话、能用 CLI 就别堆 MCP。上下文是稀缺资源，每一段常驻内容，都要挣它的一席之地。",
+    "narration": "原理三，上下文窗口。现在模型上下文到 1M——一百万 token，听着很大。但虽大还是会填满。一个大代码库、一段长会话、一堆 MCP 工具定义，都会把它撑爆，一旦填满性能就下降。几乎所有最佳实践都在围这一个约束转：精简 CLAUDE.md、按需加载 Skill、保持干净会话、能用 CLI 就别堆 MCP。上下文是稀缺资源，每一段常驻内容，都要挣它的一席之地。",
+    "hook_anchors": ["上下文 1M", "一百万 token", "撑爆", "性能下降", "精简 CLAUDE.md", "按需 Skill", "干净会话", "CLI 优于 MCP", "稀缺资源", "一席之地"],
+    "visual_type": "principle_context_window",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题区 — 原理编号「原理 ③」+ 标题「上下文 1M · 约束原点」fade-in", "duration_share": 0.16},
+      {"phase": 2, "start_offset": 5, "focus": "上下文桶示意区 — 1M token 桶 + count-up 填充度 0→100%（data-count-to=100 data-count-at=7，撑爆标红）+ 旁注三大撑爆源（大代码库/长会话/MCP）data-reveal-dir=left", "duration_share": 0.40},
+      {"phase": 3, "start_offset": 16, "focus": "最佳实践清单 — 四条实践（精简 CLAUDE.md / 按需 Skill / 干净会话 / CLI 优于 MCP）+ 金句「上下文是稀缺资源 · 每一段常驻内容都要挣一席之地」data-reveal-dir=top", "duration_share": 0.44}
+    ],
+    "bg_component": "clean_slate"
+  }
+]

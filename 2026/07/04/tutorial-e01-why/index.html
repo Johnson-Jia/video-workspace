@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.6),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+/* =========================================================
+   ClipForge Tutorial E01 段1（为什么必须转型）— 横屏教程样式
+   一屏多区域 + reveal（§6.16）
+   ========================================================= */
+
+/* ---------- 教程场景骨架（横屏 1920x1080） ---------- */
+.tut-scene{width:100%;height:100%;
+  
+  padding:60px 120px;           /* 横屏安全区单层 padding */
+  box-sizing:border-box;
+  display:flex;flex-direction:column;justify-content:flex-start;
+}
+.tut-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;        /* 默认双栏，部分场景覆盖 */
+  grid-template-rows:auto 1fr auto;
+  height:100%;width:100%;
+  gap:28px 48px;
+  align-content:start;
+}
+.tut-region{opacity:0;will-change:opacity;}   /* 初始隐藏，GSAP reveal 后保持 */
+
+/* ---------- 标题区（hero，跨列） ---------- */
+.tut-hero{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding-top:8px;
+}
+.tut-hero .hero-eyebrow{
+  font-size:32px;letter-spacing:.18em;color:#94A3B8;font-weight:600;
+}
+.tut-hero .hero-title{
+  font-size:84px;font-weight:800;letter-spacing:.02em;line-height:1.05;
+  text-align:center;
+  background-image:linear-gradient(90deg,#93C5FD 0%,#3B82F6 50%,#1E3A8A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-color:#0F172A;        /* 兜底，防 transparent 失效 */
+}
+.tut-hero .hero-underline{
+  width:160px;height:4px;border-radius:2px;
+  background-image:linear-gradient(90deg,transparent 0%,#3B82F6 30%,#FBBF24 100%);
+}
+
+/* ---------- 双栏对比 ---------- */
+.tut-col{
+  display:flex;flex-direction:column;gap:14px;
+  padding:26px 28px;border-radius:14px;
+  background:rgba(15,23,42,.62);
+  border:1px solid rgba(148,163,184,.18);
+}
+.tut-col.col-cold{border-left:6px solid #94A3B8;}
+.tut-col.col-warm{border-left:6px solid #FBBF24;}
+.tut-col.col-red {border-left:6px solid #EF4444;}
+.tut-col.col-green{border-left:6px solid #10B981;}
+.tut-col .col-title{
+  font-size:40px;font-weight:700;color:#E0E7FF;letter-spacing:.02em;
+}
+.tut-col .col-tag{
+  display:inline-block;font-size:32px;font-weight:600;letter-spacing:.08em;
+  padding:4px 12px;border-radius:6px;
+}
+.tut-col.col-red .col-tag{background:rgba(239,68,68,.16);color:#FCA5A5;}
+.tut-col.col-green .col-tag{background:rgba(16,185,129,.16);color:#6EE7B7;}
+.tut-col.col-cold .col-tag{background:rgba(148,163,184,.16);color:#CBD5E1;}
+.tut-col.col-warm .col-tag{background:rgba(251,191,36,.16);color:#FCD34D;}
+.tut-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.tut-col li{
+  font-size:32px;color:#E0E7FF;line-height:1.4;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.tut-col li .bul{color:#64748B;font-weight:700;flex:none;margin-top:2px;}
+
+/* ---------- 三栏对比（两个极端） ---------- */
+.tut-tri{
+  grid-column:1 / -1;
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;   /* 两极端用双栏 */
+}
+.tut-card{
+  display:flex;flex-direction:column;gap:14px;
+  padding:26px 28px;border-radius:14px;
+  background:rgba(15,23,42,.66);
+  border:1px solid rgba(239,68,68,.30);
+}
+.tut-card .card-head{
+  display:flex;align-items:center;gap:14px;
+}
+.tut-card .card-icon{
+  width:56px;height:56px;border-radius:12px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(239,68,68,.18);color:#FCA5A5;
+  font-size:34px;font-weight:800;
+}
+.tut-card .card-title{font-size:38px;font-weight:700;color:#FCA5A5;}
+.tut-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.tut-card li{
+  font-size:32px;color:#E0E7FF;line-height:1.4;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.tut-card li .bul{color:#94A3B8;font-weight:700;flex:none;margin-top:2px;}
+
+/* ---------- 金句条（金/蓝/绿边框） ---------- */
+.tut-quote{
+  grid-column:1 / -1;
+  padding:22px 36px;border-radius:12px;
+  background:rgba(15,23,42,.78);
+  display:flex;align-items:center;justify-content:center;gap:18px;
+}
+.tut-quote.quote-gold{border:2px solid #FBBF24;box-shadow:0 0 36px rgba(251,191,36,.18) inset;}
+.tut-quote.quote-blue{border:2px solid #3B82F6;box-shadow:0 0 36px rgba(59,130,246,.18) inset;}
+.tut-quote.quote-green{border:2px solid #10B981;box-shadow:0 0 36px rgba(16,185,129,.18) inset;}
+.tut-quote.quote-red{border:2px solid #EF4444;box-shadow:0 0 36px rgba(239,68,68,.18) inset;}
+.tut-quote .quote-text{
+  font-size:54px;font-weight:800;color:#F8FAFC;letter-spacing:.04em;line-height:1.25;
+  text-align:center;
+}
+.tut-quote.quote-gold .quote-text{
+  background-image:linear-gradient(90deg,#FCD34D 0%,#FBBF24 60%,#F59E0B 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-color:#0F172A;
+}
+
+/* ---------- 数据卡（金色大数字） ---------- */
+.tut-data{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:48px;
+  padding:16px 0;
+}
+.tut-data .data-num{
+  font-family:'JetBrains Mono','Inter',monospace;
+  font-size:160px;font-weight:800;line-height:1;letter-spacing:-.02em;
+  background-image:linear-gradient(180deg,#FCD34D 0%,#FBBF24 60%,#B45309 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-color:#0F172A;
+  text-shadow:0 0 18px rgba(251,191,36,.20);
+}
+.tut-data .data-sub{
+  display:flex;flex-direction:column;gap:6px;
+}
+.tut-data .data-sub .sub-1{font-size:36px;font-weight:700;color:#E0E7FF;}
+.tut-data .data-sub .sub-2{font-size:32px;color:#94A3B8;letter-spacing:.04em;}
+
+/* ---------- 注释区（相关性非因果） ---------- */
+.tut-note{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-size:32px;color:#94A3B8;letter-spacing:.06em;
+}
+.tut-note .note-bar{width:36px;height:2px;background:#475569;}
+
+/* ---------- 三胶囊标签（why2 冲击区） ---------- */
+.tut-pills{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+}
+.tut-pill{
+  font-size:34px;font-weight:700;letter-spacing:.04em;
+  padding:14px 28px;border-radius:999px;
+  border:2px solid #EF4444;color:#FCA5A5;
+  background:rgba(239,68,68,.10);
+}
+.tut-pill .pill-sep{color:#475569;margin:0 6px;}
+
+/* ---------- 差距对比条（why2 数量级） ---------- */
+.tut-gap{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+}
+.tut-gap .gap-bar{
+  height:48px;border-radius:8px;display:flex;align-items:center;
+  padding:0 18px;font-size:32px;font-weight:700;color:#0F172A;
+}
+.tut-gap .gap-bar.small{width:140px;background:#475569;color:#E0E7FF;}
+.tut-gap .gap-bar.big{width:520px;background:linear-gradient(90deg,#FBBF24,#F59E0B);}
+.tut-gap .gap-arrow{font-size:42px;color:#FBBF24;font-weight:800;}
+
+/* ---------- 类比卡（资深实习生） ---------- */
+.tut-analog{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  padding:18px 0;
+}
+.tut-analog .analog-icon{
+  width:96px;height:96px;border-radius:18px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#1E3A8A,#3B82F6);
+  font-size:48px;
+}
+.tut-analog .analog-rows{display:flex;flex-direction:column;gap:10px;}
+.tut-analog .analog-row{
+  font-size:34px;color:#E0E7FF;letter-spacing:.02em;
+  display:flex;align-items:center;gap:14px;
+}
+.tut-analog .analog-row .dot{color:#10B981;font-weight:800;}
+
+/* ---------- 倍率对比条（posture 懂/不懂） ---------- */
+.tut-rate{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:0;
+}
+.tut-rate .rate-cell{
+  flex:1;max-width:560px;padding:24px 28px;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.tut-rate .rate-cell.cell-green{
+  background:rgba(16,185,129,.14);border:2px solid #10B981;
+}
+.tut-rate .rate-cell.cell-gray{
+  background:rgba(100,116,139,.14);border:2px solid #475569;
+}
+.tut-rate .rate-cell .rate-label{font-size:32px;color:#94A3B8;letter-spacing:.06em;}
+.tut-rate .rate-cell .rate-num{
+  font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:800;line-height:1;
+}
+.tut-rate .rate-cell.cell-green .rate-num{color:#6EE7B7;}
+.tut-rate .rate-cell.cell-gray .rate-num{color:#CBD5E1;}
+
+/* ---------- 承接条（handoff） ---------- */
+.tut-next{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:18px 30px;border-radius:12px;
+  background:rgba(59,130,246,.10);border:1px solid rgba(59,130,246,.35);
+}
+.tut-next .next-label{font-size:32px;color:#94A3B8;letter-spacing:.10em;}
+.tut-next .next-text{font-size:36px;font-weight:700;color:#E0E7FF;letter-spacing:.04em;}
+.tut-next .next-arrow{font-size:36px;color:#3B82F6;font-weight:800;}
+
+/* ---------- 双行注释（handoff） ---------- */
+.tut-lines{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.tut-lines .line{
+  font-size:32px;color:#94A3B8;letter-spacing:.04em;text-align:center;line-height:1.5;
+}
+.tut-lines .line strong{color:#E0E7FF;font-weight:600;}
+
+/* ---------- 单列布局覆盖（hook / handoff 居中一列） ---------- */
+.tut-grid.grid-single{grid-template-columns:1fr;}
+.tut-grid.grid-single .tut-hero,
+.tut-grid.grid-single .tut-quote,
+.tut-grid.grid-single .tut-lines,
+.tut-grid.grid-single .tut-next,
+.tut-grid.grid-single .tut-note{grid-column:1;}
+
+/* ---------- fx 元素 ---------- */
+.fx-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes gridDotBreath {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.10; }
+}
+@keyframes spotlightShift {
+  0%, 100% { opacity: 0.18; transform: translateX(0); }
+  50% { opacity: 0.28; transform: translateX(15px); }
+}
+@keyframes waveDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120px); }
+}
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.14; }
+  50% { opacity: 0.25; }
+}
+@keyframes shapeFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50% { transform: translateY(-20px) rotate(45deg); opacity: 0.18; }
+}
+@keyframes shapeFloat2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.06; }
+  50% { transform: translateY(-15px) rotate(-30deg); opacity: 0.14; }
+}
+@keyframes slateVignette {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.22; }
+}
+@keyframes cornerLineGlow {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.20; }
+}
+@keyframes bluePulse {
+  0%, 100% { opacity: 0.20; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes scanLine2 { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:0.4} 50%{opacity:0.7} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes gridNodeBlink { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
+@keyframes cornerPulse { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+@keyframes dataFlow { 0%{transform:translateX(-100%);opacity:0} 50%{opacity:0.7} 100%{transform:translateX(100%);opacity:0} }
+@keyframes tickFade { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+
+@keyframes waveSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes prismShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.18; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="97.60" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.22" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="7.42">
+<div class="layer-bg" data-bg-types="dots,glow,gradient,particles,wave">
+<!-- bg-component: clean_slate -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, hsla(215,45%,14%,1) 0%, hsla(220,40%,11%,1) 50%, hsla(218,38%,9%,1) 100%)"></div>
+
+<div style="position:absolute;top:25%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, hsla(215,55%,28%,0.35), hsla(220,45%,18%,0.12), transparent 65%);
+  filter:blur(90px);animation:spotlightShift 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:55%;
+  background:radial-gradient(ellipse 90% 100% at 45% 0%, hsla(215,50%,30%,0.22), hsla(220,40%,20%,0.10) 50%, transparent 75%);
+  animation:spotlightShift 22s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle, hsla(215,40%,50%,0.08) 1px, transparent 1px);
+  background-size:60px 60px;animation:gridDotBreath 25s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40px;left:40px;width:120px;height:2px;
+  background:linear-gradient(90deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+<div style="position:absolute;top:40px;left:40px;width:2px;height:80px;
+  background:linear-gradient(180deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:40px;right:40px;width:100px;height:2px;
+  background:linear-gradient(270deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+<div style="position:absolute;bottom:40px;right:40px;width:2px;height:70px;
+  background:linear-gradient(0deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;bottom:60px;left:0;width:calc(100% + 120px);height:40px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      hsla(215,42%,45%,0.10) 30px, hsla(215,42%,45%,0.10) 31px);
+  transform:perspective(500px) rotateX(45deg);
+  animation:waveDrift 30s linear infinite"></div>
+
+<div style="position:absolute;top:25%;right:18%;width:60px;height:60px;opacity:0.08;
+  border:1px solid hsla(215,48%,50%,0.5);
+  transform:rotate(45deg);
+  animation:shapeFloat 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:22%;width:40px;height:40px;opacity:0.06;
+  border:1px solid hsla(215,45%,48%,0.5);border-radius:50%;
+  animation:shapeFloat2 22s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:70%;right:30%;width:25px;height:25px;opacity:0.06;
+  border:1px solid hsla(220,42%,45%,0.4);
+  animation:shapeFloat 16s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:32%;left:48%;width:3px;height:3px;border-radius:50%;
+  background:hsla(215,55%,58%,0.55);box-shadow:0 0 6px hsla(215,50%,52%,0.40),0 0 12px hsla(215,45%,45%,0.20);
+  animation:bluePulse 8s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:60%;left:25%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,50%,55%,0.45);box-shadow:0 0 4px hsla(215,45%,48%,0.30);
+  animation:bluePulse 10s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:45%;left:72%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,52%,52%,0.40);box-shadow:0 0 4px hsla(215,48%,45%,0.28);
+  animation:bluePulse 12s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(45deg,
+    transparent 42%, hsla(215,45%,38%,0.06) 46%, hsla(215,45%,38%,0.06) 46.5%,
+    transparent 47%);
+  animation:cornerLineGlow 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 75% 70% at 50% 48%, transparent 0%, hsla(215,30%,5%,0.30) 70%, hsla(220,35%,3%,0.50) 100%);
+  animation:slateVignette 25s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：左上脉冲光球（认知冲击） -->
+  <div class="fx-orb fx-pulse" style="top:18%;left:14%;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(59,130,246,.32),rgba(59,130,246,.06) 60%,transparent 70%);
+    filter:blur(8px);"></div>
+  <!-- fx 2：右下漂浮光球（情绪重量） -->
+  <div class="fx-orb fx-drift" style="bottom:14%;right:16%;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(251,191,36,.22),rgba(251,191,36,.04) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：中部闪烁锚点（认知反转焦点） -->
+  <div class="fx-orb fx-blink" style="top:48%;left:50%;transform:translateX(-50%);width:14px;height:14px;
+    background:#FBBF24;border-radius:50%;box-shadow:0 0 18px rgba(251,191,36,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid grid-single">
+      <div class="tut-hero" data-reveal="0" data-reveal-dir="top">
+        <div class="hero-eyebrow">E01 · 段 1</div>
+        <h1 class="hero-title">为什么必须转型</h1>
+        <div class="hero-underline"></div>
+      </div>
+      <div class="tut-quote quote-gold" data-reveal="4" data-reveal-dir="top">
+        <div class="quote-text">不转型，不是维持现状，是相对落后。</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clip" id="s02" data-start="7.42" data-duration="18.31">
+<div class="layer-bg" data-bg-types="glow,gradient,grid,particles,scan">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.1);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),rgba(0,255,200,0.6),rgba(0,229,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>| 00</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(200,0,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：右上方冷色脉冲光球 -->
+  <div class="fx-orb fx-pulse" style="top:12%;right:10%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(0,229,255,.28),rgba(0,150,200,.06) 60%,transparent 70%);
+    filter:blur(8px);"></div>
+  <!-- fx 2：左下漂移光球（数据重量感） -->
+  <div class="fx-orb fx-drift" style="bottom:12%;left:8%;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(251,191,36,.22),rgba(251,191,36,.04) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：数据卡上方闪烁高光（数据焦点） -->
+  <div class="fx-orb fx-blink" style="top:62%;left:50%;transform:translateX(-50%);width:12px;height:12px;
+    background:#FBBF24;border-radius:50%;box-shadow:0 0 16px rgba(251,191,36,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid">
+      <div class="tut-hero" data-reveal="0" data-reveal-dir="top">
+        <div class="hero-eyebrow">认知升级</div>
+        <h1 class="hero-title">AI 是生产关系的重写</h1>
+        <div class="hero-underline"></div>
+      </div>
+      <div class="tut-col col-cold" data-reveal="4" data-reveal-dir="top">
+        <span class="col-tag">不是</span>
+        <div class="col-title">锦上添花的工具</div>
+        <ul>
+          <li><span class="bul">×</span>噱头</li>
+          <li><span class="bul">×</span>可有可无的附加项</li>
+        </ul>
+      </div>
+      <div class="tut-col col-warm" data-reveal="4.3" data-reveal-dir="top">
+        <span class="col-tag">是</span>
+        <div class="col-title">研发生产关系重写</div>
+        <ul>
+          <li><span class="bul">✓</span>结构变量，不是效率工具</li>
+          <li><span class="bul">✓</span>先动者拉开身位</li>
+        </ul>
+      </div>
+      <div class="tut-data" data-reveal="9" data-reveal-dir="top">
+        <div class="data-num">2×</div>
+        <div class="data-sub">
+          <div class="sub-1">代码产出</div>
+          <div class="sub-2">同样人数 · 先动者</div>
+        </div>
+      </div>
+      <div class="tut-note" data-reveal="14" data-reveal-dir="top">
+        <span class="note-bar"></span>
+        <span>相关性 · 非因果 —— 不能 100% 归功 AI</span>
+        <span class="note-bar"></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clip" id="s03" data-start="25.73" data-duration="19.63">
+<div class="layer-bg" data-bg-types="contour,glow,gradient,particles,wave">
+<!-- bg-component: gradient_mesh -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg, var(--bg-dark, #080818) 0%, var(--bg-mid, #001a33) 100%)"></div>
+
+<div style="position:absolute;top:20%;left:0;width:100%;height:300px;
+  background:linear-gradient(90deg,transparent,hsla(220,60%,40%,0.15),transparent);
+  transform:rotate(-8deg);animation:waveSway 20s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:0;width:100%;height:250px;
+  background:linear-gradient(90deg,transparent,hsla(250,50%,45%,0.18),transparent);
+  transform:rotate(5deg);animation:waveSway 25s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:38%;left:-5%;width:110%;height:180px;
+  background:linear-gradient(90deg,transparent 15%,hsla(190,55%,45%,0.16),hsla(200,45%,40%,0.10),transparent 85%);
+  filter:blur(30px);animation:waveSway 28s ease-in-out infinite 10s"></div>
+
+<div style="position:absolute;top:25%;left:65%;width:4px;height:4px;border-radius:50%;
+  background:hsla(230,60%,60%,0.5);box-shadow:0 0 8px hsla(230,50%,50%,0.4);animation:floatParticle 7s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:30%;width:3px;height:3px;border-radius:50%;
+  background:hsla(260,50%,55%,0.45);box-shadow:0 0 6px hsla(260,40%,45%,0.35);animation:floatParticle 9s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:70%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(210,55%,58%,0.4);box-shadow:0 0 6px hsla(210,45%,48%,0.3);animation:floatParticle 8s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 40%,rgba(255,255,255,0.03) 60%,transparent 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:45%;left:50%;width:700px;height:700px;border-radius:50%;opacity:0.06;
+  background:repeating-radial-gradient(circle,transparent 0px,transparent 16px,hsla(220,60%,55%,0.10) 16px,hsla(220,60%,55%,0.10) 17px);
+  filter:blur(1.5px);transform:translate(-50%,-50%);animation:waveSway 22s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:-10%;width:120%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,rgba(255,100,100,0.5),rgba(100,255,100,0.5),rgba(100,100,255,0.5),transparent);
+  filter:blur(60px);transform:rotate(-3deg);animation:prismShimmer 10s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：顶部右侧压力脉冲球（承压感） -->
+  <div class="fx-orb fx-pulse" style="top:14%;right:12%;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(239,68,68,.26),rgba(239,68,68,.05) 60%,transparent 70%);
+    filter:blur(8px);"></div>
+  <!-- fx 2：左下漂移冷光球（差距拉大） -->
+  <div class="fx-orb fx-drift" style="bottom:14%;left:10%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(59,130,246,.26),rgba(59,130,246,.05) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：右下警示闪烁点（承压焦点） -->
+  <div class="fx-orb fx-blink" style="bottom:24%;right:22%;width:12px;height:12px;
+    background:#EF4444;border-radius:50%;box-shadow:0 0 16px rgba(239,68,68,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid">
+      <div class="tut-hero" data-reveal="0" data-reveal-dir="top">
+        <div class="hero-eyebrow">外溢冲击</div>
+        <h1 class="hero-title">不只研发团队的事</h1>
+        <div class="hero-underline"></div>
+      </div>
+      <div class="tut-pills" data-reveal="4" data-reveal-dir="top">
+        <div class="tut-pill">传统软件巨头<span class="pill-sep">·</span>CRM</div>
+        <div class="tut-pill">SaaS</div>
+        <div class="tut-pill">估值承压</div>
+      </div>
+      <div class="tut-quote quote-gold" data-reveal="9" data-reveal-dir="top">
+        <div class="quote-text">不用 AI，就被 AI 重写。</div>
+      </div>
+      <div class="tut-gap" data-reveal="13" data-reveal-dir="top">
+        <div class="gap-bar small">原地不动</div>
+        <div class="gap-arrow">→</div>
+        <div class="gap-bar big">半年后：数量级差距</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clip" id="s04" data-start="45.36" data-duration="20.23">
+<div class="layer-bg" data-bg-types="glow,gradient,grid,particles,scan">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.1);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),rgba(0,255,200,0.6),rgba(0,229,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>| 00</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0.015) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(200,0,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：左上警示脉冲 -->
+  <div class="fx-orb fx-pulse" style="top:10%;left:8%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(239,68,68,.28),rgba(239,68,68,.05) 60%,transparent 70%);
+    filter:blur(8px);"></div>
+  <!-- fx 2：右上警示脉冲（错相位） -->
+  <div class="fx-orb fx-drift" style="top:14%;right:10%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(239,68,68,.24),rgba(251,191,36,.05) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：中下警示闪烁点（误区对比焦点） -->
+  <div class="fx-orb fx-blink" style="bottom:18%;left:50%;transform:translateX(-50%);width:14px;height:14px;
+    background:#EF4444;border-radius:50%;box-shadow:0 0 18px rgba(239,68,68,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid">
+      <div class="tut-hero" data-reveal="0" data-reveal-dir="top">
+        <div class="hero-eyebrow">两个误区</div>
+        <h1 class="hero-title">两个极端 · 都要避免</h1>
+        <div class="hero-underline"></div>
+      </div>
+      <div class="tut-tri" data-reveal="3" data-reveal-dir="top">
+        <div class="tut-card">
+          <div class="card-head">
+            <div class="card-icon">×</div>
+            <div class="card-title">抗拒 AI</div>
+          </div>
+          <ul>
+            <li><span class="bul">×</span>觉得是噱头</li>
+            <li><span class="bul">×</span>怕被替代</li>
+            <li><span class="bul">×</span>碰都不碰</li>
+          </ul>
+        </div>
+        <div class="tut-card">
+          <div class="card-head">
+            <div class="card-icon">×</div>
+            <div class="card-title">盲目崇拜</div>
+          </div>
+          <ul>
+            <li><span class="bul">×</span>觉得它万能</li>
+            <li><span class="bul">×</span>全盘交付</li>
+            <li><span class="bul">×</span>不验证产出</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tut-quote quote-red" data-reveal="8" data-reveal-dir="top">
+        <div class="quote-text">不是 AI 替代你，是用 AI 的人替代你。</div>
+      </div>
+      <div class="tut-quote quote-red" data-reveal="16" data-reveal-dir="top">
+        <div class="quote-text">产出不可控 · 质量崩塌。</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clip" id="s05" data-start="65.59" data-duration="20.83">
+<div class="layer-bg" data-bg-types="contour,glow,gradient,particles,wave">
+<!-- bg-component: gradient_mesh -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg, var(--bg-dark, #080818) 0%, var(--bg-mid, #001a33) 100%)"></div>
+
+<div style="position:absolute;top:20%;left:0;width:100%;height:300px;
+  background:linear-gradient(90deg,transparent,hsla(220,60%,40%,0.15),transparent);
+  transform:rotate(-8deg);animation:waveSway 20s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:0;width:100%;height:250px;
+  background:linear-gradient(90deg,transparent,hsla(250,50%,45%,0.18),transparent);
+  transform:rotate(5deg);animation:waveSway 25s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:38%;left:-5%;width:110%;height:180px;
+  background:linear-gradient(90deg,transparent 15%,hsla(190,55%,45%,0.16),hsla(200,45%,40%,0.10),transparent 85%);
+  filter:blur(30px);animation:waveSway 28s ease-in-out infinite 10s"></div>
+
+<div style="position:absolute;top:25%;left:65%;width:4px;height:4px;border-radius:50%;
+  background:hsla(230,60%,60%,0.5);box-shadow:0 0 8px hsla(230,50%,50%,0.4);animation:floatParticle 7s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:30%;width:3px;height:3px;border-radius:50%;
+  background:hsla(260,50%,55%,0.45);box-shadow:0 0 6px hsla(260,40%,45%,0.35);animation:floatParticle 9s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:70%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(210,55%,58%,0.4);box-shadow:0 0 6px hsla(210,45%,48%,0.3);animation:floatParticle 8s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 40%,rgba(255,255,255,0.03) 60%,transparent 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:45%;left:50%;width:700px;height:700px;border-radius:50%;opacity:0.06;
+  background:repeating-radial-gradient(circle,transparent 0px,transparent 16px,hsla(220,60%,55%,0.10) 16px,hsla(220,60%,55%,0.10) 17px);
+  filter:blur(1.5px);transform:translate(-50%,-50%);animation:waveSway 22s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:-10%;width:120%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,rgba(255,100,100,0.5),rgba(100,255,100,0.5),rgba(100,100,255,0.5),transparent);
+  filter:blur(60px);transform:rotate(-3deg);animation:prismShimmer 10s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：右上绿色平衡脉冲（正确姿态） -->
+  <div class="fx-orb fx-pulse" style="top:12%;right:12%;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(16,185,129,.26),rgba(16,185,129,.05) 60%,transparent 70%);
+    filter:blur(8px);"></div>
+  <!-- fx 2：左下蓝色漂移（清晰理性） -->
+  <div class="fx-orb fx-drift" style="bottom:14%;left:10%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(59,130,246,.24),rgba(59,130,246,.05) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：右上平衡闪烁锚点（正确姿态焦点） -->
+  <div class="fx-orb fx-blink" style="top:24%;right:24%;width:12px;height:12px;
+    background:#10B981;border-radius:50%;box-shadow:0 0 16px rgba(16,185,129,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid">
+      <div class="tut-hero" data-reveal="0" data-reveal-dir="top">
+        <div class="hero-eyebrow">中间姿态</div>
+        <h1 class="hero-title">正确姿态：拥抱 + 验证</h1>
+        <div class="hero-underline"></div>
+      </div>
+      <div class="tut-quote quote-green" data-reveal="3" data-reveal-dir="top">
+        <div class="quote-text">信任，但验证。</div>
+      </div>
+      <div class="tut-analog" data-reveal="7" data-reveal-dir="top">
+        <div class="analog-icon">实</div>
+        <div class="analog-rows">
+          <div class="analog-row"><span class="dot">·</span>把 AI 当一个资深实习生</div>
+          <div class="analog-row"><span class="dot">·</span>不知疲倦 · 但会犯错</div>
+          <div class="analog-row"><span class="dot">·</span>委派任务 · 审查产出</div>
+        </div>
+      </div>
+      <div class="tut-rate" data-reveal="12" data-reveal-dir="top">
+        <div class="rate-cell cell-green">
+          <div class="rate-label">懂业务 · 懂原理</div>
+          <div class="rate-num">×10 倍</div>
+        </div>
+        <div class="rate-cell cell-gray">
+          <div class="rate-label">不懂的人</div>
+          <div class="rate-num">产出再多 = 0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clip" id="s06" data-start="86.42" data-duration="11.18">
+<div class="layer-bg" data-bg-types="dots,glow,gradient,particles,wave">
+<!-- bg-component: clean_slate -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, hsla(215,45%,14%,1) 0%, hsla(220,40%,11%,1) 50%, hsla(218,38%,9%,1) 100%)"></div>
+
+<div style="position:absolute;top:25%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, hsla(215,55%,28%,0.35), hsla(220,45%,18%,0.12), transparent 65%);
+  filter:blur(90px);animation:spotlightShift 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:55%;
+  background:radial-gradient(ellipse 90% 100% at 45% 0%, hsla(215,50%,30%,0.22), hsla(220,40%,20%,0.10) 50%, transparent 75%);
+  animation:spotlightShift 22s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle, hsla(215,40%,50%,0.08) 1px, transparent 1px);
+  background-size:60px 60px;animation:gridDotBreath 25s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40px;left:40px;width:120px;height:2px;
+  background:linear-gradient(90deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+<div style="position:absolute;top:40px;left:40px;width:2px;height:80px;
+  background:linear-gradient(180deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:40px;right:40px;width:100px;height:2px;
+  background:linear-gradient(270deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+<div style="position:absolute;bottom:40px;right:40px;width:2px;height:70px;
+  background:linear-gradient(0deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;bottom:60px;left:0;width:calc(100% + 120px);height:40px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      hsla(215,42%,45%,0.10) 30px, hsla(215,42%,45%,0.10) 31px);
+  transform:perspective(500px) rotateX(45deg);
+  animation:waveDrift 30s linear infinite"></div>
+
+<div style="position:absolute;top:25%;right:18%;width:60px;height:60px;opacity:0.08;
+  border:1px solid hsla(215,48%,50%,0.5);
+  transform:rotate(45deg);
+  animation:shapeFloat 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:22%;width:40px;height:40px;opacity:0.06;
+  border:1px solid hsla(215,45%,48%,0.5);border-radius:50%;
+  animation:shapeFloat2 22s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:70%;right:30%;width:25px;height:25px;opacity:0.06;
+  border:1px solid hsla(220,42%,45%,0.4);
+  animation:shapeFloat 16s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:32%;left:48%;width:3px;height:3px;border-radius:50%;
+  background:hsla(215,55%,58%,0.55);box-shadow:0 0 6px hsla(215,50%,52%,0.40),0 0 12px hsla(215,45%,45%,0.20);
+  animation:bluePulse 8s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:60%;left:25%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,50%,55%,0.45);box-shadow:0 0 4px hsla(215,45%,48%,0.30);
+  animation:bluePulse 10s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:45%;left:72%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,52%,52%,0.40);box-shadow:0 0 4px hsla(215,48%,45%,0.28);
+  animation:bluePulse 12s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(45deg,
+    transparent 42%, hsla(215,45%,38%,0.06) 46%, hsla(215,45%,38%,0.06) 46.5%,
+    transparent 47%);
+  animation:cornerLineGlow 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 75% 70% at 50% 48%, transparent 0%, hsla(215,30%,5%,0.30) 70%, hsla(220,35%,3%,0.50) 100%);
+  animation:slateVignette 25s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx 1：中上金色脉冲（金句重量） -->
+  <div class="fx-orb fx-pulse" style="top:18%;left:50%;transform:translateX(-50%);width:240px;height:240px;
+    background:radial-gradient(circle,rgba(251,191,36,.24),rgba(251,191,36,.05) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 2：右下蓝色漂移（承接下一段） -->
+  <div class="fx-orb fx-drift" style="bottom:14%;right:14%;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(59,130,246,.24),rgba(59,130,246,.05) 60%,transparent 70%);
+    filter:blur(10px);"></div>
+  <!-- fx 3：左上金色闪烁锚点（金句焦点） -->
+  <div class="fx-orb fx-blink" style="top:30%;left:24%;width:12px;height:12px;
+    background:#FBBF24;border-radius:50%;box-shadow:0 0 16px rgba(251,191,36,.6);"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid grid-single">
+      <div class="tut-quote quote-gold" data-reveal="0" data-reveal-dir="top">
+        <div class="quote-text">人 + AI · 人是根本。</div>
+      </div>
+      <div class="tut-lines" data-reveal="5" data-reveal-dir="top">
+        <div class="line">AI 扩展的，是<strong>会用 AI 的人</strong>的能力边界。</div>
+        <div class="line">人的能力边界，<strong>决定了 AI 产出的上限</strong>。</div>
+      </div>
+      <div class="tut-next" data-reveal="10" data-reveal-dir="top">
+        <span class="next-label">NEXT</span>
+        <span class="next-text">转型起手 · 思想转变</span>
+        <span class="next-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set(['#s02', '#s03', '#s04', '#s05', '#s06'], {opacity:0}, 0);
+tl.set('#s01', {opacity:1}, 0);
+tl.set('#s01',{opacity:0},7.42);
+tl.set('#s02',{opacity:1},7.42);
+tl.set('#s02',{opacity:0},25.73);
+tl.set('#s03',{opacity:1},25.73);
+tl.set('#s03',{opacity:0},45.36);
+tl.set('#s04',{opacity:1},45.36);
+tl.set('#s04',{opacity:0},65.59);
+tl.set('#s05',{opacity:1},65.59);
+tl.set('#s05',{opacity:0},86.42);
+tl.set('#s06',{opacity:1},86.42);
+tl.fromTo('#s01 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 0.00);
+tl.fromTo('#s01 [data-reveal="4"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 4.00);
+tl.fromTo('#s02 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 7.42);
+tl.fromTo('#s02 [data-reveal="4"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 11.42);
+tl.fromTo('#s02 [data-reveal="4.3"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 11.72);
+tl.fromTo('#s02 [data-reveal="9"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 16.42);
+tl.fromTo('#s02 [data-reveal="14"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 21.42);
+tl.fromTo('#s03 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 25.73);
+tl.fromTo('#s03 [data-reveal="4"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 29.73);
+tl.fromTo('#s03 [data-reveal="9"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 34.73);
+tl.fromTo('#s03 [data-reveal="13"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 38.73);
+tl.fromTo('#s04 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 45.36);
+tl.fromTo('#s04 [data-reveal="3"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 48.36);
+tl.fromTo('#s04 [data-reveal="8"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 53.36);
+tl.fromTo('#s04 [data-reveal="16"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 61.36);
+tl.fromTo('#s05 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 65.59);
+tl.fromTo('#s05 [data-reveal="3"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 68.59);
+tl.fromTo('#s05 [data-reveal="7"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 72.59);
+tl.fromTo('#s05 [data-reveal="12"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 77.59);
+tl.fromTo('#s06 [data-reveal="0"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 86.42);
+tl.fromTo('#s06 [data-reveal="5"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 91.42);
+tl.fromTo('#s06 [data-reveal="10"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 96.42);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:3,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-drift', {y:-30,duration:3.2,repeat:1,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:2,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s02 .fx-blink', {opacity:0.25,duration:1.6,repeat:10,yoyo:true,ease:'sine.inOut'}, 7.42);
+tl.to('#s02 .fx-drift', {y:-30,duration:3.2,repeat:4,yoyo:true,ease:'sine.inOut'}, 7.42);
+tl.to('#s02 .fx-pulse', {scale:1.18,duration:2.4,repeat:6,yoyo:true,ease:'sine.inOut'}, 7.42);
+tl.to('#s03 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 25.73);
+tl.to('#s03 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 25.73);
+tl.to('#s03 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 25.73);
+tl.to('#s04 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 45.36);
+tl.to('#s04 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 45.36);
+tl.to('#s04 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 45.36);
+tl.to('#s05 .fx-blink', {opacity:0.25,duration:1.6,repeat:12,yoyo:true,ease:'sine.inOut'}, 65.59);
+tl.to('#s05 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 65.59);
+tl.to('#s05 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 65.59);
+tl.to('#s06 .fx-blink', {opacity:0.25,duration:1.6,repeat:5,yoyo:true,ease:'sine.inOut'}, 86.42);
+tl.to('#s06 .fx-drift', {y:-30,duration:3.2,repeat:2,yoyo:true,ease:'sine.inOut'}, 86.42);
+tl.to('#s06 .fx-pulse', {scale:1.18,duration:2.4,repeat:3,yoyo:true,ease:'sine.inOut'}, 86.42);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:97.60,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

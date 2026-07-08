@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E03 战略启动 · 3:4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1080px;height:1440px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1080px;height:1440px;padding:60px 60px 52px;display:flex;flex-direction:column;background:linear-gradient(160deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-blue{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-180px;right:-160px;pointer-events:none;}
+.glow-gold{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.16),transparent 70%);filter:blur(90px);bottom:-160px;left:-120px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 80%75% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:80px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(251,191,36,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:80px;background:linear-gradient(0deg,rgba(251,191,36,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:20px;margin-bottom:18px;justify-content:center;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:80px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:23px;color:#60A5FA;letter-spacing:0.16em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 22px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+
+.title{position:relative;z-index:2;font-size:88px;font-weight:900;line-height:1.06;letter-spacing:-0.01em;text-align:center;margin-top:8px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(96,165,250,0.18);}
+.subtitle{position:relative;z-index:2;font-size:32px;color:rgba(255,255,255,0.82);margin-top:14px;font-weight:500;text-align:center;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+
+.roi-formula{position:relative;z-index:2;margin-top:32px;padding:20px 28px;border-radius:14px;border:2px solid rgba(251,191,36,0.50);background:linear-gradient(90deg,rgba(251,191,36,0.14),rgba(15,23,42,0.55));display:flex;flex-direction:column;align-items:center;gap:8px;}
+.roi-label{font-size:24px;color:#FBBF24;font-weight:700;letter-spacing:0.10em;}
+.roi-eq{font-family:'JetBrains Mono','Consolas',monospace;font-size:30px;font-weight:800;color:#fff;text-align:center;line-height:1.3;}
+.roi-eq .eq-highlight{color:#FBBF24;}
+
+.questions-label{position:relative;z-index:2;font-size:23px;color:#60A5FA;letter-spacing:0.14em;font-weight:700;margin-top:30px;margin-bottom:14px;text-align:center;}
+.questions{position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;}
+.q-row{display:flex;align-items:center;gap:20px;padding:18px 24px;border-radius:14px;border:2px solid;background:linear-gradient(92deg,rgba(15,23,42,0.55),rgba(15,23,42,0.40));}
+.q-row.q1{border-color:rgba(96,165,250,0.50);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.55));}
+.q-row.q2{border-color:rgba(167,139,250,0.50);background:linear-gradient(92deg,rgba(167,139,250,0.12),rgba(15,23,42,0.55));}
+.q-row.q3{border-color:rgba(52,211,153,0.50);background:linear-gradient(92deg,rgba(16,185,129,0.12),rgba(15,23,42,0.55));}
+.q-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:36px;font-weight:900;line-height:1;min-width:96px;text-align:center;}
+.q-row.q1 .q-num{color:#60A5FA;}
+.q-row.q2 .q-num{color:#A78BFA;}
+.q-row.q3 .q-num{color:#34D399;}
+.q-info{display:flex;flex-direction:column;gap:4px;flex:1;}
+.q-name{font-size:30px;font-weight:800;color:#fff;line-height:1.2;}
+.q-desc{font-size:22px;color:rgba(255,255,255,0.62);line-height:1.3;}
+
+.warning{position:relative;z-index:2;margin-top:24px;padding:16px 24px;border-radius:12px;border:1.5px solid rgba(251,191,36,0.55);background:rgba(251,191,36,0.10);display:flex;justify-content:center;align-items:center;gap:12px;}
+.warning-icon{font-size:28px;color:#FBBF24;font-weight:900;}
+.warning-text{font-size:24px;color:#FEF3C7;font-weight:600;text-align:center;line-height:1.3;}
+.warning-text .wt-strong{color:#FBBF24;font-weight:800;}
+
+.footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:23px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:21px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 13px;border-radius:7px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:21px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-gold"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E03</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 战略启动</div>
+  </div>
+
+  <h1 class="title"><span class="title-grad">怎么向老板要预算</span></h1>
+  <div class="subtitle">AI 转型立项实操 · <span class="sub-strong">Leader 主战场</span></div>
+
+  <div class="roi-formula">
+    <span class="roi-label">ROI 公式</span>
+    <span class="roi-eq">回本月数 ≈ 总投入 ÷<br><span class="eq-highlight">(人均月薪 × 提效等效人力)</span></span>
+  </div>
+
+  <div class="questions-label">老板三问 · 答得出才批预算</div>
+  <div class="questions">
+    <div class="q-row q1"><div class="q-num">问一</div><div class="q-info"><div class="q-name">要多少钱？</div><div class="q-desc">4 块成本表 · 一次性 vs 持续</div></div></div>
+    <div class="q-row q2"><div class="q-num">问二</div><div class="q-info"><div class="q-name">多久回本？</div><div class="q-desc">ROI 公式 · 行业常见 3-6 月</div></div></div>
+    <div class="q-row q3"><div class="q-num">问三</div><div class="q-info"><div class="q-name">失败怎么办？</div><div class="q-desc">试点可控 · 可止损 · 沉没成本低</div></div></div>
+  </div>
+
+  <div class="warning">
+    <span class="warning-icon">!</span>
+    <span class="warning-text"><span class="wt-strong">别在立项承诺 +104%</span><br>那是跑出来的结果 → 承诺目标值 + 试点路径</span>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

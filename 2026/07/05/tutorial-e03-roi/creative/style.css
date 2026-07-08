@@ -1,0 +1,204 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #10B981;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E03 段3 — ROI 公式 + 老板三问 + 警告（横屏 reveal §6.16）
+ * 1 场景 + 标题 + ROI 公式 + 三问卡 3 + 金色警告
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 40px 90px 36px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#7C3AED 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+
+/* —— 标题区 —— */
+.tut-roi-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-roi-title .mt-num {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  letter-spacing: 0.10em;
+  box-shadow: 0 4px 14px rgba(251,191,36,0.30);
+}
+.tut-roi-title .mt-h1 {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900; line-height: 1.04;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FDE68A 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-roi-title .title-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— ROI 公式大字横幅 —— */
+.tut-roi-formula {
+  border-radius: 22px; padding: 16px 36px;
+  border: 2.5px solid rgba(251,191,36,0.55);
+  background: linear-gradient(90deg, rgba(251,191,36,0.12), rgba(15,23,42,0.88), rgba(251,191,36,0.12));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.formula-label {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  color: var(--tut-gold); letter-spacing: 0.10em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.formula-line {
+  font-family: var(--font-title); font-weight: 900;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center;
+  line-height: 1.1;
+}
+.f-left {
+  font-size: 50px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.f-eq {
+  font-family: var(--font-data); font-size: 48px; font-weight: 900; color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.f-num {
+  font-family: var(--font-body); font-size: 44px; font-weight: 800; color: var(--tut-white);
+  padding: 4px 14px; border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.f-op {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900; color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.f-den {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-blue-white);
+  padding: 4px 14px; border-radius: 10px;
+  background: rgba(59,130,246,0.08);
+  border: 1.5px solid rgba(59,130,246,0.30);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 三问卡 3 列横排 —— */
+.tut-roi-questions { width: 100%; }
+.q-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+.q-card {
+  border-radius: 22px;
+  padding: 18px 24px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.q-blue { border-color: rgba(59,130,246,0.60); background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88)); }
+.q-purple { border-color: rgba(167,139,250,0.60); background: linear-gradient(165deg, rgba(167,139,250,0.12), rgba(15,23,42,0.88)); }
+.q-green { border-color: rgba(16,185,129,0.60); background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88)); }
+.q-head {
+  display: flex; align-items: center; gap: 14px;
+}
+.q-num {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900;
+  min-width: 50px; line-height: 1;
+}
+.q-blue .q-num { color: var(--tut-blue); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.q-purple .q-num { color: var(--tut-purple); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.q-green .q-num { color: var(--tut-green); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.q-ask {
+  font-family: var(--font-title); font-size: 38px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.q-ans { display: flex; flex-direction: column; gap: 6px; }
+.qa-item {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: var(--tut-white);
+  display: flex; align-items: center; gap: 12px; line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.qa-mark { font-size: 32px; min-width: 36px; }
+.qa-dot-blue { color: var(--tut-blue); }
+.qa-dot-purple { color: var(--tut-purple); }
+.qa-dot-green { color: var(--tut-green); }
+
+/* —— 金色警告框 —— */
+.tut-roi-warn {
+  border-radius: 22px; padding: 14px 32px;
+  border: 3px solid rgba(251,191,36,0.70);
+  background: linear-gradient(90deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88), rgba(251,191,36,0.14));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  box-shadow: 0 0 30px rgba(251,191,36,0.15);
+}
+.warn-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.warn-main {
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--font-title); font-size: 42px; font-weight: 900; line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.warn-x {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900; color: #F87171;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.warn-text {
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.warn-num {
+  font-family: var(--font-data); color: var(--tut-gold);
+  padding: 0 6px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.warn-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.02em;
+}
+.warn-correct {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-white);
+  padding: 8px 20px; border-radius: 12px;
+  background: rgba(16,185,129,0.08);
+  border: 1.5px solid rgba(16,185,129,0.40);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.wc-mark {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900; color: var(--tut-green);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.wc-plus {
+  font-family: var(--font-data); color: var(--tut-green); padding: 0 4px;
+}

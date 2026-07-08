@@ -1,0 +1,81 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 75,
+    "emotion": "详解-三堵墙分析不准/上下文断/偏差晚发现+各自解法",
+    "text": "先讲为什么闭环难。每个人都能让 AI 写段代码，但串成端到端流水线会撞三堵墙。首堵，AI 初始分析不准。你给它一句话需求，它的理解常常是偏的，照着偏的理解往下写，越写越歪。第二堵，上下文断。AI 会话一中断，前面的分析、决策、进度全丢，重开等于从头再来。第三堵，需求偏差晚发现。等代码写完才发现理解错了，这时候改的是代码，返工代价极大、质量难保。闭环流程就是拆这三堵墙：分析不准靠规范驱动纠错左移，上下文断靠 tasks 清单任务中断后重新接入继续执行，偏差晚发现靠 spec 先行先验证。",
+    "narration": "先讲为什么闭环难。每个人都能让 AI 写段代码，但串成端到端流水线会撞三堵墙。首堵，AI 初始分析不准。你给它一句话需求，它的理解常常是偏的，照着偏的理解往下写，越写越歪。第二堵，上下文断。AI 会话一中断，前面的分析、决策、进度全丢，重开等于从头再来。第三堵，需求偏差晚发现。等代码写完才发现理解错了，这时候改的是代码，返工代价极大、质量难保。闭环流程就是拆这三堵墙：分析不准靠规范驱动纠错左移，上下文断靠 tasks 清单任务中断后重新接入继续执行，偏差晚发现靠 spec 先行先验证。",
+    "hook_anchors": [
+      "为什么闭环难",
+      "三堵墙",
+      "AI 初始分析不准",
+      "一句话需求理解偏",
+      "越写越歪",
+      "上下文断",
+      "会话一中断全丢",
+      "从头再来",
+      "需求偏差晚发现",
+      "改代码代价大",
+      "质量难保",
+      "规范驱动纠错左移",
+      "tasks 断点续传",
+      "spec 先行先验证"
+    ],
+    "visual_type": "tutorial_walls",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题「三堵墙 · 闭环难点拆解」fade-in",
+        "duration_share": 0.1,
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 1
+        }
+      },
+      {
+        "phase": 2,
+        "start_offset": 6,
+        "focus": "墙1 分析不准：图标 + 现象「一句话需求理解偏 越写越歪」+ 解法标签「SDD 规范驱动」reveal 左滑入",
+        "duration_share": 0.22,
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 3
+        }
+      },
+      {
+        "phase": 3,
+        "start_offset": 22,
+        "focus": "墙2 上下文断：图标 + 现象「会话中断分析决策进度全丢」+ 解法标签「tasks 断点续传」reveal 左滑入",
+        "duration_share": 0.22,
+        "narration_anchor": {
+          "start_sentence": 4,
+          "end_sentence": 5
+        }
+      },
+      {
+        "phase": 4,
+        "start_offset": 40,
+        "focus": "墙3 偏差晚发现：图标 + 现象「代码写完才发现理解错 改代码代价大」+ 解法标签「spec 先行验证」reveal 左滑入",
+        "duration_share": 0.22,
+        "narration_anchor": {
+          "start_sentence": 6,
+          "end_sentence": 7
+        }
+      },
+      {
+        "phase": 5,
+        "start_offset": 58,
+        "focus": "解法映射收束卡：三墙→三解法（分析不准→SDD / 上下文断→tasks / 偏差晚发现→spec）reveal 顶部下落",
+        "duration_share": 0.24,
+        "narration_anchor": {
+          "start_sentence": 8,
+          "end_sentence": 9
+        }
+      }
+    ],
+    "bg_component": "dark_cipher"
+  }
+]

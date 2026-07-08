@@ -1,0 +1,58 @@
+<!-- 场景: scene-1 | 三个数据同时飞升 | 时长: 23.88s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+  <div class="bg-grid" style="position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.08) 1px,transparent 1px);background-size:80px 80px;"></div>
+  <div class="bg-glow" style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 40%,rgba(30,58,138,0.45),transparent 60%);"></div>
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制，数据卡场景） -->
+  <div class="fx-aura" style="top:14%;left:10%;width:380px;height:380px;background:radial-gradient(circle,rgba(251,191,36,0.22),transparent 70%);"></div>
+  <div class="fx-aura" style="bottom:14%;right:10%;width:380px;height:380px;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);"></div>
+  <div class="fx-particle" style="top:24%;left:50%;width:8px;height:8px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:74%;left:30%;width:6px;height:6px;background:rgba(16,185,129,0.7);animation-delay:1.2s;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 4 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区（场景开始即显示） -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="left">
+    <span class="tut-eyebrow">80 人团队实测</span>
+    <div class="tut-title">三个数据，同时飞升</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 三数据卡 grid（count-up 冲击累积）— narration 讲到具体数据时逐卡 reveal -->
+  <div class="tut-region tut-burst" data-reveal="0" data-reveal-dir="left">
+    <!-- 左卡：人均代码产出 +104%（金色，首屏冲击） -->
+    <div class="burst-card gold">
+      <span class="burst-tag">人均产出</span>
+      <div class="burst-num"><span data-count-to="104" data-count-at="3" data-count-prefix="+">0</span><span class="num-unit">%</span></div>
+      <div class="burst-label">代码产出涨了</div>
+    </div>
+    <!-- 中卡：AI 代码占比 76.6%（蓝，AI 主题色） -->
+    <div class="burst-card blue">
+      <span class="burst-tag">AI 占比</span>
+      <div class="burst-num"><span data-count-to="76.6" data-count-at="7">0</span><span class="num-unit">%</span></div>
+      <div class="burst-label">AI 写了这么多代码</div>
+    </div>
+    <!-- 右卡：Bug 下降 -16.4pp（绿，质量向好） -->
+    <div class="burst-card green">
+      <span class="burst-tag">质量向好</span>
+      <div class="burst-num"><span data-count-to="-16.4" data-count-at="11">0</span><span class="num-unit">pp</span></div>
+      <div class="burst-label">Bug 率下降</div>
+    </div>
+  </div>
+
+  <!-- Region 3: 注释行（灰色严谨口径）— narration 讲到「相关性非因果」时 reveal -->
+  <div class="tut-region tut-note" data-reveal="12" data-reveal-dir="left">
+    <strong>80+ 人</strong>研发团队<span class="note-sep">·</span>
+    <strong>3 个月</strong>转型<span class="note-sep">·</span>
+    <strong>206 个</strong>仓库同比<span class="note-sep">·</span>
+    相关性非因果，不能完全归功 AI
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

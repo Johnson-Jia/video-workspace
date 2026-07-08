@@ -1,0 +1,163 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 段9 — 工具演进：随能力做减法（阶梯图+金句卡）
+ * 单层 padding：.phase 已管安全区，.tut-scene 不再加 padding
+ * 布局：顶/中/底三带 space-between 撑满 1080，标题左对齐锚点
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-grid {
+  width: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#A78BFA 0%,#8B5CF6 55%,#C4B5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 标题 tag 胶囊（同色系底+深色字） —— */
+.tag-base {
+  display: inline-block;
+  padding: 3px 14px; border-radius: 8px;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.tag-gold { background-image: linear-gradient(92deg,#FBBF24,#FCD34D); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+.tag-blue { background-image: linear-gradient(92deg,#60A5FA,#93C5FD); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+.tag-purple { background-image: linear-gradient(92deg,#A78BFA,#C4B5FD); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+
+/* —— 区域 1：标题 —— 左对齐锚点 */
+.tut-ev-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-ev-title .title-h1 {
+  font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.05;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-ev-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：三阶段阶梯图 —— 横向三卡撑开画布宽度 */
+.tut-ev-staircase { width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.stair-row {
+  display: flex; align-items: stretch; justify-content: stretch;
+  gap: 12px; width: 100%;
+}
+.stair-card {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+}
+.stair-base { border-color: rgba(96,165,250,0.75); box-shadow: 0 0 20px rgba(96,165,250,0.22); }
+.stair-mid { border-color: rgba(167,139,250,0.75); box-shadow: 0 0 20px rgba(167,139,250,0.22); }
+.stair-top { border-color: rgba(251,191,36,0.80); box-shadow: 0 0 26px rgba(251,191,36,0.30); }
+.stair-name {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center;
+}
+.stair-tools {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+}
+.st-tool { color: var(--tut-blue-white); }
+.st-plus { color: rgba(196,181,253,0.85); margin: 0 4px; }
+.st-tool-none { color: rgba(251,191,36,0.92); }
+.stair-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82); text-align: center;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.stair-meta {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(196,181,253,0.85);
+}
+.stair-arrow {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 70px;
+}
+.sa-line {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.70);
+}
+.sa-label {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+}
+.stair-axis {
+  display: flex; align-items: center; justify-content: flex-start; gap: 14px;
+  margin-top: 4px;
+}
+.axis-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.75);
+}
+.axis-arrow {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+}
+
+/* —— 区域 3：金句卡（升华） —— 撑满画布宽度 */
+.tut-ev-quote { width: 100%; display: flex; justify-content: stretch; }
+.quote-card {
+  position: relative;
+  border-radius: 14px; padding: 14px 44px;
+  border: 2.5px solid rgba(251,191,36,0.75);
+  background: linear-gradient(90deg, rgba(251,191,36,0.10), rgba(15,23,42,0.92), rgba(251,191,36,0.10));
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  box-shadow: 0 0 32px rgba(251,191,36,0.25);
+  width: 100%;
+}
+.quote-mark {
+  font-family: 'JetBrains Mono'; font-size: 64px; font-weight: 900;
+  color: rgba(251,191,36,0.55);
+  line-height: 1;
+}
+.quote-text {
+  font-family: 'Noto Sans SC'; font-size: 44px; font-weight: 900;
+  line-height: 1.25; text-align: center;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  color: var(--tut-white);
+}
+
+/* —— 区域 4：团队场景注脚 —— 左对齐，与标题锚点呼应 */
+.tut-ev-note { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.note-line {
+  display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+  flex-wrap: wrap;
+}
+.note-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.88);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.note-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.78);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

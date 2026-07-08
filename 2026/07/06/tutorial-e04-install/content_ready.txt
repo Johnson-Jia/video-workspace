@@ -1,0 +1,18 @@
+【E04 段2 · 安装 Claude Code——终端一行命令装好，智谱 GLM 认证直连】
+
+工具选定，怎么装？以 Claude Code 为例。Mac 系统，打开终端，敲一行命令：curl 加 install.sh 地址，管道接 bash——一行装好。Windows 系统，用 PowerShell，命令一样简单。装完，终端会回显安装成功。
+
+接着配认证。国内推荐用智谱 GLM——国产模型，国内直连，免费额度够练手。去智谱开放平台注册，创建一个 API Key。然后回到终端，设两个环境变量：第一个 BASE_URL，填智谱的兼容地址；第二个 AUTH_TOKEN，填刚拿到的 Key。两个变量敲完，回到终端敲 claude 启动——连接成功，直接能用。
+
+认证只讲智谱 GLM 这一条路。OAuth 登录、第三方中转、各家云厂商，先放一边——信息过载反而栽跟头。一条路走通，比十条路摆在面前强。
+
+【内容保真（E04 脚本 段2，禁改写）】
+安装命令（Mac）：curl -fsSL https://claude.ai/install.sh | bash
+安装命令（Windows PowerShell）：同源一行命令
+回显：✓ Claude Code installed
+认证（智谱 GLM，唯一讲法）：
+- export ANTHROPIC_BASE_URL=https://open.bigmodel.cn/api/anthropic
+- export ANTHROPIC_AUTH_TOKEN=你的智谱Key
+- 启动：claude → 连接成功
+禁讲：OAuth 登录 / 第三方中转 / 云厂商（信息过载）
+禁命令：npm install（已废弃）

@@ -1,0 +1,83 @@
+<!-- 场景: seg1 | 时长: ~31s | bg: scan_grid | 工具选型：Claude Code / Codex / GLM -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-pulse" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:760px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:44%;left:18%;width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:44%;left:50%;transform:translateX(-50%);width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:44%;right:18%;width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:740px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-tools-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="tools-tag grad-blue-bg-inline">E04 · 段1</div>
+      <h1 class="tools-h1">工具选型</h1>
+      <div class="title-sub">按 <span class="grad-gold">角色</span> 选 · 不一刀切</div>
+    </div>
+
+    <!-- 区域 2-4：三工具卡（reveal 4，left） -->
+    <div class="tut-region tut-tools-cards" data-reveal="4" data-reveal-dir="left">
+      <div class="tc-grid">
+        <!-- 卡① Claude Code（开发者） -->
+        <div class="tool-card tcc-blue">
+          <div class="tcc-role">开发者 · 工程师</div>
+          <div class="tcc-name grad-blue">Claude Code</div>
+          <div class="tcc-feats">
+            <div class="tf-item"><span class="tf-dot tf-dot-blue">●</span>终端原生</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-blue">●</span>自主执行</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-blue">●</span>生态完整</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-blue">●</span>上下文领先</div>
+          </div>
+        </div>
+        <!-- 卡② OpenAI Codex（非开发） -->
+        <div class="tool-card tcc-purple">
+          <div class="tcc-role">产品 · 非开发</div>
+          <div class="tcc-name grad-purple">OpenAI Codex</div>
+          <div class="tcc-feats">
+            <div class="tf-item"><span class="tf-dot tf-dot-purple">●</span>云端委托 + ChatGPT</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-purple">●</span>不必碰终端</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-purple">●</span>适合做原型</div>
+          </div>
+        </div>
+        <!-- 卡③ GLM（国内） -->
+        <div class="tool-card tcc-green">
+          <div class="tcc-role">国内团队</div>
+          <div class="tcc-name grad-green">GLM</div>
+          <div class="tcc-feats">
+            <div class="tf-item"><span class="tf-dot tf-dot-green">●</span>性价比高</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-green">●</span>国产模型</div>
+            <div class="tf-item"><span class="tf-dot tf-dot-green">●</span>国内直连</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 5：结论（reveal 26，top） -->
+    <div class="tut-region tut-tools-conclusion" data-reveal="26" data-reveal-dir="top">
+      <div class="concl-tag grad-gold-bg-inline">结论</div>
+      <div class="concl-main">
+        选对工具是 <span class="cm-key grad-gold">杠杆</span>
+        <span class="cm-dots">·</span>
+        选错 <span class="cm-key grad-red">再努力也补不回来</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

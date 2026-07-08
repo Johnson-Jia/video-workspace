@@ -1,0 +1,36 @@
+<!-- 场景: seg1 | 时长: ~20s | bg: scan_grid | 反常识揭示：AI 不是万能的 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 金色静态光晕（大字后方脉冲呼吸，禁划过类 fx-scan/fx-beam） -->
+  <div class="fx-pulse" style="position:absolute;top:34%;left:50%;transform:translateX(-50%);width:1000px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:22%;right:16%;width:14px;height:14px;border-radius:50%;background:hsla(43,85%,62%,0.85);box-shadow:0 0 18px hsla(43,80%,58%,0.6),0 0 36px hsla(43,75%,52%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,70%,62%,0.75);box-shadow:0 0 14px hsla(215,65%,56%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid tut-contrarian-scene">
+
+    <!-- 区域 1：反常识大字（data-reveal=0，场景开始即显示，泼冷水冲击） -->
+    <div class="tut-region tut-contrarian" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">先泼盆冷水</div>
+      <h1 class="con-big grad-gold">AI 不是万能的</h1>
+      <div class="con-stamp">这是事实 · 不是口号</div>
+    </div>
+
+    <!-- 区域 2：副标题（data-reveal=12，转折——给指引） -->
+    <div class="tut-region tut-contrarian-sub" data-reveal="12" data-reveal-dir="top">
+      <span class="con-sub">但用对的人，能放大 <strong class="grad-blue con-ten">10 倍</strong></span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,94 @@
+<!-- 场景: seg1 | 时长: ~43s | bg: dark_cipher（代码矩阵）| 试点设计：选谁/多大/成功标准/止损 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/紫/绿）静态光晕 + 脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:820px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:22%;width:360px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:360px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;right:18%;width:340px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:84%;left:50%;transform:translateX(-50%);width:820px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题 + 引言（reveal 0，fade） -->
+    <div class="tut-region tut-pilot-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段2</div>
+      <h1 class="title-h1"><span class="grad-gold">试点设计</span></h1>
+      <div class="title-sub">选对团队 · <span class="grad-blue">定清标准</span></div>
+      <div class="title-lead">闭环不是上来就全员跑 · <span class="grad-blue">先选对试点</span></div>
+    </div>
+
+    <!-- 区域 2：选谁（reveal 6，left） -->
+    <div class="tut-region tut-pilot-who" data-reveal="6" data-reveal-dir="left">
+      <div class="card-row">
+        <div class="dec-card dc-blue">
+          <div class="dc-head"><span class="dc-tag grad-blue-bg-inline">选谁</span></div>
+          <div class="dc-body">
+            <div class="dc-line"><span class="dc-check">✓</span> 意愿强的团队</div>
+            <div class="dc-line"><span class="dc-check">✓</span> 业务典型的项目</div>
+          </div>
+        </div>
+        <div class="dec-anti">
+          <div class="anti-tag">✗</div>
+          <div class="anti-text">别选最忙的<br>没空配合</div>
+        </div>
+        <div class="dec-anti">
+          <div class="anti-tag">✗</div>
+          <div class="anti-text">别选最边缘的<br>没说服力</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：多大（reveal 16，top） -->
+    <div class="tut-region tut-pilot-size" data-reveal="16" data-reveal-dir="top">
+      <div class="size-card">
+        <div class="size-head"><span class="dc-tag grad-purple-bg-inline">多大</span></div>
+        <div class="size-grid">
+          <div class="size-cell"><div class="size-num grad-purple">1-2</div><div class="size-lbl">团队</div></div>
+          <div class="size-cell"><div class="size-num grad-purple">3-8</div><div class="size-lbl">人/组</div></div>
+          <div class="size-cell"><div class="size-num grad-purple">1-2</div><div class="size-lbl">真实需求</div></div>
+          <div class="size-cell"><div class="size-num grad-purple">4-8</div><div class="size-lbl">周</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：成功标准四条（reveal 23，left） -->
+    <div class="tut-region tut-pilot-success" data-reveal="23" data-reveal-dir="left">
+      <div class="succ-card">
+        <div class="succ-head"><span class="dc-tag grad-gold-bg-inline">成功标准四条</span></div>
+        <div class="succ-grid">
+          <div class="succ-item"><span class="succ-box">✓</span><span class="succ-text">AI 代码占比达标</span></div>
+          <div class="succ-item"><span class="succ-box">✓</span><span class="succ-text">产出提升</span></div>
+          <div class="succ-item"><span class="succ-box">✓</span><span class="succ-text">质量不降</span></div>
+          <div class="succ-item"><span class="succ-box">✓</span><span class="succ-text">愿意继续用</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 5：止损金句（reveal 30，fade） -->
+    <div class="tut-region tut-pilot-stop" data-reveal="30" data-reveal-dir="fade">
+      <div class="stop-card">
+        <div class="stop-tag grad-green-bg-inline">失败就止损</div>
+        <div class="stop-quote">4-8 周没改善就复盘 · <span class="grad-green">拿数据说话</span></div>
+        <div class="stop-foot">成功有数据推广 · 失败有原因可查</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

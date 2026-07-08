@@ -1,0 +1,67 @@
+<!-- 场景: scene-2 | 数据怎么来的（三层算法）| 时长: 31.58s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg" data-bg-types="gradient,grid,scan,glow,particles">
+<!-- bg-component: scan_grid -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:14%;left:14%;width:320px;height:320px;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);"></div>
+  <div class="fx-aura" style="top:78%;right:12%;width:300px;height:300px;background:radial-gradient(circle,rgba(16,185,129,0.20),transparent 70%);"></div>
+  <div class="fx-particle" style="top:36%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:64%;left:16%;width:7px;height:7px;background:rgba(96,165,250,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene" style="gap:18px;">
+  <!-- 单 phase div，含 5 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区 — narration「这数据怎么来的？AI 代码占比靠三层识别算法」 -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="left">
+    <span class="tut-eyebrow">数据怎么来的</span>
+    <div class="tut-title">三层识别算法</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 首层卡 — narration「首层 Co-authored-by 初筛」 -->
+  <div class="tut-region tut-algo" data-reveal="2.5" data-reveal-dir="left">
+    <div class="algo-card l1">
+      <div class="algo-idx">①</div>
+      <div class="algo-body">
+        <div class="algo-name">Co-authored-by 初筛</div>
+        <div class="algo-desc">commit message 含 AI 工具名 → 判 AI（工具默认埋点）</div>
+      </div>
+      <span class="algo-tag">首层初筛</span>
+    </div>
+  </div>
+
+  <!-- Region 3: 中层卡 — narration「中层风格计量学复核...反伪造关键」 -->
+  <div class="tut-region tut-algo" data-reveal="5.5" data-reveal-dir="left">
+    <div class="algo-card l2">
+      <div class="algo-idx">②</div>
+      <div class="algo-body">
+        <div class="algo-name">风格计量学复核</div>
+        <div class="algo-desc">算代码与作者风格画像的余弦相似度 — 像本人降置信度 / 不像本人确认 AI</div>
+      </div>
+      <span class="algo-tag">反伪造关键</span>
+    </div>
+  </div>
+
+  <!-- Region 4: 末层卡 — narration「末层注册表兜底，组合前两层给最终判定」 -->
+  <div class="tut-region tut-algo" data-reveal="12.5" data-reveal-dir="left">
+    <div class="algo-card l3">
+      <div class="algo-idx">③</div>
+      <div class="algo-body">
+        <div class="algo-name">注册表兜底</div>
+        <div class="algo-desc">组合前两层 → 最终判定（防误标 · 防伪造双保险）</div>
+      </div>
+      <span class="algo-tag">末层兜底</span>
+    </div>
+  </div>
+
+  <!-- Region 5: Excel 同比说明小字 — narration 结尾过渡 -->
+  <div class="tut-region tut-excel" data-reveal="27" data-reveal-dir="left">
+    2025 基线 vs 2026 AI 推行后 · efficiency.py 同比
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 可选：cinema 后处理原语 -->
+</div>

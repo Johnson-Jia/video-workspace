@@ -1,0 +1,85 @@
+<!-- 场景: seg1 | 时长: 20.11s | bg: clean_slate | 7 阶段全景图 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+<div class="layer-fx">
+  <div class="fx-dot" style="top:18%;left:8%;width:180px;height:180px;"></div>
+  <div class="fx-pulse-ring" style="top:55%;right:10%;width:220px;height:220px;"></div>
+  <div class="fx-blink" style="top:40%;left:48%;"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid tut-grid-hero-rail">
+
+      <!-- 区域 1：标题区（reveal 0） -->
+      <div class="tut-hero tut-region" data-reveal="0" data-reveal-dir="left">
+        <div class="tut-hero-num">
+          <span class="pill">总览</span>
+          <span>METHODOLOGY MAP</span>
+        </div>
+        <h1 class="grad-blue">7 阶段方法论全景</h1>
+        <div class="sub">思想地基 + 6 个实施阶段，每步带 demo 和数据</div>
+        <div class="underline"></div>
+      </div>
+
+      <!-- 区域 2：7 阶段全景条（每阶段卡独立 data-reveal，跟随旁白逐个出现） -->
+      <div class="tut-region" data-reveal="4" data-reveal-dir="left" style="display:flex;align-items:center;justify-content:center;">
+        <div class="stage-rail" style="width:100%;">
+          <div class="stage-card tut-region" data-reveal="4" data-reveal-dir="left">
+            <span class="num">阶段 0</span>
+            <span class="name">总纲</span>
+            <span class="out">思想地基</span>
+          </div>
+          <div class="stage-card tut-region" data-reveal="6" data-reveal-dir="left">
+            <span class="num">阶段 1</span>
+            <span class="name">战略启动</span>
+            <span class="out">立项 ROI</span>
+          </div>
+          <div class="stage-card tut-region" data-reveal="8" data-reveal-dir="left">
+            <span class="num">阶段 2</span>
+            <span class="name">全员赋能</span>
+            <span class="out">工具培训</span>
+          </div>
+          <div class="stage-card is-skip tut-region" data-reveal="10" data-reveal-dir="left">
+            <span class="num">阶段 3</span>
+            <span class="name">基础设施</span>
+            <span class="out">大库适用</span>
+          </div>
+          <div class="stage-card is-core tut-region" data-reveal="12" data-reveal-dir="left">
+            <span class="num">阶段 4</span>
+            <span class="name">闭环试点</span>
+            <span class="out">端到端</span>
+          </div>
+          <div class="stage-card tut-region" data-reveal="14" data-reveal-dir="left">
+            <span class="num">阶段 5</span>
+            <span class="name">推广度量</span>
+            <span class="out">数据说话</span>
+          </div>
+          <div class="stage-card tut-region" data-reveal="16" data-reveal-dir="left">
+            <span class="num">阶段 6</span>
+            <span class="name">沉淀复用</span>
+            <span class="out">组织资产</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 3：核心 / 可跳过 双胶囊（reveal 13） -->
+      <div class="tut-region" data-reveal="13" data-reveal-dir="left" style="display:flex;justify-content:center;gap:36px;align-items:center;">
+        <span class="pill-skip">阶段 3 · 小团队可跳过</span>
+        <span class="pill-core">阶段 4 · 核心</span>
+      </div>
+
+      <!-- 区域 4：可落地验证（reveal 18） -->
+      <div class="tut-region" data-reveal="18" data-reveal-dir="left" style="display:flex;justify-content:center;">
+        <div class="quote-bar blue" style="display:flex;gap:36px;align-items:center;">
+          <span>5 个可运行 demo</span>
+          <span style="color:var(--text-dim);">·</span>
+          <span>真实团队数据</span>
+          <span style="color:var(--text-dim);">·</span>
+          <span class="grad-green" style="font-weight:900;">不是空讲</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

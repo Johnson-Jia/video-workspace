@@ -1,0 +1,76 @@
+<!-- 场景: seg5 | 时长: 24.84s | bg: gradient_mesh | 阶段3 基础设施（灰色可跳过） -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+<div class="layer-fx">
+  <div class="fx-dot" style="top:18%;right:14%;width:170px;height:170px;"></div>
+  <div class="fx-pulse-ring" style="bottom:20%;left:12%;width:190px;height:190px;"></div>
+  <div class="fx-blink" style="top:48%;left:42%;"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid tut-grid-hero-cmp">
+
+      <!-- 区域 1：标题区（reveal 0）— 含灰色「可跳过」胶囊 -->
+      <div class="tut-hero tut-region" data-reveal="0" data-reveal-dir="left">
+        <div class="tut-hero-num">
+          <span class="pill">阶段 3</span>
+          <span>INFRASTRUCTURE · 基础设施</span>
+          <span class="pill-skip">小团队可跳过</span>
+        </div>
+        <h1 class="grad-blue">让 AI 从概率盲读升级为确定性查证</h1>
+        <div class="underline"></div>
+      </div>
+
+      <!-- 区域 2：四件套能力卡（reveal 5） -->
+      <div class="tut-region" data-reveal="5" data-reveal-dir="left" style="display:flex;align-items:center;;justify-content:center">
+        <div class="tri-cards" style="width:100%;grid-template-columns:repeat(4,1fr);gap:18px;">
+          <div class="tri-card">
+            <span class="icon">RAG</span>
+            <h3>业务知识</h3>
+            <p>文档检索增强，业务事实可查证</p>
+          </div>
+          <div class="tri-card">
+            <span class="icon">KG</span>
+            <h3>代码图谱</h3>
+            <p>调用链追溯，看清影响范围</p>
+          </div>
+          <div class="tri-card">
+            <span class="icon">SKILL</span>
+            <h3>Skill 仓库</h3>
+            <p>能力模块化复用</p>
+          </div>
+          <div class="tri-card">
+            <span class="icon">MCP</span>
+            <h3>MCP 网关</h3>
+            <p>企业服务统一接入</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 3：升级判断金句（reveal 12） -->
+      <div class="tut-region" data-reveal="12" data-reveal-dir="left" style="display:flex;justify-content:center;">
+        <div class="quote-bar gold">
+          概率性盲读 <span style="color:var(--gold);">→</span> 确定性查证
+        </div>
+      </div>
+
+      <!-- 区域 4：可跳过判定（reveal 17） -->
+      <div class="tut-region" data-reveal="17" data-reveal-dir="left" style="display:flex;align-items:center;;justify-content:center">
+        <div class="compare-2col" style="width:100%;">
+          <div class="cmp-card good">
+            <span class="tag">✓ 适合</span>
+            <h3>大库复杂业务</h3>
+            <p>多仓库、百万行代码、复杂业务 — 值得建</p>
+          </div>
+          <div class="cmp-card bad">
+            <span class="tag">✗ 跳过</span>
+            <h3>小团队单仓库</h3>
+            <p>单仓库、几万行内 — CLAUDE.md + grep 就够，<span style="color:var(--red);font-weight:700;">强行建是过度工程</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

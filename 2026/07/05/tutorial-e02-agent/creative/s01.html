@@ -1,0 +1,86 @@
+<!-- 场景: seg1 | 时长: ~42s | bg: clean_slate | 原理④⑤ Agent + REACT -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（Agent 蓝 / REACT 蓝绿）脉冲呼吸 -->
+  <div class="fx-pulse" style="position:absolute;top:18%;left:18%;width:540px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;bottom:14%;right:18%;width:600px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,48%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;right:22%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:18%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.78);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0） -->
+    <div class="tut-region tut-agent-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="at-eyebrow">原理 ④ ⑤ · 感知与改变环境</div>
+      <h1 class="at-h1"><span class="grad-blue">Agent</span> <span class="at-plus">+</span> <span class="grad-green">REACT</span></h1>
+    </div>
+
+    <!-- 区域 2：Agent 公式卡（data-reveal=9，从左滑入） -->
+    <div class="tut-region tut-agent-formula" data-reveal="9" data-reveal-dir="left">
+      <div class="af-head grad-blue">原理 ④ · Agent 是什么</div>
+      <div class="af-formula">
+        <span class="af-term">大模型</span>
+        <span class="af-op">+</span>
+        <span class="af-term">工具</span>
+        <span class="af-eq">=</span>
+        <span class="af-result grad-blue">Agent</span>
+      </div>
+      <div class="af-note">
+        <span class="af-note-icon">⚡</span>
+        能读文件、调接口、跑命令——感知和改变环境
+      </div>
+      <div class="af-note af-note-warn">
+        <span class="af-note-icon">🔑</span>
+        先思考再行动的奥秘藏在<strong>系统提示词</strong>——靠提示词工程，不是训练
+      </div>
+    </div>
+
+    <!-- 区域 3：REACT 循环图（data-reveal=25，从下浮现） -->
+    <div class="tut-region tut-react-loop" data-reveal="25" data-reveal-dir="top">
+      <div class="rl-head grad-green">原理 ⑤ · REACT 循环</div>
+      <div class="rl-flow">
+        <!-- 循环组：思考→行动→观察→（循环回思考）→最终答案 -->
+        <div class="rl-node rl-node-1" data-reveal="25" data-reveal-dir="top">
+          <div class="rn-icon">💭</div>
+          <div class="rn-name grad-blue">Thought</div>
+          <div class="rn-cn">思考</div>
+        </div>
+        <div class="rl-arrow">→</div>
+        <div class="rl-node rl-node-2" data-reveal="29" data-reveal-dir="top">
+          <div class="rn-icon">⚡</div>
+          <div class="rn-name grad-blue">Action</div>
+          <div class="rn-cn">行动</div>
+        </div>
+        <div class="rl-arrow">→</div>
+        <div class="rl-node rl-node-3" data-reveal="33" data-reveal-dir="top">
+          <div class="rn-icon">👁</div>
+          <div class="rn-name grad-green">Observation</div>
+          <div class="rn-cn">观察</div>
+        </div>
+        <div class="rl-arrow rl-arrow-loop">
+          <span class="rl-loop-text">↺ 循环</span>
+          <span class="rl-loop-sub">结果加回上下文</span>
+        </div>
+        <div class="rl-node rl-node-final" data-reveal="37" data-reveal-dir="top">
+          <div class="rn-icon">✓</div>
+          <div class="rn-name grad-gold">Final</div>
+          <div class="rn-cn">最终答案</div>
+        </div>
+      </div>
+      <div class="rl-footer">思考 · 行动 · 观察 · 再思考 — 把复杂任务拆成可控小步</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

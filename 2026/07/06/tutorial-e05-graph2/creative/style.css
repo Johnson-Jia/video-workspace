@@ -1,0 +1,310 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-blue-light: #60A5FA;
+  --tut-purple: #A78BFA;
+  --tut-green: #10B981;
+  --tut-gold: #FBBF24;
+  --tut-red: #EF4444;
+  --tut-red-light: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+  --term-bg: #0a0a0a;
+  --term-titlebar: #1a1a1a;
+  --term-text: #e5e7eb;
+  --term-green: #34D399;
+  --term-blue: #60A5FA;
+  --term-prompt: #34D399;
+  --term-yellow: #FCD34D;
+}
+
+/* ============================================
+ * Tutorial E05 段4 — 图谱工具 + 两条铁律（impact 终端 + 三类工具 + 铁律金边卡 + 实测数据）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 64px 90px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+[data-reveal]:not([data-reveal="0"]) { opacity: 0; will-change: opacity, transform; }
+.tut-region { will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#7C3AED 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+
+/* —— 标题区 —— */
+.tut-g2-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-g2-title .mt-eyebrow {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.18em;
+  padding: 6px 22px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-g2-title .mt-h1 {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-g2-title .title-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 三类工具卡（横排 3 列） —— */
+.tool-cats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.tool-cat {
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 4px;
+  border: 2px solid;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.40);
+}
+.tool-cat.tc-understand {
+  border-color: rgba(96,165,250,0.60);
+  background: linear-gradient(160deg, rgba(59,130,246,0.14), rgba(15,23,42,0.90));
+}
+.tool-cat.tc-change {
+  border-color: rgba(251,191,36,0.60);
+  background: linear-gradient(160deg, rgba(251,191,36,0.14), rgba(15,23,42,0.90));
+}
+.tool-cat.tc-query {
+  border-color: rgba(167,139,250,0.60);
+  background: linear-gradient(160deg, rgba(167,139,250,0.14), rgba(15,23,42,0.90));
+}
+.tc-name {
+  font-family: var(--font-title); font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tc-name.tc-understand { color: var(--tut-blue-light); }
+.tc-name.tc-change { color: var(--tut-gold); }
+.tc-name.tc-query { color: var(--tut-purple); }
+.tc-tool {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tc-desc {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 主体两栏：终端窗（左 2fr）+ 铁律卡（右 1fr） —— */
+.tut-g2-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.tut-g2-terminal-region { width: 100%; }
+.tut-g2-rules-region { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
+/* —— impact 终端窗口（复用 E04 install 终端范式） —— */
+.terminal-window {
+  width: 100%; height: 100%;
+  background: var(--term-bg);
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(96,165,250,0.10);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.term-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  background: var(--term-titlebar);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.term-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  display: inline-block;
+}
+.term-dot.red { background: #FF5F56; }
+.term-dot.yellow { background: #FFBD2E; }
+.term-dot.green { background: #27C93F; }
+.term-title {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: var(--tut-gray); margin-left: 14px;
+  letter-spacing: 0.04em;
+}
+.term-body {
+  flex: 1; padding: 18px 24px;
+  font-family: var(--font-data);
+  display: flex; flex-direction: column; gap: 8px;
+  overflow: hidden;
+}
+.term-line {
+  display: flex; align-items: baseline; gap: 12px;
+  font-size: 32px; line-height: 1.35;
+  flex-wrap: wrap;
+}
+.term-prompt {
+  color: var(--term-prompt); font-weight: 800;
+  font-size: 34px;
+}
+.term-cmd {
+  color: var(--term-blue); font-weight: 700;
+  font-size: 32px;
+  word-break: break-all;
+}
+.term-cmd-name {
+  color: var(--term-green); font-weight: 800;
+}
+.term-cmd-flag {
+  color: var(--tut-purple); font-weight: 700;
+}
+.term-cmd-val {
+  color: var(--term-yellow); font-weight: 700;
+  border-bottom: 2px dotted rgba(252,211,77,0.55);
+}
+.term-out {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  line-height: 1.35;
+}
+.term-out-bolt {
+  color: var(--term-yellow); font-weight: 800;
+}
+.term-out-label {
+  color: var(--tut-gray); font-weight: 600;
+  padding-left: 24px;
+}
+.term-out-num {
+  color: var(--term-green); font-weight: 800;
+  padding: 0 4px;
+}
+.term-out-detail {
+  color: var(--tut-blue-white); font-weight: 500;
+}
+.term-out-high {
+  display: flex; align-items: center; gap: 12px;
+  padding: 6px 16px;
+  border: 2px solid rgba(239,68,68,0.60);
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(239,68,68,0.18), rgba(10,10,10,0.85));
+  width: fit-content;
+  animation: highPulse 1.6s ease-in-out infinite;
+}
+@keyframes highPulse {
+  0%,100% { box-shadow: 0 0 14px rgba(239,68,68,0.35), 0 0 0 2px rgba(239,68,68,0.18); }
+  50% { box-shadow: 0 0 22px rgba(239,68,68,0.65), 0 0 0 4px rgba(239,68,68,0.28); }
+}
+.to-high-label {
+  color: var(--tut-blue-white); font-weight: 700;
+}
+.to-high-val {
+  color: var(--tut-red); font-weight: 900; font-size: 36px;
+}
+.to-high-mark {
+  color: var(--tut-red-light); font-weight: 900; font-size: 32px;
+}
+.term-out-suggest {
+  color: var(--term-green); font-weight: 700;
+  padding-left: 24px;
+  font-size: 32px;
+}
+.term-out-suggest .term-cmd-inline {
+  color: var(--term-yellow);
+  border-bottom: 2px dotted rgba(252,211,77,0.55);
+  padding: 0 2px;
+}
+
+/* —— 两条铁律卡 —— */
+.rule-card {
+  border-radius: 14px;
+  padding: 12px 16px;
+  border: 2.5px solid rgba(251,191,36,0.70);
+  background: linear-gradient(160deg, rgba(251,191,36,0.14), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; gap: 4px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.40), 0 0 0 1px rgba(251,191,36,0.18);
+  animation: ruleGlow 2.4s ease-in-out infinite;
+}
+@keyframes ruleGlow {
+  0%,100% { border-color: rgba(251,191,36,0.70); }
+  50% { border-color: rgba(252,211,77,0.95); }
+}
+.rc-head {
+  display: flex; align-items: center; gap: 10px;
+}
+.rc-mark {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.rc-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 2px 12px; border-radius: 6px;
+}
+.rc-body {
+  font-family: var(--font-title); font-size: 32px; font-weight: 800;
+  color: var(--tut-white); line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.rc-cmd {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  color: var(--tut-gold);
+  padding: 2px 8px; border-radius: 6px;
+  background: rgba(251,191,36,0.12);
+  border: 1px solid rgba(251,191,36,0.35);
+}
+
+/* —— 实测数据卡 —— */
+.metric-card {
+  border-radius: 14px;
+  padding: 12px 18px;
+  border: 2px solid rgba(52,211,153,0.55);
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.90));
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.40);
+}
+.mc-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+  background-image: linear-gradient(92deg,#34D399 0%,#047857 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 14px; border-radius: 8px;
+}
+.mc-num {
+  font-family: var(--font-data); font-size: 48px; font-weight: 900;
+}
+.mc-num.grad-green { font-size: 52px; }
+.mc-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

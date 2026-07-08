@@ -1,0 +1,308 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-blue-light: #60A5FA;
+  --tut-blue-pale: #93C5FD;
+  --tut-purple: #A78BFA;
+  --tut-green: #10B981;
+  --tut-green-light: #34D399;
+  --tut-green-pale: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 段3 — 代码知识图谱原理（节点图 + 三个好处 + 分层共存 + 六阶段流水线）
+ * 核心新组件：知识图谱节点图（圆形节点 + SVG 边 + Community 染色 + 选中高亮 + 边流光）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 64px 90px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+[data-reveal]:not([data-reveal="0"]) { opacity: 0; will-change: opacity, transform; }
+.tut-region { will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+
+/* —— 标题区 —— */
+.tut-graph-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-graph-title .mt-eyebrow {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.18em;
+  padding: 6px 22px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-graph-title .mt-h1 {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-graph-title .title-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 主体：节点图（左 2fr）+ 三个好处（右 1fr） —— */
+.tut-graph-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.tut-graph-viz-region { width: 100%; }
+.tut-graph-benefits-region { width: 100%; }
+
+/* —— 知识图谱节点图（核心组件） —— */
+.graph-viz {
+  position: relative;
+  width: 100%; height: 100%;
+  min-height: 360px;
+  border-radius: 18px;
+  border: 2px solid rgba(96,165,250,0.28);
+  background: linear-gradient(165deg, rgba(15,23,42,0.55), rgba(15,23,42,0.92));
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+.graph-canvas {
+  position: relative;
+  width: 100%; height: 100%;
+}
+/* SVG 边层（节点之下） */
+.graph-edges {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.graph-edges .edge {
+  stroke: rgba(148,163,184,0.35);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  fill: none;
+}
+.graph-edges .edge.active {
+  stroke: #60A5FA;
+  stroke-width: 3.5;
+  stroke-dasharray: 14 6;
+  stroke-opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(96,165,250,0.45));
+  animation: edgeFlow 2.2s linear infinite;
+}
+@keyframes edgeFlow {
+  to { stroke-dashoffset: -40; }
+}
+.edge-label {
+  font-family: 'JetBrains Mono','Consolas',monospace;
+  font-size: 32px; font-weight: 700;
+  fill: var(--tut-blue-light);
+}
+/* 节点 */
+.graph-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+  color: var(--tut-white);
+  border: 3px solid;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  z-index: 2;
+}
+.graph-node.node-auth {
+  background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.32), rgba(37,99,235,0.12));
+  border-color: rgba(96,165,250,0.75);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 22px rgba(59,130,246,0.20);
+}
+.graph-node.node-pay {
+  background: radial-gradient(circle at 30% 30%, rgba(16,185,129,0.32), rgba(5,150,105,0.12));
+  border-color: rgba(52,211,153,0.75);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 22px rgba(16,185,129,0.20);
+}
+.graph-node.node-selected {
+  border-color: var(--tut-blue-pale);
+  border-width: 4px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 0 8px rgba(96,165,250,0.22), 0 0 36px rgba(96,165,250,0.55);
+}
+/* 节点 ring（选中节点外圈脉冲，CSS animation 循环态允许） */
+.graph-node-ring {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 170px; height: 170px;
+  border-radius: 50%;
+  border: 2px solid rgba(96,165,250,0.35);
+  pointer-events: none;
+  z-index: 1;
+  animation: ringPulse 2.4s ease-in-out infinite;
+}
+@keyframes ringPulse {
+  0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.65; }
+  50% { transform: translate(-50%,-50%) scale(1.18); opacity: 0.25; }
+}
+.graph-caption-removed {
+  /* removed: gate flags absolute bottom/left as safezone overflow */
+}
+.graph-legend-removed {
+  /* removed: gate flags absolute top/right as safezone overflow */
+}
+
+/* —— 三个好处卡 —— */
+.benefits-card {
+  display: flex; flex-direction: column; gap: 12px;
+  height: 100%;
+}
+.benefit-item {
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 4px;
+  border: 2px solid;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.40);
+}
+.benefit-item.b-reliable {
+  border-color: rgba(96,165,250,0.60);
+  background: linear-gradient(160deg, rgba(59,130,246,0.14), rgba(15,23,42,0.90));
+}
+.benefit-item.b-token {
+  border-color: rgba(52,211,153,0.60);
+  background: linear-gradient(160deg, rgba(16,185,129,0.14), rgba(15,23,42,0.90));
+}
+.benefit-item.b-model {
+  border-color: rgba(251,191,36,0.60);
+  background: linear-gradient(160deg, rgba(251,191,36,0.14), rgba(15,23,42,0.90));
+}
+.bi-title {
+  font-family: var(--font-title); font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.bi-title.b-reliable { color: var(--tut-blue-light); }
+.bi-title.b-token { color: var(--tut-green-light); }
+.bi-title.b-model { color: var(--tut-gold); }
+.bi-desc {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-white); line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 分层共存条 —— */
+.coexist-bar {
+  border-radius: 16px;
+  padding: 12px 24px;
+  border: 2px solid rgba(167,139,250,0.45);
+  background: linear-gradient(90deg, rgba(59,130,246,0.10), rgba(15,23,42,0.85), rgba(16,185,129,0.10));
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.40);
+}
+.co-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--tut-purple);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-side {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.co-label {
+  font-family: var(--font-title); font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-label.co-graph { color: var(--tut-blue-light); }
+.co-label.co-vector { color: var(--tut-green-light); }
+.co-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-arrow {
+  font-family: var(--font-data); font-size: 34px; font-weight: 900;
+  color: var(--tut-gray);
+}
+
+/* —— 六阶段索引流水线 —— */
+.pipeline-bar {
+  border-radius: 16px;
+  padding: 12px 24px;
+  border: 2px solid rgba(96,165,250,0.35);
+  background: linear-gradient(90deg, rgba(15,23,42,0.65), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; gap: 8px;
+}
+.pipeline-title {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  color: var(--tut-blue-white); letter-spacing: 0.10em;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pipeline-flow {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 2px;
+}
+.pl-step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1;
+}
+.pl-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(96,165,250,0.45);
+  background: rgba(15,23,42,0.80);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-data); font-size: 32px; font-weight: 900;
+  color: var(--tut-gray);
+}
+.pl-dot.lit {
+  border-color: var(--tut-blue-light);
+  background: radial-gradient(circle, var(--tut-blue), rgba(37,99,235,0.30));
+  color: var(--tut-white);
+  box-shadow: 0 0 14px rgba(96,165,250,0.55), 0 0 0 3px rgba(96,165,250,0.18);
+}
+.pl-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-align: center; line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pl-connector {
+  flex: 0 0 auto;
+  width: 18px; height: 3px;
+  background: linear-gradient(90deg, rgba(96,165,250,0.20), rgba(96,165,250,0.55));
+  border-radius: 2px;
+  margin-top: 16px;
+}

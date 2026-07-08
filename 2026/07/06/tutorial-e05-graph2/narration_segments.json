@@ -1,0 +1,22 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 75,
+    "emotion": "教程-图谱工具+铁律",
+    "text": "图谱建好，暴露给 AI 的是十四个工具，分三类：理解类，看清结构，比如 context 看符号的 360 度视图。变更类，评估影响，impact 算爆炸半径，detect_changes 把 git diff 映射到受影响符号。查询类，自由 Cypher 图查询，补图谱的盲区。有两条铁律，必须写进 AI 的指令：第一，改任何符号前必跑影响分析；第二，提交前必跑变更映射。这两条是基础设施能不能落地的命脉。实测效果：某团队用它排查生产 bug，跨仓库定位调用链，累计排查 144 个 bug，覆盖率超过八成。",
+    "narration": "图谱建好，暴露给 AI 的是十四个工具，分三类：理解类，看清结构，比如 context 看符号的 360 度视图。变更类，评估影响，impact 算爆炸半径，detect_changes 把 git diff 映射到受影响符号。查询类，自由 Cypher 图查询，补图谱的盲区。有两条铁律，必须写进 AI 的指令：第一，改任何符号前必跑影响分析；第二，提交前必跑变更映射。这两条是基础设施能不能落地的命脉。实测效果：某团队用它排查生产 bug，跨仓库定位调用链，累计排查 144 个 bug，覆盖率超过八成。",
+    "hook_anchors": ["图谱建好", "十四个工具", "分三类", "理解类", "看清结构", "context", "360 度视图", "变更类", "评估影响", "impact", "爆炸半径", "detect_changes", "git diff", "受影响符号", "查询类", "自由 Cypher", "图查询", "补图谱盲区", "两条铁律", "写进 AI 指令", "改任何符号前", "必跑影响分析", "提交前", "必跑变更映射", "命脉", "实测效果", "某团队", "排查生产 bug", "跨仓库", "定位调用链", "累计排查 144 个 bug", "覆盖率超过八成"],
+    "visual_type": "tutorial_impact_terminal",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「图谱工具 · 十四件 + 两条铁律」+ 副「impact 算爆炸半径」fade-in", "duration_share": 0.08},
+      {"phase": 2, "start_offset": 4, "focus": "三类工具卡 reveal（理解/变更/查询）顶部下落，每类列代表工具", "duration_share": 0.20},
+      {"phase": 3, "start_offset": 16, "focus": "impact 终端窗口 reveal——命令打字「$ impact --target UserService.validateToken」+ ⚡ 爆炸半径分析中", "duration_share": 0.18},
+      {"phase": 4, "start_offset": 24, "focus": "终端输出 fade-in「d=1 直接调用者 12 处 / d=2 间接影响 47 处」+ HIGH 风险红色脉冲", "duration_share": 0.20},
+      {"phase": 5, "start_offset": 34, "focus": "两条铁律卡 reveal（金边警示：改前必跑 impact / 提交前必跑 detect_changes）左滑入", "duration_share": 0.20},
+      {"phase": 6, "start_offset": 48, "focus": "实测效果数据卡 reveal「累计排查 144 bug · 覆盖率 80%+」", "duration_share": 0.14}
+    ],
+    "bg_component": "hex_grid"
+  }
+]

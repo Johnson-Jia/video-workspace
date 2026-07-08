@@ -1,0 +1,162 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 CTA — 收尾（合集标识+E07预告+关注+中性提问）
+ * 单层 padding：.phase 已管安全区
+ * 布局：四区 space-between 撑满 1080，收尾段居中合理但内容放松不堆垂直中心
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-grid {
+  width: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#A78BFA 0%,#8B5CF6 55%,#C4B5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— tag 胶囊 —— */
+.tag-base {
+  display: inline-block;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.tag-gold { background-image: linear-gradient(92deg,#FBBF24,#FCD34D); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+.tag-blue { background-image: linear-gradient(92deg,#60A5FA,#93C5FD); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+.tag-purple { background-image: linear-gradient(92deg,#A78BFA,#C4B5FD); color:#1E293B; -webkit-text-fill-color:#1E293B; }
+
+/* —— 区域 1：合集标识 + E07 预告 —— */
+.tut-cta-hero { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hero-badge {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.hero-ep {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hero-sep {
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 800;
+  color: rgba(224,231,255,0.50);
+}
+.hero-done {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800;
+}
+.next-card {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 14px 32px;
+  border-radius: 14px;
+  border: 2.5px solid rgba(167,139,250,0.65);
+  background: linear-gradient(180deg, rgba(167,139,250,0.12), rgba(15,23,42,0.90));
+  box-shadow: 0 0 24px rgba(167,139,250,0.22);
+  width: 100%;
+}
+.next-tag { margin-bottom: 2px; }
+.next-title {
+  font-family: 'Inter'; font-size: 40px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  color: var(--tut-white);
+}
+.next-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：关注引导 —— */
+.tut-cta-follow { width: 100%; display: flex; justify-content: center; }
+.follow-row {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 24px;
+  border-radius: 12px;
+  border: 2px solid rgba(252,165,165,0.55);
+  background: linear-gradient(90deg, rgba(252,165,165,0.10), rgba(15,23,42,0.90));
+}
+.follow-icon {
+  font-size: 36px; color: #FCA5A5;
+  filter: drop-shadow(0 0 10px rgba(252,165,165,0.45));
+}
+.follow-text {
+  font-family: 'Inter'; font-size: 40px; font-weight: 900;
+  color: #FCA5A5;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.follow-sep {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.45);
+}
+.follow-extra {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+}
+
+/* —— 区域 3：中性提问 —— 收尾提问卡撑满画布宽度 */
+.tut-cta-question { width: 100%; display: flex; justify-content: stretch; }
+.question-card {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  padding: 16px 40px;
+  border-radius: 14px;
+  border: 2.5px solid rgba(251,191,36,0.70);
+  background: linear-gradient(90deg, rgba(251,191,36,0.10), rgba(15,23,42,0.92), rgba(251,191,36,0.10));
+  box-shadow: 0 0 28px rgba(251,191,36,0.22);
+  width: 100%;
+}
+.q-mark {
+  font-family: 'JetBrains Mono'; font-size: 72px; font-weight: 900;
+  color: rgba(251,191,36,0.70);
+  line-height: 1;
+}
+.q-text {
+  font-family: 'Noto Sans SC'; font-size: 44px; font-weight: 900;
+  line-height: 1.25;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  color: var(--tut-white);
+}
+
+/* —— 区域 4：教程仓库 —— */
+.tut-cta-repo { width: 100%; display: flex; justify-content: center; }
+.repo-line {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 6px 20px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(96,165,250,0.40);
+  background: rgba(15,23,42,0.60);
+  flex-wrap: wrap;
+}
+.repo-icon {
+  font-size: 34px; color: #60A5FA;
+}
+.repo-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.88);
+}
+.repo-sep {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.45);
+}
+.repo-path {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+}

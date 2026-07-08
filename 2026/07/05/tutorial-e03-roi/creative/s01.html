@@ -1,0 +1,102 @@
+<!-- 场景: seg1 | 时长: ~48s | bg: clean_slate | ROI 公式 + 老板三问 + 别承诺 +104% -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 多色静态光晕（金公式 / 蓝钱 / 紫回本 / 绿兜底；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:780px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;left:18%;width:480px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:480px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;right:18%;width:480px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:11%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.22);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.75);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.22);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-roi-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-num grad-gold-bg-inline">ROI</div>
+      <h1 class="mt-h1">老板三问</h1>
+      <div class="title-sub">算清成本，还要答得出</div>
+    </div>
+
+    <!-- 区域 2：ROI 公式大字横幅（data-reveal=4，dir=top） -->
+    <div class="tut-region tut-roi-formula" data-reveal="4" data-reveal-dir="top">
+      <div class="formula-label">ROI · 回本月数</div>
+      <div class="formula-line">
+        <span class="f-left grad-gold">回本月数</span>
+        <span class="f-eq">≈</span>
+        <span class="f-num">总投入</span>
+        <span class="f-op">÷</span>
+        <span class="f-den">(人均月薪 × 提效等效人力)</span>
+      </div>
+    </div>
+
+    <!-- 区域 3-5：三问卡 3 列横排（共用一个 grid region，data-reveal stagger 各卡） -->
+    <div class="tut-region tut-roi-questions" data-reveal="10" data-reveal-dir="left">
+      <div class="q-grid">
+        <div class="q-card q-blue">
+          <div class="q-head">
+            <span class="q-num">①</span>
+            <span class="q-ask grad-blue">要多少钱？</span>
+          </div>
+          <div class="q-ans">
+            <div class="qa-item"><span class="qa-mark qa-dot-blue">●</span>四块成本表</div>
+            <div class="qa-item"><span class="qa-mark qa-dot-blue">●</span>一次性 · 持续 标清</div>
+          </div>
+        </div>
+
+        <div class="q-card q-purple">
+          <div class="q-head">
+            <span class="q-num">②</span>
+            <span class="q-ask grad-purple">多久回本？</span>
+          </div>
+          <div class="q-ans">
+            <div class="qa-item"><span class="qa-mark qa-dot-purple">●</span>行业常见 3-6 个月</div>
+            <div class="qa-item"><span class="qa-mark qa-dot-purple">●</span>先试点 3 月验证再全量</div>
+          </div>
+        </div>
+
+        <div class="q-card q-green">
+          <div class="q-head">
+            <span class="q-num">③</span>
+            <span class="q-ask grad-green">失败怎么办？</span>
+          </div>
+          <div class="q-ans">
+            <div class="qa-item"><span class="qa-mark qa-dot-green">●</span>试点可控 · 可止损</div>
+            <div class="qa-item"><span class="qa-mark qa-dot-green">●</span>沉没成本低</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 6：金色警告框（data-reveal=36，dir=top） -->
+    <div class="tut-region tut-roi-warn" data-reveal="36" data-reveal-dir="top">
+      <div class="warn-tag grad-gold-bg-inline">立项警告</div>
+      <div class="warn-main">
+        <span class="warn-x">✗</span>
+        <span class="warn-text">别在立项承诺 <span class="warn-num">+104%</span></span>
+      </div>
+      <div class="warn-note">那是后面跑出来的结果 · 立项时你还没有</div>
+      <div class="warn-correct">
+        <span class="wc-mark">✓</span>
+        承诺目标值 <span class="wc-plus">+</span> 试点路径 · 更诚实也更有力
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

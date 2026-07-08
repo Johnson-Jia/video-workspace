@@ -1,0 +1,162 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-gold: #FBBF24;
+  --tut-blue: #3B82F6;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E02 原理③ 上下文 1M（横屏 reveal §6.16）
+ * 1 场景 + 3 region（标题 / 上下文桶 + 撑爆源 / 实践清单）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 26px;
+  padding: 56px 120px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 26px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 50%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 区域 1：标题 —— */
+.tut-ctx-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.tut-ctx-title .ct-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(59,130,246,0.45); border-radius: 999px;
+  background: rgba(59,130,246,0.08);
+}
+.tut-ctx-title .ct-h1 {
+  font-family: var(--font-title); font-size: 82px; font-weight: 900; line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 18px rgba(59,130,246,0.22);
+}
+
+/* —— 区域 2：上下文桶 + 三大撑爆源（左右并列）—— */
+.tut-ctx-bucket {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 36px; width: 100%;
+  align-items: stretch;
+}
+.cb-bucket-side {
+  display: flex; align-items: center; justify-content: center;
+  padding: 22px 28px; border-radius: 20px;
+  border: 2px solid rgba(251,191,36,0.50);
+  background: linear-gradient(165deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+}
+/* 桶形容器：梯形轮廓（clip-path 模拟上窄下宽的桶） */
+.cb-bucket {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 28px 36px;
+  border: 2.5px solid rgba(251,191,36,0.65);
+  border-radius: 14px 14px 36px 36px;
+  background: linear-gradient(180deg, rgba(251,191,36,0.06), rgba(15,23,42,0.40));
+}
+.cb-bucket .cb-bucket-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.10em;
+}
+.cb-bucket .cb-bucket-num {
+  font-family: var(--font-data); font-size: 110px; font-weight: 900; line-height: 1;
+  text-shadow: 0 0 22px rgba(251,191,36,0.30);
+}
+.cb-bucket .cb-bucket-unit {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+}
+.cb-bucket .cb-fill-row {
+  display: flex; align-items: baseline; gap: 6px; margin-top: 8px;
+  font-family: var(--font-data);
+}
+.cb-bucket .cb-count {
+  font-size: 64px; font-weight: 900; color: var(--tut-red); line-height: 1;
+  text-shadow: 0 0 18px rgba(239,68,68,0.40);
+}
+.cb-bucket .cb-pct {
+  font-size: 40px; font-weight: 800; color: var(--tut-red);
+  text-shadow: 0 0 14px rgba(239,68,68,0.30);
+}
+.cb-bucket .cb-warn {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800;
+  color: var(--tut-red); letter-spacing: 0.06em; margin-left: 6px;
+  text-shadow: 0 0 12px rgba(239,68,68,0.30);
+}
+
+.cb-sources-side {
+  display: flex; flex-direction: column; gap: 12px; justify-content: center;
+  padding: 22px 28px; border-radius: 20px;
+  border: 2px solid rgba(239,68,68,0.45);
+  background: linear-gradient(165deg, rgba(239,68,68,0.08), rgba(15,23,42,0.55));
+}
+.cb-sources-side .cb-sources-head {
+  font-family: var(--font-title); font-size: 34px; font-weight: 900;
+  color: var(--tut-red); letter-spacing: 0.04em;
+  text-shadow: 0 0 12px rgba(239,68,68,0.25);
+}
+.cb-sources-side .cb-source {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700;
+  color: var(--tut-white); display: flex; align-items: center; gap: 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.cb-sources-side .cb-src-icon {
+  font-family: var(--font-data); color: var(--tut-red); font-weight: 900; font-size: 34px;
+}
+.cb-sources-side .cb-sources-foot {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-gold); letter-spacing: 0.04em; margin-top: 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+}
+
+/* —— 区域 3：最佳实践清单 —— */
+.tut-ctx-practices {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 22px 36px; border-radius: 18px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(90deg, rgba(16,185,129,0.10), rgba(15,23,42,0.55));
+}
+.tut-ctx-practices .cp-head {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900;
+  color: var(--tut-green); letter-spacing: 0.04em;
+  text-shadow: 0 0 14px rgba(16,185,129,0.25);
+}
+.tut-ctx-practices .cp-pills {
+  display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 18px;
+  width: 100%;
+}
+.tut-ctx-practices .cp-pill {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-white); padding: 10px 24px; border-radius: 999px;
+  border: 1.5px solid rgba(16,185,129,0.45);
+  background: linear-gradient(135deg, rgba(16,185,129,0.14), rgba(15,23,42,0.50));
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.40);
+}
+.tut-ctx-practices .cp-quote {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700;
+  color: var(--tut-blue-white); text-align: center; letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-ctx-practices .cp-emph {
+  font-family: var(--font-title); font-weight: 900; color: var(--tut-green);
+  margin: 0 4px; font-size: 40px;
+  text-shadow: 0 0 14px rgba(16,185,129,0.30);
+}

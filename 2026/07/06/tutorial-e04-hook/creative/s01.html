@@ -1,0 +1,71 @@
+<!-- 场景: seg1 | 时长: ~18s | bg: scan_grid | 工具选错差一个量级 + 全员赋能本集主题 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色光晕（金主题 / 绿翻倍 / 红踏步；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:760px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;left:25%;width:460px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;right:25%;width:460px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:740px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:11%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:25%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-hook-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E04 钩子</div>
+      <h1 class="hook-h1">工具选错</h1>
+      <div class="title-sub grad-gold">差一个量级</div>
+    </div>
+
+    <!-- 区域 2：对比卡（data-reveal=7，dir=left） -->
+    <div class="tut-region tut-hook-compare" data-reveal="7" data-reveal-dir="left">
+      <div class="cmp-grid">
+        <div class="cmp-card cmp-up">
+          <div class="cmp-head">
+            <span class="cmp-arrow">↑</span>
+            <span class="cmp-label grad-green">效率翻倍</span>
+          </div>
+          <div class="cmp-note">会用 AI 的人</div>
+        </div>
+        <div class="cmp-vs">VS</div>
+        <div class="cmp-card cmp-down">
+          <div class="cmp-head">
+            <span class="cmp-arrow">↓</span>
+            <span class="cmp-label grad-red">原地踏步</span>
+          </div>
+          <div class="cmp-note">碰都不碰的人</div>
+        </div>
+      </div>
+      <div class="cmp-conclusion">差别往往 <span class="cc-key grad-gold">不在人</span>，<span class="cc-key grad-gold">在工具</span></div>
+    </div>
+
+    <!-- 区域 3：本集主题（data-reveal=14，dir=top） -->
+    <div class="tut-region tut-hook-topic" data-reveal="14" data-reveal-dir="top">
+      <div class="topic-tag grad-gold-bg-inline">本集主题</div>
+      <div class="topic-main grad-gold">全员赋能</div>
+      <div class="topic-list">
+        <span class="tl-item"><span class="tl-dot">●</span>选对工具</span>
+        <span class="tl-plus">+</span>
+        <span class="tl-item"><span class="tl-dot">●</span>装好 Claude Code</span>
+        <span class="tl-plus">+</span>
+        <span class="tl-item"><span class="tl-dot">●</span>规范资产化</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

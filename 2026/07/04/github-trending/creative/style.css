@@ -1,0 +1,290 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #FF8C32;
+  --accent-cool: #4DA8DA;
+  --accent-cyan: #00D4FF;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * ProjectFullCard 布局（github 核心组件）
+ * feedback-assemble-no-pfc-css：s6_assemble 不注入 PFC CSS，必须手补
+ * feedback-pfc-safezone-overflow：position:absolute inset 安全区
+ * feedback-project-fullcard-vertical-layout：纵向三带 space-between
+ * feedback-pfc-lean-colorful：精简强色（≤8 行）
+ * feedback-cm-card-transparent-bg：卡片深色不透明底挡 fx 光晕
+ * ============================================ */
+.project-full-card {
+  position: absolute;
+  inset: 180px 90px 220px 90px;   /* 单层安全区，去 layer-content 前缀避 R-S6-025 */
+  display: flex; flex-direction: column;
+  justify-content: space-between; /* ★ 三带撑满，禁 center */
+  z-index: 3;
+  padding: 40px 36px;
+  border-radius: 28px;
+  background: rgba(13, 9, 5, 0.88);   /* 深色不透明底，alpha≥0.7 挡 fx 光晕 */
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+.project-full-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, hsla(25, 95%, 55%, 0.22), transparent 45%),
+    radial-gradient(circle at 88% 82%, hsla(200, 80%, 55%, 0.18), transparent 50%);
+  opacity: 0.7;
+}
+
+/* ─── 顶部带：排名+类别 / 用途胶囊 / 项目名 ─── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 22px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 28px; }
+.pfc-rank {
+  font-size: 84px; font-weight: 900; line-height: 0.9;
+  font-family: var(--font-data);
+  color: var(--accent-warm);
+  text-shadow: 0 0 18px rgba(255, 140, 50, 0.55);
+}
+.pfc-category {
+  font-size: 36px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--accent-cool); text-transform: uppercase;
+}
+.pfc-use {
+  /* 胶囊：纯场景色 + border-box（feedback-bgclip-text-capsule-conflict 禁 grad clip:text） */
+  font-size: 44px; font-weight: 800; line-height: 1.1;
+  padding: 10px 24px; border-radius: 12px;
+  background: rgba(255, 140, 50, 0.14);
+  border: 1.5px solid rgba(255, 140, 50, 0.45);
+  color: var(--accent-warm);
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.12; letter-spacing: -0.01em;
+  word-break: break-word;     /* 长名换行完整显示（feedback-pfc-name-row） */
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255, 255, 255, 0.50);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800; color: #f5f5f5;  /* 降一档防 OLED 过曝 */
+}
+
+/* ─── 中部带：avatar + 描述 + 星标大数字 ─── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 30px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 200px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -14px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(14px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 200px; height: 200px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+.pfc-desc {
+  font-size: 36px; font-weight: 600; line-height: 1.35;
+  color: #f5f5f5; text-align: center; max-width: 760px;
+}
+.pfc-stars {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+.pfc-stars-num {
+  font-family: var(--font-data);
+  font-size: 92px; font-weight: 800; line-height: 1.0;
+  background-image: linear-gradient(135deg, #FFB347 0%, #FF8C32 60%, #FF6B35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 14px rgba(255, 140, 50, 0.35);   /* blur<16 大字门禁 */
+}
+.pfc-stars-unit {
+  font-size: 32px; font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ─── 底部带：单行涨星 + 评语 ─── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px; width: 100%;
+}
+.pfc-today {
+  display: flex; align-items: baseline; gap: 14px;
+  font-family: var(--font-data);
+}
+.pfc-today-num {
+  font-size: 44px; font-weight: 800;
+  color: var(--accent-warm);
+}
+.pfc-today-label {
+  font-size: 32px; font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+}
+.pfc-commentary {
+  font-size: 34px; font-weight: 500; line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+  border-left: 4px solid var(--accent-warm); padding-left: 22px;
+}
+
+/* ============================================
+ * Hook 场景样式
+ * ============================================ */
+.hk-stage {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px; width: 100%;
+}
+.hk-eyebrow {
+  font-size: 36px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--accent-cool);
+  padding: 8px 24px; border-radius: 999px;
+  background: rgba(77, 168, 218, 0.10);
+  border: 1.5px solid rgba(77, 168, 218, 0.40);
+}
+.hk-title {
+  font-family: var(--font-title);
+  font-size: 116px; font-weight: 900; line-height: 1.05;
+  text-align: center; max-width: 900px;
+  background-image: linear-gradient(135deg, #FFB347 0%, #FF8C32 50%, #4DA8DA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 16px rgba(255, 140, 50, 0.30);
+  word-break: break-word;
+}
+.hk-num-row {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 14px 36px;
+  background: rgba(255, 140, 50, 0.10);
+  border: 2px solid rgba(255, 140, 50, 0.45);
+  border-radius: 24px;
+}
+.hk-num {
+  font-family: var(--font-data);
+  font-size: 160px; font-weight: 900; line-height: 1.0;
+  background-image: linear-gradient(180deg, #FFD18A 0%, #FF8C32 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 22px rgba(255, 140, 50, 0.45);
+}
+.hk-num-tail {
+  font-size: 56px; font-weight: 800; color: var(--accent-warm);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+ * CTA 场景样式
+ * ============================================ */
+.cta-stage {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 36px; width: 100%;
+}
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 96px; font-weight: 900; line-height: 1.08;
+  text-align: center; max-width: 900px;
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FFB347 50%, #4DA8DA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 14px rgba(255, 140, 50, 0.30);
+}
+.cta-sub {
+  font-size: 44px; font-weight: 600; line-height: 1.35;
+  color: rgba(255, 255, 255, 0.85); text-align: center;
+  max-width: 800px;
+}
+.cta-follow {
+  font-size: 38px; font-weight: 700;
+  color: var(--accent-cool);
+  padding: 12px 32px; border-radius: 999px;
+  background: rgba(77, 168, 218, 0.12);
+  border: 1.5px solid rgba(77, 168, 218, 0.45);
+}
+
+/* ============================================
+ * 双项目卡（romm + cs249r 同场景）
+ * ============================================ */
+.dual-card {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column; gap: 24px;
+  z-index: 3;
+}
+.dual-row {
+  flex: 1;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 28px 32px;
+  background: rgba(13, 9, 5, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.dual-row::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.55;
+}
+.dual-row.dual-warm::before {
+  background: radial-gradient(circle at 88% 20%, hsla(35, 95%, 55%, 0.22), transparent 55%);
+}
+.dual-row.dual-cool::before {
+  background: radial-gradient(circle at 12% 20%, hsla(200, 80%, 55%, 0.22), transparent 55%);
+}
+.dual-head {
+  position: relative; z-index: 1;
+  display: flex; align-items: baseline; gap: 18px;
+}
+.dual-rank {
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 900; color: var(--accent-warm);
+}
+.dual-row.dual-cool .dual-rank { color: var(--accent-cool); }
+.dual-name {
+  font-family: var(--font-data);
+  font-size: 42px; font-weight: 800; color: #f5f5f5;
+  word-break: break-word;
+}
+.dual-desc {
+  position: relative; z-index: 1;
+  font-size: 32px; font-weight: 500; line-height: 1.35;
+  color: rgba(255, 255, 255, 0.82);
+}
+.dual-foot {
+  position: relative; z-index: 1;
+  display: flex; align-items: baseline; gap: 14px; margin-top: auto;
+}
+.dual-stars {
+  font-family: var(--font-data);
+  font-size: 38px; font-weight: 800;
+  color: var(--accent-warm);
+}
+.dual-row.dual-cool .dual-stars { color: var(--accent-cool); }
+.dual-stars-label {
+  font-size: 32px; font-weight: 600;
+  color: rgba(255, 255, 255, 0.60);
+}

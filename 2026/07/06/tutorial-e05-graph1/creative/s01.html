@@ -1,0 +1,151 @@
+<!-- 场景: seg1 | 时长: ~45.0s | bg: hex_grid | 代码知识图谱原理：节点图可视化（Community 染色 + 选中高亮 + 边流光）+ 三个好处 + 分层共存 + 六阶段索引流水线 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝认证域/绿支付域/金图谱；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:24%;width:520px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:42%;left:62%;width:460px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:28%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:14%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.80);box-shadow:0 0 14px hsla(43,85%,54%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-graph-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E05 · 基础设施 之二 · 重头戏</div>
+      <h1 class="mt-h1"><span class="grad-blue">代码知识图谱</span> · 索引期算关系</h1>
+      <div class="title-sub">一次调用 · 拿全调用链 · 不靠 RAG 拼凑</div>
+    </div>
+
+    <!-- 主体两栏：节点图（左）+ 三个好处（右） -->
+    <div class="tut-graph-main">
+
+    <!-- 区域 2-3：知识图谱节点图（节点 stagger 出现 → 选中高亮 + 边点亮） -->
+    <div class="tut-region tut-graph-viz-region" data-reveal="3.66" data-reveal-dir="fade">
+      <div class="graph-viz">
+        <div class="graph-canvas">
+          <!-- SVG 边层（节点之下）— 坐标基于 canvas 百分比换算（viewBox 0-1000 x 0-500） -->
+          <svg class="graph-edges" viewBox="0 0 1000 500" preserveAspectRatio="none">
+            <!-- 认证域内部 CALLS（active 在 region3 点亮） -->
+            <line class="edge active" data-reveal="6.1" data-reveal-dir="fade" x1="180" y1="150" x2="320" y2="280"/>
+            <line class="edge active" data-reveal="6.1" data-reveal-dir="fade" x1="320" y1="280" x2="200" y2="380"/>
+            <!-- 跨域 CALLS（认证调用支付，active） -->
+            <line class="edge active" data-reveal="6.3" data-reveal-dir="fade" x1="200" y1="380" x2="560" y2="180"/>
+            <!-- 支付域内部 -->
+            <line class="edge active" data-reveal="6.5" data-reveal-dir="fade" x1="560" y1="180" x2="760" y2="300"/>
+            <line class="edge active" data-reveal="6.5" data-reveal-dir="fade" x1="760" y1="300" x2="620" y2="400"/>
+            <!-- IMPORTS 边（虚线，灰，不 active） -->
+            <line class="edge" x1="180" y1="150" x2="560" y2="180"/>
+            <line class="edge" x1="320" y1="280" x2="760" y2="300"/>
+          </svg>
+
+          <!-- 节点：认证域（蓝）— stagger 出现 -->
+          <div class="graph-node node-auth" data-reveal="3.7" data-reveal-dir="fade" style="left:18%;top:30%">AuthController</div>
+          <div class="graph-node node-auth" data-reveal="4.0" data-reveal-dir="fade" style="left:32%;top:56%">validateToken</div>
+          <div class="graph-node node-auth" data-reveal="4.3" data-reveal-dir="fade" style="left:20%;top:76%">checkSession</div>
+
+          <!-- 节点：支付域（绿）— stagger 出现 -->
+          <div class="graph-node node-pay" data-reveal="4.6" data-reveal-dir="fade" style="left:56%;top:36%">processPay</div>
+          <div class="graph-node node-pay" data-reveal="4.9" data-reveal-dir="fade" style="left:76%;top:60%">PaymentService</div>
+          <div class="graph-node node-pay" data-reveal="5.2" data-reveal-dir="fade" style="left:62%;top:80%">checkout</div>
+
+          <!-- 选中节点 ring（processPay 高亮，region3 reveal） -->
+          <div class="graph-node-ring" data-reveal="6.1" data-reveal-dir="fade" style="left:56%;top:36%"></div>
+
+          <!-- 选中节点叠层（processPay 标记为 selected） -->
+          <div class="graph-node node-pay node-selected" data-reveal="6.1" data-reveal-dir="fade" style="left:56%;top:36%;background:transparent;border-color:transparent;box-shadow:none">processPay</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：三个好处卡（data-reveal=14.1，dir=left） -->
+    <div class="tut-region tut-graph-benefits-region" data-reveal="14.1" data-reveal-dir="left">
+      <div class="benefits-card">
+        <div class="benefit-item b-reliable" data-reveal="14.1" data-reveal-dir="left">
+          <div class="bi-title b-reliable">① 可靠</div>
+          <div class="bi-desc">漏不掉上下文</div>
+        </div>
+        <div class="benefit-item b-token" data-reveal="15.2" data-reveal-dir="left">
+          <div class="bi-title b-token">② 省 token</div>
+          <div class="bi-desc">不查十次拼一个函数</div>
+        </div>
+        <div class="benefit-item b-model" data-reveal="16.3" data-reveal-dir="left">
+          <div class="bi-title b-model">③ 解放小模型</div>
+          <div class="bi-desc">工具干重活 · 降顶级依赖</div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-graph-main -->
+
+    <!-- 区域 5：分层共存条（data-reveal=18.8，dir=top） -->
+    <div class="tut-region" data-reveal="18.8" data-reveal-dir="top">
+      <div class="coexist-bar">
+        <span class="co-tag">分层共存</span>
+        <div class="co-side">
+          <span class="co-label co-graph">图查询</span>
+          <span class="co-sub">确定性调用关系</span>
+        </div>
+        <span class="co-arrow">↔</span>
+        <div class="co-side">
+          <span class="co-label co-vector">向量搜索</span>
+          <span class="co-sub">语义相似</span>
+        </div>
+        <span class="co-tag">各管一摊</span>
+      </div>
+    </div>
+
+    <!-- 区域 6：六阶段索引流水线（data-reveal=28.7，dir=top） -->
+    <div class="tut-region" data-reveal="28.7" data-reveal-dir="top">
+      <div class="pipeline-bar">
+        <div class="pipeline-title">索引分六步 · 索引期一次性算好</div>
+        <div class="pipeline-flow">
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="28.7" data-reveal-dir="fade">1</div>
+            <div class="pl-label">扫描建目录</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="29.4" data-reveal-dir="fade">2</div>
+            <div class="pl-label">解析符号</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="30.1" data-reveal-dir="fade">3</div>
+            <div class="pl-label">类型传播</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="30.8" data-reveal-dir="fade">4</div>
+            <div class="pl-label">社区发现</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="31.5" data-reveal-dir="fade">5</div>
+            <div class="pl-label">执行流追踪</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="32.2" data-reveal-dir="fade">6</div>
+            <div class="pl-label">业务概念</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 75,
+    "emotion": "教程-安装终端",
+    "text": "工具选定，怎么装？以 Claude Code 为例。Mac 系统，打开终端，敲一行命令：curl 加 install.sh 地址，管道接 bash——一行装好。Windows 系统，用 PowerShell，命令一样简单。装完，终端回显安装成功。接着配认证。国内推荐用智谱 GLM——国产模型，国内直连，免费额度够练手。去智谱开放平台注册，创建一个 API Key。然后回到终端，设两个环境变量：头一个 BASE_URL，填智谱的兼容地址；第二个 AUTH_TOKEN，填刚拿到的 Key。两个变量敲完，终端敲 claude 启动——连接成功，直接能用。下一件事，是把团队规范写进 CLAUDE.md，让 AI 每次自动遵守。",
+    "narration": "工具选定，怎么装？以 Claude Code 为例。Mac 系统，打开终端，敲一行命令：curl 加 install.sh 地址，管道接 bash——一行装好。Windows 系统，用 PowerShell，命令一样简单。装完，终端回显安装成功。接着配认证。国内推荐用智谱 GLM——国产模型，国内直连，免费额度够练手。去智谱开放平台注册，创建一个 API Key。然后回到终端，设两个环境变量：头一个 BASE_URL，填智谱的兼容地址；第二个 AUTH_TOKEN，填刚拿到的 Key。两个变量敲完，终端敲 claude 启动——连接成功，直接能用。下一件事，是把团队规范写进 CLAUDE.md，让 AI 每次自动遵守。",
+    "hook_anchors": ["怎么装", "Claude Code", "Mac", "终端", "curl", "install.sh", "bash", "一行装好", "Windows", "PowerShell", "安装成功", "认证", "智谱 GLM", "国产模型", "国内直连", "免费额度", "智谱开放平台", "API Key", "环境变量", "BASE_URL", "兼容地址", "AUTH_TOKEN", "claude 启动", "连接成功", "下一件事", "团队规范", "CLAUDE.md", "AI 自动遵守"],
+    "visual_type": "tutorial_install_terminal",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「安装 Claude Code」+ 副标「一行命令 · 终端原生」fade-in", "duration_share": 0.06},
+      {"phase": 2, "start_offset": 5, "focus": "终端窗口 reveal + 命令1 打字「curl -fsSL install.sh | bash」+ ✓ installed 输出", "duration_share": 0.16},
+      {"phase": 3, "start_offset": 16, "focus": "认证卡片 reveal「智谱 GLM · 国内直连」+ 副注「注册 → 创建 API Key」", "duration_share": 0.16},
+      {"phase": 4, "start_offset": 26, "focus": "终端命令2 打字「export ANTHROPIC_BASE_URL=智谱兼容地址」+ 命令3 打字「export ANTHROPIC_AUTH_TOKEN=你的Key」", "duration_share": 0.22},
+      {"phase": 5, "start_offset": 42, "focus": "终端命令4 打字「claude」+ 连接成功输出框 reveal", "duration_share": 0.20},
+      {"phase": 6, "start_offset": 55, "focus": "收尾「GLM 配置完成 · 下一步：CLAUDE.md 规范资产化」引导 reveal", "duration_share": 0.20}
+    ],
+    "bg_component": "scan_grid"
+  }
+]

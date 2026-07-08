@@ -1,0 +1,247 @@
+/* =========================================================
+   ClipForge Tutorial E01 段1（为什么必须转型）— 横屏教程样式
+   一屏多区域 + reveal（§6.16）
+   ========================================================= */
+
+/* ---------- 教程场景骨架（横屏 1920x1080） ---------- */
+.tut-scene{width:100%;height:100%;
+  
+  padding:60px 120px;           /* 横屏安全区单层 padding */
+  box-sizing:border-box;
+  display:flex;flex-direction:column;justify-content:flex-start;
+}
+.tut-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;        /* 默认双栏，部分场景覆盖 */
+  grid-template-rows:auto 1fr auto;
+  height:100%;width:100%;
+  gap:28px 48px;
+  align-content:start;
+}
+.tut-region{opacity:0;will-change:opacity;}   /* 初始隐藏，GSAP reveal 后保持 */
+
+/* ---------- 标题区（hero，跨列） ---------- */
+.tut-hero{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding-top:8px;
+}
+.tut-hero .hero-eyebrow{
+  font-size:32px;letter-spacing:.18em;color:#94A3B8;font-weight:600;
+}
+.tut-hero .hero-title{
+  font-size:84px;font-weight:800;letter-spacing:.02em;line-height:1.05;
+  text-align:center;
+  background-image:linear-gradient(90deg,#93C5FD 0%,#3B82F6 50%,#1E3A8A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-color:#0F172A;        /* 兜底，防 transparent 失效 */
+}
+.tut-hero .hero-underline{
+  width:160px;height:4px;border-radius:2px;
+  background-image:linear-gradient(90deg,transparent 0%,#3B82F6 30%,#FBBF24 100%);
+}
+
+/* ---------- 双栏对比 ---------- */
+.tut-col{
+  display:flex;flex-direction:column;gap:14px;
+  padding:26px 28px;border-radius:14px;
+  background:rgba(15,23,42,.62);
+  border:1px solid rgba(148,163,184,.18);
+}
+.tut-col.col-cold{border-left:6px solid #94A3B8;}
+.tut-col.col-warm{border-left:6px solid #FBBF24;}
+.tut-col.col-red {border-left:6px solid #EF4444;}
+.tut-col.col-green{border-left:6px solid #10B981;}
+.tut-col .col-title{
+  font-size:40px;font-weight:700;color:#E0E7FF;letter-spacing:.02em;
+}
+.tut-col .col-tag{
+  display:inline-block;font-size:32px;font-weight:600;letter-spacing:.08em;
+  padding:4px 12px;border-radius:6px;
+}
+.tut-col.col-red .col-tag{background:rgba(239,68,68,.16);color:#FCA5A5;}
+.tut-col.col-green .col-tag{background:rgba(16,185,129,.16);color:#6EE7B7;}
+.tut-col.col-cold .col-tag{background:rgba(148,163,184,.16);color:#CBD5E1;}
+.tut-col.col-warm .col-tag{background:rgba(251,191,36,.16);color:#FCD34D;}
+.tut-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.tut-col li{
+  font-size:32px;color:#E0E7FF;line-height:1.4;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.tut-col li .bul{color:#64748B;font-weight:700;flex:none;margin-top:2px;}
+
+/* ---------- 三栏对比（两个极端） ---------- */
+.tut-tri{
+  grid-column:1 / -1;
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;   /* 两极端用双栏 */
+}
+.tut-card{
+  display:flex;flex-direction:column;gap:14px;
+  padding:26px 28px;border-radius:14px;
+  background:rgba(15,23,42,.66);
+  border:1px solid rgba(239,68,68,.30);
+}
+.tut-card .card-head{
+  display:flex;align-items:center;gap:14px;
+}
+.tut-card .card-icon{
+  width:56px;height:56px;border-radius:12px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(239,68,68,.18);color:#FCA5A5;
+  font-size:34px;font-weight:800;
+}
+.tut-card .card-title{font-size:38px;font-weight:700;color:#FCA5A5;}
+.tut-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.tut-card li{
+  font-size:32px;color:#E0E7FF;line-height:1.4;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.tut-card li .bul{color:#94A3B8;font-weight:700;flex:none;margin-top:2px;}
+
+/* ---------- 金句条（金/蓝/绿边框） ---------- */
+.tut-quote{
+  grid-column:1 / -1;
+  padding:22px 36px;border-radius:12px;
+  background:rgba(15,23,42,.78);
+  display:flex;align-items:center;justify-content:center;gap:18px;
+}
+.tut-quote.quote-gold{border:2px solid #FBBF24;box-shadow:0 0 36px rgba(251,191,36,.18) inset;}
+.tut-quote.quote-blue{border:2px solid #3B82F6;box-shadow:0 0 36px rgba(59,130,246,.18) inset;}
+.tut-quote.quote-green{border:2px solid #10B981;box-shadow:0 0 36px rgba(16,185,129,.18) inset;}
+.tut-quote.quote-red{border:2px solid #EF4444;box-shadow:0 0 36px rgba(239,68,68,.18) inset;}
+.tut-quote .quote-text{
+  font-size:54px;font-weight:800;color:#F8FAFC;letter-spacing:.04em;line-height:1.25;
+  text-align:center;
+}
+.tut-quote.quote-gold .quote-text{
+  background-image:linear-gradient(90deg,#FCD34D 0%,#FBBF24 60%,#F59E0B 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-color:#0F172A;
+}
+
+/* ---------- 数据卡（金色大数字） ---------- */
+.tut-data{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:48px;
+  padding:16px 0;
+}
+.tut-data .data-num{
+  font-family:'JetBrains Mono','Inter',monospace;
+  font-size:160px;font-weight:800;line-height:1;letter-spacing:-.02em;
+  background-image:linear-gradient(180deg,#FCD34D 0%,#FBBF24 60%,#B45309 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-color:#0F172A;
+  text-shadow:0 0 18px rgba(251,191,36,.20);
+}
+.tut-data .data-sub{
+  display:flex;flex-direction:column;gap:6px;
+}
+.tut-data .data-sub .sub-1{font-size:36px;font-weight:700;color:#E0E7FF;}
+.tut-data .data-sub .sub-2{font-size:32px;color:#94A3B8;letter-spacing:.04em;}
+
+/* ---------- 注释区（相关性非因果） ---------- */
+.tut-note{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-size:32px;color:#94A3B8;letter-spacing:.06em;
+}
+.tut-note .note-bar{width:36px;height:2px;background:#475569;}
+
+/* ---------- 三胶囊标签（why2 冲击区） ---------- */
+.tut-pills{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+}
+.tut-pill{
+  font-size:34px;font-weight:700;letter-spacing:.04em;
+  padding:14px 28px;border-radius:999px;
+  border:2px solid #EF4444;color:#FCA5A5;
+  background:rgba(239,68,68,.10);
+}
+.tut-pill .pill-sep{color:#475569;margin:0 6px;}
+
+/* ---------- 差距对比条（why2 数量级） ---------- */
+.tut-gap{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+}
+.tut-gap .gap-bar{
+  height:48px;border-radius:8px;display:flex;align-items:center;
+  padding:0 18px;font-size:32px;font-weight:700;color:#0F172A;
+}
+.tut-gap .gap-bar.small{width:140px;background:#475569;color:#E0E7FF;}
+.tut-gap .gap-bar.big{width:520px;background:linear-gradient(90deg,#FBBF24,#F59E0B);}
+.tut-gap .gap-arrow{font-size:42px;color:#FBBF24;font-weight:800;}
+
+/* ---------- 类比卡（资深实习生） ---------- */
+.tut-analog{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  padding:18px 0;
+}
+.tut-analog .analog-icon{
+  width:96px;height:96px;border-radius:18px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#1E3A8A,#3B82F6);
+  font-size:48px;
+}
+.tut-analog .analog-rows{display:flex;flex-direction:column;gap:10px;}
+.tut-analog .analog-row{
+  font-size:34px;color:#E0E7FF;letter-spacing:.02em;
+  display:flex;align-items:center;gap:14px;
+}
+.tut-analog .analog-row .dot{color:#10B981;font-weight:800;}
+
+/* ---------- 倍率对比条（posture 懂/不懂） ---------- */
+.tut-rate{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:0;
+}
+.tut-rate .rate-cell{
+  flex:1;max-width:560px;padding:24px 28px;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.tut-rate .rate-cell.cell-green{
+  background:rgba(16,185,129,.14);border:2px solid #10B981;
+}
+.tut-rate .rate-cell.cell-gray{
+  background:rgba(100,116,139,.14);border:2px solid #475569;
+}
+.tut-rate .rate-cell .rate-label{font-size:32px;color:#94A3B8;letter-spacing:.06em;}
+.tut-rate .rate-cell .rate-num{
+  font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:800;line-height:1;
+}
+.tut-rate .rate-cell.cell-green .rate-num{color:#6EE7B7;}
+.tut-rate .rate-cell.cell-gray .rate-num{color:#CBD5E1;}
+
+/* ---------- 承接条（handoff） ---------- */
+.tut-next{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:18px 30px;border-radius:12px;
+  background:rgba(59,130,246,.10);border:1px solid rgba(59,130,246,.35);
+}
+.tut-next .next-label{font-size:32px;color:#94A3B8;letter-spacing:.10em;}
+.tut-next .next-text{font-size:36px;font-weight:700;color:#E0E7FF;letter-spacing:.04em;}
+.tut-next .next-arrow{font-size:36px;color:#3B82F6;font-weight:800;}
+
+/* ---------- 双行注释（handoff） ---------- */
+.tut-lines{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.tut-lines .line{
+  font-size:32px;color:#94A3B8;letter-spacing:.04em;text-align:center;line-height:1.5;
+}
+.tut-lines .line strong{color:#E0E7FF;font-weight:600;}
+
+/* ---------- 单列布局覆盖（hook / handoff 居中一列） ---------- */
+.tut-grid.grid-single{grid-template-columns:1fr;}
+.tut-grid.grid-single .tut-hero,
+.tut-grid.grid-single .tut-quote,
+.tut-grid.grid-single .tut-lines,
+.tut-grid.grid-single .tut-next,
+.tut-grid.grid-single .tut-note{grid-column:1;}
+
+/* ---------- fx 元素 ---------- */
+.fx-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+}

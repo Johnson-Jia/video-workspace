@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 36,
+    "emotion": "原理-揭示",
+    "text": "原理二，大模型本质。一句话——根据上文预测下一个 token，也就是词元。比如输入\"今天天气真\"，预测下一个字大概率是\"好\"。它不是真理解你的代码，而是基于海量模式生成最可能的续写。这解释了幻觉——AI 会一本正经地胡说，因为生成的是看起来对的，不是验证过对的。所以从原理上就明白：AI 产出必须验证。这不是不信任，是它的运作方式决定的。信任但验证，根在这。",
+    "narration": "原理二，大模型本质。一句话——根据上文预测下一个 token，也就是词元。比如输入\"今天天气真\"，预测下一个字大概率是\"好\"。它不是真理解你的代码，而是基于海量模式生成最可能的续写。这解释了幻觉——AI 会一本正经地胡说，因为生成的是看起来对的，不是验证过对的。所以从原理上就明白：AI 产出必须验证。这不是不信任，是它的运作方式决定的。信任但验证，根在这。",
+    "hook_anchors": ["预测下一个 token", "词元", "今天天气真好", "海量模式", "幻觉", "一本正经地胡说", "看起来对", "必须验证", "信任但验证"],
+    "visual_type": "principle_token_prediction",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题区 — 原理编号「原理 ②」+ 标题「预测下一个 token」fade-in", "duration_share": 0.17},
+      {"phase": 2, "start_offset": 6, "focus": "token 预测示意区 — 大字「今天天气真 → 好」（输入灰色 + 箭头 + 预测金色大字）data-reveal-dir=left 从左滑入", "duration_share": 0.28},
+      {"phase": 3, "start_offset": 16, "focus": "幻觉揭示卡 — 「一本正经地胡说 · 看起来对 ≠ 验证过对」红边框警示卡 data-reveal-dir=top 从下滑入", "duration_share": 0.28},
+      {"phase": 4, "start_offset": 26, "focus": "金句区 — 「必须验证」绿色大字 + count-up 验证率 0→100%（data-count-to=100 data-count-at=28）data-reveal-dir=fade", "duration_share": 0.27}
+    ],
+    "bg_component": "clean_slate"
+  }
+]

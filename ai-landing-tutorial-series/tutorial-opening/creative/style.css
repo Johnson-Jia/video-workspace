@@ -1,0 +1,301 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #FBBF24;
+  --accent-cool: #3B82F6;
+  --accent-cool-bright: #60A5FA;
+  --text: #FFFFFF;
+  --text-soft: rgba(255,255,255,0.85);
+  --text2: rgba(224,231,255,0.72);
+  --text3: rgba(224,231,255,0.55);
+  --font-title: 'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Stage6 教程横屏 reveal 范式（§6.16）
+ * 单 phase + 多 region + data-reveal
+ * 一屏多区域高密度，region reveal 后同屏累积（不切屏）
+ * ============================================ */
+
+/* 教程场景容器：单 phase 撑满，padding 单层（横屏 60/120/60/120 安全区） */
+.tut-scene {
+  height: 100%;
+  padding: 60px 120px;
+  box-sizing: border-box;
+}
+
+/* 一屏多区域 grid：标题区跨满顶部 + 中段两栏（性质 / 受众） + 底部邀请条
+   横屏 1920×1080，去掉 padding 后内容区 1680×960 */
+.tut-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "title title"
+    "nature audience"
+    "cta cta";
+  gap: 28px 40px;
+  height: 100%;
+  align-content: stretch;
+}
+
+/* 所有 region 初始 opacity:0（GSAP build_gsap 扫 data-reveal 生成 tl.to opacity:1） */
+.tut-region {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.region-title  { grid-area: title; }
+.region-nature { grid-area: nature; }
+.region-audience { grid-area: audience; }
+.region-cta    { grid-area: cta; }
+
+/* ---------- 区域 1：标题 + 定位 ---------- */
+.region-title {
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.tut-eyebrow {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent-cool-bright);
+  letter-spacing: 0.18em;
+  margin-bottom: 22px;
+  padding: 8px 20px;
+  border-left: 4px solid var(--accent-cool);
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), transparent);
+}
+
+.tut-h1 {
+  font-family: var(--font-title);
+  font-weight: var(--title-weight);
+  font-size: 92px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 26px 0;
+  text-align: left;
+}
+
+/* 渐变标题：同色系高饱和蓝（禁白色端点），background-image（禁 background 简写） */
+.grad-blue {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 45%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px rgba(59,130,246,0.28);  /* blur≤16，同色系发光 */
+}
+
+.tut-positioning {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.tut-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  box-shadow: 0 0 12px rgba(251,191,36,0.55);
+  flex-shrink: 0;
+}
+
+/* ---------- 通用卡片（性质 / 受众 / 邀请） ---------- */
+.tut-card {
+  background: rgba(15,23,42,0.62);
+  border: 1px solid rgba(96,165,250,0.22);
+  border-radius: 14px;
+  padding: 28px 34px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32), inset 0 1px 0 rgba(96,165,250,0.10);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- 区域 2：性质对比 ---------- */
+.nature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.nature-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-body);
+}
+
+.nature-yes .nature-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.20);
+  border: 2px solid var(--accent-cool);
+  color: var(--accent-cool-bright);
+  font-size: 32px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.nature-yes .nature-label {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+
+.nature-no .nature-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(148,163,184,0.10);
+  border: 2px solid rgba(148,163,184,0.45);
+  color: rgba(203,213,225,0.65);
+  font-size: 32px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.nature-no .nature-label {
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--text3);
+  text-decoration: line-through;
+  text-decoration-color: rgba(148,163,184,0.45);
+}
+
+.nature-foot {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* 胶囊：纯场景色（禁 grad clip:text — feedback-bgclip-text-capsule-conflict） */
+.nature-pill {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent-cool-bright);
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(96,165,250,0.45);
+  background: rgba(59,130,246,0.10);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 区域 3：受众 ---------- */
+.audience-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.aud-head {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--text-soft);
+  letter-spacing: 0.01em;
+}
+
+.aud-cols {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+}
+
+.aud-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aud-tag {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--accent-warm);  /* 金色强调"受众兜底"关键概念，克制点缀 */
+  letter-spacing: 0.02em;
+}
+
+.aud-desc {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.aud-divider {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(96,165,250,0.40), transparent);
+  flex-shrink: 0;
+}
+
+/* ---------- 区域 4：邀请 ---------- */
+.region-cta {
+  align-items: stretch;
+  padding-bottom: 4px;
+}
+
+.cta-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 40px;
+  background: linear-gradient(95deg, rgba(59,130,246,0.18) 0%, rgba(15,23,42,0.68) 100%);
+  border: 1px solid rgba(96,165,250,0.38);
+}
+
+.cta-arrow {
+  font-family: var(--font-data);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(251,191,36,0.45);
+  flex-shrink: 0;
+}
+
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cta-main {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 44px;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--accent-cool-bright);
+  letter-spacing: 0.04em;
+}

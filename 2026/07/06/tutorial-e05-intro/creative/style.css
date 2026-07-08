@@ -1,0 +1,124 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 intro — 基础设施四件套（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 四卡 + 黄条结论
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 14px;
+  padding: 40px 90px 36px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 14px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-four-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-four-title .four-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-four-title .four-h1 {
+  font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-four-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 四卡 —— */
+.tut-four-cards { width: 100%; }
+.fc-grid {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+}
+.fc-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.four-card {
+  border-radius: 20px;
+  padding: 20px 18px;
+  border: 3px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.fc-green { border-color: rgba(110,231,183,0.65); background: linear-gradient(165deg, rgba(16,185,129,0.14), rgba(15,23,42,0.88)); }
+.fc-blue { border-color: rgba(147,197,253,0.65); background: linear-gradient(165deg, rgba(59,130,246,0.14), rgba(15,23,42,0.88)); }
+.fc-gold { border-color: rgba(252,211,77,0.65); background: linear-gradient(165deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88)); }
+.fc-purple { border-color: rgba(196,181,253,0.65); background: linear-gradient(165deg, rgba(167,139,250,0.14), rgba(15,23,42,0.88)); }
+.fc-num {
+  font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.fc-name {
+  font-family: 'Inter'; font-size: 40px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.05;
+}
+.fc-note {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 600; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.3;
+}
+
+/* —— 黄条结论 —— */
+.tut-four-conclusion {
+  border-radius: 22px; padding: 16px 36px;
+  border: 3px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.16), rgba(15,23,42,0.88), rgba(248,113,113,0.14));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.concl-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.concl-main {
+  font-family: 'Inter'; font-size: 44px; font-weight: 900; line-height: 1.1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+.cm-key { font-weight: 900; }
+.cm-dots { font-family: 'JetBrains Mono'; color: var(--tut-gold); }

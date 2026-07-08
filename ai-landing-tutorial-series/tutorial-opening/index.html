@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.6),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #FBBF24;
+  --accent-cool: #3B82F6;
+  --accent-cool-bright: #60A5FA;
+  --text: #FFFFFF;
+  --text-soft: rgba(255,255,255,0.85);
+  --text2: rgba(224,231,255,0.72);
+  --text3: rgba(224,231,255,0.55);
+  --font-title: 'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Stage6 教程横屏 reveal 范式（§6.16）
+ * 单 phase + 多 region + data-reveal
+ * 一屏多区域高密度，region reveal 后同屏累积（不切屏）
+ * ============================================ */
+
+/* 教程场景容器：单 phase 撑满，padding 单层（横屏 60/120/60/120 安全区） */
+.tut-scene {
+  height: 100%;
+  padding: 60px 120px;
+  box-sizing: border-box;
+}
+
+/* 一屏多区域 grid：标题区跨满顶部 + 中段两栏（性质 / 受众） + 底部邀请条
+   横屏 1920×1080，去掉 padding 后内容区 1680×960 */
+.tut-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "title title"
+    "nature audience"
+    "cta cta";
+  gap: 28px 40px;
+  height: 100%;
+  align-content: stretch;
+}
+
+/* 所有 region 初始 opacity:0（GSAP build_gsap 扫 data-reveal 生成 tl.to opacity:1） */
+.tut-region {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.region-title  { grid-area: title; }
+.region-nature { grid-area: nature; }
+.region-audience { grid-area: audience; }
+.region-cta    { grid-area: cta; }
+
+/* ---------- 区域 1：标题 + 定位 ---------- */
+.region-title {
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.tut-eyebrow {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent-cool-bright);
+  letter-spacing: 0.18em;
+  margin-bottom: 22px;
+  padding: 8px 20px;
+  border-left: 4px solid var(--accent-cool);
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), transparent);
+}
+
+.tut-h1 {
+  font-family: 'Inter';
+  font-weight: var(--title-weight);
+  font-size: 92px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 26px 0;
+  text-align: left;
+}
+
+/* 渐变标题：同色系高饱和蓝（禁白色端点），background-image（禁 background 简写） */
+.grad-blue {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 45%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px rgba(59,130,246,0.28);  /* blur≤16，同色系发光 */
+}
+
+.tut-positioning {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.tut-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  box-shadow: 0 0 12px rgba(251,191,36,0.55);
+  flex-shrink: 0;
+}
+
+/* ---------- 通用卡片（性质 / 受众 / 邀请） ---------- */
+.tut-card {
+  background: rgba(15,23,42,0.62);
+  border: 1px solid rgba(96,165,250,0.22);
+  border-radius: 14px;
+  padding: 28px 34px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32), inset 0 1px 0 rgba(96,165,250,0.10);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- 区域 2：性质对比 ---------- */
+.nature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.nature-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: 'Noto Sans SC';
+}
+
+.nature-yes .nature-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.20);
+  border: 2px solid var(--accent-cool);
+  color: var(--accent-cool-bright);
+  font-size: 32px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.nature-yes .nature-label {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+
+.nature-no .nature-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(148,163,184,0.10);
+  border: 2px solid rgba(148,163,184,0.45);
+  color: rgba(203,213,225,0.65);
+  font-size: 32px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.nature-no .nature-label {
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--text3);
+  text-decoration: line-through;
+  text-decoration-color: rgba(148,163,184,0.45);
+}
+
+.nature-foot {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* 胶囊：纯场景色（禁 grad clip:text — feedback-bgclip-text-capsule-conflict） */
+.nature-pill {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent-cool-bright);
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(96,165,250,0.45);
+  background: rgba(59,130,246,0.10);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 区域 3：受众 ---------- */
+.audience-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.aud-head {
+  font-family: 'Inter';
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--text-soft);
+  letter-spacing: 0.01em;
+}
+
+.aud-cols {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+}
+
+.aud-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aud-tag {
+  font-family: 'Noto Sans SC';
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--accent-warm);  /* 金色强调"受众兜底"关键概念，克制点缀 */
+  letter-spacing: 0.02em;
+}
+
+.aud-desc {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.aud-divider {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(96,165,250,0.40), transparent);
+  flex-shrink: 0;
+}
+
+/* ---------- 区域 4：邀请 ---------- */
+.region-cta {
+  align-items: stretch;
+  padding-bottom: 4px;
+}
+
+.cta-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 40px;
+  background: linear-gradient(95deg, rgba(59,130,246,0.18) 0%, rgba(15,23,42,0.68) 100%);
+  border: 1px solid rgba(96,165,250,0.38);
+}
+
+.cta-arrow {
+  font-family: 'JetBrains Mono';
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(251,191,36,0.45);
+  flex-shrink: 0;
+}
+
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cta-main {
+  font-family: 'Inter';
+  font-weight: 800;
+  font-size: 44px;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.cta-sub {
+  font-family: 'Noto Sans SC';
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--accent-cool-bright);
+  letter-spacing: 0.04em;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes gridDotBreath {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.10; }
+}
+@keyframes spotlightShift {
+  0%, 100% { opacity: 0.18; transform: translateX(0); }
+  50% { opacity: 0.28; transform: translateX(15px); }
+}
+@keyframes waveDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120px); }
+}
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.14; }
+  50% { opacity: 0.25; }
+}
+@keyframes shapeFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50% { transform: translateY(-20px) rotate(45deg); opacity: 0.18; }
+}
+@keyframes shapeFloat2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.06; }
+  50% { transform: translateY(-15px) rotate(-30deg); opacity: 0.14; }
+}
+@keyframes slateVignette {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.22; }
+}
+@keyframes cornerLineGlow {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.20; }
+}
+@keyframes bluePulse {
+  0%, 100% { opacity: 0.20; }
+  50% { opacity: 0.35; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20.47" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.3" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="20.47">
+<!-- 场景: opening | 时长: 20.47s | 教程横屏 reveal 模式（单 phase + 4 region + data-reveal 0/4/9/14s） -->
+<div class="layer-bg" data-bg-types="dots,glow,gradient,particles,wave">
+<!-- bg-component: clean_slate -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, hsla(215,45%,14%,1) 0%, hsla(220,40%,11%,1) 50%, hsla(218,38%,9%,1) 100%)"></div>
+
+<div style="position:absolute;top:25%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, hsla(215,55%,28%,0.35), hsla(220,45%,18%,0.12), transparent 65%);
+  filter:blur(90px);animation:spotlightShift 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:55%;
+  background:radial-gradient(ellipse 90% 100% at 45% 0%, hsla(215,50%,30%,0.22), hsla(220,40%,20%,0.10) 50%, transparent 75%);
+  animation:spotlightShift 22s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle, hsla(215,40%,50%,0.08) 1px, transparent 1px);
+  background-size:60px 60px;animation:gridDotBreath 25s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40px;left:40px;width:120px;height:2px;
+  background:linear-gradient(90deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+<div style="position:absolute;top:40px;left:40px;width:2px;height:80px;
+  background:linear-gradient(180deg, hsla(215,50%,52%,0.22), transparent);
+  animation:accentPulse 15s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:40px;right:40px;width:100px;height:2px;
+  background:linear-gradient(270deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+<div style="position:absolute;bottom:40px;right:40px;width:2px;height:70px;
+  background:linear-gradient(0deg, hsla(215,48%,48%,0.18), transparent);
+  animation:accentPulse 18s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;bottom:60px;left:0;width:calc(100% + 120px);height:40px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      hsla(215,42%,45%,0.10) 30px, hsla(215,42%,45%,0.10) 31px);
+  transform:perspective(500px) rotateX(45deg);
+  animation:waveDrift 30s linear infinite"></div>
+
+<div style="position:absolute;top:25%;right:18%;width:60px;height:60px;opacity:0.08;
+  border:1px solid hsla(215,48%,50%,0.5);
+  transform:rotate(45deg);
+  animation:shapeFloat 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:22%;width:40px;height:40px;opacity:0.06;
+  border:1px solid hsla(215,45%,48%,0.5);border-radius:50%;
+  animation:shapeFloat2 22s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:70%;right:30%;width:25px;height:25px;opacity:0.06;
+  border:1px solid hsla(220,42%,45%,0.4);
+  animation:shapeFloat 16s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:32%;left:48%;width:3px;height:3px;border-radius:50%;
+  background:hsla(215,55%,58%,0.55);box-shadow:0 0 6px hsla(215,50%,52%,0.40),0 0 12px hsla(215,45%,45%,0.20);
+  animation:bluePulse 8s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:60%;left:25%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,50%,55%,0.45);box-shadow:0 0 4px hsla(215,45%,48%,0.30);
+  animation:bluePulse 10s ease-in-out infinite 3s"></div>
+<div style="position:absolute;top:45%;left:72%;width:2px;height:2px;border-radius:50%;
+  background:hsla(215,52%,52%,0.40);box-shadow:0 0 4px hsla(215,48%,45%,0.28);
+  animation:bluePulse 12s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(45deg,
+    transparent 42%, hsla(215,45%,38%,0.06) 46%, hsla(215,45%,38%,0.06) 46.5%,
+    transparent 47%);
+  animation:cornerLineGlow 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 75% 70% at 50% 48%, transparent 0%, hsla(215,30%,5%,0.30) 70%, hsla(220,35%,3%,0.50) 100%);
+  animation:slateVignette 25s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx 1：横向流光带（tutorial 克制，缓慢漂移呼应"流程/方法论"流动感；fx-drift GSAP repeat 注入） -->
+  <div class="fx-drift" style="position:absolute;top:38%;left:8%;width:620px;height:2px;
+    background:linear-gradient(90deg, transparent, hsla(208,76%,62%,0.55), hsla(208,76%,72%,0.85), hsla(208,76%,62%,0.55), transparent);
+    filter:blur(1.5px);opacity:0.55"></div>
+  <!-- fx 2：聚焦光球（场景右下，柔和呼吸脉冲呼应"邀请/聚焦"调性；fx-pulse GSAP repeat 注入） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;right:12%;width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle, hsla(208,72%,58%,0.32) 0%, hsla(208,60%,42%,0.14) 45%, transparent 70%);
+    filter:blur(22px);opacity:0.65"></div>
+  <!-- fx 3：左上聚焦锚点（柔和闪烁点缀画面冷区，平衡构图；fx-blink GSAP repeat 注入） -->
+  <div class="fx-blink" style="position:absolute;top:30%;left:42%;width:14px;height:14px;border-radius:50%;
+    background:hsla(208,80%,68%,0.85);box-shadow:0 0 18px hsla(208,76%,62%,0.65),0 0 36px hsla(208,70%,55%,0.35);
+    opacity:0.7"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase，同屏累积） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：合集标题 + 定位（data-reveal=0，场景开始即显示） -->
+    <div class="tut-region region-title" data-reveal="0">
+      <div class="tut-eyebrow">AI 转型实战 · 方法论</div>
+      <h1 class="tut-h1 grad-blue">企业级 AI 提效战略转型方法论</h1>
+      <div class="tut-positioning">
+        <span class="tut-dot"></span>
+        <span>上百人研发团队 · 一次走通的战略级转型</span>
+      </div>
+    </div>
+
+    <!-- 区域 2：性质对比（data-reveal=4，旁白讲"方法论不是工具测评"时 reveal） -->
+    <div class="tut-region region-nature" data-reveal="4">
+      <div class="tut-card nature-card">
+        <div class="nature-row nature-yes">
+          <span class="nature-mark">✓</span>
+          <span class="nature-label">讲的是方法论</span>
+        </div>
+        <div class="nature-row nature-no">
+          <span class="nature-mark">✗</span>
+          <span class="nature-label">不是工具测评</span>
+        </div>
+        <div class="nature-foot">
+          <span class="nature-pill">每步配可运行 demo</span>
+          <span class="nature-pill">真实数据验证</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：受众兜底（data-reveal=9，旁白讲"团队 Leader + 个人"时 reveal） -->
+    <div class="tut-region region-audience" data-reveal="9">
+      <div class="tut-card audience-card">
+        <div class="aud-head">谁都能拿到真东西</div>
+        <div class="aud-cols">
+          <div class="aud-item">
+            <div class="aud-tag">团队 Leader</div>
+            <div class="aud-desc">带团队做战略级 AI 提效转型</div>
+          </div>
+          <div class="aud-divider"></div>
+          <div class="aud-item">
+            <div class="aud-tag">个人开发者</div>
+            <div class="aud-desc">暂时不带团队，个人提效同样适用</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：邀请（data-reveal=14，旁白讲"跟着一起拆透"时 reveal） -->
+    <div class="tut-region region-cta" data-reveal="14">
+      <div class="tut-card cta-card">
+        <div class="cta-arrow">→</div>
+        <div class="cta-text">
+          <div class="cta-main">跟着我一起</div>
+          <div class="cta-sub">把这套方法论 · 拆透</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.to('#s01 [data-reveal="0"]', {opacity:1,duration:0.5}, 0.00);
+tl.to('#s01 [data-reveal="4"]', {opacity:1,duration:0.5}, 4.00);
+tl.to('#s01 [data-reveal="9"]', {opacity:1,duration:0.5}, 9.00);
+tl.to('#s01 [data-reveal="14"]', {opacity:1,duration:0.5}, 14.00);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:11,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-drift', {y:-30,duration:3.2,repeat:5,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:7,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:20.47,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

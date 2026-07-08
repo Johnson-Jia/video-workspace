@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E05 给 AI 装上眼睛和记忆 · 16:9</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 100px 50px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-blue{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-220px;right:-160px;pointer-events:none;}
+.glow-green{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.14),transparent 70%);filter:blur(90px);bottom:-160px;left:-110px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(16,185,129,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(16,185,129,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:24px;margin-bottom:14px;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:12px;font-size:26px;color:#60A5FA;letter-spacing:0.20em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 24px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.skip-tag{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#FCD34D;border:1.5px dashed rgba(252,211,77,0.55);background:rgba(251,191,36,0.08);padding:8px 20px;border-radius:999px;font-weight:600;}
+
+.title{position:relative;z-index:2;font-size:96px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;margin-top:4px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(96,165,250,0.18);}
+.subtitle{position:relative;z-index:2;font-size:34px;color:rgba(255,255,255,0.82);margin-top:14px;font-weight:500;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;margin-top:34px;align-items:center;}
+
+.terminal-mini{background:#0a0a0a;border-radius:14px;border:1.5px solid rgba(96,165,250,0.30);overflow:hidden;box-shadow:0 0 40px rgba(59,130,246,0.10);}
+.term-bar{background:#1a1a1a;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.term-dot{width:12px;height:12px;border-radius:50%;}
+.term-dot.red{background:#FF5F57;}.term-dot.yellow{background:#FEBC2E;}.term-dot.green{background:#28C840;}
+.term-title-mini{margin-left:12px;font-size:20px;color:#6b7280;font-family:'JetBrains Mono',monospace;}
+.term-body{padding:22px 24px;font-family:'JetBrains Mono','Consolas',monospace;font-size:25px;line-height:1.75;}
+.term-prompt{color:#6b7280;}
+.term-cmd{color:#60A5FA;}
+.term-ok{color:#34D399;}
+.term-var{color:#A78BFA;}
+.term-val{color:#FCD34D;}
+.term-warn{color:#FCA5A5;font-weight:700;}
+.term-muted{color:#94a3b8;}
+
+.set-label{font-size:24px;color:#60A5FA;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;}
+.set-grid{display:flex;flex-direction:column;gap:14px;}
+.set-item{display:flex;align-items:center;gap:16px;padding:16px 22px;border-radius:12px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.set-item:nth-child(1){border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.set-item:nth-child(2){border-color:rgba(96,165,250,0.45);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.55));}
+.set-item:nth-child(3){border-color:rgba(52,211,153,0.45);background:linear-gradient(92deg,rgba(16,185,129,0.12),rgba(15,23,42,0.55));}
+.set-item:nth-child(4){border-color:rgba(167,139,250,0.45);background:linear-gradient(92deg,rgba(167,139,250,0.12),rgba(15,23,42,0.55));}
+.set-name{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;min-width:180px;}
+.set-item:nth-child(1) .set-name{color:#FBBF24;}
+.set-item:nth-child(2) .set-name{color:#60A5FA;}
+.set-item:nth-child(3) .set-name{color:#34D399;}
+.set-item:nth-child(4) .set-name{color:#A78BFA;}
+.set-desc{font-size:23px;color:rgba(255,255,255,0.72);font-weight:500;}
+
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:26px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:23px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-green"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E05</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 基础设施</div>
+    <div class="skip-tag">⚡ 小团队可跳过</div>
+  </div>
+
+  <h1 class="title"><span class="title-grad">给 AI 装上眼睛和记忆</span></h1>
+  <div class="subtitle">基础设施四件套 · <span class="sub-strong">图谱排查 144 个 bug</span> · 覆盖率 80.4%</div>
+
+  <div class="main">
+    <div class="terminal-mini">
+      <div class="term-bar">
+        <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+        <span class="term-title-mini">Terminal — impact analyzer</span>
+      </div>
+      <div class="term-body">
+        <div><span class="term-prompt">$</span> <span class="term-cmd">impact</span> --target <span class="term-var">UserService.validateToken</span></div>
+        <div><span class="term-ok">⚡ 爆炸半径分析中...</span></div>
+        <div style="margin-top:8px"><span class="term-muted">  d=1  直接调用者</span>  <span class="term-val">12 处</span></div>
+        <div><span class="term-muted">  d=2  间接影响</span>    <span class="term-val">47 处</span></div>
+        <div style="margin-top:8px"><span class="term-muted">  风险等级</span>  <span class="term-warn">HIGH ⚠</span></div>
+        <div><span class="term-muted">  建议</span>  改返回类型前先跑 <span class="term-cmd">detect_changes</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="set-label">四件套 · 让 AI 确定性查证</div>
+      <div class="set-grid">
+        <div class="set-item"><span class="set-name">RAG</span><span class="set-desc">业务知识 · 开卷考试 · 减幻觉</span></div>
+        <div class="set-item"><span class="set-name">代码图谱</span><span class="set-desc">爆炸半径 · 改前必跑 impact</span></div>
+        <div class="set-item"><span class="set-name">Skill 仓库</span><span class="set-desc">能力复用 · 两层降 Token</span></div>
+        <div class="set-item"><span class="set-name">MCP 网关</span><span class="set-desc">企业服务 · CLI 优先</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

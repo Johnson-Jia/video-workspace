@@ -1,0 +1,48 @@
+<!-- 场景: scene-2 | 怎么做到的？接下来拆 | 时长: 3.36s | 教程 reveal 模式（悬念收尾，三数据卡缩小保留顶部） -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+  <div class="bg-glow" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(59,130,246,0.22),rgba(15,23,42,0.95) 70%);"></div>
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（悬念收敛，蓝色主调） -->
+  <div class="fx-aura" style="top:30%;left:50%;transform:translateX(-50%);width:560px;height:560px;background:radial-gradient(circle,rgba(59,130,246,0.20),transparent 70%);"></div>
+  <div class="fx-particle" style="top:18%;left:22%;width:6px;height:6px;background:rgba(96,165,250,0.7);"></div>
+  <div class="fx-particle" style="top:82%;left:78%;width:8px;height:8px;background:rgba(251,191,36,0.6);animation-delay:0.8s;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，悬念 hero + 三数据卡缩小保留顶部 + 承接条 -->
+
+  <!-- Region 1: 三数据卡缩小保留（场景开始即显示，作为问题的背景不消失） -->
+  <div class="tut-region tut-minirow" data-reveal="0" data-reveal-dir="left">
+    <div class="mini-card gold">
+      <div class="mini-num">+104%</div>
+      <div class="mini-label">人均产出</div>
+    </div>
+    <div class="mini-card blue">
+      <div class="mini-num">76.6%</div>
+      <div class="mini-label">AI 占比</div>
+    </div>
+    <div class="mini-card green">
+      <div class="mini-num">-16.4pp</div>
+      <div class="mini-label">Bug 下降</div>
+    </div>
+  </div>
+
+  <!-- Region 2: 悬念 hero 大字（narration「怎么做到的」同步） -->
+  <div class="tut-region tut-hook" data-reveal="0" data-reveal-dir="left">
+    <div class="hook-q">怎么做到的？</div>
+    <span class="hook-underline"></span>
+    <div class="hook-sub">接下来拆</div>
+  </div>
+
+  <!-- Region 3: 承接条（指向介绍段：方法论是什么） -->
+  <div class="tut-region tut-handoff" data-reveal="0" data-reveal-dir="left">
+    <span class="handoff-txt">下一段：这套方法论是什么</span>
+    <span class="handoff-arrow">→</span>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

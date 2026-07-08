@@ -1,0 +1,209 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 段6 — 断点续传（tasks 状态机动画）
+ * bg: dark_cipher + 三态卡片 + 流程链 + 案例数据卡
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 65px 90px 65px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题 —— 左对齐锚点 */
+.tut-rs-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-rs-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.tut-rs-title .title-h1 {
+  font-family: 'Inter'; font-size: 84px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-rs-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：状态机三态 —— */
+.tut-rs-statemachine { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.sm-row {
+  display: flex; align-items: stretch; justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+}
+.sm-card {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 22px;
+  border-radius: 14px;
+  border: 2.5px solid;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  flex: 1;
+}
+.sm-todo { border-color: rgba(148,163,184,0.65); box-shadow: 0 0 18px rgba(148,163,184,0.18); }
+.sm-doing { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 26px rgba(251,191,36,0.30); }
+.sm-done { border-color: rgba(110,231,183,0.75); box-shadow: 0 0 22px rgba(110,231,183,0.22); }
+.sm-box {
+  font-family: 'JetBrains Mono'; font-size: 60px; font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sm-todo .sm-box { color: #94A3B8; }
+.sm-doing .sm-box { color: #FBBF24; }
+.sm-done .sm-box { color: #6EE7B7; }
+.sm-label {
+  font-family: 'Inter'; font-size: 38px; font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sm-desc {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sm-arrow {
+  font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 800;
+  color: rgba(251,191,36,0.80);
+}
+.sm-extra {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.sm-extra-tag {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.72);
+}
+.sm-extra-item {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(196,181,253,0.85);
+  padding: 2px 12px; border-radius: 6px;
+  background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.30);
+}
+
+/* —— 区域 3+4：流程链 + 案例卡 左右两栏 —— 利用画布宽度 */
+.tut-rs-resume { width: 100%; display: flex; justify-content: flex-start; }
+.tut-rs-case { width: 100%; display: flex; justify-content: flex-end; }
+.rs-bottom-row { display: flex; flex-direction: row; gap: 24px; width: 100%; align-items: stretch; }
+.resume-card {
+  border-radius: 14px; padding: 14px 24px;
+  border: 2.5px solid rgba(96,165,250,0.65);
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  flex: 1.4;
+}
+.resume-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.resume-chain {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+.rc-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 10px;
+  background: rgba(15,23,42,0.60);
+  border: 1.5px solid rgba(96,165,250,0.35);
+}
+.rc-icon {
+  font-size: 36px; line-height: 1;
+}
+.rc-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.rc-arrow {
+  font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 800;
+  color: rgba(96,165,250,0.80);
+}
+.resume-rule {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.88);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mono-x {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-gold);
+}
+
+/* —— 区域 4：案例数据卡 —— */
+.tut-rs-case { width: 100%; display: flex; justify-content: center; }
+.case-card {
+  border-radius: 14px; padding: 14px 24px;
+  border: 2.5px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.13), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  flex: 1;
+}
+.case-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.case-title {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.case-data {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px;
+  width: 100%;
+}
+.case-data .cd-sep { display: none; }
+.cd-item {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.cd-num {
+  font-family: 'Inter'; font-size: 42px; font-weight: 900; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cd-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cd-sep {
+  font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 800;
+  color: rgba(251,191,36,0.70);
+}

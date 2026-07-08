@@ -1,0 +1,15 @@
+【E06 段4 · OpenSpec 三概念四命令——Spec/Change/Archive + explore/propose/apply/archive】
+
+SDD 用 OpenSpec 落地。三个核心概念先分清。Spec 规格是稳定的、跨变更共享的，放 specs 目录。Change 变更是一次性的、做完归档，放 changes 目录。Archive 是变更完成后的存档。四条命令覆盖全流程：explore 探索需求调查代码库，propose 生成 proposal、design、specs、tasks，apply 按 tasks 执行，archive 验证通过后归档。关键一条：每次对话 OpenSpec 会自动读 specs 目录所有 spec 应用到生成代码，所以 specs 要精简，只放稳定的全局规范，一次性变更放 changes。
+
+【内容保真（E06 脚本 段4 OpenSpec 三概念四命令，禁改写）】
+OpenSpec 三概念：
+- Spec 规格 → 稳定 / 跨变更共享 / 放 specs 目录
+- Change 变更 → 一次性 / 做完归档 / 放 changes 目录
+- Archive → 变更完成后的存档
+四条命令：
+- explore → 探索需求调查代码库
+- propose → 生成 proposal/design/specs/tasks
+- apply → 按 tasks 执行
+- archive → 验证通过后归档
+关键：OpenSpec 自动读 specs 应用到生成代码 → specs 精简只放稳定全局规范 / 一次性变更放 changes

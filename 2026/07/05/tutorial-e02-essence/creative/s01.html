@@ -1,0 +1,89 @@
+<!-- 场景: seg1 | 时长: ~44s | bg: clean_slate | 原理①：AI 到底是什么（弱/强 AI + 两流派 + 图灵测试） -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 多色静态光晕（蓝弱 / 紫强 / 绿主流 / 灰淘汰；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:34%;left:25%;width:540px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:34%;right:25%;width:540px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:62%;left:30%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:34%;left:13%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:34%;right:13%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.75);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 4 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：原理编号 + 标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-ess-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-num grad-blue-bg-inline">原理 ①</div>
+      <h1 class="mt-h1">AI 到底是什么</h1>
+    </div>
+
+    <!-- 区域 2：弱 AI vs 强 AI 对比（data-reveal=12，dir=left） -->
+    <div class="tut-region tut-ess-cmp" data-reveal="12" data-reveal-dir="left">
+      <div class="cmp-col cmp-weak">
+        <div class="cmp-tag cmp-tag-blue">弱 AI · 当下所有</div>
+        <div class="cmp-head grad-blue">ChatGPT / Claude / GPT-5</div>
+        <div class="cmp-items">
+          <div class="ci"><span class="ci-mark ci-dot-blue">●</span>擅长特定任务</div>
+          <div class="ci"><span class="ci-mark ci-dot-blue">●</span>无真正理解和意识</div>
+        </div>
+      </div>
+      <div class="cmp-vs">vs</div>
+      <div class="cmp-col cmp-strong">
+        <div class="cmp-tag cmp-tag-purple">强 AI · AGI</div>
+        <div class="cmp-head grad-purple">理论阶段</div>
+        <div class="cmp-items">
+          <div class="ci"><span class="ci-mark ci-dot-purple">●</span>真正理解与意识</div>
+          <div class="ci"><span class="ci-mark ci-dot-purple">●</span>目前尚不存在</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：两大流派（data-reveal=20，dir=left） -->
+    <div class="tut-region tut-ess-schools" data-reveal="20" data-reveal-dir="left">
+      <div class="schools-label">AI 两大流派</div>
+      <div class="schools-row">
+        <div class="school school-old">
+          <div class="school-name school-name-gray">符号推理 · GOFAI</div>
+          <div class="school-desc">用规则模拟逻辑</div>
+          <div class="school-status school-status-out">已被淘汰</div>
+        </div>
+        <div class="school school-new">
+          <div class="school-name grad-green">神经网络</div>
+          <div class="school-desc">模拟大脑结构 · 从数据学</div>
+          <div class="school-status school-status-main">当前主流 · 大模型属此</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：图灵测试 + 注解（data-reveal=34，dir=top） -->
+    <div class="tut-region tut-ess-turing" data-reveal="34" data-reveal-dir="top">
+      <div class="turing-tag grad-blue-bg-inline">智能判定 · 图灵测试</div>
+      <div class="turing-main">
+        <span class="turing-side">人</span>
+        <span class="turing-vs">分不清</span>
+        <span class="turing-side">机器</span>
+        <span class="turing-arrow">→</span>
+        <span class="grad-green turing-pass">通过</span>
+      </div>
+      <div class="turing-note">
+        <span class="tn-mark tn-warn">!</span>
+        通过图灵测试 <span class="tn-neq">≠</span> 真有智能 · 可能只是巧妙的模仿
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

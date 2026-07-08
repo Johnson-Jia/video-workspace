@@ -1,0 +1,96 @@
+{
+  "date": "2026-07-05",
+  "topic_type": "工具/效率",
+  "topic_pattern": "topic-tool",
+  "angle": "AI agent 时代的轻量化工具盘点——用反直觉利益（省 token / 离线隐私 / 7MB 体积 / 自然语言指挥网页）取代硬核技术叙事，配合 hook 用反直觉冲突模式",
+  "novelty_strategy": {
+    "hook_diff": "近 7 期 hook 主导主题是「企业级 AI 转型方法论 / 教程 / 砍 AI 输入 token」，本期换主题：从「方法论 / 战略」转向「具体工具能做什么 + 利益翻译」，hook 用反直觉（caveman 省 65% token 的非常规手段）+ 数字利益，禁用「杀入/猛项目」疲劳词",
+    "project_diff": "6 个项目中 4 个新上榜（page-agent/meetily/terax-ai/herdr 均不在 07-04 top20），仅 caveman/romm 在昨日榜上",
+    "template_diff": "叙事用 contrast-arc（反直觉钩子→逐项揭示），禁用 hyper-pace 密集盘点，节奏放缓突出每项利益"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.4,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "工具效率(caveman/terax-ai) + 隐私/本地(meetily) + 自动化/网页(page-agent) + 游戏/自托管(romm) + 开发者终端(herdr)，6 个项目覆盖 5 个不同方向，AI-Agent 题材占比 ≤1/3（避免疲劳）",
+  "avoid_recent": [
+    "ai-agent/ai-landing-tutorial (近 7 期主推，禁)",
+    "pages/stage0.html (教程素材，禁)",
+    "tutorial-e01-intro/narration.txt (教程旁白，禁)",
+    "ai-landing-tutorial (07-04 主推项目，禁重复展开)"
+  ],
+  "audience_mix": {
+    "A_count": 5,
+    "B_count": 1,
+    "C_count": 0,
+    "A_ratio": 0.83,
+    "note": "5 个 A 档（GUI/桌面/终端即开/Docker）+ 1 个 B 档，远超「A 约占一半」门槛；无 C 档扎堆风险"
+  },
+  "selected_projects": [
+    {
+      "rank": 2,
+      "full_name": "JuliusBrussee/caveman",
+      "audience": "A",
+      "audience_reason": "Claude Code skill 即装即用，普通人也能省 token",
+      "contrarian_angle": "让 AI 学山顶洞人说话，反而省下 65% token——非常规手段做常见事",
+      "is_new": false,
+      "consecutive_days": 2
+    },
+    {
+      "rank": 3,
+      "full_name": "alibaba/page-agent",
+      "audience": "A",
+      "audience_reason": "浏览器内 GUI agent，自然语言控制网页，非程序员可用",
+      "contrarian_angle": "不用写脚本，一句话指挥浏览器替你点页面",
+      "is_new": true,
+      "consecutive_days": 1
+    },
+    {
+      "rank": 6,
+      "full_name": "Zackriya-Solutions/meetily",
+      "audience": "A",
+      "audience_reason": "macOS/Windows 桌面端会议助手，100% 本地处理",
+      "contrarian_angle": "会议录音不上云端，全程在本地跑——隐私优先的反潮流",
+      "is_new": true,
+      "consecutive_days": 1
+    },
+    {
+      "rank": 9,
+      "full_name": "rommapp/romm",
+      "audience": "A",
+      "audience_reason": "Docker 一键自托管 ROM 管理器，玩家级上手",
+      "contrarian_angle": "游戏库自己管，不交给云盘——自托管的浪漫",
+      "is_new": false,
+      "consecutive_days": 2
+    },
+    {
+      "rank": 10,
+      "full_name": "ogulcancelik/herdr",
+      "audience": "B",
+      "audience_reason": "终端 agent 多路复用器，需一定 CLI 门槛",
+      "contrarian_angle": "一个终端窗口管多个 AI agent，像 tmux 但给 agent 用",
+      "is_new": true,
+      "consecutive_days": 1
+    },
+    {
+      "rank": 18,
+      "full_name": "crynta/terax-ai",
+      "audience": "A",
+      "audience_reason": "Tauri 桌面端，7MB 轻量 AI 开发工作区",
+      "contrarian_angle": "7MB 体积做出 AI 原生开发环境——轻量化反潮流",
+      "is_new": true,
+      "consecutive_days": 1
+    }
+  ],
+  "hook_strategy": {
+    "mode": "contrarian_priority1",
+    "hook_template": "有个工具让 AI 学山顶洞人说话，token 反而砍掉 65%",
+    "rationale": "近 7 期 hook 主导是「方法论/转型」（hook_sim 高危），本期换为「具体反直觉」（caveman 非常规手段做常见事）。优先级 1 反直觉模式，含利益翻译（省 65% token = 省成本），禁「杀入/猛/炸」疲劳词，禁裸报数字"
+  },
+  "ending_question": {
+    "type": "中性互动",
+    "question": "这几个你最想用哪个",
+    "rationale": "2026-06-21 反馈：禁站队「你站谁」对抗式；用「想用/会试」中性二选一"
+  }
+}

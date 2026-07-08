@@ -1,0 +1,66 @@
+<!-- 场景: seg1 | 时长: ~36s | bg: clean_slate | 原理② token 预测：大模型本质 = 根据上文预测下一个 token -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（蓝原理 + 金 token 预测，呼应语义；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:900px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:68%;left:50%;transform:translateX(-50%);width:760px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:18%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:12%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.75);box-shadow:0 0 14px hsla(43,75%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:14%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0） -->
+    <div class="tut-region tut-token-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="tt-eyebrow">原理 ② · 大模型本质</div>
+      <h1 class="tt-h1 grad-blue">预测下一个 token</h1>
+    </div>
+
+    <!-- 区域 2：token 预测示意（data-reveal=6，整体从左滑入） -->
+    <div class="tut-region tut-token-demo" data-reveal="6" data-reveal-dir="left">
+      <div class="td-label">根据上文 · 预测下一个 token（词元）</div>
+      <div class="td-formula">
+        <span class="td-input">今天天气真</span>
+        <span class="td-arrow">→</span>
+        <span class="td-predict grad-gold">好</span>
+      </div>
+      <div class="td-note">基于海量模式 · 生成最可能的续写</div>
+    </div>
+
+    <!-- 区域 3：幻觉揭示卡（data-reveal=16，从下滑入） -->
+    <div class="tut-region tut-token-hallucination" data-reveal="16" data-reveal-dir="top">
+      <div class="th-head"><span class="th-icon">⚠</span>幻觉 · Hallucination</div>
+      <div class="th-body">
+        <span class="th-key">一本正经地胡说</span>
+        <span class="th-vs">·</span>
+        <span class="th-contra">看起来对 <span class="th-neq">≠</span> 验证过对</span>
+      </div>
+      <div class="th-foot">生成的是「最可能的」· 不是「验证过的」</div>
+    </div>
+
+    <!-- 区域 4：验证金句（data-reveal=26，fade + count-up 0→100%） -->
+    <div class="tut-region tut-token-verify" data-reveal="26" data-reveal-dir="fade">
+      <div class="tv-pct-row">
+        <span class="tv-big grad-green">必须验证</span>
+        <span class="tv-count-wrap">
+          <span class="tv-count" data-count-to="100" data-count-at="28">0</span>
+          <span class="tv-pct">%</span>
+        </span>
+      </div>
+      <div class="tv-sub">信任但验证 · 根在这</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

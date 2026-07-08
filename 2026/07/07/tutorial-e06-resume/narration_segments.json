@@ -1,0 +1,85 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 80,
+    "emotion": "方法论-任务中断后可重新接入继续执行（tasks 状态机动画+案例数据）",
+    "text": "第二堵墙\"上下文断\"靠 tasks 清单任务中断后可重新接入继续执行。tasks 有状态机：空框待办，in_progress 进行中，x 完成，还有 deleted 和 blocked。关键在于：Claude 中途退出了，重进项目指定 change 目录，扫 tasks 的 x 标记就知道做到哪了，从下一个未完成的接着干。devflow 这个 skill 的恢复判定，正是扫 tasks 的 x 标记自动恢复到正确阶段。真实案例：某业务组重构个人中心，十二个 Controller、两百一十一个 API、约一万五千行、一百一十个任务，全靠 tasks 清单支撑跨周任务中断后可重新接入继续执行。中途退出重进，看 x 标记接着干。",
+    "narration": "第二堵墙\"上下文断\"靠 tasks 清单任务中断后可重新接入继续执行。tasks 有状态机：空框待办，in_progress 进行中，x 完成，还有 deleted 和 blocked。关键在于：Claude 中途退出了，重进项目指定 change 目录，扫 tasks 的 x 标记就知道做到哪了，从下一个未完成的接着干。devflow 这个 skill 的恢复判定，正是扫 tasks 的 x 标记自动恢复到正确阶段。真实案例：某业务组重构个人中心，十二个 Controller、两百一十一个 API、约一万五千行、一百一十个任务，全靠 tasks 清单支撑跨周任务中断后可重新接入继续执行。中途退出重进，看 x 标记接着干。",
+    "hook_anchors": [
+      "第二堵墙",
+      "上下文断",
+      "tasks 清单",
+      "任务中断后可重新接入继续执行",
+      "状态机",
+      "空框待办",
+      "in_progress",
+      "进行中",
+      "x 完成",
+      "deleted",
+      "blocked",
+      "Claude 中途退出",
+      "重进项目",
+      "change 目录",
+      "扫 x 标记",
+      "接着干",
+      "devflow",
+      "恢复判定",
+      "自动恢复",
+      "正确阶段",
+      "真实案例",
+      "业务组",
+      "重构个人中心",
+      "十二个 Controller",
+      "两百一十一个 API",
+      "一万五千行",
+      "一百一十个任务",
+      "跨周任务中断后可重新接入继续执行"
+    ],
+    "visual_type": "tutorial_resume_state_machine",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题「任务中断后可重新接入继续执行」fade-in + 副标「tasks 状态机 · 中断了接着干」",
+        "duration_share": 0.08,
+        "narration_anchor": {
+          "start_sentence": 0,
+          "end_sentence": 0
+        }
+      },
+      {
+        "phase": 2,
+        "start_offset": 5,
+        "focus": "状态机三态卡片 reveal + 依次切换高亮：[ ] 待办 → [in_progress] 进行中（脉冲）→ [x] 完成（打勾动画）+ 状态箭头流转",
+        "duration_share": 0.32,
+        "narration_anchor": {
+          "start_sentence": 1,
+          "end_sentence": 1
+        }
+      },
+      {
+        "phase": 3,
+        "start_offset": 22,
+        "focus": "任务中断后可重新接入继续执行演示流程链 reveal：退出 → 重进 → 扫 [x] → 续行 + devflow 恢复判定（扫 x 标记自动恢复阶段）",
+        "duration_share": 0.32,
+        "narration_anchor": {
+          "start_sentence": 2,
+          "end_sentence": 3
+        }
+      },
+      {
+        "phase": 4,
+        "start_offset": 38,
+        "focus": "案例数据卡 fade：金边卡（十二 Controller · 两百一十一 API · 一万五千行 · 一百一十任务）+ 跨周任务中断后可重新接入继续执行标签",
+        "duration_share": 0.28,
+        "narration_anchor": {
+          "start_sentence": 4,
+          "end_sentence": 4
+        }
+      }
+    ],
+    "bg_component": "dark_cipher"
+  }
+]

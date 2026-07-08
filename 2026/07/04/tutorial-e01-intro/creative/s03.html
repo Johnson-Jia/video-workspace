@@ -1,0 +1,57 @@
+<!-- 场景: scene-3 | 学完能做什么（学习价值+承接段1） | 时长: 27.79s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:22%;left:78%;width:320px;height:320px;background:radial-gradient(circle,rgba(16,185,129,0.22),transparent 70%);"></div>
+  <div class="fx-particle" style="top:80%;left:14%;width:7px;height:7px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:34%;left:46%;width:6px;height:6px;background:rgba(96,165,250,0.7);animation-delay:1.2s;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 4 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区 -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="top">
+    <span class="tut-eyebrow">学习价值</span>
+    <div class="tut-title">学完能做什么</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 4 阶段流程链 — narration 讲到「思想转变→工具落地→流程闭环→度量推广」时 reveal -->
+  <div class="tut-region tut-flow" data-reveal="3" data-reveal-dir="top">
+    <div class="flow-step">
+      <div class="flow-idx">01</div>
+      <div class="flow-name">思想转变</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-idx">02</div>
+      <div class="flow-name">工具落地</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-idx">03</div>
+      <div class="flow-name">流程闭环</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-idx">04</div>
+      <div class="flow-name">度量推广</div>
+    </div>
+  </div>
+
+  <!-- Region 3: 金句（绿，可落地可验证）+ demo 注 — narration 讲到「每一步可落地、可验证」时 reveal -->
+  <div class="tut-region tut-quote green" data-reveal="8" data-reveal-dir="top">
+    <div class="quote-txt">每一步<span style="color:var(--tut-green);"> 可落地、可验证</span> —— 不空谈概念</div>
+    <div class="quote-sub">例如跑一遍 <span style="font-family:var(--font-data);color:var(--tut-blue-white);">ai-metrics</span> demo，就能直接看到自己代码库里 AI 写了多少。</div>
+  </div>
+
+  <!-- Region 4: 承接条 — narration 讲到「接下来：为什么必须转型」时 reveal -->
+  <div class="tut-region tut-handoff" data-reveal="12" data-reveal-dir="top">
+    <div class="handoff-txt">接下来：为什么必须转型</div>
+    <div class="handoff-arrow">→</div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

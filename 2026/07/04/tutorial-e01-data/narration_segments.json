@@ -1,0 +1,222 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 30,
+    "emotion": "数据三连-震撼收官",
+    "text": "最后看数据。人均产出 +104%，AI 代码占比 76.6%，Bug 率下降 16.4 个百分点——80 多人的研发团队、3 个月、206 个仓库同比统计。量级足以说明强相关。",
+    "narration": "最后看数据。人均产出 +104%，AI 代码占比 76.6%，Bug 率下降 16.4 个百分点——80 多人的研发团队、3 个月、206 个仓库同比统计。量级足以说明强相关。",
+    "hook_anchors": [
+      "+104%",
+      "76.6%",
+      "-16.4pp",
+      "80 多人",
+      "206 个仓库"
+    ],
+    "visual_type": "data_triple_hero",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题区 — 「最后看数据」hero 大字（主色蓝，等宽字体）fade-in + 蓝色下划线 width 0→100%（600ms）",
+        "duration_share": 0.15,
+        "reveal_anchor": "标题对应 narration「最后看数据」"
+      },
+      {
+        "phase": 2,
+        "start_offset": 3,
+        "focus": "数据三连大字 grid — +104% 金 / 76.6% 蓝 / -16.4pp 绿 三大字横向排列（font-size 120px+ 等宽），stagger 300ms 依次 count-up 飞升（数字从 0 滚到目标值），每字下方小字标「人均产出 / AI 代码占比 / Bug 率」",
+        "duration_share": 0.55,
+        "reveal_anchor": "三连大字对应 narration「+104% / 76.6% / Bug 率下降 16.4 个百分点」依次出现"
+      },
+      {
+        "phase": 3,
+        "start_offset": 18,
+        "focus": "样本口径注释条 — 灰色等宽小字「80+ 人团队 · 3 个月 · 206 仓库同比」横向排列 + 「相关性非因果」灰色胶囊（预告 s4 诚信标注）",
+        "duration_share": 0.30,
+        "reveal_anchor": "口径条对应 narration「80 多人的研发团队、3 个月、206 个仓库同比统计」"
+      }
+    ],
+    "contrarian_angle": "数据真、口径清——三组数据全是实测同比值（80+ 人/3 月/206 仓库），不藏口径不夸大量级；量级足以说明强相关但不归功过头（s4 展开）",
+    "bg_component": "subtle_grid"
+  },
+  {
+    "id": "seg2",
+    "scene_index": 2,
+    "duration": 36,
+    "emotion": "三层算法-机制清晰",
+    "text": "这数据怎么来的？AI 代码占比靠三层识别算法。首层 Co-authored-by 初筛——commit message 含 AI 工具名就判 AI，这是工具默认埋点。但单靠它不够，会被误标，所以加中层风格计量学复核：算代码与作者本人风格画像的余弦相似度，像本人写的可能误标就降置信度，不像本人确认 AI——这是反伪造关键。末层注册表兜底，组合前两层给最终判定。",
+    "narration": "这数据怎么来的？AI 代码占比靠三层识别算法。首层 Co-authored-by 初筛——commit message 含 AI 工具名就判 AI，这是工具默认埋点。但单靠它不够，会被误标，所以加中层风格计量学复核：算代码与作者本人风格画像的余弦相似度，像本人写的可能误标就降置信度，不像本人确认 AI——这是反伪造关键。末层注册表兜底，组合前两层给最终判定。",
+    "hook_anchors": [
+      "三层识别算法",
+      "Co-authored-by 初筛",
+      "风格计量学复核",
+      "余弦相似度",
+      "反伪造关键"
+    ],
+    "visual_type": "three_layer_algorithm_flow",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题区 — 「数据怎么来的」hero 大字（主色蓝）+ 「三层识别算法」副标题 fade-in",
+        "duration_share": 0.12,
+        "reveal_anchor": "标题对应 narration「这数据怎么来的？AI 代码占比靠三层识别算法」"
+      },
+      {
+        "phase": 2,
+        "start_offset": 4,
+        "focus": "首层卡 — 「① Co-authored-by 初筛」蓝色边框卡 fade-in，含「commit message 含 AI 工具名 → 判 AI」+ 「工具默认埋点」小字",
+        "duration_share": 0.22,
+        "reveal_anchor": "首层对应 narration「首层 Co-authored-by 初筛」"
+      },
+      {
+        "phase": 3,
+        "start_offset": 11,
+        "focus": "中层卡 — 「② 风格计量学复核」绿色边框卡 fade-in，含「余弦相似度」+ 「像本人 → 降置信度 / 不像本人 → 确认 AI」+ 「反伪造关键」金色胶囊高亮（核心亮点）",
+        "duration_share": 0.32,
+        "reveal_anchor": "中层对应 narration「中层风格计量学复核...这是反伪造关键」"
+      },
+      {
+        "phase": 4,
+        "start_offset": 26,
+        "focus": "末层卡 — 「③ 注册表兜底」金色边框卡 fade-in，含「组合前两层 → 最终判定」+ 向上连接线指向首层中层（组合关系）",
+        "duration_share": 0.20,
+        "reveal_anchor": "末层对应 narration「末层注册表兜底，组合前两层给最终判定」"
+      },
+      {
+        "phase": 5,
+        "start_offset": 31,
+        "focus": "Excel 同比说明小字 — 灰色等宽「2025 基线 vs 2026 AI 推行后 · efficiency.py 同比」底部注释",
+        "duration_share": 0.14,
+        "reveal_anchor": "Excel 说明对应 narration结尾过渡"
+      }
+    ],
+    "contrarian_angle": "数据可信靠的是机制较真——单靠 Co-authored-by 会被误标，加风格学反伪造才可信；不是拍脑袋报个数",
+    "bg_component": "subtle_grid"
+  },
+  {
+    "id": "seg3",
+    "scene_index": 3,
+    "duration": 26,
+    "emotion": "度量较真-代价收益",
+    "text": "为什么要这么较真？因为度量要让数据说话，不是感觉有用。最怕的状态是大家觉得 AI 有用但说不清提升了多少——那投入就没法持续。三层算法的代价是复杂，收益是可信：你拿这个数向老板汇报，经得起追问。",
+    "narration": "为什么要这么较真？因为度量要让数据说话，不是感觉有用。最怕的状态是大家觉得 AI 有用但说不清提升了多少——那投入就没法持续。三层算法的代价是复杂，收益是可信：你拿这个数向老板汇报，经得起追问。",
+    "hook_anchors": [
+      "让数据说话",
+      "不是感觉有用",
+      "经得起追问"
+    ],
+    "visual_type": "cost_benefit_comparison",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题区 — 「为什么要较真」hero 大字（主色蓝）fade-in",
+        "duration_share": 0.15,
+        "reveal_anchor": "标题对应 narration「为什么要这么较真」"
+      },
+      {
+        "phase": 2,
+        "start_offset": 4,
+        "focus": "「感觉有用 vs 数据说话」双栏 — 左灰栏（感觉有用 / 说不清提升多少 / 投入没法持续）vs 右金栏（数据说话 / 量级清晰 / 投入可持续），右栏「数据说话」金色高亮",
+        "duration_share": 0.50,
+        "reveal_anchor": "双栏对应 narration「度量要让数据说话，不是感觉有用...那投入就没法持续」"
+      },
+      {
+        "phase": 3,
+        "start_offset": 17,
+        "focus": "代价收益对比条 — 灰色「代价：算法复杂」vs 金色「收益：可信 · 经得起追问」横向对比，金色「经得起追问」胶囊高亮",
+        "duration_share": 0.35,
+        "reveal_anchor": "对比条对应 narration「三层算法的代价是复杂，收益是可信...经得起追问」"
+      }
+    ],
+    "contrarian_angle": "度量不是为了好看，是为了经得起追问——三层算法复杂但可信，比拍脑袋报个数扎实",
+    "bg_component": "subtle_grid"
+  },
+  {
+    "id": "seg4",
+    "scene_index": 4,
+    "duration": 32,
+    "emotion": "诚信底线-相关性非因果",
+    "text": "但要诚实讲：这是转型前后对比观察，相关性不等于因果，不能 100% 归功 AI——需求变化、人员调整同期也在发生。每个团队基线不同，别误读成「上了 AI 就涨 104%」。这套方法论，有数据、有口径、有底线——不吹、不藏、不归功过头。它是相关性证明，不是因果保证；是参考样本，不是承诺模板。",
+    "narration": "但要诚实讲：这是转型前后对比观察，相关性不等于因果，不能 100% 归功 AI——需求变化、人员调整同期也在发生。每个团队基线不同，别误读成「上了 AI 就涨 104%」。这套方法论，有数据、有口径、有底线——不吹、不藏、不归功过头。它是相关性证明，不是因果保证；是参考样本，不是承诺模板。",
+    "hook_anchors": [
+      "相关性非因果",
+      "不能 100% 归功 AI",
+      "不吹不藏不归功过头",
+      "参考样本不是承诺模板"
+    ],
+    "visual_type": "honesty_disclaimer_dual_column",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "标题区 — 「相关性非因果」hero 大字（灰色，诚信标注色）fade-in + 「诚信底线」小字副标题",
+        "duration_share": 0.12,
+        "reveal_anchor": "标题对应 narration「但要诚实讲：这是转型前后对比观察，相关性不等于因果」"
+      },
+      {
+        "phase": 2,
+        "start_offset": 5,
+        "focus": "诚实标注双栏 — 左灰栏（相关性 ≠ 因果 / 不能 100% 归功 AI / 需求变化 + 人员调整同期）vs 右金栏（量级足以说明强相关 / 参考样本 / 不是承诺模板），右栏「参考样本」金色胶囊",
+        "duration_share": 0.45,
+        "reveal_anchor": "双栏对应 narration「不能 100% 归功 AI——需求变化、人员调整同期也在发生...别误读成上了 AI 就涨 104%」"
+      },
+      {
+        "phase": 3,
+        "start_offset": 20,
+        "focus": "金句区 — 「不吹 · 不藏 · 不归功过头」三大字横向（金色金句色，font-size 80px+），下方小字「相关性证明 ≠ 因果保证 · 参考样本 ≠ 承诺模板」灰色注释",
+        "duration_share": 0.43,
+        "reveal_anchor": "金句对应 narration「有数据、有口径、有底线——不吹、不藏、不归功过头...是参考样本，不是承诺模板」"
+      }
+    ],
+    "contrarian_angle": "相关性非因果反直觉——大多数 AI 转型宣传吹「上了 AI 就翻倍」，教程守底线：量级足以说明强相关但不归功过头，是参考样本不是承诺模板",
+    "bg_component": "subtle_grid"
+  },
+  {
+    "id": "seg5",
+    "scene_index": 5,
+    "duration": 32,
+    "emotion": "CTA收官-下集预告",
+    "text": "下集 E02，讲思想转变——为什么转型的起手不是上工具，是先转型思想。合集 12 集，从总纲到 6 个实施阶段逐集拆。你的团队开始用 AI 了吗？教程仓库在评论区，clone 下来就能跑。",
+    "narration": "下集 E02，讲思想转变——为什么转型的起手不是上工具，是先转型思想。合集 12 集，从总纲到 6 个实施阶段逐集拆。你的团队开始用 AI 了吗？教程仓库在评论区，clone 下来就能跑。",
+    "hook_anchors": [
+      "下集 E02",
+      "思想转变",
+      "合集 12 集",
+      "开始用 AI 了吗"
+    ],
+    "visual_type": "cta_finale_grid",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {
+        "phase": 1,
+        "start_offset": 0,
+        "focus": "E02 下集预告卡 — 金色边框大卡 fade-in，含「E02」集数角标（左上大字）+ 「思想转变」标题（主色蓝大字）+ 「为什么起手不是上工具，是先转型思想」副文字",
+        "duration_share": 0.30,
+        "reveal_anchor": "E02 卡对应 narration「下集 E02，讲思想转变——为什么转型的起手不是上工具，是先转型思想」"
+      },
+      {
+        "phase": 2,
+        "start_offset": 10,
+        "focus": "12 集合集徽章 — 金色圆形徽章 fade-in，含「12」大字 + 「集深度解析」环绕文字 + 「总纲 → 6 个实施阶段」小字",
+        "duration_share": 0.25,
+        "reveal_anchor": "合集徽章对应 narration「合集 12 集，从总纲到 6 个实施阶段逐集拆」"
+      },
+      {
+        "phase": 3,
+        "start_offset": 17,
+        "focus": "互动问句区 — 「你的团队开始用 AI 了吗？」主色蓝大字 fade-in（中性互动，禁站队）+ 评论区引导小字「教程仓库在评论区」灰色（owner/repo 文本路径，禁 URL）",
+        "duration_share": 0.45,
+        "reveal_anchor": "互动对应 narration「你的团队开始用 AI 了吗？教程仓库在评论区，clone 下来就能跑」"
+      }
+    ],
+    "contrarian_angle": "中性互动收官——禁站队对抗式（你站谁/敢说真香吗），用「你的团队开始用 AI 了吗」让观众自查进度，不是逼表态",
+    "bg_component": "subtle_grid"
+  }
+]

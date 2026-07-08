@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E02 思想转变 · 3:4 竖屏</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1080px;height:1440px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1080px;height:1440px;padding:60px 64px 56px;display:flex;flex-direction:column;background:linear-gradient(160deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-gold{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.18),transparent 70%);filter:blur(100px);top:-180px;right:-160px;pointer-events:none;}
+.glow-blue{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.16),transparent 70%);filter:blur(90px);bottom:-160px;left:-120px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 80%75% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:80px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(96,165,250,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:80px;background:linear-gradient(0deg,rgba(96,165,250,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:20px;margin-bottom:20px;justify-content:center;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:80px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:23px;color:#60A5FA;letter-spacing:0.16em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 22px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+
+.title{position:relative;z-index:2;font-size:110px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;text-align:center;margin-top:8px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 60%,#FCD34D 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(251,191,36,0.20);}
+.subtitle{position:relative;z-index:2;font-size:32px;color:rgba(255,255,255,0.82);margin-top:16px;font-weight:500;text-align:center;}
+.subtitle .sub-strong{color:#60A5FA;font-weight:700;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+
+.principles-label{position:relative;z-index:2;font-size:23px;color:#60A5FA;letter-spacing:0.14em;font-weight:700;margin-top:40px;margin-bottom:16px;text-align:center;}
+.principles{position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;}
+.pr-row{display:flex;align-items:center;gap:20px;padding:18px 26px;border-radius:14px;border:2px solid rgba(96,165,250,0.40);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.55));}
+.pr-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:42px;font-weight:900;color:#FBBF24;line-height:1;text-shadow:0 0 14px rgba(251,191,36,0.22);min-width:54px;text-align:center;}
+.pr-info{display:flex;flex-direction:column;gap:4px;flex:1;}
+.pr-name{font-size:32px;font-weight:800;color:#fff;line-height:1.2;}
+.pr-desc{font-size:23px;color:rgba(255,255,255,0.62);line-height:1.3;}
+
+.conclusion{position:relative;z-index:2;margin-top:40px;padding:24px 32px;border-radius:16px;border:2px solid rgba(16,185,129,0.50);background:linear-gradient(90deg,rgba(16,185,129,0.12),rgba(15,23,42,0.50));display:flex;justify-content:center;align-items:center;gap:22px;}
+.conclusion-eq{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:900;color:#34D399;}
+.conclusion-text{font-size:38px;font-weight:700;color:#fff;}
+.conclusion-strong{background:linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-size:46px;font-weight:900;}
+
+.footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:23px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:21px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 13px;border-radius:7px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:21px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-blue"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E02</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 思想转变</div>
+  </div>
+
+  <h1 class="title"><span class="title-grad">AI 不是万能的</span></h1>
+  <div class="subtitle">转型<span class="sub-gold">起手</span>不是上工具 · 是<span class="sub-strong">思想转变 + 懂原理</span></div>
+
+  <div class="principles-label">5 条 AI 原理速通</div>
+  <div class="principles">
+    <div class="pr-row"><div class="pr-num">①</div><div class="pr-info"><div class="pr-name">token 预测</div><div class="pr-desc">大模型本质 · 所以会幻觉，必须验证</div></div></div>
+    <div class="pr-row"><div class="pr-num">②</div><div class="pr-info"><div class="pr-name">上下文 1M</div><div class="pr-desc">约束原点 · 所有最佳实践围着它转</div></div></div>
+    <div class="pr-row"><div class="pr-num">③</div><div class="pr-info"><div class="pr-name">Agent</div><div class="pr-desc">大模型 + 工具 · 让 AI 感知和改变环境</div></div></div>
+    <div class="pr-row"><div class="pr-num">④</div><div class="pr-info"><div class="pr-name">REACT 循环</div><div class="pr-desc">思考 → 行动 → 观察 · 自主完成复杂任务</div></div></div>
+    <div class="pr-row"><div class="pr-num">⑤</div><div class="pr-info"><div class="pr-name">精准指令</div><div class="pr-desc">给上下文 / 明目标 / 定流程 / 要验证</div></div></div>
+  </div>
+
+  <div class="conclusion">
+    <span class="conclusion-eq">★</span>
+    <span class="conclusion-text">人 + AI</span>
+    <span class="conclusion-strong">人是根本</span>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

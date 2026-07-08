@@ -1,0 +1,148 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-gold: #FBBF24;
+  --tut-blue: #3B82F6;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E02 原理② token 预测（横屏 reveal §6.16）
+ * 1 场景 + 4 region（标题 / 预测示意 / 幻觉卡 / 验证金句）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 30px;
+  padding: 60px 130px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 30px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 50%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 区域 1：标题 —— */
+.tut-token-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.tut-token-title .tt-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(59,130,246,0.45); border-radius: 999px;
+  background: rgba(59,130,246,0.08);
+}
+.tut-token-title .tt-h1 {
+  font-family: var(--font-title); font-size: 80px; font-weight: 900; line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 18px rgba(59,130,246,0.22);
+}
+
+/* —— 区域 2：token 预测示意 —— */
+.tut-token-demo {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 26px 40px; border-radius: 20px;
+  border: 2px solid rgba(251,191,36,0.45);
+  background: linear-gradient(165deg, rgba(251,191,36,0.08), rgba(15,23,42,0.55));
+}
+.tut-token-demo .td-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+}
+.tut-token-demo .td-formula {
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+  font-family: var(--font-title);
+}
+.tut-token-demo .td-input {
+  font-size: 64px; font-weight: 800; color: var(--tut-gray);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-token-demo .td-arrow {
+  font-family: var(--font-data); font-size: 72px; font-weight: 900;
+  color: var(--tut-gold); text-shadow: 0 0 18px rgba(251,191,36,0.40);
+}
+.tut-token-demo .td-predict {
+  font-size: 110px; font-weight: 900; line-height: 1;
+  text-shadow: 0 0 20px rgba(251,191,36,0.30);
+}
+.tut-token-demo .td-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-white); letter-spacing: 0.03em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.40);
+}
+
+/* —— 区域 3：幻觉揭示卡 —— */
+.tut-token-hallucination {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 24px 36px; border-radius: 18px;
+  border: 2px solid rgba(239,68,68,0.55);
+  background: linear-gradient(90deg, rgba(239,68,68,0.10), rgba(15,23,42,0.55));
+}
+.tut-token-hallucination .th-head {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900;
+  color: var(--tut-red); letter-spacing: 0.04em;
+  text-shadow: 0 0 14px rgba(239,68,68,0.30);
+  display: flex; align-items: center; gap: 12px;
+}
+.tut-token-hallucination .th-icon { font-size: 38px; }
+.tut-token-hallucination .th-body {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700;
+  color: var(--tut-white); display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-token-hallucination .th-key { color: var(--tut-red); font-weight: 900; }
+.tut-token-hallucination .th-vs { color: var(--tut-gray); font-weight: 700; }
+.tut-token-hallucination .th-contra { color: var(--tut-blue-white); }
+.tut-token-hallucination .th-neq {
+  font-family: var(--font-data); color: var(--tut-red); font-weight: 900;
+  margin: 0 6px; font-size: 42px;
+}
+.tut-token-hallucination .th-foot {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-gray); letter-spacing: 0.02em;
+}
+
+/* —— 区域 4：验证金句 + count-up —— */
+.tut-token-verify {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 40px; border-radius: 18px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(90deg, rgba(16,185,129,0.10), rgba(15,23,42,0.55));
+}
+.tut-token-verify .tv-pct-row {
+  display: flex; align-items: center; justify-content: center; gap: 36px;
+}
+.tut-token-verify .tv-big {
+  font-family: var(--font-title); font-size: 88px; font-weight: 900; line-height: 1;
+  text-shadow: 0 0 18px rgba(16,185,129,0.25);
+}
+.tut-token-verify .tv-count-wrap {
+  display: flex; align-items: baseline; gap: 4px;
+  font-family: var(--font-data);
+}
+.tut-token-verify .tv-count {
+  font-size: 96px; font-weight: 900; color: var(--tut-green); line-height: 1;
+  text-shadow: 0 0 20px rgba(16,185,129,0.35);
+}
+.tut-token-verify .tv-pct {
+  font-size: 56px; font-weight: 800; color: var(--tut-green);
+  text-shadow: 0 0 14px rgba(16,185,129,0.25);
+}
+.tut-token-verify .tv-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700;
+  color: var(--tut-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+}

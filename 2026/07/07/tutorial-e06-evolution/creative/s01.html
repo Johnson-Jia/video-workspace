@@ -1,0 +1,96 @@
+<!-- 场景: seg1 | 时长: ~39s | bg: dark_cipher | 工具演进：随能力做减法（阶梯图+金句卡） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/紫/金）静态光晕，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:18%;width:360px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:360px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,80%,70%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;right:18%;width:360px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- 金句卡位置静态光晕（强强调） -->
+  <div class="fx-aura" style="position:absolute;top:62%;left:50%;transform:translateX(-50%);width:1200px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.20) 0%, transparent 60%);filter:blur(60px);opacity:0.7"></div>
+  <!-- 阶梯位置脉冲锚点（蓝/紫/金） -->
+  <div class="fx-blink" style="position:absolute;top:34%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:34%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,80%,70%,0.85);box-shadow:0 0 14px hsla(255,75%,64%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:34%;right:20%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.9);box-shadow:0 0 18px hsla(43,85%,54%,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-ev-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="tag-base tag-gold">E06 · 段9</div>
+      <h1 class="title-h1">随能力<span class="grad-gold">做减法</span></h1>
+      <div class="title-sub"><span class="grad-blue">工具演进</span> · 三阶段</div>
+    </div>
+
+    <!-- 区域 2：三阶段阶梯图（reveal 4，left）—— 核心 -->
+    <div class="tut-region tut-ev-staircase" data-reveal="4" data-reveal-dir="left">
+      <div class="stair-row">
+        <!-- 入门期 -->
+        <div class="stair-card stair-base">
+          <div class="tag-base tag-blue">入门期</div>
+          <div class="stair-name grad-blue">OpenSpec + Superpowers</div>
+          <div class="stair-tools"><span class="st-tool">规范</span> <span class="st-plus">+</span> <span class="st-tool">执行</span></div>
+          <div class="stair-desc">需求拆规范防跑偏 · 框架兜底</div>
+          <div class="stair-meta">工具 2 · 能力基础</div>
+        </div>
+        <!-- 箭头：工具递减 -->
+        <div class="stair-arrow stair-arrow-down">
+          <div class="sa-line">工具 ▼</div>
+          <div class="sa-label grad-purple">递减</div>
+        </div>
+        <!-- 熟练期 -->
+        <div class="stair-card stair-mid">
+          <div class="tag-base tag-purple">熟练期</div>
+          <div class="stair-name grad-purple">只用 Superpowers</div>
+          <div class="stair-tools"><span class="st-tool">执行</span></div>
+          <div class="stair-desc">需求讲清 · 规范思维内化</div>
+          <div class="stair-meta">工具 1 · 能力进阶</div>
+        </div>
+        <div class="stair-arrow stair-arrow-down">
+          <div class="sa-line">工具 ▼</div>
+          <div class="sa-label grad-gold">递减</div>
+        </div>
+        <!-- 精通期 -->
+        <div class="stair-card stair-top">
+          <div class="tag-base tag-gold">精通期</div>
+          <div class="stair-name grad-gold">裸 Claude Code</div>
+          <div class="stair-tools"><span class="st-tool st-tool-none">无框架</span></div>
+          <div class="stair-desc">大模型裸交互 · 个人上限</div>
+          <div class="stair-meta">工具 0 · 能力精通</div>
+        </div>
+      </div>
+      <div class="stair-axis">
+        <span class="axis-label">能力</span>
+        <span class="axis-arrow grad-gold">▲ 递增 ▲</span>
+      </div>
+    </div>
+
+    <!-- 区域 3：金句卡（reveal 18，fade）—— 升华 -->
+    <div class="tut-region tut-ev-quote" data-reveal="18" data-reveal-dir="fade">
+      <div class="quote-card">
+        <div class="quote-text"><span class="grad-gold">你就是终极规范</span>，你的话术就是<span class="grad-gold">专业的 prompt</span></div>
+      </div>
+    </div>
+
+    <!-- 区域 4：团队场景注脚（reveal 28，fade） -->
+    <div class="tut-region tut-ev-note" data-reveal="28" data-reveal-dir="fade">
+      <div class="note-line">
+        <span class="tag-base tag-blue">团队场景</span>
+        <span class="note-text">协作 · 规范沉淀 · 新人上手 → <span class="grad-blue">框架仍有价值</span>（能力可复制 · 流程可复现）</span>
+      </div>
+      <div class="note-sub">精通后裸用是<span class="grad-gold">个人上限</span>，不是团队标准</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

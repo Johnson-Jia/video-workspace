@@ -1,0 +1,265 @@
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-mid: #1a1f3a;
+  --bg-purple: #0d0a1f;
+  --accent-warm: #FF8C32;   /* A 档利益色（meetily/immich 暖组） */
+  --accent-cool: #4DA8DA;   /* 开发者工具组冷色 */
+  --accent-gold: #FFD24A;   /* 数据/星标金 */
+  --text: #f5f5f5;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ===================================================================
+ * 根治设计原则（2026-07-06 重做）
+ * 1. PFC absolute inset 180/90/220/90 锚定安全区（feedback-pfc-safezone-overflow）
+ * 2. fx 装饰 top≥200 / bottom≥200（安全区内，不渗出顶部）
+ * 3. pfc-glow blur≤60 + 在 PFC inset 内（不渗出 PFC 边界）
+ * 4. 不用 layer-cinema 顶覆盖（之前遮内容，fx/bg 自身不渗出即无需覆盖）
+ * 5. bg 层（layer-bg）可满屏 inset:0（在 content 层下，不构成溢出）
+ * =================================================================== */
+
+/* ============================================
+ * ProjectFullCard 组件 CSS（assemble 不注入组件库，须手补）
+ * 三带 space-between 在 180-1700 安全区内分布
+ * ============================================ */
+.project-full-card {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+}
+/* 光晕：blur≤60 + 在 PFC inset 内（top:0 相对 PFC = 画面 y180） */
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(55px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 420px; height: 420px; opacity: 0.22;
+  background: var(--accent-warm);
+  top: 30px; left: -60px;
+}
+.pfc-glow-cool {
+  width: 380px; height: 380px; opacity: 0.18;
+  background: var(--accent-cool);
+  bottom: 40px; right: -50px;
+}
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+
+/* ── 顶部带：排名+类别 + 用途胶囊 + 项目名 ── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 28px; }
+.pfc-rank {
+  font-size: 92px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: 0 4px 12px rgba(255,140,50,0.4);
+  font-family: var(--font-data);
+  display: inline-block; padding-top: 6px;
+}
+.pfc-category {
+  font-size: 36px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--accent-cool); text-transform: uppercase;
+}
+.pfc-use {
+  font-size: 48px; font-weight: 800; line-height: 1.1;
+  padding: 8px 22px; border-radius: 12px;
+  background: rgba(13,9,5,0.55);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  color: var(--accent-warm);
+  align-self: flex-start; letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data); line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800; color: #f5f5f5;
+}
+
+/* ── 中部带：avatar + 描述 + 数据条 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 32px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(14px); opacity: 0.5;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-size: 38px; font-weight: 600; line-height: 1.35;
+  color: #f5f5f5; text-align: center; max-width: 780px;
+}
+.pfc-data-bar {
+  width: 100%; max-width: 780px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label { font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.pfc-bar-val {
+  font-size: 42px; font-weight: 800; color: var(--accent-warm);
+  font-family: var(--font-data);
+}
+.pfc-bar-track {
+  width: 100%; height: 14px; border-radius: 999px;
+  background: rgba(255,255,255,0.1); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+  transform-origin: left center;
+}
+.pfc-bar-fill.f-85 { width: 85%; }
+.pfc-bar-fill.f-72 { width: 72%; }
+.pfc-bar-fill.f-60 { width: 60%; }
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.pfc-topic {
+  font-size: 32px; font-weight: 600; padding: 6px 20px;
+  border-radius: 999px; color: var(--accent-cool);
+  background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.3);
+}
+
+/* ── 底部带：三词卖点 + 评语 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 24px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.pfc-sell-item {
+  font-size: 32px; font-weight: 700; padding: 10px 24px;
+  border-radius: 14px; color: #fff;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: rgba(255,255,255,0.72);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+
+/* ============================================
+ * Hook 场景（s1）
+ * ============================================ */
+.hook-wrap {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 44px; z-index: 2;
+}
+.hook-date {
+  font-size: 52px; font-weight: 800; color: var(--accent-cool);
+  font-family: var(--font-data); letter-spacing: 0.05em;
+  text-shadow: 0 0 18px rgba(77,168,218,0.55);
+}
+.hook-main {
+  font-size: 88px; font-weight: 900; line-height: 1.22;
+  color: #f5f5f5; text-align: center; max-width: 1500px;
+}
+.hook-main .hi { color: var(--accent-warm); text-shadow: 0 0 18px rgba(255,140,50,0.55); }
+.hook-sub {
+  font-size: 42px; font-weight: 600; color: var(--accent-gold);
+  padding: 12px 32px; border-radius: 14px;
+  background: rgba(13,9,5,0.55); border: 1.5px solid rgba(255,210,74,0.4);
+}
+
+/* ============================================
+ * Dual-card 对比（s4/s5）—— 双卡片在安全区内
+ * ============================================ */
+.dual-wrap {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column; gap: 24px; z-index: 2;
+}
+.dual-title {
+  font-size: 42px; font-weight: 700; color: var(--accent-cool);
+  letter-spacing: 0.04em; text-align: center;
+}
+.dual-cards { display: flex; gap: 24px; flex: 1; align-items: stretch; }
+.dual-card {
+  flex: 1; display: flex; flex-direction: column; gap: 14px;
+  padding: 28px 24px; border-radius: 22px;
+  background: rgba(13,9,5,0.88);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  position: relative; overflow: hidden;
+}
+.dual-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+}
+.dual-card-num {
+  font-size: 60px; font-weight: 900; color: var(--accent-warm);
+  font-family: var(--font-data); line-height: 1;
+}
+.dual-card-name {
+  font-size: 38px; font-weight: 800; color: #f5f5f5;
+  font-family: var(--font-data); word-break: break-word; line-height: 1.15;
+}
+.dual-card-owner {
+  font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.5);
+}
+.dual-card-use {
+  font-size: 32px; font-weight: 700; color: var(--accent-cool);
+  padding: 6px 16px; border-radius: 10px;
+  background: rgba(77,168,218,0.12); align-self: flex-start;
+}
+.dual-card-desc {
+  font-size: 32px; font-weight: 500; line-height: 1.4; color: rgba(255,255,255,0.78);
+}
+.dual-card-stars {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  font-family: var(--font-data); margin-top: auto;
+}
+.dual-card-stars .total { font-size: 36px; font-weight: 800; color: var(--accent-gold); }
+.dual-card-stars .today { font-size: 32px; font-weight: 700; color: var(--accent-warm); }
+
+/* ============================================
+ * CTA 场景（s6）
+ * ============================================ */
+.cta-wrap {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 52px; z-index: 2;
+}
+.cta-question {
+  font-size: 80px; font-weight: 900; line-height: 1.25;
+  color: #f5f5f5; text-align: center; max-width: 1500px;
+}
+.cta-question .hi { color: var(--accent-warm); }
+.cta-follow {
+  font-size: 46px; font-weight: 700; color: var(--accent-cool);
+  padding: 16px 44px; border-radius: 16px;
+  background: rgba(13,9,5,0.55); border: 2px solid var(--accent-cool);
+  letter-spacing: 0.06em;
+}

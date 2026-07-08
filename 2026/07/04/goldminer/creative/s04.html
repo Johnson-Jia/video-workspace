@@ -1,0 +1,98 @@
+<!-- 场景: loot | 时长: 29.3s | bg: diamond_lattice（45°金色菱形网格，宝藏感+区别 s03 dark_cipher） | phases: 3 -->
+<div class="layer-bg">
+<!-- bg-component: diamond_lattice -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,hsl(40,20%,4%),hsl(30,15%,7%))"></div>
+
+<div style="position:absolute;inset:0;animation:latticeDrift 24s ease-in-out infinite;
+  background-image:
+    repeating-linear-gradient(45deg,transparent,transparent 59px,hsla(40,70%,55%,0.06) 59px,hsla(40,70%,55%,0.06) 60px),
+    repeating-linear-gradient(-45deg,transparent,transparent 59px,hsla(40,70%,55%,0.06) 59px,hsla(40,70%,55%,0.06) 60px);
+  background-size:85px 85px"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:540px;height:540px;border-radius:50%;
+  background:radial-gradient(circle,hsla(38,80%,50%,0.24),hsla(35,60%,40%,0.08),transparent 70%);
+  filter:blur(90px);animation:emberRise 24s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,hsla(28,72%,48%,0.20),hsla(20,55%,35%,0.06),transparent 70%);
+  filter:blur(80px);animation:emberRise 28s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:15%;left:-15%;width:130%;height:240px;
+  background:linear-gradient(100deg,transparent 20%,hsla(45,80%,55%,0.14),hsla(35,70%,48%,0.10),transparent 80%);
+  filter:blur(55px);transform:rotate(-6deg);animation:warmShift 12s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40%;left:0%;width:90%;height:2px;
+  background:linear-gradient(90deg,transparent,hsla(45,85%,60%,0.34) 30%,hsla(50,80%,55%,0.38) 50%,hsla(45,85%,60%,0.34) 70%,transparent);
+  filter:blur(1.5px)"></div>
+
+<div style="position:absolute;top:50%;left:50%;width:480px;height:480px;border-radius:50%;opacity:0.55;
+  background:repeating-radial-gradient(circle,transparent 0,transparent 22px,hsla(45,80%,55%,0.08) 22px,hsla(45,80%,55%,0.08) 23px);
+  filter:blur(2px);transform:translate(-50%,-50%);animation:warmRing 16s ease-out infinite"></div>
+
+<div style="position:absolute;top:calc(50% - 60px);left:calc(50% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1.5px solid hsla(45,85%,60%,0.22);animation:warmRing 5s ease-out infinite 0s"></div>
+<div style="position:absolute;top:calc(50% - 60px);left:calc(50% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1px solid hsla(50,75%,55%,0.16);animation:warmRing 5s ease-out infinite 2.5s"></div>
+
+<div style="position:absolute;top:25%;left:60%;width:4px;height:4px;border-radius:50%;background:hsla(48,92%,65%,0.78);box-shadow:0 0 12px hsla(45,85%,55%,0.65);animation:emberFloat 6s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:50%;left:20%;width:3px;height:3px;border-radius:50%;background:hsla(50,88%,62%,0.72);box-shadow:0 0 10px hsla(45,80%,55%,0.55);animation:emberFloat 7s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:70%;left:65%;width:4px;height:4px;border-radius:50%;background:hsla(45,90%,65%,0.75);box-shadow:0 0 12px hsla(40,80%,55%,0.6);animation:emberFloat 5s ease-in-out infinite 4s"></div>
+<div style="position:absolute;top:35%;left:25%;width:3px;height:3px;border-radius:50%;background:hsla(50,90%,68%,0.70);box-shadow:0 0 10px hsla(48,82%,58%,0.55);animation:emberFloat 6.5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,210,120,0.04) 0%,transparent 40%,rgba(255,190,80,0.05) 60%,transparent 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 30%,hsla(30,20%,3%,0.42) 100%)"></div>
+</div>
+<div class="layer-fx">
+<!-- fx1: 宝藏金光上升带（淘金成功） -->
+<div class="fx-stream" style="position:absolute;top:-10%;left:50%;width:220px;height:65%;background:linear-gradient(180deg,transparent,hsla(48,92%,62%,0.20),transparent);transform:translateX(-50%);filter:blur(42px);animation:fxStreamFall 5s ease-in-out infinite reverse"></div>
+<!-- fx2: 暖金脉冲环 -->
+<div class="fx-ring" style="position:absolute;top:45%;left:50%;width:240px;height:240px;border-radius:50%;border:2px solid hsla(48,92%,60%,0.34);transform:translate(-50%,-50%);animation:fxRingExp 5s ease-in-out infinite"></div>
+<!-- fx3: 暖金光点漂浮 -->
+<div class="fx-glow-amber" style="top:28%;right:14%;width:220px;height:220px;background:radial-gradient(circle,hsla(48,92%,62%,0.32),transparent 70%);animation:fxAura 5s ease-in-out infinite"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px">
+  <div class="tag-pill" style="font-size:32px">淘金！淘到了什么</div>
+  <div class="card center-block" style="max-width:860px">
+    <div style="font-family:'Ma Shan Zheng';font-size:58px;line-height:1.1;font-weight:400;color:var(--gold);margin-bottom:12px">教训一条</div>
+    <div style="font-size:36px;color:var(--text);line-height:1.4">深科技不是 SaaS，要 <strong style="color:var(--amber)">7-10 年</strong>资本计划</div>
+    <div style="font-size:34px;color:var(--gold);line-height:1.4;margin-top:8px">拿不到 $500M+ 耐心资本（主权基金/战略企业）</div>
+    <div style="font-size:36px;color:var(--amber);line-height:1.4;margin-top:8px;font-weight:600">就别早上市</div>
+  </div>
+</div>
+<div class="phase phase-2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px">
+  <div class="tag-pill tag-pill-amber" style="font-size:32px">可偷的点子 · 更值钱</div>
+  <div class="card-soft center-block" style="max-width:880px;border-color:rgba(255,184,0,0.55)">
+    <div style="display:flex;align-items:center;gap:24px;margin-bottom:16px;justify-content:center">
+      <div class="geofence-icon"></div>
+      <div style="font-family:'Ma Shan Zheng';font-size:78px;line-height:1.05;font-weight:400" class="grad-gold glow-gold">HaulOS</div>
+    </div>
+    <div style="font-size:34px;color:var(--text);line-height:1.35;margin-bottom:14px">别跟巨头抢公路，转去<strong style="color:var(--gold)">采矿 · 港口 · 大农场</strong>这些围栏场景</div>
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+      <div class="card-soft" style="text-align:center;min-width:200px;background:rgba(255,184,0,0.10)">
+        <div style="font-size:32px;color:var(--text2)">市场 TAM</div>
+        <div style="font-family:'JetBrains Mono';font-size:52px;font-weight:700" class="grad-gold">$80B</div>
+      </div>
+      <div class="card-soft" style="text-align:center;min-width:200px;background:rgba(255,184,0,0.10)">
+        <div style="font-size:32px;color:var(--text2)">监管快</div>
+        <div style="font-family:'JetBrains Mono';font-size:52px;font-weight:700;color:var(--gold)">5 倍</div>
+      </div>
+      <div class="card-soft" style="text-align:center;min-width:200px;background:rgba(255,184,0,0.10)">
+        <div style="font-size:32px;color:var(--text2)">技术低</div>
+        <div style="font-family:'JetBrains Mono';font-size:52px;font-weight:700;color:var(--amber)">10 倍</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px">
+  <div style="font-family:'Ma Shan Zheng';font-size:72px;line-height:1.1;font-weight:400" class="grad-gold glow-gold">先围栏跑通 · 再往外扩</div>
+  <div style="font-size:34px;color:var(--text2);max-width:760px">这是 Embark 重做的<strong style="color:var(--gold)">正确姿势</strong></div>
+</div>
+</div>
+<div class="layer-cinema">
+<div class="cinema-halation"></div>
+</div>

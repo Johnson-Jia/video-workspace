@@ -1,0 +1,76 @@
+<!-- 场景: seg1 | 时长: ~28s | bg: diamond_lattice | 基础设施四件套总览 + 底部黄条「小团队可跳过」 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（四件套四色 + 金结论；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:780px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:14%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:38%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:62%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;right:14%;width:340px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:780px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 16px hsla(43,85%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:14%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:38%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:62%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;right:14%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-four-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="four-tag grad-gold-bg-inline">E05 · 段2</div>
+      <h1 class="four-h1">基础设施 <span class="grad-gold">四件套</span></h1>
+      <div class="title-sub">解决三件事 · <span class="grad-gold">懂业务 / 看全貌 / 留能力</span></div>
+    </div>
+
+    <!-- 区域 2：四卡（reveal 5，left） -->
+    <div class="tut-region tut-four-cards" data-reveal="5" data-reveal-dir="left">
+      <div class="fc-grid fc-grid-4">
+        <div class="four-card fc-green">
+          <div class="fc-num">①</div>
+          <div class="fc-name grad-green">业务知识 RAG</div>
+          <div class="fc-note">懂私有业务</div>
+        </div>
+        <div class="four-card fc-blue">
+          <div class="fc-num">②</div>
+          <div class="fc-name grad-blue">代码知识图谱</div>
+          <div class="fc-note">看见代码全貌</div>
+        </div>
+        <div class="four-card fc-gold">
+          <div class="fc-num">③</div>
+          <div class="fc-name grad-gold">Skill 仓库</div>
+          <div class="fc-note">留得住团队能力</div>
+        </div>
+        <div class="four-card fc-purple">
+          <div class="fc-num">④</div>
+          <div class="fc-name grad-purple">MCP 网关</div>
+          <div class="fc-note">连接企业服务</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：底部黄条结论（reveal 24，top） -->
+    <div class="tut-region tut-four-conclusion" data-reveal="24" data-reveal-dir="top">
+      <div class="concl-tag grad-gold-bg-inline">反常识</div>
+      <div class="concl-main">
+        <span class="cm-key grad-gold">小团队可跳过</span>
+        <span class="cm-dots">·</span>
+        CLAUDE.md + grep 就够 <span class="cm-key grad-red">别过度工程</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

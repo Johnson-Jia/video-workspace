@@ -1,0 +1,131 @@
+<!-- 场景: seg1 | 时长: ~35.2s | bg: hex_grid | 图谱工具+铁律：三类工具卡 + impact 终端（打字+HIGH脉冲）+ 两条铁律金边卡 + 实测数据 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝理解/金变更/紫查询/红HIGH；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:26%;left:18%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:34%;left:48%;width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:72%;left:50%;transform:translateX(-50%);width:680px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,60%,0.85);box-shadow:0 0 14px hsla(0,75%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-g2-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E05 · 基础设施 之二 · 续</div>
+      <h1 class="mt-h1"><span class="grad-gold">十四工具</span> + 两条 <span class="grad-red">铁律</span></h1>
+      <div class="title-sub">impact 算爆炸半径 · 改前必跑</div>
+    </div>
+
+    <!-- 区域 2：三类工具卡（data-reveal=7.9，dir=top） -->
+    <div class="tut-region" data-reveal="7.9" data-reveal-dir="top">
+      <div class="tool-cats">
+        <div class="tool-cat tc-understand" data-reveal="7.9" data-reveal-dir="top">
+          <div class="tc-name tc-understand">理解类</div>
+          <div class="tc-tool">context</div>
+          <div class="tc-desc">符号 360 度视图</div>
+        </div>
+        <div class="tool-cat tc-change" data-reveal="9.0" data-reveal-dir="top">
+          <div class="tc-name tc-change">变更类</div>
+          <div class="tc-tool">impact · detect_changes</div>
+          <div class="tc-desc">爆炸半径 · git diff 映射</div>
+        </div>
+        <div class="tool-cat tc-query" data-reveal="10.1" data-reveal-dir="top">
+          <div class="tc-name tc-query">查询类</div>
+          <div class="tc-tool">自由 Cypher</div>
+          <div class="tc-desc">图查询 · 补图谱盲区</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主体两栏：终端窗（左）+ 铁律卡（右） -->
+    <div class="tut-g2-main">
+
+    <!-- 区域 3-4：impact 终端窗口（命令打字 + 输出 fade + HIGH 脉冲） -->
+    <div class="tut-region tut-g2-terminal-region" data-reveal="13.9" data-reveal-dir="top">
+      <div class="terminal-window">
+        <div class="term-titlebar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-title">Terminal — impact analyzer</span>
+        </div>
+        <div class="term-body">
+          <!-- 命令行（region 3 reveal，打字） -->
+          <div class="term-line" data-reveal="13.9" data-reveal-dir="fade">
+            <span class="term-prompt">$</span>
+            <span class="term-cmd"><span class="term-cmd-name">impact</span> <span class="term-cmd-flag">--target</span> <span class="term-cmd-val">UserService.validateToken</span></span>
+          </div>
+          <!-- 输出：⚡ 爆炸半径分析中（region 3 尾） -->
+          <div class="term-out" data-reveal="15.2" data-reveal-dir="fade">
+            <span class="term-out-bolt">⚡</span> 爆炸半径分析中...
+          </div>
+          <!-- 输出：d=1 直接调用者（region 4） -->
+          <div class="term-out" data-reveal="17.4" data-reveal-dir="fade">
+            <span class="term-out-label">d=1  直接调用者:</span> <span class="term-out-num">12 处</span> <span class="term-out-detail">(AuthController, LoginRoute...)</span>
+          </div>
+          <!-- 输出：d=2 间接影响 -->
+          <div class="term-out" data-reveal="18.5" data-reveal-dir="fade">
+            <span class="term-out-label">d=2  间接影响:</span> <span class="term-out-num">47 处</span>
+          </div>
+          <!-- 输出：HIGH 风险（红色脉冲，region 4 高潮） -->
+          <div class="term-out-high" data-reveal="19.8" data-reveal-dir="fade">
+            <span class="to-high-label">风险等级:</span>
+            <span class="to-high-val grad-red">HIGH</span>
+            <span class="to-high-mark">⚠</span>
+          </div>
+          <!-- 输出：建议 -->
+          <div class="term-out-suggest" data-reveal="21.0" data-reveal-dir="fade">
+            建议: 改返回类型前先跑 <span class="term-cmd-inline">detect_changes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 5：两条铁律卡（data-reveal=24.7，dir=left） -->
+    <div class="tut-region tut-g2-rules-region">
+      <div class="rule-card" data-reveal="24.7" data-reveal-dir="left">
+        <div class="rc-head">
+          <span class="rc-mark">⚠</span>
+          <span class="rc-tag">铁律 一</span>
+        </div>
+        <div class="rc-body">改任何符号前 · 必跑 <span class="rc-cmd">impact</span></div>
+      </div>
+      <div class="rule-card" data-reveal="25.8" data-reveal-dir="left">
+        <div class="rc-head">
+          <span class="rc-mark">⚠</span>
+          <span class="rc-tag">铁律 二</span>
+        </div>
+        <div class="rc-body">提交前 · 必跑 <span class="rc-cmd">detect_changes</span></div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-g2-main -->
+
+    <!-- 区域 6：实测数据卡（data-reveal=27.6，dir=top） -->
+    <div class="tut-region" data-reveal="27.6" data-reveal-dir="top">
+      <div class="metric-card">
+        <span class="mc-tag">实测</span>
+        <span class="mc-num grad-green">144</span>
+        <span class="mc-label">个 bug · 跨仓库定位调用链</span>
+        <span class="mc-num grad-green">80%+</span>
+        <span class="mc-label">覆盖率</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

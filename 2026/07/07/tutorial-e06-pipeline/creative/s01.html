@@ -1,0 +1,120 @@
+<!-- 场景: seg1 | 时长: ~40s | bg: dark_cipher | 六阶段流水线（核心组件：横向6节点+连线渐进+当前高亮） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/紫/绿/金）静态光晕 + 节点脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:900px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:1200px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:18%;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;right:14%;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,68%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- 节点位置脉冲锚点（与6节点对齐，冷色沉稳） -->
+  <div class="fx-blink" style="position:absolute;top:50%;left:10%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:40%;width:10px;height:10px;border-radius:50%;background:hsla(215,80%,60%,0.85);box-shadow:0 0 14px hsla(215,75%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:55%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:85%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,68%,0.85);box-shadow:0 0 14px hsla(0,75%,62%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段5 · 核心</div>
+      <h1 class="title-h1"><span class="grad-gold">六阶段流水线</span></h1>
+      <div class="title-sub">OpenSpec + <span class="grad-blue">Superpowers</span> · 需求到交付</div>
+    </div>
+
+    <!-- 区域 2：六阶段流水线（reveal 5，fade）—— 核心组件 -->
+    <div class="tut-region tut-pl-pipeline" data-reveal="6" data-reveal-dir="fade">
+      <div class="pipeline-wrap">
+        <!-- SVG 连线层（dashoffset 渐进绘制，非划过类 fx） -->
+        <svg class="pipeline-edges" viewBox="0 0 1740 120" preserveAspectRatio="none">
+          <line x1="145" y1="60" x2="435" y2="60" class="edge edge-1" />
+          <line x1="435" y1="60" x2="725" y2="60" class="edge edge-2" />
+          <line x1="725" y1="60" x2="1015" y2="60" class="edge edge-3" />
+          <line x1="1015" y1="60" x2="1305" y2="60" class="edge edge-4" />
+          <line x1="1305" y1="60" x2="1595" y2="60" class="edge edge-5" />
+        </svg>
+        <!-- 6 节点 -->
+        <div class="node-row">
+          <div class="stage-node sn-1">
+            <div class="node-icon">🔍</div>
+            <div class="node-stage grad-blue">探索</div>
+            <div class="node-skill">brainstorming</div>
+            <div class="node-num">阶段一</div>
+          </div>
+          <div class="stage-node sn-2">
+            <div class="node-icon">📐</div>
+            <div class="node-stage grad-purple">规范</div>
+            <div class="node-skill">openspec-propose</div>
+            <div class="node-num">阶段二</div>
+          </div>
+          <div class="stage-node sn-3">
+            <div class="node-icon">📋</div>
+            <div class="node-stage grad-blue">计划</div>
+            <div class="node-skill">writing-plans</div>
+            <div class="node-num">阶段三</div>
+          </div>
+          <div class="stage-node sn-4">
+            <div class="node-icon">✅</div>
+            <div class="node-stage grad-green">TDD</div>
+            <div class="node-skill">subagent-driven</div>
+            <div class="node-num">阶段四</div>
+          </div>
+          <div class="stage-node sn-5">
+            <div class="node-icon">🔬</div>
+            <div class="node-stage grad-gold">验证</div>
+            <div class="node-skill">verification</div>
+            <div class="node-num">阶段五</div>
+          </div>
+          <div class="stage-node sn-6">
+            <div class="node-icon">📦</div>
+            <div class="node-stage grad-red">归档</div>
+            <div class="node-skill">openspec-archive</div>
+            <div class="node-num">阶段六</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：渐进式披露卡（reveal 30，left） -->
+    <div class="tut-region tut-pl-progressive" data-reveal="44" data-reveal-dir="left">
+      <div class="prog-card">
+        <div class="prog-tag grad-gold-bg-inline">渐进式披露</div>
+        <div class="prog-text">每阶段只读<span class="grad-gold">当前 Stage 文件</span> · 省 token</div>
+        <div class="prog-files">
+          <span class="prog-file">stage1-explore</span>
+          <span class="prog-sep">→</span>
+          <span class="prog-file">stage2-propose</span>
+          <span class="prog-sep">→</span>
+          <span class="prog-file">stage3-plan</span>
+          <span class="prog-sep">→</span>
+          <span class="prog-file">stage4-tdd</span>
+          <span class="prog-sep">→</span>
+          <span class="prog-file">stage5-verify</span>
+          <span class="prog-sep">→</span>
+          <span class="prog-file">stage6-archive</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：收束金句（reveal 36，fade） -->
+    <div class="tut-region tut-pl-closer" data-reveal="47" data-reveal-dir="fade">
+      <div class="closer-line">
+        <span class="grad-gold">一条命令</span> 串起六阶段 · 中断了还能<span class="grad-blue">接着干</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

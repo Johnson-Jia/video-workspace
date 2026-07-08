@@ -1,0 +1,73 @@
+<!-- 场景: seg1 | 时长: ~31s | bg: dark_cipher | 单点容易端到端难 + 三堵墙预告 + 路线图 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金路线 / 三墙色；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:800px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:20%;width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:50%;transform:translateX(-50%);width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:80%;width:420px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:820px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:9%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:80%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-intro-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E06 方法论</div>
+      <h1 class="intro-h1">单点容易 · <span class="grad-gold">端到端难</span></h1>
+      <div class="title-sub">三堵墙 + 本集路线</div>
+    </div>
+
+    <!-- 区域 2：三堵墙预告（data-reveal=10，dir=left） -->
+    <div class="tut-region tut-intro-walls" data-reveal="10" data-reveal-dir="left">
+      <div class="wall-grid">
+        <div class="wall-card wall-red">
+          <div class="wall-icon">?</div>
+          <div class="wall-name grad-red">分析不准</div>
+          <div class="wall-note">AI 初始理解偏</div>
+        </div>
+        <div class="wall-card wall-purple">
+          <div class="wall-icon">⇄</div>
+          <div class="wall-name grad-purple">上下文断</div>
+          <div class="wall-note">会话中断全丢</div>
+        </div>
+        <div class="wall-card wall-blue">
+          <div class="wall-icon">!</div>
+          <div class="wall-name grad-blue">偏差晚发现</div>
+          <div class="wall-note">改代码代价大</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：路线图（data-reveal=24，dir=top） -->
+    <div class="tut-region tut-intro-route" data-reveal="24" data-reveal-dir="top">
+      <div class="route-tag grad-gold-bg-inline">本集路线</div>
+      <div class="route-row">
+        <div class="route-node"><span class="route-dot">1</span><span class="route-label">为什么闭环难</span></div>
+        <div class="route-sep grad-gold">→</div>
+        <div class="route-node"><span class="route-dot">2</span><span class="route-label">SDD 规范驱动</span></div>
+        <div class="route-sep grad-gold">→</div>
+        <div class="route-node"><span class="route-dot">3</span><span class="route-label">六阶段流水线</span></div>
+        <div class="route-sep grad-gold">→</div>
+        <div class="route-node"><span class="route-dot">4</span><span class="route-label">devflow 编排</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

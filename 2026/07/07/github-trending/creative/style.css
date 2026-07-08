@@ -1,0 +1,372 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'JetBrains Mono','Consolas','PingFang SC','Microsoft YaHei',monospace;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 800;
+}
+
+/* ============================================
+ * ProjectFullCard — lean + colorful（memory: pfc-lean-colorful / pfc-safezone-overflow）
+ * .phase 已带 padding:180px 90px 220px 90px（BASE_CSS 注入），卡片用 position:relative width:100% height:100%
+ * 撑满 phase content-box（已扣安全区），不另设 padding 避双重 padding（R-S6-025）
+ * ============================================ */
+.project-full-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 三带撑满 1520px */
+  font-family: var(--font-body);
+}
+
+/* 顶部带：排名行 + 用途胶囊 + 项目名独占整行 */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%;
+}
+.pfc-header-row {
+  display: flex; align-items: baseline; gap: 28px;
+}
+.pfc-rank {
+  font-size: 88px; font-weight: 900; line-height: 1.05;
+  font-family: var(--font-data);
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FB923C 50%, #FDBA74 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 14px rgba(251,146,60,0.32); /* drop shadow 非 0 0，避发光 */
+}
+.pfc-category {
+  font-size: 34px; font-weight: 700; letter-spacing: 0.08em;
+  font-family: var(--font-data);
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+}
+/* 用途胶囊（纯色 — grad-* 胶囊冲突铁律） */
+.pfc-use {
+  font-size: 48px; font-weight: 800; line-height: 1.15;
+  padding: 10px 24px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,140,50,0.22), rgba(251,146,60,0.12));
+  border: 1.5px solid rgba(251,146,60,0.55);
+  color: #FFB775;
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+/* 项目名独占整行（owner+repo 同行，word-break 禁 nowrap） */
+.pfc-name {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-data);
+  font-weight: 800;
+  line-height: 1.05;
+  word-break: break-word;
+  display: flex; align-items: baseline; justify-content: center; gap: 14px;
+  flex-wrap: wrap;
+}
+.pfc-owner {
+  font-size: 32px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
+}
+.pfc-repo {
+  font-size: 60px;
+  background-image: linear-gradient(135deg, #60A5FA 0%, #93C5FD 50%, #DBEAFE 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 16px rgba(96,165,250,0.3);
+  line-height: 1.1;
+}
+
+/* 中部带：avatar 锚点 + 描述 + 涨星数据条 */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 200px; height: 200px;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(94,234,212,0.45);
+  box-shadow: 0 0 24px rgba(94,234,212,0.3), inset 0 0 18px rgba(94,234,212,0.18);
+}
+.pfc-avatar {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.15);
+}
+.pfc-desc {
+  font-size: 38px; font-weight: 500; line-height: 1.35;
+  color: rgba(255,255,255,0.88);
+  text-align: center;
+  max-width: 760px;
+}
+.pfc-data-bar {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 22px 28px;
+  background: rgba(8,12,28,0.55);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+}
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label {
+  font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.62);
+  letter-spacing: 0.05em;
+  font-family: var(--font-data);
+}
+.pfc-bar-val {
+  font-size: 64px; font-weight: 800; line-height: 1.1;
+  font-family: var(--font-data);
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FDBA74 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 14px rgba(251,146,60,0.32);
+}
+.pfc-bar-track {
+  width: 100%; height: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF8C32, #FDBA74);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(251,146,60,0.6);
+}
+
+/* 底部带：CTA / 收束语 */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 16px;
+  width: 100%;
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.35;
+  color: rgba(255,255,255,0.72);
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+/* ============================================
+ * Hook 场景专用 — 大字冲突
+ * ============================================ */
+.hook-stage {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+  text-align: center;
+}
+.hook-eyebrow {
+  font-size: 32px; font-weight: 600;
+  letter-spacing: 0.32em;
+  color: rgba(94,234,212,0.72);
+  font-family: var(--font-data);
+  text-transform: uppercase;
+}
+.hook-clash {
+  display: flex; flex-direction: column; gap: 18px;
+  align-items: center;
+}
+.hook-side {
+  font-size: 132px; font-weight: 900; line-height: 1.05;
+  font-family: var(--font-data);
+  letter-spacing: -0.02em;
+}
+.hook-side-warm {
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FB923C 50%, #FDBA74 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 18px rgba(251,146,60,0.4);
+}
+.hook-vs {
+  font-size: 56px; font-weight: 800;
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-data);
+  letter-spacing: 0.18em;
+}
+.hook-side-cool {
+  background-image: linear-gradient(135deg, #4DA8DA 0%, #60A5FA 50%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 18px rgba(96,165,250,0.4);
+}
+
+/* ============================================
+ * CTA 场景
+ * ============================================ */
+.cta-stage {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 36px;
+  text-align: center;
+}
+.cta-title {
+  font-size: 96px; font-weight: 900; line-height: 1.05;
+  font-family: var(--font-title);
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FDBA74 50%, #60A5FA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 5px 16px rgba(251,146,60,0.32);
+  letter-spacing: -0.01em;
+}
+.cta-question {
+  font-size: 56px; font-weight: 700; line-height: 1.25;
+  color: rgba(255,255,255,0.92);
+  font-family: var(--font-body);
+}
+.cta-options {
+  display: flex; gap: 36px; align-items: center;
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 700;
+  color: rgba(255,255,255,0.7);
+}
+.cta-options span:nth-child(2) {
+  color: rgba(94,234,212,0.6);
+  font-size: 36px;
+}
+
+/* 提示词网格（system_prompts phase-2 装饰） */
+.prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 780px;
+}
+.prompt-chip {
+  padding: 14px 18px;
+  background: rgba(168,85,247,0.12);
+  border: 1px solid rgba(168,85,247,0.35);
+  border-radius: 10px;
+  font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.82);
+  font-family: var(--font-data);
+  text-align: center;
+}
+
+/* 菜单栏模拟（CodexBar phase-2 装饰） */
+.menu-bar-mock {
+  width: 100%; max-width: 720px;
+  background: rgba(8,12,28,0.75);
+  border: 1.5px solid rgba(94,234,212,0.3);
+  border-radius: 12px;
+  padding: 16px 22px;
+  display: flex; flex-direction: column; gap: 10px;
+  backdrop-filter: blur(8px);
+}
+.menu-bar-head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-data);
+}
+.menu-bar-title {
+  font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.05em;
+}
+.menu-bar-led {
+  display: flex; gap: 8px;
+}
+.menu-bar-led i {
+  width: 12px; height: 12px; border-radius: 50%;
+  display: inline-block;
+}
+.menu-bar-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 32px; font-family: var(--font-data);
+  padding: 6px 0;
+}
+.menu-bar-row span:first-child {
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+.menu-bar-row span:last-child {
+  font-weight: 800;
+  font-size: 38px;
+  background-image: linear-gradient(135deg, #FF8C32, #FDBA74);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+
+/* 极速能量条（zvec phase-2 装饰） */
+.energy-bar {
+  width: 100%; max-width: 700px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.energy-row {
+  display: flex; align-items: center; gap: 18px;
+}
+.energy-label {
+  font-size: 32px; font-weight: 700; width: 200px;
+  font-family: var(--font-data);
+  color: rgba(255,255,255,0.7);
+}
+.energy-track {
+  flex: 1; height: 14px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.energy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4DA8DA, #00f5d4);
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,245,212,0.55);
+}
+.energy-val {
+  font-size: 36px; font-weight: 800; width: 110px; text-align: right;
+  font-family: var(--font-data);
+  background-image: linear-gradient(135deg, #4DA8DA, #00f5d4);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+
+/* 书签网格（karakeep phase-2 装饰） */
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 720px;
+}
+.bookmark-chip {
+  padding: 16px 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,180,90,0.28);
+  border-radius: 10px;
+  font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+  text-align: center;
+  font-family: var(--font-body);
+}
+.bookmark-chip.tag {
+  background: rgba(94,234,212,0.12);
+  border-color: rgba(94,234,212,0.4);
+  color: rgba(94,234,212,0.9);
+  font-family: var(--font-data);
+  font-size: 32px;
+}

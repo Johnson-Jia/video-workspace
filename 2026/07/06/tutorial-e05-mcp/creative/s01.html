@@ -1,0 +1,114 @@
+<!-- 场景: seg1 | 时长: ~52s | bg: hex_grid | MCP 网关 + CLI 优先 + 跳过判断决策卡 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-pulse" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);width:780px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:780px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:74%;left:50%;transform:translateX(-50%);width:820px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:74%;left:20%;width:320px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 16px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:74%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:74%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-mcp-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-purple-bg-inline">E05 · 段6</div>
+      <h1 class="title-h1"><span class="grad-purple">MCP 网关</span></h1>
+      <div class="title-sub">封装企业服务 · <span class="grad-gold">这集可以跳过</span></div>
+    </div>
+
+    <!-- 区域 2：MCP 网关流程（reveal 3，left） -->
+    <div class="tut-region tut-mcp-flow" data-reveal="3" data-reveal-dir="left">
+      <div class="flow-row">
+        <div class="flow-node fn-purple">
+          <div class="fn-icon">⚙</div>
+          <div class="fn-name grad-purple">企业内部服务</div>
+          <div class="fn-note">注册中心 / 内部 API</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-gold">
+          <div class="fn-icon">⇄</div>
+          <div class="fn-name grad-gold">MCP 零代码封装</div>
+          <div class="fn-note">工具定义常驻</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-blue">
+          <div class="fn-icon">●</div>
+          <div class="fn-name grad-blue">AI Agent 调用</div>
+          <div class="fn-note">无命令行等价物场景</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：CLI 优先提示（reveal 14，top） -->
+    <div class="tut-region tut-mcp-cli" data-reveal="14" data-reveal-dir="top">
+      <div class="cli-card">
+        <div class="cli-tag grad-blue-bg-inline">CLI 优先原则</div>
+        <div class="cli-main">
+          <span class="cm-key grad-blue">命令行能搞定</span>
+          <span class="cm-arrow">→</span>
+          <span class="cm-key grad-gold">别用 MCP</span>
+          <span class="cm-dot">·</span>
+          定义常驻 <span class="cm-key grad-red">烧 token</span>
+        </div>
+        <div class="cli-sub">gh · kubectl 能完成的就别封装</div>
+      </div>
+    </div>
+
+    <!-- 区域 4：跳过决策卡（reveal 24，fade） — 金边强调 -->
+    <div class="tut-region tut-mcp-skip" data-reveal="24" data-reveal-dir="fade">
+      <div class="skip-card">
+        <div class="skip-header">
+          <span class="skip-tag grad-gold-bg-inline">跳过判断 · 这集可以跳过</span>
+        </div>
+        <div class="skip-questions">
+          <div class="sq-item">
+            <span class="sq-q">代码库大？</span>
+            <span class="sq-a sq-no">单仓库几万行内</span>
+          </div>
+          <div class="sq-item">
+            <span class="sq-q">项目多？</span>
+            <span class="sq-a sq-no">无多仓库微服务</span>
+          </div>
+          <div class="sq-item">
+            <span class="sq-q">业务复杂？</span>
+            <span class="sq-a sq-no">知识不算复杂</span>
+          </div>
+        </div>
+        <div class="skip-verdict">
+          <div class="sv-line sv-skip">
+            <span class="sv-icon">✓</span>
+            <span class="sv-label">三都否则</span>
+            <span class="sv-action grad-green">直接跳过本阶段</span>
+            <span class="sv-tool">CLAUDE.md + grep + 良好代码组织</span>
+          </div>
+          <div class="sv-line sv-do">
+            <span class="sv-icon">!</span>
+            <span class="sv-label">大型组织</span>
+            <span class="sv-action grad-gold">才值得投入</span>
+            <span class="sv-tool">多仓库 · 百万行 · 复杂业务</span>
+          </div>
+          <div class="sv-fallback">
+            <span class="sf-label">跳过团队降级方案：</span>
+            <span class="sf-tool grad-green">grep + 人审 + git diff</span>
+            <span class="sf-note">能力降级 · 闭环能跑</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

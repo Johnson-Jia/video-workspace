@@ -1,0 +1,34 @@
+{
+  "topic_type": "周榜汇总/多领域分组",
+  "topic_pattern": "topic-weekly-digest",
+  "angle": "周榜视角+5大领域分组结构：以一周时间窗（06月29日-07月06日）+ 最高涨幅数字（一万多星）做钩子，按领域分类（AI Agent/记忆/视频/入口/隐私）做内容骨架，与日榜的'单日单领域'叙事差异化",
+  "novelty_strategy": {
+    "hook_角度": "数字锚定+周次时间窗（'第28周周榜，一周涨了一万多星'），避开近期 hook 主题（砍AI输入/单日涨星/个人vs大厂/方法论），换为'周时间窗+跨领域涨幅对比'",
+    "叙事结构": "领域分组式（5 分类并列）vs 日榜的'重点1-2项目展开'，周榜信息密度高、节奏快",
+    "项目呈现": "高频项目（strix/herdr/meetily/codex-plugin-cc）一句话带过不展开，留篇幅给新领域（视频图像/3D重建/AI入口）"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": {
+    "AI_Agent工具": "4（strix/herdr/orca/codex-plugin-cc）",
+    "AI记忆/代码理解": "2（codebase-memory-mcp/cognee）",
+    "视频图像": "3（OpenMontage/video-use/lingbot-map）",
+    "AI入口/网页": "3（OmniRoute/page-agent/ai-website-cloner）",
+    "安全隐私/效率": "2（simplex-chat/meetily）",
+    "多样性评估": "5大领域覆盖，AI类约8/13占多数但周榜视角可接受，A档普通可用5个（约38%）接近一半配比"
+  },
+  "avoid_recent": [
+    "usestrix/strix（近期高频，本期内一句话带过不展开）",
+    "ogulcancelik/herdr（近期高频，本期内一句话带过不展开）",
+    "Zackriya-Solutions/meetily（近期高频，本期内一句话带过不展开）",
+    "openai/codex-plugin-cc（近期高频，本期内一句话带过不展开）",
+    "alibaba/page-agent（近期高频，本期内适当简化）"
+  ],
+  "differentiation_check": {
+    "vs_近期日榜": "日榜=单日单领域1-2项目深度展开；本期=一周跨5领域13项目分组速览，叙事密度和结构完全不同",
+    "vs_近期hook": "近期hook主题为方法论/单日涨幅/AI会议；本期hook=周时间窗+周涨幅数字+跨领域，主题切换"
+  }
+}

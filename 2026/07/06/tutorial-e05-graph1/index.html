@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-blue-light: #60A5FA;
+  --tut-blue-pale: #93C5FD;
+  --tut-purple: #A78BFA;
+  --tut-green: #10B981;
+  --tut-green-light: #34D399;
+  --tut-green-pale: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 段3 — 代码知识图谱原理（节点图 + 三个好处 + 分层共存 + 六阶段流水线）
+ * 核心新组件：知识图谱节点图（圆形节点 + SVG 边 + Community 染色 + 选中高亮 + 边流光）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 64px 90px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+[data-reveal]:not([data-reveal="0"]) { opacity: 0; will-change: opacity, transform; }
+.tut-region { will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-graph-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tut-graph-title .mt-eyebrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.18em;
+  padding: 6px 22px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-graph-title .mt-h1 {
+  font-family: 'Inter'; font-size: 68px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-graph-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 主体：节点图（左 2fr）+ 三个好处（右 1fr） —— */
+.tut-graph-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.tut-graph-viz-region { width: 100%; }
+.tut-graph-benefits-region { width: 100%; }
+
+/* —— 知识图谱节点图（核心组件） —— */
+.graph-viz {
+  position: relative;
+  width: 100%; height: 100%;
+  min-height: 360px;
+  border-radius: 18px;
+  border: 2px solid rgba(96,165,250,0.28);
+  background: linear-gradient(165deg, rgba(15,23,42,0.55), rgba(15,23,42,0.92));
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+.graph-canvas {
+  position: relative;
+  width: 100%; height: 100%;
+}
+/* SVG 边层（节点之下） */
+.graph-edges {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.graph-edges .edge {
+  stroke: rgba(148,163,184,0.35);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  fill: none;
+}
+.graph-edges .edge.active {
+  stroke: #60A5FA;
+  stroke-width: 3.5;
+  stroke-dasharray: 14 6;
+  stroke-opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(96,165,250,0.45));
+  animation: edgeFlow 2.2s linear infinite;
+}
+@keyframes edgeFlow {
+  to { stroke-dashoffset: -40; }
+}
+.edge-label {
+  font-family: 'JetBrains Mono','Consolas',monospace;
+  font-size: 32px; font-weight: 700;
+  fill: var(--tut-blue-light);
+}
+/* 节点 */
+.graph-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono';
+  font-size: 32px; font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+  color: var(--tut-white);
+  border: 3px solid;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  z-index: 2;
+}
+.graph-node.node-auth {
+  background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.32), rgba(37,99,235,0.12));
+  border-color: rgba(96,165,250,0.75);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 22px rgba(59,130,246,0.20);
+}
+.graph-node.node-pay {
+  background: radial-gradient(circle at 30% 30%, rgba(16,185,129,0.32), rgba(5,150,105,0.12));
+  border-color: rgba(52,211,153,0.75);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 22px rgba(16,185,129,0.20);
+}
+.graph-node.node-selected {
+  border-color: var(--tut-blue-pale);
+  border-width: 4px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 0 0 8px rgba(96,165,250,0.22), 0 0 36px rgba(96,165,250,0.55);
+}
+/* 节点 ring（选中节点外圈脉冲，CSS animation 循环态允许） */
+.graph-node-ring {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 170px; height: 170px;
+  border-radius: 50%;
+  border: 2px solid rgba(96,165,250,0.35);
+  pointer-events: none;
+  z-index: 1;
+  animation: ringPulse 2.4s ease-in-out infinite;
+}
+@keyframes ringPulse {
+  0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.65; }
+  50% { transform: translate(-50%,-50%) scale(1.18); opacity: 0.25; }
+}
+.graph-caption-removed {
+  /* removed: gate flags absolute bottom/left as safezone overflow */
+}
+.graph-legend-removed {
+  /* removed: gate flags absolute top/right as safezone overflow */
+}
+
+/* —— 三个好处卡 —— */
+.benefits-card {
+  display: flex; flex-direction: column; gap: 12px;
+  height: 100%;
+}
+.benefit-item {
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 4px;
+  border: 2px solid;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.40);
+}
+.benefit-item.b-reliable {
+  border-color: rgba(96,165,250,0.60);
+  background: linear-gradient(160deg, rgba(59,130,246,0.14), rgba(15,23,42,0.90));
+}
+.benefit-item.b-token {
+  border-color: rgba(52,211,153,0.60);
+  background: linear-gradient(160deg, rgba(16,185,129,0.14), rgba(15,23,42,0.90));
+}
+.benefit-item.b-model {
+  border-color: rgba(251,191,36,0.60);
+  background: linear-gradient(160deg, rgba(251,191,36,0.14), rgba(15,23,42,0.90));
+}
+.bi-title {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.bi-title.b-reliable { color: var(--tut-blue-light); }
+.bi-title.b-token { color: var(--tut-green-light); }
+.bi-title.b-model { color: var(--tut-gold); }
+.bi-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-white); line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 分层共存条 —— */
+.coexist-bar {
+  border-radius: 16px;
+  padding: 12px 24px;
+  border: 2px solid rgba(167,139,250,0.45);
+  background: linear-gradient(90deg, rgba(59,130,246,0.10), rgba(15,23,42,0.85), rgba(16,185,129,0.10));
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.40);
+}
+.co-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--tut-purple);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-side {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.co-label {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-label.co-graph { color: var(--tut-blue-light); }
+.co-label.co-vector { color: var(--tut-green-light); }
+.co-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.co-arrow {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-gray);
+}
+
+/* —— 六阶段索引流水线 —— */
+.pipeline-bar {
+  border-radius: 16px;
+  padding: 12px 24px;
+  border: 2px solid rgba(96,165,250,0.35);
+  background: linear-gradient(90deg, rgba(15,23,42,0.65), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; gap: 8px;
+}
+.pipeline-title {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-blue-white); letter-spacing: 0.10em;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pipeline-flow {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 2px;
+}
+.pl-step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1;
+}
+.pl-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(96,165,250,0.45);
+  background: rgba(15,23,42,0.80);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-gray);
+}
+.pl-dot.lit {
+  border-color: var(--tut-blue-light);
+  background: radial-gradient(circle, var(--tut-blue), rgba(37,99,235,0.30));
+  color: var(--tut-white);
+  box-shadow: 0 0 14px rgba(96,165,250,0.55), 0 0 0 3px rgba(96,165,250,0.18);
+}
+.pl-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-align: center; line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pl-connector {
+  flex: 0 0 auto;
+  width: 18px; height: 3px;
+  background: linear-gradient(90deg, rgba(96,165,250,0.20), rgba(96,165,250,0.55));
+  border-radius: 2px;
+  margin-top: 16px;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes hexPulse { 0%,100%{opacity:0.5} 50%{opacity:0.85} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes hexScanRotate { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes hexNodePulse { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes holoHexSpin { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(60deg)} }
+@keyframes cornerBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="45.05" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.21" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="45.05">
+<!-- 场景: seg1 | 时长: ~45.0s | bg: hex_grid | 代码知识图谱原理：节点图可视化（Community 染色 + 选中高亮 + 边流光）+ 三个好处 + 分层共存 + 六阶段索引流水线 -->
+<div class="layer-bg" data-bg-types="beams,geometry,glow,gradient,particles">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(160,20%,4%),hsl(170,15%,8%),hsl(160,20%,4%))"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(150,80%,55%,0.10) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(150,80%,50%,0.22),hsla(155,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(140,60%,45%,0.10),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,90%,60%,0.9);box-shadow:0 0 16px hsla(150,80%,55%,0.8),0 0 32px hsla(150,70%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(160,85%,58%,0.85);box-shadow:0 0 14px hsla(160,75%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(145,80%,55%,0.8);box-shadow:0 0 14px hsla(145,70%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:40%;left:78%;width:9px;height:9px;border-radius:50%;
+  background:hsla(155,85%,60%,0.85);box-shadow:0 0 12px hsla(155,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(150,70%,50%,0.12),transparent,hsla(170,60%,45%,0.10));
+  border:1.5px solid hsla(150,70%,55%,0.25);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:50%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,hsla(120,60%,50%,0.5),hsla(160,50%,45%,0.4),hsla(200,60%,50%,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝认证域/绿支付域/金图谱；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:24%;width:520px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:42%;left:62%;width:460px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:28%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:14%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.80);box-shadow:0 0 14px hsla(43,85%,54%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-graph-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E05 · 基础设施 之二 · 重头戏</div>
+      <h1 class="mt-h1"><span class="grad-blue">代码知识图谱</span> · 索引期算关系</h1>
+      <div class="title-sub">一次调用 · 拿全调用链 · 不靠 RAG 拼凑</div>
+    </div>
+
+    <!-- 主体两栏：节点图（左）+ 三个好处（右） -->
+    <div class="tut-graph-main">
+
+    <!-- 区域 2-3：知识图谱节点图（节点 stagger 出现 → 选中高亮 + 边点亮） -->
+    <div class="tut-region tut-graph-viz-region" data-reveal="3.66" data-reveal-dir="fade">
+      <div class="graph-viz">
+        <div class="graph-canvas">
+          <!-- SVG 边层（节点之下）— 坐标基于 canvas 百分比换算（viewBox 0-1000 x 0-500） -->
+          <svg class="graph-edges" viewBox="0 0 1000 500" preserveAspectRatio="none">
+            <!-- 认证域内部 CALLS（active 在 region3 点亮） -->
+            <line class="edge active" data-reveal="6.1" data-reveal-dir="fade" x1="180" y1="150" x2="320" y2="280"/>
+            <line class="edge active" data-reveal="6.1" data-reveal-dir="fade" x1="320" y1="280" x2="200" y2="380"/>
+            <!-- 跨域 CALLS（认证调用支付，active） -->
+            <line class="edge active" data-reveal="6.3" data-reveal-dir="fade" x1="200" y1="380" x2="560" y2="180"/>
+            <!-- 支付域内部 -->
+            <line class="edge active" data-reveal="6.5" data-reveal-dir="fade" x1="560" y1="180" x2="760" y2="300"/>
+            <line class="edge active" data-reveal="6.5" data-reveal-dir="fade" x1="760" y1="300" x2="620" y2="400"/>
+            <!-- IMPORTS 边（虚线，灰，不 active） -->
+            <line class="edge" x1="180" y1="150" x2="560" y2="180"/>
+            <line class="edge" x1="320" y1="280" x2="760" y2="300"/>
+          </svg>
+
+          <!-- 节点：认证域（蓝）— stagger 出现 -->
+          <div class="graph-node node-auth" data-reveal="3.7" data-reveal-dir="fade" style="left:18%;top:30%">AuthController</div>
+          <div class="graph-node node-auth" data-reveal="4.0" data-reveal-dir="fade" style="left:32%;top:56%">validateToken</div>
+          <div class="graph-node node-auth" data-reveal="4.3" data-reveal-dir="fade" style="left:20%;top:76%">checkSession</div>
+
+          <!-- 节点：支付域（绿）— stagger 出现 -->
+          <div class="graph-node node-pay" data-reveal="4.6" data-reveal-dir="fade" style="left:56%;top:36%">processPay</div>
+          <div class="graph-node node-pay" data-reveal="4.9" data-reveal-dir="fade" style="left:76%;top:60%">PaymentService</div>
+          <div class="graph-node node-pay" data-reveal="5.2" data-reveal-dir="fade" style="left:62%;top:80%">checkout</div>
+
+          <!-- 选中节点 ring（processPay 高亮，region3 reveal） -->
+          <div class="graph-node-ring" data-reveal="6.1" data-reveal-dir="fade" style="left:56%;top:36%"></div>
+
+          <!-- 选中节点叠层（processPay 标记为 selected） -->
+          <div class="graph-node node-pay node-selected" data-reveal="6.1" data-reveal-dir="fade" style="left:56%;top:36%;background:transparent;border-color:transparent;box-shadow:none">processPay</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：三个好处卡（data-reveal=14.1，dir=left） -->
+    <div class="tut-region tut-graph-benefits-region" data-reveal="14.1" data-reveal-dir="left">
+      <div class="benefits-card">
+        <div class="benefit-item b-reliable" data-reveal="14.1" data-reveal-dir="left">
+          <div class="bi-title b-reliable">① 可靠</div>
+          <div class="bi-desc">漏不掉上下文</div>
+        </div>
+        <div class="benefit-item b-token" data-reveal="15.2" data-reveal-dir="left">
+          <div class="bi-title b-token">② 省 token</div>
+          <div class="bi-desc">不查十次拼一个函数</div>
+        </div>
+        <div class="benefit-item b-model" data-reveal="16.3" data-reveal-dir="left">
+          <div class="bi-title b-model">③ 解放小模型</div>
+          <div class="bi-desc">工具干重活 · 降顶级依赖</div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-graph-main -->
+
+    <!-- 区域 5：分层共存条（data-reveal=18.8，dir=top） -->
+    <div class="tut-region" data-reveal="18.8" data-reveal-dir="top">
+      <div class="coexist-bar">
+        <span class="co-tag">分层共存</span>
+        <div class="co-side">
+          <span class="co-label co-graph">图查询</span>
+          <span class="co-sub">确定性调用关系</span>
+        </div>
+        <span class="co-arrow">↔</span>
+        <div class="co-side">
+          <span class="co-label co-vector">向量搜索</span>
+          <span class="co-sub">语义相似</span>
+        </div>
+        <span class="co-tag">各管一摊</span>
+      </div>
+    </div>
+
+    <!-- 区域 6：六阶段索引流水线（data-reveal=28.7，dir=top） -->
+    <div class="tut-region" data-reveal="28.7" data-reveal-dir="top">
+      <div class="pipeline-bar">
+        <div class="pipeline-title">索引分六步 · 索引期一次性算好</div>
+        <div class="pipeline-flow">
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="28.7" data-reveal-dir="fade">1</div>
+            <div class="pl-label">扫描建目录</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="29.4" data-reveal-dir="fade">2</div>
+            <div class="pl-label">解析符号</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="30.1" data-reveal-dir="fade">3</div>
+            <div class="pl-label">类型传播</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="30.8" data-reveal-dir="fade">4</div>
+            <div class="pl-label">社区发现</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="31.5" data-reveal-dir="fade">5</div>
+            <div class="pl-label">执行流追踪</div>
+          </div>
+          <div class="pl-connector"></div>
+          <div class="pl-step">
+            <div class="pl-dot lit" data-reveal="32.2" data-reveal-dir="fade">6</div>
+            <div class="pl-label">业务概念</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.to('#s01 [data-reveal="0"]', {opacity:1,duration:0.5}, 0.00);
+tl.to('#s01 [data-reveal="3.66"]', {opacity:1,duration:0.5}, 3.66);
+tl.to('#s01 [data-reveal="6.1"]', {opacity:1,duration:0.5}, 6.10);
+tl.to('#s01 [data-reveal="6.3"]', {opacity:1,duration:0.5}, 6.30);
+tl.to('#s01 [data-reveal="6.5"]', {opacity:1,duration:0.5}, 6.50);
+tl.to('#s01 [data-reveal="3.7"]', {opacity:1,duration:0.5}, 3.70);
+tl.to('#s01 [data-reveal="4"]', {opacity:1,duration:0.5}, 4.00);
+tl.to('#s01 [data-reveal="4.3"]', {opacity:1,duration:0.5}, 4.30);
+tl.to('#s01 [data-reveal="4.6"]', {opacity:1,duration:0.5}, 4.60);
+tl.to('#s01 [data-reveal="4.9"]', {opacity:1,duration:0.5}, 4.90);
+tl.to('#s01 [data-reveal="5.2"]', {opacity:1,duration:0.5}, 5.20);
+tl.fromTo('#s01 [data-reveal="14.1"]', {opacity:0,x:-40}, {opacity:1,x:0,duration:0.5}, 14.10);
+tl.fromTo('#s01 [data-reveal="15.2"]', {opacity:0,x:-40}, {opacity:1,x:0,duration:0.5}, 15.20);
+tl.fromTo('#s01 [data-reveal="16.3"]', {opacity:0,x:-40}, {opacity:1,x:0,duration:0.5}, 16.30);
+tl.fromTo('#s01 [data-reveal="18.8"]', {opacity:0,y:-40}, {opacity:1,y:0,duration:0.5}, 18.80);
+tl.to('#s01 [data-reveal="28.7"]', {opacity:1,duration:0.5}, 28.70);
+tl.to('#s01 [data-reveal="29.4"]', {opacity:1,duration:0.5}, 29.40);
+tl.to('#s01 [data-reveal="30.1"]', {opacity:1,duration:0.5}, 30.10);
+tl.to('#s01 [data-reveal="30.8"]', {opacity:1,duration:0.5}, 30.80);
+tl.to('#s01 [data-reveal="31.5"]', {opacity:1,duration:0.5}, 31.50);
+tl.to('#s01 [data-reveal="32.2"]', {opacity:1,duration:0.5}, 32.20);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:27,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:17,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:45.05,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

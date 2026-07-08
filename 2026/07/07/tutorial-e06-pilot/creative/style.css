@@ -1,0 +1,239 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 段2 — 试点设计（横屏 reveal §6.16）
+ * bg: dark_cipher（代码矩阵，冷调蓝紫覆盖）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 12px;
+  padding: 72px 90px 64px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#C4B5FD 0%,#DDD6FE 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— dark_cipher bg（冷调蓝紫，覆盖原红） —— */
+.bg-dc-base {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, #1E2A5E 0%, #0F172A 55%, #080818 100%);
+}
+.bg-dc-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(96,165,250,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96,165,250,0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.6;
+}
+.bg-dc-rain {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 3px, rgba(96,165,250,0.025) 3px, rgba(96,165,250,0.025) 4px);
+  opacity: 0.5;
+}
+.bg-dc-fog {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+  background: linear-gradient(to top, rgba(30,42,94,0.35) 0%, transparent 100%);
+}
+
+/* —— 区域 1：标题 —— 左对齐建立视觉锚点 */
+.tut-pilot-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-pilot-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-pilot-title .title-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-pilot-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-pilot-title .title-lead {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(224,231,255,0.78); margin-top: 2px;
+}
+
+/* —— 区域 2：选谁 + 反例 —— 撑满画布宽度 */
+.tut-pilot-who { width: 100%; }
+.card-row {
+  display: flex; flex-direction: row; align-items: stretch; gap: 16px;
+  justify-content: stretch;
+  width: 100%;
+}
+.dec-card {
+  border-radius: 16px; padding: 14px 22px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; gap: 8px;
+  flex: 1;
+}
+.dc-blue {
+  border-color: rgba(147,197,253,0.65);
+  background: linear-gradient(135deg, rgba(59,130,246,0.13), rgba(15,23,42,0.88));
+}
+.dc-head { display: flex; align-items: center; }
+.dc-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.dc-body { display: flex; flex-direction: column; gap: 4px; }
+.dc-line {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  display: flex; align-items: center; gap: 10px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.dc-check {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-blue);
+}
+.dec-anti {
+  border-radius: 14px; padding: 12px 18px;
+  border: 2px solid rgba(248,113,113,0.55);
+  background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(15,23,42,0.85));
+  display: flex; flex-direction: row; align-items: center; gap: 14px;
+  flex: 1;
+}
+.anti-tag {
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 900;
+  color: #F87171; line-height: 1;
+}
+.anti-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.82); line-height: 1.25;
+}
+
+/* —— 区域 3：多大 —— 撑满宽度 */
+.tut-pilot-size { width: 100%; display: flex; }
+.size-card {
+  border-radius: 16px; padding: 12px 24px;
+  border: 2.5px solid rgba(167,139,250,0.60);
+  background: linear-gradient(90deg, rgba(167,139,250,0.12), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 100%;
+}
+.size-head { display: flex; }
+.size-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; width: 100%;
+}
+.size-cell {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(167,139,250,0.08);
+}
+.size-num {
+  font-family: 'JetBrains Mono'; font-size: 42px; font-weight: 900; line-height: 1;
+}
+.size-lbl {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 4：成功标准 checklist —— 撑满宽度 */
+.tut-pilot-success { width: 100%; display: flex; }
+.succ-card {
+  border-radius: 16px; padding: 12px 24px;
+  border: 2.5px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.12), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 100%;
+}
+.succ-head { display: flex; }
+.succ-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; width: 100%;
+}
+.succ-item {
+  display: flex; flex-direction: row; align-items: center; gap: 10px;
+  padding: 6px 10px; border-radius: 10px;
+  background: rgba(251,191,36,0.08);
+}
+.succ-box {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-gold); line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.succ-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 5：止损金句 —— 撑满宽度 */
+.tut-pilot-stop { width: 100%; display: flex; }
+.stop-card {
+  border-radius: 16px; padding: 12px 30px;
+  border: 2.5px solid rgba(110,231,183,0.65);
+  background: linear-gradient(90deg, rgba(16,185,129,0.13), rgba(15,23,42,0.88), rgba(110,231,183,0.10));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  width: 100%;
+}
+.stop-card .stop-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.stop-quote {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.stop-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(224,231,255,0.78);
+}

@@ -1,0 +1,76 @@
+<!-- 场景: seg1 | 时长: ~46s | bg: clean_slate | 原理⑥ 精准指令 + 人是根本 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（红差/绿好 → 蓝收束）脉冲呼吸 -->
+  <div class="fx-pulse" style="position:absolute;top:28%;left:24%;width:480px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,75%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:28%;right:24%;width:480px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,48%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;bottom:14%;left:50%;transform:translateX(-50%);width:620px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,80%,60%,0.85);box-shadow:0 0 16px hsla(43,75%,54%,0.55)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0） -->
+    <div class="tut-region tut-instruct-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="it-eyebrow">原理 ⑥ · 精准交互的起手式</div>
+      <h1 class="it-h1"><span class="grad-blue">精准下达指令</span></h1>
+    </div>
+
+    <!-- 区域 2：差 vs 好指令对比（data-reveal=6，从左滑入） -->
+    <div class="tut-region tut-cmd-cols" data-reveal="6" data-reveal-dir="left">
+      <div class="cmd-col cmd-col-bad">
+        <div class="cmd-head"><span class="cmd-x">✗</span> 差的指令</div>
+        <div class="cmd-quote">"帮我优化一下这个功能"</div>
+        <div class="cmd-tags">
+          <span class="cmd-tag">没上下文</span>
+          <span class="cmd-tag">没目标</span>
+          <span class="cmd-tag">没验证</span>
+        </div>
+      </div>
+      <div class="cmd-col cmd-col-good">
+        <div class="cmd-head"><span class="cmd-v">✓</span> 好的指令</div>
+        <div class="cmd-quote cmd-quote-good">"接口慢 SQL <span class="hl-num">18秒</span>，附执行计划，目标降到 <span class="hl-num">1秒内</span>，先分析瓶颈给方案，确认后再改，改完用 EXPLAIN 验证"</div>
+        <div class="cmd-tags">
+          <span class="cmd-tag cmd-tag-good">给现状</span>
+          <span class="cmd-tag cmd-tag-good">明目标</span>
+          <span class="cmd-tag cmd-tag-good">定流程</span>
+          <span class="cmd-tag cmd-tag-good">要验证</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：金句卡（data-reveal=26，从下浮现） -->
+    <div class="tut-region tut-quote" data-reveal="26" data-reveal-dir="top">
+      <span class="tq-icon">🎯</span>
+      <div class="tq-body">
+        <div class="tq-line1">像给聪明的<strong class="grad-gold tq-hl">实习生</strong>下指令</div>
+        <div class="tq-line2">给上下文 · 明目标 · 定流程 · 要验证</div>
+      </div>
+    </div>
+
+    <!-- 区域 4：收尾（data-reveal=40，fade） -->
+    <div class="tut-region tut-closing" data-reveal="40" data-reveal-dir="fade">
+      <div class="tc-main"><span class="tc-human">人</span> <span class="tc-plus">+</span> <span class="tc-ai grad-blue">AI</span> <span class="tc-eq">·</span> <span class="tc-root grad-gold">人是根本</span></div>
+      <div class="tc-sub">AI 放大的是会用 AI 的人 · 人的能力边界决定 AI 产出上限</div>
+      <div class="tc-principles">
+        <span class="tcp">① token</span><span class="tcp-sep">·</span>
+        <span class="tcp">② 上下文</span><span class="tcp-sep">·</span>
+        <span class="tcp">③ Agent</span><span class="tcp-sep">·</span>
+        <span class="tcp">④ REACT</span><span class="tcp-sep">·</span>
+        <span class="tcp">⑤ 指令</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

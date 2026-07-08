@@ -1,0 +1,44 @@
+{
+  "topic_type": "工具/效率",
+  "topic_pattern": "topic-tool",
+  "angle": "反直觉省 token 钩子（caveman 穴居人说话砍 65% token）→ 围绕'省力气/换个角度看开发工具'展开：token 优化 / 代码图谱 / 终端多路复用 / 设计系统 / 自托管游戏库 / 系统教材",
+  "novelty_strategy": {
+    "hook_anchor": "反直觉/冲突（优先级1）——caveman 用穴居人方式说话省 65% token，天然含利益（省成本）",
+    "differentiation": "换主题：近几期 hook 是'AI 替你干活'/'杀入榜单'/'数据集凑齐'——本期换成'反常识省 token'单点爆点钩子（非聚合型），叙事用 hyper-pace 盘点但 hook 走单点反直觉；数字锚点用 65%（token 节省）替代近期的'N 个项目/千星'",
+    "narrative_shift": "昨日 6 项目全是 AI Agent/工具聚合，本期项目类型分散到：开发工具链(caveman/graphify/herdr) + UI 设计(astryx) + 自托管娱乐(romm) + 学习教材(cs249r)——6 个不同方向，避免 Agent 扎堆"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "开发工具 3 (caveman/graphify/herdr) + UI 设计系统 1 (astryx) + 自托管应用 1 (romm) + 学习教材 1 (cs249r) — 4 个不同领域，避免单一 AI Agent 扎堆",
+  "avoid_recent": [
+    "usestrix/strix — 昨日已详报，本期降权不展开（合规中性化难度 + 连续霸榜）",
+    "obra/superpowers — 连续霸榜，本期不选",
+    "hasaneyldrm/exercises-dataset — 昨日已详报",
+    "browser-use/video-use — 昨日已详报",
+    "affaan-m/ECC — 昨日已详报",
+    "santifer/career-ops — 昨日已详报",
+    "msitarzewski/agency-agents — 昨日 rank 3 已上榜，今日虽 +1202 但避免重复，本期不展开",
+    "agentskills/agentskills — 连续霸榜，本期不选",
+    "openai/codex-plugin-cc — 连续霸榜，本期不选"
+  ],
+  "selected_projects": [
+    {"full_name": "JuliusBrussee/caveman", "rank": 3, "reason": "钩子潜力 1 — 单日 +2851 涨幅最高，'穴居人说话省 65% token' 反直觉极强，天然含利益翻译", "audience": "B"},
+    {"full_name": "safishamsi/graphify", "rank": 13, "reason": "新上榜 +937 — 把代码库/SQL/文档变可查询知识图谱，开发者工具反直觉（一个文件夹变一张图）", "audience": "B"},
+    {"full_name": "ogulcancelik/herdr", "rank": 15, "reason": "新上榜 +513 — Rust 写的终端 agent 多路复用器（tmux for AI agents），多 agent 并行管理", "audience": "B"},
+    {"full_name": "facebook/astryx", "rank": 8, "reason": "新上榜 +943 — 大厂开源的可定制设计系统，前端开发者直接用", "audience": "A"},
+    {"full_name": "rommapp/romm", "rank": 9, "reason": "跨圈补充 +236 — 自托管 ROM 游戏库管理器，Docker 一键部署 GUI 应用，怀旧游戏玩家向", "audience": "A"},
+    {"full_name": "harvard-edge/cs249r_book", "rank": 10, "reason": "连续霸榜快速带过 — 机器学习系统开源教材，浏览器可读", "audience": "A"}
+  ],
+  "audience_distribution": {"A": 3, "B": 3, "C": 0},
+  "authenticity_check": {
+    "JuliusBrussee/caveman": "82.9K★/4.6K fork=18:1 正常；JS 真实项目，emoji+完整 README，topics 完整 → 通过",
+    "safishamsi/graphify": "77K★/7.6K fork=10:1 正常；Python 项目，topics 详尽 → 通过",
+    "ogulcancelik/herdr": "10.7K★/636 fork=17:1 正常；Rust 项目，topics 完整 → 通过",
+    "facebook/astryx": "4.5K★/267 fork=17:1；facebook 官方账号(owner u/69631) 背书，新项目起步阶段 → 通过(warning: 星总数偏低但官方账号可信)",
+    "rommapp/romm": "9.8K★/473 fork=21:1 正常；Python 自托管应用，Docker 部署，topics 完整 → 通过",
+    "harvard-edge/cs249r_book": "26K★/3.1K fork=8:1 正常；教材项目，topics 详尽 → 通过"
+  }
+}

@@ -1,0 +1,59 @@
+<!-- 场景: seg1 | 时长: ~32s | bg: clean_slate | CTA：E03 预告 + 合集引导 + 互动 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（金预告/蓝合集/绿互动）脉冲呼吸 -->
+  <div class="fx-pulse" style="position:absolute;top:20%;left:20%;width:520px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:46%;right:22%;width:480px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;bottom:14%;left:50%;transform:translateX(-50%);width:560px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,48%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;right:24%;width:12px;height:12px;border-radius:50%;background:hsla(43,80%,60%,0.85);box-shadow:0 0 16px hsla(43,75%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.78);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：E03 预告卡（data-reveal=0） -->
+    <div class="tut-region tut-cta-next" data-reveal="0" data-reveal-dir="fade">
+      <div class="cn-eyebrow">下集预告 · E03</div>
+      <h2 class="cn-title"><span class="grad-gold">战略启动</span></h2>
+      <div class="cn-subtitle">怎么向老板要预算</div>
+      <div class="cn-points">
+        <span class="cn-pt"><span class="cn-pt-ico">📊</span> 算 ROI</span>
+        <span class="cn-pt-sep">·</span>
+        <span class="cn-pt"><span class="cn-pt-ico">💬</span> 老板三问</span>
+      </div>
+      <div class="cn-warn">预算批不下来，转型就停在嘴上</div>
+    </div>
+
+    <!-- 区域 2：合集引导（data-reveal=9，从下浮现） -->
+    <div class="tut-region tut-cta-series" data-reveal="9" data-reveal-dir="top">
+      <div class="cs-head grad-blue">合集 · 12 集深度解析</div>
+      <div class="cs-from">总纲 → 六个实施阶段 · 逐集拆</div>
+      <div class="cs-actions">
+        <span class="cs-act cs-act-follow"><span class="cs-ico">⭐</span> 点关注不走丢</span>
+        <span class="cs-act cs-act-repo"><span class="cs-ico">📦</span> 教程仓库在评论区</span>
+      </div>
+    </div>
+
+    <!-- 区域 3：互动问题（data-reveal=18，fade） -->
+    <div class="tut-region tut-cta-question" data-reveal="18" data-reveal-dir="fade">
+      <div class="cq-icon">💬</div>
+      <div class="cq-body">
+        <div class="cq-line">你团队里，<span class="cq-hl grad-gold">谁还在抗拒 AI</span>？</div>
+        <div class="cq-line">谁<span class="cq-hl grad-green">已经在用</span>？</div>
+        <div class="cq-tail">这差距，半年后会变成什么？</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

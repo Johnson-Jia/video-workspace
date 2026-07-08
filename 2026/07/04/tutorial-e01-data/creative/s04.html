@@ -1,0 +1,58 @@
+<!-- 场景: scene-4 | 相关性非因果（诚信底线）| 时长: 28.94s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg" data-bg-types="gradient,beams,glow,particles,noise">
+<!-- bg-component: gradient_mesh -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:20%;left:14%;width:320px;height:320px;background:radial-gradient(circle,rgba(148,163,184,0.22),transparent 70%);"></div>
+  <div class="fx-aura" style="top:70%;right:12%;width:300px;height:300px;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);"></div>
+  <div class="fx-particle" style="top:32%;left:82%;width:7px;height:7px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:64%;left:18%;width:8px;height:8px;background:rgba(148,163,184,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 3 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区（灰色诚信色） — narration「但要诚实讲：这是转型前后对比观察，相关性不等于因果」 -->
+  <div class="tut-region tut-hero gray" data-reveal="0" data-reveal-dir="left">
+    <span class="tut-eyebrow">诚信底线</span>
+    <div class="tut-title">相关性非因果</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 诚实标注双栏 — narration「不能 100% 归功 AI——需求变化、人员调整同期...别误读成上了 AI 就涨 104%」 -->
+  <div class="tut-region tut-compare" data-reveal="11" data-reveal-dir="left">
+    <div class="tut-col gray">
+      <span class="col-tag">相关性 ≠ 因果</span>
+      <div class="col-h">不能 100% 归功 AI</div>
+      <ul class="col-list">
+        <li>需求变化同期发生</li>
+        <li>人员调整同期进行</li>
+        <li>每团队基线不同</li>
+      </ul>
+      <span class="col-pill">不是因果保证</span>
+    </div>
+    <div class="tut-col gold">
+      <span class="col-tag">但量级足够</span>
+      <div class="col-h">强相关参考样本</div>
+      <ul class="col-list">
+        <li>量级足以说明强相关</li>
+        <li>80+ 人 · 206 仓库样本</li>
+        <li>有数据 · 有口径 · 有底线</li>
+      </ul>
+      <span class="col-pill">参考样本 · 非承诺</span>
+    </div>
+  </div>
+
+  <!-- Region 3: 金句区 — narration「不吹、不藏、不归功过头...是参考样本，不是承诺模板」 -->
+  <div class="tut-region tut-quote" data-reveal="16" data-reveal-dir="left">
+    <div class="quote-main">
+      不吹<span class="quote-sep">·</span>不藏<span class="quote-sep">·</span>不归功过头
+    </div>
+    <div class="quote-sub">相关性证明 ≠ 因果保证 · 参考样本 ≠ 承诺模板</div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 可选：cinema 后处理原语 -->
+</div>

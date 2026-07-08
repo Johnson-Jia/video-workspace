@@ -1,0 +1,100 @@
+<!-- 场景: seg1 | 时长: ~34s | bg: clean_slate | 预算 4 块成本（工具/培训/基础设施/推广 · 2×2 grid） -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 多色静态光晕（蓝工具 / 紫培训 / 橙基础设施 / 绿推广；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:24%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:30%;right:24%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:62%;left:24%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(28,95%,62%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:62%;right:24%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.22);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:30%;left:12%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:30%;right:12%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.75);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:62%;left:12%;width:10px;height:10px;border-radius:50%;background:hsla(28,95%,60%,0.22);box-shadow:0 0 14px hsla(28,90%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:62%;right:12%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 5 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-cost-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-num grad-gold-bg-inline">预算</div>
+      <h1 class="mt-h1">4 块成本</h1>
+      <div class="title-sub">立项要算清要多少钱</div>
+    </div>
+
+    <!-- 区域 2：成本卡①工具/API（data-reveal=4，dir=left） -->
+    <div class="tut-region tut-cost-grid" data-reveal="4" data-reveal-dir="left">
+      <div class="cost-grid">
+        <div class="cost-card cost-tools">
+          <div class="cost-head">
+            <span class="cost-num cost-num-blue">①</span>
+            <span class="cost-name grad-blue">工具 / API</span>
+          </div>
+          <div class="cost-formula">人均月费 × 人数 × 月数</div>
+          <div class="cost-items">
+            <div class="cost-item"><span class="ci-mark ci-dot-blue">●</span>Claude Code 订阅</div>
+            <div class="cost-item"><span class="ci-mark ci-dot-blue">●</span>模型调用计费</div>
+          </div>
+        </div>
+
+        <div class="cost-card cost-train">
+          <div class="cost-head">
+            <span class="cost-num cost-num-purple">②</span>
+            <span class="cost-name grad-purple">培训</span>
+          </div>
+          <div class="cost-formula">2 天全员脱产 + 讲师</div>
+          <div class="cost-items">
+            <div class="cost-item"><span class="ci-mark ci-dot-purple">●</span>工时成本</div>
+            <div class="cost-item"><span class="ci-mark ci-dot-purple">●</span>讲师费用</div>
+          </div>
+        </div>
+
+        <div class="cost-card cost-infra">
+          <div class="cost-head">
+            <span class="cost-num cost-num-orange">③</span>
+            <span class="cost-name grad-orange">基础设施</span>
+            <span class="cost-badge">小团队可跳过</span>
+          </div>
+          <div class="cost-formula">大团队才需要</div>
+          <div class="cost-items">
+            <div class="cost-item"><span class="ci-mark ci-dot-orange">●</span>RAG / 知识图谱服务器</div>
+            <div class="cost-item"><span class="ci-mark ci-dot-orange">●</span>架构师人力</div>
+          </div>
+        </div>
+
+        <div class="cost-card cost-promo">
+          <div class="cost-head">
+            <span class="cost-num cost-num-green">④</span>
+            <span class="cost-name grad-green">推广运营</span>
+          </div>
+          <div class="cost-formula">轻量 · 持续</div>
+          <div class="cost-items">
+            <div class="cost-item"><span class="ci-mark ci-dot-green">●</span>度量工具</div>
+            <div class="cost-item"><span class="ci-mark ci-dot-green">●</span>试点激励 · 考核绑定</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：收束「四块 = 总投入」（data-reveal=26，dir=top） -->
+    <div class="tut-region tut-cost-sum" data-reveal="26" data-reveal-dir="top">
+      <div class="sum-line">
+        <span class="sum-side">工具 + 培训 + 基础设施 + 推广</span>
+        <span class="sum-eq">=</span>
+        <span class="grad-gold sum-total">总投入</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

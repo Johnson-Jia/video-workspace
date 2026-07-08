@@ -1,0 +1,68 @@
+<!-- 场景: seg1 | 时长: ~35s | bg: clean_slate | 原理③ 上下文 1M：约束原点 + 桶填充 + 四条实践 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（金=1M 大 / 绿=实践落地；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:32%;left:30%;width:620px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:32%;right:24%;width:620px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:16%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.75);box-shadow:0 0 14px hsla(43,75%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:16%;right:22%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.75);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0） -->
+    <div class="tut-region tut-ctx-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="ct-eyebrow">原理 ③ · 约束原点</div>
+      <h1 class="ct-h1 grad-blue">上下文 1M</h1>
+    </div>
+
+    <!-- 区域 2：上下文桶 + count-up 填充（data-reveal=5，整体从左滑入） -->
+    <div class="tut-region tut-ctx-bucket" data-reveal="5" data-reveal-dir="left">
+      <!-- 桶形容器（左：桶 + 填充度 count-up；右：三大撑爆源） -->
+      <div class="cb-bucket-side">
+        <div class="cb-bucket">
+          <div class="cb-bucket-label">上下文窗口</div>
+          <div class="cb-bucket-num grad-gold">1M</div>
+          <div class="cb-bucket-unit">token · 一百万</div>
+          <div class="cb-fill-row">
+            <span class="cb-count" data-count-to="100" data-count-at="7">0</span>
+            <span class="cb-pct">%</span>
+            <span class="cb-warn">· 撑爆</span>
+          </div>
+        </div>
+      </div>
+      <div class="cb-sources-side">
+        <div class="cb-sources-head">三大撑爆源</div>
+        <div class="cb-source"><span class="cb-src-icon">❶</span> 大代码库</div>
+        <div class="cb-source"><span class="cb-src-icon">❷</span> 长会话</div>
+        <div class="cb-source"><span class="cb-src-icon">❸</span> MCP 工具定义</div>
+        <div class="cb-sources-foot">填满 → 性能下降</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：最佳实践清单（data-reveal=16，从下滑入） -->
+    <div class="tut-region tut-ctx-practices" data-reveal="16" data-reveal-dir="top">
+      <div class="cp-head">最佳实践 · 围着这一个约束转</div>
+      <div class="cp-pills">
+        <div class="cp-pill">精简 CLAUDE.md</div>
+        <div class="cp-pill">按需 Skill</div>
+        <div class="cp-pill">干净会话</div>
+        <div class="cp-pill">CLI 优于 MCP</div>
+      </div>
+      <div class="cp-quote">上下文是稀缺资源 · 每一段常驻内容都要挣<span class="cp-emph">一席之地</span></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

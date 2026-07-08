@@ -1,0 +1,109 @@
+<!-- 场景: seg1 | 时长: ~33s | bg: dark_cipher | TDD加子代理分工（四代理卡片+TDD循环+铁律） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/绿/紫/金）静态光晕 + 脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:900px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:14%;width:300px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:38%;width:300px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:62%;width:300px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;right:14%;width:300px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- 四代理 + TDD 脉冲锚点 -->
+  <div class="fx-blink" style="position:absolute;top:42%;left:15%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:39%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:63%;width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;right:15%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-td-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段7</div>
+      <h1 class="title-h1"><span class="grad-gold">TDD 加子代理分工</span></h1>
+      <div class="title-sub">阶段四 · <span class="grad-red">RED</span> <span class="grad-green">GREEN</span> <span class="grad-blue">REFACTOR</span></div>
+    </div>
+
+    <!-- 区域 2：四代理卡片（reveal 5，left） -->
+    <div class="tut-region tut-td-agents" data-reveal="7" data-reveal-dir="left">
+      <div class="agent-row">
+        <div class="agent-card ac-blue">
+          <div class="ac-icon">🔍</div>
+          <div class="ac-name grad-blue">Explore</div>
+          <div class="ac-role">只搜索</div>
+          <div class="ac-rule">只读不改</div>
+        </div>
+        <div class="agent-card ac-green">
+          <div class="ac-icon">✏️</div>
+          <div class="ac-name grad-green">实现</div>
+          <div class="ac-role">按 plan</div>
+          <div class="ac-rule">精确指令改代码</div>
+        </div>
+        <div class="agent-card ac-purple">
+          <div class="ac-icon">📐</div>
+          <div class="ac-name grad-purple">规格审</div>
+          <div class="ac-role">对照 spec</div>
+          <div class="ac-rule">逐条验证</div>
+        </div>
+        <div class="agent-card ac-gold">
+          <div class="ac-icon">🛡️</div>
+          <div class="ac-name grad-gold">质量审</div>
+          <div class="ac-role">风格 · 安全</div>
+          <div class="ac-rule">命名冲突</div>
+        </div>
+      </div>
+      <div class="agents-motto"><span class="grad-gold">各司其职</span> · 避免一个代理又探索又写又审的混乱</div>
+    </div>
+
+    <!-- 区域 3：TDD 循环（reveal 17，fade） —— 圆内仅 letter+name，desc 移圆下 -->
+    <div class="tut-region tut-td-cycle" data-reveal="22" data-reveal-dir="fade">
+      <div class="tdd-cycle">
+        <div class="tdd-node-wrap">
+          <div class="tdd-node tdd-red">
+            <div class="tdd-letter">R</div>
+            <div class="tdd-name grad-red">RED</div>
+          </div>
+          <div class="tdd-desc">先写测试 · 看它失败</div>
+        </div>
+        <div class="tdd-arrow">→</div>
+        <div class="tdd-node-wrap">
+          <div class="tdd-node tdd-green">
+            <div class="tdd-letter">G</div>
+            <div class="tdd-name grad-green">GREEN</div>
+          </div>
+          <div class="tdd-desc">最少代码 · 让测试过</div>
+        </div>
+        <div class="tdd-arrow">→</div>
+        <div class="tdd-node-wrap">
+          <div class="tdd-node tdd-blue">
+            <div class="tdd-letter">F</div>
+            <div class="tdd-name grad-blue">REFACTOR</div>
+          </div>
+          <div class="tdd-desc">重构</div>
+        </div>
+        <div class="tdd-loop">↻ 循环</div>
+      </div>
+    </div>
+
+    <!-- 区域 4：铁律卡（reveal 23，fade） -->
+    <div class="tut-region tut-td-ironrule" data-reveal="29" data-reveal-dir="fade">
+      <div class="iron-card">
+        <div class="iron-tag">⚠ 一条铁律</div>
+        <div class="iron-text">不要让 <span class="grad-red">Claude 同时写代码和测试</span></div>
+        <div class="iron-why">它会写出<span class="grad-red">验证错误逻辑</span>的测试 · <span class="grad-gold">全绿但全错</span></div>
+        <div class="iron-fix"><span class="grad-green">测试先行</span> · <span class="grad-blue">独立验证</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

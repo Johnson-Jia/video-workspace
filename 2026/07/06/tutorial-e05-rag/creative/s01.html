@@ -1,0 +1,131 @@
+<!-- 场景: seg1 | 时长: ~31.8s | bg: hex_grid | 业务知识 RAG：原理卡 + 代码窗（两阶段检索伪代码 + 多租户隔离）+ 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝RAG/绿召回/金重排；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;left:30%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:54%;left:38%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图，禁划过类） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:14%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.80);box-shadow:0 0 14px hsla(43,85%,54%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.75);box-shadow:0 0 14px hsla(43,85%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-rag-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E05 · 基础设施 之一</div>
+      <h1 class="mt-h1"><span class="grad-blue">业务知识 RAG</span> · 让 AI 开卷考试</h1>
+      <div class="title-sub">先检索 · 再回答 · 给它装上业务记忆</div>
+    </div>
+
+    <!-- 主体两栏：原理卡（左）+ 代码窗（右） -->
+    <div class="tut-rag-main">
+
+    <!-- 区域 2：RAG 原理卡（data-reveal=2.1，dir=left） -->
+    <div class="tut-region tut-rag-card" data-reveal="2.1" data-reveal-dir="left">
+      <div class="rag-card">
+        <div class="rag-tag">RAG 原理</div>
+        <div class="rag-flow">
+          <div class="flow-step">
+            <span class="fs-num">1</span>
+            <span class="fs-mark fs-mark-blue">📚</span>
+            <span>知识库入向量</span>
+          </div>
+          <div class="fs-arrow-down">↓</div>
+          <div class="flow-step">
+            <span class="fs-num">2</span>
+            <span class="fs-mark fs-mark-blue">🔍</span>
+            <span>检索相关片段</span>
+          </div>
+          <div class="fs-arrow-down">↓</div>
+          <div class="flow-step">
+            <span class="fs-num">3</span>
+            <span class="fs-mark fs-mark-green">🤖</span>
+            <span>喂给模型回答</span>
+          </div>
+        </div>
+        <div class="rag-foot">通用大模型没读过你的产品手册</div>
+      </div>
+    </div>
+
+    <!-- 区域 3-5：代码窗（含注释行 + 流程行 + expr 行，分段 reveal） -->
+    <div class="tut-region tut-rag-code" data-reveal="6.8" data-reveal-dir="top">
+      <div class="code-window">
+        <div class="code-titlebar">
+          <span class="code-file-icon">📄</span>
+          <span class="code-title-name">retriever.py</span>
+          <span class="code-path">两阶段检索</span>
+        </div>
+        <div class="code-body">
+          <!-- 注释行 1（region 3 一同 reveal，data-reveal=6.8） -->
+          <div class="code-line">
+            <span class="line-num">1</span>
+            <span class="c-comment"># 两阶段检索：召回优先 → 重排提精度</span>
+          </div>
+
+          <!-- 流程行：4 段 stagger reveal（区域 4） -->
+          <div class="code-line code-block" style="padding-left:48px">
+            <span class="code-step" data-reveal="12" data-reveal-dir="fade">
+              <span class="cs-stage-1">三路并发召回</span>
+            </span>
+            <span class="c-arrow" data-reveal="13.5" data-reveal-dir="fade">→</span>
+            <span class="code-step" data-reveal="13.5" data-reveal-dir="fade">
+              <span class="cs-stage-1">按原文去重</span>
+            </span>
+            <span class="c-arrow" data-reveal="15" data-reveal-dir="fade">→</span>
+            <span class="code-step" data-reveal="15" data-reveal-dir="fade">
+              <span class="cs-stage-2">CrossEncoder 重排</span>
+            </span>
+            <span class="c-arrow" data-reveal="16.5" data-reveal-dir="fade">→</span>
+            <span class="code-step" data-reveal="16.5" data-reveal-dir="fade">
+              <span class="cs-stage-2">过滤低分</span>
+            </span>
+          </div>
+
+          <div class="code-block-sep"></div>
+
+          <!-- 注释行 2 + expr 行（区域 5） -->
+          <div class="code-line" data-reveal="18.4" data-reveal-dir="fade">
+            <span class="line-num">3</span>
+            <span class="c-comment"># 多租户隔离</span>
+          </div>
+          <div class="code-line code-block" data-reveal="21" data-reveal-dir="fade">
+            <span class="line-num">4</span>
+            <span class="c-var">expr</span>
+            <span class="c-op">=</span>
+            <span class="c-str">'corp_code in ["租户A", "default"]'</span>
+          </div>
+          <div class="code-line" data-reveal="22.5" data-reveal-dir="fade">
+            <span class="line-num">5</span>
+            <span class="c-comment"># A 公司知识 · B 公司查不到</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-rag-main -->
+
+    <!-- 区域 6：金句（data-reveal=25.5，dir=top） -->
+    <div class="tut-region tut-rag-quote" data-reveal="25.5" data-reveal-dir="top">
+      <div class="quote-tag grad-gold-bg-inline">业务记忆</div>
+      <div class="quote-main">
+        <span class="quote-mark">✓</span>
+        <span class="quote-text">幻觉大幅下降 · AI 懂了你的 <span class="quote-strong grad-gold">业务</span></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

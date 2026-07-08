@@ -1,0 +1,144 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 hook — 需求→交付一条命令 + 左移对比 + 反常识（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 左移对比 + 反常识钩子
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 80px 100px 80px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 18px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点，参照 tutorial.md + E04-cover） —— */
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 箭头字符 —— */
+.arrow-glyph {
+  font-family: 'JetBrains Mono';
+  font-weight: 900;
+  display: inline-block;
+}
+
+/* —— 标题区 —— 左对齐，建立视觉锚点 */
+.tut-hook-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-hook-title .hook-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-hook-title .hook-h1 {
+  font-family: 'Inter'; font-size: 84px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-hook-title .hook-h1 .arrow-glyph {
+  font-size: 72px; color: var(--tut-blue-white); margin: 0 6px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-hook-title .title-sub {
+  font-family: 'Inter'; font-size: 42px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 左移对比 —— 中部撑满宽度，卡片均分利用画布 */
+.tut-hook-shift { width: 100%; display: flex; flex-direction: column; align-items: stretch; }
+.shift-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 48px;
+  width: 100%;
+}
+.shift-card {
+  border-radius: 22px;
+  padding: 24px 36px;
+  border: 3px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+  min-width: 360px;
+  flex: 1;
+}
+.shift-red { border-color: rgba(248,113,113,0.65); background: linear-gradient(165deg, rgba(248,113,113,0.14), rgba(15,23,42,0.88)); }
+.shift-green { border-color: rgba(110,231,183,0.65); background: linear-gradient(165deg, rgba(16,185,129,0.14), rgba(15,23,42,0.88)); }
+.shift-icon {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.shift-name {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900; letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.05;
+}
+.shift-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.3;
+}
+.shift-arrow {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  min-width: 140px;
+}
+.shift-arrow .arrow-glyph {
+  font-size: 72px; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.shift-arrow-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}
+
+/* —— 反常识钩子 —— 横向：标签在左，主文案撑满右侧，左对齐 */
+.tut-hook-twist {
+  border-radius: 22px; padding: 18px 40px;
+  border: 3px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88), rgba(251,191,36,0.14));
+  display: flex; flex-direction: row; align-items: center; gap: 28px;
+}
+.tut-hook-twist .twist-tag { flex-shrink: 0; }
+.tut-hook-twist .twist-main { text-align: left; flex: 1; }
+.twist-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.twist-main {
+  font-family: 'Inter'; font-size: 56px; font-weight: 900; line-height: 1.1;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.02em;
+}

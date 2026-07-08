@@ -1,0 +1,61 @@
+<!-- 场景: scene-3 | 为什么要较真（代价收益）| 时长: 19.85s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg" data-bg-types="gradient,contour,glow,particles,wave">
+<!-- bg-component: contour_lines -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:18%;left:12%;width:320px;height:320px;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);"></div>
+  <div class="fx-aura" style="top:72%;right:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(148,163,184,0.20),transparent 70%);"></div>
+  <div class="fx-particle" style="top:28%;left:80%;width:7px;height:7px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:66%;left:20%;width:8px;height:8px;background:rgba(59,130,246,0.7);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 3 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区 — narration「为什么要这么较真」 -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="left">
+    <span class="tut-eyebrow">度量的意义</span>
+    <div class="tut-title">为什么要较真</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 感觉 vs 数据说话双栏 — narration「度量要让数据说话，不是感觉有用...投入没法持续」 -->
+  <div class="tut-region tut-compare" data-reveal="2.5" data-reveal-dir="left">
+    <div class="tut-col gray">
+      <span class="col-tag">感觉有用</span>
+      <div class="col-h">说不清提升多少</div>
+      <ul class="col-list">
+        <li>大家觉得 AI 有用</li>
+        <li>但拿不出具体数字</li>
+        <li>投入没法持续</li>
+      </ul>
+    </div>
+    <div class="tut-col gold">
+      <span class="col-tag">数据说话</span>
+      <div class="col-h">量级清晰可量化</div>
+      <ul class="col-list">
+        <li>人均产出 +104%</li>
+        <li>AI 代码占比 76.6%</li>
+        <li>投入可持续 · 可复用</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Region 3: 代价收益对比条 — narration「三层算法的代价是复杂，收益是可信...经得起追问」 -->
+  <div class="tut-region tut-costbenefit" data-reveal="6.5" data-reveal-dir="left">
+    <div class="cb-card cost">
+      <span class="cb-label">代价</span>
+      <div class="cb-value">算法复杂</div>
+    </div>
+    <div class="cb-card benefit">
+      <span class="cb-label">收益</span>
+      <div class="cb-value">可信 · 经得起追问</div>
+      <span class="cb-pill">汇报底气</span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 可选：cinema 后处理原语 -->
+</div>

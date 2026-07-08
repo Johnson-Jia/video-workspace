@@ -1,0 +1,204 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程色板（design.md color_direction — 反常识双色） */
+  --tut-bg: #0F172A;
+  --tut-primary: #1E3A8A;
+  --tut-primary-2: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-gold-2: #F59E0B;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E02 钩子段 — 反常识 + 转折（横屏教程 reveal §6.16）
+ * 单 phase + 多 region + data-reveal 同屏累积，禁竖屏 phase 切换
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region grid）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 48px;
+  padding: 70px 140px 70px 140px;
+}
+
+.tut-grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 48px;
+}
+
+.tut-region {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* data-reveal="0" 场景开始即显示 */
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（禁白色端点 §6.12，同色系高饱和） —— */
+.grad-gold {
+  background-image: linear-gradient(92deg, #FBBF24 0%, #F59E0B 50%, #FCD34D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.grad-blue {
+  background-image: linear-gradient(92deg, #60A5FA 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+ * 场景 1：反常识揭示（AI 不是万能的）
+ * ============================================ */
+.tut-contrarian-scene {
+  align-items: center;
+  text-align: center;
+}
+
+.tut-contrarian {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+.tut-contrarian .con-eyebrow {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.20em;
+  padding: 8px 28px;
+  border: 1.5px solid rgba(251,191,36,0.45);
+  border-radius: 999px;
+  background: rgba(251,191,36,0.08);
+}
+.tut-contrarian .con-big {
+  font-family: var(--font-title);
+  font-size: 200px;
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(251,191,36,0.22);
+}
+.tut-contrarian .con-stamp {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--tut-gray);
+  letter-spacing: 0.12em;
+}
+.tut-contrarian .con-stamp::before {
+  content: "◆ ";
+  color: var(--tut-gold);
+  margin-right: 8px;
+}
+
+.tut-contrarian-sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tut-contrarian-sub .con-sub {
+  font-family: var(--font-body);
+  font-size: 52px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.04em;
+}
+.tut-contrarian-sub .con-ten {
+  font-family: var(--font-data);
+  font-size: 64px;
+  font-weight: 900;
+  margin: 0 8px;
+}
+
+/* ============================================
+ * 场景 2：转折（转型起手 + 5 原理预告）
+ * ============================================ */
+.tut-transition-scene {
+  align-items: center;
+  text-align: center;
+}
+
+.tut-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.tut-transition .trans-eyebrow {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.20em;
+  padding: 8px 28px;
+  border: 1.5px solid rgba(59,130,246,0.45);
+  border-radius: 999px;
+  background: rgba(59,130,246,0.08);
+}
+.tut-transition .trans-big {
+  font-family: var(--font-title);
+  font-size: 130px;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+}
+.tut-transition .trans-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+}
+.tut-transition .ts-tag {
+  display: inline-block;
+  color: var(--tut-gold);
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.tut-principles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  width: 100%;
+}
+.tut-principles .pr-pill {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-white);
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(59,130,246,0.40);
+  background: linear-gradient(135deg, rgba(59,130,246,0.14), rgba(15,23,42,0.50));
+  letter-spacing: 0.04em;
+}

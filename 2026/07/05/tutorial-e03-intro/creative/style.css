@@ -1,0 +1,122 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-gold: #FBBF24;
+  --tut-blue: #3B82F6;
+  --tut-gray: #94A3B8;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E03 介绍段 — Leader 主战场（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 4 卡 grid（前两件高亮）+ 本集范围
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+  padding: 60px 110px 50px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 区域 1：标题 —— */
+.tut-int-title {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.it-eyebrow {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  letter-spacing: 0.10em; color: var(--tut-blue-white);
+  padding: 4px 18px; border-radius: 8px;
+  background: rgba(59,130,246,0.14);
+  border: 1.5px solid rgba(59,130,246,0.40);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.it-h1 {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.it-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}
+
+/* —— 区域 2：4 卡 grid —— */
+.tut-int-grid {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.ig-label {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ig-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; width: 100%; }
+.ig-card {
+  border-radius: 22px; padding: 18px 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  position: relative;
+}
+.ig-hi {
+  background: linear-gradient(165deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88));
+  border: 2.5px solid rgba(251,191,36,0.65);
+  box-shadow: 0 6px 20px rgba(251,191,36,0.18);
+}
+.ig-dim {
+  background: linear-gradient(165deg, rgba(148,163,184,0.06), rgba(15,23,42,0.88));
+  border: 1.5px dashed rgba(148,163,184,0.40);
+  opacity: 0.65;
+}
+.ig-num {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.ig-num-gray { color: var(--tut-gray); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.ig-name {
+  font-family: var(--font-title); font-size: 38px; font-weight: 900; color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.02em;
+}
+.ig-name-gray { color: var(--tut-gray); }
+.ig-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  padding: 4px 14px; border-radius: 8px;
+  letter-spacing: 0.06em;
+  background: linear-gradient(92deg,#FBBF24,#FCD34D); color: #FFF;
+  box-shadow: 0 4px 12px rgba(251,191,36,0.30);
+}
+.ig-tag-dim {
+  background: transparent; color: var(--tut-gray);
+  border: 1.5px solid rgba(148,163,184,0.50);
+  box-shadow: none;
+}
+
+/* —— 区域 3：本集范围 —— */
+.tut-int-scope {
+  align-self: center;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-white);
+  padding: 10px 26px; border-radius: 14px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88));
+  border: 2px solid rgba(59,130,246,0.50);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.is-mark {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900; color: var(--tut-blue);
+}

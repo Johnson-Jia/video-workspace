@@ -1,0 +1,158 @@
+<!-- 场景: opening | 时长: 20.47s | 教程横屏 reveal 模式（单 phase + 4 region + data-reveal 0/4/9/14s） -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+  <!-- 深蓝钢蓝渐变 + 点阵网格 + 几何装饰线 + 聚光 + 波纹 + 漂浮几何 + 粒子，多纹理过 R-R-009；DOM 由 assemble 从组件库注入 -->
+  <!-- 钢蓝渐变底（design 方向：深蓝主底 #0F172A 系） -->
+  <div style="position:absolute;inset:0;
+    background:linear-gradient(170deg, hsla(215,45%,14%,1) 0%, hsla(220,40%,11%,1) 50%, hsla(218,38%,9%,1) 100%)"></div>
+  <!-- 蓝色辉光核心（主焦点，清晰蓝色身份） -->
+  <div style="position:absolute;top:22%;left:28%;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle, hsla(215,60%,30%,0.38), hsla(220,45%,18%,0.14), transparent 65%);
+    filter:blur(90px);animation:spotlightShift 20s ease-in-out infinite"></div>
+  <!-- 冷蓝聚光灯（顶部） -->
+  <div style="position:absolute;top:-15%;left:15%;width:70%;height:55%;
+    background:radial-gradient(ellipse 90% 100% at 45% 0%, hsla(215,55%,32%,0.24), hsla(220,40%,20%,0.10) 50%, transparent 75%);
+    animation:spotlightShift 22s ease-in-out infinite 3s"></div>
+  <!-- 点阵网格（蓝色交叉点） -->
+  <div style="position:absolute;inset:0;
+    background-image:radial-gradient(circle, hsla(215,42%,52%,0.10) 1px, transparent 1px);
+    background-size:64px 64px;animation:gridDotBreath 25s ease-in-out infinite"></div>
+  <!-- 左上角几何装饰线 L 型 -->
+  <div style="position:absolute;top:48px;left:48px;width:130px;height:2px;
+    background:linear-gradient(90deg, hsla(215,55%,55%,0.26), transparent);
+    animation:accentPulse 15s ease-in-out infinite"></div>
+  <div style="position:absolute;top:48px;left:48px;width:2px;height:88px;
+    background:linear-gradient(180deg, hsla(215,55%,55%,0.26), transparent);
+    animation:accentPulse 15s ease-in-out infinite"></div>
+  <!-- 右下角几何装饰线 L 型 -->
+  <div style="position:absolute;bottom:48px;right:48px;width:110px;height:2px;
+    background:linear-gradient(270deg, hsla(215,50%,50%,0.20), transparent);
+    animation:accentPulse 18s ease-in-out infinite 5s"></div>
+  <div style="position:absolute;bottom:48px;right:48px;width:2px;height:76px;
+    background:linear-gradient(0deg, hsla(215,50%,50%,0.20), transparent);
+    animation:accentPulse 18s ease-in-out infinite 5s"></div>
+  <!-- 底部波纹透视线 -->
+  <div style="position:absolute;bottom:72px;left:0;width:calc(100% + 120px);height:40px;
+    background:repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      hsla(215,45%,48%,0.12) 30px, hsla(215,45%,48%,0.12) 31px);
+    transform:perspective(500px) rotateX(45deg);
+    animation:waveDrift 30s linear infinite"></div>
+  <!-- 漂浮几何形状 1：菱形 -->
+  <div style="position:absolute;top:24%;right:16%;width:64px;height:64px;opacity:0.10;
+    border:1px solid hsla(215,52%,52%,0.55);
+    transform:rotate(45deg);
+    animation:shapeFloat 18s ease-in-out infinite 0s"></div>
+  <!-- 漂浮几何形状 2：圆形 -->
+  <div style="position:absolute;top:58%;left:20%;width:42px;height:42px;opacity:0.08;
+    border:1px solid hsla(215,48%,50%,0.55);border-radius:50%;
+    animation:shapeFloat2 22s ease-in-out infinite 4s"></div>
+  <!-- 漂浮几何形状 3：小正方形 -->
+  <div style="position:absolute;top:72%;right:32%;width:26px;height:26px;opacity:0.08;
+    border:1px solid hsla(220,45%,48%,0.45);
+    animation:shapeFloat 16s ease-in-out infinite 8s"></div>
+  <!-- 蓝色光点粒子 -->
+  <div style="position:absolute;top:32%;left:48%;width:3px;height:3px;border-radius:50%;
+    background:hsla(215,58%,60%,0.58);box-shadow:0 0 6px hsla(215,52%,54%,0.42),0 0 12px hsla(215,48%,48%,0.22);
+    animation:bluePulse 8s ease-in-out infinite 0s"></div>
+  <div style="position:absolute;top:62%;left:24%;width:2px;height:2px;border-radius:50%;
+    background:hsla(215,52%,57%,0.48);box-shadow:0 0 4px hsla(215,48%,50%,0.32);
+    animation:bluePulse 10s ease-in-out infinite 3s"></div>
+  <div style="position:absolute;top:46%;left:74%;width:2px;height:2px;border-radius:50%;
+    background:hsla(215,55%,54%,0.42);box-shadow:0 0 4px hsla(215,50%,48%,0.30);
+    animation:bluePulse 12s ease-in-out infinite 6s"></div>
+  <!-- 对角淡蓝连接线 -->
+  <div style="position:absolute;inset:0;
+    background:linear-gradient(45deg,
+      transparent 42%, hsla(215,48%,40%,0.07) 46%, hsla(215,48%,40%,0.07) 46.5%,
+      transparent 47%);
+    animation:cornerLineGlow 20s ease-in-out infinite"></div>
+  <!-- 暗角（边缘压暗突出蓝色核心） -->
+  <div style="position:absolute;inset:0;
+    background:radial-gradient(ellipse 75% 70% at 50% 48%, transparent 0%, hsla(215,30%,5%,0.32) 70%, hsla(220,35%,3%,0.52) 100%);
+    animation:slateVignette 25s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx 1：横向流光带（tutorial 克制，缓慢漂移呼应"流程/方法论"流动感；fx-drift GSAP repeat 注入） -->
+  <div class="fx-drift" style="position:absolute;top:38%;left:8%;width:620px;height:2px;
+    background:linear-gradient(90deg, transparent, hsla(208,76%,62%,0.55), hsla(208,76%,72%,0.85), hsla(208,76%,62%,0.55), transparent);
+    filter:blur(1.5px);opacity:0.55"></div>
+  <!-- fx 2：聚焦光球（场景右下，柔和呼吸脉冲呼应"邀请/聚焦"调性；fx-pulse GSAP repeat 注入） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;right:12%;width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle, hsla(208,72%,58%,0.32) 0%, hsla(208,60%,42%,0.14) 45%, transparent 70%);
+    filter:blur(22px);opacity:0.65"></div>
+  <!-- fx 3：左上聚焦锚点（柔和闪烁点缀画面冷区，平衡构图；fx-blink GSAP repeat 注入） -->
+  <div class="fx-blink" style="position:absolute;top:30%;left:42%;width:14px;height:14px;border-radius:50%;
+    background:hsla(208,80%,68%,0.85);box-shadow:0 0 18px hsla(208,76%,62%,0.65),0 0 36px hsla(208,70%,55%,0.35);
+    opacity:0.7"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase，同屏累积） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：合集标题 + 定位（data-reveal=0，场景开始即显示） -->
+    <div class="tut-region region-title" data-reveal="0">
+      <div class="tut-eyebrow">AI 转型实战 · 方法论</div>
+      <h1 class="tut-h1 grad-blue">企业级 AI 提效战略转型方法论</h1>
+      <div class="tut-positioning">
+        <span class="tut-dot"></span>
+        <span>上百人研发团队 · 一次走通的战略级转型</span>
+      </div>
+    </div>
+
+    <!-- 区域 2：性质对比（data-reveal=4，旁白讲"方法论不是工具测评"时 reveal） -->
+    <div class="tut-region region-nature" data-reveal="4">
+      <div class="tut-card nature-card">
+        <div class="nature-row nature-yes">
+          <span class="nature-mark">✓</span>
+          <span class="nature-label">讲的是方法论</span>
+        </div>
+        <div class="nature-row nature-no">
+          <span class="nature-mark">✗</span>
+          <span class="nature-label">不是工具测评</span>
+        </div>
+        <div class="nature-foot">
+          <span class="nature-pill">每步配可运行 demo</span>
+          <span class="nature-pill">真实数据验证</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：受众兜底（data-reveal=9，旁白讲"团队 Leader + 个人"时 reveal） -->
+    <div class="tut-region region-audience" data-reveal="9">
+      <div class="tut-card audience-card">
+        <div class="aud-head">谁都能拿到真东西</div>
+        <div class="aud-cols">
+          <div class="aud-item">
+            <div class="aud-tag">团队 Leader</div>
+            <div class="aud-desc">带团队做战略级 AI 提效转型</div>
+          </div>
+          <div class="aud-divider"></div>
+          <div class="aud-item">
+            <div class="aud-tag">个人开发者</div>
+            <div class="aud-desc">暂时不带团队，个人提效同样适用</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：邀请（data-reveal=14，旁白讲"跟着一起拆透"时 reveal） -->
+    <div class="tut-region region-cta" data-reveal="14">
+      <div class="tut-card cta-card">
+        <div class="cta-arrow">→</div>
+        <div class="cta-text">
+          <div class="cta-main">跟着我一起</div>
+          <div class="cta-sub">把这套方法论 · 拆透</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

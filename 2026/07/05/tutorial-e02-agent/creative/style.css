@@ -1,0 +1,151 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-green: #10B981;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.92);
+}
+
+/* ============================================
+ * Tutorial E02 agent 段 — 原理④⑤ Agent + REACT（横屏 reveal §6.16）
+ * 1 场景：标题 + Agent 公式 + REACT 循环图
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  gap: 28px;
+  padding: 56px 110px 64px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  gap: 28px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 50%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 标题区 —— */
+.tut-agent-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.tut-agent-title .at-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+}
+.tut-agent-title .at-h1 {
+  font-family: var(--font-title); font-size: 88px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 0 18px rgba(59,130,246,0.22);
+  display: flex; align-items: center; justify-content: center; gap: 24px;
+}
+.tut-agent-title .at-plus { color: var(--tut-blue-white); -webkit-text-fill-color: var(--tut-blue-white); font-size: 64px; font-weight: 400; }
+
+/* —— Agent 公式卡 —— */
+.tut-agent-formula {
+  border-radius: 22px; padding: 26px 36px 28px;
+  border: 2px solid rgba(59,130,246,0.55);
+  background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.60));
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tut-agent-formula .af-head {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgba(255,255,255,0.16);
+}
+.tut-agent-formula .af-formula {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  font-family: var(--font-title); font-weight: 900;
+  flex-wrap: nowrap;
+}
+.tut-agent-formula .af-term {
+  font-size: 44px; color: var(--tut-white);
+  padding: 8px 22px; border-radius: 12px;
+  border: 2px solid rgba(224,231,255,0.30);
+  background: rgba(15,23,42,0.55);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+.tut-agent-formula .af-op, .tut-agent-formula .af-eq {
+  font-size: 48px; color: var(--tut-blue-white); -webkit-text-fill-color: var(--tut-blue-white);
+  font-weight: 700;
+}
+.tut-agent-formula .af-result {
+  font-size: 52px; padding: 8px 26px; border-radius: 12px;
+  border: 2px solid rgba(59,130,246,0.55);
+  background: rgba(59,130,246,0.10);
+  text-shadow: 0 0 18px rgba(59,130,246,0.30);
+}
+.tut-agent-formula .af-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: var(--tut-white);
+  display: flex; align-items: center; gap: 14px; line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-agent-formula .af-note .af-note-icon { font-size: 34px; }
+.tut-agent-formula .af-note-warn { color: var(--tut-gold); -webkit-text-fill-color: var(--tut-gold); }
+.tut-agent-formula .af-note-warn strong { color: var(--tut-white); -webkit-text-fill-color: var(--tut-white); }
+
+/* —— REACT 循环图 —— */
+.tut-react-loop {
+  border-radius: 22px; padding: 24px 32px 26px;
+  border: 2px solid rgba(16,185,129,0.50);
+  background: linear-gradient(165deg, rgba(16,185,129,0.08), rgba(15,23,42,0.60));
+  display: flex; flex-direction: column; gap: 14px;
+}
+.tut-react-loop .rl-head {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgba(255,255,255,0.16);
+}
+.tut-react-loop .rl-flow {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  flex-wrap: nowrap;
+}
+.tut-react-loop .rl-node {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 170px; padding: 14px 18px;
+  border-radius: 16px; border: 2px solid;
+  background: rgba(15,23,42,0.55);
+  text-align: center;
+}
+.tut-react-loop .rl-node-1 { border-color: rgba(59,130,246,0.55); background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.60)); }
+.tut-react-loop .rl-node-2 { border-color: rgba(59,130,246,0.55); background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.60)); }
+.tut-react-loop .rl-node-3 { border-color: rgba(16,185,129,0.55); background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.60)); }
+.tut-react-loop .rl-node-final { border-color: rgba(251,191,36,0.60); background: linear-gradient(165deg, rgba(251,191,36,0.12), rgba(15,23,42,0.60)); }
+.tut-react-loop .rn-icon { font-size: 44px; line-height: 1; }
+.tut-react-loop .rn-name {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900; letter-spacing: 0.01em;
+  text-shadow: 0 0 14px rgba(59,130,246,0.22);
+}
+.tut-react-loop .rn-cn {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: var(--tut-white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-react-loop .rl-arrow {
+  font-family: var(--font-data); font-size: 40px; font-weight: 900; color: var(--tut-blue-white);
+  -webkit-text-fill-color: var(--tut-blue-white);
+  text-shadow: 0 0 12px rgba(96,165,250,0.30);
+}
+.tut-react-loop .rl-arrow-loop {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 36px; color: var(--tut-green); -webkit-text-fill-color: var(--tut-green);
+  text-shadow: 0 0 14px rgba(16,185,129,0.35);
+}
+.tut-react-loop .rl-loop-text { font-size: 36px; font-weight: 900; }
+.tut-react-loop .rl-loop-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-gray); -webkit-text-fill-color: var(--tut-gray);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+.tut-react-loop .rl-footer {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: var(--tut-white);
+  text-align: center; line-height: 1.35;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.50);
+  padding-top: 4px;
+}

@@ -1,0 +1,63 @@
+<!-- 场景: scene-1 | 这套方法论是什么 | 时长: 30.34s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制，amb/cal/tech） -->
+  <div class="fx-aura" style="top:18%;left:12%;width:340px;height:340px;background:radial-gradient(circle,rgba(59,130,246,0.28),transparent 70%);"></div>
+  <div class="fx-particle" style="top:78%;left:88%;width:8px;height:8px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:30%;left:80%;width:6px;height:6px;background:rgba(96,165,250,0.7);animation-delay:1.2s;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 4 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区（场景开始即显示） -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="top">
+    <span class="tut-eyebrow">这套方法论是什么</span>
+    <div class="tut-title">这套方法论是什么</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 对比双栏（不是/是）— narration 讲到「不是工具测评/PPT概念，是方法论」时 reveal -->
+  <div class="tut-region tut-compare" data-reveal="3" data-reveal-dir="top">
+    <div class="tut-col not">
+      <span class="col-tag">不是 ✗</span>
+      <div class="col-h">又一个 AI 工具测评</div>
+      <div class="col-d">也不是 PPT 上的概念——讲完就忘，落不了地。</div>
+    </div>
+    <div class="tut-col is">
+      <span class="col-tag">是 ✓</span>
+      <div class="col-h">企业级 AI 战略转型方法论</div>
+      <div class="col-d">80+ 人研发团队、千万级用户平台，实战验证过的一套打法。</div>
+    </div>
+  </div>
+
+  <!-- Region 3: 总纲 + 6 阶段胶囊 — narration 讲到「总纲+6 个实施阶段」时 reveal -->
+  <div class="tut-region tut-stages" data-reveal="7" data-reveal-dir="top">
+    <span class="stage-lead">总纲 + 6 阶段：</span>
+    <span class="tut-pill lead">总纲</span>
+    <span class="tut-pill">战略启动</span>
+    <span class="tut-pill">全员赋能</span>
+    <span class="tut-pill">基础设施</span>
+    <span class="tut-pill">闭环试点</span>
+    <span class="tut-pill">推广度量</span>
+    <span class="tut-pill">沉淀复用</span>
+  </div>
+
+  <!-- Region 4: 实战验证数据卡 — narration 讲到「每步带 demo+真实团队数据」时 reveal -->
+  <div class="tut-region tut-data" data-reveal="12" data-reveal-dir="top">
+    <div class="data-card">
+      <div class="data-num">80<span style="font-size:54px;color:var(--tut-blue-white);">+</span> 人</div>
+      <div class="data-label">研发团队实战验证</div>
+    </div>
+    <div class="data-note">
+      每一步都带着 <strong>可运行的 demo</strong> 和 <strong>真实团队数据</strong>——<br>
+      不是空讲，是可落地的工程方案。
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

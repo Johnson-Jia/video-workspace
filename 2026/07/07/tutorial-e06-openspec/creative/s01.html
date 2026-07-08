@@ -1,0 +1,94 @@
+<!-- 场景: seg1 | 时长: ~44s | bg: dark_cipher | OpenSpec 三概念四命令（终端命令窗口） -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色（蓝/紫/绿）静态光晕 + 脉冲锚点，禁划过类 -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:820px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:20%;width:340px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:340px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;right:18%;width:340px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:820px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-blink" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 16px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-os-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E06 · 段4</div>
+      <h1 class="title-h1"><span class="grad-gold">OpenSpec</span></h1>
+      <div class="title-sub">三概念 · <span class="grad-blue">四命令</span> · SDD 落地工具</div>
+    </div>
+
+    <!-- 区域 2：三概念卡片（reveal 4，left） -->
+    <div class="tut-region tut-os-concepts" data-reveal="4" data-reveal-dir="left">
+      <div class="concept-row">
+        <div class="concept-card cc-blue">
+          <div class="cc-head"><span class="cc-tag grad-blue-bg-inline">Spec 规格</span></div>
+          <div class="cc-body">
+            <div class="cc-line"><span class="cc-dot">●</span> 稳定</div>
+            <div class="cc-line"><span class="cc-dot">●</span> 跨变更共享</div>
+            <div class="cc-line"><span class="cc-path">specs/</span></div>
+          </div>
+        </div>
+        <div class="concept-card cc-purple">
+          <div class="cc-head"><span class="cc-tag grad-purple-bg-inline">Change 变更</span></div>
+          <div class="cc-body">
+            <div class="cc-line"><span class="cc-dot">●</span> 一次性</div>
+            <div class="cc-line"><span class="cc-dot">●</span> 做完归档</div>
+            <div class="cc-line"><span class="cc-path">changes/</span></div>
+          </div>
+        </div>
+        <div class="concept-card cc-green">
+          <div class="cc-head"><span class="cc-tag grad-green-bg-inline">Archive</span></div>
+          <div class="cc-body">
+            <div class="cc-line"><span class="cc-dot">●</span> 变更完成后</div>
+            <div class="cc-line"><span class="cc-dot">●</span> 存档</div>
+            <div class="cc-line"><span class="cc-path">archive/</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：四命令终端窗口（reveal 18，left） -->
+    <div class="tut-region tut-os-terminal" data-reveal="18" data-reveal-dir="left">
+      <div class="terminal">
+        <div class="term-titlebar">
+          <span class="term-dot term-red"></span>
+          <span class="term-dot term-yellow"></span>
+          <span class="term-dot term-green"></span>
+          <span class="term-title">openspec — bash</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">openspec</span> <span class="term-arg">explore</span> <span class="term-note"># 探索需求 · 调查代码库</span></div>
+          <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">openspec</span> <span class="term-arg">propose</span> <span class="term-note"># proposal/design/specs/tasks</span></div>
+          <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">openspec</span> <span class="term-arg">apply</span> <span class="term-note"># 按 tasks 执行</span></div>
+          <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">openspec</span> <span class="term-arg">archive</span> <span class="term-note"># 验证通过后归档</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：关键一条（reveal 31，fade） -->
+    <div class="tut-region tut-os-key" data-reveal="31" data-reveal-dir="fade">
+      <div class="key-card">
+        <div class="key-tag grad-gold-bg-inline">关键一条</div>
+        <div class="key-text">OpenSpec 自动读 <span class="mono-specs">specs/</span> 应用到生成代码</div>
+        <div class="key-rule">specs 精简 · 只放<span class="grad-blue">稳定全局规范</span> · 一次性变更放 <span class="mono-changes">changes/</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

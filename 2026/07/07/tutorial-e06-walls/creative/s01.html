@@ -1,0 +1,77 @@
+<!-- 场景: seg1 | 时长: ~49s | bg: dark_cipher | 三堵墙详解 + 各自解法标签 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（三墙色 + 金解法；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:820px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:38%;left:18%;width:420px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:58%;left:50%;transform:translateX(-50%);width:420px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:78%;left:82%;width:420px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:95%;left:50%;transform:translateX(-50%);width:840px;height:120px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:38%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:58%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,68%,0.85);box-shadow:0 0 14px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:78%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:95%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 5 region + data-reveal（不切 phase） -->
+  <div class="tut-grid walls-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-walls-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E06 段1</div>
+      <h1 class="walls-h1">三堵墙 · <span class="grad-gold">闭环难点拆解</span></h1>
+    </div>
+
+    <!-- 区域 2：墙1 分析不准（data-reveal=8.6，dir=left） -->
+    <div class="tut-region wall-detail wall-red" data-reveal="8.6" data-reveal-dir="left">
+      <div class="wall-head">
+        <span class="wall-num grad-red">1</span>
+        <span class="wall-name grad-red">分析不准</span>
+      </div>
+      <div class="wall-phen">一句话需求理解偏 · 越写越歪</div>
+      <div class="wall-fix grad-gold-bg-inline">解法 SDD 规范驱动</div>
+    </div>
+
+    <!-- 区域 3：墙2 上下文断（data-reveal=18.7，dir=left） -->
+    <div class="tut-region wall-detail wall-purple" data-reveal="18.7" data-reveal-dir="left">
+      <div class="wall-head">
+        <span class="wall-num grad-purple">2</span>
+        <span class="wall-name grad-purple">上下文断</span>
+      </div>
+      <div class="wall-phen">会话中断 · 分析决策进度全丢</div>
+      <div class="wall-fix grad-gold-bg-inline">解法 tasks 中断重启</div>
+    </div>
+
+    <!-- 区域 4：墙3 偏差晚发现（data-reveal=27.5，dir=left） -->
+    <div class="tut-region wall-detail wall-blue" data-reveal="27.5" data-reveal-dir="left">
+      <div class="wall-head">
+        <span class="wall-num grad-blue">3</span>
+        <span class="wall-name grad-blue">偏差晚发现</span>
+      </div>
+      <div class="wall-phen">代码写完才发现错 · 改代码代价大</div>
+      <div class="wall-fix grad-gold-bg-inline">解法 spec 先行验证</div>
+    </div>
+
+    <!-- 区域 5：解法映射收束（data-reveal=37.2，dir=top） -->
+    <div class="tut-region tut-walls-map" data-reveal="37.2" data-reveal-dir="top">
+      <div class="map-tag grad-gold-bg-inline">闭环 = 拆三墙</div>
+      <div class="map-row">
+        <div class="map-pair"><span class="map-from">分析不准</span><span class="map-arrow grad-gold">→</span><span class="map-to grad-gold">SDD</span></div>
+        <div class="map-pair"><span class="map-from">上下文断</span><span class="map-arrow grad-gold">→</span><span class="map-to grad-gold">tasks</span></div>
+        <div class="map-pair"><span class="map-from">偏差晚发现</span><span class="map-arrow grad-gold">→</span><span class="map-to grad-gold">spec</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

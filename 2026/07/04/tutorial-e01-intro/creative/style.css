@@ -1,0 +1,304 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程色板（design.md color_direction） */
+  --tut-bg: #0F172A;
+  --tut-primary: #1E3A8A;
+  --tut-primary-2: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-green: #10B981;
+  --tut-red: #EF4444;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E01 介绍段 — 横屏教程 reveal 范式（§6.16）
+ * 一屏多区域 + data-reveal 逐步淡入（不切 phase）
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region grid）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;        /* 垂直居中 */
+  align-items: stretch;
+  gap: 28px;
+  padding: 70px 140px 70px 140px; /* 横屏安全区内进一步留白 */
+}
+
+/* 所有 region 初始隐藏（s6_assemble 按 data-reveal 时间点淡入后保持） */
+.tut-region {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* —— 标题区（hero）—— */
+.tut-hero { text-align: left; }
+.tut-hero .tut-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0.85;
+}
+.tut-hero .tut-title {
+  font-family: var(--font-title);
+  font-size: 92px;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  /* 渐变标题（横屏增强 §6.12，禁白色端点） */
+  background-image: linear-gradient(92deg, #93C5FD 0%, #3B82F6 55%, #1E3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.tut-hero .tut-underline {
+  display: block;
+  width: 220px;
+  height: 6px;
+  margin-top: 22px;
+  background: linear-gradient(90deg, var(--tut-primary-2), transparent);
+  border-radius: 3px;
+  transform-origin: left center;
+  transform: scaleX(0);   /* 入场由 GSAP 控制；CSS 不做 seek 不执行 animation */
+}
+
+/* —— 对比双栏（不是 / 是）—— */
+.tut-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  width: 100%;
+}
+.tut-col {
+  border-radius: 18px;
+  padding: 36px 42px;
+  border: 2px solid;
+  background: rgba(15,23,42,0.55);
+}
+.tut-col.not {
+  border-color: rgba(239,68,68,0.55);
+  background: linear-gradient(160deg, rgba(239,68,68,0.10), rgba(15,23,42,0.55));
+}
+.tut-col.is {
+  border-color: rgba(16,185,129,0.55);
+  background: linear-gradient(160deg, rgba(16,185,129,0.10), rgba(15,23,42,0.55));
+}
+.tut-col .col-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  letter-spacing: 0.04em;
+}
+.tut-col.not .col-tag { background: rgba(239,68,68,0.20); color: #FCA5A5; }
+.tut-col.is  .col-tag { background: rgba(16,185,129,0.20); color: #6EE7B7; }
+.tut-col .col-h {
+  font-family: var(--font-title);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--tut-white);
+  margin-bottom: 12px;
+}
+.tut-col .col-d {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--tut-blue-white);
+  opacity: 0.92;
+}
+
+/* —— 阶段条 / 能力胶囊 —— */
+.tut-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  width: 100%;
+  align-items: center;
+}
+.tut-stages .stage-lead {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-gray);
+  margin-right: 8px;
+}
+.tut-pill {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--tut-white);
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.22), rgba(30,58,138,0.40));
+  border: 1.5px solid rgba(96,165,250,0.55);
+}
+.tut-pill.lead {
+  background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(180,83,9,0.35));
+  border-color: rgba(251,191,36,0.65);
+  color: #FEF3C7;
+}
+
+/* —— 数据卡区 —— */
+.tut-data {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  width: 100%;
+  align-items: center;
+}
+.tut-data .data-card {
+  border: 2px solid rgba(96,165,250,0.55);
+  border-radius: 18px;
+  padding: 32px 38px;
+  background: linear-gradient(160deg, rgba(59,130,246,0.10), rgba(15,23,42,0.55));
+}
+.tut-data .data-num {
+  font-family: var(--font-data);
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1.0;
+  color: var(--tut-gold);
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 22px rgba(251,191,36,0.25);
+}
+.tut-data .data-label {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  margin-top: 10px;
+}
+.tut-data .data-note {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--tut-gray);
+}
+.tut-data .data-note strong {
+  color: var(--tut-blue-white);
+  font-weight: 700;
+}
+
+/* —— 金句条 —— */
+.tut-quote {
+  display: block;
+  width: 100%;
+  border-left: 6px solid var(--tut-gold);
+  padding: 22px 32px;
+  background: linear-gradient(90deg, rgba(251,191,36,0.08), rgba(15,23,42,0.0));
+  border-radius: 0 12px 12px 0;
+}
+.tut-quote .quote-txt {
+  font-family: var(--font-title);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--tut-white);
+}
+.tut-quote .quote-sub {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--tut-gray);
+  margin-top: 8px;
+}
+.tut-quote.green {
+  border-left-color: var(--tut-green);
+  background: linear-gradient(90deg, rgba(16,185,129,0.10), rgba(15,23,42,0.0));
+}
+
+/* —— 流程链（4 阶段卡）—— */
+.tut-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  width: 100%;
+}
+.tut-flow .flow-step {
+  border: 1.5px solid rgba(96,165,250,0.50);
+  border-radius: 14px;
+  padding: 22px 18px;
+  background: rgba(30,58,138,0.18);
+  text-align: center;
+  position: relative;
+}
+.tut-flow .flow-step::after {
+  content: "→";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  color: var(--tut-primary-2);
+  font-weight: 700;
+}
+.tut-flow .flow-step:last-child::after { content: ""; }
+.tut-flow .flow-idx {
+  font-family: var(--font-data);
+  font-size: 32px;
+  color: var(--tut-gold);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.tut-flow .flow-name {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-white);
+  margin-top: 6px;
+  line-height: 1.2;
+}
+
+/* —— 承接条 —— */
+.tut-handoff {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 36px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), rgba(15,23,42,0.4));
+  border: 1.5px solid rgba(96,165,250,0.45);
+}
+.tut-handoff .handoff-txt {
+  font-family: var(--font-title);
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--tut-white);
+}
+.tut-handoff .handoff-arrow {
+  font-family: var(--font-data);
+  font-size: 56px;
+  color: var(--tut-primary-2);
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* —— 入场辅助：标题区场景开始即显示（data-reveal="0"）——
+   s6_assemble 也会对该选择器 set opacity:1，此处双保险 */
+.tut-region[data-reveal="0"] { opacity: 1; }

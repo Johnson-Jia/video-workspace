@@ -1,0 +1,80 @@
+<!-- 场景: seg1 | 时长: ~40s | bg: clean_slate | 段1 目标量化：阶梯卡 10/20/50 count-up + 注解 + 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 三色静态光晕（蓝1月 / 青2月 / 金3月，呼应阶梯；脉冲呼吸，禁划过类 fx-scan/fx-beam） -->
+  <div class="fx-pulse" style="position:absolute;top:36%;left:18%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:36%;left:50%;transform:translateX(-50%);width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(190,85%,50%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:36%;right:18%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:760px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:36%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,70%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:36%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(190,80%,55%,0.75);box-shadow:0 0 14px hsla(190,75%,50%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:36%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.22);box-shadow:0 0 14px hsla(43,75%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 4 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：原理标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-goal-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="gt-eyebrow">段 1 · 目标量化</div>
+      <h1 class="gt-h1">让提效 <span class="grad-gold">可衡量</span></h1>
+      <div class="gt-sub">不可度量 · 等于不可管理</div>
+    </div>
+
+    <!-- 区域 2：阶梯目标卡（data-reveal=4，dir=left，count-up 各档） -->
+    <div class="tut-region tut-goal-stairs" data-reveal="4" data-reveal-dir="left">
+      <div class="gs-label">阶梯参考 · 培训后提效</div>
+      <div class="gs-row">
+        <div class="stair stair-blue">
+          <div class="st-stage">1 个月</div>
+          <div class="st-num-wrap">
+            <span class="st-prefix">+</span><span class="st-num" data-count-to="10" data-count-at="6">0</span><span class="st-unit">%</span>
+          </div>
+          <div class="st-range">~ 20%</div>
+          <div class="st-tag st-tag-blue">适应期 · 简单任务</div>
+        </div>
+        <div class="stair stair-cyan">
+          <div class="st-stage">2 个月</div>
+          <div class="st-num-wrap">
+            <span class="st-prefix">+</span><span class="st-num" data-count-to="20" data-count-at="9">0</span><span class="st-unit">%</span>
+          </div>
+          <div class="st-range">~ 30%</div>
+          <div class="st-tag st-tag-cyan">扩展期 · 复杂任务</div>
+        </div>
+        <div class="stair stair-gold">
+          <div class="st-stage">3 个月</div>
+          <div class="st-num-wrap">
+            <span class="st-prefix">+</span><span class="st-num" data-count-to="50" data-count-at="12">0</span><span class="st-unit">%</span>
+          </div>
+          <div class="st-range">人均产出</div>
+          <div class="st-tag st-tag-gold">目标期 · 启动承诺</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：注解（data-reveal=20，dir=top） -->
+    <div class="tut-region tut-goal-note" data-reveal="20" data-reveal-dir="top">
+      <span class="gn-mark gn-warn">!</span>
+      <span class="gn-text"><strong>+50%</strong> 是启动承诺目标 · 实际跑出多少 <span class="gn-key">靠度量</span></span>
+    </div>
+
+    <!-- 区域 4：金句（data-reveal=26，dir=fade） -->
+    <div class="tut-region tut-goal-quote" data-reveal="26" data-reveal-dir="fade">
+      <span class="gq-icon">★</span>
+      <span class="gq-big grad-green">目标要前置</span>
+      <span class="gq-sub">启动时公开承诺 · 配度量工具 · 否则沦为口号</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

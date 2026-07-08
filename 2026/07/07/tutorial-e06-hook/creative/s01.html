@@ -1,0 +1,59 @@
+<!-- 场景: seg1 | 时长: ~29s | bg: dark_cipher | 需求→交付一条命令 + 左移对比 + 反常识钩子 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金反常识 / 红损失 / 绿可控；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);width:780px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:54%;left:24%;width:440px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:54%;left:76%;width:440px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:780px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:90%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-hook-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E06 钩子</div>
+      <h1 class="hook-h1">需求 <span class="arrow-glyph">→</span> 交付 <span class="grad-gold">一条命令</span></h1>
+      <div class="title-sub">OpenSpec + Superpowers</div>
+    </div>
+
+    <!-- 区域 2：左移对比（data-reveal=15，dir=left）—— 左：改Markdown(新/可控) ← 右：改代码(旧/损失) -->
+    <div class="tut-region tut-hook-shift" data-reveal="15" data-reveal-dir="left">
+      <div class="shift-row">
+        <div class="shift-card shift-green">
+          <div class="shift-icon">✓</div>
+          <div class="shift-name grad-green">改 Markdown</div>
+          <div class="shift-note">质量可控</div>
+        </div>
+        <div class="shift-arrow"><span class="arrow-glyph grad-gold">◀</span><div class="shift-arrow-label">偏差左移</div></div>
+        <div class="shift-card shift-red">
+          <div class="shift-icon">✗</div>
+          <div class="shift-name grad-red">改代码</div>
+          <div class="shift-note">质量损失</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：反常识钩子（data-reveal=22，dir=top） -->
+    <div class="tut-region tut-hook-twist" data-reveal="22" data-reveal-dir="top">
+      <div class="twist-tag grad-gold-bg-inline">反常识</div>
+      <div class="twist-main">发动机不是写更多代码 是<span class="grad-gold">纠错左移</span></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

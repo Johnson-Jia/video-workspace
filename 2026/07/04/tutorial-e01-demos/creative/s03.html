@@ -1,0 +1,82 @@
+<!-- 场景: seg3 | 时长: 34.94s | bg: contour_lines | ai-metrics 三层算法（重头戏） -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+<div class="layer-fx">
+  <div class="fx-dot" style="top:20%;left:5%;width:220px;height:220px;"></div>
+  <div class="fx-pulse-ring" style="top:55%;right:6%;width:260px;height:260px;"></div>
+  <div class="fx-blink" style="top:42%;left:50%;"></div>
+</div>
+<div class="layer-content">
+  <div class="phase phase-1 tut-scene">
+    <div class="tut-grid" style="grid-template-rows:auto auto 1fr auto;">
+
+      <!-- 区域 1：标题区（reveal 0） -->
+      <div class="tut-hero tut-region" data-reveal="0" data-reveal-dir="left">
+        <div class="tut-hero-num">
+          <span class="pill">DEMO 02 · 重头戏</span>
+          <span>ai-metrics</span>
+        </div>
+        <h1 class="grad-gold">ai-metrics · 三层反伪造</h1>
+        <div class="sub">AI 代码占比度量 · 风格计量学防误标</div>
+        <div class="underline"></div>
+      </div>
+
+      <!-- 区域 2：痛点警示卡（reveal 3） -->
+      <div class="tut-region" data-reveal="3" data-reveal-dir="left">
+        <div class="pain-card">
+          <span class="icon">!</span>
+          <span class="txt">只靠 <b>Co-authored-by</b> 不够 —— VS Code Copilot 对手写代码也自动加 trailer，会被<b>误标</b></span>
+        </div>
+      </div>
+
+      <!-- 区域 3：三层算法层级卡（reveal 9，蓝→绿→金渐次高亮） -->
+      <div class="tut-region" data-reveal="9" data-reveal-dir="left" style="display:flex;align-items:center;;justify-content:center">
+        <div class="layer-stack" style="width:100%;">
+          <div class="layer-card l1">
+            <span class="layer-num">① 初筛</span>
+            <span class="layer-name">Co-authored-by</span>
+            <span class="layer-desc">commit message 含 AI 工具名 → 判 AI</span>
+            <span class="layer-formula">trailer ∈ {Claude, Copilot, ...}</span>
+          </div>
+          <div class="layer-card l2">
+            <span class="badge-anti-forgery">反伪造关键</span>
+            <span class="layer-num">② 复核</span>
+            <span class="layer-name">风格计量学</span>
+            <span class="layer-desc">算代码与作者风格画像的余弦相似度：像本人 → 降置信度；不像本人 → 确认 AI</span>
+            <span class="layer-formula">cos(style_vec, author_profile)</span>
+          </div>
+          <div class="layer-card l3">
+            <span class="layer-num">③ 兜底</span>
+            <span class="layer-name">注册表组合判定</span>
+            <span class="layer-desc">三层结果组合 → 最终判定</span>
+            <span class="layer-formula">final = f(L1, L2, registry)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 4：Excel 同比表（reveal 28） -->
+      <div class="tut-region" data-reveal="28" data-reveal-dir="left">
+        <div style="display:flex;align-items:center;gap:18px;">
+          <div class="excel-cmp" style="flex:1;">
+            <div class="ex-cell head">
+              <span class="ex-label">PERIOD</span>
+              <span class="ex-val">对比维度</span>
+            </div>
+            <div class="ex-cell">
+              <span class="ex-label">2025 基线</span>
+              <span class="ex-val">人工编码</span>
+            </div>
+            <div class="ex-cell">
+              <span class="ex-label">2026 AI 推行后</span>
+              <span class="ex-val gold">AI 占比 ↑</span>
+            </div>
+          </div>
+          <span class="badge-green">导 Excel · 提效同比</span>
+          <span style="font-family:var(--font-body);font-size:32px;color:var(--text-dim);">相关性非因果</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

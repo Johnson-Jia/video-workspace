@@ -1,0 +1,54 @@
+<!-- 场景: seg1 | 时长: ~23s | bg: clean_slate | 钩子：转型卡在预算 + 老板三问 + 立项全套 4 胶囊 -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（红痛点 + 蓝指引；脉冲呼吸，禁划过类 fx-scan/fx-beam） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:900px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:62%;left:50%;transform:translateX(-50%);width:820px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:16%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(0,75%,62%,0.22);box-shadow:0 0 16px hsla(0,70%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:44%;left:12%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.22);box-shadow:0 0 14px hsla(43,75%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:14%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：痛点大字（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-hook-pain" data-reveal="0" data-reveal-dir="fade">
+      <div class="pain-eyebrow">转型最大拦路虎</div>
+      <h1 class="pain-big">不是技术 · 是 <span class="grad-red">预算</span></h1>
+      <div class="pain-stamp">预算批不下来 · 转型停在嘴上</div>
+    </div>
+
+    <!-- 区域 2：老板三问（data-reveal=8，dir=top） -->
+    <div class="tut-region tut-hook-asks" data-reveal="8" data-reveal-dir="top">
+      <div class="asks-label">老板三问 · 没准备当场卡住</div>
+      <div class="asks-row">
+        <div class="ask"><span class="ask-num grad-gold">①</span><span class="ask-text">要多少钱</span></div>
+        <div class="ask"><span class="ask-num grad-gold">②</span><span class="ask-text">多久回本</span></div>
+        <div class="ask"><span class="ask-num grad-gold">③</span><span class="ask-text">失败怎么办</span></div>
+      </div>
+    </div>
+
+    <!-- 区域 3：立项全套 4 胶囊（data-reveal=18，dir=left） -->
+    <div class="tut-region tut-hook-set" data-reveal="18" data-reveal-dir="left">
+      <div class="set-label">这集给你 · 立项实操全套</div>
+      <div class="set-row">
+        <div class="cap cap-blue"><span class="cap-mark">●</span>目标</div>
+        <div class="cap cap-blue"><span class="cap-mark">●</span>成本</div>
+        <div class="cap cap-blue"><span class="cap-mark">●</span>ROI</div>
+        <div class="cap cap-blue"><span class="cap-mark">●</span>兜底</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

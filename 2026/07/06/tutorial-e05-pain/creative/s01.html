@@ -1,0 +1,101 @@
+<!-- 场景: seg1 | 时长: ~47s | bg: diamond_lattice | 三痛点纵排（不懂业务/看不见全貌/留不住能力）+ 解法标签 + 结论金条 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（三痛点色 + 金结论；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:780px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:20%;width:420px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:20%;width:420px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:74%;left:20%;width:420px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:92%;left:50%;transform:translateX(-50%);width:780px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-pulse-ring 脉冲锚点（每卡进入时左侧锚点，呼应当前痛点） -->
+  <div class="fx-pulse-ring" style="position:absolute;top:32%;left:8%;width:24px;height:24px;border-radius:50%;border:3px solid hsla(0,80%,65%,0.7);box-shadow:0 0 18px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-pulse-ring" style="position:absolute;top:54%;left:8%;width:24px;height:24px;border-radius:50%;border:3px solid hsla(255,70%,72%,0.7);box-shadow:0 0 18px hsla(255,65%,62%,0.5)"></div>
+  <div class="fx-pulse-ring" style="position:absolute;top:76%;left:8%;width:24px;height:24px;border-radius:50%;border:3px solid hsla(215,75%,60%,0.7);box-shadow:0 0 18px hsla(215,70%,54%,0.5)"></div>
+  <!-- fx-blink 平衡 -->
+  <div class="fx-blink" style="position:absolute;top:9%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 16px hsla(43,85%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:91%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,54%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade） -->
+    <div class="tut-region tut-pain-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="pain-tag grad-gold-bg-inline">E05 · 段1</div>
+      <h1 class="pain-h1">为什么 AI 需要 <span class="grad-gold">眼睛和记忆</span></h1>
+      <div class="title-sub">三个痛点</div>
+    </div>
+
+    <!-- 区域 2：三痛点卡纵排（reveal 4，left；三卡各列 reveal 时间差由 GSAP data-reveal 序错实现，此处合并 region 用内部 reveal stagger class） -->
+    <div class="tut-region tut-pain-cards" data-reveal="4" data-reveal-dir="left">
+      <div class="pc-list">
+
+        <div class="pain-row pain-row-red">
+          <div class="pr-icon-box"><span class="pr-icon">?</span></div>
+          <div class="pr-body">
+            <div class="pr-head">
+              <span class="pr-idx">其一</span>
+              <span class="pr-name grad-red">不懂业务</span>
+            </div>
+            <div class="pr-note">通用大模型没读过产品手册 · 问业务细节就幻觉</div>
+          </div>
+          <div class="pr-solve">
+            <span class="solve-tag grad-gold-bg-inline">业务知识 RAG</span>
+            <span class="solve-sub">开卷考试</span>
+          </div>
+        </div>
+
+        <div class="pain-row pain-row-purple">
+          <div class="pr-icon-box"><span class="pr-icon">◑</span></div>
+          <div class="pr-body">
+            <div class="pr-head">
+              <span class="pr-idx">其二</span>
+              <span class="pr-name grad-purple">看不见全貌</span>
+            </div>
+            <div class="pr-note">改一个函数不知几十处依赖 · 破坏性变更悄悄合并</div>
+          </div>
+          <div class="pr-solve">
+            <span class="solve-tag grad-gold-bg-inline">代码知识图谱</span>
+            <span class="solve-sub">看爆炸半径</span>
+          </div>
+        </div>
+
+        <div class="pain-row pain-row-blue">
+          <div class="pr-icon-box"><span class="pr-icon">⇣</span></div>
+          <div class="pr-body">
+            <div class="pr-head">
+              <span class="pr-idx">其三</span>
+              <span class="pr-name grad-blue">留不住能力</span>
+            </div>
+            <div class="pr-note">开发者调走 · 经验也跟着走了</div>
+          </div>
+          <div class="pr-solve">
+            <span class="solve-tag grad-gold-bg-inline">Skill 仓库</span>
+            <span class="solve-sub">沉淀团队资产</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 区域 3：结论金条（reveal 42，top） -->
+    <div class="tut-region tut-pain-conclusion" data-reveal="42" data-reveal-dir="top">
+      <div class="concl-tag grad-gold-bg-inline">收束</div>
+      <div class="concl-main">
+        三痛点 <span class="cm-key grad-red">拖垮落地质量</span>
+        <span class="cm-dots">·</span>
+        <span class="cm-key grad-gold">四件套</span> 就是解决这三件事
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

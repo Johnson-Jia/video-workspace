@@ -1,0 +1,192 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E06 段4 — OpenSpec 三概念四命令
+ * bg: dark_cipher（代码矩阵）+ 终端命令窗口（深底 + JetBrains Mono）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 12px;
+  padding: 60px 90px 56px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 12px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#C4B5FD 0%,#DDD6FE 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题 —— 左对齐建立视觉锚点 */
+.tut-os-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-os-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-os-title .title-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-os-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：三概念卡片横排 —— */
+.tut-os-concepts { width: 100%; }
+.concept-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%;
+}
+.concept-card {
+  border-radius: 14px; padding: 10px 16px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.cc-blue { border-color: rgba(147,197,253,0.65); background: linear-gradient(135deg, rgba(59,130,246,0.13), rgba(15,23,42,0.88)); }
+.cc-purple { border-color: rgba(196,181,253,0.65); background: linear-gradient(135deg, rgba(167,139,250,0.13), rgba(15,23,42,0.88)); }
+.cc-green { border-color: rgba(110,231,183,0.65); background: linear-gradient(135deg, rgba(16,185,129,0.13), rgba(15,23,42,0.88)); }
+.cc-head { display: flex; align-items: center; }
+.cc-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.cc-body { display: flex; flex-direction: column; gap: 3px; }
+.cc-line {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-white);
+  display: flex; align-items: center; gap: 8px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cc-dot {
+  font-family: 'JetBrains Mono'; font-size: 32px;
+  color: var(--tut-blue-white);
+}
+.cc-path {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-blue-white);
+}
+
+/* —— 区域 3：终端命令窗口 —— */
+.tut-os-terminal { width: 100%; display: flex; justify-content: center; }
+.terminal {
+  width: 100%; max-width: 1500px;
+  border-radius: 14px; overflow: hidden;
+  border: 2px solid rgba(96,165,250,0.45);
+  background: #0a0a0a;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+}
+.term-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(180deg, #1f1f1f, #141414);
+  border-bottom: 1px solid rgba(96,165,250,0.25);
+}
+.term-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+}
+.term-red { background: #ff5f56; }
+.term-yellow { background: #ffbd2e; }
+.term-green { background: #27c93f; }
+.term-title {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(224,231,255,0.75); margin-left: 12px;
+}
+.term-body {
+  padding: 14px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.term-line {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  line-height: 1.3;
+}
+.term-prompt {
+  color: var(--tut-green);
+}
+.term-cmd {
+  color: #60A5FA; font-weight: 800;
+}
+.term-arg {
+  color: var(--tut-gold); font-weight: 800;
+}
+.term-note {
+  color: rgba(110,231,183,0.75); font-weight: 600;
+}
+
+/* —— 区域 4：关键一条 —— 撑满宽度 */
+.tut-os-key { width: 100%; display: flex; }
+.key-card {
+  border-radius: 14px; padding: 12px 26px;
+  border: 2.5px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.13), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  width: 100%;
+}
+.key-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.key-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mono-specs, .mono-changes {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-gold);
+}
+.key-rule {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(224,231,255,0.82);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

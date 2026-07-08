@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2026年7月第28周 GitHub 热门开源项目盘点</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'JetBrains Mono', sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+  }
+  .cover {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(0, 229, 160, 0.10), transparent 45%),
+      radial-gradient(ellipse at 85% 80%, rgba(240, 136, 62, 0.10), transparent 45%),
+      linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    overflow: hidden;
+  }
+  /* 网格背景 */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(110, 118, 129, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110, 118, 129, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  /* 装饰光晕 */
+  .glow-1 {
+    position: absolute;
+    top: -150px; left: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0, 229, 160, 0.15), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .glow-2 {
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240, 136, 62, 0.12), transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+  /* GitHub 角标 */
+  .github-mark {
+    position: absolute;
+    top: 48px; left: 64px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .github-mark svg {
+    width: 44px; height: 44px;
+    fill: #c9d1d9;
+  }
+  .github-mark .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: #00e5a0;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0, 229, 160, 0.4);
+    border-radius: 6px;
+    background: rgba(0, 229, 160, 0.06);
+  }
+  /* 周次标签 */
+  .week-tag {
+    position: absolute;
+    top: 48px; right: 64px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: #8b949e;
+    letter-spacing: 2px;
+  }
+  .week-tag .num {
+    color: #f0883e;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  /* 主标题区 */
+  .title-block {
+    position: absolute;
+    top: 160px;
+    left: 64px;
+    right: 64px;
+  }
+  .date-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    color: #00e5a0;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+  }
+  .main-title {
+    font-size: 78px;
+    font-weight: 800;
+    color: #f0f6fc;
+    line-height: 1.15;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 24px rgba(0, 229, 160, 0.2);
+  }
+  .main-title .highlight {
+    background: linear-gradient(135deg, #00e5a0 0%, #4da8da 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .sub-title {
+    margin-top: 22px;
+    font-size: 30px;
+    color: #8b949e;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .sub-title .sep {
+    color: #30363d;
+    margin: 0 18px;
+  }
+
+  /* Top 3 卡片 */
+  .top3 {
+    position: absolute;
+    bottom: 200px;
+    left: 64px;
+    right: 64px;
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+  }
+  .card {
+    flex: 1;
+    background: linear-gradient(180deg, rgba(22, 27, 34, 0.9) 0%, rgba(13, 17, 23, 0.9) 100%);
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .card.rank-1::before { background: linear-gradient(90deg, #f0883e, #ffd700); }
+  .card.rank-2::before { background: linear-gradient(90deg, #c9d1d9, #8b949e); }
+  .card.rank-3::before { background: linear-gradient(90deg, #cd7f32, #a0522d); }
+  .card .rank-badge {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
+  .rank-1 .rank-badge { background: rgba(240, 136, 62, 0.15); color: #f0883e; border: 1px solid rgba(240, 136, 62, 0.4); }
+  .rank-2 .rank-badge { background: rgba(201, 209, 217, 0.12); color: #c9d1d9; border: 1px solid rgba(201, 209, 217, 0.3); }
+  .rank-3 .rank-badge { background: rgba(205, 127, 50, 0.15); color: #cd7f32; border: 1px solid rgba(205, 127, 50, 0.4); }
+  .card .project-name {
+    font-family: 'JetBrains Mono', 'Inter', monospace;
+    font-size: 42px;
+    font-weight: 700;
+    color: #f0f6fc;
+    margin-top: 30px;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+    line-height: 1.2;
+  }
+  .card .project-tag {
+    font-size: 22px;
+    color: #8b949e;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+  }
+  .card .stars {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .rank-1 .stars { color: #f0883e; }
+  .rank-2 .stars { color: #c9d1d9; }
+  .rank-3 .stars { color: #cd7f32; }
+  .card .stars .plus {
+    font-size: 36px;
+    font-weight: 600;
+  }
+  .card .stars .unit {
+    font-size: 28px;
+    color: #8b949e;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+  .card .weekly-label {
+    font-size: 18px;
+    color: #6e7681;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* 底部统计条 */
+  .stats-bar {
+    position: absolute;
+    bottom: 60px;
+    left: 64px;
+    right: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid #30363d;
+  }
+  .stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .stat-item .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 40px;
+    font-weight: 800;
+    color: #00e5a0;
+  }
+  .stat-item.warm .num { color: #f0883e; }
+  .stat-item .label {
+    font-size: 22px;
+    color: #8b949e;
+    letter-spacing: 1px;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 48px;
+    background: #30363d;
+  }
+  .footer-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #6e7681;
+    letter-spacing: 2px;
+  }
+  .footer-brand .accent { color: #00e5a0; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <!-- GitHub 角标 -->
+  <div class="github-mark">
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    <span class="badge">GITHUB TRENDING</span>
+  </div>
+
+  <!-- 周次 -->
+  <div class="week-tag">
+    WEEK <span class="num">28</span> / 2026
+  </div>
+
+  <!-- 主标题 -->
+  <div class="title-block">
+    <div class="date-line">2026年7月 · 06月29日 — 07月06日</div>
+    <div class="main-title">本周 GitHub <span class="highlight">热门开源项目</span>盘点</div>
+    <div class="sub-title">AI Agent 工具链成型<span class="sep">·</span>单周双项目破万星<span class="sep">·</span>安全隐私升温</div>
+  </div>
+
+  <!-- Top 3 -->
+  <div class="top3">
+    <div class="card rank-1">
+      <div class="rank-badge">TOP 1</div>
+      <div class="project-name">agency-agents</div>
+      <div class="project-tag">AI 代理团队 · 虚拟公司</div>
+      <div class="stars"><span class="plus">+</span>10,637<span class="unit">★/周</span></div>
+      <div class="weekly-label">本周涨幅 · 累计 127K ★</div>
+    </div>
+    <div class="card rank-2">
+      <div class="rank-badge">TOP 2</div>
+      <div class="project-name">strix</div>
+      <div class="project-tag">AI 渗透测试 · 安全</div>
+      <div class="stars"><span class="plus">+</span>10,338<span class="unit">★/周</span></div>
+      <div class="weekly-label">本周涨幅 · 累计 37K ★</div>
+    </div>
+    <div class="card rank-3">
+      <div class="rank-badge">TOP 3</div>
+      <div class="project-name">codebase-memory-mcp</div>
+      <div class="project-tag">代码智能 MCP · 记忆层</div>
+      <div class="stars"><span class="plus">+</span>7,945<span class="unit">★/周</span></div>
+      <div class="weekly-label">本周涨幅 · 累计 26K ★</div>
+    </div>
+  </div>
+
+  <!-- 底部统计 -->
+  <div class="stats-bar">
+    <div class="stat-item warm">
+      <span class="num">77,882</span>
+      <span class="label">本周总涨星 (Top 15)</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="num">15</span>
+      <span class="label">精选项目</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="num">3</span>
+      <span class="label">大方向</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="footer-brand">数据来源 · GitHub Trending Weekly · <span class="accent">github-star-scout</span></div>
+  </div>
+</div>
+</body>
+</html>

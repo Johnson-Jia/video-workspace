@@ -1,0 +1,257 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E05 段6 — MCP 网关 + 跳过判断（横屏 reveal §6.16）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+  padding: 28px 90px 28px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 10px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#C4B5FD 0%,#DDD6FE 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-mcp-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tut-mcp-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-mcp-title .title-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-mcp-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— MCP 网关流程 —— */
+.tut-mcp-flow { width: 100%; }
+.flow-row {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: 14px;
+}
+.flow-node {
+  flex: 1;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center;
+}
+.fn-purple {
+  border-color: rgba(196,181,253,0.6);
+  background: linear-gradient(165deg, rgba(167,139,250,0.13), rgba(15,23,42,0.88));
+}
+.fn-gold {
+  border-color: rgba(252,211,77,0.65);
+  background: linear-gradient(165deg, rgba(251,191,36,0.13), rgba(15,23,42,0.88));
+}
+.fn-blue {
+  border-color: rgba(147,197,253,0.6);
+  background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88));
+}
+.fn-icon {
+  font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 900;
+  color: var(--tut-white); line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.fn-name {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.fn-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.2;
+}
+.flow-arrow {
+  display: flex; align-items: center;
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— CLI 优先提示 —— */
+.tut-mcp-cli { width: 100%; }
+.cli-card {
+  border-radius: 16px; padding: 10px 26px;
+  border: 2.5px solid rgba(147,197,253,0.6);
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88), rgba(248,113,113,0.12));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.cli-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.cli-main {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900; line-height: 1.15;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.cm-key { font-weight: 900; }
+.cm-arrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-blue);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cm-dot {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cli-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 跳过决策卡（金边强调） —— */
+.tut-mcp-skip { width: 100%; }
+.skip-card {
+  border-radius: 18px; padding: 12px 24px;
+  border: 4px solid rgba(252,211,77,0.85);
+  background: linear-gradient(165deg, rgba(251,191,36,0.12), rgba(15,23,42,0.92));
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: 0 0 0 1px rgba(252,211,77,0.25) inset;
+}
+.skip-header { text-align: center; }
+.skip-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.skip-questions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.sq-item {
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 2px solid rgba(110,231,183,0.45);
+  background: rgba(16,185,129,0.08);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-align: center;
+}
+.sq-q {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sq-a {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+}
+.sq-no { color: var(--tut-green); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+.skip-verdict {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.sv-line {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border-radius: 12px;
+  padding: 8px 14px;
+  border: 2px solid;
+}
+.sv-skip {
+  border-color: rgba(110,231,183,0.55);
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88));
+}
+.sv-do {
+  border-color: rgba(252,211,77,0.55);
+  background: linear-gradient(90deg, rgba(251,191,36,0.12), rgba(15,23,42,0.88));
+}
+.sv-icon {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1;
+}
+.sv-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-action {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-tool {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sv-fallback {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border-radius: 12px;
+  padding: 8px 14px;
+  border: 2px dashed rgba(110,231,183,0.45);
+  background: rgba(15,23,42,0.6);
+}
+.sf-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sf-tool {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.sf-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

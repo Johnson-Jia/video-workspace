@@ -1,0 +1,66 @@
+<!-- 场景: seg1 | 时长: ~23s | bg: clean_slate | 介绍：Leader 主战场 · 战略启动 4 件事（前两件高亮） -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 双色静态光晕（金高亮 + 蓝战略；脉冲呼吸，禁划过类 fx-scan/fx-beam） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:30%;width:560px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:30%;right:30%;width:560px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:72%;left:50%;transform:translateX(-50%);width:760px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（角落点缀，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:12%;width:10px;height:10px;border-radius:50%;background:hsla(43,80%,60%,0.22);box-shadow:0 0 14px hsla(43,75%,54%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;right:12%;width:10px;height:10px;border-radius:50%;background:hsla(148,60%,58%,0.65);box-shadow:0 0 14px hsla(148,55%,52%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 3 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-int-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="it-eyebrow">E03 · 战略启动</div>
+      <h1 class="it-h1">Leader 的 <span class="grad-gold">主战场</span></h1>
+      <div class="it-sub">思想就绪后 · 怎么转？</div>
+    </div>
+
+    <!-- 区域 2：4 卡 grid（data-reveal=6，dir=left） -->
+    <div class="tut-region tut-int-grid" data-reveal="6" data-reveal-dir="left">
+      <div class="ig-label">四件事齐备 · 才叫启动</div>
+      <div class="ig-row">
+        <div class="ig-card ig-hi">
+          <div class="ig-num grad-gold">①</div>
+          <div class="ig-name">目标量化</div>
+          <div class="ig-tag">本集</div>
+        </div>
+        <div class="ig-card ig-hi">
+          <div class="ig-num grad-gold">②</div>
+          <div class="ig-name">预算 ROI</div>
+          <div class="ig-tag">本集</div>
+        </div>
+        <div class="ig-card ig-dim">
+          <div class="ig-num ig-num-gray">③</div>
+          <div class="ig-name ig-name-gray">组织保障</div>
+          <div class="ig-tag ig-tag-dim">下集</div>
+        </div>
+        <div class="ig-card ig-dim">
+          <div class="ig-num ig-num-gray">④</div>
+          <div class="ig-name ig-name-gray">风险预案</div>
+          <div class="ig-tag ig-tag-dim">下集</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：本集范围标注（data-reveal=18，dir=fade） -->
+    <div class="tut-region tut-int-scope" data-reveal="18" data-reveal-dir="fade">
+      <span class="is-mark">▶</span><span class="is-text">这集拆前两件 · <span class="grad-blue">目标量化 + 预算 ROI</span></span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E04 全员赋能 · 16:9</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 100px 50px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-blue{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-220px;right:-160px;pointer-events:none;}
+.glow-green{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.14),transparent 70%);filter:blur(90px);bottom:-160px;left:-110px;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(15,23,42,0.35) 75%, rgba(8,12,24,0.55) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(16,185,129,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(16,185,129,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:24px;margin-bottom:14px;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:12px;font-size:26px;color:#60A5FA;letter-spacing:0.20em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:9px 24px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+
+.title{position:relative;z-index:2;font-size:104px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;margin-top:4px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(96,165,250,0.18);}
+.subtitle{position:relative;z-index:2;font-size:36px;color:rgba(255,255,255,0.82);margin-top:14px;font-weight:500;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+
+/* 左：终端缩略 / 右：5 件套 */
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;margin-top:34px;align-items:center;}
+
+/* 终端窗口缩略 */
+.terminal-mini{background:#0a0a0a;border-radius:14px;border:1.5px solid rgba(96,165,250,0.30);overflow:hidden;box-shadow:0 0 40px rgba(59,130,246,0.10);}
+.term-bar{background:#1a1a1a;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.term-dot{width:12px;height:12px;border-radius:50%;}
+.term-dot.red{background:#FF5F57;}
+.term-dot.yellow{background:#FEBC2E;}
+.term-dot.green{background:#28C840;}
+.term-title-mini{margin-left:12px;font-size:20px;color:#6b7280;font-family:'JetBrains Mono',monospace;}
+.term-body{padding:22px 24px;font-family:'JetBrains Mono','Consolas',monospace;font-size:24px;line-height:1.7;}
+.term-prompt{color:#6b7280;}
+.term-cmd{color:#60A5FA;}
+.term-ok{color:#34D399;}
+.term-var{color:#A78BFA;}
+.term-val{color:#FCD34D;}
+.term-success{display:inline-block;margin-top:8px;padding:8px 16px;border-radius:8px;border:1.5px solid rgba(52,211,153,0.5);background:rgba(16,185,129,0.10);color:#34D399;font-size:22px;}
+
+/* 5 件套 */
+.five-label{font-size:24px;color:#60A5FA;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;}
+.five-grid{display:flex;flex-direction:column;gap:12px;}
+.five-item{display:flex;align-items:center;gap:16px;padding:14px 22px;border-radius:12px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.five-item:nth-child(1){border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.five-item:nth-child(2){border-color:rgba(96,165,250,0.45);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.55));}
+.five-item:nth-child(3){border-color:rgba(167,139,250,0.45);background:linear-gradient(92deg,rgba(167,139,250,0.12),rgba(15,23,42,0.55));}
+.five-item:nth-child(4){border-color:rgba(52,211,153,0.45);background:linear-gradient(92deg,rgba(16,185,129,0.12),rgba(15,23,42,0.55));}
+.five-item:nth-child(5){border-color:rgba(251,146,60,0.45);background:linear-gradient(92deg,rgba(251,146,60,0.12),rgba(15,23,42,0.55));}
+.five-name{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;min-width:170px;}
+.five-item:nth-child(1) .five-name{color:#FBBF24;}
+.five-item:nth-child(2) .five-name{color:#60A5FA;}
+.five-item:nth-child(3) .five-name{color:#A78BFA;}
+.five-item:nth-child(4) .five-name{color:#34D399;}
+.five-item:nth-child(5) .five-name{color:#FB923C;}
+.five-desc{font-size:24px;color:rgba(255,255,255,0.7);font-weight:500;}
+
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:26px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:23px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-green"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E04</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 全员赋能</div>
+  </div>
+
+  <h1 class="title"><span class="title-grad">Claude Code 全员赋能</span></h1>
+  <div class="subtitle">工具选型 + <span class="sub-strong">CLAUDE.md 规范资产化</span> · 五件套 · 培训 100%</div>
+
+  <div class="main">
+    <!-- 终端缩略 -->
+    <div class="terminal-mini">
+      <div class="term-bar">
+        <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+        <span class="term-title-mini">Terminal — bash</span>
+      </div>
+      <div class="term-body">
+        <div><span class="term-prompt">$</span> <span class="term-cmd">curl</span> -fsSL claude.ai/install.sh | bash</div>
+        <div><span class="term-ok">✓ Claude Code installed</span></div>
+        <div style="margin-top:10px"><span class="term-prompt">$</span> <span class="term-cmd">export</span> <span class="term-var">ANTHROPIC_BASE_URL</span>=<span class="term-val">智谱地址</span></div>
+        <div><span class="term-prompt">$</span> <span class="term-cmd">export</span> <span class="term-var">ANTHROPIC_AUTH_TOKEN</span>=<span class="term-val">你的Key</span></div>
+        <div style="margin-top:10px"><span class="term-prompt">$</span> <span class="term-ok">claude</span></div>
+        <div class="term-success">✓ 已连接 GLM · 开始用吧</div>
+      </div>
+    </div>
+
+    <!-- 5 件套 -->
+    <div>
+      <div class="five-label">五件套 · 团队级提效杠杆</div>
+      <div class="five-grid">
+        <div class="five-item"><span class="five-name">CLAUDE.md</span><span class="five-desc">项目规范 · AI 自动读</span></div>
+        <div class="five-item"><span class="five-name">Skill</span><span class="five-desc">可复用工作流</span></div>
+        <div class="five-item"><span class="five-name">MCP</span><span class="five-desc">连接外部数据工具</span></div>
+        <div class="five-item"><span class="five-name">RAG</span><span class="five-desc">检索知识库 · 减幻觉</span></div>
+        <div class="five-item"><span class="five-name">Hooks</span><span class="five-desc">事件钩子 · 自动检查</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

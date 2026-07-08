@@ -1,0 +1,113 @@
+[
+  {
+    "id": "T-20260705T085613Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-05T08:56:13.993487+00:00",
+    "project_dir": "2026/07/05/tutorial-e02-essence",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:safezone_rendered",
+            "details": "seg1: 内容溢出安全区 top (content_y=[50, 793], bounds=(60, 1860))"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260705T090047Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-05T09:00:47.843218+00:00",
+    "project_dir": "2026/07/05/tutorial-e02-essence",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260705T093255Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-05T09:32:55.148195+00:00",
+    "project_dir": "2026/07/05/tutorial-e02-essence",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:safezone_rendered",
+            "details": "seg1: 内容溢出安全区 top (content_y=[57, 739], bounds=(60, 1860))"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260705T110804Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-07-05T11:08:04.979749+00:00",
+    "project_dir": "2026/07/05/tutorial-e02-essence",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: douyin.md"
+          },
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "douyin.md 缺失"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

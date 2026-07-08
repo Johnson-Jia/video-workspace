@@ -1,0 +1,117 @@
+<!-- 场景: seg1 | 时长: ~61.9s | bg: scan_grid | CLAUDE.md 资产化：文件窗 + 代码块逐行 reveal + 资产化卡 + 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝代码/绿资产化/金金句；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;left:32%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:48%;right:10%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:32%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;right:12%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.75);box-shadow:0 0 14px hsla(43,85%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-cmd-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E04 · 规范资产化</div>
+      <h1 class="mt-h1"><span class="grad-blue">CLAUDE.md</span> · 规范资产化</h1>
+      <div class="title-sub">项目根目录 · AI 每次自动读</div>
+    </div>
+
+    <!-- 主体两栏：文件窗（左）+ 资产化卡（右） -->
+    <div class="tut-cmd-main">
+
+    <!-- 区域 2：文件窗口（data-reveal=6，dir=top）—— 含标题栏 + 代码块头部 -->
+    <div class="tut-region tut-cmd-filewindow" data-reveal="6" data-reveal-dir="top">
+      <div class="code-window">
+        <div class="code-titlebar">
+          <span class="code-file-icon">📄</span>
+          <span class="code-title-name">CLAUDE.md</span>
+          <span class="code-path">项目根目录</span>
+        </div>
+        <div class="code-body">
+          <!-- 头部：注释行（region 2 一同 reveal） -->
+          <div class="code-line">
+            <span class="line-num">1</span>
+            <span class="c-comment"># 项目规范</span>
+          </div>
+
+          <!-- 第1块：技术栈（data-reveal=14） -->
+          <div class="code-line code-block" data-reveal="14" data-reveal-dir="fade">
+            <span class="line-num">2</span>
+            <span class="c-key">- 技术栈</span><span class="c-colon">：</span><span class="c-val">React <span class="c-op">+</span> TypeScript <span class="c-op">+</span> Vite</span>
+          </div>
+
+          <!-- 第2块：命名（data-reveal=20） -->
+          <div class="code-line code-block" data-reveal="20" data-reveal-dir="fade">
+            <span class="line-num">3</span>
+            <span class="c-key">- 命名</span><span class="c-colon">：</span><span class="c-val">组件 <span class="c-emph">PascalCase</span> · 工具 <span class="c-emph">camelCase</span></span>
+          </div>
+
+          <!-- 第3块：测试（data-reveal=30） -->
+          <div class="code-line code-block" data-reveal="30" data-reveal-dir="fade">
+            <span class="line-num">4</span>
+            <span class="c-key">- 测试</span><span class="c-colon">：</span><span class="c-val">改动必跑 <span class="c-code">npm test</span></span>
+          </div>
+
+          <!-- 第4块：提交（data-reveal=38） -->
+          <div class="code-line code-block" data-reveal="38" data-reveal-dir="fade">
+            <span class="line-num">5</span>
+            <span class="c-key">- 提交</span><span class="c-colon">：</span><span class="c-val">约定式 <span class="c-emph">feat</span><span class="c-op">/</span><span class="c-emph">fix</span><span class="c-op">/</span><span class="c-emph">docs</span></span>
+          </div>
+
+          <!-- 末尾空注释 -->
+          <div class="code-line code-tail" data-reveal="44" data-reveal-dir="fade">
+            <span class="line-num">6</span>
+            <span class="c-comment"># AI 启动自动读 · 生成时遵守</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：资产化卡（data-reveal=46，dir=left） -->
+    <div class="tut-region tut-cmd-asset" data-reveal="46" data-reveal-dir="left">
+      <div class="asset-card">
+        <div class="asset-tag grad-green-bg-inline">资产化</div>
+        <div class="asset-formula">
+          <span class="af-left">人定规矩</span>
+          <span class="af-arrow">→</span>
+          <span class="af-right grad-green">AI 自动执行</span>
+        </div>
+        <div class="asset-flow">
+          <div class="flow-item"><span class="fi-mark fi-git">⎇</span>提交进 Git</div>
+          <div class="flow-item"><span class="fi-mark fi-git">⎇</span>全团队共享</div>
+          <div class="flow-item"><span class="fi-mark fi-ai">✓</span>新人 AI 守规矩</div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-cmd-main -->
+
+    <!-- 区域 4：金句（data-reveal=58，dir=top） -->
+    <div class="tut-region tut-cmd-quote" data-reveal="58" data-reveal-dir="top">
+      <div class="quote-tag grad-gold-bg-inline">硬约束</div>
+      <div class="quote-main">
+        <span class="quote-text">规范不是文档里落灰的字</span>
+      </div>
+      <div class="quote-correct">
+        <span class="qc-mark">→</span>
+        是 AI 每次生成都遵守的 <span class="qc-strong grad-gold">硬约束</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

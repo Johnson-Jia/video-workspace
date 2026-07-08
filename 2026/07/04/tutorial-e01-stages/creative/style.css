@@ -1,0 +1,373 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #FBBF24;
+  --accent-cool: #3B82F6;
+  --text: rgba(255,255,255,0.90);
+  --text2: #E0E7FF;
+  --text-dim: #94A3B8;
+  --green: #10B981;
+  --red: #EF4444;
+  --gold: #FBBF24;
+  --blue: #3B82F6;
+  --blue-deep: #1E3A8A;
+  --gray: #94A3B8;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* === 教程横屏通用布局（§6.16 一屏多区域 + reveal） === */
+/* 全局文字微阴影（深底浮起，非通配 *，避免影响渐变文字） */
+.tut-scene h1, .tut-scene h3, .tut-scene p, .tut-scene span,
+.stage-card .name, .cmp-card h3, .tri-card h3, .dual-card .col h3,
+.tf-card h3, .data-card .num, .quote-bar, .cost-pill, .flow-step{
+  text-shadow:0 2px 12px rgba(0,0,0,0.45);
+}
+.tut-scene{width:100%;height:100%;
+    /* 横屏安全区单层 padding */
+  display:flex; flex-direction:column;
+}
+.tut-grid{
+  display:grid;
+  width:100%; height:100%;
+  gap:28px;
+}
+.tut-region{ opacity:0; }  /* s6_assemble 按 data-reveal 时间点 set opacity:1 */
+
+/* 标题区（hero 大字，每场景顶部） */
+.tut-hero{
+  display:flex; flex-direction:column; gap:14px;
+  border-bottom:1px solid rgba(59,130,246,0.35);
+  padding-bottom:18px;
+}
+.tut-hero-num{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--font-data); font-size:32px; font-weight:700;
+  color:var(--blue); letter-spacing:0.08em;
+}
+.tut-hero-num .pill{
+  display:inline-block; padding:6px 18px;
+  border:1px solid rgba(59,130,246,0.55); border-radius:999px;
+  color:var(--blue); font-size:32px;
+}
+.tut-hero h1{
+  font-family:var(--font-title); font-weight:900;
+  font-size:78px; line-height:1.05; letter-spacing:0.01em;
+  margin:0;
+}
+.tut-hero .sub{
+  font-family:var(--font-body); font-size:32px; color:var(--text2);
+  font-weight:500;
+}
+.tut-hero .underline{
+  height:3px; width:0;
+  background:linear-gradient(90deg,var(--blue),var(--gold));
+}
+
+/* 金色「核心」胶囊 */
+.pill-core{
+  display:inline-block; padding:8px 22px;
+  border:1.5px solid var(--gold); border-radius:999px;
+  color:var(--gold); font-size:32px; font-weight:700;
+  background:rgba(251,191,36,0.10);
+  letter-spacing:0.06em;
+}
+/* 灰色「可跳过」胶囊 */
+.pill-skip{
+  display:inline-block; padding:8px 22px;
+  border:1.5px solid var(--gray); border-radius:999px;
+  color:var(--gray); font-size:32px; font-weight:600;
+  background:rgba(148,163,184,0.08);
+  letter-spacing:0.04em;
+}
+
+/* 渐变文字（标题，禁白色端点） */
+.grad-blue{
+  background-image:linear-gradient(92deg,#60A5FA,#3B82F6,#1E40AF);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+.grad-gold{
+  background-image:linear-gradient(92deg,#FCD34D,#FBBF24,#D97706);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+.grad-green{
+  background-image:linear-gradient(92deg,#6EE7B7,#10B981,#047857);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+
+/* 7 阶段全景条 */
+.stage-rail{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:18px;
+  align-items:stretch;
+}
+.stage-card{
+  display:flex; flex-direction:column; gap:10px;
+  padding:18px 14px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  border-radius:14px;
+  background:rgba(30,58,138,0.18);
+}
+.stage-card .num{
+  font-family:var(--font-data); font-size:32px; color:var(--blue); font-weight:700;
+}
+.stage-card .name{
+  font-family:var(--font-title); font-size:34px; font-weight:800; color:var(--text);
+  line-height:1.15;
+}
+.stage-card .out{
+  font-family:var(--font-body); font-size:32px; color:var(--text2);
+}
+.stage-card.is-core{
+  border:2px solid var(--gold);
+  background:rgba(251,191,36,0.10);
+  box-shadow:0 0 32px rgba(251,191,36,0.18);
+}
+.stage-card.is-core .num{ color:var(--gold); }
+.stage-card.is-skip{
+  border:1.5px dashed var(--gray);
+  background:rgba(148,163,184,0.06);
+  opacity:0.85;
+}
+.stage-card.is-skip .num{ color:var(--gray); }
+
+/* 双栏对比（是/不是） */
+.compare-2col{
+  display:grid; grid-template-columns:1fr 1fr; gap:36px;
+}
+.cmp-card{
+  padding:26px 30px; border-radius:14px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.cmp-card.bad{
+  border:1.5px solid rgba(239,68,68,0.55);
+  background:rgba(239,68,68,0.06);
+}
+.cmp-card.good{
+  border:1.5px solid rgba(16,185,129,0.55);
+  background:rgba(16,185,129,0.06);
+}
+.cmp-card .tag{
+  font-family:var(--font-data); font-size:32px; font-weight:700;
+  letter-spacing:0.06em;
+}
+.cmp-card.bad .tag{ color:var(--red); }
+.cmp-card.good .tag{ color:var(--green); }
+.cmp-card h3{
+  font-family:var(--font-title); font-size:40px; font-weight:800;
+  margin:0; color:var(--text); line-height:1.1;
+}
+.cmp-card p{
+  font-family:var(--font-body); font-size:32px; line-height:1.4;
+  color:var(--text2); margin:0;
+}
+
+/* 三卡横向（老板三问 / 三件事 / 三产物） */
+.tri-cards{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.tri-card{
+  padding:22px 24px; border-radius:14px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  background:rgba(30,58,138,0.16);
+  display:flex; flex-direction:column; gap:10px;
+}
+.tri-card .icon{
+  font-family:var(--font-data); font-size:44px; font-weight:800;
+  color:var(--gold); line-height:1;
+}
+.tri-card h3{
+  font-family:var(--font-title); font-size:34px; font-weight:800;
+  color:var(--text); margin:0; line-height:1.15;
+}
+.tri-card p{
+  font-family:var(--font-body); font-size:32px; color:var(--text2);
+  margin:0; line-height:1.4;
+}
+
+/* 四块成本胶囊 */
+.cost-row{
+  display:flex; gap:18px; flex-wrap:wrap;
+}
+.cost-pill{
+  padding:14px 28px; border-radius:999px;
+  border:1.5px solid rgba(59,130,246,0.55);
+  background:rgba(30,58,138,0.20);
+  font-family:var(--font-body); font-size:32px; color:var(--text);
+  font-weight:600;
+}
+
+/* 数据卡（金色大数字 + 注释） */
+.data-card{
+  display:flex; flex-direction:column; gap:8px;
+  padding:24px 36px;
+  border:1.5px solid rgba(251,191,36,0.50);
+  background:rgba(251,191,36,0.08);
+  border-radius:14px;
+}
+.data-card .num{
+  font-family:var(--font-data); font-size:96px; font-weight:800;
+  color:var(--gold); line-height:1; letter-spacing:0.02em;
+}
+.data-card .lbl{
+  font-family:var(--font-body); font-size:32px; color:var(--text-dim);
+}
+
+/* 金句条 */
+.quote-bar{
+  padding:20px 36px;
+  border-radius:12px;
+  font-family:var(--font-title); font-size:38px; font-weight:800;
+  color:var(--text); line-height:1.25;
+}
+.quote-bar.gold{
+  border:2px solid var(--gold);
+  background:linear-gradient(90deg,rgba(251,191,36,0.10),rgba(251,191,36,0.02));
+}
+.quote-bar.green{
+  border:2px solid var(--green);
+  background:linear-gradient(90deg,rgba(16,185,129,0.10),rgba(16,185,129,0.02));
+}
+.quote-bar.blue{
+  border:2px solid var(--blue);
+  background:linear-gradient(90deg,rgba(59,130,246,0.10),rgba(59,130,246,0.02));
+}
+.quote-bar .warn{
+  display:block; margin-top:8px; font-size:32px; color:var(--red);
+  font-weight:500;
+}
+
+/* 双栏工具/规范区（左右对称） */
+.dual-card{
+  display:grid; grid-template-columns:1fr 1fr; gap:30px;
+}
+.dual-card .col{
+  padding:24px 28px; border-radius:14px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  background:rgba(30,58,138,0.16);
+  display:flex; flex-direction:column; gap:10px;
+}
+.dual-card .col .role{
+  font-family:var(--font-data); font-size:32px; color:var(--blue);
+  font-weight:700; letter-spacing:0.06em;
+}
+.dual-card .col h3{
+  font-family:var(--font-title); font-size:38px; font-weight:800;
+  color:var(--text); margin:0; line-height:1.1;
+}
+.dual-card .col p{
+  font-family:var(--font-body); font-size:32px; color:var(--text2);
+  margin:0; line-height:1.4;
+}
+
+/* 流程链（横向箭头连接） */
+.flow-chain{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.flow-step{
+  padding:14px 24px; border-radius:10px;
+  border:1.5px solid rgba(59,130,246,0.55);
+  background:rgba(30,58,138,0.20);
+  font-family:var(--font-body); font-size:32px; font-weight:600;
+  color:var(--text);
+}
+.flow-arrow{
+  font-family:var(--font-data); font-size:34px; color:var(--gold);
+  font-weight:700;
+}
+
+/* SDD 三产物 + 左移箭头 */
+.sdd-row{
+  display:grid; grid-template-columns:repeat(3,1fr) auto; gap:20px;
+  align-items:center;
+}
+.sdd-card{
+  padding:20px 22px; border-radius:12px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  background:rgba(30,58,138,0.16);
+  display:flex; flex-direction:column; gap:6px;
+}
+.sdd-card .tag{
+  font-family:var(--font-data); font-size:32px; font-weight:700;
+  color:var(--blue); letter-spacing:0.08em;
+}
+.sdd-card .fn{
+  font-family:var(--font-data); font-size:32px; color:var(--text); font-weight:600;
+}
+.shift-arrow{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  font-family:var(--font-data); font-weight:700;
+}
+.shift-arrow .from{ color:var(--red); font-size:32px; }
+.shift-arrow .arr{ font-size:42px; color:var(--gold); }
+.shift-arrow .to{ color:var(--green); font-size:32px; }
+
+/* 个体→组织转化 */
+.transform-row{
+  display:grid; grid-template-columns:1fr auto 1fr; gap:36px; align-items:center;
+}
+.tf-card{
+  padding:28px 32px; border-radius:14px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  background:rgba(30,58,138,0.16);
+  display:flex; flex-direction:column; gap:8px; align-items:center;
+}
+.tf-card h3{
+  font-family:var(--font-title); font-size:36px; font-weight:800;
+  color:var(--text); margin:0;
+}
+.tf-card p{
+  font-family:var(--font-body); font-size:32px; color:var(--text2); margin:0;
+}
+.tf-arrow{
+  font-family:var(--font-data); font-size:60px; color:var(--gold); font-weight:800;
+}
+
+/* 度量方法双防线 */
+.measure-flow{
+  display:flex; flex-direction:column; gap:14px;
+}
+.mf-step{
+  padding:18px 26px; border-radius:12px;
+  border:1.5px solid rgba(59,130,246,0.45);
+  background:rgba(30,58,138,0.16);
+  display:flex; align-items:center; gap:18px;
+}
+.mf-step .idx{
+  font-family:var(--font-data); font-size:32px; font-weight:800;
+  color:var(--gold); width:50px;
+}
+.mf-step .txt{
+  font-family:var(--font-body); font-size:32px; color:var(--text2);
+}
+
+/* 底部承接条 */
+.handoff{
+  margin-top:auto;
+  padding:14px 24px;
+  border-top:1px solid rgba(59,130,246,0.30);
+  display:flex; justify-content:flex-end; align-items:center; gap:10px;
+  font-family:var(--font-body); font-size:32px; color:var(--text-dim);
+}
+.handoff .arr{ color:var(--gold); font-weight:700; }
+
+/* fx 元素占位（s6_assemble 按约定 class 注入动画） */
+.fx-dot{
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,0.55),transparent 70%);
+  pointer-events:none;
+}
+.fx-pulse-ring{
+  position:absolute; border-radius:50%;
+  border:2px solid rgba(251,191,36,0.40);
+  pointer-events:none;
+}
+.fx-blink{
+  position:absolute; width:12px; height:12px; border-radius:50%;
+  background:#60A5FA;
+  box-shadow:0 0 16px rgba(96,165,250,0.8),0 0 32px rgba(96,165,250,0.4);
+  pointer-events:none;
+}

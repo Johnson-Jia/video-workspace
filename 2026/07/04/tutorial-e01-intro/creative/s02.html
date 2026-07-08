@@ -1,0 +1,52 @@
+<!-- 场景: scene-2 | AI 发展到什么阶段 | 时长: 30.53s | 教程 reveal 模式（单 phase + 多 region + data-reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+<div class="layer-fx">
+  <!-- §6.12 横屏 fx：≥2 个 GSAP 动画元素（教程克制） -->
+  <div class="fx-aura" style="top:60%;left:70%;width:380px;height:380px;background:radial-gradient(circle,rgba(168,85,247,0.22),transparent 70%);"></div>
+  <div class="fx-particle" style="top:24%;left:18%;width:7px;height:7px;background:rgba(251,191,36,0.7);"></div>
+  <div class="fx-particle" style="top:72%;left:42%;width:6px;height:6px;background:rgba(96,165,250,0.7);animation-delay:1.5s;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 单 phase div，含 4 个 region，按 narration 句子锚点 data-reveal 依次淡入并保持 -->
+
+  <!-- Region 1: 标题区 -->
+  <div class="tut-region tut-hero" data-reveal="0" data-reveal-dir="top">
+    <span class="tut-eyebrow">阶段判断</span>
+    <div class="tut-title">AI 发展到了什么阶段</div>
+    <span class="tut-underline"></span>
+  </div>
+
+  <!-- Region 2: 能力清单（3 胶囊）— narration 讲到「写代码/操作电脑/推理决策」时 reveal -->
+  <div class="tut-region tut-stages" data-reveal="3" data-reveal-dir="top">
+    <span class="stage-lead">大模型 + Agent 已能：</span>
+    <span class="tut-pill">写代码</span>
+    <span class="tut-pill">操作电脑</span>
+    <span class="tut-pill">推理决策</span>
+    <span style="font-family:var(--font-body);font-size:32px;color:var(--tut-gray);align-self:center;">—— 不再是 demo 级噱头</span>
+  </div>
+
+  <!-- Region 3: 阶段判断金句 — narration 讲到「从锦上添花 → 重写生产关系」时 reveal -->
+  <div class="tut-region tut-quote" data-reveal="7" data-reveal-dir="top">
+    <div class="quote-txt">AI 正从「锦上添花的工具」<span style="color:var(--tut-gold);">→ 重写研发生产关系</span></div>
+    <div class="quote-sub">性质升级：先动者红利窗口正在打开</div>
+  </div>
+
+  <!-- Region 4: 数据卡（2 倍代码 + 相关性非因果）— narration 讲到「2 倍代码/相关性非因果」时 reveal -->
+  <div class="tut-region tut-data" data-reveal="11" data-reveal-dir="top">
+    <div class="data-card">
+      <div class="data-num">2<span style="font-size:54px;color:var(--tut-blue-white);">×</span> 代码</div>
+      <div class="data-label">先动者，同样人数的产出</div>
+    </div>
+    <div class="data-note">
+      <strong>相关性、非因果</strong>——不能 100% 归功 AI，<br>
+      但先动者确实拉开了身位。
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

@@ -1,0 +1,276 @@
+:root {
+  --bg-deep: #0A0805;
+  --bg-deeper: #050302;
+  --gold: #FFB800;
+  --gold-sand: #D4A017;
+  --amber: #FF6B00;
+  --amber-warn: #8B2500;
+  --warn-red: #B33A3A;
+  --text: #F5E6C8;
+  --text2: rgba(245,230,200,0.62);
+  --card-bg: rgba(26,16,8,0.88);
+  --card-bg-soft: rgba(40,24,10,0.78);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+}
+
+/* ============================================
+ * 自定义组件 CSS（暖金 versus 硬朗）
+ * 基础层（.clip, .layer-*, .phase, .fx-*）由 assemble 脚本自动注入
+ * ============================================ */
+
+/* === 暖金渐变文字（禁纯白端点，同色系高饱和，line-height≥1.0） === */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FFD66B 0%, #FFB800 45%, #FF6B00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.grad-amber {
+  background-image: linear-gradient(135deg, #FF8C40 0%, #FF6B00 50%, #8B2500 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.grad-red {
+  background-image: linear-gradient(135deg, #FF6B00 0%, #B33A3A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+/* 渐变文字同色系发光（禁黑色阴影） */
+.glow-gold { text-shadow: 0 0 16px rgba(255,184,0,0.55), 0 2px 6px rgba(255,107,0,0.35); }
+.glow-amber { text-shadow: 0 0 16px rgba(255,107,0,0.55), 0 2px 6px rgba(139,37,0,0.4); }
+.glow-red { text-shadow: 0 0 16px rgba(179,58,58,0.55); }
+/* 纯色文字深色描边 */
+.stroke-dark { -webkit-text-stroke: 1.5px rgba(10,8,5,0.7); }
+
+/* === 卡片（深色不透明底 alpha 0.88 挡 fx 光晕） === */
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,184,0,0.30);
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,184,0,0.12);
+  position: relative;
+}
+.card-soft {
+  background: var(--card-bg-soft);
+  border: 1px solid rgba(255,107,0,0.25);
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+.card-danger {
+  background: rgba(40,12,8,0.85);
+  border: 1px solid rgba(179,58,58,0.45);
+  border-radius: 14px;
+  padding: 28px 32px;
+  box-shadow: 0 8px 28px rgba(80,12,12,0.4);
+}
+
+/* === 数据条（耐力对比/股价崩盘） === */
+.bar-track {
+  width: 100%;
+  height: 26px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 13px;
+  background: linear-gradient(90deg, #FFB800, #FF6B00);
+  box-shadow: 0 0 16px rgba(255,184,0,0.45);
+}
+.bar-fill-amber {
+  background: linear-gradient(90deg, #FF6B00, #8B2500);
+  box-shadow: 0 0 16px rgba(255,107,0,0.45);
+}
+.bar-fill-red {
+  background: linear-gradient(90deg, #B33A3A, #8B2500);
+  box-shadow: 0 0 14px rgba(179,58,58,0.45);
+}
+.bar-fill-short {
+  background: linear-gradient(90deg, #D4A017, #8B2500);
+  box-shadow: 0 0 12px rgba(212,160,23,0.4);
+}
+
+/* === 胶囊小标签（纯场景色，禁 grad-clip:text） === */
+.tag-pill {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(255,184,0,0.14);
+  border: 1px solid rgba(255,184,0,0.45);
+  color: var(--gold);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.tag-pill-amber {
+  background: rgba(255,107,0,0.14);
+  border-color: rgba(255,107,0,0.45);
+  color: var(--amber);
+}
+.tag-pill-warn {
+  background: rgba(139,37,0,0.22);
+  border-color: rgba(179,58,58,0.55);
+  color: #FF8C40;
+}
+
+/* === 卡车剪影（CSS，自动驾驶货运意象） === */
+.truck-icon {
+  width: 96px; height: 56px;
+  position: relative;
+  flex-shrink: 0;
+}
+.truck-icon::before {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 56px; height: 38px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-sand));
+  border-radius: 6px 6px 4px 4px;
+  box-shadow: 0 0 14px rgba(255,184,0,0.45);
+}
+.truck-icon::after {
+  content: '';
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 32px; height: 28px;
+  background: linear-gradient(180deg, var(--amber), var(--amber-warn));
+  border-radius: 4px 6px 4px 4px;
+  box-shadow: 0 0 10px rgba(255,107,0,0.4);
+}
+
+/* === 围栏图标（HaulOS geofence） === */
+.geofence-icon {
+  width: 80px; height: 80px;
+  position: relative;
+  flex-shrink: 0;
+}
+.geofence-icon::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 3px dashed var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(255,184,0,0.4);
+}
+.geofence-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 14px; height: 14px;
+  background: var(--amber);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 12px rgba(255,107,0,0.7);
+}
+
+/* === 炸弹图标（SPAC 定时炸弹） === */
+.bomb-icon {
+  width: 64px; height: 64px;
+  position: relative;
+  flex-shrink: 0;
+}
+.bomb-icon::before {
+  content: '';
+  position: absolute;
+  left: 8px; bottom: 0;
+  width: 48px; height: 48px;
+  background: radial-gradient(circle at 35% 35%, #B33A3A, #6B1818);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(179,58,58,0.6);
+}
+.bomb-icon::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0;
+  width: 14px; height: 22px;
+  background: linear-gradient(180deg, #FFB800, #FF6B00);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  filter: blur(0.5px);
+}
+
+/* === 列表行（图标/序号+文字 垂直成列 左对齐） === */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+}
+.list-row .item-num {
+  font-family: var(--font-data);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--amber);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* === 中央 max-width 块居中兜底 === */
+.center-block { margin: 0 auto; }
+
+/* === fx 暖光晕（blur≤30） === */
+.fx-glow-amber {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+}
+.fx-glow-red {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* === 双栏对比 === */
+.compare-cols {
+  display: flex;
+  gap: 28px;
+  width: 100%;
+  align-items: stretch;
+}
+.compare-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* === 股价崩盘时间轴节点 === */
+.tick-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+.tick-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(255,184,0,0.55);
+}
+.tick-dot-fall { background: var(--amber); box-shadow: 0 0 12px rgba(255,107,0,0.55); }
+.tick-dot-crash { background: var(--warn-red); box-shadow: 0 0 14px rgba(179,58,58,0.65); }
+
+/* === 讨论问题强调框 === */
+.discuss-box {
+  border: 2px solid rgba(255,184,0,0.55);
+  border-radius: 16px;
+  padding: 26px 32px;
+  background: rgba(255,184,0,0.06);
+  text-align: center;
+}

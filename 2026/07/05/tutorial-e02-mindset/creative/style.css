@@ -1,0 +1,173 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-red: #EF4444;
+  --tut-green: #10B981;
+  --tut-blue: #3B82F6;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E02 思想转变段 — 两个极端 + 拥抱验证（横屏 reveal §6.16）
+ * 1 场景 + 标题 + 左右双卡（红）+ 金句（绿）+ 转折（蓝）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  gap: 18px;
+  padding: 50px 110px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  gap: 18px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-red { background-image: linear-gradient(92deg,#F87171 0%,#EF4444 50%,#B91C1C 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green-bg { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#047857 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#1E3A8A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 标题区 —— */
+.tut-ms-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.tut-ms-title .mt-eyebrow {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.20em;
+  padding: 6px 24px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+}
+.tut-ms-title .mt-h1 {
+  font-family: var(--font-title); font-size: 76px; font-weight: 900; line-height: 1.04;
+  background-image: linear-gradient(92deg,#F87171 0%,#EF4444 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 16px rgba(239,68,68,0.20);
+}
+
+/* —— 双卡（左右对称）—— */
+.tut-ms-card {
+  border-radius: 22px; padding: 28px 32px 26px;
+  border: 2.5px solid;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative;
+}
+.tut-ms-card-left {
+  border-color: rgba(239,68,68,0.60);
+  background: linear-gradient(165deg, rgba(239,68,68,0.10), rgba(15,23,42,0.65));
+}
+.tut-ms-card-right {
+  border-color: rgba(239,68,68,0.60);
+  background: linear-gradient(165deg, rgba(239,68,68,0.10), rgba(15,23,42,0.65));
+}
+.tut-ms-card .card-tag {
+  align-self: flex-start;
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  padding: 4px 16px; border-radius: 8px;
+  background: linear-gradient(92deg,#EF4444,#B91C1C); color: #FFF;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 14px rgba(239,68,68,0.35);
+}
+.tut-ms-card .card-head {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900; letter-spacing: 0.02em;
+  margin-top: 6px;
+  text-shadow: 0 0 12px rgba(239,68,68,0.22);
+}
+.tut-ms-card .card-block { display: flex; flex-direction: column; gap: 8px; }
+.tut-ms-card .block-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.10em;
+  opacity: 0.85;
+}
+.tut-ms-card .block-label-cost { color: var(--tut-red); }
+.tut-ms-card .block-items { display: flex; flex-direction: column; gap: 6px; }
+.tut-ms-card .bi {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: var(--tut-white);
+  display: flex; align-items: center; gap: 12px; line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-ms-card .bi-mark {
+  font-family: var(--font-data); color: var(--tut-red); font-weight: 900;
+  font-size: 32px; min-width: 32px; text-align: center;
+}
+.tut-ms-card .card-cost {
+  margin-top: 4px; padding-top: 10px;
+  border-top: 1.5px dashed rgba(239,68,68,0.40);
+}
+.tut-ms-card .cost-text {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-white);
+  line-height: 1.3;
+  text-shadow: 0 2px 10px rgba(239,68,68,0.30);
+}
+
+/* 双卡水平排列（由 tut-ms-cards-row 容器管理） */
+.tut-ms-card-left,
+.tut-ms-card-right {
+  align-self: stretch;
+}
+
+/* —— 金句（拥抱+验证）—— */
+.tut-ms-quote {
+  align-self: center;
+  width: 100%;
+  border-radius: 22px; padding: 24px 40px;
+  border: 2.5px solid rgba(16,185,129,0.60);
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(15,23,42,0.55));
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.tut-ms-quote .quote-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.15em;
+}
+.tut-ms-quote .quote-main {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900; line-height: 1.05;
+  display: flex; align-items: center; gap: 18px;
+  text-shadow: 0 0 16px rgba(16,185,129,0.20);
+}
+.tut-ms-quote .quote-plus {
+  font-family: var(--font-data); font-size: 60px; font-weight: 900; color: var(--tut-green);
+}
+.tut-ms-quote .quote-sub { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.tut-ms-quote .qs-line {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: var(--tut-white);
+  display: flex; align-items: center; gap: 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+.tut-ms-quote .qs-mark {
+  font-family: var(--font-data); color: var(--tut-green); font-weight: 900;
+  font-size: 32px; min-width: 32px; text-align: center;
+}
+
+/* —— 转折（引出原理）—— */
+.tut-ms-pivot {
+  align-self: center;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 16px 36px; border-radius: 18px;
+  border: 2px solid rgba(59,130,246,0.50);
+  background: linear-gradient(90deg, rgba(59,130,246,0.10), rgba(15,23,42,0.50));
+}
+.tut-ms-pivot .pivot-from {
+  font-family: var(--font-body); font-size: 36px; font-weight: 600;
+  color: var(--tut-gray); text-decoration: line-through;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+}
+.tut-ms-pivot .pivot-arrow {
+  font-family: var(--font-data); font-size: 42px; font-weight: 900; color: var(--tut-blue);
+}
+.tut-ms-pivot .pivot-to {
+  font-family: var(--font-title); font-size: 40px; font-weight: 800;
+  text-shadow: 0 0 12px rgba(59,130,246,0.20);
+}
+
+/* —— 双卡并排行（用 grid 的隐式行：通过 tut-ms-cards-row 容器）—— */
+/* intro 段 tut-map-cols 用了 grid 1fr 1fr；这里双卡需同样并排，故把双卡包在一个隐式 row */
+.tut-ms-cards-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%;
+  align-items: stretch;
+}

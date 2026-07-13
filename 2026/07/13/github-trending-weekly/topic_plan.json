@@ -1,0 +1,37 @@
+{
+  "topic_type": "AI-Agent 体系化（周榜多领域盘点）",
+  "topic_pattern": "topic-ai-weekly",
+  "angle": "本周 GitHub 被 AI agent 全面占领——但不再是单点工具，而是成体系：并行编排、技能市场、安全隔离、办公接管。14 个项目分四组，数字锚点用 OfficeCLI 周涨近七千星（周涨王）+ caveman 总星 88K + claude-video 周涨四千三，差异化于近期的'周次+涨幅数字'泛盘点角度，落到'agent 基础设施化'这个新主题。",
+  "novelty_strategy": "① 数字锚点换主角：近 3 期周榜 hook 都锚定'最高涨幅单一项目'（OpenMontage/strix），本期换'涨幅分布'视角——OfficeCLI 周涨近七千星是办公组冠军、claude-video 周涨四千三是技能组冠军、caveman 总星 88K 是技能组元老，三组冠军锚定强化'四组体系'叙事而非'单王炸项目'。② 叙事模板换：近 3 期是'hook→按涨幅排序介绍'，本期是'hook→按领域分组（编码/技能/安全/办公）+ 每组点名 3-4 个+重点展开 1 个'，结构从'榜单流水'变'领域切片'。③ hook 主角换：近期 hook 主语是'GitHub 周榜'，本期 hook 主语是'AI agent'（'AI agent 这周把 GitHub 刷屏了'），从'榜单视角'切到'技术潮流视角'。④ 领域名分组而非色名分组：旁白用'编码 agent 这组/技能生态/安全工具/应用办公'四个领域名引导，禁颜色词。",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "本期 14 项目四组分布：编码 Agent（4，agent 编排/并行）/ 技能生态（4，Claude Code skill 插件）/ 安全工具（3，AI 渗透+沙箱）/ 应用办公（3，AI 接管 Office/网页/设计）。A 普通可用 3 / B 半可用 5 / C 开发者向 6，C 档措辞'给做 XX 的开发者'。领域多元：编码+技能+安全+办公，避免近期连续 AI-Agent 单一题材疲劳。",
+  "avoid_recent": [
+    "strix（07/06 周榜已展开，本期一带而过讲防御价值）",
+    "herdr（07/06 周榜已展开，本期快速点名）",
+    "orca（07/06 周榜已展开，本期快速点名）",
+    "codex-plugin-cc（07/06 周榜已展开，本期快速点名）",
+    "wonderwhy-er/DesktopCommanderMCP（07/06 周榜已展开，本期一带而过）"
+  ],
+  "weekly_context": "第29周（07月06日-07月13日），hook 开头 + CTA 结尾必含周次或日期范围，禁只用'本周'",
+  "hook_strategy": {
+    "primary_anchor": "OfficeCLI 周涨近七千星（应用办公组冠军，A 档普通人可用）",
+    "secondary_anchors": ["caveman 总星 88K（技能生态元老）", "claude-video 周涨四千三（技能生态周涨王）"],
+    "main_subject": "AI agent（技术潮流视角，非榜单视角）",
+    "tone": "动作+数字+利益翻译（P-hook-action_number + P-hook-number_anchor）",
+    "differentiation_from_recent": "近期 hook 主语=GitHub 周榜+锚定单一最高涨幅项目；本期 hook 主语=AI agent+锚定四组冠军分布"
+  },
+  "scene_plan": [
+    "S1 hook（数字锚点：OfficeCLI 周涨近七千+ AI agent 刷屏主题，6s）",
+    "S2 编码 Agent 组（orca/herdr/codex-plugin-cc/DesktopCommanderMCP，重点 orca 并行编排，8s）",
+    "S3 技能生态组（caveman/claude-skills/claude-video/archify，重点 caveman 省 65% 词元，8s）",
+    "S4 安全工具组（strix/pentagi/CubeSandbox，讲防御价值，重点 strix 找漏洞修复，8s）",
+    "S5 应用办公组（OfficeCLI/page-agent/astryx，重点 OfficeCLI A 档普通人可用，8s）",
+    "S6 趋势总结（agent 体系化：从单点到编排/市场/隔离/接管，5s）",
+    "S7 CTA（中性二选一+周次+关注 GitHub 星探，4s）"
+  ],
+  "word_count_target": "300-450 字（weekly_mode，时长 45-60s）"
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E10 度量实操：跑 ai-metrics · 16:9</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 100px 50px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#15233D 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,191,36,0.07) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-gold{position:absolute;width:880px;height:880px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);filter:blur(110px);top:-240px;right:-180px;pointer-events:none;}
+.glow-blue{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.18),transparent 70%);filter:blur(95px);bottom:-160px;left:-120px;pointer-events:none;}
+.glow-green{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.14),transparent 70%);filter:blur(90px);top:38%;left:42%;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(15,23,42,0.38) 75%, rgba(8,12,24,0.58) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(59,130,246,0.50),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(59,130,246,0.50),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:24px;margin-bottom:14px;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:12px;font-size:26px;color:#FBBF24;letter-spacing:0.20em;border:1.5px solid rgba(251,191,36,0.45);background:rgba(251,191,36,0.10);padding:9px 24px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.hook-tag{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#3B82F6;border:1.5px solid rgba(59,130,246,0.55);background:rgba(59,130,246,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+
+.title-row{position:relative;z-index:2;display:flex;align-items:flex-end;gap:32px;margin-top:4px;}
+.title{font-size:96px;font-weight:900;line-height:1.02;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#FCD34D 50%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.18);}
+.title-num{font-family:'JetBrains Mono',monospace;font-size:128px;font-weight:900;line-height:1;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.20);margin-left:auto;}
+.subtitle{position:relative;z-index:2;font-size:34px;color:rgba(255,255,255,0.84);margin-top:16px;font-weight:500;}
+.subtitle .sub-strong{color:#3B82F6;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 14px;font-weight:400;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+.subtitle .sub-green{color:#34D399;font-weight:700;}
+
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr 1fr;gap:40px;margin-top:34px;align-items:center;}
+
+.layers-label{font-size:24px;color:#3B82F6;letter-spacing:0.14em;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.layers-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.45),transparent);}
+.layers{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:18px;}
+.l-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:11px;border:1.5px solid;background:rgba(15,23,42,0.65);}
+.l-row.k1{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.65));}
+.l-row.k2{border-color:rgba(59,130,246,0.55);background:linear-gradient(92deg,rgba(59,130,246,0.14),rgba(15,23,42,0.65));}
+.l-row.k3{border-color:rgba(16,185,129,0.55);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(15,23,42,0.65));}
+.l-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:46px;}
+.l-row.k1 .l-num{color:#FBBF24;}
+.l-row.k2 .l-num{color:#60A5FA;}
+.l-row.k3 .l-num{color:#34D399;}
+.l-name{font-size:23px;font-weight:800;color:#fff;}
+.l-desc{font-size:18px;color:rgba(255,255,255,0.78);font-weight:500;margin-left:auto;}
+.l-row.k1 .l-desc{color:#FCD34D;}
+.l-row.k2 .l-desc{color:#93C5FD;}
+.l-row.k3 .l-desc{color:#6EE7B7;}
+
+.term-card{background:linear-gradient(160deg,rgba(15,23,42,0.94),rgba(8,12,24,0.94));border-radius:14px;border:1.5px solid rgba(59,130,246,0.40);overflow:hidden;box-shadow:0 0 36px rgba(59,130,246,0.12);}
+.term-head{background:rgba(11,18,36,0.85);padding:13px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(59,130,246,0.22);}
+.term-head-dot{width:11px;height:11px;border-radius:50%;background:#3B82F6;box-shadow:0 0 12px rgba(59,130,246,0.7);}
+.term-head-title{font-size:21px;color:#60A5FA;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.06em;}
+.term-body{padding:22px 26px;display:flex;flex-direction:column;gap:11px;font-family:'JetBrains Mono',monospace;}
+.term-line{font-size:22px;font-weight:600;color:#fff;display:flex;align-items:center;gap:12px;}
+.term-prompt{color:#34D399;font-weight:800;}
+.term-cmd{color:#FBBF24;font-weight:700;}
+.term-out{color:rgba(255,255,255,0.74);font-weight:500;}
+.term-out .o-gold{color:#FBBF24;font-weight:700;}
+.term-out .o-blue{color:#60A5FA;font-weight:700;}
+.term-out .o-green{color:#34D399;font-weight:700;}
+.term-out .o-purple{color:#C4B5FD;font-weight:700;}
+
+.stat-label{font-size:24px;color:#FBBF24;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;}
+.stat-grid{display:flex;flex-direction:column;gap:14px;}
+.stat-item{display:flex;align-items:center;gap:16px;padding:16px 22px;border-radius:12px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.stat-item.s-gold{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.stat-item.s-blue{border-color:rgba(59,130,246,0.55);background:linear-gradient(92deg,rgba(59,130,246,0.14),rgba(15,23,42,0.55));}
+.stat-item.s-green{border-color:rgba(16,185,129,0.55);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(15,23,42,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:900;min-width:180px;}
+.stat-item.s-gold .stat-num{color:#FBBF24;}
+.stat-item.s-blue .stat-num{color:#60A5FA;}
+.stat-item.s-green .stat-num{color:#34D399;}
+.stat-name{font-size:24px;color:rgba(255,255,255,0.86);font-weight:700;}
+
+.chip-row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+.chip{font-size:18px;color:rgba(255,255,255,0.80);font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.45);font-family:'JetBrains Mono',monospace;}
+
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(251,191,36,0.22);}
+.repo{font-size:26px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#FBBF24;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:23px;}
+.repo .repo-path{background:rgba(251,191,36,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(251,191,36,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-blue"></div><div class="glow-green"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E10</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E10</div>
+    <div class="hook-tag">◆ 度量层 · 看清 AI 真实占比</div>
+  </div>
+
+  <div class="title-row">
+    <h1 class="title"><span class="title-grad">度量实操：跑 ai-metrics</span></h1>
+    <div class="title-num">3</div>
+  </div>
+  <div class="subtitle">三层识别算法看 AI 占比<span class="sub-divider">·</span><span class="sub-strong">风格学反伪造</span> + <span class="sub-green">python main.py 实跑</span><span class="sub-divider">·</span><span class="sub-gold">换自己数据即用</span></div>
+
+  <div class="main">
+    <div>
+      <div class="layers-label">三层识别 · 挡掉假信号的递进校验</div>
+      <div class="layers">
+        <div class="l-row k1"><span class="l-num">L1</span><span class="l-name">Co-authored-by 初筛</span><span class="l-desc">trailer 匹配 6 大 AI 工具</span></div>
+        <div class="l-row k2"><span class="l-num">L2</span><span class="l-name">风格学反伪造</span><span class="l-desc">n-gram + 余弦相似度挡误标</span></div>
+        <div class="l-row k3"><span class="l-num">L3</span><span class="l-name">注册表组合判定</span><span class="l-desc">提交占比 + 行数占比双口径</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="term-card">
+        <div class="term-head">
+          <span class="term-head-dot"></span>
+          <span class="term-head-title">demos/ai-metrics · python main.py</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line"><span class="term-prompt">$</span><span class="term-cmd">cd demos/ai-metrics</span></div>
+          <div class="term-line"><span class="term-prompt">$</span><span class="term-cmd">python main.py --repo ../my-project</span></div>
+          <div class="term-line"><span class="term-out"><span class="o-green">✓</span> 扫描 commits · <span class="o-blue">2,847</span> 条</span></div>
+          <div class="term-line"><span class="term-out"><span class="o-green">✓</span> AI 占比 <span class="o-gold">76.6%</span> · 风格学复核完成</span></div>
+          <div class="term-line"><span class="term-out"><span class="o-green">→</span> 导出 report.xlsx · <span class="o-blue">双口径</span> 明细</span></div>
+        </div>
+      </div>
+
+      <div class="stat-label" style="margin-top:18px;">真实跑通数据 · 开箱即跑</div>
+      <div class="stat-grid">
+        <div class="stat-item s-gold"><span class="stat-num">76.6%</span><span class="stat-name">AI 代码占比（双口径）</span></div>
+        <div class="stat-item s-blue"><span class="stat-num">3 层</span><span class="stat-name">识别算法挡伪造</span></div>
+        <div class="stat-item s-green"><span class="stat-num">0 配置</span><span class="stat-name">clone 即跑可换数据</span></div>
+      </div>
+      <div class="chip-row">
+        <span class="chip">n-gram</span>
+        <span class="chip">cosine 相似度</span>
+        <span class="chip">Excel 模板</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 13 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

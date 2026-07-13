@@ -1,0 +1,57 @@
+<!-- 场景: scene-1 | 实跑 main.py：terminal 精简 9 行全显（不溢出，完整展示）-->
+<div class="layer-bg">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px"></div>
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.10);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;background:rgba(0,229,255,0.85);box-shadow:0 0 14px rgba(0,229,255,0.65)"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;background:rgba(0,235,255,0.75);box-shadow:0 0 13px rgba(0,235,255,0.60)"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 0%,hsla(200,30%,3%,0.55) 100%)"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:1000px;height:500px;border-radius:50%;background:radial-gradient(ellipse,hsla(200,90%,55%,0.10) 0%,transparent 70%);filter:blur(70px);pointer-events:none"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;left:5%;width:14px;height:14px;border-radius:50%;background:hsla(200,85%,55%,0.50);box-shadow:0 0 16px hsla(200,75%,50%,0.40)"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;right:5%;width:14px;height:14px;border-radius:50%;background:hsla(150,85%,55%,0.50);box-shadow:0 0 16px hsla(150,75%,50%,0.40)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase tut-scene phase-1">
+
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:20px">
+    <div style="font-size:56px;font-weight:900;letter-spacing:-1px;line-height:1.1;background-image:linear-gradient(90deg,#60A5FA 0%,#34D399 50%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.28)">实跑 main.py</div>
+    <div style="font-size:32px;font-weight:500;color:rgba(255,255,255,0.82);margin-top:8px">一条命令，开箱即跑</div>
+  </div>
+
+  <div class="region" data-reveal="0" style="margin:0 30px;background:#0d1117;border-radius:14px;overflow:hidden;border:1px solid #21262d;box-shadow:0 20px 60px rgba(0,0,0,0.65)">
+    <div style="background:#161b22;padding:12px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #21262d">
+      <div style="display:flex;gap:8px"><div style="width:14px;height:14px;border-radius:50%;background:#ff5f57"></div><div style="width:14px;height:14px;border-radius:50%;background:#febc2e"></div><div style="width:14px;height:14px;border-radius:50%;background:#28c840"></div></div>
+      <div style="flex:1;text-align:center;color:#8b949e;font-size:32px;font-family:'JetBrains Mono','Consolas',monospace">ai-metrics — zsh</div>
+      <div style="width:60px"></div>
+    </div>
+    <div style="padding:20px 24px;font-family:'JetBrains Mono','Consolas',monospace;font-size:32px;line-height:1.5;color:#c9d1d9">
+      <div style="margin-bottom:6px"><span style="color:#34D399">➜</span> <span style="color:#60A5FA">~</span> <span style="color:#FBBF24;font-weight:700">cd</span> <span style="color:#c9d1d9">demos/ai-metrics</span></div>
+      <div style="margin-bottom:6px"><span style="color:#34D399">➜</span> <span style="color:#60A5FA">ai-metrics</span> <span style="color:#FBBF24;font-weight:700">pip install</span> <span style="color:#93C5FD">openpyxl</span></div>
+      <div style="margin-bottom:10px"><span style="color:#34D399">➜</span> <span style="color:#60A5FA">ai-metrics</span> <span style="color:#FBBF24;font-weight:700">python</span> <span style="color:#93C5FD">main.py</span></div>
+      <div style="margin-bottom:4px;padding:6px 12px;background:rgba(56,189,248,0.06);border-left:3px solid #60A5FA;border-radius:4px"><span style="color:#8b949e">#</span> <span style="color:#60A5FA;font-weight:700">=== 1. AI 代码占比 ===</span></div>
+      <div style="color:#c9d1d9;margin-bottom:10px;padding-left:30px">提交 <span style="color:#FBBF24;font-weight:700">42.3%</span> · 行数 <span style="color:#FBBF24;font-weight:700">38.7%</span></div>
+      <div style="margin-bottom:4px;padding:6px 12px;background:rgba(52,211,153,0.06);border-left:3px solid #34D399;border-radius:4px"><span style="color:#8b949e">#</span> <span style="color:#34D399;font-weight:700">=== 2. 提效同比 ===</span></div>
+      <div style="color:#c9d1d9;margin-bottom:10px;padding-left:30px">人均 <span style="color:#34D399;font-weight:700">↑ 1.8x</span></div>
+      <div style="margin-bottom:4px;padding:6px 12px;background:rgba(251,191,36,0.06);border-left:3px solid #FBBF24;border-radius:4px"><span style="color:#8b949e">#</span> <span style="color:#FBBF24;font-weight:700">=== 3. 报告生成 ===</span></div>
+      <div style="color:#34D399;padding-left:30px">✓ report.md · report.html</div>
+    </div>
+  </div>
+
+  <div class="region" data-reveal="0" style="margin:18px 30px 0;padding:14px 22px;background:linear-gradient(90deg,rgba(15,23,42,0.85),rgba(30,40,60,0.85));border:1.5px solid rgba(96,165,250,0.45);border-radius:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px">
+      <div style="font-size:32px;font-weight:700;color:rgba(255,255,255,0.90)">自动生成示例数据，<span style="color:#34D399;font-weight:900">不需准备</span></div>
+      <div style="font-size:32px;font-weight:900;color:#FBBF24">开箱即跑</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" data-strength="0.18"></div>
+</div>

@@ -1,0 +1,373 @@
+:root {
+  /* 暗色科技风 — design.md 配色：深蓝/深紫底 + 橙金强调 */
+  --bg-deep: #0B1226;
+  --bg-mid: #1A1235;
+  --accent-warm: #FF8C32;        /* 主暖色：橙 */
+  --accent-gold: #FBBF24;        /* 辅暖色：金 */
+  --accent-cool: #4DA8DA;        /* 主冷色：科技蓝 */
+  --accent-cool2: #A78BFA;       /* 辅冷色：紫 */
+  --text: #F5F5F5;
+  --text2: rgba(245,245,245,0.62);
+  --text3: rgba(245,245,245,0.45);
+  --card-bg: rgba(13,9,5,0.88);
+  --card-bg-cool: rgba(11,18,38,0.88);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 通用渐变文字（同色系高饱和，禁白色端点）
+ * ============================================ */
+.grad-warm {
+  background-image: linear-gradient(135deg, #FFB970 0%, #FF8C32 50%, #FB923C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, #FCD34D 0%, #FBBF24 50%, #F59E0B 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-cool {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 50%, #4DA8DA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #C4B5FD 0%, #A78BFA 50%, #8B5CF6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+
+/* ============================================
+ * 场景 1 — Hook：789★ 颠覆常识
+ * ============================================ */
+.hook-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 52px;
+  text-align: center;
+}
+.hook-tag {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent-cool);
+  padding: 10px 28px;
+  border: 1.5px solid rgba(77,168,218,0.45);
+  border-radius: 999px;
+  background: rgba(77,168,218,0.08);
+}
+.hook-main {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 22px;
+}
+.hook-date {
+  font-family: var(--font-data);
+  font-size: 38px; font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+}
+.hook-num-row {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 0;
+}
+.hook-num {
+  font-family: var(--font-data);
+  font-size: 280px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -0.04em;
+}
+.hook-num-suffix {
+  font-family: var(--font-data);
+  font-size: 120px; font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1.0;
+  margin-left: -4px;
+}
+.hook-headline {
+  font-family: var(--font-title);
+  font-size: 84px; font-weight: 900;
+  line-height: 1.15; letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+/* fx 通用元素 */
+.fx-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+}
+.fx-orb-warm {
+  width: 520px; height: 520px;
+  background: var(--accent-warm);
+  top: 180px; left: -100px; opacity: 0.22;
+}
+.fx-orb-cool {
+  width: 460px; height: 460px;
+  background: var(--accent-cool2);
+  bottom: 280px; right: -120px; opacity: 0.20;
+}
+.fx-streak {
+  position: absolute; height: 2px; border-radius: 2px;
+  pointer-events: none; opacity: 0.55;
+}
+.fx-streak-1 {
+  width: 720px; top: 36%; left: 50%; margin-left: -360px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  transform: rotate(-8deg);
+}
+.fx-streak-2 {
+  width: 540px; bottom: 26%; right: 0;
+  background: linear-gradient(90deg, transparent, var(--accent-cool), transparent);
+  transform: rotate(6deg);
+}
+.fx-anchor {
+  position: absolute; width: 14px; height: 14px;
+  border-radius: 50%; pointer-events: none;
+  background: var(--accent-gold);
+  box-shadow: 0 0 18px rgba(251,191,36,0.85);
+}
+.fx-anchor-1 { top: 26%; left: 18%; }
+.fx-anchor-2 { top: 70%; right: 14%; }
+.fx-anchor-3 { top: 44%; right: 22%; background: var(--accent-cool); box-shadow: 0 0 18px rgba(77,168,218,0.85); }
+
+/* ============================================
+ * ProjectFullCard（assemble 不注入组件 CSS，必须手写）
+ * 纵向三带：justify-content:space-between 撑满 1920 安全区
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 180px 90px 220px 90px;
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 520px; height: 520px; opacity: 0.18;
+  background: var(--accent-warm);
+  top: 180px; left: -120px;
+}
+.pfc-glow-cool {
+  width: 460px; height: 460px; opacity: 0.16;
+  background: var(--accent-cool);
+  bottom: 280px; right: -100px;
+}
+
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  font-family: var(--font-data);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-category {
+  font-size: 38px; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  font-size: 48px; font-weight: 800; line-height: 1.15;
+  padding: 10px 26px; border-radius: 12px;
+  background: rgba(255,140,50,0.10);
+  border: 1.5px solid rgba(255,140,50,0.40);
+  color: var(--accent-warm);
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;
+  margin-top: 4px;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800;
+  color: var(--text);
+}
+
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 30px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(14px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(245,245,245,0.85);
+  box-shadow: 0 0 40px rgba(0,0,0,0.45);
+}
+.pfc-desc {
+  font-size: 38px; font-weight: 600; line-height: 1.35;
+  color: var(--text); text-align: center; max-width: 780px;
+}
+.pfc-data-bar { width: 100%; max-width: 780px; display: flex; flex-direction: column; gap: 14px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label {
+  font-size: 32px; font-weight: 500;
+  color: var(--text2);
+}
+.pfc-bar-val {
+  font-size: 56px; font-weight: 900;
+  color: var(--accent-gold);
+  font-family: var(--font-data);
+  line-height: 1.0;
+}
+.pfc-bar-track {
+  width: 100%; height: 14px; border-radius: 999px;
+  background: rgba(255,255,255,0.10); overflow: hidden;
+}
+.pfc-bar-fill {
+  width: 72%; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+  transform-origin: left center;
+}
+
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 24px; width: 100%;
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: var(--text2);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+
+/* 反直觉数据强调胶囊（如"100% 回归测试"） */
+.pfc-highlight-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 12px 28px; border-radius: 14px;
+  background: rgba(251,191,36,0.12);
+  border: 1.5px solid rgba(251,191,36,0.50);
+  font-size: 36px; font-weight: 800;
+  color: var(--accent-gold);
+  font-family: var(--font-data);
+}
+
+/* ============================================
+ * 对比块（说话→改图 / 拔网线→照样管）
+ * ============================================ */
+.pfc-compare {
+  display: flex; align-items: center; justify-content: center;
+  gap: 22px; width: 100%; max-width: 780px;
+  font-family: var(--font-body);
+}
+.pfc-compare-from {
+  padding: 14px 26px; border-radius: 14px;
+  font-size: 36px; font-weight: 700;
+  background: rgba(167,139,250,0.10);
+  border: 1.5px solid rgba(167,139,250,0.45);
+  color: var(--accent-cool2);
+}
+.pfc-compare-arrow {
+  font-size: 56px; font-weight: 900;
+  color: var(--accent-gold);
+  font-family: var(--font-data);
+  line-height: 1.0;
+}
+.pfc-compare-to {
+  padding: 14px 26px; border-radius: 14px;
+  font-size: 36px; font-weight: 800;
+  background: rgba(255,140,50,0.12);
+  border: 1.5px solid rgba(255,140,50,0.50);
+  color: var(--accent-warm);
+}
+
+/* ============================================
+ * 能力胶囊组（PowerToys 等多能力项目）
+ * ============================================ */
+.pfc-ability-row {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  width: 100%; max-width: 780px;
+}
+.pfc-ability {
+  padding: 12px 26px; border-radius: 12px;
+  font-size: 34px; font-weight: 700;
+  background: rgba(77,168,218,0.10);
+  border: 1.5px solid rgba(77,168,218,0.45);
+  color: var(--accent-cool);
+  font-family: var(--font-body);
+}
+
+/* ============================================
+ * 场景 6 CTA 收尾
+ * ============================================ */
+.cta-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 44px;
+  text-align: center;
+}
+.cta-question {
+  font-family: var(--font-title);
+  font-size: 92px; font-weight: 900;
+  line-height: 1.15;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 44px; font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+.cta-pill-row {
+  display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+}
+.cta-pill {
+  padding: 14px 32px; border-radius: 999px;
+  font-size: 34px; font-weight: 700;
+  background: rgba(77,168,218,0.10);
+  border: 1.5px solid rgba(77,168,218,0.40);
+  color: var(--accent-cool);
+}
+.cta-avatar-row {
+  display: flex; gap: 18px; align-items: center;
+  margin-top: 8px;
+}
+.cta-mini-avatar {
+  width: 88px; height: 88px; border-radius: 50%;
+  border: 3px solid rgba(245,245,245,0.75);
+  object-fit: cover;
+  box-shadow: 0 0 22px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+ * s06 CTA 收尾 bottom（home-assistant 卡 + CTA 合屏，单 phase）
+ * ============================================ */
+.pfc-cta-bottom { align-items: center; text-align: center; gap: 20px; }
+.pfc-cta-bottom .cta-question { margin: 0; }
+.pfc-cta-bottom .cta-avatar-row { margin-top: 4px; }

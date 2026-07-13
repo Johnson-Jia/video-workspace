@@ -1,0 +1,136 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E07 hook — 测试全绿但业务逻辑全错 + 权限层硬拦截
+ * 单场景 4 region data-reveal（E06 模式）
+ * 横屏 layout：space-between + flex-start 标题 + padding 80
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 180px 100px 100px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 22px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具（同色系，禁白色端点） —— */
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区（左对齐建锚点） —— */
+.tut-hook-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-hook-title .hook-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.tut-hook-title .hook-h1 {
+  font-family: 'Inter'; font-size: 88px; font-weight: 900; line-height: 1.02;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.01em;
+}
+.tut-hook-title .hook-sub {
+  font-family: 'Inter'; font-size: 38px; font-weight: 800; letter-spacing: 0.04em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 大字对比卡（测试全绿 vs 业务逻辑全错） —— */
+.tut-contrast { width: 100%; display: flex; align-items: stretch; gap: 36px; }
+.contrast-card {
+  flex: 1;
+  border-radius: 22px;
+  padding: 24px 32px;
+  border: 3px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.contrast-green { border-color: rgba(110,231,183,0.65); background: linear-gradient(165deg, rgba(16,185,129,0.14), rgba(15,23,42,0.88)); }
+.contrast-red { border-color: rgba(248,113,113,0.65); background: linear-gradient(165deg, rgba(248,113,113,0.14), rgba(15,23,42,0.88)); }
+.contrast-icon {
+  font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+}
+.contrast-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.contrast-big {
+  font-family: 'Inter'; font-size: 60px; font-weight: 900; line-height: 1.05;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 反常识/收束条（横向：标签 + 主文案） —— */
+.tut-twist {
+  border-radius: 22px; padding: 18px 36px;
+  border: 3px solid rgba(251,191,36,0.65);
+  background: linear-gradient(90deg, rgba(251,191,36,0.14), rgba(15,23,42,0.88), rgba(251,191,36,0.14));
+  display: flex; flex-direction: row; align-items: center; gap: 28px;
+}
+.tut-twist .twist-tag { flex-shrink: 0; }
+.tut-twist .twist-main { text-align: left; flex: 1; }
+.twist-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.twist-main {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900; line-height: 1.12;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.01em;
+}
+
+/* —— 案例预告横排（4 卡均分） —— */
+.tut-cases { width: 100%; display: flex; gap: 20px; align-items: stretch; }
+.case-pill {
+  flex: 1;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 2px solid rgba(96,165,250,0.45);
+  background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  text-align: center;
+}
+.case-num {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.case-name {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.2;
+}

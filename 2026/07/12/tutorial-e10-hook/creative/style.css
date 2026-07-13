@@ -1,0 +1,200 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E10 hook — 反常识开篇：AI 占比 Co-authored-by 误标 + Copilot 自动加 trailer + 三层识别预告
+ * 多 phase（每 phase 一个完整 hook-scene 状态，s6_assemble 多 phase 重叠 bug 已修复）
+ * ============================================ */
+
+.hook-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+/* —— 阶段标签胶囊 —— */
+.h-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.h-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端，禁白端点 / 禁暗端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#F87171 0%,#F87171 55%,#FCA5A5 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 关键词点缀（不透明纯色，可叠阴影） —— */
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+/* —— Phase 1：提问「AI 代码占比怎么算」 —— */
+.h-question { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.h-q-label {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  letter-spacing: 0.18em; color: rgba(96, 165, 250, 0.85);
+  padding: 8px 24px; border-radius: 8px;
+  background: rgba(96, 165, 250, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.30);
+}
+.h-q-big {
+  font-family: var(--font-title); font-size: 120px; font-weight: 900; line-height: 1.05;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 4px 18px rgba(30,41,59,0.32);
+}
+
+/* —— Phase 2：本能解法「数 Co-authored-by 不够」+ Copilot 自动加 trailer 大坑 + 占比虚高 —— */
+.trap-block { flex-direction: column; gap: 18px; width: 100%; }
+.h-ans-row { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.h-ans-tag {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: rgba(255,255,255,0.62); letter-spacing: 0.06em;
+}
+.h-ans-big {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900; line-height: 1.15;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 4px 18px rgba(30,41,59,0.32);
+}
+.h-ans-mark {
+  display: inline-block;
+  padding: 0 20px; margin-left: 14px;
+  background: rgba(248, 113, 113, 0.16);
+  border: 2px solid rgba(248, 113, 113, 0.65);
+  border-radius: 14px;
+  color: #FCA5A5;
+  font-size: 60px; line-height: 1.15;
+  -webkit-text-fill-color: #FCA5A5;
+  text-shadow: 0 3px 12px rgba(127,29,29,0.32);
+  vertical-align: middle;
+}
+.trap-warn {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900;
+  text-align: center; letter-spacing: 0.04em;
+  text-shadow: 0 3px 14px rgba(127,29,29,0.32);
+  padding: 4px 0;
+}
+.trap-row {
+  display: flex; gap: 32px; align-items: stretch;
+  width: 100%;
+}
+.trap-code {
+  flex: 1.5; max-width: 960px;
+  background: linear-gradient(180deg, rgba(10,10,15,0.94), rgba(15,23,42,0.94));
+  border: 1px solid rgba(96, 165, 250, 0.30);
+  border-radius: 14px;
+  padding: 22px 30px;
+  font-family: var(--font-data); font-size: 34px; font-weight: 600;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.92);
+  text-align: left;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+}
+.trap-code .code-line { white-space: pre; overflow-x: auto; }
+.trap-code .trailer { color: rgba(252, 211, 77, 0.92); }
+.trap-code .red-line { color: rgba(248, 113, 113, 0.95); font-weight: 700; }
+.trap-code .code-kw { color: #93C5FD; font-weight: 700; }
+.trap-code .code-fn { color: #FCD34D; font-weight: 700; }
+.trap-code .code-str { color: #6EE7B7; }
+.trap-code .code-cmt { color: rgba(110, 231, 183, 0.65); font-style: italic; }
+.trap-code .code-ai { color: #93C5FD; font-weight: 800; }
+.trap-code .code-red { color: #F87171; font-weight: 700; }
+.trap-code .code-x { color: #F87171; font-weight: 900; font-size: 40px; }
+
+.trap-inflate {
+  flex: 1; max-width: 420px;
+  border-radius: 20px; padding: 20px 22px;
+  border: 2px solid rgba(248, 113, 113, 0.60);
+  background: linear-gradient(165deg, rgba(239,68,68,0.16), rgba(15,23,42,0.92));
+  box-shadow: 0 0 0 1px rgba(248,113,113,0.30);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  text-align: center;
+}
+.inflate-label {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: rgba(255,255,255,0.62); letter-spacing: 0.06em;
+}
+.inflate-key {
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; line-height: 1;
+  text-shadow: 0 3px 12px rgba(127,29,29,0.32);
+}
+.inflate-arrow {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900;
+  color: rgba(248, 113, 113, 0.85); line-height: 1;
+  letter-spacing: 0.04em;
+}
+.inflate-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+
+/* —— Phase 3：三层识别算法 + 风格学反伪造 + python main.py 三段胶囊 —— */
+.resolve-block { flex-direction: column; gap: 22px; width: 100%; }
+.resolve-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.resolve-row { display: flex; gap: 28px; align-items: stretch; width: 100%; }
+.resolve-card {
+  flex: 1;
+  border-radius: 20px; padding: 22px 22px;
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+}
+.resolve-card:nth-child(1) { border-color: rgba(251,191,36,0.55); }
+.resolve-card:nth-child(2) { border-color: rgba(96,165,250,0.55); }
+.resolve-card:nth-child(3) { border-color: rgba(52,211,153,0.55); }
+.r-num {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900;
+  text-shadow: 0 2px 8px rgba(30,41,59,0.32);
+}
+.r-name {
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.r-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+.resolve-finale {
+  font-family: var(--font-title); font-size: 44px; font-weight: 800;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 2px 10px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}

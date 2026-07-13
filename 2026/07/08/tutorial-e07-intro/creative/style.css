@@ -1,0 +1,137 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E07 intro — 三层防护 + 四案例预告 + 学习目标
+ * 单场景 4 region data-reveal
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 180px 100px 100px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 20px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-title .title-h1 {
+  font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-title .title-sub {
+  font-family: 'Inter'; font-size: 36px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 三层防护横排 —— */
+.tut-defense { width: 100%; display: flex; gap: 24px; align-items: stretch; }
+.defense-card {
+  flex: 1;
+  border-radius: 18px;
+  padding: 20px 24px;
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
+}
+.defense-1 { border-color: rgba(96,165,250,0.55); background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88)); }
+.defense-2 { border-color: rgba(251,191,36,0.85); background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.88)); box-shadow: 0 0 0 1px rgba(251,191,36,0.35); }
+.defense-3 { border-color: rgba(110,231,183,0.55); background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88)); }
+.defense-num {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.defense-name {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.defense-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.75);
+  line-height: 1.3;
+}
+.defense-key {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  margin-top: 4px;
+}
+
+/* —— 四案例横排 —— */
+.tut-cases { width: 100%; display: flex; gap: 18px; align-items: stretch; }
+.case-pill {
+  flex: 1;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 2px solid rgba(96,165,250,0.40);
+  background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center;
+}
+.case-num {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.case-name {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.2;
+}
+
+/* —— 学习目标三栏 —— */
+.tut-goals { width: 100%; display: flex; gap: 22px; align-items: stretch; }
+.goal-card {
+  flex: 1;
+  border-radius: 16px;
+  padding: 16px 22px;
+  border: 2px solid rgba(110,231,183,0.50);
+  background: linear-gradient(165deg, rgba(16,185,129,0.10), rgba(15,23,42,0.88));
+  display: flex; flex-direction: row; align-items: center; gap: 16px;
+}
+.goal-icon {
+  font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; flex-shrink: 0;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.goal-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: left;
+  line-height: 1.25;
+}

@@ -1,0 +1,132 @@
+<!-- 场景: scene-1 | 时长: 30s | 换成你自己的数据：REPO + sample_releases + 注意人数偏高 -->
+<div class="layer-bg">
+<!-- bg-component: diamond_lattice -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+<div style="position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(45deg,rgba(0,229,255,0.05) 0 1px,transparent 1px 60px),
+    repeating-linear-gradient(-45deg,rgba(0,200,255,0.05) 0 1px,transparent 1px 60px),
+    repeating-linear-gradient(0deg,rgba(96,165,250,0.025) 0 1px,transparent 1px 80px);
+  animation:diamondDrift 18s linear infinite"></div>
+<div style="position:absolute;top:30%;left:50%;width:500px;height:500px;border-radius:50%;background:rgba(0,150,200,0.08);filter:blur(110px);transform:translate(-50%,-50%)"></div>
+<div style="position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.45),rgba(0,229,255,0.6),rgba(0,229,255,0.45),transparent);
+  box-shadow:0 0 22px rgba(0,229,255,0.35);animation:scanY 10s linear infinite"></div>
+<div style="position:absolute;top:35%;left:25%;width:13px;height:13px;border-radius:50%;
+  background:rgba(0,229,255,0.85);box-shadow:0 0 16px rgba(0,229,255,0.65);
+  animation:nodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:70%;left:75%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,220,255,0.80);box-shadow:0 0 15px rgba(0,220,255,0.60);
+  animation:nodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 0%,hsla(200,30%,3%,0.55) 100%)"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:1100px;height:520px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(200,90%,55%,0.08) 0%,hsla(150,80%,50%,0.05) 40%,transparent 70%);
+  filter:blur(70px);pointer-events:none"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;left:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(200,85%,55%,0.50);box-shadow:0 0 16px hsla(200,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;right:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(0,85%,55%,0.45);box-shadow:0 0 16px hsla(0,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite 2.5s"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase tut-scene phase-1">
+
+  <!-- 顶部标题 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:20px">
+    <div class="grad-title" style="font-size:64px;font-weight:900;letter-spacing:-1px;line-height:1.1;
+      background-image:linear-gradient(90deg,#60A5FA 0%,#34D399 50%,#FBBF24 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      换成你自己的数据
+    </div>
+    <div style="font-size:32px;font-weight:500;color:rgba(255,255,255,0.82);margin-top:8px;
+      text-shadow:0 1px 4px rgba(15,23,42,0.30)">
+      两个文件，跑你自己的仓库和记录
+    </div>
+  </div>
+
+  <!-- 左右分栏 -->
+  <div style="display:flex;gap:24px;margin:0 30px">
+
+    <!-- 左：AI 占比 - main.py REPO -->
+    <div class="region" data-reveal="1" style="flex:1;background:#0d1117;border-radius:14px;overflow:hidden;
+      border:1px solid #21262d;box-shadow:0 16px 40px rgba(0,0,0,0.55),0 0 32px rgba(96,165,250,0.10)">
+
+      <div style="background:#161b22;padding:12px 16px;border-bottom:1px solid #21262d;display:flex;align-items:center;gap:10px">
+        <div style="color:#FBBF24;font-size:32px;font-weight:700;font-family:'JetBrains Mono','Consolas',monospace">main.py</div>
+        <div style="margin-left:auto;color:#60A5FA;font-size:32px;font-weight:700">AI 占比</div>
+      </div>
+
+      <div style="padding:18px 22px;font-family:'JetBrains Mono','Consolas',monospace;font-size:32px;line-height:1.6;color:#c9d1d9">
+        <div style="color:#8b949e"># 改这一行</div>
+        <div style="margin-top:6px">
+          <span style="color:#FBBF24;font-weight:700">REPO</span>
+          <span style="color:#c9d1d9"> = </span>
+          <span style="color:#34D399">"/path/to/your/repo"</span>
+        </div>
+        <div data-reveal="1" style="margin-top:10px;padding:8px 12px;background:rgba(96,165,250,0.10);border-left:3px solid #60A5FA;border-radius:4px;color:#60A5FA;font-size:32px;font-weight:700">
+          指向你的 git 仓库
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：提效同比 - template.xlsx -->
+    <div class="region" data-reveal="2" style="flex:1;background:#0d1117;border-radius:14px;overflow:hidden;
+      border:1px solid #21262d;box-shadow:0 16px 40px rgba(0,0,0,0.55),0 0 32px rgba(52,211,153,0.10)">
+
+      <div style="background:#1e7d3a;padding:12px 16px;display:flex;align-items:center;gap:10px">
+        <div style="color:#ffffff;font-size:32px;font-weight:700;font-family:'JetBrains Mono','Consolas',monospace">data/sample_releases.xlsx</div>
+      </div>
+
+      <div style="padding:18px 22px;font-family:'JetBrains Mono','Consolas',monospace;font-size:32px;line-height:1.6;color:#c9d1d9">
+        <div style="color:#8b949e"># 按 template 模板录入</div>
+        <div style="margin-top:6px">
+          <span style="color:#34D399;font-weight:700">替换</span>
+          <span style="color:#c9d1d9"> → </span>
+          <span style="color:#FBBF24">sample_releases.xlsx</span>
+        </div>
+        <div data-reveal="2" style="margin-top:10px;padding:8px 12px;background:rgba(52,211,153,0.10);border-left:3px solid #34D399;border-radius:4px;color:#34D399;font-size:32px;font-weight:700">
+          7 列：日期/定制/应用/类型/jira_id/描述/开发
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 注意卡 -->
+  <div class="region" data-reveal="3" style="margin:18px 30px 0;padding:18px 22px;
+    background:linear-gradient(90deg,rgba(60,15,15,0.85) 0%,rgba(80,30,15,0.85) 100%);
+    border:2px solid #F87171;border-radius:14px;
+    box-shadow:0 12px 36px rgba(15,23,42,0.55),0 0 24px rgba(248,113,113,0.15)">
+
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+      <div style="width:40px;height:40px;border-radius:50%;background:#F87171;display:flex;align-items:center;justify-content:center">
+        <div style="color:#fff;font-size:32px;font-weight:900">!</div>
+      </div>
+      <div style="font-size:36px;font-weight:900;color:#FCA5A5">真实数据要注意：人数偏高约两倍</div>
+    </div>
+
+    <div style="display:flex;gap:18px;margin-top:10px">
+      <div style="flex:1;padding:10px 12px;background:rgba(248,113,113,0.10);border-radius:8px">
+        <div style="font-size:32px;font-weight:700;color:#FCA5A5;margin-bottom:4px">开发人员字段</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.85)">含多人、写法不规范 → 拆分去重简化</div>
+      </div>
+      <div style="flex:1;padding:10px 12px;background:rgba(52,211,153,0.10);border-radius:8px">
+        <div style="font-size:32px;font-weight:700;color:#34D399;margin-bottom:4px">趋势仍准</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.85)">上线 / 需求 / Bug 数量和占比可信</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" data-strength="0.18"></div>
+</div>

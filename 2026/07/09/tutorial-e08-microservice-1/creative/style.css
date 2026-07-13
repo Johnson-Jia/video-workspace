@@ -1,0 +1,228 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E08 microservice-1 — 微服务闭环·前半（参照 E06-pipeline 设计语言）
+ * bg: 多组件轮换（noise/contour/hex/scan/wave/diamond）+ 横向6节点 + SVG连线渐进 + 节点脉冲
+ * 布局：顶/中/底三带 space-between 撑满 1080，标题左对齐锚点
+ * 类前缀 .tut-pl-*（与 E06 一致），删旧 .fcb-*/.ms-*
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 90px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 16px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题 —— 左对齐锚点，打破为居中而居中 */
+.tut-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.tut-pl-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.tut-pl-title .title-h1 {
+  font-family: 'Inter'; font-size: 92px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-pl-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：六阶段流水线（核心组件，参照 E06） —— 横向 6 节点撑满画布宽度 */
+.tut-pl-pipeline { width: 100%; display: flex; justify-content: stretch; }
+.pipeline-wrap {
+  position: relative;
+  width: 100%; max-width: 1740px;
+  height: 380px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pipeline-edges {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 120px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.pipeline-edges .edge {
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+.edge-1 { stroke: rgba(96,165,250,0.75); }
+.edge-2 { stroke: rgba(167,139,250,0.75); }
+.edge-3 { stroke: rgba(59,130,246,0.75); }
+.edge-4 { stroke: rgba(110,231,183,0.75); }
+.edge-5 { stroke: rgba(251,191,36,0.75); }
+.edge-dim { stroke: rgba(148,163,184,0.35); stroke-dasharray: 8 8; }
+.node-row {
+  position: relative;
+  width: 100%;
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  z-index: 2;
+}
+.stage-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 6px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 2.5px solid;
+  will-change: transform, opacity;
+}
+.sn-1 { border-color: rgba(96,165,250,0.75); box-shadow: 0 0 22px rgba(96,165,250,0.22); }
+.sn-2 { border-color: rgba(167,139,250,0.75); box-shadow: 0 0 22px rgba(167,139,250,0.22); }
+.sn-3 { border-color: rgba(59,130,246,0.75); box-shadow: 0 0 22px rgba(59,130,246,0.22); }
+.sn-4 { border-color: rgba(110,231,183,0.75); box-shadow: 0 0 22px rgba(110,231,183,0.22); }
+.sn-5 { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 22px rgba(251,191,36,0.22); }
+.sn-6 { border-color: rgba(252,165,165,0.75); box-shadow: 0 0 22px rgba(252,165,165,0.22); }
+/* 灰态（done/未到） */
+.sn-dim {
+  border-color: rgba(148,163,184,0.30);
+  background: linear-gradient(180deg, rgba(15,23,42,0.70), rgba(15,23,42,0.55));
+  box-shadow: none;
+  opacity: 0.5;
+}
+.sn-dim .node-icon { filter: grayscale(0.7) opacity(0.6); }
+.sn-dim .node-stage,
+.sn-dim .node-skill,
+.sn-dim .node-num { color: rgba(148,163,184,0.70); -webkit-text-fill-color: rgba(148,163,184,0.70); }
+/* active 聚焦态（s07-s09 单专项高亮，紫色脉冲） */
+.sn-active {
+  border-color: rgba(167,139,250,0.95);
+  box-shadow: 0 0 32px rgba(167,139,250,0.42), 0 0 60px rgba(167,139,250,0.20);
+  transform: scale(1.06);
+}
+.node-icon {
+  font-size: 44px; line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.node-stage {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.node-skill {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center; line-height: 1.1;
+  word-break: break-all;
+}
+.node-num {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.78);
+  letter-spacing: 0.06em;
+}
+
+/* —— 区域 3：辅助卡（顶级 Agent / 流向 / 警示） —— 撑满画布宽度，左对齐内容 */
+.tut-pl-aux { width: 100%; display: flex; justify-content: stretch; }
+.aux-card {
+  border-radius: 14px; padding: 16px 32px;
+  border: 2.5px solid rgba(96,165,250,0.55);
+  background: linear-gradient(90deg, rgba(96,165,250,0.12), rgba(15,23,42,0.90));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  width: 100%;
+}
+.aux-card.gold { border-color: rgba(251,191,36,0.65); background: linear-gradient(90deg, rgba(251,191,36,0.13), rgba(15,23,42,0.90)); }
+.aux-card.red { border-color: rgba(252,165,165,0.60); background: linear-gradient(90deg, rgba(252,165,165,0.12), rgba(15,23,42,0.90)); }
+.aux-card.purple { border-color: rgba(167,139,250,0.65); background: linear-gradient(90deg, rgba(167,139,250,0.13), rgba(15,23,42,0.90)); }
+.aux-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.aux-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.25;
+}
+.aux-flow {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.aux-chip {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+  padding: 2px 10px; border-radius: 6px;
+  background: rgba(96,165,250,0.12);
+  border: 1px solid rgba(96,165,250,0.30);
+}
+.aux-chip.purple { background: rgba(167,139,250,0.14); border-color: rgba(167,139,250,0.32); }
+.aux-sep {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(251,191,36,0.80);
+}
+
+/* —— 顶级 Agent 单卡（s04-s05 用） —— */
+.tut-pl-top { width: 100%; display: flex; justify-content: stretch; }
+.top-card {
+  border-radius: 14px; padding: 18px 32px;
+  border: 2.5px solid rgba(167,139,250,0.65);
+  background: linear-gradient(90deg, rgba(167,139,250,0.13), rgba(15,23,42,0.90));
+  display: flex; align-items: center; gap: 24px;
+  width: 100%;
+}
+.top-icon { font-size: 56px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.top-name {
+  font-family: 'Inter'; font-size: 38px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.top-tasks {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 4px;
+}
+.top-task {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+  padding: 2px 10px; border-radius: 6px;
+  background: rgba(167,139,250,0.14);
+  border: 1px solid rgba(167,139,250,0.32);
+}
+
+/* —— 区域 4：收束金句 —— 左对齐收束，与标题锚点呼应 */
+.tut-pl-closer { width: 100%; display: flex; justify-content: flex-start; }
+.closer-line {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}

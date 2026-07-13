@@ -1,0 +1,136 @@
+<!-- 场景: scene-1 | 时长: 34.90s | bg: hex_grid | 4 核心 skill：概览 + devflow 编排 + sql-query 工具 + crud-gen 工具 + code-review 编排 + 三类覆盖收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金编排 / 蓝工具 / 绿工具 / 紫编排；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(60px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:25%;width:520px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:75%;width:520px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:1000px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:23%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:77%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:82%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:26%;left:18%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:28%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:68%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:70%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 fourskill-scene">
+  <!-- phase-1 (0-4.9s): 概览 + 大字「七个 skill 挑四个核心」 + 四卡缩略 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 4 核心 skill · 核心段</div>
+  </div>
+  <div class="region-mid fs-overview">
+    <div class="fs-title">七个 skill 挑 <span class="grad-gold">四个核心</span></div>
+    <div class="fs-mini-row">
+      <div class="fs-mini mini-gold"><span class="mini-icon">⚡</span> devflow</div>
+      <div class="fs-mini mini-blue"><span class="mini-icon">🔧</span> sql-query</div>
+      <div class="fs-mini mini-green"><span class="mini-icon">⚙</span> crud-gen</div>
+      <div class="fs-mini mini-purple"><span class="mini-icon">🛡</span> code-review</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 4 核心 skill —</div>
+  </div>
+</div>
+<div class="phase phase-2 fourskill-scene">
+  <!-- phase-2 (4.9-12.2s): 卡 1 devflow 编排型（金） -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 其一 · devflow 编排型</div>
+  </div>
+  <div class="region-mid skill-card card-gold">
+    <div class="skill-head">
+      <div class="skill-num grad-gold">01</div>
+      <div class="skill-name"><span class="mono-gold">devflow</span></div>
+      <div class="skill-tag tag-gold">编排型</div>
+    </div>
+    <div class="skill-desc">把 <span class="kw-gold">需求到交付</span> 串成 <span class="kw-gold">六阶段流水线</span></div>
+    <div class="skill-flow">
+      <span class="flow-step">探索</span><span class="flow-arrow">→</span>
+      <span class="flow-step">规范</span><span class="flow-arrow">→</span>
+      <span class="flow-step">计划</span><span class="flow-arrow">→</span>
+      <span class="flow-step">TDD</span><span class="flow-arrow">→</span>
+      <span class="flow-step">验证</span><span class="flow-arrow">→</span>
+      <span class="flow-step">归档</span>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 4 核心 skill —</div>
+  </div>
+</div>
+<div class="phase phase-3 fourskill-scene">
+  <!-- phase-3 (12.2-19.5s): 卡 2 sql-query 工具型（蓝） -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 其二 · sql-query 工具型</div>
+  </div>
+  <div class="region-mid skill-card card-blue">
+    <div class="skill-head">
+      <div class="skill-num grad-blue">02</div>
+      <div class="skill-name"><span class="mono-blue">sql-query</span></div>
+      <div class="skill-tag tag-blue">工具型</div>
+    </div>
+    <div class="skill-desc"><span class="kw-blue">PostgreSQL</span> 只读查询 · 三模式加 <span class="kw-blue">安全护栏</span></div>
+    <div class="skill-modes">
+      <div class="mode-pill">交互模式</div>
+      <div class="mode-pill">脚本模式</div>
+      <div class="mode-pill">单条模式</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 4 核心 skill —</div>
+  </div>
+</div>
+<div class="phase phase-4 fourskill-scene">
+  <!-- phase-4 (19.5-26.8s): 卡 3 crud-gen 工具型（翠绿） -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 其三 · crud-gen 工具型</div>
+  </div>
+  <div class="region-mid skill-card card-green">
+    <div class="skill-head">
+      <div class="skill-num grad-green">03</div>
+      <div class="skill-name"><span class="mono-green">crud-gen</span></div>
+      <div class="skill-tag tag-green">工具型</div>
+    </div>
+    <div class="skill-desc">读 <span class="kw-green">表结构</span> · 自动生成 <span class="kw-green">增删改查代码</span></div>
+    <div class="skill-layers">
+      <span class="layer-pill">domain</span><span class="lp-arrow">→</span>
+      <span class="layer-pill">dto</span><span class="lp-arrow">→</span>
+      <span class="layer-pill">service</span><span class="lp-arrow">→</span>
+      <span class="layer-pill">dao</span><span class="lp-arrow">→</span>
+      <span class="layer-pill">controller</span>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 4 核心 skill —</div>
+  </div>
+</div>
+<div class="phase phase-5 fourskill-scene">
+  <!-- phase-5 (26.8-34.9s): 卡 4 code-review 编排型（紫） + 三类覆盖收尾 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 其四 · code-review 编排型</div>
+  </div>
+  <div class="region-mid skill-card card-purple">
+    <div class="skill-head">
+      <div class="skill-num grad-purple">04</div>
+      <div class="skill-name"><span class="mono-purple">code-review</span></div>
+      <div class="skill-tag tag-purple">编排型</div>
+    </div>
+    <div class="skill-desc"><span class="kw-purple">AI 代码审查</span> · 三级分级 <span class="cr-light">🔴 红 / 🟡 黄 / 🟢 绿</span></div>
+    <div class="skill-finale">四个覆盖 <span class="grad-gold">编排</span> · <span class="grad-blue">工具</span> · <span class="grad-purple">审查</span> 三类</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 4 核心 skill —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

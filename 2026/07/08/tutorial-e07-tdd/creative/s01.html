@@ -1,0 +1,114 @@
+<!-- 场景: seg1 | 时长: ~31.2s | bg: scan_grid | TDD 铁律：三圆循环图 + 铁律卡 + 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（红RED/绿GREEN/紫REFACTOR/金铁律；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,75%,60%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:30%;left:42%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:30%;left:66%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,66%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:60%;right:8%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.75);box-shadow:0 0 14px hsla(43,85%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-tdd-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E07 · TDD 铁律</div>
+      <h1 class="mt-h1"><span class="grad-gold">TDD 铁律</span> · 测试先行</h1>
+      <div class="title-sub">不同时写代码和测试</div>
+    </div>
+
+    <!-- 主体两栏：循环图（左）+ 铁律卡（右） -->
+    <div class="tut-tdd-main">
+
+    <!-- 区域 2-4：TDD 循环图（三圆 + 箭头） -->
+    <div class="tut-region tut-tdd-cycle" data-reveal="6" data-reveal-dir="top">
+      <div class="cycle-wrap">
+        <!-- RED 圆（data-reveal=6） -->
+        <div class="cycle-node cycle-red" data-reveal="6" data-reveal-dir="fade">
+          <div class="cycle-circle">
+            <span class="cycle-short">RED</span>
+          </div>
+          <div class="cycle-label">先写测试看它失败</div>
+        </div>
+
+        <!-- RED→GREEN 箭头（data-reveal=16） -->
+        <div class="cycle-arrow arrow-1" data-reveal="16" data-reveal-dir="fade">
+          <span class="arrow-line">→</span>
+        </div>
+
+        <!-- GREEN 圆（data-reveal=16） -->
+        <div class="cycle-node cycle-green" data-reveal="16" data-reveal-dir="fade">
+          <div class="cycle-circle">
+            <span class="cycle-short">GRN</span>
+          </div>
+          <div class="cycle-label">写最少代码让测试过</div>
+        </div>
+
+        <!-- GREEN→REFACTOR 箭头（data-reveal=28） -->
+        <div class="cycle-arrow arrow-2" data-reveal="28" data-reveal-dir="fade">
+          <span class="arrow-line">→</span>
+        </div>
+
+        <!-- REFACTOR 圆（data-reveal=28） -->
+        <div class="cycle-node cycle-refactor" data-reveal="28" data-reveal-dir="fade">
+          <div class="cycle-circle">
+            <span class="cycle-short">REF</span>
+          </div>
+          <div class="cycle-label">REFACTOR 重构</div>
+        </div>
+
+        <!-- 回环箭头 REFACTOR→RED（data-reveal=34） -->
+        <div class="cycle-loopback" data-reveal="34" data-reveal-dir="fade">
+          <span class="loopback-text">↻ 循环</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 5：铁律卡（data-reveal=42，dir=left） -->
+    <div class="tut-region tut-tdd-iron" data-reveal="42" data-reveal-dir="left">
+      <div class="iron-card">
+        <div class="iron-tag grad-gold-bg-inline">铁律</div>
+        <div class="iron-formula">
+          <span class="if-left">不同时写</span>
+          <span class="if-arrow">·</span>
+          <span class="if-right grad-gold">代码和测试</span>
+        </div>
+        <div class="iron-wrong">
+          <div class="wrong-tag">✗ 错误</div>
+          <div class="wrong-text">AI 同时写 → 验证错误逻辑的测试</div>
+          <div class="wrong-result">全部通过 · 业务逻辑全错</div>
+        </div>
+        <div class="iron-right">
+          <div class="right-tag">✓ 正确</div>
+          <div class="right-text">测试先行 · 独立验证</div>
+          <div class="right-flow">人写测试 → AI 写代码 → 独立验证</div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-tdd-main -->
+
+    <!-- 区域 6：金句（data-reveal=56，dir=top） -->
+    <div class="tut-region tut-tdd-quote" data-reveal="56" data-reveal-dir="top">
+      <div class="quote-tag grad-gold-bg-inline">铁律</div>
+      <div class="quote-main">
+        <span class="quote-text">测试先行</span>
+        <span class="qc-mark">·</span>
+        <span class="qc-strong grad-gold">独立验证</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

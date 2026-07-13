@@ -1,0 +1,116 @@
+<!-- 场景: seg1 | 时长: ~43.3s | bg: scan_grid | 案例 form 编辑器：横向时间线 + 方案演进卡 + 启示金句 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝时间线/红v1/黄v2/绿v3/金最终；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:760px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:58%;left:20%;width:300px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,75%,60%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:58%;left:50%;transform:translateX(-50%);width:300px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:58%;right:20%;width:300px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(255,70%,66%,0.75);box-shadow:0 0 14px hsla(255,65%,60%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-case-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E07 · 案例一</div>
+      <h1 class="mt-h1"><span class="grad-gold">form 编辑器</span> · 数据丢失修复</h1>
+      <div class="title-sub">两次纠方向 · 三方案演进</div>
+    </div>
+
+    <!-- 区域 2-3：横向时间线 -->
+    <div class="tut-region tut-case-timeline" data-reveal="4" data-reveal-dir="top">
+      <div class="timeline-wrap">
+        <!-- 节点 1：需求（data-reveal=4） -->
+        <div class="tl-node tl-need" data-reveal="4" data-reveal-dir="fade">
+          <div class="tl-dot"></div>
+          <div class="tl-label">需求</div>
+          <div class="tl-sub">一句话</div>
+        </div>
+        <div class="tl-arrow" data-reveal="6" data-reveal-dir="fade">→</div>
+
+        <!-- 节点 2：两个 Explore（data-reveal=7） -->
+        <div class="tl-node tl-explore" data-reveal="7" data-reveal-dir="fade">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Explore</div>
+          <div class="tl-sub">两个子代理</div>
+        </div>
+        <div class="tl-arrow" data-reveal="9" data-reveal-dir="fade">→</div>
+
+        <!-- 节点 3：两次纠方向（data-reveal=10） -->
+        <div class="tl-node tl-correct" data-reveal="10" data-reveal-dir="fade">
+          <div class="tl-dot"></div>
+          <div class="tl-label">纠方向</div>
+          <div class="tl-sub">两次</div>
+        </div>
+        <div class="tl-arrow" data-reveal="12" data-reveal-dir="fade">→</div>
+
+        <!-- 节点 4：三方案（data-reveal=13） -->
+        <div class="tl-node tl-plan" data-reveal="13" data-reveal-dir="fade">
+          <div class="tl-dot"></div>
+          <div class="tl-label">三方案</div>
+          <div class="tl-sub">v1/v2/v3</div>
+        </div>
+        <div class="tl-arrow" data-reveal="15" data-reveal-dir="fade">→</div>
+
+        <!-- 节点 5：最终（data-reveal=16，金色强调） -->
+        <div class="tl-node tl-final" data-reveal="16" data-reveal-dir="fade">
+          <div class="tl-dot tl-dot-gold"></div>
+          <div class="tl-label tl-label-gold">最终</div>
+          <div class="tl-sub">两文件 · 10 行</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4-5：方案演进卡（v1/v2/v3 三栏） -->
+    <div class="tut-region tut-case-plans" data-reveal="18" data-reveal-dir="fade">
+      <div class="plans-wrap">
+        <!-- v1 卡（data-reveal=18） -->
+        <div class="plan-card plan-v1" data-reveal="18" data-reveal-dir="fade">
+          <div class="plan-tag plan-tag-red">v1</div>
+          <div class="plan-method">prop 开关</div>
+          <div class="plan-files">两文件</div>
+          <div class="plan-verdict plan-verdict-bad">✗ 覆盖不全</div>
+        </div>
+
+        <!-- v2 卡（data-reveal=24） -->
+        <div class="plan-card plan-v2" data-reveal="24" data-reveal-dir="fade">
+          <div class="plan-tag plan-tag-yellow">v2</div>
+          <div class="plan-method">prop 开关</div>
+          <div class="plan-files">二十五文件</div>
+          <div class="plan-verdict plan-verdict-mid">△ 改动大</div>
+        </div>
+
+        <!-- v3 卡（data-reveal=28，金边强调） -->
+        <div class="plan-card plan-v3" data-reveal="28" data-reveal-dir="fade">
+          <div class="plan-tag plan-tag-green">v3 ✓</div>
+          <div class="plan-method">provide/inject</div>
+          <div class="plan-files">两文件 · 自动覆盖</div>
+          <div class="plan-verdict plan-verdict-good">✓ 最优</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 6：启示金句（data-reveal=32，dir=top） -->
+    <div class="tut-region tut-case-quote" data-reveal="32" data-reveal-dir="top">
+      <div class="quote-tag grad-purple-bg-inline">启示</div>
+      <div class="quote-main">
+        <span class="quote-text">用户引导是核心</span>
+        <span class="qc-mark">·</span>
+        <span class="qc-strong grad-purple">AI 是执行者</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

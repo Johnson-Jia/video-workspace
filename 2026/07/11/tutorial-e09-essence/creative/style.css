@@ -1,0 +1,221 @@
+:root {
+  --bg-deep: #0a0e1a;
+  --c-blue: #60a5fa;
+  --c-blue-light: #93c5fd;
+  --c-purple: #a78bfa;
+  --c-purple-light: #c4b5fd;
+  --c-green: #34d399;
+  --c-green-light: #6ee7b7;
+  --c-gold: #fbbf24;
+  --c-gold-light: #fcd34d;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * E09 essence · 组织资产本质（金句升华）
+ * 克制精美：少元素大留白，金句居中
+ * ============================================ */
+
+.tut-scene{
+  padding:70px 90px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+  box-sizing:border-box;
+  width:100%;
+}
+
+/* —— 通用渐变文字（两端亮色，禁暗端） —— */
+.grad-gold{
+  background-image:linear-gradient(120deg,#FCD34D,#FBBF24 60%,#F59E0B);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 2px 10px rgba(30,41,59,0.28);
+}
+.grad-green{
+  background-image:linear-gradient(120deg,#6EE7B7,#34D399 60%,#10B981);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.grad-blue{
+  background-image:linear-gradient(120deg,#93C5FD,#60A5FA 60%,#3B82F6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+
+/* —— 顶部阶段标签 —— */
+.p-top{width:100%;}
+.p-stage-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(251,191,36,0.78);
+  letter-spacing:0.08em;
+  margin-bottom:8px;
+}
+.p-stage-tag .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#fbbf24;box-shadow:0 0 12px rgba(251,191,36,0.7);
+}
+
+/* —— phase-1：点题 —— */
+.e-point{
+  display:flex;flex-direction:column;
+  justify-content:center;flex:1;
+  gap:18px;align-items:center;text-align:center;
+}
+.e-point-tag{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.1em;
+}
+.e-point-title{
+  font-family:var(--font-title);font-weight:900;
+  font-size:96px;line-height:1.1;
+  color:#fff;
+  letter-spacing:1px;
+  text-shadow:0 2px 12px rgba(30,41,59,0.28);
+  word-break:break-word;overflow-wrap:break-word;
+}
+.e-point-title .grad-gold{display:inline-block;}
+
+/* —— phase-2：金句大字「人 + AI，人是根本」居中 —— */
+.e-quote{
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;flex:1;
+  gap:30px;text-align:center;
+}
+.e-formula{
+  display:flex;align-items:center;justify-content:center;
+  gap:28px;
+  font-family:var(--font-title);font-weight:900;
+  font-size:120px;line-height:1;
+}
+.e-formula .op{
+  font-family:var(--font-data);font-weight:800;
+  color:rgba(255,255,255,0.5);
+  font-size:96px;
+}
+.e-formula .e-human{
+  color:#fff;
+  text-shadow:0 4px 18px rgba(96,165,250,0.32);
+}
+.e-formula .e-ai{
+  background-image:linear-gradient(120deg,#93C5FD,#60A5FA 60%,#22D3EE);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.e-quote-core{
+  font-family:var(--font-title);font-weight:900;
+  font-size:128px;line-height:1.05;
+  letter-spacing:2px;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.e-quote-sub{
+  font-family:var(--font-body);font-size:38px;font-weight:600;
+  color:rgba(255,255,255,0.55);
+  letter-spacing:0.5px;
+  margin-top:8px;
+}
+
+/* —— phase-3：三大地基 + 工具方法论迭代注脚 —— */
+.e-base{
+  display:flex;flex-direction:column;
+  flex:1;justify-content:center;
+  gap:22px;
+}
+.e-base-title{
+  font-family:var(--font-body);font-size:36px;font-weight:700;
+  color:rgba(255,255,255,0.82);
+  text-align:center;
+  letter-spacing:0.5px;
+}
+.e-base-title .kw-gold{color:#fcd34d;font-weight:800;}
+.e-base-grid{
+  display:flex;gap:24px;justify-content:center;align-items:stretch;
+  width:100%;
+}
+.e-base-card{
+  flex:1;max-width:520px;
+  background:linear-gradient(160deg,rgba(20,28,52,0.92) 0%,rgba(13,9,5,0.92) 100%);
+  border:1px solid rgba(96,165,250,0.32);
+  border-left:4px solid var(--c-blue);
+  border-radius:14px;
+  padding:24px 26px;
+  display:flex;flex-direction:column;gap:10px;
+  min-width:0;box-sizing:border-box;
+  box-shadow:0 6px 28px rgba(0,0,0,0.42), 0 0 22px rgba(96,165,250,0.08);
+}
+.e-base-card .e-num{
+  font-family:var(--font-data);font-size:36px;font-weight:800;
+  background-image:linear-gradient(120deg,#93C5FD,#60A5FA);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  letter-spacing:0.06em;
+}
+.e-base-card .e-name{
+  font-family:var(--font-title);font-weight:900;
+  font-size:48px;line-height:1.1;color:#fff;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.e-base-note{
+  font-family:var(--font-body);font-size:34px;
+  color:rgba(255,255,255,0.6);
+  text-align:center;
+  margin-top:4px;letter-spacing:0.5px;
+}
+.e-base-note .kw-blue{color:#93c5fd;font-weight:700;}
+
+/* —— phase-4：个体→组织 流向 + 收尾 —— */
+.e-flow{
+  display:flex;flex-direction:column;
+  flex:1;justify-content:center;align-items:center;
+  gap:24px;text-align:center;
+}
+.e-flow-title{
+  font-family:var(--font-body);font-size:38px;font-weight:700;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0.5px;
+}
+.e-flow-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:36px;flex-wrap:wrap;
+}
+.e-flow-block{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  min-width:280px;
+}
+.e-flow-label{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.06em;
+}
+.e-flow-value{
+  font-family:var(--font-title);font-weight:900;
+  font-size:88px;line-height:1;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.e-flow-arrow{
+  font-family:var(--font-data);font-size:88px;font-weight:800;
+  color:#fbbf24;
+  display:flex;align-items:center;justify-content:center;
+  min-width:100px;
+  text-shadow:0 2px 6px rgba(30,41,59,0.28);
+}
+.e-flow-final{
+  font-family:var(--font-body);font-size:42px;font-weight:800;
+  color:rgba(255,255,255,0.9);
+  margin-top:14px;letter-spacing:0.5px;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.e-flow-final .kw-green{color:#6ee7b7;font-weight:800;}
+.e-flow-final .kw-gold{color:#fcd34d;font-weight:800;}
+
+/* —— 全局溢出防御 —— */
+.p-stage-tag,.e-point-title,.e-quote-core,.e-base-card .e-name,.e-flow-value,.e-flow-final,.e-base-note,.e-flow-title{
+  word-break:break-word;overflow-wrap:break-word;
+}

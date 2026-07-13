@@ -1,0 +1,218 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #10B981;
+  --tut-gold: #FBBF24;
+  --tut-red: #F87171;
+  --tut-yellow: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E07 段5 — 案例 form 编辑器
+ * 1 场景 + 标题 + 横向时间线 + 方案卡（v1/v2/v3）+ 启示金句
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 14px;
+  padding: 64px 90px 56px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: stretch;
+  gap: 14px;
+}
+[data-reveal]:not([data-reveal="0"]) { opacity: 0; will-change: opacity, transform; }
+.tut-region { will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字工具 —— */
+.grad-gold { background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+.grad-purple-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#A78BFA 0%,#7C3AED 100%);
+  color: #FFF; -webkit-text-fill-color: #FFF;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: var(--font-data);
+}
+
+/* —— 标题区 —— */
+.tut-case-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tut-case-title .mt-eyebrow {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.18em;
+  padding: 6px 22px; border: 1.5px solid rgba(224,231,255,0.35); border-radius: 999px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-case-title .mt-h1 {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-case-title .title-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-blue-white); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 横向时间线 —— */
+.tut-case-timeline { width: 100%; }
+.timeline-wrap {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 16px 10px;
+}
+.tl-node {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  flex: 0 0 auto;
+  min-width: 140px;
+}
+.tl-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.40), rgba(15,23,42,0.92));
+  border: 3px solid rgba(59,130,246,0.75);
+  box-shadow: 0 0 18px rgba(59,130,246,0.35);
+}
+.tl-dot-gold {
+  background: radial-gradient(circle at 30% 30%, rgba(251,191,36,0.50), rgba(15,23,42,0.92));
+  border: 3px solid rgba(251,191,36,0.85);
+  box-shadow: 0 0 22px rgba(251,191,36,0.50);
+}
+.tl-label {
+  font-family: var(--font-title); font-size: 36px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tl-label-gold {
+  background-image: linear-gradient(92deg,#FDE68A 0%,#FBBF24 55%,#FCD34D 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+}
+.tl-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--tut-gray);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tl-arrow {
+  font-family: var(--font-data); font-size: 40px; font-weight: 900;
+  color: var(--tut-blue);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  padding: 0 4px;
+}
+
+/* —— 方案演进卡（v1/v2/v3 三栏） —— */
+.tut-case-plans { width: 100%; }
+.plans-wrap {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.plan-card {
+  border-radius: 18px;
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.40);
+}
+.plan-v1 {
+  background: linear-gradient(165deg, rgba(248,113,113,0.12), rgba(15,23,42,0.92));
+  border: 2px solid rgba(248,113,113,0.50);
+}
+.plan-v2 {
+  background: linear-gradient(165deg, rgba(251,191,36,0.12), rgba(15,23,42,0.92));
+  border: 2px solid rgba(251,191,36,0.50);
+}
+.plan-v3 {
+  background: linear-gradient(165deg, rgba(52,211,153,0.16), rgba(15,23,42,0.92));
+  border: 3px solid rgba(52,211,153,0.85);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.40), 0 0 24px rgba(52,211,153,0.20);
+}
+.plan-tag {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900;
+  letter-spacing: 0.06em;
+  width: fit-content;
+  padding: 4px 16px;
+  border-radius: 8px;
+  color: #FFF;
+  -webkit-text-fill-color: #FFF;
+}
+.plan-tag-red { background-image: linear-gradient(92deg,#F87171 0%,#DC2626 100%); }
+.plan-tag-yellow { background-image: linear-gradient(92deg,#FBBF24 0%,#D97706 100%); }
+.plan-tag-green { background-image: linear-gradient(92deg,#34D399 0%,#047857 100%); }
+.plan-method {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.plan-files {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.3;
+}
+.plan-verdict {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  margin-top: 4px;
+}
+.plan-verdict-bad {
+  color: var(--tut-red);
+  background: rgba(248,113,113,0.10);
+  border: 1.5px solid rgba(248,113,113,0.40);
+}
+.plan-verdict-mid {
+  color: var(--tut-yellow);
+  background: rgba(251,191,36,0.10);
+  border: 1.5px solid rgba(251,191,36,0.40);
+}
+.plan-verdict-good {
+  color: var(--tut-green);
+  background: rgba(52,211,153,0.12);
+  border: 1.5px solid rgba(52,211,153,0.55);
+}
+
+/* —— 启示金句 —— */
+.tut-case-quote {
+  border-radius: 22px; padding: 16px 32px;
+  border: 3px solid rgba(167,139,250,0.70);
+  background: linear-gradient(90deg, rgba(167,139,250,0.14), rgba(15,23,42,0.90), rgba(167,139,250,0.14));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  box-shadow: 0 0 30px rgba(167,139,250,0.15);
+}
+.quote-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.quote-main {
+  font-family: var(--font-title); font-size: 42px; font-weight: 900; line-height: 1.1;
+  display: flex; align-items: center; gap: 14px;
+}
+.quote-text {
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.qc-mark {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900; color: var(--tut-purple);
+}
+.qc-strong { font-size: 42px; padding: 0 4px; }

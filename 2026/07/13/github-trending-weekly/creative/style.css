@@ -1,0 +1,402 @@
+:root {
+  /* 第29周 GitHub 周榜 — 暗色科技底 + 四组领域色（蓝/紫/橙/青） */
+  --bg-deep: #0B1226;
+  --bg-mid: #1A1235;
+  --accent-warm: #F9A825;        /* hook/CTA 金琥珀 */
+  --accent-gold: #FBBF24;
+  --grp-blue: #60A5FA;           /* 组1 编码 Agent */
+  --grp-purple: #A78BFA;         /* 组2 技能生态 */
+  --grp-orange: #FB923C;         /* 组3 安全工具 */
+  --grp-teal: #22D3EE;           /* 组4 应用办公 */
+  --text: #F5F5F5;
+  --text2: rgba(245,245,245,0.62);
+  --text3: rgba(245,245,245,0.45);
+  --card-bg: rgba(13,9,5,0.88);
+  --card-bg-cool: rgba(11,18,38,0.88);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 通用渐变文字（同色系高饱和，禁白色端点/暗端）
+ * text-shadow 用深蓝灰 rgba(30,41,59,0.6) 防 R-S6-023
+ * ============================================ */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FCD34D 0%, #FBBF24 50%, #F59E0B 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 50%, #3B82F6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #C4B5FD 0%, #A78BFA 50%, #8B5CF6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-orange {
+  background-image: linear-gradient(135deg, #FDBA74 0%, #FB923C 50%, #F97316 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-teal {
+  background-image: linear-gradient(135deg, #67E8F9 0%, #22D3EE 50%, #06B6D4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+
+/* ============================================
+ * fx 通用元素（每个场景通过 class 覆盖定位/颜色）
+ * ============================================ */
+.fx-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+}
+.fx-streak {
+  position: absolute; height: 2px; border-radius: 2px;
+  pointer-events: none; opacity: 0.55;
+}
+.fx-anchor {
+  position: absolute; width: 14px; height: 14px;
+  border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 18px currentColor;
+}
+
+/* ============================================
+ * 场景 1 — Hook：第29周 + 一周涨一万多星
+ * ============================================ */
+.hook-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 48px;
+  text-align: center;
+}
+.hook-tag {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent-gold);
+  padding: 10px 28px;
+  border: 1.5px solid rgba(251,191,36,0.45);
+  border-radius: 999px;
+  background: rgba(251,191,36,0.08);
+}
+.hook-main {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 22px;
+}
+.hook-week {
+  font-family: var(--font-data);
+  font-size: 40px; font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+}
+.hook-num-row {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 0;
+}
+.hook-num {
+  font-family: var(--font-data);
+  font-size: 240px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -0.04em;
+}
+.hook-num-suffix {
+  font-family: var(--font-data);
+  font-size: 100px; font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1.0;
+  margin-left: -4px;
+}
+.hook-headline {
+  font-family: var(--font-title);
+  font-size: 76px; font-weight: 900;
+  line-height: 1.15; letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+/* ============================================
+ * ProjectFullCard（assemble 不注入组件 CSS，必须手写）
+ * .project-full-card 用 position:absolute;inset 安全区（feedback-pfc-safezone-overflow）
+ * 纵向三带：justify-content:space-between 撑满 1920
+ * ============================================ */
+.project-full-card {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 520px; height: 520px; opacity: 0.18;
+  top: 180px; left: -120px;
+}
+.pfc-glow-cool {
+  width: 460px; height: 460px; opacity: 0.16;
+  bottom: 280px; right: -100px;
+}
+
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%;
+}
+.pfc-group-row {
+  display: flex; align-items: center; gap: 20px;
+  width: 100%;
+}
+.pfc-rank {
+  font-size: 88px; font-weight: 900; line-height: 0.9;
+  font-family: var(--font-data);
+}
+.pfc-group-tag {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 600;
+  letter-spacing: 0.10em;
+  padding: 8px 22px;
+  border-radius: 999px;
+}
+.pfc-use {
+  font-size: 46px; font-weight: 800; line-height: 1.15;
+  padding: 10px 26px; border-radius: 12px;
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;
+  margin-top: 4px;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 58px; font-weight: 800;
+  color: var(--text);
+}
+
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 28px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 200px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -14px;
+  border-radius: 50%;
+  filter: blur(14px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 200px; height: 200px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(245,245,245,0.85);
+  box-shadow: 0 0 40px rgba(0,0,0,0.45);
+}
+.pfc-desc {
+  font-size: 38px; font-weight: 600; line-height: 1.35;
+  color: var(--text); text-align: center; max-width: 820px;
+}
+.pfc-data-bar {
+  width: 100%; max-width: 820px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label {
+  font-size: 32px; font-weight: 500;
+  color: var(--text2);
+}
+.pfc-bar-val {
+  font-size: 52px; font-weight: 900;
+  font-family: var(--font-data);
+  line-height: 1.0;
+}
+.pfc-bar-track {
+  width: 100%; height: 14px; border-radius: 999px;
+  background: rgba(255,255,255,0.10); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  transform-origin: left center;
+}
+.pfc-highlight-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 12px 28px; border-radius: 14px;
+  font-size: 34px; font-weight: 800;
+  font-family: var(--font-data);
+}
+
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 22px; width: 100%;
+}
+.pfc-related {
+  display: flex; flex-direction: column; gap: 14px; width: 100%;
+}
+.pfc-related-label {
+  font-size: 32px; font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+}
+.pfc-related-list {
+  display: flex; flex-direction: column; gap: 12px; width: 100%;
+}
+.pfc-related-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: rgba(245,245,245,0.04);
+  border-left: 3px solid currentColor;
+}
+.pfc-related-mini {
+  width: 56px; height: 56px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(245,245,245,0.65);
+  flex-shrink: 0;
+}
+.pfc-related-info {
+  display: flex; flex-direction: column; gap: 4px;
+  flex: 1; min-width: 0;
+}
+.pfc-related-name {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 700;
+  color: var(--text);
+  word-break: break-all;
+  line-height: 1.15;
+}
+.pfc-related-desc {
+  font-size: 32px; font-weight: 500;
+  color: var(--text2);
+  line-height: 1.2;
+}
+.pfc-related-stars {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 700;
+  flex-shrink: 0;
+}
+.pfc-commentary {
+  font-size: 34px; font-weight: 500; line-height: 1.4;
+  color: var(--text2);
+  border-left: 4px solid currentColor; padding-left: 22px;
+}
+
+/* ============================================
+ * 场景 6 CTA 收尾
+ * ============================================ */
+.cta-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 44px;
+  text-align: center;
+}
+.cta-trend-title {
+  font-family: var(--font-title);
+  font-size: 64px; font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+  max-width: 820px;
+}
+.cta-question {
+  font-family: var(--font-title);
+  font-size: 84px; font-weight: 900;
+  line-height: 1.15;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 40px; font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+.cta-pill-row {
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+}
+.cta-pill {
+  padding: 12px 28px; border-radius: 999px;
+  font-size: 32px; font-weight: 700;
+  font-family: var(--font-body);
+}
+.cta-avatar-row {
+  display: flex; gap: 14px; align-items: center;
+}
+.cta-mini-avatar {
+  width: 76px; height: 76px; border-radius: 50%;
+  border: 3px solid rgba(245,245,245,0.75);
+  object-fit: cover;
+  box-shadow: 0 0 22px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+ * 四组领域色变体（按场景 data-group 切换）
+ * ============================================ */
+/* 默认（无 group）用金色 */
+.project-full-card { color: var(--accent-warm); }
+.project-full-card[data-group="blue"]   { color: var(--grp-blue); }
+.project-full-card[data-group="purple"] { color: var(--grp-purple); }
+.project-full-card[data-group="orange"] { color: var(--grp-orange); }
+.project-full-card[data-group="teal"]   { color: var(--grp-teal); }
+
+[data-group="blue"]   .pfc-glow-warm { background: var(--grp-blue); }
+[data-group="blue"]   .pfc-glow-cool { background: #1E3A8A; }
+[data-group="blue"]   .pfc-rank      { color: var(--grp-blue); }
+[data-group="blue"]   .pfc-group-tag { color: var(--grp-blue); background: rgba(96,165,250,0.10); border: 1.5px solid rgba(96,165,250,0.45); }
+[data-group="blue"]   .pfc-use       { color: var(--grp-blue); background: rgba(96,165,250,0.10); border: 1.5px solid rgba(96,165,250,0.40); }
+[data-group="blue"]   .pfc-bar-fill  { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
+[data-group="blue"]   .pfc-bar-val   { color: var(--grp-blue); }
+[data-group="blue"]   .pfc-avatar-ring { background: conic-gradient(from 0deg, var(--grp-blue), #93C5FD, var(--grp-blue)); }
+[data-group="blue"]   .pfc-highlight-pill { color: var(--grp-blue); background: rgba(96,165,250,0.12); border: 1.5px solid rgba(96,165,250,0.50); }
+
+[data-group="purple"] .pfc-glow-warm { background: var(--grp-purple); }
+[data-group="purple"] .pfc-glow-cool { background: #6D28D9; }
+[data-group="purple"] .pfc-rank      { color: var(--grp-purple); }
+[data-group="purple"] .pfc-group-tag { color: var(--grp-purple); background: rgba(167,139,250,0.10); border: 1.5px solid rgba(167,139,250,0.45); }
+[data-group="purple"] .pfc-use       { color: var(--grp-purple); background: rgba(167,139,250,0.10); border: 1.5px solid rgba(167,139,250,0.40); }
+[data-group="purple"] .pfc-bar-fill  { background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
+[data-group="purple"] .pfc-bar-val   { color: var(--grp-purple); }
+[data-group="purple"] .pfc-avatar-ring { background: conic-gradient(from 0deg, var(--grp-purple), #C4B5FD, var(--grp-purple)); }
+[data-group="purple"] .pfc-highlight-pill { color: var(--grp-purple); background: rgba(167,139,250,0.12); border: 1.5px solid rgba(167,139,250,0.50); }
+
+[data-group="orange"] .pfc-glow-warm { background: var(--grp-orange); }
+[data-group="orange"] .pfc-glow-cool { background: #C2410C; }
+[data-group="orange"] .pfc-rank      { color: var(--grp-orange); }
+[data-group="orange"] .pfc-group-tag { color: var(--grp-orange); background: rgba(251,146,60,0.10); border: 1.5px solid rgba(251,146,60,0.45); }
+[data-group="orange"] .pfc-use       { color: var(--grp-orange); background: rgba(251,146,60,0.10); border: 1.5px solid rgba(251,146,60,0.40); }
+[data-group="orange"] .pfc-bar-fill  { background: linear-gradient(90deg, #F97316, #FB923C); }
+[data-group="orange"] .pfc-bar-val   { color: var(--grp-orange); }
+[data-group="orange"] .pfc-avatar-ring { background: conic-gradient(from 0deg, var(--grp-orange), #FDBA74, var(--grp-orange)); }
+[data-group="orange"] .pfc-highlight-pill { color: var(--grp-orange); background: rgba(251,146,60,0.12); border: 1.5px solid rgba(251,146,60,0.50); }
+
+[data-group="teal"]   .pfc-glow-warm { background: var(--grp-teal); }
+[data-group="teal"]   .pfc-glow-cool { background: #0E7490; }
+[data-group="teal"]   .pfc-rank      { color: var(--grp-teal); }
+[data-group="teal"]   .pfc-group-tag { color: var(--grp-teal); background: rgba(34,211,238,0.10); border: 1.5px solid rgba(34,211,238,0.45); }
+[data-group="teal"]   .pfc-use       { color: var(--grp-teal); background: rgba(34,211,238,0.10); border: 1.5px solid rgba(34,211,238,0.40); }
+[data-group="teal"]   .pfc-bar-fill  { background: linear-gradient(90deg, #06B6D4, #22D3EE); }
+[data-group="teal"]   .pfc-bar-val   { color: var(--grp-teal); }
+[data-group="teal"]   .pfc-avatar-ring { background: conic-gradient(from 0deg, var(--grp-teal), #67E8F9, var(--grp-teal)); }
+[data-group="teal"]   .pfc-highlight-pill { color: var(--grp-teal); background: rgba(34,211,238,0.12); border: 1.5px solid rgba(34,211,238,0.50); }

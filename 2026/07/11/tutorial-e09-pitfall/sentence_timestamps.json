@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+0%",
+    "source": "edge-tts-srt"
+  },
+  "segments": [
+    {
+      "scene": "seg1",
+      "segment_index": 0,
+      "sentences": [
+        {
+          "index": 0,
+          "text": "真实避坑，来自生产 bug 复盘。",
+          "start": 0.1,
+          "end": 3.287
+        },
+        {
+          "index": 1,
+          "text": "最典型的是静默吞异常。",
+          "start": 3.237,
+          "end": 6.075
+        },
+        {
+          "index": 2,
+          "text": "代码里 catch 吞掉异常，然后无论如何都调 handleSuccess，任务自报成功。",
+          "start": 6.075,
+          "end": 12.412
+        },
+        {
+          "index": 3,
+          "text": "某 SFTP 推送任务就这么静默挂了九个月，客户才发现。",
+          "start": 12.412,
+          "end": 17.65
+        },
+        {
+          "index": 4,
+          "text": "修复方法是 catch 必须重抛或转 Error，失败必须调 handleFail。",
+          "start": 17.65,
+          "end": 23.125
+        },
+        {
+          "index": 5,
+          "text": "关键集成任务必须有外部健康检查，不能只信任务自报成功。",
+          "start": 23.125,
+          "end": 28.975
+        },
+        {
+          "index": 6,
+          "text": "这些避坑写进规则，AI 自动加载，同类问题不再虫犯。",
+          "start": 28.975,
+          "end": 34.687
+        }
+      ]
+    }
+  ]
+}

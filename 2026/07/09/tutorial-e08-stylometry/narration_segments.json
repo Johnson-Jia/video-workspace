@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 40,
+    "emotion": "core-算法核心反伪造+四步流程+两分支判定",
+    "text": "第二层是反伪造关键——风格计量学。原理：每个开发者有独特的代码风格指纹，AI 生成的代码风格往往和作者本人不一样。对被 Co-authored-by 标记的提交，算它和作者本人风格画像的余弦相似度。算法四步：字符级 n-gram 切分，TF 归一化，算余弦相似度，置信度等于一减相似度。像本人手写的，相似度高，可能是误标，降低置信度；不像本人的，相似度低，确认是 AI。这样能挡住 VS Code Copilot 对手写代码加 trailer 这类误标。",
+    "narration": "第二层是反伪造关键——风格计量学。原理：每个开发者有独特的代码风格指纹，AI 生成的代码风格往往和作者本人不一样。对被 Co-authored-by 标记的提交，算它和作者本人风格画像的余弦相似度。算法四步：字符级 n-gram 切分，TF 归一化，算余弦相似度，置信度等于一减相似度。像本人手写的，相似度高，可能是误标，降低置信度；不像本人的，相似度低，确认是 AI。这样能挡住 VS Code Copilot 对手写代码加 trailer 这类误标。",
+    "hook_anchors": ["风格计量学", "代码风格指纹", "Co-authored-by", "余弦相似度", "n-gram 切分", "TF 归一化", "置信度", "误标降", "确认 AI", "VS Code Copilot", "trailer"],
+    "visual_type": "tutorial_stylometry_flow",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「第二层 风格计量学 · 反伪造复核」fade-in + 原理一句话副标题", "duration_share": 0.20, "narration_anchor": {"start_sentence": 0, "end_sentence": 0}},
+      {"phase": 2, "start_offset": 8, "focus": "算法四步横向流程 reveal 左滑入（n-gram → TF → 余弦 → 置信度，第四步金边胶囊）", "duration_share": 0.32, "narration_anchor": {"start_sentence": 1, "end_sentence": 1}},
+      {"phase": 3, "start_offset": 21, "focus": "两分支判定横排 reveal 底部上滑（相似度高→误标降绿 / 相似度低→确认 AI 红）", "duration_share": 0.28, "narration_anchor": {"start_sentence": 2, "end_sentence": 2}},
+      {"phase": 4, "start_offset": 32, "focus": "防误标场景卡 reveal（VS Code Copilot 对手写代码加 trailer 命中，被第二层挡住）", "duration_share": 0.20, "narration_anchor": {"start_sentence": 3, "end_sentence": 3}}
+    ],
+    "bg_component": "diamond_lattice"
+  }
+]

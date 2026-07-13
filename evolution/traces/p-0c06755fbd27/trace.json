@@ -1,0 +1,209 @@
+[
+  {
+    "id": "T-20260712T085403Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T08:54:03.278982+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:output_no_bgm_valid",
+            "details": "output.mp4 缺失，无法验证 no_bgm 版本"
+          },
+          {
+            "rule_id": "gate:video_bitrate_valid",
+            "details": "视频文件缺失: output.mp4"
+          },
+          {
+            "rule_id": "gate:output_media_valid",
+            "details": "output.mp4 不存在或为空"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T085522Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T08:55:22.489856+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T090419Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T09:04:19.065182+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T111337Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T11:13:37.777645+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T124943Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T12:49:43.466116+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "A/V 漂移风险: bgm=24.94s > 旁白=21.77s (超出 3.17s > 容差 0.15s)。HyperFrames 会以最长音频轨为准渲染，BGM 超长导致视频尾段无旁白。修复: ffmpeg -y -i bgm.wav -t 21.77 -c:a pcm_s16le bgm.wav"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T124952Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T12:49:52.455525+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:bgm_not_exceeds_narration",
+            "details": "A/V 漂移风险: bgm=24.94s > 旁白=21.77s (超出 3.17s > 容差 0.15s)。HyperFrames 会以最长音频轨为准渲染，BGM 超长导致视频尾段无旁白。修复: ffmpeg -y -i bgm.wav -t 21.77 -c:a pcm_s16le bgm.wav"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T125140Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T12:51:40.852890+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  },
+  {
+    "id": "T-20260712T125209Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-12T12:52:09.627133+00:00",
+    "project_dir": "2026/07/12/tutorial-e11-intro",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "pass",
+      "gate_report": {
+        "hard_passed": true,
+        "soft_score": 1.0,
+        "hard_violations": [],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

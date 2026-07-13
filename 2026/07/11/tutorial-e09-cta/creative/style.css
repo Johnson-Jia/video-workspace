@@ -1,0 +1,224 @@
+:root {
+  --bg-deep: #0a0e1a;
+  --c-blue: #60a5fa;
+  --c-blue-light: #93c5fd;
+  --c-purple: #a78bfa;
+  --c-purple-light: #c4b5fd;
+  --c-cyan: #22d3ee;
+  --c-cyan-light: #67e8f9;
+  --c-green: #34d399;
+  --c-green-light: #6ee7b7;
+  --c-gold: #fbbf24;
+  --c-gold-light: #fcd34d;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * E09 cta · 合集预告 + E10 预告 + 关注 CTA + 互动问
+ * ============================================ */
+
+.tut-scene{
+  padding:60px 80px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+  box-sizing:border-box;
+  width:100%;
+}
+
+/* —— 通用渐变文字（两端亮色） —— */
+.grad-gold{
+  background-image:linear-gradient(120deg,#FCD34D,#FBBF24 60%,#F59E0B);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 2px 10px rgba(30,41,59,0.28);
+}
+.grad-cyan{
+  background-image:linear-gradient(120deg,#67E8F9,#22D3EE 60%,#06B6D4);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.grad-purple{
+  background-image:linear-gradient(120deg,#C4B5FD,#A78BFA 60%,#8B5CF6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.grad-blue{
+  background-image:linear-gradient(120deg,#93C5FD,#60A5FA 60%,#3B82F6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+
+/* —— 顶部阶段标签 —— */
+.p-top{width:100%;}
+.p-stage-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(251,191,36,0.78);
+  letter-spacing:0.08em;
+  margin-bottom:8px;
+}
+.p-stage-tag .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#fbbf24;box-shadow:0 0 12px rgba(251,191,36,0.7);
+}
+
+/* —— phase-1：合集标识 + 点题 —— */
+.c-open{
+  display:flex;flex-direction:column;
+  justify-content:center;flex:1;
+  gap:20px;align-items:center;text-align:center;
+}
+.c-series-tag{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--font-data);font-size:32px;font-weight:800;
+  padding:8px 22px;border-radius:999px;
+  background:rgba(251,191,36,0.18);color:#fcd34d;
+  border:1px solid rgba(251,191,36,0.5);
+  letter-spacing:0.08em;
+}
+.c-open-title{
+  font-family:var(--font-title);font-weight:900;
+  font-size:88px;line-height:1.1;
+  color:#fff;
+  letter-spacing:1px;
+  text-shadow:0 2px 12px rgba(30,41,59,0.28);
+  word-break:break-word;overflow-wrap:break-word;
+}
+.c-open-sub{
+  font-family:var(--font-body);font-size:38px;font-weight:700;
+  color:rgba(255,255,255,0.6);
+  letter-spacing:0.5px;
+}
+
+/* —— phase-2：E10 预告卡 + 合集还有四集 —— */
+.c-next{
+  display:flex;flex-direction:column;
+  flex:1;justify-content:center;
+  gap:24px;
+}
+.c-next-row{
+  display:flex;gap:28px;align-items:stretch;
+  width:100%;
+}
+.c-next-card{
+  flex:1.4;
+  background:linear-gradient(160deg,rgba(12,32,52,0.92) 0%,rgba(13,9,5,0.92) 100%);
+  border:1.5px solid rgba(34,211,238,0.5);
+  border-left:5px solid var(--c-cyan);
+  border-radius:16px;
+  padding:26px 30px;
+  display:flex;flex-direction:column;gap:14px;
+  min-width:0;box-sizing:border-box;
+  box-shadow:0 8px 32px rgba(0,0,0,0.45), 0 0 28px rgba(34,211,238,0.18);
+}
+.c-next-badge{
+  display:inline-flex;align-self:flex-start;align-items:center;gap:10px;
+  font-family:var(--font-data);font-size:32px;font-weight:800;
+  padding:6px 18px;border-radius:999px;
+  background:rgba(34,211,238,0.18);color:#67e8f9;
+  border:1px solid rgba(34,211,238,0.5);
+  letter-spacing:0.06em;
+}
+.c-next-title{
+  font-family:var(--font-title);font-weight:900;
+  font-size:64px;line-height:1.05;color:#fff;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.c-next-title .grad-cyan{display:inline-block;}
+.c-next-tool{
+  font-family:var(--font-data);font-size:38px;font-weight:800;
+  background-image:linear-gradient(120deg,#67E8F9,#22D3EE);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  letter-spacing:0.04em;
+}
+.c-next-idea{
+  font-family:var(--font-body);font-size:34px;
+  color:rgba(255,255,255,0.78);
+  word-break:break-word;overflow-wrap:break-word;
+}
+.c-next-idea .kw-cyan{color:#67e8f9;font-weight:700;}
+
+.c-more{
+  flex:1;
+  background:linear-gradient(160deg,rgba(20,28,52,0.92) 0%,rgba(13,9,5,0.92) 100%);
+  border:1px solid rgba(96,165,250,0.32);
+  border-left:5px solid var(--c-blue);
+  border-radius:16px;
+  padding:26px 28px;
+  display:flex;flex-direction:column;gap:12px;justify-content:center;
+  min-width:0;box-sizing:border-box;
+  box-shadow:0 6px 28px rgba(0,0,0,0.42);
+}
+.c-more-label{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.06em;
+}
+.c-more-num{
+  font-family:var(--font-title);font-weight:900;
+  font-size:128px;line-height:1;
+}
+.c-more-text{
+  font-family:var(--font-body);font-size:34px;font-weight:700;
+  color:rgba(255,255,255,0.82);
+  word-break:break-word;overflow-wrap:break-word;
+}
+
+/* —— phase-3：关注 CTA + 教程仓库评论区 —— */
+.c-cta{
+  display:flex;flex-direction:column;
+  flex:1;justify-content:center;align-items:center;
+  gap:26px;text-align:center;
+}
+.c-cta-title{
+  font-family:var(--font-title);font-weight:900;
+  font-size:108px;line-height:1.05;
+  letter-spacing:1px;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.c-cta-btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--font-data);font-size:40px;font-weight:800;
+  padding:14px 40px;border-radius:999px;
+  background:linear-gradient(135deg,#FCD34D,#FBBF24);
+  color:#1a1208;
+  letter-spacing:0.06em;
+  box-shadow:0 8px 28px rgba(251,191,36,0.42), 0 0 24px rgba(251,191,36,0.32);
+}
+.c-cta-sub{
+  font-family:var(--font-body);font-size:36px;font-weight:600;
+  color:rgba(255,255,255,0.62);
+  letter-spacing:0.5px;
+}
+.c-cta-sub .kw-gold{color:#fcd34d;font-weight:800;}
+
+/* —— phase-4：互动问（中性留白） —— */
+.c-ask{
+  display:flex;flex-direction:column;
+  flex:1;justify-content:center;align-items:center;
+  gap:20px;text-align:center;
+}
+.c-ask-tag{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.1em;
+}
+.c-ask-text{
+  font-family:var(--font-title);font-weight:900;
+  font-size:76px;line-height:1.2;
+  letter-spacing:1px;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.c-ask-text .grad-purple{display:inline-block;}
+
+/* —— 全局溢出防御 —— */
+.p-stage-tag,.c-open-title,.c-next-title,.c-next-tool,.c-next-idea,.c-more-text,.c-cta-title,.c-ask-text{
+  word-break:break-word;overflow-wrap:break-word;
+}

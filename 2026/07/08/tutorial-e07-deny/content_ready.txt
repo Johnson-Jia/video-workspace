@@ -1,0 +1,14 @@
+【E07 段3 · 权限 deny 关键——settings.json 配 deny 硬性拦截 AI 改测试】
+
+第二层权限是关键，settings.json 配 deny。permissions.deny 列出测试文件写入：Write test 目录、Edit test 目录、Write 星 test.ts。AI 尝试改测试时，框架直接拒绝，不是提示词劝阻，是硬性拦截。这层不靠 AI 自觉，靠框架强制。AI 再聪明也绕不过权限层。配一行：deny 加 test 路径，测试文件锁死，AI 只能改业务代码不能碰测试。
+
+【内容保真（E07 脚本 段3，禁改写）】
+settings.json deny 配置（禁改写）：
+- permissions.deny 数组列出测试文件写入
+- Write(test/**) — 写 test 目录
+- Edit(test/**) — 编辑 test 目录
+- Write(**/*.test.ts) — 写星 test.ts
+机制：AI 尝试改测试 → 框架直接拒绝（非提示词劝阻，是硬性拦截）
+关键：不靠 AI 自觉，靠框架强制
+效果：AI 再聪明也绕不过权限层
+配置位置：.claude/settings.json

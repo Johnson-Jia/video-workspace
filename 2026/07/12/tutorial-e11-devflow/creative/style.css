@@ -1,0 +1,180 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-purple: #A78BFA;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E11 devflow — 编排型六阶段流水线
+ * ============================================ */
+
+.devflow-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.t-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.t-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#A78BFA 0%,#A78BFA 55%,#C4B5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-green { color: #34D399; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-purple { color: #A78BFA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-white { color: rgba(255,255,255,0.92); font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+.mono-blue { font-family: var(--font-data); color: #60A5FA; font-weight: 800; }
+.mono-green { font-family: var(--font-data); color: #34D399; font-weight: 800; }
+
+/* —— Phase 1：六阶段总览 —— */
+.df-overview { flex-direction: column; gap: 24px; width: 100%; }
+.df-title {
+  font-family: var(--font-title); font-size: 92px; font-weight: 900; line-height: 1.05;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 18px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.df-tag-row {
+  display: flex; gap: 22px; align-items: center; justify-content: center;
+}
+.df-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  padding: 10px 26px; border-radius: 999px;
+  background: rgba(56,189,248,0.10);
+  border: 1px solid rgba(56,189,248,0.35);
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+}
+.df-node-row {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  flex-wrap: nowrap;
+}
+.df-node {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  padding: 14px 22px; border-radius: 12px;
+  background: rgba(15,23,42,0.88);
+  border: 2px solid;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  color: var(--tut-white);
+}
+.df-node.n-gold { border-color: rgba(251,191,36,0.55); color: #FBBF24; }
+.df-node.n-blue { border-color: rgba(96,165,250,0.55); color: #60A5FA; }
+.df-node.n-green { border-color: rgba(52,211,153,0.55); color: #34D399; }
+.df-node.n-purple { border-color: rgba(167,139,250,0.55); color: #A78BFA; }
+.df-arrow {
+  font-family: var(--font-data); font-size: 34px; font-weight: 900;
+  color: rgba(255,255,255,0.45);
+}
+
+/* —— Phase 2：四阶段卡网格 —— */
+.df-phase-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+  width: 100%; max-width: 1600px;
+}
+.df-phase-card {
+  border-radius: 20px; padding: 30px 22px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(15,23,42,0.88));
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.pc-gold { border-color: rgba(251,191,36,0.55); }
+.pc-blue { border-color: rgba(96,165,250,0.55); }
+.pc-green { border-color: rgba(52,211,153,0.55); }
+.pc-purple { border-color: rgba(167,139,250,0.55); }
+.pc-num {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900;
+  filter: drop-shadow(0 3px 12px rgba(30,41,59,0.32));
+  line-height: 1;
+}
+.pc-gold .pc-num { color: #FBBF24; }
+.pc-blue .pc-num { color: #60A5FA; }
+.pc-green .pc-num { color: #34D399; }
+.pc-purple .pc-num { color: #A78BFA; }
+.pc-name {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.pc-tool {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.78);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  text-align: center;
+}
+
+/* —— Phase 3：验证归档 + 断点续传/规则覆盖 —— */
+.df-feature-block { flex-direction: column; gap: 28px; width: 100%; max-width: 1400px; }
+.df-phase-pair {
+  display: flex; gap: 32px; align-items: stretch; justify-content: center;
+}
+.df-phase-pair .df-phase-card { flex: 1; max-width: 460px; }
+.df-feature-row {
+  display: flex; gap: 32px; align-items: stretch; justify-content: center;
+}
+.df-feature {
+  flex: 1; max-width: 540px;
+  border-radius: 18px; padding: 26px 32px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(15,23,42,0.88));
+  border: 2px solid;
+  display: flex; align-items: center; gap: 22px;
+}
+.feat-green { border-color: rgba(52,211,153,0.55); }
+.feat-purple { border-color: rgba(167,139,250,0.55); }
+.feat-icon { font-size: 56px; line-height: 1; }
+.feat-title {
+  font-family: var(--font-title); font-size: 42px; font-weight: 900;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.feat-desc {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.82); margin-top: 6px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— Phase 4：默认工作流 收尾 —— */
+.df-finale { flex-direction: column; gap: 24px; width: 100%; }
+.finale-line {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 16px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}

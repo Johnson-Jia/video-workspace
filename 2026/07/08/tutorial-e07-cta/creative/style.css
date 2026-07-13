@@ -1,0 +1,141 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E07 CTA — 合集标识+E08预告+中性提问+关注CTA
+ * bg: hex_grid + 收尾段居中
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  padding: 72px 90px 72px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  gap: 16px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 合集标识+E08预告 —— */
+.cta-header { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.series-badge {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800;
+  letter-spacing: 0.10em;
+}
+.e08-card {
+  border-radius: 16px; padding: 18px 36px;
+  border: 3px solid rgba(96,165,250,0.75);
+  background: linear-gradient(90deg, rgba(59,130,246,0.14), rgba(15,23,42,0.90));
+  box-shadow: 0 0 30px rgba(96,165,250,0.25);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.e08-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.e08-title {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.e08-sub {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 中性提问 —— */
+.cta-question { width: 100%; display: flex; justify-content: center; }
+.question-card {
+  border-radius: 16px; padding: 20px 40px;
+  border: 3px solid rgba(251,191,36,0.75);
+  background: linear-gradient(90deg, rgba(251,191,36,0.14), rgba(15,23,42,0.90));
+  box-shadow: 0 0 30px rgba(251,191,36,0.25);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.question-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+  color: rgba(224,231,255,0.82);
+}
+.question-text {
+  font-family: 'Noto Sans SC'; font-size: 64px; font-weight: 900; line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center;
+}
+
+/* —— 关注CTA —— */
+.cta-follow { width: 100%; display: flex; justify-content: center; }
+.follow-card {
+  border-radius: 16px; padding: 18px 36px;
+  border: 3px solid rgba(110,231,183,0.75);
+  background: linear-gradient(90deg, rgba(16,185,129,0.14), rgba(15,23,42,0.90));
+  box-shadow: 0 0 28px rgba(110,231,183,0.22);
+  display: flex; align-items: center; gap: 18px;
+}
+.follow-icon {
+  font-size: 48px; line-height: 1;
+}
+.follow-text {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 教程仓库 —— */
+.cta-repo { width: 100%; display: flex; justify-content: center; }
+.repo-card {
+  border-radius: 12px; padding: 12px 28px;
+  border: 1.5px solid rgba(167,139,250,0.50);
+  background: rgba(15,23,42,0.70);
+  display: flex; align-items: center; gap: 12px;
+}
+.repo-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #C4B5FD;
+}
+.repo-text {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 700;
+  color: rgba(224,231,255,0.88);
+}

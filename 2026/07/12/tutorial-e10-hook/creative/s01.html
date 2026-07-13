@@ -1,0 +1,105 @@
+<!-- 场景: scene-1 | 时长: 23.76s | bg: scan_grid | 反常识开篇：AI 占比 Co-authored-by 误标 + Copilot 自动加 trailer + 三层识别预告 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；金占比+冷蓝三层+红误标；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:880px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:54%;left:30%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:920px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先；红为警示允许） -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:78%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:76%;left:70%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 hook-scene">
+  <!-- phase-1 (0-2.3s): 提问「AI 代码占比怎么算」 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E10 · 度量实操 · 反常识钩子</div>
+  </div>
+  <div class="region-mid">
+    <div class="h-question">
+      <div class="h-q-label">AI 转型度量 · 反常识</div>
+      <div class="h-q-big">AI 代码占比<span class="grad-gold">怎么算</span></div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / hook · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+<div class="phase phase-2 hook-scene">
+  <!-- phase-2 (2.3-16.4s): 本能解法「数 Co-authored-by 不够」+ Copilot 自动加 trailer 大坑 + 手写误标 + 占比虚高 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E10 · 度量实操 · 反常识钩子</div>
+  </div>
+  <div class="region-mid trap-block">
+    <div class="h-ans-row">
+      <div class="h-ans-tag">本能解法 · 但有坑</div>
+      <div class="h-ans-big">数 Co-authored-by <span class="h-ans-mark">不够</span></div>
+    </div>
+    <div class="trap-warn grad-red">⚠ Copilot 自动加 trailer</div>
+    <div class="trap-row">
+      <div class="trap-code">
+        <div class="code-line"><span class="code-cmt">// 你手写的代码</span></div>
+        <div class="code-line"><span class="code-fn">commit</span>(<span class="code-str">"feat: 修 bug"</span>)</div>
+        <div class="code-line trailer">Co-authored-by: <span class="code-ai">Copilot</span> <span class="code-red">← 自动加上</span></div>
+        <div class="code-line red-line">手写 → 被误标成 AI <span class="code-x">✗</span></div>
+      </div>
+      <div class="trap-inflate">
+        <div class="inflate-label">结果</div>
+        <div class="inflate-key grad-red">占比虚高</div>
+        <div class="inflate-arrow">↑↑↑</div>
+        <div class="inflate-note">真 AI + 假 AI 混一起</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / hook · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+<div class="phase phase-3 hook-scene">
+  <!-- phase-3 (16.4-23.76s): 三层识别算法 + 风格学反伪造 + python main.py 三段胶囊收尾 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E10 · 度量实操 · 反常识钩子</div>
+  </div>
+  <div class="region-mid resolve-block">
+    <div class="resolve-title">这集跑 <span class="kw-gold">ai-metrics</span> · 真实算出来</div>
+    <div class="resolve-row">
+      <div class="resolve-card">
+        <div class="r-num grad-gold">01</div>
+        <div class="r-name">三层识别算法</div>
+        <div class="r-note">初筛 + 复核 + 注册表</div>
+      </div>
+      <div class="resolve-card">
+        <div class="r-num grad-blue">02</div>
+        <div class="r-name">风格学反伪造</div>
+        <div class="r-note">代码像不像本人</div>
+      </div>
+      <div class="resolve-card">
+        <div class="r-num grad-green">03</div>
+        <div class="r-name">python main.py</div>
+        <div class="r-note">一条命令出占比</div>
+      </div>
+    </div>
+    <div class="resolve-finale">挡住误标 · 把 <span class="grad-gold">AI 占比</span> 真实算出来</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / hook · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

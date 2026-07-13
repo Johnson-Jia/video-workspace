@@ -1,0 +1,81 @@
+{
+  "topic_type": "工具/效率",
+  "topic_pattern": "topic-tool",
+  "angle": "今日 GitHub 涌现一批「让 AI 和设计软件更好用」的工具——从把 GIMP 改造成 PS、到让 AI 看视频、到一键跨平台研究汇总，普通人也能用上的实用工具集",
+  "novelty_strategy": "本期避开连续 4 期的 AI-Agent 泛盘点同质化，聚焦「工具/效率/创意」轴线：①选 PhotoGIMP（设计师补丁工具，跨圈设计领域）+ claude-video（内容创作工具）+ last30days-skill（研究汇总工具）三个非纯 Agent 项目；②hook 角度用「工具让你少做手工」（反问式痛点）而非「杀入/猛项目」疲劳词；③叙事用「你能用它干什么」利益翻译主导，禁裸报技术名词；④数字锚点用「单日涨星 + 工具类别多样性」而非「AI 占多少」",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "工具类（PhotoGIMP 设计工具 / claude-video 内容工具 / last30days 研究工具 / OfficeCLI 文档工具）+ 创意类（autoremesher 3D 建模）—— 跨 5 个不同领域（设计/视频/研究/文档/3D），避开纯 AI Agent 扎堆",
+  "avoid_recent": [
+    "Zackriya-Solutions/meetily（07/05-08 连续 4 期，已饱和，本期不在榜）",
+    "addyosmani/agent-skills（07/08 已展开）",
+    "TencentCloud/CubeSandbox（07/08 已展开）",
+    "alibaba/zvec（07/07 已展开）",
+    "asgeirtj/system_prompts_leaks（07/07 已做，本期⛔合规排除）",
+    "ruvnet/RuView（永久排除）"
+  ],
+  "exclusion_decisions": [
+    "ruvnet/RuView — 永久排除列表命中（虚假/不可实现），跳过",
+    "asgeirtj/system_prompts_leaks — 泄露他人系统提示，合规风险，⛔排除",
+    "prisma/prisma — 单日 +46 低增量，老牌 ORM 无新意，跳过",
+    "argoproj/argo-cd — 单日 +29 低增量，C 档 K8s 开发者向，跳过",
+    "wonderwhy-er/DesktopCommanderMCP — 单日 +28 低增量，跳过",
+    "TencentCloud/TencentDB-Agent-Memory — agent 记忆主题，近期 agent 题材饱和，跳过",
+    "obra/superpowers — agentic skills 框架，07/08 邻近题材已覆盖，跳过"
+  ],
+  "verification_notes": {
+    "mvanhorn/last30days-skill": "raw_trending.json stars_total=0（采集缺失），gh API 复核实际 50764★ / 4237 forks / 96 open issues / 创建 2026-01-23 / pushed 2026-07-08 —— 真实活跃项目，0 HARD 0 警告，✅ 通过。后续旁白用 gh 校准值（约5万星），不用 raw 的 0"
+  },
+  "selected_projects": [
+    {
+      "owner/repo": "Diolinux/PhotoGIMP",
+      "rank_today": 4,
+      "stars_today": 1125,
+      "stars_total": 15041,
+      "audience": "A",
+      "reason": "设计师工具钩子强（GIMP 3 补丁让界面变 PS），跨圈设计领域破 AI 同质化，A 档普通人可用（装补丁即生效）",
+      "role": "核心钩子 + 跨圈"
+    },
+    {
+      "owner/repo": "bradautomates/claude-video",
+      "rank_today": 14,
+      "stars_today": 951,
+      "stars_total": 6063,
+      "audience": "A",
+      "reason": "让 AI 看视频的反直觉能力，A 档内容创作工具，新颖度高（rank 14 但今日涨星第 4），避开了高位霸榜项目",
+      "role": "反直觉钩子 + 内容工具"
+    },
+    {
+      "owner/repo": "mvanhorn/last30days-skill",
+      "rank_today": 5,
+      "stars_today": 352,
+      "stars_total": 50764,
+      "audience": "B",
+      "reason": "跨 Reddit/X/YouTube/HN/Polymarket/网页研究汇总，B 档半可用（agent skill），总星 5 万但今日新涨，研究工具角度新颖",
+      "role": "研究工具 + 数字锚（5万星老树新芽）"
+    },
+    {
+      "owner/repo": "huxingyi/autoremesher",
+      "rank_today": 13,
+      "stars_today": 296,
+      "stars_total": 2019,
+      "audience": "C",
+      "reason": "自动四边重网格 3D 工具，跨圈 3D 建模领域（破 AI 扎堆），C 档开发者向（≤1/3 占比合规），给做 3D 的开发者",
+      "role": "跨圈 3D + 开发者向点缀"
+    },
+    {
+      "owner/repo": "iOfficeAI/OfficeCLI",
+      "rank_today": 1,
+      "stars_today": 1717,
+      "stars_total": 11866,
+      "audience": "B",
+      "reason": "今日涨星榜首（+1717），但 07/08 已详细展开 → 按「连续霸榜」规则快速带过（3-4s），仅提增量（单日再涨 1717，总星破 1.1 万）",
+      "role": "霸榜带过（增量信息）"
+    }
+  ],
+  "audience_balance": "A 档 2（PhotoGIMP / claude-video）+ B 档 2（last30days / OfficeCLI）+ C 档 1（autoremesher）—— A 约占一半（2/5=40%，OfficeCLI 介于 A/B）符合「A 约占一半、C ≤ 一半」约束",
+  "ending_question_strategy": "用「想尝试 / 会用」类中性互动（禁站队对抗），候选：「这几个工具你最想试哪个」—— 轮换避免连续同款句式"
+}

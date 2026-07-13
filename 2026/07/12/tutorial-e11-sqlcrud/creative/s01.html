@@ -1,0 +1,132 @@
+<!-- 场景: scene-1 | 时长: 29s | bg: dark_cipher | sqlcrud：两工具总览 + sql-query terminal + 安全护栏 + crud-gen terminal + 高频收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝 sql / 绿 crud / 金护栏；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:1100px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;left:25%;width:520px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;left:75%;width:520px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:78%;left:50%;transform:translateX(-50%);width:1000px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.12) 0%, transparent 65%);filter:blur(55px);opacity:0.55"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:14%;left:14%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:16%;left:86%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:82%;left:20%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:84%;left:80%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 sqlcrud-scene">
+  <!-- phase-1 (0-5.2s): 两工具总览 -->
+  <div class="region region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 两个工具型 · 核心段</div>
+  </div>
+  <div class="region region-mid sc-overview">
+    <div class="sc-title">两个 <span class="grad-blue">工具型</span> skill</div>
+    <div class="sc-mini-row">
+      <div class="sc-mini mini-blue"><span class="mini-icon">🔧</span> sql-query</div>
+      <div class="sc-mini mini-green"><span class="mini-icon">⚙</span> crud-gen</div>
+    </div>
+  </div>
+  <div class="region region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 工具型 skill —</div>
+  </div>
+</div>
+<div class="phase phase-2 sqlcrud-scene">
+  <!-- phase-2 (5.2-13.4s): sql-query terminal（全显 data-reveal=0） -->
+  <div class="region region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · sql-query · PostgreSQL 只读</div>
+  </div>
+  <div class="region region-mid sc-terminal-block">
+    <div class="terminal-frame tf-blue">
+      <div class="tf-head">
+        <div class="tf-dot tf-dot-red"></div>
+        <div class="tf-dot tf-dot-yellow"></div>
+        <div class="tf-dot tf-dot-green"></div>
+        <div class="tf-title">sql-query · psql (read-only)</div>
+      </div>
+      <div class="tf-body">
+        <div class="tf-line"><span class="tf-prompt">$</span> <span class="tf-cmd">sql-query</span> <span class="tf-arg">--mode=interactive</span></div>
+        <div class="tf-line"><span class="tf-prompt">&gt;</span> <span class="tf-sql">SELECT</span> id, name <span class="tf-sql">FROM</span> users</div>
+        <div class="tf-line tf-comment">-- 三种模式覆盖不同场景</div>
+        <div class="tf-line"><span class="tf-mode">交互模式</span> <span class="tf-sep">·</span> <span class="tf-mode">脚本模式</span> <span class="tf-sep">·</span> <span class="tf-mode">单条模式</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="region region-bottom">
+    <div class="bottom-hint">— tutorial E11 / sql-query 工具型 —</div>
+  </div>
+</div>
+<div class="phase phase-3 sqlcrud-scene">
+  <!-- phase-3 (13.4-20.6s): 安全护栏三卡（全显 data-reveal=0） -->
+  <div class="region region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · sql-query · 安全护栏</div>
+  </div>
+  <div class="region region-mid sc-guard-row">
+    <div class="sc-guard g-gold">
+      <div class="g-icon">🛡</div>
+      <div class="g-title">只允许 <span class="kw-gold">SELECT</span></div>
+      <div class="g-desc">绝不乱写数据</div>
+    </div>
+    <div class="sc-guard g-blue">
+      <div class="g-icon">🔑</div>
+      <div class="g-title">走 <span class="kw-blue">SSH 隧道</span></div>
+      <div class="g-desc">加密访问数据库</div>
+    </div>
+    <div class="sc-guard g-green">
+      <div class="g-icon">🏢</div>
+      <div class="g-title">强制 <span class="kw-green">租户隔离</span></div>
+      <div class="g-desc">跨租户零泄漏</div>
+    </div>
+  </div>
+  <div class="region region-bottom">
+    <div class="bottom-hint">— tutorial E11 / sql-query 安全护栏 —</div>
+  </div>
+</div>
+<div class="phase phase-4 sqlcrud-scene">
+  <!-- phase-4 (20.6-26.8s): crud-gen terminal（全显 data-reveal=0） -->
+  <div class="region region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · crud-gen · 读表 → 分层生成</div>
+  </div>
+  <div class="region region-mid sc-terminal-block">
+    <div class="terminal-frame tf-green">
+      <div class="tf-head">
+        <div class="tf-dot tf-dot-red"></div>
+        <div class="tf-dot tf-dot-yellow"></div>
+        <div class="tf-dot tf-dot-green"></div>
+        <div class="tf-title">crud-gen · scaffold</div>
+      </div>
+      <div class="tf-body">
+        <div class="tf-line"><span class="tf-prompt">$</span> <span class="tf-cmd">crud-gen</span> <span class="tf-arg">--table=users</span></div>
+        <div class="tf-line tf-comment">-- 读表结构 → 自动生成分层代码</div>
+        <div class="tf-line"><span class="tf-layer">domain</span> <span class="tf-arrow">→</span> <span class="tf-layer">dto</span> <span class="tf-arrow">→</span> <span class="tf-layer">service</span></div>
+        <div class="tf-line"><span class="tf-layer">dao</span> <span class="tf-arrow">→</span> <span class="tf-layer">controller</span> <span class="tf-sep">·</span> <span class="tf-comment">字段→操作符内置</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="region region-bottom">
+    <div class="bottom-hint">— tutorial E11 / crud-gen 工具型 —</div>
+  </div>
+</div>
+<div class="phase phase-5 sqlcrud-scene">
+  <!-- phase-5 (26.8-29s): 高频工具 收尾 -->
+  <div class="region region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 高频工具 · 收尾</div>
+  </div>
+  <div class="region region-mid sc-finale">
+    <div class="finale-line">两个都是 <span class="grad-gold">高频工具</span></div>
+    <div class="finale-line"><span class="kw-white">开发</span> <span class="grad-green">每天用</span></div>
+  </div>
+  <div class="region region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 工具型 skill —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

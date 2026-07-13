@@ -1,0 +1,219 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-cyan: #22D3EE;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --term-bg: #0a0a0a;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E08 coauthored — 首层 Co-authored-by 终端演示
+ * 单 tut-scene 内 4 region reveal（同屏 1080）：标题(0) → 终端(2.575) → 工具名(18.012) → 误标(28.037)
+ * 注意：.tut-scene 与 .phase 同元素，不设 padding（继承 .phase 的 60/120 安全区 padding），否则覆盖安全区
+ * ============================================ */
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 10px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* 渐变文字（同色系禁白端点 + text-shadow 深蓝非发光） */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#F87171 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-cyan { background-image: linear-gradient(92deg,#67E8F9 0%,#22D3EE 55%,#A5F3FC 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-cyan-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#22D3EE 0%,#67E8F9 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题（reveal 0，fade）—— 顶部，紧凑 —— */
+.tut-title { width: 100%; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.tut-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-title .title-h1 {
+  font-family: 'Inter'; font-size: 60px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.tut-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— 中段横排容器：终端(reveal 2.575) + 工具名(reveal 18.012) —— 非区域，纯布局 */
+.tut-mid-row { width: 100%; display: flex; gap: 20px; align-items: stretch; flex: 1; min-height: 0; }
+.tut-term { flex: 1.55; display: flex; }
+.tut-tool { flex: 1; display: flex; }
+.tut-term .term-window { width: 100%; }
+.tut-tool .tool-panel { width: 100%; }
+
+/* —— 区域 2：终端窗口（reveal 2.575，fade）—— 深底 + 红黄绿圆点 + JetBrains Mono，撑满 mid-row 高度 —— */
+.term-window {
+  background: var(--term-bg);
+  border-radius: 16px;
+  border: 2px solid rgba(34,211,238,0.32);
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.10), 0 10px 32px rgba(0,0,0,0.55);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.term-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.dot-red { background: #FF5F56; box-shadow: 0 0 6px rgba(255,95,86,0.4); }
+.dot-yellow { background: #FFBD2E; box-shadow: 0 0 6px rgba(255,189,46,0.4); }
+.dot-green { background: #27C93F; box-shadow: 0 0 6px rgba(39,201,63,0.4); }
+.term-title {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  margin-left: 14px;
+  letter-spacing: 0.02em;
+}
+.term-body {
+  padding: 18px 26px 20px;
+  font-family: 'JetBrains Mono';
+  display: flex; flex-direction: column; gap: 3px;
+  flex: 1;
+}
+.term-line {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.35;
+}
+.term-key { color: #C792EA; font-weight: 700; }
+.term-hash { color: #7FDBCA; }
+.term-feat { color: #82AAFF; font-weight: 600; }
+.term-indent { padding-left: 28px; }
+.term-blank { height: 6px; }
+.term-trailer {
+  font-size: 32px; font-weight: 800;
+  padding: 6px 12px; border-radius: 6px;
+  background: rgba(251,191,36,0.10);
+  border: 1px solid rgba(251,191,36,0.45);
+  display: inline-block;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  overflow-wrap: break-word; word-break: break-all;
+}
+
+/* —— 区域 3：六工具名名单（reveal 18.012，left）—— 侧栏撑满 mid-row 高度 —— */
+.tool-panel {
+  background: linear-gradient(165deg, rgba(34,211,238,0.08), rgba(15,23,42,0.92));
+  border-radius: 16px;
+  border: 2px solid rgba(34,211,238,0.32);
+  padding: 14px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+  justify-content: space-between;
+}
+.tool-head {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-cyan);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(34,211,238,0.22);
+}
+.tool-list { display: flex; flex-direction: column; gap: 3px; }
+.tool-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.tool-hit {
+  background: rgba(16,185,129,0.14);
+  border: 1px solid rgba(16,185,129,0.42);
+}
+.tool-check {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  width: 36px; text-align: center;
+  color: rgba(255,255,255,0.35);
+}
+.tool-hit .tool-check { color: var(--tut-green); text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.tool-name {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.85);
+}
+.tool-hit .tool-name { color: var(--tut-white); }
+.tool-conf {
+  margin-top: 4px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(16,185,129,0.10);
+  border: 1px solid rgba(16,185,129,0.32);
+}
+.conf-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+}
+.conf-value {
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900;
+  text-shadow: 0 2px 8px rgba(30,41,59,0.32);
+}
+
+/* —— 区域 4：误标缺陷红框警示条（reveal 28.037，fade）—— 底部紧凑 —— */
+.tut-warn { width: 100%; }
+.warn-card {
+  border-radius: 16px;
+  padding: 12px 24px;
+  border: 2px solid rgba(248,113,113,0.65);
+  background: linear-gradient(165deg, rgba(239,68,68,0.14), rgba(15,23,42,0.90));
+  box-shadow: 0 0 0 1px rgba(248,113,113,0.30);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.warn-icon {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  letter-spacing: 0.04em;
+}
+.warn-chain {
+  display: flex; gap: 14px; align-items: center; justify-content: center;
+}
+.chain-step {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  flex: 1;
+}
+.chain-name {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  line-height: 1.15;
+}
+.chain-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.2;
+}
+.chain-arrow {
+  font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900;
+  color: rgba(255,255,255,0.45);
+  flex-shrink: 0;
+}
+.chain-arrow-red { color: rgba(248,113,113,0.85); }
+.warn-tail {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  text-align: center;
+  padding-top: 0;
+}

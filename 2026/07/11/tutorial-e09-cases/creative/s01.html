@@ -1,0 +1,116 @@
+<!-- 场景: seg1 | 时长: 30.19s | bg: hex_grid | 沉淀复用案例：标题→4案例timeline(问题→方案→效果)→测试时长对比条形图→个体→组织流向 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色+金强调光晕（禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:1100px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,80%,60%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(262,80%,66%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;right:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:84%;left:50%;transform:translateX(-50%);width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(36,92%,58%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <!-- 脉冲锚点 -->
+  <div class="fx-blink" style="position:absolute;top:40%;left:18%;width:11px;height:11px;border-radius:50%;background:hsla(215,80%,60%,0.85);box-shadow:0 0 14px hsla(215,75%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:hsla(262,80%,66%,0.85);box-shadow:0 0 14px hsla(262,75%,60%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;right:18%;width:11px;height:11px;border-radius:50%;background:hsla(150,65%,55%,0.85);box-shadow:0 0 14px hsla(150,60%,49%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:hsla(36,92%,60%,0.9);box-shadow:0 0 18px hsla(36,88%,54%,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:18%;left:88%;width:9px;height:9px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:82%;left:12%;width:8px;height:8px;background:rgba(96,165,250,0.8);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题/四案例timeline/测试时长对比/个体→组织流向 同屏 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region cs-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="cs-tag grad-gold-bg-inline">E09 · 沉淀复用</div>
+      <h1 class="cs-h1">四类资产 · <span class="grad-gold">沉淀复用</span></h1>
+      <div class="cs-sub">个体的会用 → <span class="grad-blue">组织的默认能力</span></div>
+    </div>
+
+    <!-- 区域 2：4 案例 timeline（reveal 3，bottom）—— 中部核心 -->
+    <div class="tut-region cs-pl-tl" data-reveal="3" data-reveal-dir="bottom">
+      <div class="cs-timelines">
+        <!-- 案例1：工具型 -->
+        <div class="cs-tl cs-tl-1">
+          <div class="cs-tl-icon">🔧</div>
+          <div class="cs-tl-body">
+            <div class="cs-tl-name">工具型 · <span class="grad-blue">sql-query</span></div>
+            <div class="cs-tl-flow"><span class="cs-tl-q">新人重复摸索</span><span class="cs-tl-arr">→</span><span class="cs-tl-a">调用即用</span></div>
+          </div>
+          <div class="cs-tl-effect">即用</div>
+        </div>
+        <!-- 案例2：编排型 -->
+        <div class="cs-tl cs-tl-2">
+          <div class="cs-tl-icon">⚙</div>
+          <div class="cs-tl-body">
+            <div class="cs-tl-name">编排型 · <span class="grad-purple">devflow</span></div>
+            <div class="cs-tl-flow"><span class="cs-tl-q">规范驱动口号</span><span class="cs-tl-arr">→</span><span class="cs-tl-a">默认工作流</span></div>
+          </div>
+          <div class="cs-tl-effect">默认</div>
+        </div>
+        <!-- 案例3：避坑资产 -->
+        <div class="cs-tl cs-tl-3">
+          <div class="cs-tl-icon">⚠</div>
+          <div class="cs-tl-body">
+            <div class="cs-tl-name">避坑资产 · <span class="grad-red">静默吞异常</span></div>
+            <div class="cs-tl-flow"><span class="cs-tl-q">同类重犯</span><span class="cs-tl-arr">→</span><span class="cs-tl-a">不再重犯</span></div>
+          </div>
+          <div class="cs-tl-effect">归零</div>
+        </div>
+        <!-- 案例4：录制+生成 -->
+        <div class="cs-tl cs-tl-4">
+          <div class="cs-tl-icon">🎬</div>
+          <div class="cs-tl-body">
+            <div class="cs-tl-name">录制 + AI 生成 · <span class="grad-green">测试用例</span></div>
+            <div class="cs-tl-flow"><span class="cs-tl-q">四到八小时</span><span class="cs-tl-arr">→</span><span class="cs-tl-a">十到三十分钟</span></div>
+          </div>
+          <div class="cs-tl-effect cs-tl-effect-gold">16×</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：测试时长对比条形图（reveal 16，left）—— 底部左 -->
+    <div class="tut-region cs-pl-compare" data-reveal="16" data-reveal-dir="left">
+      <div class="cs-compare">
+        <div class="cs-cmp-label">测试用例耗时</div>
+        <div class="cs-cmp-bars">
+          <div class="cs-cmp-row">
+            <div class="cs-cmp-name">之前</div>
+            <div class="cs-cmp-bar cs-cmp-bar-old"><div class="cs-cmp-fill cs-cmp-fill-old"></div><div class="cs-cmp-val">4-8h</div></div>
+          </div>
+          <div class="cs-cmp-row">
+            <div class="cs-cmp-name">现在</div>
+            <div class="cs-cmp-bar cs-cmp-bar-new"><div class="cs-cmp-fill cs-cmp-fill-new"></div><div class="cs-cmp-val grad-gold">10-30min</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：个体→组织流向收尾（reveal 26，left）—— 底部右 -->
+    <div class="tut-region cs-pl-flow" data-reveal="26" data-reveal-dir="left">
+      <div class="cs-flow-big">
+        <div class="cs-fb-node cs-fb-indiv">
+          <div class="cs-fb-icon">👤</div>
+          <div class="cs-fb-name">个体的会用</div>
+        </div>
+        <div class="cs-fb-arrow">→</div>
+        <div class="cs-fb-node cs-fb-org">
+          <div class="cs-fb-icon">🏢</div>
+          <div class="cs-fb-name grad-gold">组织的默认能力</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.32) 100%);pointer-events:none"></div>
+</div>

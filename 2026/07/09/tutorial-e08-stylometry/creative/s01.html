@@ -1,0 +1,101 @@
+<!-- 场景: scene-1 | 时长: 39.8s | E08 第二层 风格计量学（算法流程核心段） -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+  <!-- 深蓝底覆盖（教程统一）+ diamond_lattice 几何网格叠层（标记注入组件 DOM） -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%, #152347 0%, #0F172A 55%, #08081a 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx：冷色静态发光类（无划过类），≥3 元素 -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:8%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);filter:blur(20px);"></div>
+  <div class="fx-aura" style="position:absolute;top:55%;right:6%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(168,85,247,0.16) 0%, transparent 70%);filter:blur(22px);"></div>
+  <div class="fx-pulse-ring" style="position:absolute;top:30%;left:46%;width:180px;height:180px;border:2px solid rgba(96,165,250,0.20);border-radius:50%;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1 (0~3.6s): 标题「第二层 风格计量学 · 反伪造复核」+ 一句话定位 -->
+  <div class="s1-title-block">
+    <div class="s1-eyebrow">E08 · 推广度量 · 三层识别第二层</div>
+    <h1 class="s1-title">第二层 风格计量学</h1>
+    <div class="s1-subtitle">反伪造复核 · 用代码风格指纹挡误标</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2 (3.6~11.3s): 原理 —— 代码风格指纹（本人 vs AI 不同） -->
+  <div class="s2-principle">
+    <div class="s2-label">原理</div>
+    <div class="s2-compare">
+      <div class="s2-card s2-card-human">
+        <div class="s2-card-title" style="color:#60A5FA;">作者本人</div>
+        <div class="s2-fingerprint"><span style="color:#93C5FD;">{ 缩进 4 / 尾随逗号 / 命名 camelCase }</span></div>
+        <div class="s2-card-foot">独特风格指纹</div>
+      </div>
+      <div class="s2-vs">≠</div>
+      <div class="s2-card s2-card-ai">
+        <div class="s2-card-title" style="color:#C4B5FD;">AI 生成</div>
+        <div class="s2-fingerprint"><span style="color:#DDD6FE;">{ 模板化 / 过度注释 / 风格趋同 }</span></div>
+        <div class="s2-card-foot">与本人不一致</div>
+      </div>
+    </div>
+    <div class="s2-hint">每个开发者都有独特代码风格指纹，AI 生成的代码风格往往与作者本人不同</div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <!-- phase-3 (11.3~17.5s): Co-authored-by 标记 → 算它与本人风格画像的余弦相似度 -->
+  <div class="s3-target">
+    <div class="s3-committag">
+      <span class="s3-commitmono">commit a1b2c3d</span>
+      <span class="s3-trailer" style="color:#FBBF24;">Co-authored-by: Claude &lt;noreply@anthropic.com&gt;</span>
+    </div>
+    <div class="s3-arrow">↓</div>
+    <div class="s3-action">对被标记提交，算它与作者本人风格画像的<span style="color:#FBBF24;font-weight:800;">余弦相似度</span></div>
+  </div>
+</div>
+<div class="phase phase-4">
+  <!-- phase-4 (17.5~39.8s): 算法四步流程 + 两分支判定 + 防误标场景（VS Code Copilot） -->
+  <div class="s4-stack">
+    <!-- 四步横向流程（圆/胶囊内仅短词，长描述移外） -->
+    <div class="s4-flow-label">算法四步</div>
+    <div class="s4-flow">
+      <div class="s4-step">
+        <div class="s4-node s4-node-blue">n-gram</div>
+        <div class="s4-step-desc">字符级切分</div>
+      </div>
+      <div class="s4-arrow-h">→</div>
+      <div class="s4-step">
+        <div class="s4-node s4-node-blue">TF</div>
+        <div class="s4-step-desc">词频归一化</div>
+      </div>
+      <div class="s4-arrow-h">→</div>
+      <div class="s4-step">
+        <div class="s4-node s4-node-blue">余弦</div>
+        <div class="s4-step-desc">相似度计算</div>
+      </div>
+      <div class="s4-arrow-h">→</div>
+      <div class="s4-step">
+        <div class="s4-node s4-node-gold">置信度</div>
+        <div class="s4-step-desc">= 1 − 相似度</div>
+      </div>
+    </div>
+    <!-- 两分支判定 -->
+    <div class="s4-branch-label">相似度两分支判定</div>
+    <div class="s4-branches">
+      <div class="s4-branch s4-branch-high">
+        <div class="s4-branch-pill s4-pill-green">高 → 降</div>
+        <div class="s4-branch-text"><b style="color:#6EE7B7;">像本人手写</b> · 可能误标<br>降低置信度</div>
+      </div>
+      <div class="s4-branch s4-branch-low">
+        <div class="s4-branch-pill s4-pill-red">低 → AI</div>
+        <div class="s4-branch-text"><b style="color:#FCA5A5;">不像本人</b> · 确认 AI</div>
+      </div>
+    </div>
+    <!-- 防误标场景 -->
+    <div class="s4-scene">
+      <div class="s4-scene-head">防误标场景</div>
+      <div class="s4-scene-body">VS Code Copilot 对手写代码加 trailer 这类<b style="color:#FBBF24;">误标</b> → 被第二层风格学挡住，不误判为 AI</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 留空：教程重内容轻质感 -->
+</div>

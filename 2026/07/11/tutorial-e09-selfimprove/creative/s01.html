@@ -1,0 +1,106 @@
+<!-- 场景: seg1 | 时长: 31.66s | bg: hex_grid | 自我改进循环：标题→循环大图(中心CLAUDE.md+4步环绕)→规则版本柱状v1→v4+书厚对比→金句 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 多色光晕（蓝紫金绿，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:1100px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;left:32%;width:480px;height:480px;border-radius:50%;background:radial-gradient(ellipse, hsla(262,80%,66%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:42%;right:28%;width:480px;height:480px;border-radius:50%;background:radial-gradient(ellipse, hsla(36,92%,58%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:1100px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- 循环节点脉冲锚点（4方位） -->
+  <div class="fx-blink" style="position:absolute;top:42%;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:hsla(215,85%,60%,0.9);box-shadow:0 0 18px hsla(215,80%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:38%;width:12px;height:12px;border-radius:50%;background:hsla(262,80%,66%,0.9);box-shadow:0 0 16px hsla(262,75%,60%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:65%;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:hsla(36,92%,60%,0.9);box-shadow:0 0 18px hsla(36,88%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:38%;width:12px;height:12px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 16px hsla(150,65%,49%,0.5)"></div>
+  <div class="fx-particle" style="position:absolute;top:20%;left:86%;width:9px;height:9px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:82%;left:14%;width:8px;height:8px;background:rgba(96,165,250,0.8);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题/循环大图+版本柱状/升华金句 同屏 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region si-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="si-tag grad-gold-bg-inline">E09 · 方法论精华</div>
+      <h1 class="si-h1">自我改进 <span class="grad-gold">循环</span></h1>
+      <div class="si-sub">AI 边用边学 · <span class="grad-blue">规则越用越厚</span></div>
+    </div>
+
+    <!-- 区域 2：循环大图 + 规则版本柱状（reveal 3，bottom）—— 中部核心 -->
+    <div class="tut-region si-pl-main" data-reveal="3" data-reveal-dir="bottom">
+      <div class="si-main-row">
+        <!-- 左：循环大图 -->
+        <div class="si-loop-big">
+          <!-- 中心 CLAUDE.md -->
+          <div class="si-center">
+            <div class="si-center-icon">📘</div>
+            <div class="si-center-name grad-gold">CLAUDE.md</div>
+            <div class="si-center-sub">规则越用越厚</div>
+          </div>
+          <!-- 4 步环绕节点 -->
+          <div class="si-orbit si-orbit-1">
+            <div class="si-orb-icon">⚠</div>
+            <div class="si-orb-name">AI 犯错</div>
+          </div>
+          <div class="si-orbit si-orbit-2">
+            <div class="si-orb-icon">👤</div>
+            <div class="si-orb-name">人指出</div>
+          </div>
+          <div class="si-orbit si-orbit-3">
+            <div class="si-orb-icon">✏</div>
+            <div class="si-orb-name grad-gold">更新规则</div>
+          </div>
+          <div class="si-orbit si-orbit-4">
+            <div class="si-orb-icon">✓</div>
+            <div class="si-orb-name">下次避开</div>
+          </div>
+          <!-- 循环箭头标记（4个弧形提示） -->
+          <div class="si-loop-mark si-loop-mark-1">↻</div>
+          <div class="si-loop-mark si-loop-mark-2">↻</div>
+          <div class="si-loop-mark si-loop-mark-3">↻</div>
+          <div class="si-loop-mark si-loop-mark-4">↻</div>
+        </div>
+        <!-- 右：规则版本柱状 + 书厚对比 -->
+        <div class="si-side">
+          <div class="si-side-title">规则版本进化</div>
+          <div class="si-bars">
+            <div class="si-bar si-bar-1"><div class="si-bar-fill"></div><div class="si-bar-label">v1</div></div>
+            <div class="si-bar si-bar-2"><div class="si-bar-fill"></div><div class="si-bar-label">v2</div></div>
+            <div class="si-bar si-bar-3"><div class="si-bar-fill"></div><div class="si-bar-label">v3</div></div>
+            <div class="si-bar si-bar-4"><div class="si-bar-fill"></div><div class="si-bar-label">v4</div></div>
+          </div>
+          <div class="si-book-compare">
+            <div class="si-book si-book-thin">
+              <div class="si-book-spine"></div>
+              <div class="si-book-label">初期</div>
+            </div>
+            <div class="si-book-arrow">→</div>
+            <div class="si-book si-book-thick">
+              <div class="si-book-spine si-book-spine-thick"></div>
+              <div class="si-book-label">越用越厚</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：升华金句（reveal 26，left）—— 底部收尾 -->
+    <div class="tut-region si-pl-closer" data-reveal="26" data-reveal-dir="left">
+      <div class="si-closer">
+        <div class="si-closer-h1">AI 边用边学 · <span class="grad-gold">规则越用越厚</span> · 不是人维护规则 · 是 <span class="grad-blue">AI 自己进化</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.32) 100%);pointer-events:none"></div>
+</div>

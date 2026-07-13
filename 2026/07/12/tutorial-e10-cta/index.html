@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --accent-gold: #FBBF24;
+  --accent-blue: #3B82F6;
+  --accent-cyan: #60A5FA;
+  --accent-emerald: #34D399;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.82);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* aurora_flow bg keyframes */
+@keyframes scanY { 0%{top:-10%} 100%{top:110%} }
+@keyframes auroraShift { 0%{opacity:0.7;transform:translateY(0)} 100%{opacity:1;transform:translateY(-10px)} }
+@keyframes nodeBlink { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
+@keyframes heartbeatPulse { 0% { transform: scale(0.3); opacity: 0.40; } 15% { transform: scale(1.2); opacity: 0.15; } 30% { transform: scale(0.5); opacity: 0.30; } 45% { transform: scale(1.0); opacity: 0; } 100% { opacity: 0; } }
+
+/* tut-scene 单 phase 横屏布局 */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  padding: 180px 60px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.region { box-sizing: border-box; }
+
+.grad-title {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes auroraFlow {
+  0%, 100% { transform: translateX(-8%) scaleY(1); }
+  50% { transform: translateX(8%) scaleY(1.12); }
+}
+@keyframes auroraCurtain {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.5; }
+  50% { transform: scaleY(1.15) translateY(-10px); opacity: 0.8; }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.55; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="23.35" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.22" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="23.35">
+<!-- 场景: scene-1 | 时长: 23s | CTA：度量实操=数据底座 + E11 预告 + 关注 + 中性提问 -->
+<div class="layer-bg" data-bg-types="glow,gradient,particles">
+<!-- bg-component: aurora_flow -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(200,30%,5%),hsl(180,25%,8%))"></div>
+
+<div style="position:absolute;top:15%;left:-10%;width:120%;height:180px;
+  background:linear-gradient(90deg,transparent 5%,hsla(150,70%,45%,0.18),hsla(160,55%,40%,0.12),transparent 95%);
+  filter:blur(45px);animation:auroraFlow 22s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:35%;left:-10%;width:120%;height:150px;
+  background:linear-gradient(90deg,transparent 10%,hsla(180,60%,50%,0.16),hsla(170,50%,45%,0.10),transparent 90%);
+  filter:blur(50px);animation:auroraFlow 26s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:55%;left:-10%;width:120%;height:160px;
+  background:linear-gradient(90deg,transparent 8%,hsla(280,50%,50%,0.16),hsla(260,45%,40%,0.10),transparent 92%);
+  filter:blur(55px);animation:auroraFlow 20s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:72%;left:-10%;width:120%;height:120px;
+  background:linear-gradient(90deg,transparent 15%,hsla(155,60%,42%,0.15),transparent 85%);
+  filter:blur(40px);animation:auroraFlow 28s ease-in-out infinite 12s"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:250px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 100%,hsla(155,65%,45%,0.18),hsla(170,50%,40%,0.08),transparent 70%);
+  filter:blur(60px);animation:auroraCurtain 14s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:0;left:20%;width:2px;height:65%;
+  background:linear-gradient(180deg,hsla(155,70%,55%,0.25),hsla(155,60%,48%,0.08) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 8s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:0;left:28%;width:1.5px;height:55%;
+  background:linear-gradient(180deg,hsla(160,65%,50%,0.20),hsla(160,55%,45%,0.06) 45%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 9s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:0;left:38%;width:2.5px;height:70%;
+  background:linear-gradient(180deg,hsla(170,70%,52%,0.28),hsla(170,60%,45%,0.10) 35%,transparent 100%);
+  filter:blur(1.5px);animation:auroraCurtain 7s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:0;left:50%;width:2px;height:60%;
+  background:linear-gradient(180deg,hsla(180,65%,50%,0.22),hsla(180,55%,42%,0.07) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 10s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:0;left:60%;width:1.5px;height:50%;
+  background:linear-gradient(180deg,hsla(175,60%,48%,0.18),hsla(175,50%,40%,0.05) 45%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 8.5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:0;left:72%;width:2px;height:58%;
+  background:linear-gradient(180deg,hsla(270,55%,50%,0.20),hsla(270,45%,42%,0.06) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 9.5s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:0;left:82%;width:1.5px;height:45%;
+  background:linear-gradient(180deg,hsla(280,50%,48%,0.16),hsla(280,40%,38%,0.05) 50%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 11s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:18%;left:37%;width:5px;height:5px;border-radius:50%;
+  background:hsla(165,70%,60%,0.4);box-shadow:0 0 12px hsla(165,70%,55%,0.5);animation:starTwinkle 3s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:30%;left:50%;width:4px;height:4px;border-radius:50%;
+  background:hsla(180,65%,58%,0.35);box-shadow:0 0 10px hsla(180,65%,50%,0.4);animation:starTwinkle 4s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;top:12%;left:72%;width:4px;height:4px;border-radius:50%;
+  background:hsla(270,55%,55%,0.35);box-shadow:0 0 10px hsla(270,55%,48%,0.4);animation:starTwinkle 3.5s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 40%,rgba(255,255,255,0.03) 60%,transparent 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:10%;left:-10%;width:120%;height:160px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,hsla(150,60%,50%,0.4),hsla(180,50%,45%,0.3),hsla(280,40%,45%,0.4),transparent);
+  filter:blur(60px)"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:1200px;height:600px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(200,90%,55%,0.08) 0%,hsla(150,80%,50%,0.05) 40%,transparent 70%);
+  filter:blur(80px);pointer-events:none"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;left:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(200,85%,55%,0.50);box-shadow:0 0 16px hsla(200,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;right:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,85%,55%,0.50);box-shadow:0 0 16px hsla(150,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite 2.5s"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase tut-scene phase-1">
+
+  <!-- 顶部合集徽章 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:14px">
+    <div style="display:inline-block;padding:6px 18px;background:linear-gradient(90deg,rgba(96,165,250,0.20) 0%,rgba(52,211,153,0.20) 100%);border:1.5px solid rgba(96,165,250,0.55);border-radius:32px">
+      <span style="font-size:32px;font-weight:700;color:#60A5FA">E10</span>
+      <span style="font-size:32px;color:rgba(255,255,255,0.55);margin:0 8px">·</span>
+      <span style="font-size:32px;font-weight:700;color:#34D399">度量实操</span>
+    </div>
+  </div>
+
+  <!-- 主标 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:22px">
+    <div class="grad-title" style="font-size:68px;font-weight:900;letter-spacing:-1px;line-height:1.1;
+      background-image:linear-gradient(90deg,#60A5FA 0%,#34D399 50%,#FBBF24 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      转型的数据底座
+    </div>
+    <div style="font-size:32px;font-weight:500;color:rgba(255,255,255,0.82);margin-top:10px;
+      text-shadow:0 1px 4px rgba(15,23,42,0.30)">
+      有了真实占比，才知道转型到底见效没有
+    </div>
+  </div>
+
+  <!-- E11 预告卡 -->
+  <div class="region" data-reveal="1" style="margin:0 30px;padding:18px 22px;
+    background:linear-gradient(90deg,rgba(15,23,42,0.88) 0%,rgba(30,40,60,0.88) 100%);
+    border:2px solid rgba(251,191,36,0.55);border-radius:14px;
+    box-shadow:0 14px 40px rgba(15,23,42,0.55),0 0 28px rgba(251,191,36,0.10)">
+
+    <div style="display:flex;align-items:center;gap:18px">
+      <!-- 左：NEXT 标 -->
+      <div style="flex:0 0 auto;text-align:center">
+        <div style="font-size:32px;font-weight:900;color:#FBBF24">E11</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.65);margin-top:2px">下集</div>
+      </div>
+      <div style="width:2px;height:90px;background:linear-gradient(180deg,transparent,#FBBF24,transparent)"></div>
+      <!-- 中：标题 -->
+      <div style="flex:1">
+        <div style="font-size:38px;font-weight:900;color:#fff;line-height:1.2">Skill 仓库实操</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78);margin-top:6px">复制到 .claude 即用</div>
+      </div>
+      <!-- 右：数字徽章 -->
+      <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:8px">
+        <div style="padding:8px 14px;background:rgba(96,165,250,0.18);border:1.5px solid #60A5FA;border-radius:8px;text-align:center">
+          <div style="font-size:38px;font-weight:900;color:#60A5FA;font-family:'JetBrains Mono','Consolas',monospace;line-height:1">4</div>
+          <div style="font-size:32px;color:rgba(255,255,255,0.80);margin-top:2px">skill</div>
+        </div>
+        <div style="padding:8px 14px;background:rgba(52,211,153,0.18);border:1.5px solid #34D399;border-radius:8px;text-align:center">
+          <div style="font-size:38px;font-weight:900;color:#34D399;font-family:'JetBrains Mono','Consolas',monospace;line-height:1">13</div>
+          <div style="font-size:32px;color:rgba(255,255,255,0.80);margin-top:2px">条规范</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中部：关注 + 评论区 -->
+  <div class="region" data-reveal="2" style="margin:16px 30px 0;display:flex;gap:16px">
+    <div style="flex:1;padding:12px 18px;background:linear-gradient(90deg,rgba(251,191,36,0.15),rgba(251,191,36,0.05));border:1.5px solid rgba(251,191,36,0.45);border-radius:10px;display:flex;align-items:center;gap:14px">
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FBBF24,#F59E0B);display:flex;align-items:center;justify-content:center">
+        <div style="width:18px;height:18px;background:#fff;border-radius:50%"></div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:900;color:#FBBF24;line-height:1.1">点关注</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78)">合集还有 3 集，不走丢</div>
+      </div>
+    </div>
+    <div style="flex:1;padding:12px 18px;background:linear-gradient(90deg,rgba(96,165,250,0.15),rgba(96,165,250,0.05));border:1.5px solid rgba(96,165,250,0.45);border-radius:10px;display:flex;align-items:center;gap:14px">
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#60A5FA,#3B82F6);display:flex;align-items:center;justify-content:center">
+        <div style="width:22px;height:18px;border:2px solid #fff;border-radius:3px"></div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:900;color:#60A5FA;line-height:1.1">教程仓库</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78)">链接在评论区</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部中性提问 -->
+  <div class="region" data-reveal="3" style="margin:18px 30px 0;padding:18px 22px;
+    background:linear-gradient(90deg,rgba(15,23,42,0.85) 0%,rgba(30,40,60,0.85) 100%);
+    border:2px solid rgba(52,211,153,0.55);border-radius:14px;text-align:center;
+    box-shadow:0 14px 40px rgba(15,23,42,0.55),0 0 24px rgba(52,211,153,0.10)">
+    <div style="font-size:32px;color:rgba(255,255,255,0.78);margin-bottom:6px">最后问你：</div>
+    <div class="grad-title" style="font-size:42px;font-weight:900;line-height:1.2;
+      background-image:linear-gradient(90deg,#FBBF24 0%,#34D399 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      你的团队，AI 占比度量了吗？
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" data-strength="0.18"></div>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.to('#s01 [data-reveal="0"]', {opacity:1,duration:0.5}, 0.00);
+tl.to('#s01 [data-reveal="1"]', {opacity:1,duration:0.5}, 1.00);
+tl.to('#s01 [data-reveal="2"]', {opacity:1,duration:0.5}, 2.00);
+tl.to('#s01 [data-reveal="3"]', {opacity:1,duration:0.5}, 3.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:8,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:23.35,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

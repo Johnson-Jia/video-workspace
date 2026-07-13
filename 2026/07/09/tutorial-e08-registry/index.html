@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-blue-light: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #FCA5A5;
+  --tut-purple: #C4B5FD;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --tut-sh: 0 2px 6px rgba(30,41,59,0.32);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E08 段5 第三层 注册表 + 双口径（registry）
+ * 横屏 1920x1080 / 单场景 4 phase（标题/组合卡/双口径/下钻趋势）
+ * 渐变文字同色系禁白端点 + text-shadow 深蓝 drop（禁发光）
+ * bg = hex_grid 蜂巢（与 stylometry diamond_lattice 异质）
+ * ============================================ */
+
+/* 渐变同色系（无白端点） */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* ===== phase-1：标题区（左对齐建锚点） ===== */
+.r1-title-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  gap: 18px; padding: 60px 120px;
+  text-align: left;
+}
+.r1-eyebrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-blue-light);
+  text-shadow: var(--tut-sh);
+}
+.r1-title {
+  font-family: 'Inter'; font-size: 88px; font-weight: 900; line-height: 1.04;
+  margin: 0;
+  text-shadow: var(--tut-sh);
+}
+.r1-subtitle {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 700; letter-spacing: 0.03em;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-2：注册表组合卡（首层+第二层→第三层→最终判定） ===== */
+.r2-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 20px;
+}
+.r2-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r2-flow {
+  display: flex; align-items: stretch; justify-content: space-between;
+  gap: 16px; flex: 1;
+}
+.r2-node-col {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+}
+.r2-node {
+  width: 100%; max-width: 280px;
+  border-radius: 18px;
+  padding: 22px 18px;
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  text-align: center;
+  min-height: 160px;
+}
+.r2-node-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.r2-node-name {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900; line-height: 1.2;
+  text-shadow: var(--tut-sh);
+  word-break: break-word; overflow-wrap: break-word;
+  max-width: 100%;
+}
+.r2-node-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+.r2-node-first { border-color: rgba(96,165,250,0.60); background: linear-gradient(165deg, rgba(59,130,246,0.16), rgba(15,23,42,0.92)); }
+.r2-node-second { border-color: rgba(196,181,253,0.55); background: linear-gradient(165deg, rgba(167,139,250,0.16), rgba(15,23,42,0.92)); }
+.r2-node-third { border-color: rgba(251,191,36,0.70); background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.92)); }
+.r2-arrow-v {
+  font-family: 'Inter'; font-size: 56px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  align-self: center; flex-shrink: 0;
+  padding: 0 6px;
+}
+.r2-final-block {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 22px;
+  border: 2px solid rgba(251,191,36,0.85);
+  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.95));
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.20), 0 6px 24px rgba(251,191,36,0.10);
+  min-height: 160px;
+  max-width: 320px;
+}
+.r2-final-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-gold);
+}
+.r2-final-name {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900; line-height: 1.15;
+  text-shadow: var(--tut-sh);
+}
+.r2-final-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+}
+.r2-hint {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.82); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-3：双口径对比（提交占比 vs 行数占比 金边强调） ===== */
+.r3-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 18px;
+}
+.r3-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r3-dual {
+  display: flex; gap: 32px; align-items: stretch; flex: 1;
+}
+.r3-card {
+  flex: 1;
+  border-radius: 22px;
+  padding: 26px 28px;
+  border: 2px solid;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  position: relative;
+}
+.r3-card-commit {
+  border-color: rgba(96,165,250,0.55);
+  background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.92));
+}
+.r3-card-lines {
+  border-color: rgba(251,191,36,0.90);
+  background: linear-gradient(165deg, rgba(251,191,36,0.14), rgba(15,23,42,0.93));
+  box-shadow: 0 0 0 2px rgba(251,191,36,0.30), 0 0 32px rgba(251,191,36,0.18);
+}
+.r3-card-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em;
+}
+.r3-card-name {
+  font-family: 'Inter'; font-size: 38px; font-weight: 900; line-height: 1.1;
+  text-shadow: var(--tut-sh);
+}
+.r3-card-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72); line-height: 1.35;
+}
+.r3-badge {
+  align-self: flex-end;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  padding: 6px 18px; border-radius: 999px;
+  background: linear-gradient(92deg,#FBBF24,#F59E0B);
+  color: #1A1206;
+  box-shadow: 0 4px 12px rgba(251,191,36,0.45);
+}
+.r3-case {
+  display: flex; gap: 18px; align-items: stretch;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8,15,30,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.r3-case-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.r3-case-num {
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900; line-height: 1.0;
+  text-shadow: var(--tut-sh);
+}
+.r3-case-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.75);
+}
+.r3-case-sep {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+  color: rgba(255,255,255,0.55); align-self: center; flex-shrink: 0;
+}
+.r3-bottom-hint {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.82); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-4：下钻趋势（按作者/模块/周 三 chip + 趋势条） ===== */
+.r4-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 22px;
+}
+.r4-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r4-chips {
+  display: flex; gap: 22px; justify-content: flex-start;
+}
+.r4-chip {
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 2px solid rgba(110,231,183,0.55);
+  background: linear-gradient(165deg, rgba(16,185,129,0.14), rgba(15,23,42,0.92));
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  display: flex; align-items: center; gap: 10px;
+  text-shadow: var(--tut-sh);
+}
+.r4-chip-icon {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-green);
+}
+.r4-trend {
+  display: flex; flex-direction: column; gap: 14px; flex: 1;
+}
+.r4-trend-row {
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(8,15,30,0.50);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.r4-trend-name {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900; flex-shrink: 0;
+  width: 220px;
+  text-shadow: var(--tut-sh);
+}
+.r4-trend-bar-wrap {
+  flex: 1; height: 24px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.r4-trend-bar {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#60A5FA 0%,#FBBF24 100%);
+  box-shadow: 0 0 12px rgba(251,191,36,0.30);
+}
+.r4-trend-pct {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900; flex-shrink: 0;
+  width: 120px; text-align: right;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+}
+.r4-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.80); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.r1-title, .r1-subtitle, .r2-node-name, .r2-node-desc, .r2-hint,
+.r3-card-name, .r3-card-desc, .r3-bottom-hint, .r3-case-label,
+.r4-foot, .r4-trend-name {
+  word-break: break-word; overflow-wrap: break-word;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes hexPulse { 0%,100%{opacity:0.5} 50%{opacity:0.85} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes hexScanRotate { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes hexNodePulse { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes holoHexSpin { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(60deg)} }
+@keyframes cornerBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="26.28" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.15" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="26.28">
+<!-- 场景: scene-1 | 时长: 25.9s | E08 第三层 注册表 + 双口径（registry 组合判定核心段） -->
+<div class="layer-bg" data-bg-types="beams,geometry,glow,gradient,particles">
+<!-- bg-component: hex_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(160,20%,4%),hsl(170,15%,8%),hsl(160,20%,4%))"></div>
+
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexPat" width="56" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
+      <path d="M28 0 L56 16.7 L56 50 L28 66.7 L0 50 L0 16.7 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+      <path d="M28 33.3 L56 50 L56 83.3 L28 100 L0 83.3 L0 50 Z" fill="none" stroke="hsla(155,70%,45%,0.12)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#hexPat)"/>
+</svg>
+
+<div style="position:absolute;top:42%;left:50%;width:900px;height:900px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(150,80%,55%,0.10) 30deg,transparent 70deg,transparent 360deg);
+  filter:blur(40px);animation:hexScanRotate 14s linear infinite"></div>
+
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0);animation:hexPulse 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(150,80%,50%,0.22),hsla(155,60%,40%,0.08),transparent 70%);
+  filter:blur(100px)"></div>
+
+<div style="position:absolute;top:60%;left:55%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,hsla(140,60%,45%,0.10),transparent 70%);
+  filter:blur(80px)"></div>
+
+<div style="position:absolute;top:28%;left:42%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,90%,60%,0.9);box-shadow:0 0 16px hsla(150,80%,55%,0.8),0 0 32px hsla(150,70%,50%,0.4);
+  animation:hexNodePulse 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:55%;left:68%;width:10px;height:10px;border-radius:50%;
+  background:hsla(160,85%,58%,0.85);box-shadow:0 0 14px hsla(160,75%,52%,0.7);
+  animation:hexNodePulse 5s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:70%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:hsla(145,80%,55%,0.8);box-shadow:0 0 14px hsla(145,70%,50%,0.6);
+  animation:hexNodePulse 6s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:40%;left:78%;width:9px;height:9px;border-radius:50%;
+  background:hsla(155,85%,60%,0.85);box-shadow:0 0 12px hsla(155,75%,52%,0.7);
+  animation:hexNodePulse 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:42%;left:50%;width:180px;height:180px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:linear-gradient(135deg,hsla(150,70%,50%,0.12),transparent,hsla(170,60%,45%,0.10));
+  border:1.5px solid hsla(150,70%,55%,0.25);
+  animation:holoHexSpin 20s linear infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:40px;height:40px;
+  border-top:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-left:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:40px;height:40px;
+  border-bottom:2px solid hsla(150,70%,55%,0.4);border-right:2px solid hsla(150,70%,55%,0.4);
+  animation:cornerBlink 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:50%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,hsla(120,60%,50%,0.5),hsla(160,50%,45%,0.4),hsla(200,60%,50%,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx：冷色静态/脉冲类（无划过类），≥3 元素，alpha≤0.22 -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:6%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);filter:blur(20px);"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;right:8%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(168,85,247,0.16) 0%, transparent 70%);filter:blur(22px);"></div>
+  <div class="fx-aura" style="position:absolute;bottom:6%;left:42%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle, rgba(251,191,36,0.14) 0%, transparent 70%);filter:blur(24px);"></div>
+  <div class="fx-pulse-ring" style="position:absolute;top:34%;left:48%;width:200px;height:200px;border:2px solid rgba(251,191,36,0.20);border-radius:50%;"></div>
+  <div class="fx-particle" style="position:absolute;bottom:10%;left:12%;width:160px;height:160px;background:radial-gradient(circle, rgba(96,165,250,0.10) 1px, transparent 1.5px);background-size:14px 14px;opacity:0.5;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1 (0~4.5s): 标题「第三层 注册表 + 双口径」+ 一句话定位 -->
+  <div class="r1-title-block">
+    <div class="r1-eyebrow">E08 · 推广度量 · 三层识别第三层</div>
+    <h1 class="r1-title"><span class="grad-gold">第三层 注册表</span> + 双口径</h1>
+    <div class="r1-subtitle">组合判定 · 双口径看真实占比</div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2 (4.5~9.4s): 注册表组合卡（首层 + 第二层 → 第三层 → 最终判定金边） -->
+  <div class="r2-stack">
+    <div class="r2-label">注册表组合判定</div>
+    <div class="r2-flow">
+      <div class="r2-node-col">
+        <div class="r2-node r2-node-first">
+          <div class="r2-node-tag" style="color:#60A5FA;">首层</div>
+          <div class="r2-node-name"><span class="grad-blue">Co-authored-by</span></div>
+          <div class="r2-node-desc">初筛 · trailer 命中</div>
+        </div>
+      </div>
+      <div class="r2-arrow-v">+</div>
+      <div class="r2-node-col">
+        <div class="r2-node r2-node-second">
+          <div class="r2-node-tag" style="color:#C4B5FD;">第二层</div>
+          <div class="r2-node-name"><span class="grad-purple">风格学</span></div>
+          <div class="r2-node-desc">复核 · 余弦相似度</div>
+        </div>
+      </div>
+      <div class="r2-arrow-v">→</div>
+      <div class="r2-node-col">
+        <div class="r2-node r2-node-third">
+          <div class="r2-node-tag" style="color:#FBBF24;">第三层</div>
+          <div class="r2-node-name"><span class="grad-gold">注册表</span></div>
+          <div class="r2-node-desc">组合判定</div>
+        </div>
+      </div>
+      <div class="r2-arrow-v">→</div>
+      <div class="r2-node-col">
+        <div class="r2-final-block">
+          <div class="r2-final-label">最终判定</div>
+          <div class="r2-final-name"><span class="grad-gold">AI 占比</span></div>
+          <div class="r2-final-foot">真实占比输出</div>
+        </div>
+      </div>
+    </div>
+    <div class="r2-hint">第三层把前两层组合，给出最终判定</div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <!-- phase-3 (9.4~18.8s): 双口径对比（提交占比 vs 行数占比 金边强调 + 500 行 vs 5 行案例） -->
+  <div class="r3-stack">
+    <div class="r3-label">双口径对比</div>
+    <div class="r3-dual">
+      <div class="r3-card r3-card-commit">
+        <div class="r3-card-tag" style="color:#60A5FA;">口径一</div>
+        <div class="r3-card-name"><span class="grad-blue">提交占比</span></div>
+        <div class="r3-card-desc">数 commit 数 · 一次提交算一票</div>
+        <div class="r3-case">
+          <div class="r3-case-item">
+            <div class="r3-case-num" style="color:#60A5FA;">1</div>
+            <div class="r3-case-label">AI 提交</div>
+          </div>
+          <div class="r3-case-sep">vs</div>
+          <div class="r3-case-item">
+            <div class="r3-case-num" style="color:#60A5FA;">1</div>
+            <div class="r3-case-label">手写提交</div>
+          </div>
+        </div>
+      </div>
+      <div class="r3-card r3-card-lines">
+        <div class="r3-badge">更真实</div>
+        <div class="r3-card-tag" style="color:#FBBF24;">口径二 · 推荐</div>
+        <div class="r3-card-name"><span class="grad-gold">行数占比</span></div>
+        <div class="r3-card-desc">数改动行数 · 反映真实工作量</div>
+        <div class="r3-case">
+          <div class="r3-case-item">
+            <div class="r3-case-num" style="color:#FBBF24;">500</div>
+            <div class="r3-case-label">AI 提交 行数</div>
+          </div>
+          <div class="r3-case-sep">vs</div>
+          <div class="r3-case-item">
+            <div class="r3-case-num" style="color:#FCA5A5;">5</div>
+            <div class="r3-case-label">手写提交 行数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="r3-bottom-hint">光数提交数会<b style="color:#FBBF24;">低估 AI 占比</b> · 行数占比更真实</div>
+  </div>
+</div>
+<div class="phase phase-4">
+  <!-- phase-4 (18.8~25.9s): 下钻趋势（按作者/模块/周 三 chip + 趋势条 + 收尾） -->
+  <div class="r4-stack">
+    <div class="r4-label">下钻趋势 · 看哪个组哪个模块 AI 用得多</div>
+    <div class="r4-chips">
+      <div class="r4-chip"><span class="r4-chip-icon">@</span><span class="grad-green">按作者</span></div>
+      <div class="r4-chip"><span class="r4-chip-icon">#</span><span class="grad-green">按模块</span></div>
+      <div class="r4-chip"><span class="r4-chip-icon">W</span><span class="grad-green">按周</span></div>
+    </div>
+    <div class="r4-trend">
+      <div class="r4-trend-row">
+        <div class="r4-trend-name"><span class="grad-blue">服务端组</span></div>
+        <div class="r4-trend-bar-wrap"><div class="r4-trend-bar" style="width:82%;"></div></div>
+        <div class="r4-trend-pct">82%</div>
+      </div>
+      <div class="r4-trend-row">
+        <div class="r4-trend-name"><span class="grad-purple">前端组</span></div>
+        <div class="r4-trend-bar-wrap"><div class="r4-trend-bar" style="width:68%;"></div></div>
+        <div class="r4-trend-pct">68%</div>
+      </div>
+      <div class="r4-trend-row">
+        <div class="r4-trend-name"><span class="grad-gold">算法组</span></div>
+        <div class="r4-trend-bar-wrap"><div class="r4-trend-bar" style="width:54%;"></div></div>
+        <div class="r4-trend-pct">54%</div>
+      </div>
+    </div>
+    <div class="r4-foot">支持按作者、按模块、按周下钻，定位 AI 渗透深度</div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- 留空：教程重内容轻质感 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.set(['#s01 .phase-2', '#s01 .phase-3', '#s01 .phase-4'], {opacity:0}, 0.00);
+tl.set('#s01 .phase-2', {opacity:1}, 4.50);
+tl.set('#s01 .phase-1', {opacity:0}, 4.50);
+tl.set('#s01 .phase-3', {opacity:1}, 9.41);
+tl.set('#s01 .phase-2', {opacity:0}, 9.41);
+tl.set('#s01 .phase-4', {opacity:1}, 19.24);
+tl.set('#s01 .phase-3', {opacity:0}, 19.24);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:26.28,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

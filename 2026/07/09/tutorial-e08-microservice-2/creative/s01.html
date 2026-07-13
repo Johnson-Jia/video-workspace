@@ -1,0 +1,138 @@
+<!-- 场景: seg1 | 时长: ~52s | bg: noise_field | 微服务闭环后半（单 tut-scene 多 region reveal：标题/流水线/底座/人机边界+警示 同屏 1080 内依次 reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: noise_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色静态光晕 + 节点脉冲锚点（参照 E06，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:900px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:70%;width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <!-- 节点脉冲锚点（前3 弱，后3 强） -->
+  <div class="fx-blink" style="position:absolute;top:50%;left:10%;width:8px;height:8px;border-radius:50%;background:hsla(215,15%,55%,0.5);box-shadow:0 0 10px hsla(215,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:25%;width:8px;height:8px;border-radius:50%;background:hsla(255,15%,55%,0.5);box-shadow:0 0 10px hsla(255,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:40%;width:8px;height:8px;border-radius:50%;background:hsla(215,15%,55%,0.5);box-shadow:0 0 10px hsla(215,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:55%;width:12px;height:12px;border-radius:50%;background:hsla(150,65%,58%,0.95);box-shadow:0 0 18px hsla(150,60%,52%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:70%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.95);box-shadow:0 0 18px hsla(43,85%,54%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:85%;width:12px;height:12px;border-radius:50%;background:hsla(0,80%,68%,0.95);box-shadow:0 0 18px hsla(0,75%,62%,0.6)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题/流水线/底座/人机边界+警示 同屏 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region tut-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">微服务闭环 · 后半</div>
+      <h1 class="title-h1">后三个<span class="grad-purple">专项</span></h1>
+      <div class="title-sub">自检查 · 测试 · 部署</div>
+    </div>
+
+    <!-- 区域 2：六阶段流水线（reveal 3，fade）—— 中部核心组件（前3 done灰 + 后3 active + 测试→生成红色闭环） -->
+    <div class="tut-region tut-pl-pipeline" data-reveal="0" data-reveal-dir="fade">
+      <div class="pipeline-wrap">
+        <svg class="pipeline-edges" viewBox="0 0 1740 160" preserveAspectRatio="none">
+          <!-- 主线（前3 done 虚线 + 后3 实线高亮） -->
+          <line x1="145" y1="80" x2="435" y2="80" class="edge edge-dim" />
+          <line x1="435" y1="80" x2="725" y2="80" class="edge edge-dim" />
+          <line x1="725" y1="80" x2="1015" y2="80" class="edge edge-3" />
+          <line x1="1015" y1="80" x2="1305" y2="80" class="edge edge-4" />
+          <line x1="1305" y1="80" x2="1595" y2="80" class="edge edge-5" />
+          <!-- 闭环弧线：测试节点(x=1305) → 代码生成节点(x=725)，红色虚线下弧 -->
+          <path d="M 1305 80 Q 1015 150 725 80" class="edge-loop" />
+        </svg>
+        <div class="node-row">
+          <div class="stage-node sn-1 sn-dim sn-done">
+            <div class="node-icon">🎯</div>
+            <div class="node-stage">定位</div>
+            <div class="node-skill">调RAG+代码图谱</div>
+            <div class="node-num">专项一</div>
+          </div>
+          <div class="stage-node sn-2 sn-dim sn-done">
+            <div class="node-icon">📐</div>
+            <div class="node-stage">规划</div>
+            <div class="node-skill">复用优先</div>
+            <div class="node-num">专项二</div>
+          </div>
+          <div class="stage-node sn-3 sn-dim sn-done">
+            <div class="node-icon">⚡</div>
+            <div class="node-stage">生成</div>
+            <div class="node-skill">Controller+Service</div>
+            <div class="node-num">专项三</div>
+          </div>
+          <div class="stage-node sn-4 sn-active">
+            <div class="node-icon">🔍</div>
+            <div class="node-stage grad-green">自检</div>
+            <div class="node-skill">规范校验</div>
+            <div class="node-num">专项四</div>
+          </div>
+          <div class="stage-node sn-5 sn-active">
+            <div class="node-icon">✅</div>
+            <div class="node-stage grad-gold">测试</div>
+            <div class="node-skill">自动化测试</div>
+            <div class="node-num">专项五</div>
+          </div>
+          <div class="stage-node sn-6 sn-active">
+            <div class="node-icon">🚀</div>
+            <div class="node-stage grad-red">部署</div>
+            <div class="node-skill">提交上线</div>
+            <div class="node-num">专项六</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：数据底座双卡（reveal 22，left）—— 底部紧凑（RAG / 图谱） -->
+    <div class="tut-region tut-pl-base" data-reveal="14" data-reveal-dir="left">
+      <div class="base-card blue">
+        <div class="base-icon">📦</div>
+        <div>
+          <div class="base-name"><span class="grad-blue">RAG 向量库</span></div>
+          <div class="base-desc">存业务数据 · 供 Agent 检索</div>
+        </div>
+      </div>
+      <div class="base-card gold">
+        <div class="base-icon">🗂️</div>
+        <div>
+          <div class="base-name"><span class="grad-gold">代码知识图谱</span></div>
+          <div class="base-desc">存代码结构 · 定位模块复用接口</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：人机边界（reveal 47，left）+ 警示条（reveal 48，fade）—— 底部并排一行 -->
+    <div class="tut-region tut-pl-bound" data-reveal="32" data-reveal-dir="left">
+      <div class="bound-card cyan">
+        <div class="bound-icon">🧑‍💼</div>
+        <div>
+          <div class="bound-name">人</div>
+          <div class="bound-tasks">定义需求 + 审核决策</div>
+        </div>
+      </div>
+      <div class="bound-vs">‖</div>
+      <div class="bound-card blue">
+        <div class="bound-icon">🤖</div>
+        <div>
+          <div class="bound-name">AI</div>
+          <div class="bound-tasks">执行全流程</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tut-region tut-pl-warn" data-reveal="42" data-reveal-dir="fade">
+      <div class="warn-card">
+        <div class="warn-mark">⚠ 务实路径</div>
+        <div class="warn-text">先跑通<span class="grad-gold">阶段零到五</span>（思想/战略/培训/基础设施/闭环试点/度量），有数据规范底座再演进，否则就是<span class="grad-red">空中楼阁</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

@@ -1,0 +1,176 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+.phase.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  padding: 60px 100px 70px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; align-items: stretch;
+  gap: 8px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.pf-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.pf-pl-bad { width: 100%; display: flex; justify-content: stretch; gap: 14px; align-items: stretch; }
+.pf-pl-fix { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.pf-pl-lesson { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-green-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.pf-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.pf-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.pf-h1 { font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.pf-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 警示横幅 —— */
+.pf-intro { display: flex; flex-direction: column; justify-content: flex-start; height: 100%; gap: 14px; }
+.pf-warn-banner {
+  align-self: center;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; border-radius: 12px;
+  background: linear-gradient(95deg, rgba(248,113,113,0.16), rgba(15,23,42,0.90));
+  border: 2px solid rgba(248,113,113,0.55);
+}
+.pf-warn-icon { font-size: 36px; line-height: 1; }
+.pf-warn-text { font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800; color: var(--tut-blue-white); }
+
+/* —— 终端代码块（共用） —— */
+.pf-bad-code, .pf-good-code {
+  border-radius: 12px; overflow: hidden;
+}
+.pf-bad-code { border: 2.5px solid rgba(248,113,113,0.65); box-shadow: 0 0 28px rgba(248,113,113,0.18); }
+.pf-good-code { border: 2.5px solid rgba(52,211,153,0.65); box-shadow: 0 0 28px rgba(52,211,153,0.18); }
+.pf-term-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+}
+.pf-term-bar-red { background: rgba(248,113,113,0.14); border-bottom: 1px solid rgba(248,113,113,0.28); }
+.pf-term-bar-green { background: rgba(52,211,153,0.14); border-bottom: 1px solid rgba(52,211,153,0.28); }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #F87171; }
+.dot-yellow { background: #FBBF24; }
+.dot-green { background: #34D399; }
+.pf-term-title { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.65); margin-left: 8px; }
+.pf-term-tag {
+  margin-left: auto;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FCA5A5;
+}
+.pf-term-tag-green { color: #6EE7B7; }
+.pf-code {
+  padding: 10px 16px;
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 700;
+  line-height: 1.4;
+  background: #0D1117;
+}
+.code-kw { color: #60A5FA; }
+.code-comment { color: rgba(148,163,184,0.70); font-style: italic; }
+.pf-code-warn {
+  padding: 10px 20px;
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-blue-white);
+  background: rgba(248,113,113,0.10);
+  border-top: 1px solid rgba(248,113,113,0.25);
+}
+.pf-neq { font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 900; color: #F87171; padding: 0 6px; }
+
+/* —— M1-M9 月历时间线 —— */
+.pf-timeline {
+  width: 100%;
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: linear-gradient(95deg, rgba(248,113,113,0.10), rgba(15,23,42,0.92));
+  border: 2px solid rgba(248,113,113,0.45);
+}
+.pf-tl-label { font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800; color: #FCA5A5; white-space: nowrap; }
+.pf-tl-track { display: flex; align-items: center; gap: 4px; flex: 1; }
+.pf-tl-node {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(148,163,184,0.70);
+  padding: 4px 8px; border-radius: 4px;
+  background: rgba(15,23,42,0.60);
+}
+.pf-tl-node-end {
+  color: #FCA5A5;
+  background: rgba(248,113,113,0.20);
+  border: 1.5px solid rgba(248,113,113,0.55);
+}
+.pf-tl-seg { width: 24px; height: 4px; background: rgba(148,163,184,0.40); border-radius: 2px; }
+.pf-tl-seg-warn { background: rgba(248,113,113,0.65); }
+.pf-tl-end-label { font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800; color: #F87171; white-space: nowrap; }
+
+/* —— phase-3 修复代码 + 探针横排 —— */
+.pf-fix-row { width: 100%; display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+.pf-probe {
+  border-radius: 12px; padding: 10px 16px;
+  border: 2.5px solid rgba(96,165,250,0.55);
+  background: linear-gradient(180deg, rgba(96,165,250,0.10), rgba(15,23,42,0.92));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+}
+.pf-probe-icon { font-size: 44px; line-height: 1; }
+.pf-probe-title { font-family: 'Inter'; font-size: 34px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.pf-probe-desc { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.78); }
+.pf-probe-flow { display: flex; align-items: center; gap: 8px; }
+.pf-probe-node {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.88);
+  padding: 4px 12px; border-radius: 6px;
+  background: rgba(96,165,250,0.14);
+  border: 1px solid rgba(96,165,250,0.35);
+}
+.pf-probe-end { color: #6EE7B7; background: rgba(52,211,153,0.18); border-color: rgba(52,211,153,0.50); }
+.pf-probe-arrow { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: rgba(96,165,250,0.80); }
+
+/* —— 教训金句 —— */
+.pf-lesson {
+  align-self: stretch;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: linear-gradient(95deg, rgba(52,211,153,0.12), rgba(15,23,42,0.92));
+  border: 2px solid rgba(52,211,153,0.50);
+}
+.pf-lesson-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #6EE7B7;
+  padding: 4px 14px; border-radius: 6px;
+  background: rgba(52,211,153,0.18);
+  border: 1px solid rgba(52,211,153,0.45);
+}
+.pf-lesson-text { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-white); }

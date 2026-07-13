@@ -1,0 +1,203 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-purple: #A78BFA;
+  --tut-red: #F87171;
+  --tut-yellow: #FBBF24;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E11 codereview — 编排型审查 + 三级分级 + rule 核对
+ * ============================================ */
+
+.codereview-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.t-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.t-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#A78BFA 0%,#A78BFA 55%,#C4B5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#F87171 0%,#F87171 55%,#FCA5A5 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-green { color: #34D399; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-purple { color: #A78BFA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-red { color: #F87171; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-yellow { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-white { color: rgba(255,255,255,0.92); font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+.mono-blue { font-family: var(--font-data); color: #60A5FA; font-weight: 800; }
+.mono-purple { font-family: var(--font-data); color: #A78BFA; font-weight: 800; }
+
+/* —— Phase 1：code-review 三级总览 —— */
+.cr-overview { flex-direction: column; gap: 24px; width: 100%; }
+.cr-title {
+  font-family: var(--font-title); font-size: 92px; font-weight: 900; line-height: 1.05;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 18px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.cr-tag-row {
+  display: flex; gap: 22px; align-items: center; justify-content: center;
+}
+.cr-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  padding: 10px 26px; border-radius: 999px;
+  background: rgba(56,189,248,0.10);
+  border: 1px solid rgba(56,189,248,0.35);
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+}
+.cr-dot-row {
+  display: flex; gap: 36px; align-items: center; justify-content: center;
+}
+.cr-big-dot { font-size: 100px; line-height: 1; }
+
+/* —— Phase 2：三级分级卡 —— */
+.cr-triage-row {
+  display: flex; gap: 36px; align-items: stretch; justify-content: center; width: 100%; max-width: 1500px;
+}
+.cr-triage {
+  flex: 1; max-width: 480px;
+  border-radius: 24px; padding: 40px 30px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(15,23,42,0.88));
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+.t-red { border-color: rgba(248,113,113,0.55); }
+.t-yellow { border-color: rgba(251,191,36,0.55); }
+.t-green { border-color: rgba(52,211,153,0.55); }
+.t-circle { font-size: 100px; line-height: 1; }
+.t-level {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.t-action {
+  font-family: var(--font-body); font-size: 44px; font-weight: 900;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+
+/* —— Phase 3：rule 核对 —— */
+.cr-rule-block { flex-direction: column; gap: 22px; width: 100%; max-width: 1400px; }
+.cr-rule-row {
+  display: flex; gap: 32px; align-items: stretch; justify-content: center;
+}
+.cr-rule {
+  flex: 1; max-width: 580px;
+  border-radius: 18px; padding: 24px 28px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(15,23,42,0.88));
+  border: 2px solid;
+  display: flex; align-items: center; gap: 18px;
+}
+.r-blue { border-color: rgba(96,165,250,0.55); }
+.r-purple { border-color: rgba(167,139,250,0.55); }
+.r-icon { font-size: 52px; line-height: 1; }
+.r-name {
+  flex: 1;
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.r-check {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.78);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.cr-flow-arrow {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900;
+  color: rgba(167,139,250,0.75);
+  text-align: center; letter-spacing: 0.10em;
+}
+.cr-no-checklist {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+
+/* —— Phase 4：结构化报告 —— */
+.cr-report-block { flex-direction: column; gap: 24px; width: 100%; max-width: 1300px; }
+.cr-report-frame {
+  border-radius: 16px; overflow: hidden;
+  background: rgba(8, 12, 24, 0.92);
+  border: 2px solid rgba(96,165,250,0.45);
+  padding: 22px 32px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.rf-head {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.78);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  letter-spacing: 0.04em;
+}
+.rf-line {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  display: flex; align-items: center; gap: 14px;
+  letter-spacing: 0.02em;
+}
+.rf-loc {
+  color: #60A5FA; font-weight: 900;
+  padding: 2px 12px; border-radius: 6px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.35);
+}
+.rf-sep { color: rgba(255,255,255,0.40); font-weight: 900; }
+.rf-rule {
+  color: #A78BFA; font-weight: 800;
+  padding: 2px 12px; border-radius: 6px;
+  background: rgba(167,139,250,0.10);
+  border: 1px solid rgba(167,139,250,0.35);
+}
+.rf-pass { color: rgba(255,255,255,0.65); font-weight: 700; }
+.rf-sev { font-weight: 900; margin-left: auto; }
+.rf-sev-red { color: #F87171; }
+.rf-sev-yellow { color: #FBBF24; }
+.rf-sev-green { color: #34D399; }
+.cr-finale {
+  font-family: var(--font-title); font-size: 50px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}

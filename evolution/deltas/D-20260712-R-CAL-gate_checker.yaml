@@ -1,0 +1,17 @@
+delta:
+  approved_by: null
+  confidence: 0.7
+  created_at: '2026-07-12T16:11:57.864254+00:00'
+  id: D-20260712-R-CAL-gate_checker
+  new_rule:
+    class: EXPERIENTIAL
+    id: R-CAL-gate_checker
+    pattern: gate_checker 的 gate checker 评分偏高，需校准阈值
+    positive: 校准 gate_checker 的 gate checker 阈值，使其更准确反映实际表现
+    scope: SKILL
+    severity: SOFT
+    type: FORBIDDEN_LOGIC
+  operation: ADDED
+  source: calibrate_machine_scoring
+  target_rule: R-CAL-gate_checker
+requires_human_review: true

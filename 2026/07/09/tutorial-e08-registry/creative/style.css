@@ -1,0 +1,294 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-blue-light: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #FCA5A5;
+  --tut-purple: #C4B5FD;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --tut-sh: 0 2px 6px rgba(30,41,59,0.32);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E08 段5 第三层 注册表 + 双口径（registry）
+ * 横屏 1920x1080 / 单场景 4 phase（标题/组合卡/双口径/下钻趋势）
+ * 渐变文字同色系禁白端点 + text-shadow 深蓝 drop（禁发光）
+ * bg = hex_grid 蜂巢（与 stylometry diamond_lattice 异质）
+ * ============================================ */
+
+/* 渐变同色系（无白端点） */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* ===== phase-1：标题区（左对齐建锚点） ===== */
+.r1-title-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  gap: 18px; padding: 60px 120px;
+  text-align: left;
+}
+.r1-eyebrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-blue-light);
+  text-shadow: var(--tut-sh);
+}
+.r1-title {
+  font-family: 'Inter'; font-size: 88px; font-weight: 900; line-height: 1.04;
+  margin: 0;
+  text-shadow: var(--tut-sh);
+}
+.r1-subtitle {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 700; letter-spacing: 0.03em;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-2：注册表组合卡（首层+第二层→第三层→最终判定） ===== */
+.r2-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 20px;
+}
+.r2-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r2-flow {
+  display: flex; align-items: stretch; justify-content: space-between;
+  gap: 16px; flex: 1;
+}
+.r2-node-col {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+}
+.r2-node {
+  width: 100%; max-width: 280px;
+  border-radius: 18px;
+  padding: 22px 18px;
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  text-align: center;
+  min-height: 160px;
+}
+.r2-node-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.r2-node-name {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900; line-height: 1.2;
+  text-shadow: var(--tut-sh);
+  word-break: break-word; overflow-wrap: break-word;
+  max-width: 100%;
+}
+.r2-node-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+.r2-node-first { border-color: rgba(96,165,250,0.60); background: linear-gradient(165deg, rgba(59,130,246,0.16), rgba(15,23,42,0.92)); }
+.r2-node-second { border-color: rgba(196,181,253,0.55); background: linear-gradient(165deg, rgba(167,139,250,0.16), rgba(15,23,42,0.92)); }
+.r2-node-third { border-color: rgba(251,191,36,0.70); background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.92)); }
+.r2-arrow-v {
+  font-family: 'Inter'; font-size: 56px; font-weight: 900;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  align-self: center; flex-shrink: 0;
+  padding: 0 6px;
+}
+.r2-final-block {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 22px;
+  border: 2px solid rgba(251,191,36,0.85);
+  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.95));
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.20), 0 6px 24px rgba(251,191,36,0.10);
+  min-height: 160px;
+  max-width: 320px;
+}
+.r2-final-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-gold);
+}
+.r2-final-name {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900; line-height: 1.15;
+  text-shadow: var(--tut-sh);
+}
+.r2-final-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+}
+.r2-hint {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.82); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-3：双口径对比（提交占比 vs 行数占比 金边强调） ===== */
+.r3-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 18px;
+}
+.r3-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r3-dual {
+  display: flex; gap: 32px; align-items: stretch; flex: 1;
+}
+.r3-card {
+  flex: 1;
+  border-radius: 22px;
+  padding: 26px 28px;
+  border: 2px solid;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  position: relative;
+}
+.r3-card-commit {
+  border-color: rgba(96,165,250,0.55);
+  background: linear-gradient(165deg, rgba(59,130,246,0.10), rgba(15,23,42,0.92));
+}
+.r3-card-lines {
+  border-color: rgba(251,191,36,0.90);
+  background: linear-gradient(165deg, rgba(251,191,36,0.14), rgba(15,23,42,0.93));
+  box-shadow: 0 0 0 2px rgba(251,191,36,0.30), 0 0 32px rgba(251,191,36,0.18);
+}
+.r3-card-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em;
+}
+.r3-card-name {
+  font-family: 'Inter'; font-size: 38px; font-weight: 900; line-height: 1.1;
+  text-shadow: var(--tut-sh);
+}
+.r3-card-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72); line-height: 1.35;
+}
+.r3-badge {
+  align-self: flex-end;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  padding: 6px 18px; border-radius: 999px;
+  background: linear-gradient(92deg,#FBBF24,#F59E0B);
+  color: #1A1206;
+  box-shadow: 0 4px 12px rgba(251,191,36,0.45);
+}
+.r3-case {
+  display: flex; gap: 18px; align-items: stretch;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8,15,30,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.r3-case-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.r3-case-num {
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900; line-height: 1.0;
+  text-shadow: var(--tut-sh);
+}
+.r3-case-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.75);
+}
+.r3-case-sep {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+  color: rgba(255,255,255,0.55); align-self: center; flex-shrink: 0;
+}
+.r3-bottom-hint {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.82); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-4：下钻趋势（按作者/模块/周 三 chip + 趋势条） ===== */
+.r4-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 22px;
+}
+.r4-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  text-align: left;
+}
+.r4-chips {
+  display: flex; gap: 22px; justify-content: flex-start;
+}
+.r4-chip {
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 2px solid rgba(110,231,183,0.55);
+  background: linear-gradient(165deg, rgba(16,185,129,0.14), rgba(15,23,42,0.92));
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  display: flex; align-items: center; gap: 10px;
+  text-shadow: var(--tut-sh);
+}
+.r4-chip-icon {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-green);
+}
+.r4-trend {
+  display: flex; flex-direction: column; gap: 14px; flex: 1;
+}
+.r4-trend-row {
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(8,15,30,0.50);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.r4-trend-name {
+  font-family: 'Inter'; font-size: 32px; font-weight: 900; flex-shrink: 0;
+  width: 220px;
+  text-shadow: var(--tut-sh);
+}
+.r4-trend-bar-wrap {
+  flex: 1; height: 24px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.r4-trend-bar {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#60A5FA 0%,#FBBF24 100%);
+  box-shadow: 0 0 12px rgba(251,191,36,0.30);
+}
+.r4-trend-pct {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900; flex-shrink: 0;
+  width: 120px; text-align: right;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+}
+.r4-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.80); line-height: 1.4;
+  text-align: center;
+  text-shadow: var(--tut-sh);
+}
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.r1-title, .r1-subtitle, .r2-node-name, .r2-node-desc, .r2-hint,
+.r3-card-name, .r3-card-desc, .r3-bottom-hint, .r3-case-label,
+.r4-foot, .r4-trend-name {
+  word-break: break-word; overflow-wrap: break-word;
+}

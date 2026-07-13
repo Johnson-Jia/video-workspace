@@ -1,0 +1,47 @@
+<!-- 场景: s04 | 时长: 7.99s | bg: contour_lines | 任务中断后自动恢复流程 -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(60px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:45%;left:18%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.9);box-shadow:0 0 18px hsla(215,70%,54%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:45%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.9);box-shadow:0 0 18px hsla(43,85%,54%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:45%;right:18%;width:12px;height:12px;border-radius:50%;background:hsla(150,65%,58%,0.9);box-shadow:0 0 18px hsla(150,60%,52%,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene-focus">
+  <div class="focus-tag grad-blue-bg-inline" data-reveal="0">任务中断后自动恢复</div>
+
+  <!-- 恢复流程链 -->
+  <div class="tut-region" data-reveal="1" data-reveal-dir="left">
+    <div class="resume-card">
+      <div class="resume-tag grad-blue-bg-inline">跨周中断接续流程</div>
+      <div class="resume-chain">
+        <div class="rc-step"><span class="rc-icon">⏏</span><span class="rc-text">跨周退出</span></div>
+        <div class="rc-arrow">→</div>
+        <div class="rc-step"><span class="rc-icon">↻</span><span class="rc-text">重进项目</span></div>
+        <div class="rc-arrow">→</div>
+        <div class="rc-step"><span class="rc-icon">⊗</span><span class="rc-text grad-gold">看 x 标记</span></div>
+        <div class="rc-arrow">→</div>
+        <div class="rc-step"><span class="rc-icon">▶</span><span class="rc-text grad-green">接着干</span></div>
+      </div>
+      <div class="resume-rule">tasks 清单支撑 · 扫 <span class="mono-x">[x]</span> 自动恢复到<span class="grad-blue">正确进度</span></div>
+    </div>
+  </div>
+
+  <!-- 关键说明 -->
+  <div class="tut-region" data-reveal="3" data-reveal-dir="fade" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap">
+    <div style="border-radius:10px;padding:8px 18px;border:1.5px solid rgba(96,165,250,0.40);background:rgba(15,23,42,0.60);font-family:'Noto Sans SC';font-size:32px;font-weight:700;color:var(--tut-white)">中途退出</div>
+    <div style="font-family:'JetBrains Mono';font-size:32px;font-weight:800;color:rgba(96,165,250,0.80)">·</div>
+    <div style="border-radius:10px;padding:8px 18px;border:1.5px solid rgba(251,191,36,0.40);background:rgba(15,23,42,0.60);font-family:'Noto Sans SC';font-size:32px;font-weight:700;color:var(--tut-white)">重进接续</div>
+    <div style="font-family:'JetBrains Mono';font-size:32px;font-weight:800;color:rgba(96,165,250,0.80)">·</div>
+    <div style="border-radius:10px;padding:8px 18px;border:1.5px solid rgba(110,231,183,0.40);background:rgba(15,23,42,0.60);font-family:'Noto Sans SC';font-size:32px;font-weight:700;color:var(--tut-white)">无需重头来</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

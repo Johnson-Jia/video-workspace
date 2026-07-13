@@ -1,0 +1,170 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E09 rules — 三条红线独立卡 + 终端代码 + AI加载
+ * bg: scan_grid · 3红线卡横排(终端代码块) + AI自动加载流程 + 强制/宽容
+ * 布局：顶/中/底三带 space-between 撑满 1080
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.rl-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.rl-pl-cards { width: 100%; display: flex; justify-content: stretch; }
+.rl-pl-autoload { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.rl-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rl-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.rl-h1 { font-family: 'Inter'; font-size: 92px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.rl-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 预告 —— */
+.rl-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.rl-preview { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: nowrap; }
+.rl-prev-num { font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1; }
+.rl-prev-num-1 { color: #FCA5A5; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-num-2 { color: #F87171; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-num-3 { color: #FCA5A5; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-name { font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 800; color: var(--tut-blue-white); }
+.rl-prev-sep { font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 800; color: rgba(251,191,36,0.65); }
+
+/* —— phase-2 三红线卡横排 —— */
+.rl-cards { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rl-card {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.80));
+  border: 2.5px solid;
+}
+.rl-card-1 { border-color: rgba(252,165,165,0.70); box-shadow: 0 0 24px rgba(252,165,165,0.20); }
+.rl-card-2 { border-color: rgba(248,113,113,0.70); box-shadow: 0 0 24px rgba(248,113,113,0.20); }
+.rl-card-3 { border-color: rgba(252,165,165,0.70); box-shadow: 0 0 24px rgba(252,165,165,0.20); }
+.rl-card-head { display: flex; align-items: center; gap: 12px; }
+.rl-card-num { font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 900; color: #FCA5A5; line-height: 1; }
+.rl-card-title { font-family: 'Inter'; font-size: 38px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— 终端代码块 —— */
+.rl-terminal {
+  background: #0D1117;
+  border-radius: 8px;
+  border: 1.5px solid rgba(248,113,113,0.40);
+  overflow: hidden;
+}
+.rl-term-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  background: rgba(248,113,113,0.12);
+  border-bottom: 1px solid rgba(248,113,113,0.25);
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #F87171; }
+.dot-yellow { background: #FBBF24; }
+.dot-green { background: #34D399; }
+.rl-term-title { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.65); margin-left: 8px; }
+.rl-code {
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.92);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.code-kw { color: #60A5FA; }
+.code-str { color: #34D399; }
+.code-comment { color: rgba(148,163,184,0.70); font-style: italic; }
+.rl-card-note { display: flex; align-items: center; gap: 10px; }
+.rl-note-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FCA5A5;
+  padding: 2px 10px; border-radius: 6px;
+  background: rgba(248,113,113,0.14);
+  border: 1px solid rgba(248,113,113,0.32);
+}
+.rl-card-note { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.82); }
+
+/* —— AI 自动加载流程 —— */
+.rl-autoload {
+  width: 100%;
+  border-radius: 14px; padding: 16px 28px;
+  border: 2.5px solid rgba(96,165,250,0.60);
+  background: linear-gradient(95deg, rgba(96,165,250,0.10), rgba(15,23,42,0.92));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+}
+.rl-al-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.06em; }
+.rl-al-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.rl-al-node {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.88);
+  padding: 4px 14px; border-radius: 6px;
+  background: rgba(96,165,250,0.12);
+  border: 1px solid rgba(96,165,250,0.32);
+}
+.rl-al-end {
+  background: rgba(52,211,153,0.18);
+  border-color: rgba(52,211,153,0.50);
+  color: #6EE7B7;
+}
+.rl-al-arrow { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: rgba(96,165,250,0.80); }
+.rl-al-strict { display: flex; align-items: center; gap: 14px; }
+.rl-strict-badge {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  padding: 4px 16px; border-radius: 8px;
+}
+.rl-strict-new {
+  color: #34D399;
+  background: rgba(52,211,153,0.16);
+  border: 1.5px solid rgba(52,211,153,0.50);
+}
+.rl-strict-old {
+  color: #60A5FA;
+  background: rgba(96,165,250,0.14);
+  border: 1.5px solid rgba(96,165,250,0.45);
+}
+
+/* —— phase-3 收尾 —— */
+.rl-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; justify-content: center; }
+.rl-closer-h1 { font-family: 'Inter'; font-size: 80px; font-weight: 900; line-height: 1.05; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.rl-closer-sub { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-blue-white); }

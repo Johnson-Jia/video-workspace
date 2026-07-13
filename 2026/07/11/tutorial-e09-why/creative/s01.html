@@ -1,0 +1,157 @@
+<!-- 场景: scene-1 | 时长: 29.52s | bg: hex_grid | 为什么沉淀：标题+双卡对比 → 能力流失警示 → 阶段六转折 → 沉淀三路详解 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:46%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:84%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 16px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1 (0-6.10s): 标题「为什么必须沉淀」+ 双卡对比开篇：左个人脑 vs 右团队仓库 -->
+  <div class="why-scene">
+    <div class="w-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 阶段六 · 沉淀复用</div>
+      <h1 class="w-title">为什么<span class="grad-gold">必须沉淀</span></h1>
+    </div>
+    <div class="w-mid dual-row">
+      <div class="dual-card dual-person">
+        <div class="dual-icon grad-blue">👤</div>
+        <div class="dual-name">个人脑</div>
+        <div class="dual-note">能力长在个体身上</div>
+      </div>
+      <div class="dual-vs">VS</div>
+      <div class="dual-card dual-team">
+        <div class="dual-icon grad-gold">🗄</div>
+        <div class="dual-name">团队仓库</div>
+        <div class="dual-note">组织资产 · 默认能力</div>
+      </div>
+    </div>
+    <div class="w-bot">
+      <div class="bottom-hint">前五阶段 · 能力长在个体 — tutorial E09 / why —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2 (6.10-11.60s): 人员流动能力流失警示：双卡红箭头 + 能力流失可视化 + 红底白字警示 -->
+  <div class="why-scene">
+    <div class="w-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 阶段六 · 沉淀复用</div>
+      <h1 class="w-title">人员流动 · <span class="lose-title-accent">能力流失</span></h1>
+    </div>
+    <div class="w-mid lose-block">
+      <div class="lose-row">
+        <div class="lose-card lose-person">
+          <div class="lose-icon-solid">👤↗</div>
+          <div class="lose-name">人走了</div>
+          <div class="lose-note">开发者离职 / 调岗</div>
+        </div>
+        <div class="lose-arrow-solid">⇒</div>
+        <div class="lose-card lose-exp">
+          <div class="lose-icon-solid">🗑</div>
+          <div class="lose-name">经验也走了</div>
+          <div class="lose-note">能力没沉淀 · 归零</div>
+        </div>
+      </div>
+      <!-- 能力流失可视化：进度条归零 -->
+      <div class="lose-meter">
+        <div class="lose-meter-label">团队经验值</div>
+        <div class="lose-meter-track">
+          <div class="lose-meter-fill"></div>
+        </div>
+        <div class="lose-meter-zero">→ 0</div>
+        <div class="lose-meter-tag">未沉淀</div>
+      </div>
+      <!-- 红底白字警示胶囊（纯色高对比，禁渐变） -->
+      <div class="lose-warn-solid">⚠ 不沉淀 = 能力流失</div>
+    </div>
+    <div class="w-bot">
+      <div class="bottom-hint">— tutorial E09 / why —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <!-- phase-3 (11.60-16.00s): 阶段六转折：金色箭头流向 + 「个人→团队资产」金边胶囊 -->
+  <div class="why-scene">
+    <div class="w-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 阶段六 · 沉淀复用</div>
+      <h1 class="w-title">阶段六 · <span class="grad-gold">个人→团队资产</span></h1>
+    </div>
+    <div class="w-mid pivot-block">
+      <div class="pivot-from">
+        <div class="pivot-label">个人 · 会用</div>
+        <div class="pivot-note">前五阶段成果</div>
+      </div>
+      <div class="pivot-arrow">
+        <div class="pivot-line"></div>
+        <div class="pivot-tag grad-gold-bg">阶段六 · 沉淀</div>
+      </div>
+      <div class="pivot-to">
+        <div class="pivot-label">团队 · 资产</div>
+        <div class="pivot-note">组织默认能力</div>
+      </div>
+    </div>
+    <div class="w-bot">
+      <div class="bottom-hint">核心 · 把个人会用变成团队资产 — tutorial E09 / why —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-4">
+  <!-- phase-4 (16.00-29.52s): 沉淀三路详解：Skill 复用 / 知识沉淀 / 自我改进（图标+标题+详解+真实案例） -->
+  <div class="why-scene">
+    <div class="w-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 阶段六 · 沉淀复用</div>
+      <h1 class="w-title">沉淀 <span class="grad-gold">三条路</span></h1>
+    </div>
+    <div class="w-mid paths-block">
+      <div class="path-card p-1">
+        <div class="path-icon grad-blue">🔧</div>
+        <div class="path-name">Skill 复用</div>
+        <div class="path-detail">把高频操作做成<span class="grad-blue">共享技能</span></div>
+        <div class="path-eg">SQL 查询 · CRUD 生成</div>
+        <div class="path-case">
+          <div class="path-case-tag p1-tag">案例</div>
+          <div class="path-case-txt">sql-query Skill · 新人调用即用</div>
+        </div>
+      </div>
+      <div class="path-card p-2">
+        <div class="path-icon grad-gold">📚</div>
+        <div class="path-name">知识沉淀</div>
+        <div class="path-detail">规范避坑写成 <span class="grad-gold">AI 自动加载</span> 规则</div>
+        <div class="path-eg">三条红线 · 静默吞异常</div>
+        <div class="path-case">
+          <div class="path-case-tag p2-tag">案例</div>
+          <div class="path-case-txt">rules/ · AI 启动即读</div>
+        </div>
+      </div>
+      <div class="path-card p-3">
+        <div class="path-icon grad-green">♻</div>
+        <div class="path-name">自我改进</div>
+        <div class="path-detail">AI 犯错后<span class="grad-green">自己更新规则</span></div>
+        <div class="path-eg">CLAUDE.md · 边用边学</div>
+        <div class="path-case">
+          <div class="path-case-tag p3-tag">案例</div>
+          <div class="path-case-txt">规则 3 条 → 15 条 · 自动长</div>
+        </div>
+      </div>
+    </div>
+    <div class="w-bot">
+      <div class="bottom-hint">— tutorial E09 / why —</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

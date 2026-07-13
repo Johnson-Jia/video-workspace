@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 70,
+    "emotion": "method-首层Co-authored-by初筛+六个工具名+误标缺陷",
+    "text": "度量靠 AI 代码占比。最可靠的信号是 Co-authored-by——AI 工具默认会在 commit 末尾埋 trailer。首层初筛：解析 commit message，匹配六个 AI 工具名：claude、copilot、cursor、chatgpt、codeium、gemini。命中就判 AI，置信度一点零。但这层有个缺陷：VS Code Copilot 会对手写代码也自动加 trailer，会误标。所以光靠首层，占比会虚高。",
+    "narration": "度量靠 AI 代码占比。最可靠的信号是 Co-authored-by——AI 工具默认会在 commit 末尾埋 trailer。首层初筛：解析 commit message，匹配六个 AI 工具名：claude、copilot、cursor、chatgpt、codeium、gemini。命中就判 AI，置信度一点零。但这层有个缺陷：VS Code Copilot 会对手写代码也自动加 trailer，会误标。所以光靠首层，占比会虚高。",
+    "hook_anchors": ["度量靠 AI 代码占比", "最可靠的信号", "Co-authored-by", "commit 末尾", "trailer", "首层初筛", "解析 commit message", "匹配六个 AI 工具名", "claude", "copilot", "cursor", "chatgpt", "codeium", "gemini", "命中就判 AI", "置信度一点零", "缺陷", "VS Code Copilot", "对手写代码自动加 trailer", "误标", "占比会虚高"],
+    "visual_type": "tutorial_coauthored",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「首层 Co-authored-by」fade-in + 副标「最可靠的 AI 信号」", "duration_share": 0.10, "narration_anchor": {"start_sentence": 0, "end_sentence": 0}},
+      {"phase": 2, "start_offset": 7, "focus": "终端窗口 reveal（标题栏红黄绿圆点 + commit a1b2c3d + Author + feat message 打字动画逐行 reveal）+ Co-authored-by trailer 金色高亮闪烁", "duration_share": 0.32, "narration_anchor": {"start_sentence": 1, "end_sentence": 2}},
+      {"phase": 3, "start_offset": 30, "focus": "六个工具名名单侧栏 reveal（claude/copilot/cursor/chatgpt/codeium/gemini + 绿色✓命中标记 + 置信度 1.0 标注）", "duration_share": 0.28, "narration_anchor": {"start_sentence": 3, "end_sentence": 4}},
+      {"phase": 4, "start_offset": 50, "focus": "误标缺陷红框警示条 reveal（VS Code Copilot 对手写代码加 trailer → 误标 → 占比虚高 红色警示链）+ 收尾「光靠首层，占比会虚高」", "duration_share": 0.30, "narration_anchor": {"start_sentence": 5, "end_sentence": 6}}
+    ],
+    "bg_component": "contour_lines"
+  }
+]

@@ -1,0 +1,156 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E08 cta — 收尾：合集标识 + 本集总结 + E09 预告 + 关注 CTA + 互动问
+ * 单场景 4 region data-reveal
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 180px 100px 100px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 22px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：合集标识 + 本集总结（左对齐） —— */
+.tut-header { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-header .series-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-header .title-h1 {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; line-height: 1.06;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.tut-header .title-sub {
+  font-family: 'Inter'; font-size: 34px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— 区域 2：E09 预告（金边强调） —— */
+.tut-next { width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+.next-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.12em;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.next-card {
+  width: 100%;
+  border-radius: 18px;
+  padding: 22px 32px;
+  border: 2px solid;
+  display: flex; flex-direction: row; align-items: center; gap: 28px;
+}
+.next-card.next-key {
+  border-color: rgba(251,191,36,0.88);
+  background: linear-gradient(165deg, rgba(251,191,36,0.18), rgba(15,23,42,0.88));
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.38);
+}
+.next-ep {
+  font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 900; flex-shrink: 0;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.next-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.next-name {
+  font-family: 'Noto Sans SC'; font-size: 40px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.next-tagline {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.3;
+}
+.next-arrow {
+  font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 900; flex-shrink: 0;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— 区域 3：关注 CTA（绿色合集还有五集） —— */
+.tut-follow { width: 100%; display: flex; flex-direction: column; align-items: stretch; }
+.follow-card {
+  width: 100%;
+  border-radius: 18px;
+  padding: 22px 32px;
+  border: 2px solid rgba(110,231,183,0.55);
+  background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88));
+  display: flex; flex-direction: row; align-items: center; gap: 26px;
+}
+.follow-icon {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; flex-shrink: 0; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.follow-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.follow-main {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.follow-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.3;
+}
+
+/* —— 区域 4：互动问大字（中性问句收尾，金色渐变） —— */
+.tut-ask { width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.ask-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.12em;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.ask-quote {
+  width: 100%;
+  border-radius: 18px;
+  padding: 22px 32px;
+  border: 2px solid rgba(251,191,36,0.55);
+  background: linear-gradient(165deg, rgba(251,191,36,0.10), rgba(15,23,42,0.88));
+  display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px;
+}
+.ask-mark {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.ask-text {
+  font-family: 'Noto Sans SC'; font-size: 44px; font-weight: 900; line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  text-align: center;
+  word-break: break-word; overflow-wrap: break-word;
+}
+.ask-quote { word-break: break-word; overflow-wrap: break-word; }
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.tut-scene, .tut-region, .next-card, .follow-card, .ask-quote,
+.next-name, .next-tagline, .follow-main, .follow-sub, .ask-text, .title-h1, .title-sub {
+  word-break: break-word; overflow-wrap: break-word;
+}

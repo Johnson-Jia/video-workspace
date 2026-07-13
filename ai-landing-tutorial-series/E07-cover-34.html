@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E07 防 AI 偷改测试 · 4:3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1440px;height:1080px;padding:56px 72px 48px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#1E293B 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(96,165,250,0.09) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-blue{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.22),transparent 70%);filter:blur(100px);top:-200px;right:-140px;pointer-events:none;}
+.glow-green{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.14),transparent 70%);filter:blur(90px);bottom:-140px;left:-90px;pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(96,165,250,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:76px;background:linear-gradient(180deg,rgba(96,165,250,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(16,185,129,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:76px;background:linear-gradient(0deg,rgba(16,185,129,0.45),transparent);}
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:18px;margin-bottom:12px;flex-wrap:wrap;}
+.ep-num{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 28px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#60A5FA;letter-spacing:0.16em;border:1.5px solid rgba(96,165,250,0.42);background:rgba(59,130,246,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.skip-tag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:19px;color:#34D399;border:1.5px solid rgba(52,211,153,0.55);background:rgba(16,185,129,0.10);padding:7px 16px;border-radius:999px;font-weight:600;}
+.title{position:relative;z-index:2;font-size:82px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;margin-top:4px;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#60A5FA 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 38px rgba(96,165,250,0.18);}
+.subtitle{position:relative;z-index:2;font-size:28px;color:rgba(255,255,255,0.82);margin-top:10px;font-weight:500;}
+.subtitle .sub-strong{color:#FBBF24;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 12px;font-weight:400;}
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-top:24px;align-items:center;}
+.layers-label{font-size:22px;color:#60A5FA;letter-spacing:0.12em;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.layers-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(96,165,250,0.45),transparent);}
+.layers{display:flex;flex-direction:column;gap:11px;margin-bottom:14px;}
+.layer-row{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.65);}
+.layer-row.l1{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.65));}
+.layer-row.l2{border-color:rgba(96,165,250,0.45);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.65));}
+.layer-row.l3{border-color:rgba(52,211,153,0.45);background:linear-gradient(92deg,rgba(16,185,129,0.12),rgba(15,23,42,0.65));}
+.layer-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:40px;}
+.layer-row.l1 .layer-num{color:#FBBF24;}
+.layer-row.l2 .layer-num{color:#60A5FA;}
+.layer-row.l3 .layer-num{color:#34D399;}
+.layer-name{font-size:22px;font-weight:800;color:#fff;min-width:160px;}
+.layer-desc{font-size:18px;color:rgba(255,255,255,0.78);font-weight:500;}
+.layer-tag{margin-left:auto;font-size:15px;font-weight:700;padding:4px 11px;border-radius:999px;border:1px solid;}
+.layer-row.l1 .layer-tag{color:#FBBF24;border-color:rgba(251,191,36,0.55);background:rgba(251,191,36,0.10);}
+.layer-row.l2 .layer-tag{color:#60A5FA;border-color:rgba(96,165,250,0.55);background:rgba(59,130,246,0.10);}
+.layer-row.l3 .layer-tag{color:#34D399;border-color:rgba(52,211,153,0.55);background:rgba(16,185,129,0.10);}
+.terminal-mini{background:#0a0a0a;border-radius:12px;border:1.5px solid rgba(96,165,250,0.30);overflow:hidden;}
+.term-bar{background:#1a1a1a;padding:10px 16px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.term-dot{width:11px;height:11px;border-radius:50%;}
+.term-dot.red{background:#FF5F57;}.term-dot.yellow{background:#FEBC2E;}.term-dot.green{background:#28C840;}
+.term-title-mini{margin-left:10px;font-size:18px;color:#6b7280;font-family:'JetBrains Mono',monospace;}
+.term-body{padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:21px;line-height:1.7;}
+.term-prompt{color:#6b7280;}.term-cmd{color:#60A5FA;}.term-ok{color:#34D399;}.term-var{color:#A78BFA;}.term-val{color:#FCD34D;}.term-warn{color:#FCA5A5;font-weight:700;}.term-muted{color:#94a3b8;}.term-shift{color:#FBBF24;font-weight:700;}.term-block{color:#34D399;font-weight:700;}
+.stat-label{font-size:22px;color:#60A5FA;letter-spacing:0.12em;font-weight:700;margin-bottom:12px;}
+.stat-grid{display:flex;flex-direction:column;gap:11px;}
+.stat-item{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.stat-item:nth-child(1){border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.stat-item:nth-child(2){border-color:rgba(96,165,250,0.45);background:linear-gradient(92deg,rgba(59,130,246,0.12),rgba(15,23,42,0.55));}
+.stat-item:nth-child(3){border-color:rgba(52,211,153,0.45);background:linear-gradient(92deg,rgba(16,185,129,0.12),rgba(15,23,42,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:110px;}
+.stat-item:nth-child(1) .stat-num{color:#FBBF24;}
+.stat-item:nth-child(2) .stat-num{color:#60A5FA;}
+.stat-item:nth-child(3) .stat-num{color:#34D399;}
+.stat-name{font-size:20px;color:rgba(255,255,255,0.85);font-weight:700;}
+.cases{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+.case-chip{font-size:15px;color:rgba(255,255,255,0.80);font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.45);font-family:'JetBrains Mono',monospace;}
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid rgba(96,165,250,0.22);}
+.repo{font-size:22px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#60A5FA;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:20px;}
+.repo .repo-path{background:rgba(59,130,246,0.12);padding:4px 12px;border-radius:7px;border:1px solid rgba(96,165,250,0.25);}
+.author{font-size:20px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-green"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+  <div class="top-row">
+    <div class="ep-num">E07</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E07</div>
+    <div class="skip-tag">◆ 闭环试点下</div>
+  </div>
+  <h1 class="title"><span class="title-grad">防 AI 偷改测试</span></h1>
+  <div class="subtitle">三层防护<span class="sub-divider">·</span>四真实案例<span class="sub-divider">·</span><span class="sub-strong">10 行到 15000 行</span></div>
+  <div class="main">
+    <div>
+      <div class="layers-label">三层防护 · 层层拦截</div>
+      <div class="layers">
+        <div class="layer-row l1">
+          <span class="layer-num">L1</span>
+          <span class="layer-name">权限硬拦截</span>
+          <span class="layer-desc">禁写测试目录</span>
+          <span class="layer-tag">源头</span>
+        </div>
+        <div class="layer-row l2">
+          <span class="layer-num">L2</span>
+          <span class="layer-name">TDD 铁律</span>
+          <span class="layer-desc">先红后绿</span>
+          <span class="layer-tag">流程</span>
+        </div>
+        <div class="layer-row l3">
+          <span class="layer-num">L3</span>
+          <span class="layer-name">断言不删</span>
+          <span class="layer-desc">diff 审计</span>
+          <span class="layer-tag">审计</span>
+        </div>
+      </div>
+      <div class="terminal-mini">
+        <div class="term-bar"><span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span><span class="term-title-mini">Terminal — 防偷改</span></div>
+        <div class="term-body">
+          <div><span class="term-prompt">$</span> <span class="term-cmd">git diff</span> <span class="term-var">tests/</span></div>
+          <div><span class="term-warn">⛔ BLOCKED</span> <span class="term-muted">写入 tests/ 被拦截</span></div>
+          <div><span class="term-prompt">$</span> <span class="term-cmd">/devflow</span> <span class="term-var">--change</span> fix</div>
+          <div><span class="term-ok">⚡ RED</span> <span class="term-val">assert == false</span></div>
+          <div><span class="term-block">✓ GREEN</span> <span class="term-shift">断言保留</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="stat-label">真实案例 · 10→15000 行</div>
+      <div class="stat-grid">
+        <div class="stat-item"><span class="stat-num">12</span><span class="stat-name">Controller</span></div>
+        <div class="stat-item"><span class="stat-num">211</span><span class="stat-name">API 全链路</span></div>
+        <div class="stat-item"><span class="stat-num">15000</span><span class="stat-name">行 TDD 严守</span></div>
+      </div>
+      <div class="cases">
+        <span class="case-chip">案例1 · 10行 修复</span>
+        <span class="case-chip">案例2 · 200行</span>
+      </div>
+      <div class="cases" style="margin-top:6px;">
+        <span class="case-chip">案例3 · 3000行 重构</span>
+        <span class="case-chip">案例4 · 15000行</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

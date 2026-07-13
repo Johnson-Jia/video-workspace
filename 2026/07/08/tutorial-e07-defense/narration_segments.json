@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 32,
+    "emotion": "explain-三层防护+权限层关键",
+    "text": "防护三层，第二层是关键。首层提示词：CLAUDE.md 写明严禁修改测试文件。但提示词靠 AI 自觉，会被绕过。第二层权限（关键）：settings.json 的 deny 硬性拦截。Write test 编辑 test 直接拒绝，AI 改不了。第三层 Git 兜底：先提交测试，完成后 git diff 检查测试文件有没有被动。三层叠加，提示词挡大部分，权限兜底硬拦截，Git 最后核查。",
+    "narration": "防护三层，第二层是关键。首层提示词：CLAUDE.md 写明严禁修改测试文件。但提示词靠 AI 自觉，会被绕过。第二层权限（关键）：settings.json 的 deny 硬性拦截。Write test 编辑 test 直接拒绝，AI 改不了。第三层 Git 兜底：先提交测试，完成后 git diff 检查测试文件有没有被动。三层叠加，提示词挡大部分，权限兜底硬拦截，Git 最后核查。",
+    "hook_anchors": ["防护三层", "第二层是关键", "首层提示词", "CLAUDE.md", "严禁修改测试文件", "靠 AI 自觉", "会被绕过", "第二层权限", "settings.json", "deny 硬性拦截", "直接拒绝", "AI 改不了", "第三层 Git 兜底", "先提交测试", "git diff", "检查测试文件", "三层叠加", "提示词挡大部分", "权限兜底硬拦截", "Git 最后核查"],
+    "visual_type": "tutorial_explain",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「三层防护 · 第二层是关键」fade-in", "duration_share": 0.12, "narration_anchor": {"start_sentence": 0, "end_sentence": 0}},
+      {"phase": 2, "start_offset": 4, "focus": "首层提示词卡（CLAUDE.md 严禁修改测试 · 靠自觉会被绕过）reveal", "duration_share": 0.22, "narration_anchor": {"start_sentence": 1, "end_sentence": 2}},
+      {"phase": 3, "start_offset": 12, "focus": "第二层权限卡 金边强调（settings.json deny 硬性拦截 · 直接拒绝 AI 改不了）reveal", "duration_share": 0.30, "narration_anchor": {"start_sentence": 3, "end_sentence": 4}},
+      {"phase": 4, "start_offset": 22, "focus": "第三层 Git 兜底卡 + 三层叠加总结条（提示词挡大部分/权限硬拦截/Git 最后核查）reveal", "duration_share": 0.36, "narration_anchor": {"start_sentence": 5, "end_sentence": 6}}
+    ],
+    "bg_component": "dark_cipher"
+  }
+]

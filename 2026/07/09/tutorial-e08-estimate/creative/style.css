@@ -1,0 +1,346 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-blue-light: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #FCA5A5;
+  --tut-purple: #C4B5FD;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --tut-sh: 0 2px 6px rgba(30,41,59,0.32);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E08 段6 事前估算 vs 事后统计（estimate 表格核心段）
+ * 横屏 1920x1080 / 单场景 4 phase（标题/公式/场景表/实测落点+金句）
+ * 渐变文字同色系禁白端点 + text-shadow 深蓝 drop（禁发光）
+ * ============================================ */
+
+/* 渐变同色系（无白端点） */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* ===== phase-1：标题区（左对齐建锚点） ===== */
+.s1-title-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  gap: 20px; padding: 80px 130px;
+  text-align: left;
+}
+.s1-eyebrow {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-blue-light);
+  text-shadow: var(--tut-sh);
+}
+.s1-title {
+  font-family: 'Inter'; font-size: 108px; font-weight: 900; line-height: 1.02;
+  margin: 0;
+  text-shadow: var(--tut-sh);
+}
+.s1-subtitle {
+  font-family: 'Noto Sans SC'; font-size: 44px; font-weight: 700; letter-spacing: 0.03em;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+}
+
+/* ===== phase-2：估算公式卡（分子÷分母=AI占比） ===== */
+.s2-formula-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 70px 130px;
+  gap: 30px;
+}
+.s2-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+  align-self: flex-start;
+}
+.s2-formula-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 18px;
+  padding: 48px 80px;
+  border: 3px solid rgba(251,191,36,0.55);
+  border-radius: 28px;
+  background: rgba(15,23,42,0.62);
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.18) inset, 0 12px 40px rgba(15,23,42,0.50);
+}
+.s2-formula-line {
+  display: flex; align-items: center; justify-content: center;
+  gap: 22px;
+  font-family: var(--font-body); font-size: 50px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+}
+.s2-num-part {
+  padding: 10px 26px;
+  border: 2px solid rgba(96,165,250,0.55);
+  border-radius: 14px;
+  background: rgba(59,130,246,0.10);
+  color: #93C5FD;
+}
+.s2-plus {
+  font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; color: var(--tut-blue-light);
+}
+.s2-divider {
+  width: 560px; height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(251,191,36,0.85), transparent);
+  border-radius: 2px;
+}
+.s2-denominator {
+  font-family: var(--font-body); font-size: 48px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+  padding: 8px 30px;
+  border: 2px solid rgba(96,165,250,0.45);
+  border-radius: 14px;
+  background: rgba(59,130,246,0.08);
+}
+.s2-equals {
+  font-family: 'JetBrains Mono'; font-size: 60px; font-weight: 900; color: var(--tut-gold);
+  margin-top: 4px;
+}
+.s2-result {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: var(--tut-sh);
+}
+.s2-hint {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+  text-align: center;
+}
+
+/* ===== phase-3：场景表 4 行（AI 占比列柱状条） ===== */
+.s3-table-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: stretch;
+  padding: 60px 100px;
+  gap: 18px;
+}
+.s3-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-blue-light);
+  text-shadow: var(--tut-sh);
+}
+.s3-table {
+  display: flex; flex-direction: column;
+  border: 2px solid rgba(96,165,250,0.30);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(15,23,42,0.55);
+}
+.s3-row {
+  display: flex; align-items: center;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(96,165,250,0.18);
+}
+.s3-row:last-child { border-bottom: none; }
+.s3-row-head {
+  background: rgba(59,130,246,0.18);
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.04em;
+  color: var(--tut-blue-light);
+}
+.s3-row-data {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-blue-white);
+}
+.s3-row-avg {
+  background: rgba(251,191,36,0.12);
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  color: #FCD34D;
+  border-top: 2px solid rgba(251,191,36,0.45);
+}
+.s3-cell {
+  padding: 6px 12px;
+  text-shadow: var(--tut-sh);
+}
+.s3-col-scene { flex: 0 0 28%; }
+.s3-col-core { flex: 0 0 16%; text-align: center; font-family: 'JetBrains Mono'; }
+.s3-col-aux { flex: 0 0 16%; text-align: center; font-family: 'JetBrains Mono'; }
+.s3-col-ratio { flex: 1 1 auto; }
+.s3-bar-wrap {
+  position: relative;
+  width: 100%; height: 42px;
+  background: rgba(15,23,42,0.65);
+  border-radius: 10px;
+  border: 1px solid rgba(96,165,250,0.20);
+  overflow: hidden;
+  display: flex; align-items: center; padding: 0 14px;
+}
+.s3-bar {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(59,130,246,0.30);
+}
+.s3-bar-blue {
+  background: linear-gradient(90deg, #60A5FA 0%, #60A5FA 100%);
+}
+.s3-bar-gold {
+  background: linear-gradient(90deg, #F59E0B 0%, #FBBF24 100%);
+  box-shadow: 0 0 14px rgba(251,191,36,0.40);
+}
+.s3-bar-label {
+  position: relative; z-index: 2;
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.50);
+  margin-left: auto;
+}
+
+/* ===== phase-4：实测落点 + 金句 ===== */
+.s4-result-block {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: 60px 110px;
+  gap: 24px;
+}
+.s4-label {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+}
+.s4-actual-row {
+  display: flex; align-items: stretch; gap: 36px;
+  flex: 1 1 auto;
+}
+.s4-actual-card {
+  flex: 0 0 38%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 14px;
+  padding: 30px 40px;
+  border: 3px solid rgba(251,191,36,0.65);
+  border-radius: 24px;
+  background: rgba(15,23,42,0.62);
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.18) inset, 0 12px 40px rgba(15,23,42,0.50);
+}
+.s4-actual-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--tut-gold);
+  text-shadow: var(--tut-sh);
+}
+.s4-actual-value {
+  font-family: 'Inter'; font-size: 124px; font-weight: 900; line-height: 1.0;
+  text-shadow: var(--tut-sh);
+}
+.s4-actual-check {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  text-shadow: var(--tut-sh);
+  text-align: center;
+}
+.s4-range-bar {
+  flex: 1 1 auto;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 18px;
+}
+.s4-range-track {
+  position: relative;
+  width: 100%; height: 72px;
+  background: rgba(15,23,42,0.65);
+  border-radius: 14px;
+  border: 1px solid rgba(96,165,250,0.25);
+  overflow: visible;
+}
+/* 实测填充条：从 0 填到 76.6%，金色实心，区别于估算 zone 的绿色半透 */
+.s4-range-fill {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 76.6%;
+  background: linear-gradient(90deg, rgba(96,165,250,0.45) 0%, rgba(251,191,36,0.55) 100%);
+  border-radius: 14px 0 0 14px;
+  box-shadow: 0 0 18px rgba(251,191,36,0.30);
+}
+.s4-range-zone {
+  position: absolute; top: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(52,211,153,0.18), rgba(52,211,153,0.30), rgba(52,211,153,0.18));
+  border-radius: 8px;
+  border: 1px dashed rgba(52,211,153,0.55);
+}
+.s4-range-zone-label {
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #6EE7B7;
+  text-shadow: var(--tut-sh);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.s4-range-marker {
+  position: absolute; top: -22px; bottom: -22px;
+  display: flex; flex-direction: column; align-items: center;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+/* 金边大 dot：圆形 + 双层金边 + 强光晕 */
+.s4-range-dot {
+  width: 56px; height: 56px;
+  background: radial-gradient(circle, #FCD34D 0%, #FBBF24 50%, #F59E0B 100%);
+  border-radius: 50%;
+  border: 4px solid #FCD34D;
+  box-shadow:
+    0 0 0 4px rgba(251,191,36,0.30),
+    0 0 28px rgba(251,191,36,0.85),
+    0 0 56px rgba(251,191,36,0.45),
+    inset 0 0 14px rgba(255,255,255,0.40);
+}
+/* 76.6% tag：金色徽章，dot 上方 */
+.s4-range-tag {
+  position: absolute;
+  top: -64px;
+  font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900;
+  color: #0F172A;
+  background: linear-gradient(180deg, #FCD34D 0%, #FBBF24 100%);
+  padding: 8px 22px;
+  border-radius: 12px;
+  border: 2px solid #F59E0B;
+  box-shadow: 0 4px 16px rgba(251,191,36,0.55), 0 0 0 3px rgba(15,23,42,0.60);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.s4-range-tag::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #FBBF24;
+}
+.s4-range-scale {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-light);
+  text-shadow: var(--tut-sh);
+}
+.s4-range-scale span:nth-child(2) {
+  color: #6EE7B7;
+}
+.s4-quote-block {
+  display: flex; justify-content: center; align-items: center;
+  padding: 18px 30px;
+  border-top: 2px solid rgba(96,165,250,0.20);
+}
+.s4-quote {
+  font-family: 'Inter'; font-size: 56px; font-weight: 900; letter-spacing: 0.02em;
+  text-shadow: var(--tut-sh);
+  text-align: center;
+}
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.s1-title, .s1-subtitle, .s2-formula-line, .s2-num-part, .s2-denominator,
+.s2-result, .s2-hint, .s3-cell, .s3-bar-label, .s4-actual-value,
+.s4-actual-check, .s4-range-scale, .s4-quote {
+  word-break: break-word; overflow-wrap: break-word;
+}

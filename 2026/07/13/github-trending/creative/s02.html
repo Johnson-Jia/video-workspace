@@ -1,0 +1,95 @@
+<!-- 场景: scene-2 | 双项目对比（Vibe-Trading vs destructive_command_guard）
+     重构：去掉中心 VS 圆，改上下分屏双卡，对比清晰美观 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+  <!-- 顶部暖底 / 底部冷底，呼应上下双卡氛围（弱渐变不抢内容）-->
+  <div style="position:absolute;top:0;left:0;width:100%;height:50%;background:linear-gradient(180deg,rgba(245,194,68,0.06),transparent);z-index:1"></div>
+  <div style="position:absolute;bottom:0;left:0;width:100%;height:50%;background:linear-gradient(0deg,rgba(77,214,232,0.06),transparent);z-index:1"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx-beam：上下分区横向扫描（暖冷呼应）-->
+  <div class="fx-beam" style="top:24%;background:linear-gradient(90deg,transparent,rgba(245,194,68,0.45),transparent)"></div>
+  <div class="fx-beam" style="top:74%;background:linear-gradient(90deg,transparent,rgba(77,214,232,0.45),transparent);animation-delay:1.2s"></div>
+  <!-- fx-scan：纵向监控感扫描 -->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(245,245,245,0.12),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1：上下分屏双卡对照（去掉中心 VS 圆，对比清晰）-->
+  <div class="vs-stack">
+    <!-- 上：Vibe-Trading（暖金，AI 做交易）-->
+    <div class="vs-card warm">
+      <div class="vs-card-head">
+        <span class="vs-tag warm">AI 帮你做交易</span>
+        <span class="vs-lang warm">Python</span>
+      </div>
+      <div class="vs-name">
+        <span class="vs-owner">HKUDS /</span>
+        <span class="vs-repo grad-gold">Vibe-Trading</span>
+      </div>
+      <div class="vs-role-row warm">
+        <span class="vs-icon">📈</span>
+        <span class="vs-role">个人交易 AI Agent · 港大实验室</span>
+      </div>
+      <div class="vs-desc">集成回测 + 量化策略 · 多 Agent 协作</div>
+    </div>
+    <!-- 中央分隔条（替代 VS 圆，干净轻量）-->
+    <div class="vs-sep"><span>vs</span></div>
+    <!-- 下：destructive_command_guard（冷青，防 AI 删硬盘）-->
+    <div class="vs-card cool">
+      <div class="vs-card-head">
+        <span class="vs-tag cool">防 AI 删你硬盘</span>
+        <span class="vs-lang cool">Rust</span>
+      </div>
+      <div class="vs-name">
+        <span class="vs-owner">Dicklesworthstone /</span>
+        <span class="vs-repo grad-cyan">destructive_command_guard</span>
+      </div>
+      <div class="vs-role-row cool">
+        <span class="vs-icon">🛡️</span>
+        <span class="vs-role">危险命令守护 · AI 安全赛道</span>
+      </div>
+      <div class="vs-desc">拦 rm -rf · 危险 git / shell 命令</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2：保留对照持续到旁白结束（双卡静态 + 涨星数据强化）-->
+  <div class="vs-stack">
+    <div class="vs-card warm">
+      <div class="vs-card-head">
+        <span class="vs-tag warm">同日 · 同向涨星</span>
+        <span class="vs-lang warm">Python</span>
+      </div>
+      <div class="vs-name">
+        <span class="vs-owner">HKUDS /</span>
+        <span class="vs-repo grad-gold">Vibe-Trading</span>
+      </div>
+      <div class="vs-role-row warm">
+        <span class="vs-icon">📈</span>
+        <span class="vs-role warm-emph">+776 今日涨星 · 领跑</span>
+      </div>
+      <div class="vs-desc">MCP 支持 · 回测验证 · 量化策略</div>
+    </div>
+    <div class="vs-sep"><span>vs</span></div>
+    <div class="vs-card cool">
+      <div class="vs-card-head">
+        <span class="vs-tag cool">反方向 · 守护安全</span>
+        <span class="vs-lang cool">Rust</span>
+      </div>
+      <div class="vs-name">
+        <span class="vs-owner">Dicklesworthstone /</span>
+        <span class="vs-repo grad-cyan">destructive_command_guard</span>
+      </div>
+      <div class="vs-role-row cool">
+        <span class="vs-icon">🛡️</span>
+        <span class="vs-role cool-emph">+444 今日涨星 · 紧随</span>
+      </div>
+      <div class="vs-desc">守护 git / shell · Rust 实现 · CLI</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

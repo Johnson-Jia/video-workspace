@@ -1,0 +1,325 @@
+:root {
+  --bg-deep: #0A0805;
+  --bg-deeper: #050302;
+  --gold: #FFB800;
+  --gold-light: #FFD66B;
+  --gold-sand: #D4A017;
+  --amber: #FF6B00;
+  --amber-warn: #8B2500;
+  --warn-red: #B33A3A;
+  --cool-green: #34D399;
+  --cool-green-light: #6EE7B7;
+  --text: #F5E6C8;
+  --text2: rgba(245,230,200,0.62);
+  --card-bg: rgba(26,16,8,0.88);
+  --card-bg-soft: rgba(40,24,10,0.78);
+  --card-bg-green: rgba(10,28,18,0.86);
+  --card-bg-danger: rgba(40,12,8,0.85);
+  --font-title: 'Ma Shan Zheng','PingFang SC','Microsoft YaHei',cursive;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 400;
+}
+
+/* ============================================
+ * 自定义组件 CSS（goldminer 暖金失败复盘风）
+ * 基础层（.clip, .layer-*, .phase, .fx-*）由 assemble 脚本自动注入
+ * 渐变文字两端都亮（禁暗端），text-shadow alpha ≤0.32
+ * ============================================ */
+
+/* === 暖金渐变文字（同色系高饱和，亮端 → 主色 → 亮端） === */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FFD66B 0%, #FFB800 45%, #FFD66B 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.grad-amber {
+  background-image: linear-gradient(135deg, #FFB37A 0%, #FF6B00 50%, #FFB37A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.grad-red {
+  background-image: linear-gradient(135deg, #F87171 0%, #FF6B00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.grad-green {
+  background-image: linear-gradient(135deg, #6EE7B7 0%, #34D399 50%, #6EE7B7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+/* 渐变文字同色系极淡 drop（偏移阴影，禁 0 0 泛光，alpha ≤ 0.32，禁黑色） */
+.glow-gold { text-shadow: 0 3px 8px rgba(255,140,40,0.28); }
+.glow-amber { text-shadow: 0 3px 8px rgba(255,107,0,0.28); }
+.glow-red { text-shadow: 0 3px 8px rgba(200,80,40,0.26); }
+.glow-green { text-shadow: 0 3px 8px rgba(52,211,153,0.28); }
+/* 纯色文字深色描边 */
+.stroke-dark { -webkit-text-stroke: 1.5px rgba(10,8,5,0.7); }
+
+/* === 卡片（深色不透明底 alpha≥0.78 挡 fx 光晕） === */
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,184,0,0.30);
+  border-radius: 18px;
+  padding: 32px 38px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,184,0,0.12);
+  position: relative;
+}
+.card-soft {
+  background: var(--card-bg-soft);
+  border: 1px solid rgba(255,107,0,0.25);
+  border-radius: 14px;
+  padding: 26px 30px;
+}
+.card-danger {
+  background: var(--card-bg-danger);
+  border: 1px solid rgba(179,58,58,0.45);
+  border-radius: 14px;
+  padding: 26px 30px;
+  box-shadow: 0 8px 28px rgba(80,12,12,0.4);
+}
+.card-green {
+  background: var(--card-bg-green);
+  border: 1px solid rgba(52,211,153,0.40);
+  border-radius: 14px;
+  padding: 26px 30px;
+  box-shadow: 0 8px 28px rgba(10,40,28,0.45);
+}
+
+/* === 数据条 === */
+.bar-track {
+  width: 100%;
+  height: 26px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 13px;
+  background: linear-gradient(90deg, #FFD66B, #FF6B00);
+  box-shadow: 0 0 16px rgba(255,184,0,0.45);
+}
+.bar-fill-amber {
+  background: linear-gradient(90deg, #FFB37A, #FF6B00);
+  box-shadow: 0 0 16px rgba(255,107,0,0.45);
+}
+.bar-fill-red {
+  background: linear-gradient(90deg, #FF8C40, #B33A3A);
+  box-shadow: 0 0 14px rgba(179,58,58,0.45);
+}
+.bar-fill-short {
+  background: linear-gradient(90deg, #FFD66B, #D4A017);
+  box-shadow: 0 0 12px rgba(212,160,23,0.4);
+}
+.bar-fill-green {
+  background: linear-gradient(90deg, #6EE7B7, #34D399);
+  box-shadow: 0 0 14px rgba(52,211,153,0.45);
+}
+
+/* === 胶囊小标签（纯场景色 + border-box，禁 grad-clip:text） === */
+.tag-pill {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(255,184,0,0.14);
+  border: 1px solid rgba(255,184,0,0.45);
+  color: var(--gold);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.tag-pill-amber {
+  background: rgba(255,107,0,0.14);
+  border-color: rgba(255,107,0,0.45);
+  color: var(--amber);
+}
+.tag-pill-warn {
+  background: rgba(139,37,0,0.22);
+  border-color: rgba(179,58,58,0.55);
+  color: #FF8C40;
+}
+.tag-pill-green {
+  background: rgba(52,211,153,0.14);
+  border-color: rgba(52,211,153,0.50);
+  color: var(--cool-green);
+}
+
+/* === 列表行（图标/序号+文字 垂直成列 左对齐） === */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+}
+.list-row .item-num {
+  font-family: var(--font-data);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--amber);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* === 中央 max-width 块居中兜底 === */
+.center-block { margin: 0 auto; }
+
+/* === fx 暖光晕（blur≤30） === */
+.fx-glow-amber {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+}
+.fx-glow-red {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+.fx-glow-green {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+/* === 双栏对比 === */
+.compare-cols {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+.compare-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* === 时间轴节点 === */
+.tick-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.tick-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(255,184,0,0.55);
+}
+.tick-dot-amber { background: var(--amber); box-shadow: 0 0 12px rgba(255,107,0,0.55); }
+.tick-dot-red { background: var(--warn-red); box-shadow: 0 0 14px rgba(179,58,58,0.65); }
+
+/* === 讨论问题强调框 === */
+.discuss-box {
+  border: 2px solid rgba(255,184,0,0.55);
+  border-radius: 16px;
+  padding: 24px 30px;
+  background: rgba(255,184,0,0.06);
+  text-align: center;
+}
+
+/* === 漏斗（顶宽 → 底窄） === */
+.funnel-top {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, rgba(255,184,0,0.32), rgba(255,184,0,0.18));
+  border: 1px solid rgba(255,184,0,0.45);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.funnel-mid {
+  width: 60%;
+  height: 56px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(255,107,0,0.30), rgba(255,107,0,0.16));
+  border: 1px solid rgba(255,107,0,0.45);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.funnel-bottom {
+  width: 22%;
+  height: 56px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(179,58,58,0.40), rgba(179,58,58,0.24));
+  border: 1px solid rgba(179,58,58,0.55);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === 宝藏箱图标（loot 段，CSS） === */
+.chest-icon {
+  width: 110px; height: 80px;
+  position: relative;
+  flex-shrink: 0;
+}
+.chest-icon::before {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 48px;
+  background: linear-gradient(180deg, var(--gold-sand), var(--amber-warn));
+  border-radius: 8px 8px 6px 6px;
+  box-shadow: 0 0 18px rgba(255,184,0,0.45);
+}
+.chest-icon::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px;
+  width: 100%; height: 32px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 0 16px rgba(255,214,107,0.55);
+}
+
+/* === 钻头/镐图标（淘金） === */
+.pick-icon {
+  width: 70px; height: 90px;
+  position: relative;
+  flex-shrink: 0;
+}
+.pick-icon::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 8px; height: 70px;
+  background: linear-gradient(180deg, var(--gold-sand), var(--amber-warn));
+  border-radius: 4px;
+  transform: translateX(-50%);
+}
+.pick-icon::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 64px; height: 22px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  border-radius: 32px;
+  transform: translateX(-50%) rotate(-20deg);
+  box-shadow: 0 0 14px rgba(255,184,0,0.55);
+}

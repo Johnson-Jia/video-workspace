@@ -1,0 +1,107 @@
+<!-- 场景: scene-1 | 时长: 29.59s | bg: dark_cipher | 三件套结构：概览 + SKILL.md 入口 + reference/scripts 按需 + rules 覆盖 + 自包含收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金入口 + 蓝按需 + 紫覆盖 + 绿收尾；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:54%;left:24%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:54%;left:76%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:84%;left:50%;transform:translateX(-50%);width:900px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:78%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:30%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:70%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 triad-scene">
+  <!-- phase-1 (0-4.5s): 三件套概览 + 大字「一个 skill 的三件套」 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 三件套结构 · 核心段</div>
+  </div>
+  <div class="region-mid triad-overview">
+    <div class="triad-title">一个 skill 的 <span class="grad-gold">三件套</span> 结构</div>
+    <div class="triad-mini-row">
+      <div class="triad-mini mini-gold"><span class="mini-icon">📄</span> SKILL.md</div>
+      <div class="triad-mini mini-blue"><span class="mini-icon">📚</span> reference / scripts</div>
+      <div class="triad-mini mini-purple"><span class="mini-icon">⚙</span> rules</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 三件套结构 —</div>
+  </div>
+</div>
+<div class="phase phase-2 triad-scene">
+  <!-- phase-2 (4.5-15s): 第 1 层入口 SKILL.md 详解（金） -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 三件套 · 第 1 层 入口</div>
+  </div>
+  <div class="region-mid layer-block layer-1">
+    <div class="layer-head">
+      <div class="layer-num grad-gold">01</div>
+      <div class="layer-name">入口 · <span class="mono-gold">SKILL.md</span></div>
+      <div class="layer-tag tag-gold">必选</div>
+    </div>
+    <div class="layer-desc">声明这个 skill <span class="kw-gold">干什么</span> · <span class="kw-gold">怎么触发</span> · <span class="kw-gold">调用什么</span></div>
+    <div class="layer-detail-row">
+      <div class="detail-pill">干什么</div>
+      <div class="detail-pill">怎么触发</div>
+      <div class="detail-pill">调用什么</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 三件套结构 —</div>
+  </div>
+</div>
+<div class="phase phase-3 triad-scene">
+  <!-- phase-3 (15-24s): 第 2 层 reference/scripts 按需加载（蓝） -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 三件套 · 第 2 层 按需</div>
+  </div>
+  <div class="region-mid layer-block layer-2">
+    <div class="layer-head">
+      <div class="layer-num grad-blue">02</div>
+      <div class="layer-name">按需 · <span class="mono-blue">reference / scripts</span></div>
+      <div class="layer-tag tag-blue">详细资料 + 脚本</div>
+    </div>
+    <div class="layer-desc">SKILL.md <span class="kw-blue">只放骨架</span> · 细节放这里 · AI <span class="kw-blue">用到才读</span></div>
+    <div class="layer-benefit">
+      <div class="benefit-label">收益</div>
+      <div class="benefit-key grad-green">省上下文</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 三件套结构 —</div>
+  </div>
+</div>
+<div class="phase phase-4 triad-scene">
+  <!-- phase-4 (24-29.59s): 第 3 层 rules 覆盖（紫） + 自包含收尾 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 三件套 · 第 3 层 覆盖</div>
+  </div>
+  <div class="region-mid layer-block layer-3">
+    <div class="layer-head">
+      <div class="layer-num grad-purple">03</div>
+      <div class="layer-name">覆盖 · <span class="mono-purple">rules</span></div>
+      <div class="layer-tag tag-purple">可选</div>
+    </div>
+    <div class="layer-desc">改写底层 skill 的 <span class="kw-purple">默认行为</span> · 适配 <span class="kw-purple">团队的规矩</span></div>
+    <div class="triad-finale">三件套让 skill <span class="grad-gold">自包含</span> · <span class="grad-blue">可复用</span> · <span class="grad-green">不臃肿</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 三件套结构 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

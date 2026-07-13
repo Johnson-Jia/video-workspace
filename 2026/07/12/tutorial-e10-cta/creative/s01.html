@@ -1,0 +1,138 @@
+<!-- 场景: scene-1 | 时长: 23s | CTA：度量实操=数据底座 + E11 预告 + 关注 + 中性提问 -->
+<div class="layer-bg">
+<!-- bg-component: aurora_flow -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+<div style="position:absolute;inset:0;
+  background-image:
+    radial-gradient(ellipse 900px 500px at 25% 30%,rgba(96,165,250,0.14) 0%,transparent 60%),
+    radial-gradient(ellipse 800px 460px at 75% 60%,rgba(52,211,153,0.12) 0%,transparent 60%),
+    radial-gradient(ellipse 700px 420px at 50% 90%,rgba(251,191,36,0.10) 0%,transparent 60%);
+  animation:auroraShift 10s ease-in-out infinite alternate"></div>
+<div style="position:absolute;top:20%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.35),rgba(0,229,255,0.5),rgba(0,229,255,0.35),transparent);
+  box-shadow:0 0 22px rgba(0,229,255,0.30);animation:scanY 12s linear infinite"></div>
+<div style="position:absolute;top:45%;left:30%;width:13px;height:13px;border-radius:50%;
+  background:rgba(0,229,255,0.85);box-shadow:0 0 16px rgba(0,229,255,0.65);
+  animation:nodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:65%;left:65%;width:11px;height:11px;border-radius:50%;
+  background:rgba(52,211,153,0.85);box-shadow:0 0 14px rgba(52,211,153,0.65);
+  animation:nodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:55%;left:50%;width:12px;height:12px;border-radius:50%;
+  background:rgba(251,191,36,0.85);box-shadow:0 0 15px rgba(251,191,36,0.65);
+  animation:nodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 0%,hsla(200,30%,3%,0.55) 100%)"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:1200px;height:600px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(200,90%,55%,0.08) 0%,hsla(150,80%,50%,0.05) 40%,transparent 70%);
+  filter:blur(80px);pointer-events:none"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;left:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(200,85%,55%,0.50);box-shadow:0 0 16px hsla(200,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;right:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,85%,55%,0.50);box-shadow:0 0 16px hsla(150,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite 2.5s"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase tut-scene phase-1">
+
+  <!-- 顶部合集徽章 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:14px">
+    <div style="display:inline-block;padding:6px 18px;background:linear-gradient(90deg,rgba(96,165,250,0.20) 0%,rgba(52,211,153,0.20) 100%);border:1.5px solid rgba(96,165,250,0.55);border-radius:32px">
+      <span style="font-size:32px;font-weight:700;color:#60A5FA">E10</span>
+      <span style="font-size:32px;color:rgba(255,255,255,0.55);margin:0 8px">·</span>
+      <span style="font-size:32px;font-weight:700;color:#34D399">度量实操</span>
+    </div>
+  </div>
+
+  <!-- 主标 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:22px">
+    <div class="grad-title" style="font-size:68px;font-weight:900;letter-spacing:-1px;line-height:1.1;
+      background-image:linear-gradient(90deg,#60A5FA 0%,#34D399 50%,#FBBF24 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      转型的数据底座
+    </div>
+    <div style="font-size:32px;font-weight:500;color:rgba(255,255,255,0.82);margin-top:10px;
+      text-shadow:0 1px 4px rgba(15,23,42,0.30)">
+      有了真实占比，才知道转型到底见效没有
+    </div>
+  </div>
+
+  <!-- E11 预告卡 -->
+  <div class="region" data-reveal="1" style="margin:0 30px;padding:18px 22px;
+    background:linear-gradient(90deg,rgba(15,23,42,0.88) 0%,rgba(30,40,60,0.88) 100%);
+    border:2px solid rgba(251,191,36,0.55);border-radius:14px;
+    box-shadow:0 14px 40px rgba(15,23,42,0.55),0 0 28px rgba(251,191,36,0.10)">
+
+    <div style="display:flex;align-items:center;gap:18px">
+      <!-- 左：NEXT 标 -->
+      <div style="flex:0 0 auto;text-align:center">
+        <div style="font-size:32px;font-weight:900;color:#FBBF24">E11</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.65);margin-top:2px">下集</div>
+      </div>
+      <div style="width:2px;height:90px;background:linear-gradient(180deg,transparent,#FBBF24,transparent)"></div>
+      <!-- 中：标题 -->
+      <div style="flex:1">
+        <div style="font-size:38px;font-weight:900;color:#fff;line-height:1.2">Skill 仓库实操</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78);margin-top:6px">复制到 .claude 即用</div>
+      </div>
+      <!-- 右：数字徽章 -->
+      <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:8px">
+        <div style="padding:8px 14px;background:rgba(96,165,250,0.18);border:1.5px solid #60A5FA;border-radius:8px;text-align:center">
+          <div style="font-size:38px;font-weight:900;color:#60A5FA;font-family:'JetBrains Mono','Consolas',monospace;line-height:1">4</div>
+          <div style="font-size:32px;color:rgba(255,255,255,0.80);margin-top:2px">skill</div>
+        </div>
+        <div style="padding:8px 14px;background:rgba(52,211,153,0.18);border:1.5px solid #34D399;border-radius:8px;text-align:center">
+          <div style="font-size:38px;font-weight:900;color:#34D399;font-family:'JetBrains Mono','Consolas',monospace;line-height:1">13</div>
+          <div style="font-size:32px;color:rgba(255,255,255,0.80);margin-top:2px">条规范</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中部：关注 + 评论区 -->
+  <div class="region" data-reveal="2" style="margin:16px 30px 0;display:flex;gap:16px">
+    <div style="flex:1;padding:12px 18px;background:linear-gradient(90deg,rgba(251,191,36,0.15),rgba(251,191,36,0.05));border:1.5px solid rgba(251,191,36,0.45);border-radius:10px;display:flex;align-items:center;gap:14px">
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FBBF24,#F59E0B);display:flex;align-items:center;justify-content:center">
+        <div style="width:18px;height:18px;background:#fff;border-radius:50%"></div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:900;color:#FBBF24;line-height:1.1">点关注</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78)">合集还有 3 集，不走丢</div>
+      </div>
+    </div>
+    <div style="flex:1;padding:12px 18px;background:linear-gradient(90deg,rgba(96,165,250,0.15),rgba(96,165,250,0.05));border:1.5px solid rgba(96,165,250,0.45);border-radius:10px;display:flex;align-items:center;gap:14px">
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#60A5FA,#3B82F6);display:flex;align-items:center;justify-content:center">
+        <div style="width:22px;height:18px;border:2px solid #fff;border-radius:3px"></div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:900;color:#60A5FA;line-height:1.1">教程仓库</div>
+        <div style="font-size:32px;color:rgba(255,255,255,0.78)">链接在评论区</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部中性提问 -->
+  <div class="region" data-reveal="3" style="margin:18px 30px 0;padding:18px 22px;
+    background:linear-gradient(90deg,rgba(15,23,42,0.85) 0%,rgba(30,40,60,0.85) 100%);
+    border:2px solid rgba(52,211,153,0.55);border-radius:14px;text-align:center;
+    box-shadow:0 14px 40px rgba(15,23,42,0.55),0 0 24px rgba(52,211,153,0.10)">
+    <div style="font-size:32px;color:rgba(255,255,255,0.78);margin-bottom:6px">最后问你：</div>
+    <div class="grad-title" style="font-size:42px;font-weight:900;line-height:1.2;
+      background-image:linear-gradient(90deg,#FBBF24 0%,#34D399 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      你的团队，AI 占比度量了吗？
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" data-strength="0.18"></div>
+</div>

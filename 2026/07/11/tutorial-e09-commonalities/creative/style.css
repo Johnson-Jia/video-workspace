@@ -1,0 +1,107 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.cm-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.cm-pl-grid { width: 100%; display: flex; justify-content: stretch; }
+.cm-pl-summary { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.cm-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.cm-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.cm-h1 { font-family: 'Inter'; font-size: 88px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.cm-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 预告 —— */
+.cm-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.cm-preview { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.cm-prev-icon { font-size: 56px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.cm-prev-sep { font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 800; color: rgba(251,191,36,0.65); }
+
+/* —— phase-2 6 卡 2×3 网格 —— */
+.cm-grid {
+  width: 100%;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+  gap: 18px;
+}
+.cm-card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.80));
+  border: 2.5px solid;
+}
+.cm-card-blue { border-color: rgba(96,165,250,0.70); box-shadow: 0 0 22px rgba(96,165,250,0.20); }
+.cm-card-purple { border-color: rgba(167,139,250,0.70); box-shadow: 0 0 22px rgba(167,139,250,0.20); }
+.cm-card-green { border-color: rgba(52,211,153,0.70); box-shadow: 0 0 22px rgba(52,211,153,0.20); }
+.cm-card-gold { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 26px rgba(251,191,36,0.22); }
+.cm-card-red { border-color: rgba(248,113,113,0.70); box-shadow: 0 0 22px rgba(248,113,113,0.20); }
+.cm-card-head { display: flex; align-items: center; gap: 12px; }
+.cm-card-icon { font-size: 44px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.cm-card-name { font-family: 'Inter'; font-size: 38px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.cm-card-case { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.78); line-height: 1.25; }
+.cm-card-effect { display: flex; align-items: baseline; gap: 10px; margin-top: auto; }
+.cm-eff-num { font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 900; line-height: 1; }
+.cm-eff-label { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.65); }
+
+/* —— 提炼句 —— */
+.cm-summary {
+  align-self: stretch;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: linear-gradient(95deg, rgba(251,191,36,0.12), rgba(15,23,42,0.92));
+  border: 2px solid rgba(251,191,36,0.50);
+}
+.cm-sum-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FBBF24;
+  padding: 4px 14px; border-radius: 6px;
+  background: rgba(251,191,36,0.18);
+  border: 1px solid rgba(251,191,36,0.45);
+}
+.cm-sum-text { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-white); }
+
+/* —— phase-3 收尾 —— */
+.cm-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; justify-content: center; }
+.cm-closer-h1 { font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.05; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.cm-closer-sub { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-blue-white); }

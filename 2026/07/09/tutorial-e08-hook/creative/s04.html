@@ -1,0 +1,41 @@
+<!-- 场景: scene-4 | 时长: ~8s | Phase 4 陷阱：VS Code Copilot 误标 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+<div class="layer-fx">
+  <div class="fx-pulse-ring-cyan" style="top:35%;left:18%;border-color:rgba(248,113,113,0.22);box-shadow:0 0 60px rgba(248,113,113,0.10);"></div>
+  <div class="fx-aura-violet" style="top:60%;left:70%;"></div>
+  <div class="fx-glow-soft" style="top:25%;left:55%;background:radial-gradient(circle,rgba(248,113,113,0.14) 0%,transparent 70%);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="hook-scene">
+  <div class="region-top">
+    <div class="stage-tag" style="background:rgba(248,113,113,0.10);border-color:rgba(248,113,113,0.40);color:#F87171;"><span class="dot" style="background:#F87171;box-shadow:0 0 12px rgba(248,113,113,0.7);"></span>但 · 有个坑</div>
+  </div>
+  <div class="region-mid" style="flex-direction:column;justify-content:center;gap:24px;">
+    <div style="font-family:var(--font-title);font-size:46px;font-weight:800;color:var(--text);text-align:left;text-shadow:0 4px 16px rgba(30,41,59,0.32);line-height:1.25;">
+      VS Code 的 Copilot · 会对<br>
+      <span style="background-image:linear-gradient(135deg,#F87171 0%,#FCA5A5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">人手写的代码</span> · 也自动加 trailer
+    </div>
+    <div class="mislabel-block" data-reveal="fade-up">
+      <div class="mislabel-row">
+        <div class="warn-icon">!</div>
+        <div class="code-line">const total = price * count;</div>
+        <div class="auto-tag">+ Co-authored-by</div>
+      </div>
+      <div class="mislabel-row">
+        <div class="warn-icon">!</div>
+        <div class="code-line">// 人手写的业务逻辑</div>
+        <div class="auto-tag">+ Co-authored-by</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div style="font-family:var(--font-body);font-size:32px;color:rgba(248,113,113,0.85);">手写代码 · 被误标为 AI 生成</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>

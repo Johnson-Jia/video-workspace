@@ -1,0 +1,54 @@
+<!-- 场景: code-review | 时长: 9.67s | bg: diamond_lattice | 卡3: code-review 多 Agent（Haiku 资格 + 5 Sonnet 并行 + Haiku 打分阈值 80） -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_flow -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1180px;height:560px;border-radius:50%;background:radial-gradient(ellipse,hsla(150,75%,55%,0.18) 0%,transparent 70%);filter:blur(70px);opacity:0.75"></div>
+  <div class="fx-aura" style="position:absolute;top:24%;left:20%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse,hsla(150,75%,55%,0.14) 0%,transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:72%;left:78%;width:460px;height:200px;border-radius:50%;background:radial-gradient(ellipse,hsla(150,75%,55%,0.12) 0%,transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-particle" style="position:absolute;top:22%;left:84%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:86%;left:16%;width:9px;height:9px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div style="display:flex;flex-direction:column;justify-content:center;width:100%;height:100%;gap:18px">
+    <!-- 顶部标题 -->
+    <div data-reveal="0" data-reveal-dir="fade">
+      <div class="ma-subtitle" style="margin-top:0;color:rgba(52,211,153,0.75);font-family:var(--font-data);font-size:32px;letter-spacing:2px">玩法三</div>
+      <h1 class="ma-title" style="font-size:42px;background-image:linear-gradient(120deg,#a7f3d0,#34d399 60%,#60a5fa)">code-review 多 Agent</h1>
+    </div>
+    <!-- 卡3: code-review 多 Agent 流水线 -->
+    <div class="ma-card ma-card-green ma-badge-green" data-reveal="1" data-reveal-dir="left" style="display:flex">
+      <div class="ma-badge">
+        <div class="ma-badge-icon">CR</div>
+        <div class="ma-badge-name">code-review</div>
+      </div>
+      <div class="ma-body">
+        <div class="ma-card-title">多 Agent 流水线 · 分工 + 阈值卡控</div>
+        <!-- 流水线四步 -->
+        <div class="ma-flow" data-reveal="2" data-reveal-dir="bottom">
+          <span class="ma-flow-step">Haiku 资格审查</span>
+          <span class="ma-flow-arrow">→</span>
+          <span class="ma-flow-step">五个 Sonnet 并行专项审查</span>
+          <span class="ma-flow-arrow">→</span>
+          <span class="ma-flow-step">独立 Haiku 打置信度分</span>
+          <span class="ma-flow-arrow">→</span>
+          <span class="ma-flow-step">≥ 80 分才发评论</span>
+        </div>
+        <!-- 关键指标 -->
+        <div class="ma-points" data-reveal="3" data-reveal-dir="bottom">
+          <div class="ma-point"><span class="ma-point-dot"></span><span class="ma-pill ma-pill-green">Haiku</span>资格审查 + 置信度打分（独立双重）</div>
+          <div class="ma-point"><span class="ma-point-dot"></span><span class="ma-pill ma-pill-green">五个 Sonnet</span>并行专项审查 · 各管一块</div>
+          <div class="ma-point"><span class="ma-point-dot"></span><span class="ma-pill ma-pill-green">阈值 80 分</span>低于 80 不发评论 · 卡控噪声</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

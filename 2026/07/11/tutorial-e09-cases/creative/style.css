@@ -1,0 +1,142 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 12px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.cs-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.cs-pl-tl { width: 100%; display: flex; justify-content: stretch; }
+.cs-pl-compare { width: 100%; display: flex; justify-content: stretch; }
+.cs-pl-flow { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.cs-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.cs-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.cs-h1 { font-family: 'Inter'; font-size: 84px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.cs-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 mini 流向 —— */
+.cs-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.cs-flow-mini { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.cs-fm-node {
+  font-family: 'Noto Sans SC'; font-size: 40px; font-weight: 800;
+  color: var(--tut-blue-white);
+  padding: 10px 24px; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(15,23,42,0.72));
+  border: 2.5px solid;
+}
+.cs-fm-indiv { border-color: rgba(96,165,250,0.65); }
+.cs-fm-org { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 24px rgba(251,191,36,0.22); }
+.cs-fm-arrow { font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 900; color: rgba(251,191,36,0.80); }
+
+/* —— phase-2 4 案例 timeline —— */
+.cs-timelines { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.cs-tl {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: linear-gradient(95deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 2px solid;
+}
+.cs-tl-1 { border-color: rgba(96,165,250,0.60); }
+.cs-tl-2 { border-color: rgba(167,139,250,0.60); }
+.cs-tl-3 { border-color: rgba(248,113,113,0.60); }
+.cs-tl-4 { border-color: rgba(52,211,153,0.60); }
+.cs-tl-icon { font-size: 42px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); flex-shrink: 0; }
+.cs-tl-body { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cs-tl-name { font-family: 'Inter'; font-size: 36px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.cs-tl-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cs-tl-q { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(248,113,113,0.78); }
+.cs-tl-arr { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: rgba(251,191,36,0.75); }
+.cs-tl-a { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800; color: rgba(110,231,183,0.88); }
+.cs-tl-effect {
+  font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900;
+  color: var(--tut-blue-white);
+  padding: 6px 16px; border-radius: 8px;
+  background: rgba(96,165,250,0.14);
+  border: 1.5px solid rgba(96,165,250,0.40);
+  flex-shrink: 0;
+}
+.cs-tl-effect-gold {
+  color: #FCD34D;
+  background: rgba(251,191,36,0.18);
+  border-color: rgba(251,191,36,0.55);
+  box-shadow: 0 0 18px rgba(251,191,36,0.25);
+}
+
+/* —— 测试时长对比条形图 —— */
+.cs-compare {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: linear-gradient(95deg, rgba(251,191,36,0.10), rgba(15,23,42,0.92));
+  border: 2px solid rgba(251,191,36,0.45);
+}
+.cs-cmp-label { font-family: 'Inter'; font-size: 36px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.cs-cmp-bars { display: flex; flex-direction: column; gap: 8px; }
+.cs-cmp-row { display: flex; align-items: center; gap: 12px; }
+.cs-cmp-name { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800; color: rgba(224,231,255,0.75); width: 90px; flex-shrink: 0; }
+.cs-cmp-bar { flex: 1; height: 56px; display: flex; align-items: center; border-radius: 8px; background: rgba(15,23,42,0.60); overflow: hidden; padding: 0 4px; }
+.cs-cmp-fill { height: 40px; border-radius: 6px; }
+.cs-cmp-fill-old { width: 100%; background: linear-gradient(90deg, rgba(248,113,113,0.65), rgba(239,68,68,0.45)); border: 1px solid rgba(248,113,113,0.55); }
+.cs-cmp-fill-new { width: 12%; background: linear-gradient(90deg, rgba(251,191,36,0.85), rgba(245,158,11,0.55)); border: 1px solid rgba(251,191,36,0.70); box-shadow: 0 0 14px rgba(251,191,36,0.30); }
+.cs-cmp-val {
+  font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 900;
+  color: var(--tut-white);
+  margin-left: 14px;
+  white-space: nowrap;
+}
+
+/* —— phase-3 个体→组织大流向 —— */
+.cs-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; height: 100%; justify-content: center; }
+.cs-flow-big { display: flex; align-items: center; gap: 28px; }
+.cs-fb-node {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 24px 36px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 3px solid;
+}
+.cs-fb-indiv { border-color: rgba(96,165,250,0.65); }
+.cs-fb-org { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 36px rgba(251,191,36,0.24); }
+.cs-fb-icon { font-size: 64px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.cs-fb-name { font-family: 'Inter'; font-size: 44px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.cs-fb-arrow { font-family: 'JetBrains Mono'; font-size: 64px; font-weight: 900; color: rgba(251,191,36,0.85); }

@@ -1,0 +1,138 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E07 defense — 三层防护（权限层金边强调）
+ * 单场景 4 region data-reveal
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 180px 100px 100px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 18px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区 —— */
+.tut-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tut-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-title .title-h1 {
+  font-family: 'Inter'; font-size: 72px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-title .title-sub {
+  font-family: 'Inter'; font-size: 36px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 防护卡（横排 3 卡，权限层金边强调 + 锁图标） —— */
+.tut-defense-row { width: 100%; display: flex; gap: 22px; align-items: stretch; }
+.def-card {
+  flex: 1;
+  border-radius: 18px;
+  padding: 22px 24px;
+  border: 2px solid;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+  position: relative;
+}
+.def-1 { border-color: rgba(96,165,250,0.55); background: linear-gradient(165deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88)); }
+.def-2 { border-color: rgba(251,191,36,0.90); background: linear-gradient(165deg, rgba(251,191,36,0.20), rgba(15,23,42,0.88)); box-shadow: 0 0 0 2px rgba(251,191,36,0.40), 0 0 30px rgba(251,191,36,0.18); }
+.def-3 { border-color: rgba(110,231,183,0.55); background: linear-gradient(165deg, rgba(16,185,129,0.12), rgba(15,23,42,0.88)); }
+.def-icon {
+  font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 900; line-height: 1;
+  color: var(--tut-white);
+}
+.def-num {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.def-name {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.15;
+}
+.def-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.80);
+  line-height: 1.3;
+}
+.def-key {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.def-badge {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 900;
+  background: linear-gradient(92deg,#FBBF24,#FCD34D);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  letter-spacing: 0.08em;
+}
+
+/* —— 代码块（权限 deny 示例） —— */
+.tut-code {
+  width: 100%;
+  border-radius: 12px; padding: 16px 22px;
+  background: #0a0a0a;
+  border: 2px solid rgba(251,191,36,0.55);
+  font-family: 'JetBrains Mono'; font-size: 32px; line-height: 1.45;
+  color: var(--tut-white);
+  text-align: left;
+}
+.tut-code .cmt { color: rgba(110,231,183,0.85); }
+.tut-code .gold { color: var(--tut-gold); }
+.tut-code .blue { color: #93C5FD; }
+
+/* —— 三层叠加总结条 —— */
+.tut-summary {
+  border-radius: 16px; padding: 16px 32px;
+  border: 2px solid rgba(96,165,250,0.55);
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(15,23,42,0.88), rgba(110,231,183,0.12));
+  display: flex; flex-direction: row; align-items: center; gap: 24px;
+}
+.tut-summary .sum-tag { flex-shrink: 0; }
+.tut-summary .sum-main { text-align: left; flex: 1; }
+.sum-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em;
+}
+.sum-main {
+  font-family: 'Inter'; font-size: 40px; font-weight: 800; line-height: 1.2;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

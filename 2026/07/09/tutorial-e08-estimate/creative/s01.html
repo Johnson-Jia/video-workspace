@@ -1,0 +1,121 @@
+<!-- 场景: scene-1 | 时长: 39.58s | E08 段6 事前估算 vs 事后统计（表格核心段） -->
+<div class="layer-bg">
+  <!-- bg-component: wave_ripple -->
+  <!-- 深蓝底覆盖（教程统一）+ wave_ripple 同心波纹叠层（度量数据"扩散辐射"感） -->
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%, #152347 0%, #0F172A 55%, #08081a 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx：冷色静态发光类（无划过类），≥3 元素 -->
+  <div class="fx-aura" style="position:absolute;top:12%;left:6%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);filter:blur(22px);"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;right:5%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle, rgba(251,191,36,0.14) 0%, transparent 70%);filter:blur(24px);"></div>
+  <div class="fx-pulse-ring" style="position:absolute;top:22%;left:48%;width:200px;height:200px;border:2px solid rgba(96,165,250,0.20);border-radius:50%;"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:18%;width:6px;height:6px;border-radius:50%;background:rgba(110,231,183,0.30);box-shadow:0 0 12px rgba(110,231,183,0.20);"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1 (0~3.2s): 标题「事前估算 vs 事后统计」+ 副标题「占比有两种算法，要配合用」 -->
+  <div class="s1-title-block">
+    <div class="s1-eyebrow">E08 · 推广度量 · 段6 估算 vs 统计</div>
+    <h1 class="s1-title"><span class="grad-blue">事前估算</span> <span style="color:var(--tut-white);">vs</span> <span class="grad-gold">事后统计</span></h1>
+    <div class="s1-subtitle">占比有两种算法，<span style="color:#FBBF24;font-weight:800;">要配合用</span></div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2 (3.2~8.8s): 估算公式卡 —— 分子÷分母=AI占比（金边强调）+ 旁注 -->
+  <div class="s2-formula-block">
+    <div class="s2-label">事前估算 · 公式</div>
+    <div class="s2-formula-card">
+      <div class="s2-formula-line s2-numerator">
+        <span class="s2-num-part">AI 生成核心</span>
+        <span class="s2-plus">+</span>
+        <span class="s2-num-part">AI 辅助优化</span>
+      </div>
+      <div class="s2-divider"></div>
+      <div class="s2-denominator">总代码量</div>
+      <div class="s2-equals">=</div>
+      <div class="s2-result grad-gold">AI 占比</div>
+    </div>
+    <div class="s2-hint">推广前按场景估目标占比 · 用于<span style="color:#60A5FA;font-weight:800;">设预期</span>、<span style="color:#60A5FA;font-weight:800;">定考核</span></div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <!-- phase-3 (8.8~16.0s): 场景表 4 行（CRUD/复杂/Bug/平均，AI 占比列柱状条） -->
+  <div class="s3-table-block">
+    <div class="s3-label">场景表 · AI 占比目标</div>
+    <div class="s3-table">
+      <div class="s3-row s3-row-head">
+        <div class="s3-cell s3-col-scene">开发场景</div>
+        <div class="s3-cell s3-col-core">AI 生成核心</div>
+        <div class="s3-cell s3-col-aux">AI 辅助优化</div>
+        <div class="s3-cell s3-col-ratio">AI 占比目标</div>
+      </div>
+      <div class="s3-row s3-row-data">
+        <div class="s3-cell s3-col-scene">简单接口 CRUD</div>
+        <div class="s3-cell s3-col-core">80%</div>
+        <div class="s3-cell s3-col-aux">10%</div>
+        <div class="s3-cell s3-col-ratio">
+          <div class="s3-bar-wrap"><div class="s3-bar s3-bar-blue" style="width:90%;"></div><span class="s3-bar-label">90%</span></div>
+        </div>
+      </div>
+      <div class="s3-row s3-row-data">
+        <div class="s3-cell s3-col-scene">复杂业务逻辑</div>
+        <div class="s3-cell s3-col-core">50%</div>
+        <div class="s3-cell s3-col-aux">20%</div>
+        <div class="s3-cell s3-col-ratio">
+          <div class="s3-bar-wrap"><div class="s3-bar s3-bar-blue" style="width:70%;"></div><span class="s3-bar-label">70%</span></div>
+        </div>
+      </div>
+      <div class="s3-row s3-row-data">
+        <div class="s3-cell s3-col-scene">Bug 修复/优化</div>
+        <div class="s3-cell s3-col-core">30%</div>
+        <div class="s3-cell s3-col-aux">40%</div>
+        <div class="s3-cell s3-col-ratio">
+          <div class="s3-bar-wrap"><div class="s3-bar s3-bar-blue" style="width:70%;"></div><span class="s3-bar-label">70%</span></div>
+        </div>
+      </div>
+      <div class="s3-row s3-row-avg">
+        <div class="s3-cell s3-col-scene">平均</div>
+        <div class="s3-cell s3-col-core">53.3%</div>
+        <div class="s3-cell s3-col-aux">23.3%</div>
+        <div class="s3-cell s3-col-ratio">
+          <div class="s3-bar-wrap"><div class="s3-bar s3-bar-gold" style="width:75%;"></div><span class="s3-bar-label">~75%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-4">
+  <!-- phase-4 (16.0~39.6s): 实测 76.6% 金边徽章落区间内（绿✓）+ 金句收尾 -->
+  <div class="s4-result-block">
+    <div class="s4-label">事后统计 · 实测落点</div>
+    <div class="s4-actual-row">
+      <div class="s4-actual-card">
+        <div class="s4-actual-tag">实测</div>
+        <div class="s4-actual-value grad-gold">76.6%</div>
+        <div class="s4-actual-check"><span style="color:#34D399;">✓</span> 落在估算区间内（70%~90%）</div>
+      </div>
+      <div class="s4-range-bar">
+        <div class="s4-range-track">
+          <div class="s4-range-fill"></div>
+          <div class="s4-range-zone" style="left:70%;width:20%;">
+            <div class="s4-range-zone-label">估算区间 70%~90%</div>
+          </div>
+          <div class="s4-range-marker" style="left:76.6%;">
+            <div class="s4-range-tag">实测 76.6%</div>
+            <div class="s4-range-dot"></div>
+          </div>
+        </div>
+        <div class="s4-range-scale">
+          <span>0%</span><span>实测 76.6% · 落估算区间内</span><span>100%</span>
+        </div>
+      </div>
+    </div>
+    <div class="s4-quote-block">
+      <div class="s4-quote"><span class="grad-blue">估算给方向</span><span style="color:var(--tut-white);margin:0 18px;">·</span><span class="grad-gold">统计给真相</span><span style="color:var(--tut-white);margin:0 18px;">·</span><span class="grad-purple">两者独立</span></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <!-- cinema：度量段稳沉，留空 -->
+</div>

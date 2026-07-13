@@ -1,0 +1,103 @@
+<!-- 场景: scene-1 | 时长: 31.66s | bg: diamond_lattice | Skill vs Rule：定义对比 + 双卡机制（按需⚡/始终🛡）+ sql-query/database 例子 + 配合收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金 skill + 蓝 rule + 绿配合；低 alpha 呼吸） -->
+  <div class="fx-aura" style="position:absolute;top:24%;left:24%;width:620px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:24%;left:76%;width:620px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:78%;left:50%;transform:translateX(-50%);width:920px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:24%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:20%;left:76%;width:12px;height:12px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 16px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:50%;width:12px;height:12px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:30%;left:14%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:32%;left:86%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:70%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 svr-scene">
+  <!-- phase-1 (0-8s): 定义对比 大字「skill / rule」+ 一句话定义 -->
+  <div class="region-top">
+    <div class="s-stage-tag"><span class="dot"></span>E11 · Skill vs Rule · 概念对比</div>
+  </div>
+  <div class="region-mid svr-def-block">
+    <div class="svr-def-title">两类资产 · <span class="grad-gold">一按需</span> <span class="grad-blue">一始终</span></div>
+    <div class="svr-def-row">
+      <div class="svr-def-card def-gold">
+        <div class="def-tag">skill</div>
+        <div class="def-name grad-gold">可复用工作流</div>
+        <div class="def-note">+ 领域知识</div>
+      </div>
+      <div class="svr-def-card def-blue">
+        <div class="def-tag">rule</div>
+        <div class="def-name grad-blue">始终生效规范</div>
+        <div class="def-note">AI 自动遵守</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / Skill vs Rule —</div>
+  </div>
+</div>
+<div class="phase phase-2 svr-scene">
+  <!-- phase-2 (8-22s): 双卡机制 skill ⚡ 按需调用 / rule 🛡 始终生效 -->
+  <div class="region-top">
+    <div class="s-stage-tag"><span class="dot"></span>E11 · Skill vs Rule · 双机制</div>
+  </div>
+  <div class="region-mid svr-mech-block">
+    <div class="svr-mech-title">两种调用机制</div>
+    <div class="svr-mech-row">
+      <div class="svr-mech-card mech-skill">
+        <div class="mech-emoji">⚡</div>
+        <div class="mech-kind grad-gold">skill · 按需调用</div>
+        <div class="mech-desc">你让它做某件事<br>它<span class="kw-gold">才加载</span>对应 skill</div>
+        <div class="mech-trigger">触发：用户请求</div>
+      </div>
+      <div class="svr-mech-card mech-rule">
+        <div class="mech-emoji">🛡</div>
+        <div class="mech-kind grad-blue">rule · 始终生效</div>
+        <div class="mech-desc">不用你提<br>它<span class="kw-blue">每次都按</span>规范来</div>
+        <div class="mech-trigger">触发：自动遵守</div>
+      </div>
+    </div>
+    <div class="svr-quote">一个 <span class="kw-gold">按需</span> · 一个 <span class="kw-blue">始终</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / Skill vs Rule —</div>
+  </div>
+</div>
+<div class="phase phase-3 svr-scene">
+  <!-- phase-3 (22-31.66s): 真实例子 sql-query skill / database rule + 配合收尾 -->
+  <div class="region-top">
+    <div class="s-stage-tag"><span class="dot"></span>E11 · Skill vs Rule · 真实例子</div>
+  </div>
+  <div class="region-mid svr-ex-block">
+    <div class="svr-ex-title">真实例子</div>
+    <div class="svr-ex-row">
+      <div class="svr-ex-card ex-skill">
+        <div class="ex-kind">skill</div>
+        <div class="ex-name kw-gold">sql-query</div>
+        <div class="ex-when">你让它<span class="kw-gold">查数据时</span>调用</div>
+      </div>
+      <div class="svr-ex-card ex-rule">
+        <div class="ex-kind">rule</div>
+        <div class="ex-name kw-blue">database 规范</div>
+        <div class="ex-when">每次写 SQL <span class="kw-blue">自动按规范</span></div>
+      </div>
+    </div>
+    <div class="svr-finale">两者配合 · AI <span class="grad-gold">既会干活</span> <span class="grad-blue">又守规矩</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / Skill vs Rule —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

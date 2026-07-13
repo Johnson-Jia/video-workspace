@@ -1,0 +1,97 @@
+<!-- 场景: seg1 | 时长: ~50s | bg: hex_grid | 为什么度量：危险状态流程 + 不可度量金句 + 放大与证伪两件事 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:46%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 16px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（左对齐） -->
+    <div class="tut-region tut-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E08 · 阶段五</div>
+      <h1 class="title-h1">为什么<span class="grad-red">必须度量</span></h1>
+      <div class="title-sub">不可度量 = 不可管理</div>
+    </div>
+
+    <!-- 区域 2：危险状态流程横排（都在用→感觉有用→说不清→预算没了） -->
+    <div class="tut-region tut-danger" data-reveal="2" data-reveal-dir="left">
+      <div class="danger-card danger-1">
+        <div class="danger-num grad-blue">01</div>
+        <div class="danger-name">都在用 AI</div>
+        <div class="danger-note">团队全员上线</div>
+      </div>
+      <div class="danger-arrow">→</div>
+      <div class="danger-card danger-2">
+        <div class="danger-num grad-gold">02</div>
+        <div class="danger-name">感觉有用</div>
+        <div class="danger-note">主观感受良好</div>
+      </div>
+      <div class="danger-arrow">→</div>
+      <div class="danger-card danger-3">
+        <div class="danger-num grad-gold">03</div>
+        <div class="danger-name">说不清多少</div>
+        <div class="danger-note">没有量化数据</div>
+      </div>
+      <div class="danger-arrow danger-arrow-red">→</div>
+      <div class="danger-card danger-4">
+        <div class="danger-num grad-red">04</div>
+        <div class="danger-name">预算没了</div>
+        <div class="danger-key">明年钱没了</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：金句大字「不可度量 = 不可管理」 -->
+    <div class="tut-region tut-quote" data-reveal="20" data-reveal-dir="bottom">
+      <div class="quote-eq">
+        <span class="quote-l grad-gold">不可度量</span>
+        <span class="quote-eq-sign">=</span>
+        <span class="quote-r grad-gold">不可管理</span>
+      </div>
+      <div class="quote-sub">这句话不是口号，是企业级转型的生死线</div>
+    </div>
+
+    <!-- 区域 4：两件事图标卡（放大 + 证伪） + 收尾金句 -->
+    <div class="tut-region tut-two" data-reveal="26" data-reveal-dir="top">
+      <div class="two-row">
+        <div class="two-card two-scale">
+          <div class="two-icon grad-blue">放大</div>
+          <div class="two-text">
+            <div class="two-name">从试点到全团队</div>
+            <div class="two-note">单点提效 → 规模提效</div>
+          </div>
+        </div>
+        <div class="two-card two-falsify">
+          <div class="two-icon grad-green">证伪</div>
+          <div class="two-text">
+            <div class="two-name">数据正面回答</div>
+            <div class="two-note">提效多少 · 质量降没降</div>
+          </div>
+        </div>
+      </div>
+      <div class="two-tail">
+        <div class="tail-item"><span class="tail-x">✗</span> 没有度量的转型是<span class="grad-red">玄学</span></div>
+        <div class="tail-item"><span class="tail-x">✗</span> 推广不动的转型是<span class="grad-gold">孤岛</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

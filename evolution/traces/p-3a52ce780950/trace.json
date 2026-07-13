@@ -277,5 +277,33 @@
     },
     "attribution": null,
     "performance": null
+  },
+  {
+    "id": "T-20260713T011632Z-stage6-production",
+    "skill_id": "stage6-production",
+    "timestamp": "2026-07-13T01:16:32.594841+00:00",
+    "project_dir": ".",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:phase_visibility_present",
+            "details": "R-S6-022: 9 个 phase 无可见性恢复: S2_coding_agent .phase-2, S2_coding_agent .phase-3, S3_skill_ecosystem .phase-2, S3_skill_ecosystem .phase-3, S4_security_tools .phase-2, S4_security_tools .phase-3。Phase 2+ 在骨架中被设为 opacity:0 但从未恢复 → 空白帧"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
   }
 ]

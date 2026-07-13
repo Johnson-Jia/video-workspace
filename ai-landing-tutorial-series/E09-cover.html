@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E09 Skill 范式整合 · 16:9</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0B1426;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 100px 50px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0B1426 0%,#15233D 55%,#0B1426 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,191,36,0.07) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-gold{position:absolute;width:880px;height:880px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);filter:blur(110px);top:-240px;right:-180px;pointer-events:none;}
+.glow-purple{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,0.16),transparent 70%);filter:blur(95px);bottom:-160px;left:-120px;pointer-events:none;}
+.glow-cyan{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,0.12),transparent 70%);filter:blur(90px);top:38%;left:42%;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(11,20,38,0.38) 75%, rgba(6,11,22,0.58) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(167,139,250,0.45),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(167,139,250,0.45),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:24px;margin-bottom:14px;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:12px;font-size:26px;color:#FBBF24;letter-spacing:0.20em;border:1.5px solid rgba(251,191,36,0.45);background:rgba(251,191,36,0.10);padding:9px 24px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.hook-tag{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#A78BFA;border:1.5px solid rgba(167,139,250,0.55);background:rgba(167,139,250,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+
+.title-row{position:relative;z-index:2;display:flex;align-items:flex-end;gap:32px;margin-top:4px;}
+.title{font-size:96px;font-weight:900;line-height:1.02;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 55%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 44px rgba(251,191,36,0.20);}
+.title-num{font-family:'JetBrains Mono',monospace;font-size:128px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 50px rgba(251,191,36,0.25);margin-left:auto;}
+.subtitle{position:relative;z-index:2;font-size:34px;color:rgba(255,255,255,0.84);margin-top:16px;font-weight:500;}
+.subtitle .sub-strong{color:#A78BFA;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 14px;font-weight:400;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+.subtitle .sub-cyan{color:#22D3EE;font-weight:700;}
+
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr 1fr;gap:40px;margin-top:34px;align-items:center;}
+
+.paradigms-label{font-size:24px;color:#A78BFA;letter-spacing:0.14em;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.paradigms-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(167,139,250,0.45),transparent);}
+.paradigms{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.p-row{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:11px;border:1.5px solid;background:rgba(11,20,38,0.65);}
+.p-row.k1{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(11,20,38,0.65));}
+.p-row.k2{border-color:rgba(167,139,250,0.50);background:linear-gradient(92deg,rgba(167,139,250,0.12),rgba(11,20,38,0.65));}
+.p-row.k3{border-color:rgba(34,211,238,0.50);background:linear-gradient(92deg,rgba(34,211,238,0.12),rgba(11,20,38,0.65));}
+.p-row.k4{border-color:rgba(52,211,153,0.50);background:linear-gradient(92deg,rgba(52,211,153,0.12),rgba(11,20,38,0.65));}
+.p-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:42px;}
+.p-row.k1 .p-num{color:#FBBF24;}
+.p-row.k2 .p-num{color:#A78BFA;}
+.p-row.k3 .p-num{color:#22D3EE;}
+.p-row.k4 .p-num{color:#34D399;}
+.p-name{font-size:23px;font-weight:800;color:#fff;}
+.p-desc{font-size:18px;color:rgba(255,255,255,0.74);font-weight:500;margin-left:auto;}
+
+.loop-card{background:linear-gradient(160deg,rgba(20,28,52,0.92),rgba(11,20,38,0.92));border-radius:14px;border:1.5px solid rgba(167,139,250,0.40);overflow:hidden;box-shadow:0 0 36px rgba(167,139,250,0.10);}
+.loop-head{background:rgba(15,26,46,0.85);padding:13px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(167,139,250,0.22);}
+.loop-head-dot{width:11px;height:11px;border-radius:50%;background:#A78BFA;box-shadow:0 0 12px rgba(167,139,250,0.7);}
+.loop-head-title{font-size:21px;color:#A78BFA;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.08em;}
+.loop-body{padding:22px 26px;display:flex;flex-direction:column;gap:12px;}
+.loop-step{display:flex;align-items:center;gap:14px;}
+.loop-arrow{color:rgba(167,139,250,0.65);font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;}
+.loop-text{font-size:23px;font-weight:700;color:#fff;}
+.loop-text .t-gold{color:#FBBF24;}
+.loop-text .t-purple{color:#C4B5FD;}
+.loop-text .t-cyan{color:#67E8F9;}
+.loop-text .t-green{color:#6EE7B7;}
+.loop-tag{margin-left:auto;font-size:17px;font-weight:700;padding:4px 12px;border-radius:999px;border:1px solid rgba(167,139,250,0.55);background:rgba(167,139,250,0.10);color:#C4B5FD;font-family:'JetBrains Mono',monospace;}
+
+.stat-label{font-size:24px;color:#FBBF24;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;}
+.stat-grid{display:flex;flex-direction:column;gap:14px;}
+.stat-item{display:flex;align-items:center;gap:16px;padding:16px 22px;border-radius:12px;border:1.5px solid;background:rgba(11,20,38,0.55);}
+.stat-item.s-up{border-color:rgba(52,211,153,0.50);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(11,20,38,0.55));}
+.stat-item.s-down{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(11,20,38,0.55));}
+.stat-item.s-pct{border-color:rgba(167,139,250,0.50);background:linear-gradient(92deg,rgba(167,139,250,0.14),rgba(11,20,38,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:900;min-width:170px;}
+.stat-item.s-up .stat-num{color:#34D399;}
+.stat-item.s-down .stat-num{color:#FBBF24;}
+.stat-item.s-pct .stat-num{color:#A78BFA;}
+.stat-name{font-size:24px;color:rgba(255,255,255,0.86);font-weight:700;}
+
+.chip-row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+.chip{font-size:18px;color:rgba(255,255,255,0.80);font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(11,20,38,0.45);font-family:'JetBrains Mono',monospace;}
+
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(251,191,36,0.22);}
+.repo{font-size:26px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#FBBF24;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:23px;}
+.repo .repo-path{background:rgba(251,191,36,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(251,191,36,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-purple"></div><div class="glow-cyan"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E09</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E09</div>
+    <div class="hook-tag">◆ 范式层 · 个体经验变组织资产</div>
+  </div>
+
+  <div class="title-row">
+    <h1 class="title"><span class="title-grad">Skill 范式整合</span></h1>
+    <div class="title-num">7</div>
+  </div>
+  <div class="subtitle">个体经验变组织资产<span class="sub-divider">·</span><span class="sub-strong">7 种范式</span> + <span class="sub-cyan">自我改进循环</span><span class="sub-divider">·</span><span class="sub-gold">让人走经验不走</span></div>
+
+  <div class="main">
+    <div>
+      <div class="paradigms-label">7 种 Skill 范式 · 经验沉淀的标准件</div>
+      <div class="paradigms">
+        <div class="p-row k1"><span class="p-num">01</span><span class="p-name">prompts</span><span class="p-desc">提示词</span></div>
+        <div class="p-row k2"><span class="p-num">02</span><span class="p-name">workflows</span><span class="p-desc">工作流</span></div>
+        <div class="p-row k3"><span class="p-num">03</span><span class="p-name">tools</span><span class="p-desc">工具封装</span></div>
+        <div class="p-row k4"><span class="p-num">04</span><span class="p-name">templates</span><span class="p-desc">脚手架</span></div>
+        <div class="p-row k2"><span class="p-num">05</span><span class="p-name">rules</span><span class="p-desc">规则资产</span></div>
+        <div class="p-row k1"><span class="p-num">06</span><span class="p-name">docs</span><span class="p-desc">知识库</span></div>
+        <div class="p-row k4"><span class="p-num">07</span><span class="p-name">components</span><span class="p-desc">组件库</span></div>
+        <div class="p-row k3" style="border-style:dashed;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);"><span style="font-size:20px;font-weight:700;">+ 自定义扩展</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="loop-card">
+        <div class="loop-head">
+          <span class="loop-head-dot"></span>
+          <span class="loop-head-title">self-improve · 自我改进循环</span>
+        </div>
+        <div class="loop-body">
+          <div class="loop-step">
+            <span class="loop-arrow">▸</span>
+            <span class="loop-text"><span class="t-gold">真实任务</span> 跑一遍</span>
+            <span class="loop-tag">L1</span>
+          </div>
+          <div class="loop-step">
+            <span class="loop-arrow">▸</span>
+            <span class="loop-text">沉淀为 <span class="t-purple">Skill 资产</span></span>
+            <span class="loop-tag">L2</span>
+          </div>
+          <div class="loop-step">
+            <span class="loop-arrow">▸</span>
+            <span class="loop-text"><span class="t-cyan">团队复用</span> · 默认能力</span>
+            <span class="loop-tag">L3</span>
+          </div>
+          <div class="loop-step">
+            <span class="loop-arrow">▸</span>
+            <span class="loop-text">回灌 <span class="t-green">下一轮</span> 进化</span>
+            <span class="loop-tag">L4</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-label" style="margin-top:18px;">真实沉淀数据 · 9 个月复盘</div>
+      <div class="stat-grid">
+        <div class="stat-item s-pct"><span class="stat-num">7 种</span><span class="stat-name">Skill 范式覆盖</span></div>
+        <div class="stat-item s-down"><span class="stat-num">9 个月</span><span class="stat-name">避坑沉淀周期</span></div>
+        <div class="stat-item s-up"><span class="stat-num">5-10 倍</span><span class="stat-name">测试用例提效</span></div>
+      </div>
+      <div class="chip-row">
+        <span class="chip">devflow 编排</span>
+        <span class="chip">sql-query 工具</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 12 集深度解析 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

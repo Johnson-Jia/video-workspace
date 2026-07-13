@@ -1,0 +1,188 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E09 paradigms — 七节点横向流水线 + 编排型金边特写
+ * bg: dark_cipher · 7节点grid + SVG连线渐进 + 编排型金边大卡
+ * 布局：顶/中/底三带 space-between 撑满 1080
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.pp-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.pp-pl-pipeline { width: 100%; display: flex; justify-content: stretch; }
+.pp-pl-orch { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块（左对齐锚点，打破为居中而居中） —— */
+.pp-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.pp-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.pp-h1 { font-family: 'Inter'; font-size: 92px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.pp-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 预告链 —— */
+.pp-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.pp-preview-chain {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: nowrap;
+}
+.pp-prev-node {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 16px; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(15,23,42,0.72));
+  border: 2px solid rgba(96,165,250,0.45);
+  min-width: 110px;
+}
+.pp-prev-orch { border-color: rgba(251,191,36,0.65); box-shadow: 0 0 22px rgba(251,191,36,0.20); }
+.pp-prev-emoji { font-size: 38px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.pp-prev-name { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800; color: var(--tut-blue-white); }
+.pp-prev-arrow { font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 800; color: rgba(251,191,36,0.75); }
+
+/* —— phase-2 七节点流水线（核心） —— */
+.pp-pipeline { width: 100%; display: flex; justify-content: stretch; }
+.pipeline-wrap {
+  position: relative;
+  width: 100%; max-width: 1740px;
+  height: 320px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto;
+}
+.pipeline-edges {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 120px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.pipeline-edges .edge {
+  stroke-width: 4; fill: none; stroke-linecap: round;
+  stroke-dasharray: 260; stroke-dashoffset: 260;
+}
+.edge-1 { stroke: rgba(96,165,250,0.75); }
+.edge-2 { stroke: rgba(167,139,250,0.75); }
+.edge-3 { stroke: rgba(52,211,153,0.75); }
+.edge-4 { stroke: rgba(59,130,246,0.75); }
+.edge-5 { stroke: rgba(167,139,250,0.75); }
+.edge-6 { stroke: rgba(251,191,36,0.80); }
+.node-row {
+  position: relative;
+  width: 100%;
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  z-index: 2;
+}
+.stage-node {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 12px 6px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 2.5px solid;
+  will-change: transform, opacity;
+}
+.sn-1 { border-color: rgba(96,165,250,0.75); box-shadow: 0 0 22px rgba(96,165,250,0.22); }
+.sn-2 { border-color: rgba(167,139,250,0.75); box-shadow: 0 0 22px rgba(167,139,250,0.22); }
+.sn-3 { border-color: rgba(52,211,153,0.75); box-shadow: 0 0 22px rgba(52,211,153,0.22); }
+.sn-4 { border-color: rgba(59,130,246,0.75); box-shadow: 0 0 22px rgba(59,130,246,0.22); }
+.sn-5 { border-color: rgba(167,139,250,0.75); box-shadow: 0 0 22px rgba(167,139,250,0.22); }
+.sn-6 { border-color: rgba(52,211,153,0.75); box-shadow: 0 0 22px rgba(52,211,153,0.22); }
+.sn-7 { border-color: rgba(251,191,36,0.80); box-shadow: 0 0 28px rgba(251,191,36,0.28); }
+.node-icon { font-size: 42px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.node-stage { font-family: 'Inter'; font-size: 34px; font-weight: 900; letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.node-team { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.72); letter-spacing: 0.02em; }
+.node-skill {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center; line-height: 1.1;
+  word-break: break-all;
+}
+
+/* —— phase-2 编排型金边特写大卡 —— */
+.pp-orch-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 18px 32px;
+  border: 2.5px solid rgba(251,191,36,0.65);
+  background: linear-gradient(95deg, rgba(251,191,36,0.10), rgba(15,23,42,0.92));
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 36px rgba(251,191,36,0.16);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+.pp-orch-glow {
+  position: absolute; top: -40px; right: -40px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(251,191,36,0.22) 0%, transparent 65%);
+  filter: blur(30px); pointer-events: none;
+}
+.pp-orch-corner {
+  align-self: flex-end;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FBBF24; letter-spacing: 0.06em;
+}
+.pp-orch-head { display: flex; align-items: center; gap: 14px; }
+.pp-orch-icon { font-size: 44px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.pp-orch-title { font-family: 'Inter'; font-size: 38px; font-weight: 900; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.pp-orch-team { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.78); }
+.pp-devflow {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.pp-df-node {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.88);
+  padding: 4px 12px; border-radius: 6px;
+  background: rgba(251,191,36,0.12);
+  border: 1px solid rgba(251,191,36,0.32);
+}
+.pp-df-end {
+  background: rgba(251,191,36,0.22);
+  border-color: rgba(251,191,36,0.55);
+  color: #FCD34D;
+}
+.pp-df-arrow { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: rgba(251,191,36,0.80); }
+.pp-orch-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— phase-3 收尾 —— */
+.pp-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; justify-content: center; }
+.pp-closer-h1 { font-family: 'Inter'; font-size: 84px; font-weight: 900; line-height: 1.05; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.pp-closer-sub { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-blue-white); }

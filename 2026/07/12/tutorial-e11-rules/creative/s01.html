@@ -1,0 +1,183 @@
+<!-- 场景: scene-1 | 时长: 48.31s | bg: hex_grid | 13 条团队规范五层分类：概览入口 + 接口层(金) + 质量稳定层(蓝) + 数据并发层(青/绿) + 工程规范层(紫) -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金接口 / 蓝质量 / 青绿数据并发 / 紫工程；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(60px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:24%;width:540px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:76%;width:540px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:1000px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:23%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:77%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:82%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:26%;left:18%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:28%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:68%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:70%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 rules-scene">
+  <!-- phase-1 (0-10.75s): 概览 + team-conventions 总纲入口卡 + 五层流向 -->
+  <div class="region-top">
+    <div class="r-stage-tag"><span class="dot"></span>E11 · 十三条规范 · 五层分类</div>
+  </div>
+  <div class="region-mid rules-overview">
+    <div class="ro-title" data-reveal="0">十三条规范 · <span class="grad-gold">五层</span> 分类</div>
+    <div class="entry-card" data-reveal="3">
+      <div class="entry-label">总纲入口</div>
+      <div class="entry-title">team-conventions</div>
+      <div class="entry-ref">CLAUDE.md <span class="at">@</span> 引用所有 rule · AI 自动加载</div>
+    </div>
+    <div class="five-flow" data-reveal="7">
+      <span class="ff-step ff-gold">接口</span><span class="ff-arrow">→</span>
+      <span class="ff-step ff-blue">质量</span><span class="ff-arrow">→</span>
+      <span class="ff-step ff-cyan">数据</span><span class="ff-arrow">→</span>
+      <span class="ff-step ff-green">并发</span><span class="ff-arrow">→</span>
+      <span class="ff-step ff-purple">工程</span>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 团队规范五层 —</div>
+  </div>
+</div>
+<div class="phase phase-2 rules-scene">
+  <!-- phase-2 (10.75-17.88s): 其一接口层（金） -->
+  <div class="region-top">
+    <div class="r-stage-tag"><span class="dot"></span>E11 · 其一 · 接口层</div>
+  </div>
+  <div class="region-mid layer-card card-gold">
+    <div class="layer-head" data-reveal="0">
+      <div class="layer-num num-gold">①</div>
+      <div class="layer-name grad-gold">分层与接口</div>
+      <div class="layer-tag tag-gold">接口层</div>
+    </div>
+    <div class="rule-grid">
+      <div class="rule-card rc-gold" data-reveal="3">
+        <div class="rule-name">api-response</div>
+        <div class="rule-desc">统一响应模型</div>
+        <div class="rule-icon">📦</div>
+      </div>
+      <div class="rule-card rc-gold" data-reveal="7">
+        <div class="rule-name">service-dao</div>
+        <div class="rule-desc">接口实现分离 · 事务归 Service</div>
+        <div class="rule-icon">🔌</div>
+      </div>
+    </div>
+    <div class="rule-example" data-reveal="11">Service 编排事务 · DAO 只做数据</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 接口层 —</div>
+  </div>
+</div>
+<div class="phase phase-3 rules-scene">
+  <!-- phase-3 (17.88-25.65s): 其二质量稳定层（蓝） -->
+  <div class="region-top">
+    <div class="r-stage-tag"><span class="dot"></span>E11 · 其二 · 质量稳定层</div>
+  </div>
+  <div class="region-mid layer-card card-blue">
+    <div class="layer-head" data-reveal="0">
+      <div class="layer-num num-blue">②</div>
+      <div class="layer-name grad-blue">质量与稳定</div>
+      <div class="layer-tag tag-blue">质量层</div>
+    </div>
+    <div class="rule-grid">
+      <div class="rule-card rc-blue" data-reveal="3">
+        <div class="rule-name">error-handling</div>
+        <div class="rule-desc">异常处理 · 禁空 catch</div>
+        <div class="rule-icon">🛡</div>
+      </div>
+      <div class="rule-card rc-blue" data-reveal="7">
+        <div class="rule-name">logging</div>
+        <div class="rule-desc">日志级别 · 脱敏</div>
+        <div class="rule-icon">📜</div>
+      </div>
+      <div class="rule-card rc-blue" data-reveal="11">
+        <div class="rule-name">testing</div>
+        <div class="rule-desc">Given-When-Then</div>
+        <div class="rule-icon">✓</div>
+      </div>
+    </div>
+    <div class="rule-example" data-reveal="15">catch 必须处理或上抛 · 不许吞异常</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 质量层 —</div>
+  </div>
+</div>
+<div class="phase phase-4 rules-scene">
+  <!-- phase-4 (25.65-37.75s): 其三数据层（青）+ 其四并发层（绿） -->
+  <div class="region-top">
+    <div class="r-stage-tag"><span class="dot"></span>E11 · 其三 数据 · 其四 并发</div>
+  </div>
+  <div class="region-mid layer-card card-cyan">
+    <div class="layer-head" data-reveal="0">
+      <div class="layer-num num-cyan">③</div>
+      <div class="layer-name grad-cyan">数据与并发</div>
+      <div class="layer-tag tag-cyan">数据 / 并发</div>
+    </div>
+    <div class="rule-grid rg-2row">
+      <div class="rule-card rc-cyan" data-reveal="3">
+        <div class="rule-name">database</div>
+        <div class="rule-desc">表设计 · 向后兼容</div>
+        <div class="rule-icon">🗄</div>
+      </div>
+      <div class="rule-card rc-cyan" data-reveal="7">
+        <div class="rule-name">batch</div>
+        <div class="rule-desc">批量代替循环</div>
+        <div class="rule-icon">⚡</div>
+      </div>
+      <div class="rule-card rc-green" data-reveal="11">
+        <div class="rule-name">async</div>
+        <div class="rule-desc">线程池 · 上下文传递</div>
+        <div class="rule-icon">🔄</div>
+      </div>
+      <div class="rule-card rc-green" data-reveal="15">
+        <div class="rule-name">distributed-lock</div>
+        <div class="rule-desc">Redisson · 控粒度</div>
+        <div class="rule-icon">🔒</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 数据 + 并发 —</div>
+  </div>
+</div>
+<div class="phase phase-5 rules-scene">
+  <!-- phase-5 (37.75-48.31s): 其五工程规范层（紫）+ 收尾 -->
+  <div class="region-top">
+    <div class="r-stage-tag"><span class="dot"></span>E11 · 其五 · 工程规范层</div>
+  </div>
+  <div class="region-mid layer-card card-purple">
+    <div class="layer-head" data-reveal="0">
+      <div class="layer-num num-purple">④</div>
+      <div class="layer-name grad-purple">工程规范</div>
+      <div class="layer-tag tag-purple">工程层</div>
+    </div>
+    <div class="rule-grid">
+      <div class="rule-card rc-purple" data-reveal="3">
+        <div class="rule-name">git-branch</div>
+        <div class="rule-desc">Conventional Commits 命名</div>
+        <div class="rule-icon">🌿</div>
+      </div>
+      <div class="rule-card rc-purple" data-reveal="7">
+        <div class="rule-name">naming</div>
+        <div class="rule-desc">类后缀 · 方法动词 · 目录分层</div>
+        <div class="rule-icon">🏷</div>
+      </div>
+    </div>
+    <div class="rule-finale" data-reveal="12">五层覆盖 <span class="grad-gold">团队开发</span> <span class="grad-blue">全流程</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 工程层 · 收尾 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

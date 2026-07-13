@@ -1,0 +1,64 @@
+<!-- 场景: scene-1 | hook 数字冲击 + AI 反差对照 -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+  <!-- 深色径向压暗四角聚焦中心，去掉杂乱多色 -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 28%,rgba(0,0,0,0.5) 75%,rgba(0,0,0,0.85) 100%);z-index:2"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx-glow：单一暖金底辉（去多重 pulse-ring 杂乱）-->
+  <div class="fx-glow" style="top:22%;left:calc(50% - 300px);width:600px;height:600px;background:rgba(245,194,68,0.30)"></div>
+  <!-- fx-bolt：开篇闪击（金），强化数字爆点 -->
+  <div class="fx-bolt" style="background:radial-gradient(circle at 50% 40%,rgba(245,194,68,0.45),transparent 60%)"></div>
+  <!-- fx-scan：纵向细腻扫描线（赛博数据感）-->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(77,214,232,0.18),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1：日期 + 近800 大数字 + 涨星标签（hook 前 4.5s）
+       配色策略：金作主调 + 单一青作冷点缀，去杂色，提协调 -->
+  <div class="hook-stage1">
+    <!-- 顶部日期 + 标签（柔白主，避免与金大字抢色）-->
+    <div class="hook-topbar">
+      <span class="hook-date">2026 · 07 · 13</span>
+      <span class="hook-dot"></span>
+      <span class="hook-eyebrow">GitHub Trending Daily</span>
+    </div>
+    <!-- 中心大数字组：单一金渐变 + 单层 drop shadow -->
+    <div class="hook-numblock">
+      <div class="hook-label">今日单日涨星王</div>
+      <div class="hook-num-row">
+        <span class="hook-big-num grad-gold">近800</span>
+        <span class="hook-num-unit">★</span>
+      </div>
+      <!-- 数据徽章：冷青点缀，与暖金大字形成补色平衡 -->
+      <div class="hook-badge">单日净增 · 领跑全网</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2：AI 反差对照（左暖右冷双列条，干净对称）-->
+  <div class="hook-stage2">
+    <div class="hook-contrast-title">同一天，方向相反</div>
+    <div class="hook-contrast">
+      <div class="hook-contrast-row warm">
+        <span class="hook-contrast-icon">📈</span>
+        <div class="hook-contrast-body">
+          <span class="hook-contrast-tag warm">Vibe-Trading</span>
+          <span class="hook-contrast-text">让 AI <span class="accent-warm">帮你做交易</span></span>
+        </div>
+      </div>
+      <div class="hook-divider"><span>VS</span></div>
+      <div class="hook-contrast-row cool">
+        <span class="hook-contrast-icon">🛡️</span>
+        <div class="hook-contrast-body">
+          <span class="hook-contrast-tag cool">destructive_command_guard</span>
+          <span class="hook-contrast-text">专门 <span class="accent-cool">防 AI 删你硬盘</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

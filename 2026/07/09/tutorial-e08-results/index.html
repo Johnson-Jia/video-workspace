@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-cyan: #22D3EE;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E08 results — 量化效果数据卡
+ * 7 phase 累积 reveal：标题 → +数据卡1(+104%) → +数据卡2(-16.4pp) → +数据卡3(76.6%) → +数据卡4(5-10倍) → +数据卡5(-40%) → +客观口径收尾
+ * 数据卡 width:100% 撑满画布（tutorial.md layout flex:1）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 80px 90px 80px;
+}
+.tut-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+
+/* 渐变文字（同色系禁白端点 + text-shadow 深蓝非发光） */
+.grad-cyan { background-image: linear-gradient(92deg,#67E8F9 0%,#22D3EE 55%,#A5F3FC 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#6EE7B7 0%,#34D399 55%,#A7F3D0 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FCD34D 0%,#FBBF24 55%,#F59E0B 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-cyan-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#22D3EE 0%,#67E8F9 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区（左对齐） —— */
+.tut-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.tut-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-title .title-h1 {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.tut-title .title-sub {
+  font-family: 'Inter'; font-size: 32px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— 数据卡网格（5 卡 width:100% 撑满） —— */
+.tut-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  flex: 1;
+  align-items: stretch;
+}
+.data-card {
+  background: linear-gradient(165deg, rgba(34,211,238,0.07), rgba(15,23,42,0.92));
+  border-radius: 16px;
+  border: 2px solid rgba(34,211,238,0.30);
+  padding: 18px 16px 16px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.40);
+}
+.data-card.card-pos { border-color: rgba(52,211,153,0.38); background: linear-gradient(165deg, rgba(52,211,153,0.08), rgba(15,23,42,0.92)); }
+.data-card.card-anchor { border-color: rgba(251,191,36,0.42); background: linear-gradient(165deg, rgba(251,191,36,0.08), rgba(15,23,42,0.92)); }
+
+.data-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.data-value {
+  font-family: 'JetBrains Mono'; font-size: 72px; font-weight: 900;
+  line-height: 1.0;
+  text-shadow: 0 2px 8px rgba(30,41,59,0.32);
+  letter-spacing: -0.04em;
+  word-break: break-word; overflow-wrap: break-word;
+}
+.data-value.v-pos { font-size: 64px; }
+.data-sub {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.3;
+}
+.data-bar {
+  margin-top: 6px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.bar-row { display: flex; align-items: center; gap: 8px; }
+.bar-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.62);
+  width: 132px; flex-shrink: 0;
+  letter-spacing: -0.04em;
+}
+.bar-track {
+  flex: 1; height: 10px; border-radius: 6px;
+  background: rgba(255,255,255,0.10);
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  border-radius: 6px;
+}
+.bar-fill.fill-before { background: rgba(248,113,113,0.55); }
+.bar-fill.fill-after-pos { background: linear-gradient(90deg,#34D399,#6EE7B7); }
+.bar-fill.fill-after-cyan { background: linear-gradient(90deg,#22D3EE,#67E8F9); }
+.bar-fill.fill-after-gold { background: linear-gradient(90deg,#FBBF24,#FCD34D); }
+
+/* —— 客观口径收尾条 —— */
+.tut-tail { width: 100%; }
+.tail-card {
+  border-radius: 16px;
+  padding: 16px 26px;
+  border: 2px solid rgba(96,165,250,0.50);
+  background: linear-gradient(165deg, rgba(96,165,250,0.12), rgba(15,23,42,0.90));
+  box-shadow: 0 0 0 1px rgba(96,165,250,0.24);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.tail-icon {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 900;
+  color: #93C5FD;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  letter-spacing: 0.04em;
+}
+.tail-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  line-height: 1.35;
+}
+.tail-text .em-cyan { color: var(--tut-cyan); }
+.tail-text .em-green { color: var(--tut-green); }
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.tut-scene, .data-card, .data-label, .data-value, .data-sub,
+.tail-card, .tail-text, .bar-tag, .title-h1, .title-sub {
+  word-break: break-word; overflow-wrap: break-word;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes scanLine2 { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:0.4} 50%{opacity:0.7} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes gridNodeBlink { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
+@keyframes cornerPulse { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+@keyframes dataFlow { 0%{transform:translateX(-100%);opacity:0} 50%{opacity:0.7} 100%{transform:translateX(100%);opacity:0} }
+@keyframes tickFade { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="39.55" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.19" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="39.55">
+<!-- 场景: seg1 | 时长: ~39.5s | bg: scan_grid | 量化效果：五项数据卡 + 趋势对比 + 客观口径（7 phase 累积 reveal） -->
+<div class="layer-bg" data-bg-types="glow,gradient,grid,particles,scan">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.1);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),rgba(0,255,200,0.6),rgba(0,229,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>| 00</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(200,0,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色青/蓝/绿优先，呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:18%;width:760px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(190,90%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:14%;left:58%;width:760px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,90%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:38%;width:900px;height:170px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,60%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色青/蓝/绿） -->
+  <div class="fx-blink" style="position:absolute;top:10%;left:46%;width:11px;height:11px;border-radius:50%;background:hsla(190,90%,58%,0.85);box-shadow:0 0 14px hsla(190,85%,52%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:10%;left:54%;width:10px;height:10px;border-radius:50%;background:hsla(150,90%,58%,0.85);box-shadow:0 0 14px hsla(150,85%,52%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:72%;width:10px;height:10px;border-radius:50%;background:hsla(190,90%,58%,0.85);box-shadow:0 0 14px hsla(190,85%,52%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<!-- phase-1: 标题 -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div style="flex:1"></div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-2: 数据卡1 人均 +104% -->
+<div class="phase phase-2 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">Bug 占比</div><div class="data-value grad-green" style="font-size:48px">-16.4pp</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">AI 代码占比</div><div class="data-value grad-gold" style="font-size:48px">76.6%</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">测试用例</div><div class="data-value grad-cyan" style="font-size:48px">5-10×</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">词元消耗</div><div class="data-value grad-green" style="font-size:48px">-40%</div></div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-3: 数据卡2 Bug -16.4pp -->
+<div class="phase phase-3 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">Bug 占比</div>
+        <div class="data-value grad-green">-16.4pp</div>
+        <div class="data-sub">38.5% → 22.1%</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:84%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:50%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">AI 代码占比</div><div class="data-value grad-gold" style="font-size:48px">76.6%</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">测试用例</div><div class="data-value grad-cyan" style="font-size:48px">5-10×</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">词元消耗</div><div class="data-value grad-green" style="font-size:48px">-40%</div></div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-4: 数据卡3 AI 代码占比 76.6% -->
+<div class="phase phase-4 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">Bug 占比</div>
+        <div class="data-value grad-green">-16.4pp</div>
+        <div class="data-sub">38.5% → 22.1%</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:84%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:50%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-anchor">
+        <div class="data-label">AI 代码占比</div>
+        <div class="data-value grad-gold">76.6%</div>
+        <div class="data-sub">简单 CRUD <span style="color:#FBBF24">~90%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">目标</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:75%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">实测</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:77%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">测试用例</div><div class="data-value grad-cyan" style="font-size:48px">5-10×</div></div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">词元消耗</div><div class="data-value grad-green" style="font-size:48px">-40%</div></div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-5: 数据卡4 测试用例 5-10倍 -->
+<div class="phase phase-5 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">Bug 占比</div>
+        <div class="data-value grad-green">-16.4pp</div>
+        <div class="data-sub">38.5% → 22.1%</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:84%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:50%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-anchor">
+        <div class="data-label">AI 代码占比</div>
+        <div class="data-value grad-gold">76.6%</div>
+        <div class="data-sub">简单 CRUD <span style="color:#FBBF24">~90%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">目标</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:75%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">实测</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:77%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card">
+        <div class="data-label">测试用例</div>
+        <div class="data-value grad-cyan">5-10×</div>
+        <div class="data-sub">4-8h → 10-30min</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:92%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:14%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card" style="opacity:0.18"><div class="data-label">词元消耗</div><div class="data-value grad-green" style="font-size:48px">-40%</div></div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-6: 数据卡5 词元 -40% -->
+<div class="phase phase-6 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">Bug 占比</div>
+        <div class="data-value grad-green">-16.4pp</div>
+        <div class="data-sub">38.5% → 22.1%</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:84%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:50%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-anchor">
+        <div class="data-label">AI 代码占比</div>
+        <div class="data-value grad-gold">76.6%</div>
+        <div class="data-sub">简单 CRUD <span style="color:#FBBF24">~90%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">目标</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:75%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">实测</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:77%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card">
+        <div class="data-label">测试用例</div>
+        <div class="data-value grad-cyan">5-10×</div>
+        <div class="data-sub">4-8h → 10-30min</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:92%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:14%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">词元消耗</div>
+        <div class="data-value grad-green">-40%</div>
+        <div class="data-sub">案例值下降</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:88%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:53%"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-7: 客观口径收尾 -->
+<div class="phase phase-7 tut-scene">
+  <div class="tut-grid tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 量化效果</div>
+      <h1 class="title-h1">全团队跑完的<span class="grad-cyan">真实数据</span></h1>
+      <div class="title-sub">转型前后对比 · 五项度量</div>
+    </div>
+    <div class="tut-cards">
+      <div class="data-card">
+        <div class="data-label">人均代码产出</div>
+        <div class="data-value grad-cyan">+104%</div>
+        <div class="data-sub">同期人数 <span style="color:#F87171">-9%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:48%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:98%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">Bug 占比</div>
+        <div class="data-value grad-green">-16.4pp</div>
+        <div class="data-sub">38.5% → 22.1%</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:84%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:50%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-anchor">
+        <div class="data-label">AI 代码占比</div>
+        <div class="data-value grad-gold">76.6%</div>
+        <div class="data-sub">简单 CRUD <span style="color:#FBBF24">~90%</span></div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">目标</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:75%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">实测</span><div class="bar-track"><div class="bar-fill fill-after-gold" style="width:77%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card">
+        <div class="data-label">测试用例</div>
+        <div class="data-value grad-cyan">5-10×</div>
+        <div class="data-sub">4-8h → 10-30min</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:92%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-cyan" style="width:14%"></div></div></div>
+        </div>
+      </div>
+      <div class="data-card card-pos">
+        <div class="data-label">词元消耗</div>
+        <div class="data-value grad-green">-40%</div>
+        <div class="data-sub">案例值下降</div>
+        <div class="data-bar">
+          <div class="bar-row"><span class="bar-tag">Before</span><div class="bar-track"><div class="bar-fill fill-before" style="width:88%"></div></div></div>
+          <div class="bar-row"><span class="bar-tag">After</span><div class="bar-track"><div class="bar-fill fill-after-pos" style="width:53%"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tut-tail">
+      <div class="tail-card">
+        <div class="tail-icon">客观口径</div>
+        <div class="tail-text">不能百分百都算 AI 的功劳，需求加人员变动也有影响 —— <span class="em-green">但量级足以说明 AI 转型与显著提效强相关</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.set(['#s01 .phase-2', '#s01 .phase-3', '#s01 .phase-4', '#s01 .phase-5', '#s01 .phase-6', '#s01 .phase-7'], {opacity:0}, 0.00);
+tl.set('#s01 .phase-2', {opacity:1}, 2.99);
+tl.set('#s01 .phase-1', {opacity:0}, 2.99);
+tl.set('#s01 .phase-3', {opacity:1}, 9.57);
+tl.set('#s01 .phase-2', {opacity:0}, 9.57);
+tl.set('#s01 .phase-4', {opacity:1}, 15.14);
+tl.set('#s01 .phase-3', {opacity:0}, 15.14);
+tl.set('#s01 .phase-5', {opacity:1}, 19.66);
+tl.set('#s01 .phase-4', {opacity:0}, 19.66);
+tl.set('#s01 .phase-6', {opacity:1}, 25.75);
+tl.set('#s01 .phase-5', {opacity:0}, 25.75);
+tl.set('#s01 .phase-7', {opacity:1}, 28.46);
+tl.set('#s01 .phase-6', {opacity:0}, 28.46);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:23,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:39.55,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

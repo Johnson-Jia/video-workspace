@@ -1,0 +1,73 @@
+<!-- 场景: seg1 | 时长: ~28s | bg: dark_cipher | AI 偷改动机 + 全部通过假象 + TDD 铁律 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,80%,62%,0.85);box-shadow:0 0 16px hsla(0,75%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:52%;left:80%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（左对齐） -->
+    <div class="tut-region tut-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E07 · 段一</div>
+      <h1 class="title-h1">AI 为什么<span class="grad-gold">偷改测试</span></h1>
+    </div>
+
+    <!-- 区域 2：偷改路径流程（横排 3 步） -->
+    <div class="tut-region tut-flow" data-reveal="4" data-reveal-dir="left">
+      <div class="flow-step flow-1">
+        <div class="flow-num grad-red">01</div>
+        <div class="flow-name">测试失败</div>
+        <div class="flow-note">AI 发现不过</div>
+      </div>
+      <div class="flow-arrow grad-gold">▶</div>
+      <div class="flow-step flow-2">
+        <div class="flow-num grad-gold">02</div>
+        <div class="flow-name">最省事</div>
+        <div class="flow-note">不修代码 改测试</div>
+      </div>
+      <div class="flow-arrow grad-gold">▶</div>
+      <div class="flow-step flow-3">
+        <div class="flow-num grad-green">03</div>
+        <div class="flow-name">让它通过</div>
+        <div class="flow-note">迎合错误逻辑</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：全部通过假象 + 错误逻辑代码块 -->
+    <div class="tut-region tut-fake" data-reveal="13" data-reveal-dir="top">
+      <div class="fake-left">
+        <div class="fake-label grad-red">全部通过 · 假象</div>
+        <div class="fake-big grad-red">业务逻辑全错</div>
+      </div>
+      <div class="fake-code">
+        <span class="cmt">// 错误逻辑测试</span><br>
+        <span class="gold">test</span>(add(2,2) === <span class="red">5</span>)
+      </div>
+    </div>
+
+    <!-- 区域 4：TDD 铁律卡 -->
+    <div class="tut-region tut-iron" data-reveal="21" data-reveal-dir="bottom">
+      <div class="iron-tag grad-gold-bg-inline">TDD 铁律</div>
+      <div class="iron-main">禁 <span class="grad-gold">同时写代码和测试</span> · 会验证错误逻辑</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,38 @@
+<!-- 场景: multiagent-intro | 时长: 3.7s | bg: diamond_lattice | 标题入场：多 Agent 并行 · 三种玩法 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 蓝紫静态光晕（alpha≤0.22，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:30%;width:620px;height:240px;border-radius:50%;background:radial-gradient(ellipse,hsla(215,90%,62%,0.20) 0%,transparent 65%);filter:blur(60px);opacity:0.8"></div>
+  <div class="fx-aura" style="position:absolute;top:22%;left:62%;width:580px;height:220px;border-radius:50%;background:radial-gradient(ellipse,hsla(260,85%,70%,0.18) 0%,transparent 65%);filter:blur(60px);opacity:0.8"></div>
+  <!-- fx-pulse-ring 绿色脉冲（calc 居中，避 safe_area 误报） -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 120px);left:calc(50% - 120px);width:240px;height:240px;border:2px solid rgba(52,211,153,0.55)"></div>
+  <!-- fx-particle 冷色粒子 -->
+  <div class="fx-particle" style="position:absolute;top:78%;left:20%;width:9px;height:9px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:84%;left:78%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div style="display:flex;flex-direction:column;justify-content:center;width:100%;height:100%;gap:24px">
+    <!-- 主标题 -->
+    <div data-reveal="0" data-reveal-dir="fade">
+      <div class="ma-subtitle" style="margin-top:0;color:rgba(96,165,250,0.7);font-family:var(--font-data);font-size:32px;letter-spacing:2px">E08 · 多 Agent 并行</div>
+      <h1 class="ma-title">放大靠多 Agent 并行</h1>
+      <div class="ma-subtitle">三种玩法 · 单点提效 → 规模放大</div>
+    </div>
+    <!-- 三种玩法预告横排 -->
+    <div style="display:flex;gap:18px;width:100%" data-reveal="1" data-reveal-dir="bottom">
+      <div class="ma-pill ma-pill-blue">agent-teams</div>
+      <div class="ma-pill ma-pill-purple">psmux</div>
+      <div class="ma-pill ma-pill-green">code-review 多 Agent</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

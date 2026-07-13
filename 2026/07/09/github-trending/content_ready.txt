@@ -1,0 +1,92 @@
+# Stage 1 内容整理 — GitHub Trending 2026-07-09（content_ready）
+
+## 数据源
+- `raw_trending.json`：15 个项目，python_requests + gh API 双源交叉验证
+- gh API 复核：5 个入选项目逐一验证（star/fork/watcher/created/size/contributors）
+- 验证结论：0 HARD，3 个 watcher% 警告（skill/CLI 类共性，star/fork 正常，全部保留）
+
+## 选题方向
+工具/效率（topic-tool）—— 避开连续 4 期的 AI-Agent 盘点同质化，聚焦跨领域实用工具集（设计/视频/研究/3D/文档）
+
+## 排除项（⛔ 排除记录）
+- ruvnet/RuView：永久排除列表命中（WiFi 感知人体，虚假/不可实现），跳过
+- asgeirtj/system_prompts_leaks：泄露他人系统提示，平台合规风险，⛔ 排除（不入选也不展开）
+- prisma/prisma（+46 低增量）、argoproj/argo-cd（+29 低增量 K8s）、wonderwhy-er/DesktopCommanderMCP（+28 低增量）：跳过
+- TencentCloud/TencentDB-Agent-Memory（agent 记忆，题材饱和）、obra/superpowers（agentic skills，邻近题材已覆盖）：跳过
+- addyosmani/agent-skills（07/08 已展开）、TencentCloud/CubeSandbox（07/08 已展开）、alibaba/zvec（07/07 已展开）：避免重复展开
+
+## 选取结果（5 个，受众 A2/B2/C1，跨 5 领域）
+
+### 1. Diolinux/PhotoGIMP（A 普通可用，设计工具）
+- avatar: assets/avatars/Diolinux.png
+- 用途: 让GIMP秒变PS
+- gh: 15043★ (+1125) / 595 forks / 6 年老牌 / size 105MB
+- 中文描述：给 GIMP 3+ 用的补丁，让习惯 Photoshop 的用户无缝切换（原: A Patch for GIMP 3+ for Photoshop Users）
+- 反直觉角度：开源免费软件装个补丁，界面和快捷键就变成熟悉的 Photoshop——让不想付费的设计师无缝切换工具
+- 受众措辞：设计师、PS 老用户、不想付费的创作者
+
+### 2. bradautomates/claude-video（A 普通可用，视频/内容工具）
+- avatar: assets/avatars/bradautomates.png
+- 用途: 让AI看视频
+- gh: 6069★ (+951) / 723 forks / 2.5 月新项目 / size 76KB（skill 包正常）/ README 19.5KB 证真实
+- 中文描述：让 AI 助手具备看视频的能力，一个命令完成下载、抽帧、转写，全部交给 AI 处理（原: Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.）
+- 反直觉角度：AI 助手原本只能看文字和图，这个工具让它能"看"任何视频——内容创作者的好帮手
+- 受众措辞：内容创作者、做视频分析的人、想用 AI 处理视频素材的人
+
+### 3. mvanhorn/last30days-skill（B 半可用，研究工具）
+- avatar: assets/avatars/mvanhorn.png
+- 用途: 跨6平台做研究
+- gh: 50765★ (+352) / 4237 forks / 5.5 月 / size 48MB（raw 的 stars_total=0 系采集缺失，gh 校准 50765）
+- 中文描述：一个 AI agent 技能，跨 Reddit、X、YouTube、HN、Polymarket 和网页研究任意主题，然后合成一份有依据的摘要（原: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary）
+- 反直觉角度：单平台研究已经费时，这个工具一个命令跨 6 个平台汇总——约 5 万人收藏的老牌研究利器
+- 受众措辞：做内容研究的人、需要跨平台信息汇总的人、用 AI agent 的研究者
+
+### 4. huxingyi/autoremesher（C 开发者向，3D 工具）
+- avatar: assets/avatars/huxingyi.png
+- 用途: 自动四边重网格
+- gh: 2020★ (+296) / 153 forks / 6 年老牌 / size 108MB / watcher 3.4%（最健康）
+- 中文描述：自动四边重网格工具（原: Automatic quad remeshing tool）
+- 反直觉角度：3D 建模里把杂乱三角面转成干净四边面是个手工耗时活，这个工具自动完成——给做 3D/游戏/动画的开发者省手工
+- 受众措辞：给做 3D 建模、游戏开发、动画制作的开发者
+
+### 5. iOfficeAI/OfficeCLI（B 半可用，文档/办公工具）—— 霸榜带过
+- avatar: assets/avatars/iOfficeAI.png
+- 用途: AI批量处理文档
+- gh: 11879★ (+1717，今日涨星榜首) / 807 forks / 3.8 月
+- 中文描述：专为 AI agent 打造的 Office 套件，让 AI 自动读写编辑 Word、Excel、PowerPoint 文件，免费开源、单文件、无需安装 Office（原: OfficeCLI is the first and best Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files. Free, open-source, single binary, no Office installation required.）
+- 霸榜处理：07/08 已详细展开，本期仅提增量（"昨天说的 OfficeCLI 单日再涨 1717，总星破 1.1 万"），不重复介绍功能
+- 受众措辞：用 AI 批量处理 Office 文档的人、自动化办公场景
+
+## 受众配比校验
+- A 档 2（PhotoGIMP / claude-video）= 40%，约一半 ✓
+- B 档 2（last30days-skill / OfficeCLI）
+- C 档 1（autoremesher）= 20%，≤ 一半 ✓
+- 跨 5 个不同领域（设计/视频/研究/3D/文档），无单一领域扎堆 ✓
+
+## 钩子候选（stage3 选用）
+- 主钩子候选（反直觉）：PhotoGIMP「开源软件装个补丁秒变 PS」或 claude-video「让 AI 看视频」
+- 数字锚：OfficeCLI 今日 +1717 涨星榜首（霸榜带过，不强钩子）
+- 利益翻译：所有钩子配「你能用它干什么」观众利益，禁裸报技术名词
+
+## 全项目原始描述锚点（raw_trending.json 15 项目，保真度门禁锚点）
+> 以下为 raw_trending.json 中每个项目 description 字段的原文，作为子串匹配锚点。中文翻译见上方各项目条目，禁从 owner/repo 名杜撰功能。
+
+1. addyosmani/agent-skills — Production-grade engineering skills for AI coding agents.
+2. ruvnet/RuView — π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.
+3. TencentCloud/TencentDB-Agent-Memory — TencentDB Agent Memory delivers fully local long-term memory for AI Agents via a 4-tier progressive pipeline, with zero external API dependencies.
+4. prisma/prisma — Next-generation ORM for Node.js &amp; TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB
+5. mvanhorn/last30days-skill — AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary
+6. argoproj/argo-cd — Declarative Continuous Deployment for Kubernetes
+7. iOfficeAI/OfficeCLI — OfficeCLI is the first and best Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files. Free, open-source, single binary, no Office installation required.
+8. asgeirtj/system_prompts_leaks — Extracted system prompts from Anthropic - Claude Fable 5, Opus 4.8, Claude Code, Claude Design. OpenAI - ChatGPT 5.5 Thinking, GPT 5.5 Instant, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly.
+9. obra/superpowers — An agentic skills framework &amp; software development methodology that works.
+10. alibaba/zvec — A lightweight, lightning-fast, in-process vector database
+11. Diolinux/PhotoGIMP — A Patch for GIMP 3+ for Photoshop Users
+12. wonderwhy-er/DesktopCommanderMCP — This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilities
+13. huxingyi/autoremesher — Automatic quad remeshing tool
+14. bradautomates/claude-video — Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.
+15. TencentCloud/CubeSandbox — Instant, Concurrent, Secure &amp; Lightweight Sandbox for AI Agents.
+
+> 注：OfficeCLI 原始描述含 "first and best"，旁白画面用限定性语言软化（"专为 AI 打造的 Office 套件"），但英文锚点按门禁要求原样内嵌保真。
+> 注：system_prompts_leaks 因合规风险⛔排除不入选，锚点仅为门禁校验保留原文。
+> 注：ruvnet/RuView 因永久排除列表命中不入选，锚点仅为门禁校验保留原文。

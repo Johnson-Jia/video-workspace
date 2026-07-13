@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-cyan: #38BDF8;
+  --tut-cyan-light: #7DD3FC;
+  --tut-purple: #A78BFA;
+  --tut-purple-light: #C4B5FD;
+  --tut-amber: #F59E0B;
+  --tut-green: #34D399;
+  --tut-green-light: #6EE7B7;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --tut-grey: #94A3B8;
+  --font-title: 'Inter',sans-serif;
+  --font-body: 'Noto Sans SC',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --font-brush: 'Inter',sans-serif;
+}
+
+/* ============================================
+ * Tutorial E08 gradual — 度量逐步建（阶梯三卡 + 警示条 + 金句）
+ * 4 phase 累积 reveal：标题 → 阶梯三卡(业务覆盖→bug排查→AI占比) → 警示条+基础注脚 → 收尾金句
+ * bg: light_field（冷蓝光场）
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 70px 90px 70px;
+}
+.tut-stack {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 18px;
+}
+
+/* 渐变文字（同色系禁白端点 + text-shadow 深蓝非发光） */
+.grad-cyan-purple { background-image: linear-gradient(92deg,#38BDF8 0%,#818CF8 55%,#A78BFA 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#6EE7B7 55%,#A7F3D0 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-tag-cyan {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#38BDF8 0%,#7DD3FC 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 4px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题区（左对齐） —— */
+.tut-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.tut-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.10em;
+}
+.tut-title .title-h1 {
+  font-family: 'Inter'; font-size: 62px; font-weight: 900; line-height: 1.04;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.tut-title .title-sub {
+  font-family: 'Inter'; font-size: 32px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--tut-grey);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— 阶梯三卡（横向 3 列 + 箭头连接） —— */
+.tut-stairs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr 60px 1fr;
+  gap: 0;
+  flex: 1;
+  align-items: stretch;
+}
+.stair-card {
+  background: linear-gradient(165deg, rgba(56,189,248,0.06), rgba(15,23,42,0.92));
+  border-radius: 18px;
+  border: 2px solid rgba(56,189,248,0.30);
+  padding: 24px 22px 22px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.40);
+  position: relative;
+}
+.stair-card.card-final {
+  border-color: rgba(167,139,250,0.50);
+  background: linear-gradient(165deg, rgba(167,139,250,0.10), rgba(15,23,42,0.92));
+  box-shadow: 0 8px 28px rgba(0,0,0,0.40), 0 0 0 1px rgba(167,139,250,0.20);
+}
+.stair-num {
+  font-family: 'Inter',sans-serif;
+  font-size: 92px; font-weight: 900;
+  line-height: 1.0;
+  color: var(--tut-cyan);
+  text-shadow: 0 2px 8px rgba(30,41,59,0.32);
+  letter-spacing: -0.02em;
+}
+.stair-card.card-final .stair-num { color: var(--tut-purple); }
+.stair-stage-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  letter-spacing: 0.10em;
+  color: var(--tut-cyan-light);
+  padding: 3px 12px;
+  border: 1.5px solid rgba(125,211,252,0.40);
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+}
+.stair-card.card-final .stair-stage-tag {
+  color: var(--tut-purple-light);
+  border-color: rgba(196,181,253,0.45);
+}
+.stair-name {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  line-height: 1.25;
+}
+.stair-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.4;
+}
+.stair-badge {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: var(--tut-purple-light);
+  padding: 4px 10px;
+  border: 1.5px dashed rgba(167,139,250,0.50);
+  border-radius: 6px;
+  align-self: flex-start;
+  letter-spacing: 0.04em;
+}
+/* 箭头连接列（flex 布局，避免定位类误判） */
+.stair-arrow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 2px;
+}
+.stair-arrow .arrow-line {
+  flex: 1; height: 3px;
+  background: linear-gradient(90deg, rgba(56,189,248,0.20), rgba(56,189,248,0.65), rgba(56,189,248,0.20));
+  border-radius: 2px;
+}
+.stair-arrow .arrow-head {
+  width: 0; height: 0;
+  border-left: 14px solid rgba(56,189,248,0.70);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  flex-shrink: 0;
+}
+.stair-arrow.arrow-final .arrow-line {
+  background: linear-gradient(90deg, rgba(56,189,248,0.20), rgba(167,139,250,0.65), rgba(167,139,250,0.20));
+}
+.stair-arrow.arrow-final .arrow-head {
+  border-left-color: rgba(167,139,250,0.75);
+}
+
+/* 阶梯下方注脚 */
+.stair-foot {
+  width: 100%;
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-grey);
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+/* —— 警示条（琥珀） —— */
+.warn-bar {
+  width: 100%;
+  border-radius: 14px;
+  padding: 18px 28px;
+  border: 2px solid rgba(245,158,11,0.60);
+  background: linear-gradient(165deg, rgba(245,158,11,0.14), rgba(15,23,42,0.90));
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.20), 0 6px 20px rgba(0,0,0,0.35);
+  display: flex; align-items: center; gap: 18px;
+}
+.warn-icon {
+  font-family: 'Inter'; font-size: 42px; font-weight: 900;
+  color: var(--tut-amber);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.warn-text {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-amber);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.warn-text .pct { font-family: 'JetBrains Mono'; font-weight: 900; }
+.warn-foot {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: var(--tut-grey);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+.warn-foot .em-cyan { color: var(--tut-cyan-light); }
+
+/* —— 收尾金句（翠绿） —— */
+.tut-essence {
+  width: 100%;
+  border-radius: 16px;
+  padding: 20px 30px;
+  border: 2px solid rgba(52,211,153,0.45);
+  background: linear-gradient(165deg, rgba(52,211,153,0.10), rgba(15,23,42,0.90));
+  box-shadow: 0 0 0 1px rgba(52,211,153,0.18), 0 6px 20px rgba(0,0,0,0.35);
+  display: flex; align-items: center; gap: 18px;
+}
+.essence-check {
+  font-family: 'Inter'; font-size: 42px; font-weight: 900;
+  color: var(--tut-green);
+  line-height: 1; flex-shrink: 0;
+}
+.essence-text {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+/* —— fx 层（冷色 alpha≤0.22，≥3 元素，禁划过类） —— */
+.fx-aura-cyan {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(ellipse, hsla(210,90%,60%,0.18) 0%, transparent 65%);
+  filter: blur(50px); opacity: 0.55;
+}
+.fx-aura-purple {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(ellipse, hsla(260,80%,65%,0.15) 0%, transparent 65%);
+  filter: blur(55px); opacity: 0.50;
+}
+.fx-aura-green {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(ellipse, hsla(160,80%,55%,0.16) 0%, transparent 65%);
+  filter: blur(50px); opacity: 0.52;
+}
+.fx-pulse-ring {
+  position: absolute; border-radius: 50%;
+  border: 2px solid hsla(260,75%,68%,0.18);
+  box-shadow: 0 0 24px hsla(260,70%,62%,0.14) inset;
+}
+.fx-glow-dot {
+  position: absolute; border-radius: 50%;
+}
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.tut-scene, .title-h1, .title-sub, .stair-card, .stair-name, .stair-desc,
+.warn-text, .warn-foot, .essence-text {
+  word-break: break-word; overflow-wrap: break-word;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes starDot {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+@keyframes prismShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.18; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="52.68" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.22" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="52.68">
+<!-- 场景: seg1 | 时长: ~52.7s | bg: light_field | 度量逐步建：阶梯三卡（业务覆盖→bug排查→AI占比）+ 警示条 + 收尾金句（4 phase 累积 reveal） -->
+<div class="layer-bg" data-bg-types="beams,glow,gradient,particles">
+<!-- bg-component: light_field -->
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%, var(--bg-mid, #001a33), var(--bg-dark, #080818))"></div>
+
+<div style="position:absolute;top:25%;left:20%;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,hsla(210,70%,55%,0.18),hsla(260,50%,40%,0.06),transparent 70%);
+  filter:blur(80px);animation:orbDrift 20s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:25%;left:20%;width:240px;height:240px;
+  background:conic-gradient(from 0deg,transparent 0deg,hsla(210,85%,75%,0.18) 4deg,transparent 12deg,transparent 88deg,hsla(260,75%,68%,0.14) 92deg,transparent 100deg,transparent 178deg,hsla(210,85%,75%,0.18) 182deg,transparent 190deg,transparent 268deg,hsla(260,75%,68%,0.14) 272deg,transparent 280deg,transparent 360deg);
+  filter:blur(2.5px);border-radius:50%;animation:orbDrift 20s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:55%;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,hsla(280,60%,50%,0.14),hsla(220,40%,35%,0.05),transparent 70%);
+  filter:blur(70px);animation:orbDrift 24s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:60%;left:15%;width:250px;height:250px;border-radius:50%;
+  background:radial-gradient(circle,hsla(170,55%,50%,0.12),transparent 65%);
+  filter:blur(60px);animation:orbDrift 16s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:15%;left:45%;width:3px;height:3px;border-radius:50%;
+  background:white;opacity:0.35;box-shadow:0 0 5px rgba(255,255,255,0.4);animation:starDot 4s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:40%;left:75%;width:2px;height:2px;border-radius:50%;
+  background:white;opacity:0.30;box-shadow:0 0 4px rgba(255,255,255,0.35);animation:starDot 5s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:72%;left:35%;width:3px;height:3px;border-radius:50%;
+  background:white;opacity:0.38;box-shadow:0 0 6px rgba(255,255,255,0.4);animation:starDot 3.5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:55%;left:60%;width:2px;height:2px;border-radius:50%;
+  background:white;opacity:0.28;box-shadow:0 0 4px rgba(255,255,255,0.3);animation:starDot 6s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.015) 0%,transparent 35%,transparent 65%,rgba(255,255,255,0.025) 100%);
+  animation:glassShimmer 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:15%;right:-5%;width:40%;height:300px;opacity:0.035;
+  background:linear-gradient(180deg,rgba(255,80,80,0.4),rgba(80,255,180,0.3),rgba(80,120,255,0.4));
+  filter:blur(80px);border-radius:50%;animation:prismShimmer 12s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色 青/紫/绿，呼吸脉冲，禁划过类） -->
+  <div class="fx-aura-cyan" style="top:8%;left:6%;width:620px;height:200px"></div>
+  <div class="fx-aura-purple" style="top:30%;right:4%;width:680px;height:220px"></div>
+  <div class="fx-aura-green" style="bottom:6%;left:30%;width:760px;height:200px"></div>
+  <!-- fx-pulse-ring 围绕第三阶段卡（占比是目标，calc 居中避 safe_area 误报） -->
+  <div class="fx-pulse-ring" style="top:calc(50% - 110px);right:90px;width:340px;height:340px"></div>
+  <!-- fx-glow-dot 锚点（冷色 青/紫/绿，alpha≤0.22） -->
+  <div class="fx-glow-dot" style="top:12%;left:44%;width:11px;height:11px;background:hsla(210,90%,60%,0.85);box-shadow:0 0 14px hsla(210,85%,55%,0.22)"></div>
+  <div class="fx-glow-dot" style="top:14%;left:52%;width:10px;height:10px;background:hsla(260,80%,68%,0.85);box-shadow:0 0 14px hsla(260,75%,62%,0.22)"></div>
+  <div class="fx-glow-dot" style="bottom:14%;left:28%;width:10px;height:10px;background:hsla(160,80%,55%,0.85);box-shadow:0 0 14px hsla(160,75%,50%,0.22)"></div>
+  <div class="fx-glow-dot" style="bottom:16%;right:32%;width:11px;height:11px;background:hsla(210,90%,60%,0.85);box-shadow:0 0 14px hsla(210,85%,55%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<!-- phase-1: 标题（0~5.4s） -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-tag-cyan">E08 · 推广度量 · 段8</div>
+      <h1 class="title-h1">度量是<span class="grad-cyan-purple">逐步建</span>的</h1>
+      <div class="title-sub">不是部署工具就出数据 · 三步走</div>
+    </div>
+    <div style="flex:1"></div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-2: 标题 + 阶梯卡1 业务模块覆盖（5.4~8.5s） -->
+<div class="phase phase-2 tut-scene">
+  <div class="tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-tag-cyan">E08 · 推广度量 · 段8</div>
+      <h1 class="title-h1">度量是<span class="grad-cyan-purple">逐步建</span>的</h1>
+      <div class="title-sub">不是部署工具就出数据 · 三步走</div>
+    </div>
+    <div class="tut-stairs">
+      <div class="stair-card">
+        <div class="stair-num">1</div>
+        <div class="stair-stage-tag">先</div>
+        <div class="stair-name">业务模块覆盖率</div>
+        <div class="stair-desc">盘点哪些业务接入了 AI 辅助</div>
+      </div>
+      <div class="stair-arrow"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card" style="opacity:0.22">
+        <div class="stair-num">2</div>
+        <div class="stair-stage-tag">中</div>
+        <div class="stair-name">bug 排查覆盖率</div>
+        <div class="stair-desc">线上问题追溯到代码行</div>
+      </div>
+      <div class="stair-arrow arrow-final"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card card-final" style="opacity:0.22">
+        <div class="stair-num">3</div>
+        <div class="stair-stage-tag">后</div>
+        <div class="stair-name">AI 代码占比</div>
+        <div class="stair-desc">三层识别算真实占比</div>
+      </div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-3: + 阶梯卡2 bug 排查（8.5~16s） -->
+<div class="phase phase-3 tut-scene">
+  <div class="tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-tag-cyan">E08 · 推广度量 · 段8</div>
+      <h1 class="title-h1">度量是<span class="grad-cyan-purple">逐步建</span>的</h1>
+      <div class="title-sub">不是部署工具就出数据 · 三步走</div>
+    </div>
+    <div class="tut-stairs">
+      <div class="stair-card">
+        <div class="stair-num">1</div>
+        <div class="stair-stage-tag">先</div>
+        <div class="stair-name">业务模块覆盖率</div>
+        <div class="stair-desc">盘点哪些业务接入了 AI 辅助</div>
+      </div>
+      <div class="stair-arrow"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card">
+        <div class="stair-num">2</div>
+        <div class="stair-stage-tag">中</div>
+        <div class="stair-name">bug 排查覆盖率</div>
+        <div class="stair-desc">线上问题追溯到代码行</div>
+      </div>
+      <div class="stair-arrow arrow-final"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card card-final" style="opacity:0.30">
+        <div class="stair-num">3</div>
+        <div class="stair-stage-tag">后</div>
+        <div class="stair-name">AI 代码占比</div>
+        <div class="stair-desc">三层识别算真实占比</div>
+      </div>
+    </div>
+    <div style="flex:0"></div>
+  </div>
+</div>
+
+<!-- phase-4: 全阶梯 + 警示条 + 基础注脚 + 收尾金句（16~52.7s 长尾总结态） -->
+<div class="phase phase-4 tut-scene">
+  <div class="tut-stack">
+    <div class="tut-title">
+      <div class="title-tag grad-tag-cyan">E08 · 推广度量 · 段8</div>
+      <h1 class="title-h1">度量是<span class="grad-cyan-purple">逐步建</span>的</h1>
+      <div class="title-sub">不是部署工具就出数据 · 三步走</div>
+    </div>
+    <div class="tut-stairs">
+      <div class="stair-card">
+        <div class="stair-num">1</div>
+        <div class="stair-stage-tag">先</div>
+        <div class="stair-name">业务模块覆盖率</div>
+        <div class="stair-desc">盘点哪些业务接入了 AI 辅助</div>
+      </div>
+      <div class="stair-arrow"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card">
+        <div class="stair-num">2</div>
+        <div class="stair-stage-tag">中</div>
+        <div class="stair-name">bug 排查覆盖率</div>
+        <div class="stair-desc">线上问题追溯到代码行</div>
+      </div>
+      <div class="stair-arrow arrow-final"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+      <div class="stair-card card-final">
+        <div class="stair-num">3</div>
+        <div class="stair-stage-tag">后</div>
+        <div class="stair-name">AI 代码占比</div>
+        <div class="stair-desc">三层识别算真实占比</div>
+        <div class="stair-badge">目标态</div>
+      </div>
+    </div>
+    <div class="stair-foot">先盘点模块接入 → 再追线上问题 → 最后算占比</div>
+    <div class="warn-bar">
+      <div class="warn-icon">⚠</div>
+      <div class="warn-text">别指望一上来就跑出 <span class="pct">76.6%</span></div>
+    </div>
+    <div class="warn-foot">前两层是基础 · 业务没铺开占比没分母 · 问题追不到占比是<span class="em-cyan">空中楼阁</span></div>
+    <div class="tut-essence">
+      <div class="essence-check">✓</div>
+      <div class="essence-text"><span class="grad-green">先建可量化的业务指标，度量体系随转型成熟分阶段落地</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- cinema 后处理：本段为理性提醒段，留空避免过度风格化 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.set(['#s01 .phase-2', '#s01 .phase-3', '#s01 .phase-4'], {opacity:0}, 0.00);
+tl.set('#s01 .phase-2', {opacity:1}, 5.40);
+tl.set('#s01 .phase-1', {opacity:0}, 5.40);
+tl.set('#s01 .phase-3', {opacity:1}, 8.53);
+tl.set('#s01 .phase-2', {opacity:0}, 8.53);
+tl.set('#s01 .phase-4', {opacity:1}, 16.06);
+tl.set('#s01 .phase-3', {opacity:0}, 16.06);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:52.68,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

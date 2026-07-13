@@ -1,0 +1,198 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-purple: #A78BFA;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E11 fourskill — 4 核心 skill：概览 + devflow + sql-query + crud-gen + code-review
+ * ============================================ */
+
+.fourskill-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.t-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.t-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#A78BFA 0%,#A78BFA 55%,#C4B5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-green { color: #34D399; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-purple { color: #A78BFA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+.mono-gold { font-family: var(--font-data); color: #FBBF24; font-weight: 800; }
+.mono-blue { font-family: var(--font-data); color: #60A5FA; font-weight: 800; }
+.mono-green { font-family: var(--font-data); color: #34D399; font-weight: 800; }
+.mono-purple { font-family: var(--font-data); color: #A78BFA; font-weight: 800; }
+
+.cr-light { color: rgba(255,255,255,0.92); font-weight: 800; }
+
+/* —— Phase 1：概览 + 四卡缩略 —— */
+.fs-overview { flex-direction: column; gap: 32px; width: 100%; }
+.fs-title {
+  font-family: var(--font-title); font-size: 96px; font-weight: 900; line-height: 1.05;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 18px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.fs-mini-row {
+  display: flex; gap: 24px; align-items: stretch; justify-content: center; width: 100%;
+}
+.fs-mini {
+  flex: 1; max-width: 380px;
+  border-radius: 18px; padding: 22px 18px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.fs-mini.mini-gold { border-color: rgba(251,191,36,0.55); }
+.fs-mini.mini-blue { border-color: rgba(96,165,250,0.55); }
+.fs-mini.mini-green { border-color: rgba(52,211,153,0.55); }
+.fs-mini.mini-purple { border-color: rgba(167,139,250,0.55); }
+.mini-icon { font-size: 40px; }
+
+/* —— Phase 2/3/4/5：skill 卡 —— */
+.skill-card {
+  flex-direction: column; gap: 22px; width: 100%; max-width: 1400px;
+  border-radius: 24px; padding: 40px 56px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(15,23,42,0.88));
+  border: 2px solid;
+}
+.card-gold { border-color: rgba(251,191,36,0.55); box-shadow: 0 0 50px rgba(251,191,36,0.10) inset; }
+.card-blue { border-color: rgba(96,165,250,0.55); box-shadow: 0 0 50px rgba(96,165,250,0.10) inset; }
+.card-green { border-color: rgba(52,211,153,0.55); box-shadow: 0 0 50px rgba(52,211,153,0.10) inset; }
+.card-purple { border-color: rgba(167,139,250,0.55); box-shadow: 0 0 50px rgba(167,139,250,0.10) inset; }
+
+.skill-head {
+  display: flex; align-items: center; gap: 24px;
+  width: 100%;
+}
+.skill-num {
+  font-family: var(--font-data); font-size: 80px; font-weight: 900;
+  filter: drop-shadow(0 3px 12px rgba(30,41,59,0.32));
+  line-height: 1;
+}
+.skill-name {
+  flex: 1;
+  font-family: var(--font-title); font-size: 60px; font-weight: 900;
+  letter-spacing: 0.02em;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.skill-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  padding: 8px 24px; border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+.tag-gold { background: rgba(251,191,36,0.14); color: #FBBF24; border: 1px solid rgba(251,191,36,0.45); }
+.tag-blue { background: rgba(96,165,250,0.14); color: #60A5FA; border: 1px solid rgba(96,165,250,0.45); }
+.tag-green { background: rgba(52,211,153,0.14); color: #34D399; border: 1px solid rgba(52,211,153,0.45); }
+.tag-purple { background: rgba(167,139,250,0.14); color: #A78BFA; border: 1px solid rgba(167,139,250,0.45); }
+
+.skill-desc {
+  font-family: var(--font-body); font-size: 42px; font-weight: 800;
+  color: var(--tut-white); line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+
+/* —— devflow 六阶段流 —— */
+.skill-flow {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: nowrap;
+}
+.flow-step {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  color: #FBBF24;
+  padding: 10px 22px; border-radius: 12px;
+  background: rgba(251,191,36,0.10);
+  border: 2px solid rgba(251,191,36,0.45);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.flow-arrow {
+  font-family: var(--font-data); font-size: 36px; font-weight: 900;
+  color: rgba(251,191,36,0.65);
+}
+
+/* —— sql-query 三模式 —— */
+.skill-modes {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+}
+.mode-pill {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  color: #60A5FA;
+  padding: 12px 32px; border-radius: 14px;
+  background: rgba(96,165,250,0.10);
+  border: 2px solid rgba(96,165,250,0.50);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+
+/* —— crud-gen 五层 —— */
+.skill-layers {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  flex-wrap: nowrap;
+}
+.layer-pill {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  color: #34D399;
+  padding: 10px 22px; border-radius: 12px;
+  background: rgba(52,211,153,0.10);
+  border: 2px solid rgba(52,211,153,0.50);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.lp-arrow {
+  font-family: var(--font-data); font-size: 34px; font-weight: 900;
+  color: rgba(52,211,153,0.65);
+}
+
+/* —— 收尾 —— */
+.skill-finale {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}

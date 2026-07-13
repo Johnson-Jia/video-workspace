@@ -1,0 +1,137 @@
+<!-- 场景: scene-1 | 时长: 31s | bg: scan_grid | devflow 编排型：六阶段流水线 + OpenSpec/Superpowers 调用 + 断点续传/规则覆盖 + 默认工作流收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金主线 / 蓝 skill / 绿规则 / 紫归档；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:1200px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(60px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:30%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:52%;left:70%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:1100px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.14) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:78%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:26%;left:18%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:28%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:68%;left:32%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 devflow-scene">
+  <!-- phase-1 (0-5.3s): devflow 编排型定位 + 六阶段总览 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · devflow 编排型 · 核心段</div>
+  </div>
+  <div class="region-mid df-overview">
+    <div class="df-title">devflow <span class="grad-gold">六阶段</span> 流水线</div>
+    <div class="df-tag-row">
+      <div class="df-tag">编排型 · 自己不实现</div>
+      <div class="df-tag">把多个 skill 串成流水线</div>
+    </div>
+    <div class="df-node-row">
+      <div class="df-node n-gold">探索</div>
+      <div class="df-arrow">→</div>
+      <div class="df-node n-blue">规范</div>
+      <div class="df-arrow">→</div>
+      <div class="df-node n-green">计划</div>
+      <div class="df-arrow">→</div>
+      <div class="df-node n-purple">TDD</div>
+      <div class="df-arrow">→</div>
+      <div class="df-node n-blue">验证</div>
+      <div class="df-arrow">→</div>
+      <div class="df-node n-gold">归档</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / devflow 编排型 —</div>
+  </div>
+</div>
+<div class="phase phase-2 devflow-scene">
+  <!-- phase-2 (5.3-13.7s): 前四阶段 + 调 OpenSpec/Superpowers -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 前四阶段 · 调 skill</div>
+  </div>
+  <div class="region-mid df-phase-grid">
+    <div class="df-phase-card pc-gold">
+      <div class="pc-num">01</div>
+      <div class="pc-name">探索</div>
+      <div class="pc-tool">理解需求</div>
+    </div>
+    <div class="df-phase-card pc-blue">
+      <div class="pc-num">02</div>
+      <div class="pc-name">规范</div>
+      <div class="pc-tool">调 <span class="mono-blue">OpenSpec</span></div>
+    </div>
+    <div class="df-phase-card pc-green">
+      <div class="pc-num">03</div>
+      <div class="pc-name">计划</div>
+      <div class="pc-tool">调 <span class="mono-green">Superpowers</span></div>
+    </div>
+    <div class="df-phase-card pc-purple">
+      <div class="pc-num">04</div>
+      <div class="pc-name">TDD</div>
+      <div class="pc-tool">测试驱动</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / devflow 编排型 —</div>
+  </div>
+</div>
+<div class="phase phase-3 devflow-scene">
+  <!-- phase-3 (13.7-22.1s): 验证+归档 + 断点续传 + 规则覆盖 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 验证归档 · 断点续传 / 规则覆盖</div>
+  </div>
+  <div class="region-mid df-feature-block">
+    <div class="df-phase-pair">
+      <div class="df-phase-card pc-blue">
+        <div class="pc-num">05</div>
+        <div class="pc-name">验证</div>
+        <div class="pc-tool">检查产出</div>
+      </div>
+      <div class="df-phase-card pc-gold">
+        <div class="pc-num">06</div>
+        <div class="pc-name">归档</div>
+        <div class="pc-tool">沉淀复用</div>
+      </div>
+    </div>
+    <div class="df-feature-row">
+      <div class="df-feature feat-green">
+        <div class="feat-icon">⏯</div>
+        <div class="feat-title">断点续传</div>
+        <div class="feat-desc">中断了 <span class="kw-green">接着跑</span></div>
+      </div>
+      <div class="df-feature feat-purple">
+        <div class="feat-icon">⚙</div>
+        <div class="feat-title">规则覆盖</div>
+        <div class="feat-desc">团队规矩 <span class="kw-purple">改写默认出口</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / devflow 编排型 —</div>
+  </div>
+</div>
+<div class="phase phase-4 devflow-scene">
+  <!-- phase-4 (22.1-31s): 规范驱动开发 默认工作流 收尾 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 默认工作流 · 收尾</div>
+  </div>
+  <div class="region-mid df-finale">
+    <div class="finale-line">devflow 把 <span class="grad-gold">规范驱动开发</span></div>
+    <div class="finale-line">从 <span class="kw-white">口号</span> 变成 <span class="grad-green">团队默认工作流</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / devflow 编排型 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

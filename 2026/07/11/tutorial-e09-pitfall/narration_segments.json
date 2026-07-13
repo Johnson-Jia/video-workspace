@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 60,
+    "emotion": "真实避坑——静默吞异常（catch 吞 + handleSuccess）→ SFTP 停更九个月 → 修复（重抛 + handleFail + 外部健康检查）",
+    "text": "真实避坑，来自生产 bug 复盘。最典型的是静默吞异常。代码里 catch 吞掉异常，然后无论如何都调 handleSuccess，任务自报成功。某 SFTP 推送任务就这么静默挂了九个月，客户才发现。修复方法是 catch 必须重抛或转 Error，失败必须调 handleFail。关键集成任务必须有外部健康检查，不能只信任务自报成功。这些避坑写进规则，AI 自动加载，同类问题不再重犯。",
+    "narration": "真实避坑，来自生产 bug 复盘。最典型的是静默吞异常。代码里 catch 吞掉异常，然后无论如何都调 handleSuccess，任务自报成功。某 SFTP 推送任务就这么静默挂了九个月，客户才发现。修复方法是 catch 必须重抛或转 Error，失败必须调 handleFail。关键集成任务必须有外部健康检查，不能只信任务自报成功。这些避坑写进规则，AI 自动加载，同类问题不再重犯。",
+    "hook_anchors": ["真实避坑", "来自生产 bug 复盘", "最典型的是静默吞异常", "catch 吞掉异常", "无论如何都调 handleSuccess", "任务自报成功", "某 SFTP 推送任务", "静默挂了九个月", "客户才发现", "修复方法", "catch 必须重抛或转 Error", "失败必须调 handleFail", "关键集成任务", "外部健康检查", "不能只信任务自报成功", "写进规则", "AI 自动加载", "同类问题不再重犯"],
+    "visual_type": "tutorial_pitfall",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "标题「真实避坑 · 静默吞异常」+ 副标「生产 bug 复盘」fade-in", "duration_share": 0.13, "narration_anchor": {"start_sentence": 0, "end_sentence": 1}},
+      {"phase": 2, "start_offset": 8, "focus": "❌ 错误代码案例卡：catch 吞异常 + 无条件 handleSuccess + 红色警示「自报成功≠真的成功」 reveal bottom", "duration_share": 0.33, "narration_anchor": {"start_sentence": 2, "end_sentence": 3}},
+      {"phase": 3, "start_offset": 28, "focus": "九个月时间线警示：M1-M9 横向时间轴 + SFTP 任务图标 + M9 红色「客户发现」 reveal", "duration_share": 0.27, "narration_anchor": {"start_sentence": 3, "end_sentence": 4}},
+      {"phase": 4, "start_offset": 44, "focus": "✅ 修复代码卡：catch 重抛 + handleFail + 外部健康检查 + 「写进规则 · AI 自动加载」 reveal bottom", "duration_share": 0.27, "narration_anchor": {"start_sentence": 5, "end_sentence": 7}}
+    ],
+    "bg_component": "hex_grid"
+  }
+]

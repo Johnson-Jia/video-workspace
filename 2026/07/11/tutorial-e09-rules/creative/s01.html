@@ -1,0 +1,101 @@
+<!-- 场景: seg1 | 时长: 23.3s | bg: scan_grid | 三条红线：标题→3红线独立卡横排(终端代码+违规/后果)→AI加载流程+强制/宽容 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色+警示红光晕（禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:1100px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:20%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;right:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,78%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:1100px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- 红线脉冲锚点（3卡对齐） -->
+  <div class="fx-blink" style="position:absolute;top:50%;left:18%;width:12px;height:12px;border-radius:50%;background:hsla(0,80%,62%,0.9);box-shadow:0 0 16px hsla(0,75%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,78%,60%,0.9);box-shadow:0 0 16px hsla(0,73%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:18%;width:12px;height:12px;border-radius:50%;background:hsla(0,82%,62%,0.9);box-shadow:0 0 16px hsla(0,77%,56%,0.5)"></div>
+  <div class="fx-particle" style="position:absolute;top:18%;left:86%;width:9px;height:9px;background:rgba(252,165,165,0.85);box-shadow:0 0 12px rgba(252,165,165,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:82%;left:14%;width:8px;height:8px;background:rgba(96,165,250,0.8);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题/三条红线卡/AI自动加载收尾 同屏 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region rl-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="rl-tag grad-gold-bg-inline">E09 · 三条红线</div>
+      <h1 class="rl-h1">规范资产化 · <span class="grad-gold">三条红线</span></h1>
+      <div class="rl-sub">写进 <span class="grad-blue">rules</span> 目录 · AI 自动加载</div>
+    </div>
+
+    <!-- 区域 2：三条红线卡横排（reveal 3，bottom）—— 中部核心 -->
+    <div class="tut-region rl-pl-cards" data-reveal="3" data-reveal-dir="bottom">
+      <div class="rl-cards">
+        <!-- 红线1：租户隔离 -->
+        <div class="rl-card rl-card-1">
+          <div class="rl-card-head">
+            <div class="rl-card-num">①</div>
+            <div class="rl-card-title">租户隔离</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">sql-rule.md</span></div>
+            <div class="rl-code">SELECT * FROM t_order<br>WHERE <span class="code-kw">corp_id</span> = ?<br><span class="code-comment">// 每表必带 corp_id</span></div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>所有 SQL</div>
+        </div>
+        <!-- 红线2：MQ finally 清理 -->
+        <div class="rl-card rl-card-2">
+          <div class="rl-card-head">
+            <div class="rl-card-num">②</div>
+            <div class="rl-card-title">finally 清理</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">mq-rule.md</span></div>
+            <div class="rl-code"><span class="code-kw">try</span> { send(msg); }<br><span class="code-kw">finally</span> {<br>  Context.clear();<br>}</div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>MQ / 定时任务</div>
+        </div>
+        <!-- 红线3：事务管理器 -->
+        <div class="rl-card rl-card-3">
+          <div class="rl-card-head">
+            <div class="rl-card-num">③</div>
+            <div class="rl-card-title">事务管理器</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">tx-rule.md</span></div>
+            <div class="rl-code">@Transactional<br>(<span class="code-str">"orderTxManager"</span>)<br><span class="code-comment">// 必须指定管理器</span></div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>所有事务</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：AI 自动加载流程 + 强制/宽容收尾（reveal 14，left）—— 底部 -->
+    <div class="tut-region rl-pl-autoload" data-reveal="14" data-reveal-dir="left">
+      <div class="rl-autoload">
+        <div class="rl-al-tag grad-blue-bg-inline">AI 自动加载</div>
+        <div class="rl-al-flow">
+          <div class="rl-al-node">rules/</div>
+          <div class="rl-al-arrow">→</div>
+          <div class="rl-al-node">AI 启动扫描</div>
+          <div class="rl-al-arrow">→</div>
+          <div class="rl-al-node rl-al-end">自动遵守</div>
+        </div>
+        <div class="rl-al-strict">
+          <span class="rl-strict-badge rl-strict-new">新代码 · 强制</span>
+          <span class="rl-strict-badge rl-strict-old">旧代码 · 宽容</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.32) 100%);pointer-events:none"></div>
+</div>

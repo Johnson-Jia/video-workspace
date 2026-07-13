@@ -1,0 +1,113 @@
+{
+  "topic_type": "运行时/基础设施/网络框架（开发者基石周，远离连续应用层）",
+  "topic_pattern": "topic-tool",
+  "angle": "今天 GitHub 换到开发者基石层：JS 运行时、网络互联、基础设施代码、AI 编程助手配置——这些是上层应用的地基，普通人触不到但每天都在用它们造的东西",
+  "novelty_strategy": "本期主动差异化三轴：①题材换——07/07 本地隐私 / 07/08 AI+端侧 / 07/09 跨领域工具 / 07/10 安全+学习+游戏，连续 4 期都是「应用层能玩能用」轴，本期换成「底层基石/运行时/网络/IaC」新轴线（bun 运行时 / tailscale 网络 / terraform IaC / next.js 框架），让观众看到 GitHub 不只是 AI 工具集合，更是开发者世界的钢筋水泥；②hook 角度换——近期 hook 多用'砍掉/杀入/猛项目/换口味'句式，本期用'换层/底层/基石'转折+反问式（'今天换到开发者地基这层'），打破观众对 GitHub=Trending AI 工具的刻板印象；③叙事结构换——按'最火 AI 编程配置（mattpocock skills）→ 运行时基石（bun）→ 网络互联（tailscale）→ AI 终端控制（DesktopCommanderMCP）→ 老牌框架（next.js）→ 基础设施代码（terraform）'六段递进，而非纯涨星排序，从应用往底层逐层深入",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "AI 编程配置(A/B·mattpocock skills) + JS 运行时(C·bun) + 网络 VPN(B·tailscale) + AI 终端控制(A/B·DesktopCommanderMCP) + React 框架(C·next.js) + 基础设施 IaC(C·terraform)——跨 6 个不同领域（AI配置/运行时/网络/AI终端/前端框架/云基础设施），AI 类压到 2 个点缀，4 个是非 AI 的纯底层基石",
+  "avoid_recent": [
+    "Diolinux/PhotoGIMP（07/09 主导展开，避）",
+    "bradautomates/claude-video（07/09 展开，避）",
+    "mvanhorn/last30days-skill（07/09 展开，避）",
+    "huxingyi/autoremesher（07/09 展开，避）",
+    "SmartlyDressedGames/U3-SDK（07/10 展开，避）",
+    "VoltAgent/awesome-design-md（07/10 展开，避）",
+    "anthropics/claude-cookbooks（07/10 展开，避）",
+    "imthenachoman/How-To-Secure-A-Linux-Server（07/10 展开，避）",
+    "vxcontrol/pentagi（07/10 展开，避）",
+    "MadsLorentzen/ai-job-search（07/08 展开 + 07/10 霸榜带过，已两次提及，本期不选）",
+    "addyosmani/agent-skills（07/08 展开 + AI agent skills 题材饱和，避）",
+    "obra/superpowers（07/07 展开 + agentic skills 框架，避）",
+    "iOfficeAI/OfficeCLI（07/08+07/09 连续两期展开，连续霸榜严重疲劳，本期避）",
+    "TencentCloud/TencentDB-Agent-Memory（07/07 饱和 + agent 记忆题材，避）",
+    "ruvnet/RuView（永久排除）",
+    "asgeirtj/system_prompts_leaks（若在榜，合规风险⛔排除）"
+  ],
+  "exclusion_decisions": [
+    "ruvnet/RuView — 永久排除列表命中（虚假/不可实现），跳过（本期不在 raw_trending 榜中）",
+    "addyosmani/agent-skills (+1114) — 07/08 已主导展开 + AI agent skills 题材近期严重饱和（连续多期 agent 框架/skills），避",
+    "obra/superpowers (+969) — 07/07 已展开 + agentic skills 框架，避",
+    "iOfficeAI/OfficeCLI (+1210) — 07/08+07/09 连续两期展开，连续 3 天霸榜已严重疲劳，本期避（让位给更新鲜的 mattpocock/skills 作 AI 配置代表）",
+    "TencentCloud/TencentDB-Agent-Memory (+134) — 07/07 饱和 + agent 记忆题材，避",
+    "abseil/abseil-cpp (+106) — Google C++ 通用库，C 档纯开发者库无新意，跳过",
+    "jbeder/yaml-cpp (+65) — C++ YAML 解析库，C 档纯库低增量，跳过",
+    "catchorg/Catch2 (+69) — C++ 测试框架，C 档纯库，跳过",
+    "chriskohlhoff/asio (+87) — C++ Asio 网络库，C 档纯库，跳过",
+    "zeux/meshoptimizer (+86) — C++ 网格优化库，C 档纯库，跳过",
+    "grpc/grpc (+68) — C++ gRPC 框架，C 档纯库低增量，跳过",
+    "davila7/claude-code-templates (+104) — Claude Code 配置 CLI，与 mattpocock/skills 题材邻近（都是 AI 编程配置），择一不重复，跳过",
+    "google-labs-code/stitch-skills (+101) — Stitch MCP agent skills，与 mattpocock/skills + agent-skills 题材三重叠加，跳过",
+    "microsoft/TypeScript (+166) — TypeScript 编译器老牌大项目，C 档语言实现，与本期'换到底层基石'角度已有 bun/next.js 代表 JS 生态，跳过避免 JS 生态扎堆"
+  ],
+  "candidate_for_brief_mention": null,
+  "verification_notes": {
+    "mattpocock/skills": "raw +1663 / 164566，gh API 校准 164567★ / 14161 forks / 958 watchers / 2026-02-03 创建 5 个月新项目 / size 698KB（skill 集合正常）/ MIT / 0 HARD 0 警告 ✅。watcher% 0.58% 健康范围。Matt Pocock 是知名 TypeScript 教育者（Total TypeScript 作者），账号真实活跃",
+    "oven-sh/bun": "raw +307 / 94195，gh 校准 94196★ / 4938 forks / 681 watchers / 2021-04 创建 5 年大项目 / size 633MB（runtime 正常）/ NOASSERTION（非 MIT 但可商用）/ 0 HARD 0 警告 ✅",
+    "tailscale/tailscale": "raw +183 / 33627，gh 校准 33627★ / 2910 forks / 266 watchers / 2020-01 创建 6 年大项目 / size 83MB / BSD-3-Clause / 0 HARD 0 警告 ✅",
+    "wonderwhy-er/DesktopCommanderMCP": "raw +349 / 7253，gh 校准 7253★ / 925 forks / 111 watchers / 2024-12 创建 1.5 年项目 / size 70MB / MIT / 0 HARD 0 警告 ✅。07/07 trending 在榜但未在 07/07 content_ready 选中（07/07 选了 meetily/taste-skill 等），本期首次展开",
+    "vercel/next.js": "raw +176 / 140688，gh 校准 140688★ / 31523 forks / 1669 watchers / 2016-10 创建 9 年老牌 / size 2.5GB（大型 monorepo 正常）/ MIT / 0 HARD 0 警告 ✅",
+    "hashicorp/terraform": "raw +168 / 49150，gh 校准 49151★ / 10672 forks / 1282 watchers / 2014-03 创建 11 年老牌 / size 356MB / NOASSERTION（BSL 1.1，源码可见但有限制）/ 0 HARD 0 警告 ✅"
+  },
+  "selected_projects": [
+    {
+      "owner/repo": "mattpocock/skills",
+      "rank_today": 6,
+      "stars_today": 1663,
+      "stars_total": 164566,
+      "audience": "A/B",
+      "reason": "今日涨星榜首（+1663），TypeScript 教育界名人 Matt Pocock 把自己 .claude 目录里的 AI 编程 skills 开源——反直觉钩子强（'私人配置'公开），16 万星证明价值，A/B 档（用 Claude/Cursor 的非专业开发者也能装）",
+      "role": "核心钩子 + 涨星榜首（AI 配置层）"
+    },
+    {
+      "owner/repo": "wonderwhy-er/DesktopCommanderMCP",
+      "rank_today": 1,
+      "stars_today": 349,
+      "stars_total": 7253,
+      "audience": "A/B",
+      "reason": "给 AI 助手装上终端控制+文件搜索+差异编辑能力，A/B 档（用 Claude Code/AI 编程的人都能受益），本期首次展开（07/07 在榜未选），反直觉角度：AI 原本只能聊天，现在能直接操作你电脑",
+      "role": "反直觉钩子 + AI 终端层"
+    },
+    {
+      "owner/repo": "oven-sh/bun",
+      "rank_today": 2,
+      "stars_today": 307,
+      "stars_total": 94195,
+      "audience": "B/C",
+      "reason": "Rust 写的 JS 运行时，把运行时/打包/测试/包管理四合一，'快'是核心卖点，9 万星大项目，B/C 档（前端开发者主力工具），代表'运行时基石'层",
+      "role": "运行时基石 + 大项目数字锚"
+    },
+    {
+      "owner/repo": "tailscale/tailscale",
+      "rank_today": 14,
+      "stars_today": 183,
+      "stars_total": 33627,
+      "audience": "B",
+      "reason": "基于 WireGuard 的 VPN，号称'最简单最安全的组网方式'，B 档（远程办公/跨设备互联的普通人能上手），代表'网络互联'层，反直觉：传统 VPN 配置复杂，这个一行命令搞定",
+      "role": "网络互联 + 普通人可用"
+    },
+    {
+      "owner/repo": "vercel/next.js",
+      "rank_today": 19,
+      "stars_today": 176,
+      "stars_total": 140688,
+      "audience": "C",
+      "reason": "React 框架事实标准，14 万星老牌，C 档（前端开发者），代表'前端框架基石'层，老项目但今日新涨 176 提及'仍在快速迭代'",
+      "role": "前端框架基石 + 老牌数字锚"
+    },
+    {
+      "owner/repo": "hashicorp/terraform",
+      "rank_today": 17,
+      "stars_today": 168,
+      "stars_total": 49150,
+      "audience": "C",
+      "reason": "基础设施即代码鼻祖，用配置文件管理云资源，4.9 万星 11 年老牌，C 档（运维/云架构师），代表'云基础设施'层，反直觉：手点云控制台的时代过去了，写代码就能开服务器",
+      "role": "云基础设施 + IaC 老牌"
+    }
+  ],
+  "audience_balance": "A/B 档 2（mattpocock skills / DesktopCommanderMCP，AI 编程配置类普通人能上手）+ B 档 1（tailscale，远程办公可用）+ B/C 档 1（bun，前端开发者）+ C 档 2（next.js / terraform，纯开发者基石）—— A/B 约占一半（3/6=50%）符合'普通人可用约一半'约束；C 档 2/6=33% ≤ 一半合规。本期 raw 数据 C++ 库/纯开发者库扎堆（abseil/yaml-cpp/Catch2/asio/meshoptimizer/grpc/TypeScript），按 audience_filter 已尽量拔高 A/B 占比",
+  "ending_question_strategy": "用「想尝试 / 会用 / 会试」类中性互动（禁站队对抗），候选：「这几个开发者基石你最想用哪个」或「今天这层你日常在用几个」—— 轮换避免连续同款句式（07/09 用过'最想试哪个'，07/10 用过'最看好哪个'，本期用'日常在用几个'或'会用哪个'换式）"
+}

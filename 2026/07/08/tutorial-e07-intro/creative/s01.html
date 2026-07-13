@@ -1,0 +1,78 @@
+<!-- 场景: seg1 | 时长: ~25s | bg: dark_cipher | 三层防护 + 四案例预告 + 学习目标 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 16px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:20%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:80%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 14px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（左对齐） -->
+    <div class="tut-region tut-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">E07 · 方法论</div>
+      <h1 class="title-h1">防 AI 偷改测试 <span class="grad-gold">三层防护</span></h1>
+      <div class="title-sub">提示词 + 权限 deny + Git 兜底</div>
+    </div>
+
+    <!-- 区域 2：三层防护横排（权限层金边强调） -->
+    <div class="tut-region tut-defense" data-reveal="5" data-reveal-dir="left">
+      <div class="defense-card defense-1">
+        <div class="defense-num grad-blue">01</div>
+        <div class="defense-name">提示词</div>
+        <div class="defense-note">靠 AI 自觉</div>
+      </div>
+      <div class="defense-card defense-2">
+        <div class="defense-num grad-gold">02</div>
+        <div class="defense-name">权限 deny</div>
+        <div class="defense-key">关键 · 硬拦截</div>
+      </div>
+      <div class="defense-card defense-3">
+        <div class="defense-num grad-green">03</div>
+        <div class="defense-name">Git 兜底</div>
+        <div class="defense-note">diff 核查</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：四案例预告横排 -->
+    <div class="tut-region tut-cases" data-reveal="13" data-reveal-dir="bottom">
+      <div class="case-pill"><div class="case-num grad-blue">01</div><div class="case-name">单点修复</div></div>
+      <div class="case-pill"><div class="case-num grad-blue">02</div><div class="case-name">12 Controller</div></div>
+      <div class="case-pill"><div class="case-num grad-blue">03</div><div class="case-name">前端陪练</div></div>
+      <div class="case-pill"><div class="case-num grad-blue">04</div><div class="case-name">大规模迁移</div></div>
+    </div>
+
+    <!-- 区域 4：学习目标三栏 -->
+    <div class="tut-region tut-goals" data-reveal="19" data-reveal-dir="top">
+      <div class="goal-card">
+        <div class="goal-icon grad-green">✓</div>
+        <div class="goal-text">怎么防 AI 改测试</div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon grad-green">✓</div>
+        <div class="goal-text">权限层怎么配</div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon grad-green">✓</div>
+        <div class="goal-text">真实案例怎么跑</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

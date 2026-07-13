@@ -1,0 +1,38 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-gold: #FBBF24;
+  --accent-blue: #3B82F6;
+  --accent-emerald: #34D399;
+  --accent-rose: #F87171;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.82);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* hex_grid bg keyframes */
+@keyframes hexPulse { 0%,100%{opacity:0.5} 50%{opacity:0.85} }
+@keyframes hexScanRotate { 0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)} }
+@keyframes hexNodePulse { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes heartbeatPulse { 0% { transform: scale(0.3); opacity: 0.40; } 15% { transform: scale(1.2); opacity: 0.15; } 30% { transform: scale(0.5); opacity: 0.30; } 45% { transform: scale(1.0); opacity: 0; } 100% { opacity: 0; } }
+
+/* tut-scene 单 phase 横屏布局 */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  padding: 180px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.region { box-sizing: border-box; }
+
+.grad-title {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,40 @@
+{
+  "topic_type": "安全/学习资源/游戏开发（混合，远离 AI 工具饱和）",
+  "topic_pattern": "topic-mixed-novelty",
+  "angle": "今天 GitHub 换口味：AI 不再是主角——免费僵尸生存游戏全开源、Linux 服务器加固指南、AI 自动做渗透测试，还有官方 Claude 学习手册和品牌设计系统合集，普通人能玩能学能防",
+  "novelty_strategy": "本期主动差异化三轴：①题材换——07/07 本地隐私工具 / 07/08 AI+端侧工具 / 07/09 跨领域实用工具，连续 3 期都是「工具/效率」轴，本期换成「安全防御 + 学习资源 + 游戏开源」新轴线，AI 项目压到 1 个（pentagi AI渗透）做点缀而非主角；②hook 角度换——近期 hook 多用'砍掉/杀入/猛项目'动作词疲劳，本期用'换口味/不再是主角'转折句式+具体领域数字锚定（'游戏源码/安全指南/学习手册'三类）让观众知道换内容了；③叙事结构换——按'能玩→能学→能防'三段利益分组而非纯涨星排序，打破盘点疲劳",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "游戏开源(A·能玩) + 设计资源(A·能用) + 学习手册(A·能学) + 安全指南(B·能学) + AI渗透(C·开发者) + 求职霸榜带过(A)——5 个全新 + 1 个连续霸榜，跨游戏/设计/学习/安全 4 个领域，AI 仅 1 个点缀",
+  "avoid_recent": [
+    "Diolinux/PhotoGIMP（07/09 主导展开，避）",
+    "bradautomates/claude-video（07/09 展开，避）",
+    "mvanhorn/last30days-skill（07/09 展开，避）",
+    "huxingyi/autoremesher（07/09 展开，避）",
+    "addyosmani/agent-skills（07/08 展开 + AI agent 题材饱和，避）",
+    "Zackriya-Solutions/meetily（07/05-08 连续 4 期，已饱和）",
+    "TencentCloud/CubeSandbox（07/08 展开，避）",
+    "kyutai-labs/pocket-tts（07/08 展开，端侧已覆盖，避）",
+    "prisma/prisma（老牌 ORM，低增量，C 档纯库，跳过）",
+    "ruvnet/RuView（永久排除）",
+    "asgeirtj/system_prompts_leaks（泄露他人系统提示，⛔合规排除）"
+  ],
+  "exclusion_decisions": [
+    "asgeirtj/system_prompts_leaks — 泄露他人系统提示（含 Anthropic/OpenAI/Google/xAI 等多家系统 prompt），合规风险高，⛔ 排除不入选",
+    "ruvnet/RuView — 永久排除列表命中（虚假/不可实现），跳过",
+    "addyosmani/agent-skills (+2582) — 07/08 已主导展开 + AI agent skills 题材近期饱和（连续多期 agent 框架/skills），避",
+    "bradautomates/claude-video (+727) — 07/09 已展开，避",
+    "huxingyi/autoremesher (+405) — 07/09 已展开，避",
+    "prisma/prisma (+373) — 老牌 ORM 46886★，单日低增量，C 档纯库无新意，跳过",
+    "wonderwhy-er/DesktopCommanderMCP (+185) — 单日低增量，跳过",
+    "unclecode/crawl4ai (+195) — 单日低增量 + 爬虫题材与本期'游戏/安全/学习'轴线不符，跳过",
+    "kyutai-labs/pocket-tts (+273) — 07/08 已展开端侧 TTS，避重复",
+    "iOfficeAI/OfficeCLI (+1923) — 07/08+07/09 连续两期展开，连续 3 天霸榜已严重疲劳，本期不在 5 选 1 带过名额内（让位给更新鲜的 ai-job-search 霸榜带过）"
+  ],
+  "candidate_for_brief_mention": {
+    "MadsLorentzen/ai-job-search": "07/08 主导展开，今日 +3728（昨 2402→今 3728，单日翻倍式加速）连续霸榜第 1，本期作为'霸榜带过'3-4s 提及增量即可，不重复展开功能。选它而非 OfficeCLI 作带过，因 ai-job-search 增量更猛（+3728 vs +1923）且 07/08 才展开 1 次（OfficeCLI 已展开 2 次更疲劳）"
+  }
+}

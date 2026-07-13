@@ -1,0 +1,151 @@
+<!-- 场景: scene-1 | 时长: 19s | 报告 ECharts 可视化：report.html 饼图+柱状图 -->
+<div class="layer-bg">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.08);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+<div style="position:absolute;top:30%;left:30%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.85);box-shadow:0 0 14px rgba(0,229,255,0.65);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:60%;left:70%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,220,255,0.75);box-shadow:0 0 13px rgba(0,220,255,0.55);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 0%,hsla(200,30%,3%,0.55) 100%)"></div>
+</div>
+
+<div class="layer-fx">
+<div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:1100px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(200,90%,55%,0.08) 0%,hsla(180,80%,50%,0.05) 40%,transparent 70%);
+  filter:blur(70px);pointer-events:none"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;left:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(200,85%,55%,0.50);box-shadow:0 0 16px hsla(200,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite"></div>
+<div class="fx-pulse" style="position:absolute;top:50%;right:4%;width:14px;height:14px;border-radius:50%;
+  background:hsla(150,85%,55%,0.50);box-shadow:0 0 16px hsla(150,75%,50%,0.40);
+  animation:heartbeatPulse 5s ease-out infinite 2.5s"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase tut-scene phase-1">
+
+  <!-- 顶部标题 -->
+  <div class="region" data-reveal="0" style="text-align:center;margin-bottom:20px">
+    <div class="grad-title" style="font-size:64px;font-weight:900;letter-spacing:-1px;line-height:1.1;
+      background-image:linear-gradient(90deg,#60A5FA 0%,#34D399 50%,#FBBF24 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 2px 6px rgba(30,41,59,0.28)">
+      报告 = ECharts 可视化
+    </div>
+    <div style="font-size:32px;font-weight:500;color:rgba(255,255,255,0.82);margin-top:8px;
+      text-shadow:0 1px 4px rgba(15,23,42,0.30)">
+      Markdown + HTML 双版本，HTML 自带图表
+    </div>
+  </div>
+
+  <!-- 浏览器窗口 -->
+  <div class="region" data-reveal="1" style="margin:0 30px;background:#0d1117;border-radius:14px;overflow:hidden;
+    border:1px solid #21262d;box-shadow:0 20px 60px rgba(0,0,0,0.65),0 0 40px rgba(56,189,248,0.10)">
+
+    <!-- browser titlebar -->
+    <div style="background:#161b22;padding:12px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #21262d">
+      <div style="display:flex;gap:8px">
+        <div style="width:14px;height:14px;border-radius:50%;background:#ff5f57"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:#febc2e"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:#28c840"></div>
+      </div>
+      <div style="flex:1;background:#0d1117;border-radius:8px;padding:8px 14px;color:#8b949e;font-size:32px;font-family:'JetBrains Mono','Consolas',monospace;text-align:center">
+        file:///workspace/report.html
+      </div>
+    </div>
+
+    <!-- ECharts 双图区 -->
+    <div style="padding:22px 26px;display:flex;gap:24px;align-items:stretch">
+
+      <!-- 左：饼图 AI 占比 -->
+      <div data-reveal="1" style="flex:1;background:rgba(13,17,23,0.5);border:1px solid #21262d;border-radius:10px;padding:16px">
+        <div style="text-align:center;color:#60A5FA;font-size:34px;font-weight:700;margin-bottom:12px">AI 代码占比</div>
+        <div style="display:flex;justify-content:center;align-items:center;margin-bottom:14px">
+          <!-- conic-gradient 饼图 -->
+          <div style="width:200px;height:200px;border-radius:50%;
+            background:conic-gradient(#FBBF24 0% 42%,#60A5FA 42% 100%);
+            box-shadow:0 8px 24px rgba(251,191,36,0.25),0 0 32px rgba(96,165,250,0.15);
+            display:flex;align-items:center;justify-content:center;position:relative">
+            <div style="width:90px;height:90px;border-radius:50%;background:#0d1117;display:flex;align-items:center;justify-content:center;flex-direction:column">
+              <div style="font-size:38px;font-weight:900;color:#FBBF24;font-family:'JetBrains Mono','Consolas',monospace">42%</div>
+              <div style="font-size:32px;color:#8b949e;margin-top:2px">AI</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:18px">
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:14px;height:14px;background:#FBBF24;border-radius:3px"></div><span style="font-size:32px;color:rgba(255,255,255,0.88)">AI 42%</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:14px;height:14px;background:#60A5FA;border-radius:3px"></div><span style="font-size:32px;color:rgba(255,255,255,0.88)">人工 58%</span></div>
+        </div>
+      </div>
+
+      <!-- 右：柱状图 提效同比 -->
+      <div data-reveal="2" style="flex:1.2;background:rgba(13,17,23,0.5);border:1px solid #21262d;border-radius:10px;padding:16px">
+        <div style="text-align:center;color:#34D399;font-size:34px;font-weight:700;margin-bottom:12px">提效同比 2025 vs 2026</div>
+        <!-- 柱状图（CSS flex） -->
+        <div style="display:flex;gap:18px;align-items:flex-end;height:200px;padding:0 8px;border-bottom:2px solid #21262d">
+          <!-- 上线 -->
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+            <div style="display:flex;align-items:flex-end;gap:6px;height:100%;width:100%;justify-content:center">
+              <div style="width:32%;height:55%;background:linear-gradient(180deg,#8b949e 0%,#5d6470 100%);border-radius:4px 4px 0 0"></div>
+              <div style="width:32%;height:90%;background:linear-gradient(180deg,#34D399 0%,#10b981 100%);border-radius:4px 4px 0 0;box-shadow:0 0 12px rgba(52,211,153,0.4)"></div>
+            </div>
+          </div>
+          <!-- 需求 -->
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+            <div style="display:flex;align-items:flex-end;gap:6px;height:100%;width:100%;justify-content:center">
+              <div style="width:32%;height:40%;background:linear-gradient(180deg,#8b949e 0%,#5d6470 100%);border-radius:4px 4px 0 0"></div>
+              <div style="width:32%;height:78%;background:linear-gradient(180deg,#34D399 0%,#10b981 100%);border-radius:4px 4px 0 0;box-shadow:0 0 12px rgba(52,211,153,0.4)"></div>
+            </div>
+          </div>
+          <!-- Bug -->
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+            <div style="display:flex;align-items:flex-end;gap:6px;height:100%;width:100%;justify-content:center">
+              <div style="width:32%;height:22%;background:linear-gradient(180deg,#8b949e 0%,#5d6470 100%);border-radius:4px 4px 0 0"></div>
+              <div style="width:32%;height:35%;background:linear-gradient(180deg,#34D399 0%,#10b981 100%);border-radius:4px 4px 0 0;box-shadow:0 0 12px rgba(52,211,153,0.4)"></div>
+            </div>
+          </div>
+          <!-- 人均 -->
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+            <div style="display:flex;align-items:flex-end;gap:6px;height:100%;width:100%;justify-content:center">
+              <div style="width:32%;height:35%;background:linear-gradient(180deg,#8b949e 0%,#5d6470 100%);border-radius:4px 4px 0 0"></div>
+              <div style="width:32%;height:65%;background:linear-gradient(180deg,#FBBF24 0%,#f59e0b 100%);border-radius:4px 4px 0 0;box-shadow:0 0 12px rgba(251,191,36,0.4)"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:18px;padding:6px 8px 0">
+          <div style="flex:1;text-align:center;font-size:32px;color:rgba(255,255,255,0.82)">上线</div>
+          <div style="flex:1;text-align:center;font-size:32px;color:rgba(255,255,255,0.82)">需求</div>
+          <div style="flex:1;text-align:center;font-size:32px;color:rgba(255,255,255,0.82)">Bug</div>
+          <div style="flex:1;text-align:center;font-size:32px;color:rgba(255,255,255,0.82)">人均</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 底部条 -->
+  <div class="region" data-reveal="2" style="margin:18px 30px 0;padding:14px 22px;
+    background:linear-gradient(90deg,rgba(15,23,42,0.85) 0%,rgba(30,40,60,0.85) 100%);
+    border:1.5px solid rgba(96,165,250,0.45);border-radius:12px;
+    box-shadow:0 10px 32px rgba(15,23,42,0.55)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px">
+      <div style="font-size:32px;font-weight:700;color:rgba(255,255,255,0.90)">
+        给老板汇报直接讲，<span style="color:#FBBF24;font-weight:900">比数字直观得多</span>
+      </div>
+      <div style="font-size:32px;font-weight:900;color:#60A5FA">workspace/report.html</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" data-strength="0.18"></div>
+</div>

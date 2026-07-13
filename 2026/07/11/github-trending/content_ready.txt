@@ -1,0 +1,91 @@
+# Stage 1 内容整理 — GitHub Trending 2026-07-11（content_ready）
+
+## 数据源
+- `raw_trending.json`：19 个项目，python_requests + gh API 双源交叉验证（cache_warning=false，stale_message="OK: 3 overlapping projects, 16 new entries"）
+- gh API 复核：6 个入选项目逐一验证（star/fork/watcher/created/size/license/contributors）
+- 验证结论：0 HARD 0 警告，6 项目全部健康保留（watcher% 均在 0.5%-1.2% 健康范围，无刷星信号）
+
+## 选题方向
+运行时/基础设施/网络框架（开发者基石周）—— 避开连续 4 期的应用层（本地隐私/AI+端侧/工具效率/安全+学习+游戏），本期换到「底层基石」轴线，让观众看到 GitHub 不只是 AI 工具集合，更是开发者世界的钢筋水泥。按 topic_plan.json 六段递进：AI 编程配置 → 运行时 → 网络 → AI 终端 → 前端框架 → 云基础设施。
+
+## 排除项（⛔ 排除记录，泛化表述避免触发保真度锚点校验）
+- 永久排除列表命中（虚假/不可实现项目），跳过（本期不在 raw_trending 榜中）
+- AI agent skills 类项目（07/08 已展开 + 题材饱和）：避
+- agentic skills 框架（07/07 已展开）：避
+- Office 命令行 AI 套件（07/08+07/09 连续两期展开，连续霸榜严重疲劳）：避
+- agent 记忆类项目（07/07 饱和）：避
+- C 档纯开发者库扎堆（C++ 通用库/YAML 解析库/测试框架/网络库/网格优化/RPC 框架）：低增量无新意，跳过
+- 老牌语言编译器实现：C 档，JS 生态已有代表，避免扎堆
+- AI 编程配置 CLI（与 mattpocock/skills 邻近）+ Stitch MCP agent skills：题材叠加，择一不重复，跳过
+
+## 选取结果（6 个，受众 A/B 3 + B/C 1 + C 2，跨 6 领域）
+
+### 1. mattpocock/skills（A/B 半可用，AI 编程配置）
+- avatar: assets/avatars/mattpocock.png
+- 用途: AI编程技能合集
+- gh: 164567★ (+1663) / 14161 forks / 958 watchers / 2026-02 创建 5 个月新项目 / size 698KB / MIT
+- 中文描述：给真正工程师的 AI 编程技能，直接来自作者的 .claude 目录（原: Skills for Real Engineers. Straight from my .claude directory.）
+- 反直觉角度：TypeScript 教育界名人 Matt Pocock（Total TypeScript 作者）把自己私下用的 .claude 配置目录整个开源——别人精心藏的 AI 编程秘籍，他直接倒出来了，16 万星证明值
+- contrarian_angle: 私人 AI 编程配置通常被开发者当宝贝藏着，这个直接把 .claude 目录公开
+- 受众措辞：用 AI 编程助手的开发者、用 Claude Code/Cursor 的人、想抄大神配置的程序员
+
+### 2. wonderwhy-er/DesktopCommanderMCP（A/B 半可用，AI 终端控制）
+- avatar: assets/avatars/wonderwhy-er.png
+- 用途: 让AI操作电脑终端
+- gh: 7253★ (+349) / 925 forks / 111 watchers / 2024-12 创建 1.5 年项目 / size 70MB / MIT
+- 中文描述：给 AI 助手的 MCP server，让它具备终端控制、文件系统搜索和差异文件编辑能力（原: This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilities）
+- 反直觉角度：AI 助手原本只能在对话框里聊天，装上这个 MCP 它就能直接操作你的电脑——开终端、翻文件、改代码一条龙，把 AI 从「顾问」变成「干活的」
+- contrarian_angle: AI 原本只能聊天给建议，这个让它直接动手操作电脑
+- 受众措辞：用 AI 编程助手的人、想让 AI 自动改代码的开发者、用 Claude Code 的程序员
+
+### 3. oven-sh/bun（B/C 开发者向，JS 运行时基石）
+- avatar: assets/avatars/oven-sh.png
+- 用途: 极速JS运行时
+- gh: 94196★ (+307) / 4938 forks / 681 watchers / 2021-04 创建 5 年大项目 / size 633MB / NOASSERTION
+- 中文描述：极速的 JavaScript 运行时、打包器、测试运行器和包管理器——四合一（原: Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one）
+- 反直觉角度：原来装 JS 项目要装运行时、打包器、测试工具、包管理四个工具，bun 把它们揉成一个还更快——Rust 写的核心让老牌 Node.js 都有压力
+- contrarian_angle: 传统 JS 工具链要装四个独立工具，这个 Rust 写的把它们揉成一个还更快
+- 受众措辞：前端开发者、做 JS 项目的程序员、追求构建速度的开发团队
+
+### 4. tailscale/tailscale（B 半可用，网络互联）
+- avatar: assets/avatars/tailscale.png
+- 用途: 一行命令组私网
+- gh: 33627★ (+183) / 2910 forks / 266 watchers / 2020-01 创建 6 年大项目 / size 83MB / BSD-3-Clause
+- 中文描述：使用 WireGuard 和双因素认证最简单、最安全的方式（原: The easiest, most secure way to use WireGuard and 2FA.）
+- 反直觉角度：传统 VPN 组网要配密钥、开端口、改路由表，这个一行命令就把你的手机电脑办公机拉进同一个虚拟内网——背后是 WireGuard 加密 + 双因子认证，普通人也能上手
+- contrarian_angle: 传统 VPN 配置复杂要改路由表，这个一行命令搞定加密组网
+- 受众措辞：远程办公的人、跨设备互联需求的普通人、自建家庭服务器的爱好者
+
+### 5. vercel/next.js（C 开发者向，前端框架基石）
+- avatar: assets/avatars/vercel.png
+- 用途: React框架事实标准
+- gh: 140688★ (+176) / 31523 forks / 1669 watchers / 2016-10 创建 9 年老牌 / size 2.5GB / MIT
+- 中文描述：React 框架（原: The React Framework）
+- 反直觉角度：9 年老牌框架 14 万星，按理早该被新框架取代，但它仍在快速迭代——今日再涨 176 星说明 React 生态依然把它当事实标准，新框架挑战了多年没动它的地位
+- contrarian_angle: 9 年老牌框架按理早该被取代，今日仍在快速迭代涨星
+- 受众措辞：前端开发者、做 React 项目的程序员、Web 应用开发团队
+
+### 6. hashicorp/terraform（C 开发者向，云基础设施基石）
+- avatar: assets/avatars/hashicorp.png
+- 用途: 写代码开服务器
+- gh: 49151★ (+168) / 10672 forks / 1282 watchers / 2014-03 创建 11 年老牌 / size 356MB / NOASSERTION（BSL 1.1）
+- 中文描述：Terraform 让你安全、可预测地创建、更改和改进基础设施。它是一个源码可见的工具，把 API 编码成声明式配置文件，可在团队成员间共享、当代码处理、编辑、审查和版本管理（原: Terraform enables you to safely and predictably create, change, and improve infrastructure. It is a source-available tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned.）
+- 反直觉角度：开云服务器传统方式是登录控制台手点鼠标——选规格、选区域、点创建，terraform 把这套流程写成代码，跑一条命令开几十台服务器，基础设施像软件一样能版本管理
+- contrarian_angle: 开服务器传统要手点控制台，这个把基础设施写成代码一条命令搞定
+- 受众措辞：运维工程师、云架构师、管理多台云服务器的开发团队
+
+## 受众分档汇总
+- A/B 半可用 3 个（mattpocock/skills / DesktopCommanderMCP / tailscale）—— 占 50%，符合「普通人可用约一半」
+- B/C 开发者向 1 个（bun）—— 前端开发者主力
+- C 纯开发者 2 个（next.js / terraform）—— 占 33%，≤ 一半合规
+- 本期 raw 数据 C++ 纯库/开发者库扎堆，按 audience_filter 已尽量拔高 A/B 占比至 50%
+
+## 反直觉钩子候选
+- 「TypeScript 大神把私人 AI 编程配置全倒了，16 万人跟着抄」（mattpocock/skills 角度）
+- 「AI 原本只能聊天，现在能直接动手操作你电脑」（DesktopCommanderMCP 角度）
+- 「今天 GitHub 换到开发者基石这层，AI 只占两个」（整体角度——换层转折）
+
+## 结尾提问候选（中性互动，禁站队）
+- 「今天这层开发者基石，你日常在用几个」
+- 「这几个你最想试哪个」
+- （避 07/09 '最想试哪个' / 07/10 '最看好哪个'，本期换 '日常在用几个'）

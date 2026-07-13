@@ -1,0 +1,254 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #6EE7B7;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E08 microservice-2 — 微服务闭环·后半（参照 E06-pipeline 设计语言）
+ * bg: noise_field + 横向6节点（前3 done灰 / 后3 active）+ SVG连线 + 测试→生成 红色虚线闭环
+ * 4 phase 累积：标题 → +流水线 → +数据底座双卡 → +人机边界+警示
+ * 类前缀 .tut-pl-*（与 E06 一致），删旧 .fcb-*/.ms-*/.pipe-*
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 90px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 10px;
+}
+.tut-region { opacity: 0; will-change: opacity, transform; }
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 渐变文字（同色系，禁白色端点） —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-purple { background-image: linear-gradient(92deg,#C4B5FD 0%,#A78BFA 55%,#DDD6FE 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-red { background-image: linear-gradient(92deg,#FCA5A5 0%,#EF4444 55%,#F87171 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 4px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 区域 1：标题 —— 左对齐锚点 */
+.tut-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.tut-pl-title .title-tag {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.tut-pl-title .title-h1 {
+  font-family: 'Inter'; font-size: 92px; font-weight: 900; line-height: 1.04;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.tut-pl-title .title-sub {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white); letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 区域 2：六阶段流水线（核心组件，参照 E06） —— 横向 6 节点 + SVG 连线 + 测试→生成闭环 */
+.tut-pl-pipeline { width: 100%; display: flex; justify-content: stretch; }
+.pipeline-wrap {
+  position: relative;
+  width: 100%; max-width: 1740px;
+  height: 300px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pipeline-edges {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 160px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.pipeline-edges .edge {
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+.edge-1 { stroke: rgba(96,165,250,0.75); }
+.edge-2 { stroke: rgba(167,139,250,0.75); }
+.edge-3 { stroke: rgba(59,130,246,0.75); }
+.edge-4 { stroke: rgba(110,231,183,0.75); }
+.edge-5 { stroke: rgba(251,191,36,0.75); }
+.edge-dim { stroke: rgba(148,163,184,0.35); stroke-dasharray: 8 8; }
+/* 闭环：测试不过 → 代码生成（红色虚线弧线） */
+.edge-loop {
+  stroke: rgba(239,68,68,0.85);
+  stroke-width: 4;
+  stroke-dasharray: 10 6;
+  fill: none;
+  stroke-linecap: round;
+}
+.node-row {
+  position: relative;
+  width: 100%;
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  z-index: 2;
+}
+.stage-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 6px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 2.5px solid;
+  will-change: transform, opacity;
+}
+.sn-1 { border-color: rgba(96,165,250,0.75); box-shadow: 0 0 22px rgba(96,165,250,0.22); }
+.sn-2 { border-color: rgba(167,139,250,0.75); box-shadow: 0 0 22px rgba(167,139,250,0.22); }
+.sn-3 { border-color: rgba(59,130,246,0.75); box-shadow: 0 0 22px rgba(59,130,246,0.22); }
+.sn-4 { border-color: rgba(110,231,183,0.75); box-shadow: 0 0 22px rgba(110,231,183,0.22); }
+.sn-5 { border-color: rgba(251,191,36,0.75); box-shadow: 0 0 22px rgba(251,191,36,0.22); }
+.sn-6 { border-color: rgba(252,165,165,0.75); box-shadow: 0 0 22px rgba(252,165,165,0.22); }
+/* 灰态（前3 done） */
+.sn-dim {
+  border-color: rgba(148,163,184,0.30);
+  background: linear-gradient(180deg, rgba(15,23,42,0.70), rgba(15,23,42,0.55));
+  box-shadow: none;
+  opacity: 0.5;
+}
+.sn-dim .node-icon { filter: grayscale(0.7) opacity(0.6); }
+.sn-dim .node-stage,
+.sn-dim .node-skill,
+.sn-dim .node-num { color: rgba(148,163,184,0.70); -webkit-text-fill-color: rgba(148,163,184,0.70); }
+/* done 标记（前3 done 加对勾） */
+.sn-done::after {
+  content: '✓';
+  position: absolute;
+  top: 6px; right: 8px;
+  font-family: 'JetBrains Mono'; font-size: 24px; font-weight: 900;
+  color: rgba(110,231,183,0.85);
+}
+/* active 聚焦态（后3 高亮） */
+.sn-active {
+  border-color: rgba(167,139,250,0.95);
+  box-shadow: 0 0 32px rgba(167,139,250,0.42), 0 0 60px rgba(167,139,250,0.20);
+  transform: scale(1.06);
+}
+.node-icon {
+  font-size: 44px; line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.node-stage {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.node-skill {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  text-align: center; line-height: 1.1;
+  word-break: break-all;
+}
+.node-num {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.78);
+  letter-spacing: 0.06em;
+}
+
+/* —— 区域 3：数据底座双卡（RAG / 图谱） —— */
+.tut-pl-base { width: 100%; display: flex; justify-content: stretch; gap: 16px; }
+.base-card {
+  flex: 1;
+  border-radius: 14px; padding: 10px 24px;
+  border: 2.5px solid;
+  display: flex; align-items: center; gap: 16px;
+}
+.base-card.blue { border-color: rgba(96,165,250,0.65); background: linear-gradient(90deg, rgba(96,165,250,0.13), rgba(15,23,42,0.90)); }
+.base-card.gold { border-color: rgba(251,191,36,0.65); background: linear-gradient(90deg, rgba(251,191,36,0.13), rgba(15,23,42,0.90)); }
+.base-icon { font-size: 44px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.base-name {
+  font-family: 'Inter'; font-size: 34px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.base-desc {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  margin-top: 2px;
+}
+
+/* —— 区域 4：人机边界左右对比 —— */
+.tut-pl-bound { width: 100%; display: flex; justify-content: stretch; gap: 16px; align-items: stretch; }
+.bound-card {
+  flex: 1;
+  border-radius: 14px; padding: 10px 24px;
+  border: 2.5px solid;
+  display: flex; align-items: center; gap: 16px;
+}
+.bound-card.cyan { border-color: rgba(34,211,238,0.65); background: linear-gradient(90deg, rgba(34,211,238,0.13), rgba(15,23,42,0.90)); }
+.bound-card.blue { border-color: rgba(96,165,250,0.65); background: linear-gradient(90deg, rgba(96,165,250,0.13), rgba(15,23,42,0.90)); }
+.bound-icon { font-size: 44px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.bound-name {
+  font-family: 'Inter'; font-size: 36px; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.bound-tasks {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.85);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  margin-top: 2px;
+}
+.bound-vs {
+  font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900;
+  color: rgba(251,191,36,0.85);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 8px;
+}
+
+/* —— 区域 5：警示条 —— */
+.tut-pl-warn { width: 100%; display: flex; justify-content: stretch; }
+.warn-card {
+  border-radius: 14px; padding: 10px 28px;
+  border: 2.5px solid rgba(252,165,165,0.60);
+  background: linear-gradient(90deg, rgba(252,165,165,0.12), rgba(15,23,42,0.90));
+  display: flex; align-items: center; gap: 16px;
+  width: 100%;
+}
+.warn-mark {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 12px; border-radius: 6px;
+  background: rgba(252,165,165,0.20);
+  color: rgba(252,165,165,0.95);
+  -webkit-text-fill-color: rgba(252,165,165,0.95);
+  flex-shrink: 0;
+}
+.warn-text {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.25;
+}
+
+/* —— 收束金句 —— */
+.tut-pl-closer { width: 100%; display: flex; justify-content: flex-start; }
+.closer-line {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  letter-spacing: 0.04em;
+}

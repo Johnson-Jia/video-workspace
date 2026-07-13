@@ -1,0 +1,195 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E11 skillvrule — Skill vs Rule 对比：定义 + 双机制 + 例子 + 配合
+ * ============================================ */
+
+.svr-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.s-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.s-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+/* —— Phase 1：定义对比 —— */
+.svr-def-block { flex-direction: column; gap: 22px; width: 100%; }
+.svr-def-title {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.svr-def-row {
+  display: flex; gap: 36px; align-items: stretch; width: 100%;
+  justify-content: center;
+}
+.svr-def-card {
+  flex: 1; max-width: 640px;
+  border-radius: 22px; padding: 28px 30px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.svr-def-card.def-gold { border-color: rgba(251,191,36,0.55); }
+.svr-def-card.def-blue { border-color: rgba(96,165,250,0.55); }
+.def-tag {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 6px 22px; border-radius: 8px;
+  background: rgba(56,189,248,0.10);
+  color: #38BDF8;
+  border: 1px solid rgba(56,189,248,0.35);
+}
+.def-name {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900;
+  filter: drop-shadow(0 3px 10px rgba(30,41,59,0.32));
+  line-height: 1.1;
+}
+.def-note {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+
+/* —— Phase 2：双卡机制 —— */
+.svr-mech-block { flex-direction: column; gap: 18px; width: 100%; }
+.svr-mech-title {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.svr-mech-row {
+  display: flex; gap: 36px; align-items: stretch; width: 100%;
+  justify-content: center;
+}
+.svr-mech-card {
+  flex: 1; max-width: 640px;
+  border-radius: 22px; padding: 26px 30px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.svr-mech-card.mech-skill { border-color: rgba(251,191,36,0.55); }
+.svr-mech-card.mech-rule { border-color: rgba(96,165,250,0.55); }
+.mech-emoji {
+  font-size: 72px; line-height: 1;
+}
+.mech-kind {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900;
+  filter: drop-shadow(0 2px 8px rgba(30,41,59,0.32));
+  letter-spacing: 0.02em;
+}
+.mech-desc {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-white); line-height: 1.35;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.mech-trigger {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: rgba(110,231,183,0.85);
+  padding: 6px 22px; border-radius: 8px;
+  background: rgba(52,211,153,0.10);
+  border: 1px solid rgba(52,211,153,0.30);
+  letter-spacing: 0.04em;
+}
+.svr-quote {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+
+/* —— Phase 3：真实例子 + 配合收尾 —— */
+.svr-ex-block { flex-direction: column; gap: 20px; width: 100%; }
+.svr-ex-title {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.svr-ex-row {
+  display: flex; gap: 36px; align-items: stretch; width: 100%;
+  justify-content: center;
+}
+.svr-ex-card {
+  flex: 1; max-width: 640px;
+  border-radius: 22px; padding: 26px 30px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.svr-ex-card.ex-skill { border-color: rgba(251,191,36,0.55); }
+.svr-ex-card.ex-rule { border-color: rgba(96,165,250,0.55); }
+.ex-kind {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 6px 22px; border-radius: 8px;
+  background: rgba(56,189,248,0.10);
+  color: #38BDF8;
+  border: 1px solid rgba(56,189,248,0.35);
+  filter: drop-shadow(0 2px 6px rgba(30,41,59,0.32));
+}
+.ex-name {
+  font-family: var(--font-data); font-size: 52px; font-weight: 900;
+  filter: drop-shadow(0 3px 10px rgba(30,41,59,0.32));
+  letter-spacing: 0.02em;
+}
+.ex-when {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--tut-white); line-height: 1.35;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.svr-finale {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+
+.svr-ex-card.ex-skill .ex-kind { color: #FBBF24 !important; background: rgba(251,191,36,0.10) !important; border-color: rgba(251,191,36,0.45) !important; }
+.svr-ex-card.ex-rule .ex-kind { color: #60A5FA !important; background: rgba(96,165,250,0.10) !important; border-color: rgba(96,165,250,0.45) !important; }

@@ -1,0 +1,119 @@
+<!-- 场景: scene-1 | 时长: 26s | bg: diamond_lattice | code-review 编排型：三级分级 + rule 核对流向 + 结构化报告收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（红/黄/绿 三级 + 紫编排；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.13) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:22%;width:540px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:540px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:78%;width:540px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.13) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:1000px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.13) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,80%,65%,0.9);box-shadow:0 0 16px hsla(0,75%,58%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:26%;left:18%;width:8px;height:8px;background:rgba(248,113,113,0.85);box-shadow:0 0 12px rgba(248,113,113,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:28%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:68%;left:32%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 codereview-scene">
+  <!-- phase-1 (0-5.2s): code-review 定位 + 三级总览 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · code-review 编排型 · 核心段</div>
+  </div>
+  <div class="region-mid cr-overview">
+    <div class="cr-title">code-review <span class="grad-purple">三级分级</span></div>
+    <div class="cr-tag-row">
+      <div class="cr-tag">编排型 · 审查 skill</div>
+    </div>
+    <div class="cr-dot-row">
+      <div class="cr-big-dot d-red">🔴</div>
+      <div class="cr-big-dot d-yellow">🟡</div>
+      <div class="cr-big-dot d-green">🟢</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / code-review 编排型 —</div>
+  </div>
+</div>
+<div class="phase phase-2 codereview-scene">
+  <!-- phase-2 (5.2-13s): 三级分级卡 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 三级分级 · 红 / 黄 / 绿</div>
+  </div>
+  <div class="region-mid cr-triage-row">
+    <div class="cr-triage t-red">
+      <div class="t-circle">🔴</div>
+      <div class="t-level">红</div>
+      <div class="t-action"><span class="kw-red">必须改</span></div>
+    </div>
+    <div class="cr-triage t-yellow">
+      <div class="t-circle">🟡</div>
+      <div class="t-level">黄</div>
+      <div class="t-action"><span class="kw-yellow">建议改</span></div>
+    </div>
+    <div class="cr-triage t-green">
+      <div class="t-circle">🟢</div>
+      <div class="t-level">绿</div>
+      <div class="t-action"><span class="kw-green">通过</span></div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / code-review 三级分级 —</div>
+  </div>
+</div>
+<div class="phase phase-3 codereview-scene">
+  <!-- phase-3 (13-20.8s): rule 核对流向 + 不用人对照检查清单 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 自动核对 rule · 自动套规范</div>
+  </div>
+  <div class="region-mid cr-rule-block">
+    <div class="cr-rule-row">
+      <div class="cr-rule r-blue">
+        <div class="r-icon">🗄</div>
+        <div class="r-name"><span class="mono-blue">database</span> rule</div>
+        <div class="r-check">SQL 是否合规</div>
+      </div>
+      <div class="cr-rule r-purple">
+        <div class="r-icon">⚠</div>
+        <div class="r-name"><span class="mono-purple">error-handling</span> rule</div>
+        <div class="r-check">异常处理是否合规</div>
+      </div>
+    </div>
+    <div class="cr-flow-arrow">↓ AI 自动套规范 ↓</div>
+    <div class="cr-no-checklist">不用人 <span class="kw-white">对照检查清单</span> · AI <span class="grad-green">自动核对</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 自动核对 rule —</div>
+  </div>
+</div>
+<div class="phase phase-4 codereview-scene">
+  <!-- phase-4 (20.8-26s): 结构化报告 哪行违反哪条 + 清清楚楚 收尾 -->
+  <div class="region-top">
+    <div class="t-stage-tag"><span class="dot"></span>E11 · 结构化报告 · 清清楚楚</div>
+  </div>
+  <div class="region-mid cr-report-block">
+    <div class="cr-report-frame">
+      <div class="rf-head">📋 code-review report</div>
+      <div class="rf-line"><span class="rf-loc">L23</span> <span class="rf-sep">→</span> <span class="rf-rule">database</span> <span class="rf-sev rf-sev-red">🔴 必须改</span></div>
+      <div class="rf-line"><span class="rf-loc">L47</span> <span class="rf-sep">→</span> <span class="rf-rule">error-handling</span> <span class="rf-sev rf-sev-yellow">🟡 建议改</span></div>
+      <div class="rf-line"><span class="rf-loc">L62</span> <span class="rf-sep">→</span> <span class="rf-pass">通过</span> <span class="rf-sev rf-sev-green">🟢 通过</span></div>
+    </div>
+    <div class="cr-finale">哪行 <span class="kw-red">违反</span> 哪条 · <span class="grad-green">清清楚楚</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / 结构化报告 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

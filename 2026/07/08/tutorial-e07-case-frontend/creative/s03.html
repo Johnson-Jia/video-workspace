@@ -1,0 +1,48 @@
+<!-- 场景: s03 | 时长: 5.71s | bg: hex_grid | 复杂集成示意（React×Vue + SSE） -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.18) 0%, transparent 65%);filter:blur(60px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;left:25%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,60%,0.9);box-shadow:0 0 18px hsla(215,70%,54%,0.6)"></div>
+  <div class="fx-blink" style="position:absolute;top:40%;right:25%;width:12px;height:12px;border-radius:50%;background:hsla(150,65%,58%,0.9);box-shadow:0 0 18px hsla(150,60%,52%,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene-focus">
+  <div class="focus-tag grad-blue-bg-inline" data-reveal="0">复杂集成</div>
+
+  <div class="tut-region" data-reveal="1" data-reveal-dir="left">
+    <div class="integ-card">
+      <div class="integ-tag grad-blue-bg-inline">技术栈集成链</div>
+      <div class="integ-row">
+        <div class="integ-step">
+          <div class="integ-step-title grad-blue">React</div>
+          <div class="integ-step-desc">主框架</div>
+        </div>
+        <div class="integ-arrow">⇄</div>
+        <div class="integ-step">
+          <div class="integ-step-title grad-green">Vue SDK</div>
+          <div class="integ-step-desc">Monkey Patch</div>
+        </div>
+        <div class="integ-arrow">+</div>
+        <div class="integ-step">
+          <div class="integ-step-title grad-purple">SSE</div>
+          <div class="integ-step-desc">拦截器</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tut-region" data-reveal="3" data-reveal-dir="fade" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Noto Sans SC';font-size:32px;font-weight:700;color:rgba(224,231,255,0.72)">不止 CRUD</div>
+    <div style="font-family:'JetBrains Mono';font-size:32px;font-weight:800;color:rgba(96,165,250,0.80)">→</div>
+    <div style="font-family:'Noto Sans SC';font-size:32px;font-weight:800;color:var(--tut-white)">前端复杂场景落地</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

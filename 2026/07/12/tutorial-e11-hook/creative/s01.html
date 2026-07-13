@@ -1,0 +1,84 @@
+<!-- 场景: scene-1 | 时长: 20.26s | bg: scan_grid | 资产即用开篇：4 skill + 13 规范 + skill按需/rule始终 + .claude 目录树 + 整个仓库开源 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；金 4 skill + 蓝 13 规范 + 绿复制即用；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:58%;left:24%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:920px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先） -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:76%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:78%;left:70%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 hook-scene">
+  <!-- phase-1 (0-13s): 大字「4 skill + 13 规范」浮现 + 复制即用 标签 + skill 按需/rule 始终 双卡机制 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E11 · Skill 仓库实操 · 钩子</div>
+  </div>
+  <div class="region-mid hero-block">
+    <div class="hero-row">
+      <div class="hero-num grad-gold">4</div>
+      <div class="hero-x">×</div>
+      <div class="hero-num grad-blue">13</div>
+    </div>
+    <div class="hero-subtitle">核心 <span class="kw-gold">skill</span> × 团队 <span class="kw-blue">规范</span></div>
+    <div class="copy-pill">复制到 .claude 就能跑</div>
+    <div class="mech-row">
+      <div class="mech-card mech-gold">
+        <div class="mech-icon">⚡</div>
+        <div class="mech-name">skill 按需调用</div>
+        <div class="mech-note">让它做时才加载</div>
+      </div>
+      <div class="mech-card mech-blue">
+        <div class="mech-icon">🛡</div>
+        <div class="mech-name">rule 始终生效</div>
+        <div class="mech-note">不提也每次遵守</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / hook · Skill 仓库实操 —</div>
+  </div>
+</div>
+<div class="phase phase-2 hook-scene">
+  <!-- phase-2 (13-20.26s): .claude/ 目录树生长 + 整个仓库开源 + E09 七种范式 → 一组资产 预告 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E11 · Skill 仓库实操 · 钩子</div>
+  </div>
+  <div class="region-mid opensrc-block">
+    <div class="tree-block">
+      <div class="tree-title">复制到你的项目</div>
+      <div class="tree">
+        <div class="tree-line tree-root">📁 your-project/</div>
+        <div class="tree-line tree-l1">└─ <span class="kw-gold">.claude/</span></div>
+        <div class="tree-line tree-l2">   ├─ <span class="kw-blue">skills/</span>  <span class="tree-note">devflow · sql-query · crud-gen · code-review</span></div>
+        <div class="tree-line tree-l2">   └─ <span class="kw-blue">rules/</span>   <span class="tree-note">team-conventions + 12 条规范</span></div>
+      </div>
+    </div>
+    <div class="opensource-row">
+      <div class="os-tag">E09 七种范式</div>
+      <div class="os-arrow">→</div>
+      <div class="os-tag os-gold">一组拿来即用资产</div>
+    </div>
+    <div class="os-finale">整个仓库 <span class="grad-green">开源</span> · 拿去改改就能用</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E11 / hook · Skill 仓库实操 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

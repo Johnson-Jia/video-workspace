@@ -1,0 +1,151 @@
+<!-- 场景: scene-1 | 时长: 34.8s | bg: scan_grid | 三层识别算法：总览 + ① 初筛 + ② 风格学复核 + ③ 注册表组合 + 收口 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；金初筛+蓝复核+绿收口；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:24%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:76%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:80%;left:50%;transform:translateX(-50%);width:920px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:78%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:78%;left:40%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:78%;left:60%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 algo-scene">
+  <!-- phase-1 (0-3s): 总标题「ai-metrics 用三层识别算法」+ 三卡片预告横排 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E10 · 度量实操 · 三层识别算法</div>
+  </div>
+  <div class="region-mid algo-overview-block">
+    <div class="a-overview-title"><span class="kw-gold">ai-metrics</span> 用 <span class="grad-gold">三层识别算法</span></div>
+    <div class="a-overview-row">
+      <div class="a-overview-card card-gold"><div class="a-ov-num grad-gold">①</div><div class="a-ov-name">初筛</div></div>
+      <div class="a-flow">→</div>
+      <div class="a-overview-card card-blue"><div class="a-ov-num grad-blue">②</div><div class="a-ov-name">复核</div></div>
+      <div class="a-flow">→</div>
+      <div class="a-overview-card card-green"><div class="a-ov-num grad-green">③</div><div class="a-ov-name">注册表</div></div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / algorithm · 三层识别算法 —</div>
+  </div>
+</div>
+<div class="phase phase-2 algo-scene">
+  <!-- phase-2 (3-9.7s): ① Co-authored-by 初筛卡详展 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E10 · 度量实操 · 三层识别算法</div>
+  </div>
+  <div class="region-mid algo-card-block">
+    <div class="a-card-tag card-gold">① Co-authored-by 初筛</div>
+    <div class="a-card-row">
+      <div class="a-card-main card-gold">
+        <div class="a-card-icon grad-gold">①</div>
+        <div class="a-card-name">Co-authored-by 初筛</div>
+        <div class="a-card-oneline">commit message 含 <span class="kw-gold">AI 工具名</span> → 判 AI</div>
+        <div class="a-card-code">
+          <div class="code-line"><span class="code-cmt"># commit message</span></div>
+          <div class="code-line trailer">Co-authored-by: <span class="code-ai">Copilot</span></div>
+        </div>
+      </div>
+      <div class="a-card-confidence card-gold">
+        <div class="a-conf-label">置信度</div>
+        <div class="a-conf-val grad-gold">1.0</div>
+        <div class="a-conf-note">最高 · 直接判 AI</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / algorithm · 三层识别算法 —</div>
+  </div>
+</div>
+<div class="phase phase-3 algo-scene">
+  <!-- phase-3 (9.7-25.1s): ② 风格学复核卡详展（余弦相似度 + 像本人降置信 + 不像确认 AI） -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E10 · 度量实操 · 三层识别算法</div>
+  </div>
+  <div class="region-mid algo-card-block">
+    <div class="a-card-tag card-blue">② 风格计量学复核 · 反伪造核心</div>
+    <div class="a-card-row">
+      <div class="a-card-main card-blue">
+        <div class="a-card-icon grad-blue">②</div>
+        <div class="a-card-name">风格学复核</div>
+        <div class="a-card-oneline">代码风格 跟 <span class="kw-blue">作者本人手写画像</span> 有多像</div>
+        <div class="a-card-formula">
+          <div class="formula-label">余弦相似度</div>
+          <div class="formula-eq">cos(θ) = <span class="frac"><span class="num">A·B</span><span class="den">‖A‖·‖B‖</span></span></div>
+        </div>
+      </div>
+      <div class="a-card-compare card-blue">
+        <div class="a-cmp-label">复核结果</div>
+        <div class="a-cmp-row">
+          <div class="a-cmp-item like">
+            <div class="a-cmp-cond">像本人</div>
+            <div class="a-cmp-arrow">→</div>
+            <div class="a-cmp-res grad-red">降置信度</div>
+            <div class="a-cmp-note">可能误标</div>
+          </div>
+          <div class="a-cmp-item unlike">
+            <div class="a-cmp-cond">不像本人</div>
+            <div class="a-cmp-arrow">→</div>
+            <div class="a-cmp-res grad-green">确认 AI</div>
+            <div class="a-cmp-note">反伪造挡住</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / algorithm · 三层识别算法 —</div>
+  </div>
+</div>
+<div class="phase phase-4 algo-scene">
+  <!-- phase-4 (25.1-34.8s): ③ 注册表组合卡详展 + 收口逻辑带 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E10 · 度量实操 · 三层识别算法</div>
+  </div>
+  <div class="region-mid algo-card-block">
+    <div class="a-card-tag card-green">③ 检测器注册表 · 组合收口</div>
+    <div class="a-card-row">
+      <div class="a-card-main card-green">
+        <div class="a-card-icon grad-green">③</div>
+        <div class="a-card-name">检测器注册表</div>
+        <div class="a-card-oneline">组合 <span class="kw-gold">前两层</span> → 给出最终判定</div>
+        <div class="a-card-combine">
+          <div class="combine-in">① 初筛</div>
+          <div class="combine-plus">+</div>
+          <div class="combine-in">② 复核</div>
+          <div class="combine-arrow">→</div>
+          <div class="combine-out grad-green">最终判定</div>
+        </div>
+      </div>
+      <div class="a-card-finale card-green">
+        <div class="finale-label">三层逻辑</div>
+        <div class="finale-row">
+          <div class="finale-item"><span class="f-num grad-gold">①</span> 粗筛</div>
+          <div class="finale-item"><span class="f-num grad-blue">②</span> 反伪造</div>
+          <div class="finale-item"><span class="f-num grad-green">③</span> 收口</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / algorithm · 三层识别算法 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

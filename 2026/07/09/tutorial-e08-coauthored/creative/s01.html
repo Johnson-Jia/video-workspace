@@ -1,0 +1,98 @@
+<!-- 场景: seg1 | 时长: ~31.82s | bg: contour_lines | 首层 Co-authored-by：标题 + 终端窗口 + 六工具名名单 + 误标缺陷（单 tut-scene 内 4 region reveal，同屏 1080 不溢出） -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色青/蓝优先，禁划过类；底部红呼应误标警示） -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:22%;width:760px;height:170px;border-radius:50%;background:radial-gradient(ellipse, hsla(190,90%,55%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:72%;width:780px;height:170px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,60%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:880px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.13) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <!-- fx-blink 锚点（冷色青/蓝 + 误标红呼应） -->
+  <div class="fx-blink" style="position:absolute;top:12%;left:50%;width:11px;height:11px;border-radius:50%;background:hsla(190,90%,58%,0.85);box-shadow:0 0 14px hsla(190,85%,52%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:10%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:92%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:26%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题 + 终端+工具名（横排） + 误标缺陷 同屏 1080 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region tut-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-cyan-bg-inline">E08 · 首层识别</div>
+      <h1 class="title-h1">首层 <span class="grad-gold">Co-authored-by</span></h1>
+      <div class="title-sub">最可靠的 AI 代码信号 · trailer 初筛</div>
+    </div>
+
+    <!-- 中段横排容器（非 region，纯布局）：终端窗口 reveal 2.575 + 六工具名名单 reveal 18.012 -->
+    <div class="tut-mid-row">
+      <!-- 区域 2：终端窗口（reveal 2.575，fade）—— commit message + Co-authored-by trailer 金色高亮 -->
+      <div class="tut-region tut-term" data-reveal="2.575" data-reveal-dir="fade">
+        <div class="term-window">
+          <div class="term-bar">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="term-title">git log — Alice/team-project</span>
+          </div>
+          <div class="term-body">
+            <div class="term-line"><span class="term-key">commit</span> <span class="term-hash">a1b2c3d</span></div>
+            <div class="term-line"><span class="term-key">Author:</span> Alice &lt;alice@team.com&gt;</div>
+            <div class="term-blank"></div>
+            <div class="term-line term-indent"><span class="term-feat">feat: add user profile API</span></div>
+            <div class="term-blank"></div>
+            <div class="term-line term-indent">
+              <span class="term-trailer grad-gold">Co-authored-by: Claude &lt;noreply@anthropic.com&gt;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 区域 3：六工具名名单侧栏（reveal 18.012，left）—— claude 命中 + 置信度 1.0 -->
+      <div class="tut-region tut-tool" data-reveal="18.012" data-reveal-dir="left">
+        <div class="tool-panel">
+          <div class="tool-head">六工具名匹配</div>
+          <div class="tool-list">
+            <div class="tool-row tool-hit"><span class="tool-check">✓</span><span class="tool-name">claude</span></div>
+            <div class="tool-row"><span class="tool-check">·</span><span class="tool-name">copilot</span></div>
+            <div class="tool-row"><span class="tool-check">·</span><span class="tool-name">cursor</span></div>
+            <div class="tool-row"><span class="tool-check">·</span><span class="tool-name">chatgpt</span></div>
+            <div class="tool-row"><span class="tool-check">·</span><span class="tool-name">codeium</span></div>
+            <div class="tool-row"><span class="tool-check">·</span><span class="tool-name">gemini</span></div>
+          </div>
+          <div class="tool-conf">
+            <div class="conf-label">命中置信度</div>
+            <div class="conf-value grad-green">1.0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 4：误标缺陷红框警示条（reveal 28.037，fade）—— 底部完整显示，不溢出 -->
+    <div class="tut-region tut-warn" data-reveal="28.037" data-reveal-dir="fade">
+      <div class="warn-card">
+        <div class="warn-icon grad-red">⚠ 缺陷</div>
+        <div class="warn-chain">
+          <div class="chain-step"><span class="chain-name">VS Code Copilot</span><span class="chain-note">手写代码自动加 trailer</span></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-step"><span class="chain-name grad-red">误标</span><span class="chain-note">人写代码被判 AI</span></div>
+          <div class="chain-arrow chain-arrow-red">→</div>
+          <div class="chain-step"><span class="chain-name grad-gold">占比虚高</span><span class="chain-note">光靠首层不够</span></div>
+        </div>
+        <div class="warn-tail">需第二层风格学复核 + 第三层注册表组合判定</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

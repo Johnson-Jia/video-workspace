@@ -1,0 +1,121 @@
+<!-- 场景: scene-1 | 时长: 22.34s | bg: hex_grid | 反常识开篇：SFTP 静默 9 个月 + 自报成功陷阱 + 七种 Skill 范式预告 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；呼吸脉冲，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:84%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先；红为警示允许） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- phase-1 (0-4.75s): 大字「静默 九 个月」反差钩子 -->
+  <div class="hook-scene">
+    <div class="region-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 个体经验变组织资产</div>
+    </div>
+    <div class="region-mid">
+      <div class="silent-block">
+        <div class="silent-label">生产事故 · 反常识</div>
+        <div class="silent-big grad-gold">静默 九 个月</div>
+        <div class="silent-sub">客户才发现 · 任务一直挂</div>
+      </div>
+    </div>
+    <div class="region-bottom">
+      <div class="bottom-hint">— tutorial E09 / hook —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-2">
+  <!-- phase-2 (4.75-9.30s): SFTP 任务报绿（✓成功）但实际挂红反差揭示 -->
+  <div class="hook-scene">
+    <div class="region-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 个体经验变组织资产</div>
+    </div>
+    <div class="region-mid sftp-row">
+      <div class="sftp-card sftp-ok">
+        <div class="sftp-icon grad-green">✓</div>
+        <div class="sftp-name">任务状态</div>
+        <div class="sftp-key grad-green">成功</div>
+        <div class="sftp-note">handleSuccess 已调用</div>
+      </div>
+      <div class="sftp-vs">VS</div>
+      <div class="sftp-card sftp-bad">
+        <div class="sftp-icon grad-red">✗</div>
+        <div class="sftp-name">实际推送</div>
+        <div class="sftp-key grad-red">挂掉</div>
+        <div class="sftp-note">客户九个月才发现</div>
+      </div>
+    </div>
+    <div class="region-bottom">
+      <div class="bottom-hint">— tutorial E09 / hook —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-3">
+  <!-- phase-3 (9.30-12.57s): 「自报成功」陷阱红框警示 + catch 吞异常代码 trailer -->
+  <div class="hook-scene">
+    <div class="region-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 个体经验变组织资产</div>
+    </div>
+    <div class="region-mid trap-block">
+      <div class="trap-warn grad-red">⚠ 自报成功陷阱</div>
+      <div class="trap-code">
+        <div class="code-line"><span class="code-kw">catch</span> (Exception e) { <span class="code-cmt">// 吞异常</span></div>
+        <div class="code-line indent">log.warn(e); <span class="code-cmt">// 只记日志不抛</span></div>
+        <div class="code-line">}</div>
+        <div class="code-line"><span class="code-fn">handleSuccess</span>(); <span class="code-cmt">// 无条件报成功</span></div>
+      </div>
+      <div class="trap-sub">不是没报错 · 是代码把异常吞了</div>
+    </div>
+    <div class="region-bottom">
+      <div class="bottom-hint">— tutorial E09 / hook —</div>
+    </div>
+  </div>
+</div>
+<div class="phase phase-4">
+  <!-- phase-4 (12.57-22.34s): 三段胶囊预告 + 收尾「让 AI 犯过的错自动变成团队规范」 -->
+  <div class="hook-scene">
+    <div class="region-top">
+      <div class="stage-tag"><span class="dot"></span>E09 · 个体经验变组织资产</div>
+    </div>
+    <div class="region-mid preview-block">
+      <div class="preview-title">怎么让它<span class="grad-gold">永远不再发生</span></div>
+      <div class="preview-row">
+        <div class="preview-pill">
+          <div class="pill-num grad-gold">01</div>
+          <div class="pill-name">七种 Skill 范式</div>
+          <div class="pill-note">能力封装复用</div>
+        </div>
+        <div class="preview-pill">
+          <div class="pill-num grad-blue">02</div>
+          <div class="pill-name">自我改进循环</div>
+          <div class="pill-note">AI 边用边学</div>
+        </div>
+        <div class="preview-pill">
+          <div class="pill-num grad-green">03</div>
+          <div class="pill-name">团队规范进化</div>
+          <div class="pill-note">规则越用越厚</div>
+        </div>
+      </div>
+      <div class="preview-finale">让 AI 犯过的错 · <span class="grad-gold">自动变成团队规范</span></div>
+    </div>
+    <div class="region-bottom">
+      <div class="bottom-hint">— tutorial E09 / hook —</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

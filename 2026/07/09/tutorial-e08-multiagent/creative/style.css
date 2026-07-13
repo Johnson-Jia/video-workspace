@@ -1,0 +1,459 @@
+:root {
+  --bg-deep: #0a0e1a;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --c-blue: #60a5fa;
+  --c-purple: #a78bfa;
+  --c-green: #34d399;
+  --c-red: #f87171;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 多 Agent 并行 · 卡片三纵列
+ * ============================================ */
+
+.ma-title{
+  width:100%;text-align:left;
+  font-family:var(--font-title);font-weight:900;
+  font-size:56px;line-height:1.2;
+  background-image:linear-gradient(120deg,#93c5fd,#60a5fa 60%,#a78bfa);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:none;
+  letter-spacing:1px;
+}
+.ma-title-wrap{
+  width:100%;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(96,165,250,0.18);
+}
+.ma-subtitle{
+  width:100%;text-align:left;
+  font-family:var(--font-body);font-size:32px;
+  color:rgba(255,255,255,0.55);
+  margin-top:10px;letter-spacing:0.5px;
+}
+
+.ma-cards{
+  display:flex;flex-direction:column;
+  flex:1;width:100%;
+  justify-content:space-between;
+  gap:18px;margin-top:24px;
+}
+
+.ma-card{
+  background:rgba(13,9,5,0.88);
+  border:1px solid rgba(96,165,250,0.22);
+  border-radius:14px;
+  padding:22px 28px;
+  display:flex;align-items:center;gap:24px;
+  width:100%;
+  box-shadow:0 4px 24px rgba(0,0,0,0.4);
+  flex:1;
+}
+.ma-card-blue{border-left:4px solid var(--c-blue);}
+.ma-card-purple{border-left:4px solid var(--c-purple);}
+.ma-card-green{border-left:4px solid var(--c-green);}
+
+.ma-badge{
+  flex-shrink:0;width:120px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.ma-badge-icon{
+  width:88px;height:88px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-weight:700;font-size:34px;
+  color:#fff;
+}
+.ma-badge-blue .ma-badge-icon{background:linear-gradient(135deg,#60A5FA,#93C5FD);box-shadow:0 0 18px rgba(96,165,250,0.4);}
+.ma-badge-purple .ma-badge-icon{background:linear-gradient(135deg,#A78BFA,#C4B5FD);box-shadow:0 0 18px rgba(167,139,250,0.4);}
+.ma-badge-green .ma-badge-icon{background:linear-gradient(135deg,#34D399,#6EE7B7);box-shadow:0 0 18px rgba(52,211,153,0.4);}
+.ma-badge-name{
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(255,255,255,0.75);text-align:center;
+  letter-spacing:0.3px;
+}
+
+.ma-body{flex:1;display:flex;flex-direction:column;gap:10px;}
+.ma-card-title{
+  font-family:var(--font-title);font-weight:800;
+  font-size:38px;line-height:1.2;color:#fff;
+  text-align:left;
+}
+.ma-points{
+  display:flex;flex-direction:column;gap:6px;
+}
+.ma-point{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-body);font-size:32px;
+  color:rgba(255,255,255,0.82);text-align:left;
+  line-height:1.3;
+  overflow-wrap:break-word;word-break:break-word;
+}
+.ma-point-dot{
+  flex-shrink:0;width:6px;height:6px;border-radius:50%;
+}
+.ma-card-blue .ma-point-dot{background:var(--c-blue);box-shadow:0 0 8px rgba(96,165,250,0.7);}
+.ma-card-purple .ma-point-dot{background:var(--c-purple);box-shadow:0 0 8px rgba(167,139,250,0.7);}
+.ma-card-green .ma-point-dot{background:var(--c-green);box-shadow:0 0 8px rgba(52,211,153,0.7);}
+
+.ma-pill{
+  display:inline-flex;align-items:center;
+  font-family:var(--font-data);font-weight:700;font-size:32px;
+  padding:8px 22px;border-radius:999px;
+  margin-right:8px;
+}
+.ma-pill-blue{background:rgba(96,165,250,0.18);color:#bfdbfe;border:1px solid rgba(96,165,250,0.4);}
+.ma-pill-purple{background:rgba(167,139,250,0.18);color:#ddd6fe;border:1px solid rgba(167,139,250,0.4);}
+.ma-pill-green{background:rgba(52,211,153,0.18);color:#a7f3d0;border:1px solid rgba(52,211,153,0.4);}
+.ma-pill-red{background:rgba(248,113,113,0.18);color:#fecaca;border:1px solid rgba(248,113,113,0.4);}
+
+.ma-warn{
+  width:100%;
+  background:linear-gradient(90deg,rgba(127,29,29,0.85),rgba(13,9,5,0.88));
+  border:1px solid rgba(248,113,113,0.5);
+  border-radius:12px;
+  padding:18px 24px;
+  display:flex;align-items:center;gap:16px;
+  margin-top:18px;
+}
+.ma-warn-icon{
+  flex-shrink:0;width:60px;height:60px;border-radius:50%;
+  background:rgba(248,113,113,0.22);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-title);font-weight:900;font-size:32px;
+  color:#fecaca;
+  border:2px solid rgba(248,113,113,0.6);
+}
+.ma-warn-body{flex:1;display:flex;flex-direction:column;gap:4px;}
+.ma-warn-title{
+  font-family:var(--font-title);font-weight:800;font-size:32px;
+  color:#fecaca;text-align:left;
+}
+.ma-warn-text{
+  font-family:var(--font-body);font-size:32px;
+  color:rgba(255,255,255,0.78);text-align:left;
+}
+
+.tut-scene{padding:72px 90px;display:flex;flex-direction:column;justify-content:space-between;height:100%;box-sizing:border-box;}
+
+/* ============================================
+ * s02 · agent-teams 精美大卡（六步流程 + 四设计手法）
+ * ============================================ */
+.at-grid{
+  display:flex;flex-direction:column;
+  width:100%;height:100%;
+  justify-content:space-between;gap:18px;
+}
+.at-header{width:100%;}
+.at-tag-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.at-skill-tag{
+  font-family:var(--font-data);font-weight:800;font-size:32px;
+  padding:6px 20px;border-radius:999px;
+  background:rgba(96,165,250,0.18);color:#bfdbfe;
+  border:1px solid rgba(96,165,250,0.45);
+  letter-spacing:0.04em;
+}
+.at-demo-mark{
+  font-family:var(--font-data);font-weight:700;font-size:32px;
+  color:rgba(52,211,153,0.85);letter-spacing:0.04em;
+}
+.at-subtitle{
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(96,165,250,0.72);letter-spacing:2px;
+  margin-bottom:6px;
+}
+.at-title{
+  width:100%;text-align:left;
+  font-family:var(--font-title);font-weight:900;
+  font-size:50px;line-height:1.15;
+  background-image:linear-gradient(120deg,#93c5fd,#60a5fa 60%,#a78bfa);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:none;letter-spacing:1px;
+}
+
+.at-card{
+  flex:1;
+  display:flex;gap:32px;
+  background:linear-gradient(160deg,rgba(20,28,52,0.92) 0%,rgba(13,9,5,0.92) 100%);
+  border:1px solid rgba(96,165,250,0.32);
+  border-left:4px solid var(--c-blue);
+  border-radius:18px;
+  padding:30px 36px;
+  box-shadow:0 8px 36px rgba(0,0,0,0.45), 0 0 32px rgba(96,165,250,0.10);
+  box-sizing:border-box;
+}
+.at-badge{
+  flex-shrink:0;width:160px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding-top:6px;
+}
+.at-badge-icon{
+  width:104px;height:104px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-weight:800;font-size:38px;color:#fff;
+  background:linear-gradient(135deg,#60A5FA,#93C5FD);
+  box-shadow:0 0 22px rgba(96,165,250,0.45);
+}
+.at-badge-name{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.88);text-align:center;
+}
+.at-badge-sub{
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(96,165,250,0.7);text-align:center;
+}
+.at-body{flex:1;display:flex;flex-direction:column;gap:14px;min-width:0;}
+
+.at-section-label{
+  font-family:var(--font-data);font-size:32px;font-weight:800;
+  color:rgba(96,165,250,0.8);letter-spacing:0.06em;
+  margin-bottom:4px;
+}
+
+/* 六步流程横排 */
+.at-steps{
+  display:flex;align-items:center;gap:6px;
+  width:100%;
+}
+.at-step{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:rgba(96,165,250,0.10);
+  border:1px solid rgba(96,165,250,0.35);
+  border-radius:12px;
+  padding:12px 8px;
+  min-width:0;
+}
+.at-step-num{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-weight:900;font-size:34px;
+  color:#bfdbfe;
+  background:linear-gradient(135deg,rgba(96,165,250,0.45),rgba(147,197,253,0.25));
+  border:1.5px solid rgba(96,165,250,0.6);
+  box-shadow:0 0 12px rgba(96,165,250,0.3);
+}
+.at-step-name{
+  font-family:var(--font-body);font-size:32px;font-weight:700;
+  color:#dbeafe;text-align:center;line-height:1.1;
+  word-break:break-word;overflow-wrap:break-word;
+}
+.at-step-line{
+  flex-shrink:0;width:18px;height:2px;
+  background:linear-gradient(90deg,rgba(96,165,250,0.6),rgba(167,139,250,0.6));
+  border-radius:1px;
+}
+
+.at-divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(96,165,250,0.30),transparent);
+  margin:2px 0;
+}
+
+/* 四设计手法 */
+.at-tactics{
+  display:flex;gap:14px;
+}
+.at-tactic{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:rgba(15,23,42,0.55);
+  border:1px solid rgba(96,165,250,0.22);
+  border-radius:12px;
+  padding:12px 12px 14px;
+  text-align:center;
+}
+.at-tactic-icon{
+  font-size:36px;line-height:1;
+  color:rgba(167,139,250,0.85);
+  text-shadow:0 2px 6px rgba(30,41,59,0.32);
+}
+.at-tactic-name{
+  font-family:var(--font-title);font-size:32px;font-weight:800;
+  color:#fff;line-height:1.1;
+}
+.at-tactic-desc{
+  font-family:var(--font-body);font-size:32px;font-weight:500;
+  color:rgba(255,255,255,0.7);line-height:1.2;
+  word-break:break-word;overflow-wrap:break-word;
+}
+
+/* ============================================
+ * s03 · psmux 精美大卡（终端辐射多端并行）
+ * ============================================ */
+.ps-grid{
+  display:flex;flex-direction:column;
+  width:100%;height:100%;
+  justify-content:space-between;gap:18px;
+}
+.ps-header{width:100%;}
+.ps-tag-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.ps-skill-tag{
+  font-family:var(--font-data);font-weight:800;font-size:32px;
+  padding:6px 20px;border-radius:999px;
+  background:rgba(167,139,250,0.18);color:#ddd6fe;
+  border:1px solid rgba(167,139,250,0.45);
+  letter-spacing:0.04em;
+}
+.ps-subtitle{
+  font-family:var(--font-data);font-size:32px;
+  color:rgba(167,139,250,0.72);letter-spacing:2px;
+  margin-bottom:6px;
+}
+.ps-title{
+  width:100%;text-align:left;
+  font-family:var(--font-title);font-weight:900;
+  font-size:48px;line-height:1.15;color:#fff;
+  text-shadow:none;letter-spacing:1px;
+}
+.ps-title-grad{
+  background-image:linear-gradient(120deg,#c4b5fd,#a78bfa 60%,#60a5fa);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+
+.ps-card{
+  flex:1;
+  display:flex;gap:36px;align-items:stretch;
+  background:linear-gradient(160deg,rgba(30,24,52,0.92) 0%,rgba(13,9,5,0.92) 100%);
+  border:1px solid rgba(167,139,250,0.32);
+  border-left:4px solid var(--c-purple);
+  border-radius:18px;
+  padding:30px 36px;
+  box-shadow:0 8px 36px rgba(0,0,0,0.45), 0 0 32px rgba(167,139,250,0.10);
+  box-sizing:border-box;
+}
+.ps-left{
+  flex-shrink:0;width:360px;
+  display:flex;flex-direction:column;gap:16px;
+  align-items:center;justify-content:center;
+}
+.ps-badge{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.ps-badge-icon{
+  width:104px;height:104px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-weight:800;font-size:38px;color:#fff;
+  background:linear-gradient(135deg,#A78BFA,#C4B5FD);
+  box-shadow:0 0 22px rgba(167,139,250,0.45);
+}
+.ps-badge-name{
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.88);
+}
+.ps-term{
+  width:100%;
+  background:rgba(8,8,16,0.85);
+  border:1px solid rgba(167,139,250,0.35);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,0.4);
+}
+.ps-term-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;
+  background:rgba(20,18,34,0.9);
+  border-bottom:1px solid rgba(167,139,250,0.25);
+}
+.ps-dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.ps-dot-r{background:#f87171;}
+.ps-dot-y{background:#fbbf24;}
+.ps-dot-g{background:#34d399;}
+.ps-term-title{
+  margin-left:auto;
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:rgba(167,139,250,0.85);
+}
+.ps-term-body{
+  padding:14px 16px;
+  font-family:var(--font-data);font-size:32px;font-weight:700;
+  color:#ddd6fe;line-height:1.3;
+}
+.ps-cursor{
+  display:inline-block;color:#a78bfa;
+  animation:none;
+}
+.ps-pill-row{display:flex;justify-content:center;}
+.ps-pill{
+  font-family:var(--font-data);font-weight:700;font-size:32px;
+  padding:8px 22px;border-radius:999px;
+  background:rgba(167,139,250,0.18);color:#ddd6fe;
+  border:1px solid rgba(167,139,250,0.45);
+}
+
+/* 辐射连线 + 多端 */
+.ps-ends{
+  flex:1;position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  min-width:0;
+}
+.ps-conn{
+  position:absolute;left:0;
+  width:60px;height:2px;
+  background:linear-gradient(90deg,rgba(167,139,250,0.7),rgba(96,165,250,0.4));
+  transform-origin:left center;
+}
+.ps-conn-1{top:18%;transform:rotate(-22deg);}
+.ps-conn-2{top:40%;transform:rotate(-7deg);}
+.ps-conn-3{top:60%;transform:rotate(7deg);}
+.ps-conn-4{top:82%;transform:rotate(22deg);}
+.ps-ends-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;padding-left:64px;
+}
+.ps-end{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:linear-gradient(165deg,rgba(59,130,246,0.12),rgba(15,23,42,0.85));
+  border:1.5px solid rgba(167,139,250,0.40);
+  border-radius:14px;
+  padding:14px 12px;
+  box-shadow:0 0 0 1px rgba(167,139,250,0.12);
+}
+.ps-end-icon{font-size:44px;line-height:1;}
+.ps-end-name{
+  font-family:var(--font-title);font-size:34px;font-weight:800;
+  color:#fff;line-height:1.1;
+}
+.ps-end-sub{
+  font-family:var(--font-data);font-size:32px;font-weight:600;
+  color:rgba(167,139,250,0.78);
+}
+
+.ps-foot{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:var(--font-body);font-size:32px;font-weight:700;
+  color:rgba(255,255,255,0.82);
+  flex-wrap:wrap;
+}
+.ps-foot-item{display:inline-flex;align-items:center;gap:8px;}
+.ps-foot-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--c-purple);
+  box-shadow:0 0 10px rgba(167,139,250,0.7);
+}
+.ps-foot-sep{color:rgba(167,139,250,0.5);}
+
+/* —— 全局溢出防御（长词/长句自动换行，防 1920 画布溢出） —— */
+.at-title,.at-step-name,.at-tactic-name,.at-tactic-desc,
+.ps-title,.ps-end-name,.ps-foot-item{
+  word-break:break-word;overflow-wrap:break-word;
+}
+
+/* code-review 多 Agent 流水线子卡（ma-body 内嵌） */
+.ma-flow{
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;margin-top:4px;
+}
+.ma-flow-step{
+  font-family:var(--font-data);font-size:32px;
+  padding:6px 16px;border-radius:8px;
+  background:rgba(52,211,153,0.12);color:#a7f3d0;
+  border:1px solid rgba(52,211,153,0.3);
+}
+.ma-flow-arrow{color:rgba(52,211,153,0.5);font-size:32px;}

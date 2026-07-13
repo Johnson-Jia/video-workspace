@@ -1,0 +1,50 @@
+:root {
+  --bg-deep: #0F172A;
+  --accent-gold: #FBBF24;
+  --accent-blue: #3B82F6;
+  --accent-cyan: #60A5FA;
+  --accent-emerald: #34D399;
+  --accent-rose: #F87171;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.78);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 自定义组件 CSS（dark_cipher keyframes + tut-scene 布局）
+ * ============================================ */
+
+/* dark_cipher bg 组件 keyframes（bg 层引用，全局共享） */
+@keyframes scanSweep { 0% { top: -5%; } 100% { top: 105%; } }
+@keyframes scanFade { 0%, 100% { opacity: 0.30; } 50% { opacity: 0.50; } }
+@keyframes glitchFlash { 0%, 90%, 100% { opacity: 0; } 92%, 96% { opacity: 0.15; } }
+@keyframes cipherBlink { 0%, 100% { opacity: 0.30; } 30% { opacity: 0.60; } 60% { opacity: 0.18; } }
+@keyframes fogRise { 0%, 100% { transform: translateY(0); opacity: 0.25; } 50% { transform: translateY(-15px); opacity: 0.35; } }
+@keyframes heartbeatPulse { 0% { transform: scale(0.3); opacity: 0.40; } 15% { transform: scale(1.2); opacity: 0.15; } 30% { transform: scale(0.5); opacity: 0.30; } 45% { transform: scale(1.0); opacity: 0; } 100% { opacity: 0; } }
+
+/* tut-scene 单 phase 横屏布局（stage6 范式：禁多 tut-scene 平铺） */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  padding: 180px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* region 内 data-reveal stagger 由 GSAP timeline 控制（assemble 注入） */
+.region { box-sizing: border-box; }
+
+/* 渐变文字防简写覆盖（R-S6-021 HARD：用 background-image 非 background） */
+.grad-title, .grad-step {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* step-card 悬停无（静态视频不需要，但保留视觉一致性） */
+.step-card { transition: none; }

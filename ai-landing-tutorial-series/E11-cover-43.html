@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E11 Skill 仓库实操 · 4:3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1440px;height:1080px;padding:56px 72px 48px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#15233D 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,191,36,0.07) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-gold{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);filter:blur(100px);top:-200px;right:-140px;pointer-events:none;}
+.glow-blue{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.18),transparent 70%);filter:blur(90px);bottom:-140px;left:-90px;pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:76px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(59,130,246,0.50),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:76px;background:linear-gradient(0deg,rgba(59,130,246,0.50),transparent);}
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:18px;margin-bottom:12px;flex-wrap:wrap;}
+.ep-num{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 28px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#FBBF24;letter-spacing:0.16em;border:1.5px solid rgba(251,191,36,0.45);background:rgba(251,191,36,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.hook-tag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:19px;color:#3B82F6;border:1.5px solid rgba(59,130,246,0.55);background:rgba(59,130,246,0.10);padding:7px 16px;border-radius:999px;font-weight:600;}
+.title-row{position:relative;z-index:2;display:flex;align-items:flex-end;gap:24px;margin-top:4px;}
+.title{font-size:68px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#FCD34D 50%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.18);}
+.title-num{font-family:'JetBrains Mono',monospace;font-size:88px;font-weight:900;line-height:1;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.20);margin-left:auto;}
+.subtitle{position:relative;z-index:2;font-size:22px;color:rgba(255,255,255,0.84);margin-top:10px;font-weight:500;line-height:1.4;}
+.subtitle .sub-strong{color:#3B82F6;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 10px;font-weight:400;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+.subtitle .sub-green{color:#34D399;font-weight:700;}
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:22px;align-items:center;}
+.layers-label{font-size:22px;color:#3B82F6;letter-spacing:0.12em;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.layers-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.45),transparent);}
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.l-row{display:flex;flex-direction:column;gap:5px;padding:13px 16px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.65);}
+.l-row.k1{border-color:rgba(251,191,36,0.50);background:linear-gradient(140deg,rgba(251,191,36,0.12),rgba(15,23,42,0.65));}
+.l-row.k2{border-color:rgba(59,130,246,0.55);background:linear-gradient(140deg,rgba(59,130,246,0.14),rgba(15,23,42,0.65));}
+.l-row.k3{border-color:rgba(16,185,129,0.55);background:linear-gradient(140deg,rgba(16,185,129,0.14),rgba(15,23,42,0.65));}
+.l-row.k4{border-color:rgba(167,139,250,0.55);background:linear-gradient(140deg,rgba(167,139,250,0.14),rgba(15,23,42,0.65));}
+.l-top{display:flex;align-items:center;gap:10px;}
+.l-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:900;min-width:32px;}
+.l-row.k1 .l-num{color:#FBBF24;}
+.l-row.k2 .l-num{color:#60A5FA;}
+.l-row.k3 .l-num{color:#34D399;}
+.l-row.k4 .l-num{color:#A78BFA;}
+.l-name{font-size:20px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;}
+.l-tag{font-size:13px;font-weight:700;padding:2px 8px;border-radius:5px;margin-left:auto;letter-spacing:0.06em;}
+.l-row.k1 .l-tag{color:#0F172A;background:#FBBF24;}
+.l-row.k2 .l-tag{color:#0F172A;background:#60A5FA;}
+.l-row.k3 .l-tag{color:#0F172A;background:#34D399;}
+.l-row.k4 .l-tag{color:#0F172A;background:#A78BFA;}
+.l-desc{font-size:15px;color:rgba(255,255,255,0.82);font-weight:500;line-height:1.35;}
+.l-row.k1 .l-desc{color:#FCD34D;}
+.l-row.k2 .l-desc{color:#93C5FD;}
+.l-row.k3 .l-desc{color:#6EE7B7;}
+.l-row.k4 .l-desc{color:#C4B5FD;}
+.term-card{background:linear-gradient(160deg,rgba(15,23,42,0.94),rgba(8,12,24,0.94));border-radius:12px;border:1.5px solid rgba(59,130,246,0.40);overflow:hidden;}
+.term-head{background:rgba(11,18,36,0.85);padding:11px 18px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(59,130,246,0.22);}
+.term-head-dot{width:10px;height:10px;border-radius:50%;background:#3B82F6;box-shadow:0 0 12px rgba(59,130,246,0.7);}
+.term-head-title{font-size:17px;color:#60A5FA;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.04em;}
+.term-body{padding:16px 20px;display:flex;flex-direction:column;gap:9px;font-family:'JetBrains Mono',monospace;}
+.term-line{font-size:17px;font-weight:600;color:#fff;display:flex;align-items:center;gap:10px;}
+.term-prompt{color:#34D399;font-weight:800;}
+.term-cmd{color:#FBBF24;font-weight:700;}
+.term-flag{color:#60A5FA;font-weight:600;}
+.term-out{color:rgba(255,255,255,0.74);font-weight:500;}
+.term-out .o-gold{color:#FBBF24;font-weight:700;}
+.term-out .o-blue{color:#60A5FA;font-weight:700;}
+.term-out .o-green{color:#34D399;font-weight:700;}
+.term-out .o-purple{color:#C4B5FD;font-weight:700;}
+.stat-label{font-size:22px;color:#FBBF24;letter-spacing:0.12em;font-weight:700;margin-bottom:12px;}
+.stat-grid{display:flex;flex-direction:column;gap:11px;}
+.stat-item{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.stat-item.s-gold{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.stat-item.s-blue{border-color:rgba(59,130,246,0.55);background:linear-gradient(92deg,rgba(59,130,246,0.14),rgba(15,23,42,0.55));}
+.stat-item.s-green{border-color:rgba(16,185,129,0.55);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(15,23,42,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:128px;}
+.stat-item.s-gold .stat-num{color:#FBBF24;}
+.stat-item.s-blue .stat-num{color:#60A5FA;}
+.stat-item.s-green .stat-num{color:#34D399;}
+.stat-name{font-size:18px;color:rgba(255,255,255,0.86);font-weight:700;}
+.chip-row{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:14px;color:rgba(255,255,255,0.80);font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.45);font-family:'JetBrains Mono',monospace;}
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid rgba(251,191,36,0.22);}
+.repo{font-size:22px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#FBBF24;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:20px;}
+.repo .repo-path{background:rgba(251,191,36,0.12);padding:4px 12px;border-radius:7px;border:1px solid rgba(251,191,36,0.25);}
+.author{font-size:20px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-blue"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+  <div class="top-row">
+    <div class="ep-num">E11</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E11</div>
+    <div class="hook-tag">◆ Skill 仓库 · 复制即用</div>
+  </div>
+  <div class="title-row">
+    <h1 class="title"><span class="title-grad">Skill 仓库实操</span></h1>
+    <div class="title-num">4+13</div>
+  </div>
+  <div class="subtitle">4 核心 skill + 13 团队规范<span class="sub-divider">·</span><span class="sub-strong">devflow / sql-query / crud-gen / code-review</span><span class="sub-divider">·</span><span class="sub-green">复制到 .claude 即用</span></div>
+  <div class="main">
+    <div>
+      <div class="layers-label">四个核心 skill · 编排/工具/审查</div>
+      <div class="layers">
+        <div class="l-row k1">
+          <div class="l-top"><span class="l-num">01</span><span class="l-name">devflow</span><span class="l-tag">编排</span></div>
+          <div class="l-desc">6 阶段流水线，断点续传</div>
+        </div>
+        <div class="l-row k2">
+          <div class="l-top"><span class="l-num">02</span><span class="l-name">sql-query</span><span class="l-tag">工具</span></div>
+          <div class="l-desc">只读查询，三模式 + 护栏</div>
+        </div>
+        <div class="l-row k3">
+          <div class="l-top"><span class="l-num">03</span><span class="l-name">crud-gen</span><span class="l-tag">工具</span></div>
+          <div class="l-desc">读表生成分层 CRUD 代码</div>
+        </div>
+        <div class="l-row k4">
+          <div class="l-top"><span class="l-num">04</span><span class="l-name">code-review</span><span class="l-tag">编排</span></div>
+          <div class="l-desc">三级分级 + 自动套规范</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="term-card">
+        <div class="term-head">
+          <span class="term-head-dot"></span>
+          <span class="term-head-title">demos/claude-skills</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line"><span class="term-prompt">$</span><span class="term-cmd">cp</span> <span class="term-flag">-r</span> skills/devflow .claude/</div>
+          <div class="term-line"><span class="term-prompt">$</span><span class="term-cmd">cp</span> rules/*.md .claude/rules/</div>
+          <div class="term-line"><span class="term-out"><span class="o-green">✓</span> skill 按需 · <span class="o-blue">devflow</span> 加载</span></div>
+          <div class="term-line"><span class="term-out"><span class="o-green">✓</span> rule 始终生效 · <span class="o-gold">13 条</span></span></div>
+          <div class="term-line"><span class="term-out"><span class="o-green">→</span> CLAUDE.md <span class="o-purple">@</span> 引用</span></div>
+        </div>
+      </div>
+      <div class="stat-label" style="margin-top:14px;">仓库数据 · 开箱即用</div>
+      <div class="stat-grid">
+        <div class="stat-item s-gold"><span class="stat-num">4 核心</span><span class="stat-name">skill（编排/工具/审查）</span></div>
+        <div class="stat-item s-blue"><span class="stat-num">13 条</span><span class="stat-name">团队规范 5 层</span></div>
+        <div class="stat-item s-green"><span class="stat-num">0 配置</span><span class="stat-name">复制即生效</span></div>
+      </div>
+      <div class="chip-row">
+        <span class="chip">devflow</span>
+        <span class="chip">sql-query</span>
+        <span class="chip">crud-gen</span>
+        <span class="chip">code-review</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 13 集 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

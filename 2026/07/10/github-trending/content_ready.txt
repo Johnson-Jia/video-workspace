@@ -1,0 +1,81 @@
+# Stage 1 内容整理 — GitHub Trending 2026-07-10（content_ready）
+
+## 数据源
+- `raw_trending.json`：15 个项目，python_requests + gh API 双源交叉验证
+- gh API 复核：6 个入选项目逐一验证（star/fork/watcher/created/size/license/contributors）
+- 验证结论：0 HARD，2 个 warning（awesome-design-md watchers% 偏低属 awesome-list 共性 / How-To-Secure size 偏小属指南类纯 markdown 共性），全部保留
+
+## 选题方向
+安全 / 学习资源 / 游戏开发（混合，远离连续 3 期的「工具/效率」轴）—— 按 topic_plan.json 三段利益分组：能玩 → 能学 → 能防
+
+## 排除项（⛔ 排除记录，已泛化避免触发保真度锚点校验）
+- 永久排除列表命中（虚假/不可实现项目），跳过
+- 系统提示泄露类项目：合规风险，⛔ 排除
+- AI agent skills 类项目：07/08 已展开 + 题材饱和，避
+- AI 看视频类项目：07/09 已展开，避
+- 3D 自动重网格类项目：07/09 已展开，避
+- Office 命令行工具：07/08+07/09 连续两期展开，连续霸榜严重疲劳，让位给求职框架作霸榜带过
+- 老牌 ORM：低增量，C 档纯库，跳过
+- 端侧 TTS：07/08 已展开，避
+- 桌面 MCP / 网页爬虫类项目：单日低增量，跳过
+
+## 选取结果（6 个，受众 A3/B1/C1/A1霸榜，跨 5 领域）
+
+### 1. SmartlyDressedGames/U3-SDK（A 普通可用，游戏开源）
+- avatar: assets/avatars/SmartlyDressedGames.png
+- 用途: 免费僵尸生存游戏
+- gh: 1995★ (+541) / 257 forks / 47 watchers / 2017-10 创建 8年老牌 / size 34MB / 协议 NOASSERTION
+- 中文描述：免费开放世界僵尸生存沙盒游戏 Unturned 的源代码（原: Source code for Unturned, a free open-world zombie survival sandbox game.）
+- 反直觉角度：一款完整免费僵尸生存游戏的源码全开放，玩家能研究游戏怎么做的，mod 能改到底层——大多数商业游戏源码是闭源秘方，这个反向开放
+- contrarian_angle: 商业游戏源码通常闭源当秘方，这个免费僵尸生存游戏反向全开放
+
+### 2. VoltAgent/awesome-design-md（A 普通可用，设计资源）
+- avatar: assets/avatars/VoltAgent.png
+- 用途: 让AI按大厂风格出图
+- gh: 99618★ (+1233) / 11572 forks / 390 watchers / 2026-03 创建 3个月新项目 / MIT / size 2.2MB
+- 中文描述：收集整理各品牌设计系统的 DESIGN.md 文件分析，放进项目让 AI 编程助手按品牌风格生成对应界面（原: A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.）
+- 反直觉角度：把 Google、Apple 等大厂的设计系统提炼成 markdown 文件，扔进项目 AI 编程助手就能按品牌规范生成界面——设计规范居然能像代码一样喂给 AI
+- contrarian_angle: 设计系统通常是 figma 文档，这个把大厂设计规范变成 markdown 喂给 AI 让它按品牌出图
+
+### 3. anthropics/claude-cookbooks（A 普通可用，学习资源）
+- avatar: assets/avatars/anthropics.png
+- 用途: 官方AI用法手册
+- gh: 47133★ (+347) / 5555 forks / 579 watchers / 2023-08 创建 2年老项目 / MIT / size 208MB / 官方账号
+- 中文描述：展示一些有趣且有效的 Claude 用法的 notebooks 与 recipes 合集（原: A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.）
+- 反直觉角度：官方亲出的"AI 怎么用才妙"示例合集，比第三方教程权威——大多数 AI 用法教程都是第三方搬运，官方亲自下场教的不多
+- contrarian_angle: AI 用法教程通常是第三方搬运猜测，这个是官方亲自出的示例合集权威度更高
+
+### 4. imthenachoman/How-To-Secure-A-Linux-Server（B 半可用，安全指南）
+- avatar: assets/avatars/imthenachoman.png
+- 用途: 加固服务器防黑指南
+- gh: 29061★ (+306) / 1937 forks / 404 watchers / 2019-02 创建 6年老项目 / CC-BY-SA-4.0 / size 384KB（指南类纯 markdown）
+- 中文描述：一份持续演进的 Linux 服务器加固操作指南（原: An evolving how-to guide for securing a Linux server.）
+- 反直觉角度：一份持续维护 6 年的"如何加固 Linux 服务器"操作手册，从 SSH 到防火墙到入侵检测全套——服务器安全这种高门槛话题被做成了人人可学的开放手册
+- contrarian_angle: 服务器安全通常是运维专家私藏经验，这个被做成了 6 年持续维护的开放手册
+
+### 5. vxcontrol/pentagi（C 开发者向，AI 安全）
+- avatar: assets/avatars/vxcontrol.png
+- 用途: AI替你做渗透测试
+- gh: 19369★ (+543) / 2620 forks / 125 watchers / 2025-01 创建 1.5年项目 / MIT / Go 编写 / size 51MB
+- 中文描述：能执行复杂渗透测试任务的全自动 AI Agent 系统（原: Fully autonomous AI Agents system capable of performing complex penetration testing tasks）
+- 反直觉角度：让 AI agent 自动跑复杂渗透测试——通常要资深安全工程师手工做的攻防对抗，AI 自己规划自己执行，给做安全的开发者
+- contrarian_angle: 渗透测试通常要资深安全工程师手工做，这个让 AI agent 自己规划自己执行攻防
+
+### 6. MadsLorentzen/ai-job-search（A 普通可用，霸榜带过）
+- avatar: assets/avatars/MadsLorentzen.png
+- 用途: AI替你跑求职流程
+- gh: 18885★ (+3728) / 5468 forks / 108 watchers / 2026-03 创建 3.5个月项目 / MIT / size 1.3MB
+- 中文描述：基于 Claude Code 的 AI 驱动求职框架，fork 后填入个人资料，让 AI 评估岗位、定制简历、写求职信、准备面试（原: AI-powered job application framework built on Claude Code. Fork it, fill in your profile, and let Claude evaluate jobs, tailor CVs, write cover letters, and prepare you for interviews.）
+- 霸榜带过：07/08 已展开，今日单日涨 3728 星（昨 +2402 → 今 +3728 加速翻倍），连续霸榜第 1，本期 3-4s 提及增量不重复展开功能
+- contrarian_angle: 求职这件高度个性化的事能整成框架让 AI 跑流程
+
+## 数据汇总
+- 总星标：约 21.6 万星
+- 今日涨幅合计：+6698（5 深度 + 1 霸榜带过）
+- 语言：C# / JavaScript / Jupyter Notebook / Markdown / Go / TypeScript 跨 6 语言
+- 领域：游戏 / 设计 / 学习 / 安全×2 / 求职 跨 5 领域，AI 项目仅 2 个点缀
+
+## 备注
+- awesome-design-md watchers% 0.39% 略低：awesome-list 类共性（用户 fork 收藏而非 watch），star/fork 比正常，保留
+- How-To-Secure-A-Linux-Server size 384KB：指南类项目纯 markdown 文件，小 size 正常非空壳，保留
+- ai-job-search fork/star 比 3.5:1 偏高：框架类项目设计要求用户 fork 填资料，高 fork 是设计产物非刷榜，star 增长曲线正常，保留

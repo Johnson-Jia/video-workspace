@@ -1,0 +1,101 @@
+<!-- 场景: s8 | 时长: 6.79s | bg: contour_lines | 专项2 接口规划（专项2 active 聚焦，其余 dim） -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-aura" style="position:absolute;top:10%;left:50%;transform:translateX(-50%);width:900px;height:140px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:25%;width:700px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,70%,72%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.8"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:900px;height:130px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.15) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:10%;width:8px;height:8px;border-radius:50%;background:hsla(215,15%,55%,0.5);box-shadow:0 0 10px hsla(215,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:25%;width:14px;height:14px;border-radius:50%;background:hsla(255,75%,70%,1);box-shadow:0 0 22px hsla(255,70%,64%,0.7)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:40%;width:8px;height:8px;border-radius:50%;background:hsla(215,15%,55%,0.5);box-shadow:0 0 10px hsla(215,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:55%;width:8px;height:8px;border-radius:50%;background:hsla(150,15%,55%,0.5);box-shadow:0 0 10px hsla(150,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:70%;width:8px;height:8px;border-radius:50%;background:hsla(43,15%,55%,0.5);box-shadow:0 0 10px hsla(43,15%,50%,0.3)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:85%;width:8px;height:8px;border-radius:50%;background:hsla(0,15%,55%,0.5);box-shadow:0 0 10px hsla(0,15%,50%,0.3)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（左对齐） -->
+    <div class="tut-region tut-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="title-tag grad-gold-bg-inline">专项二</div>
+      <h1 class="title-h1"><span class="grad-purple">接口规划</span></h1>
+      <div class="title-sub">按接口规范规划 · 优先复用已有接口</div>
+    </div>
+
+    <!-- 区域 2：六阶段流水线（专项2 active 聚焦，其余 dim） -->
+    <div class="tut-region tut-pl-pipeline" data-reveal="3" data-reveal-dir="fade">
+      <div class="pipeline-wrap">
+        <svg class="pipeline-edges" viewBox="0 0 1740 120" preserveAspectRatio="none">
+          <line x1="145" y1="60" x2="435" y2="60" class="edge edge-dim" />
+          <line x1="435" y1="60" x2="725" y2="60" class="edge edge-dim" />
+          <line x1="725" y1="60" x2="1015" y2="60" class="edge edge-dim" />
+          <line x1="1015" y1="60" x2="1305" y2="60" class="edge edge-dim" />
+          <line x1="1305" y1="60" x2="1595" y2="60" class="edge edge-dim" />
+        </svg>
+        <div class="node-row">
+          <div class="stage-node sn-1 sn-dim">
+            <div class="node-icon">🎯</div>
+            <div class="node-stage">定位</div>
+            <div class="node-skill">调RAG+代码图谱</div>
+            <div class="node-num">专项一</div>
+          </div>
+          <div class="stage-node sn-2 sn-active">
+            <div class="node-icon">📐</div>
+            <div class="node-stage grad-purple">规划</div>
+            <div class="node-skill">复用优先</div>
+            <div class="node-num">专项二</div>
+          </div>
+          <div class="stage-node sn-3 sn-dim">
+            <div class="node-icon">⚡</div>
+            <div class="node-stage">生成</div>
+            <div class="node-skill">Controller+Service</div>
+            <div class="node-num">专项三</div>
+          </div>
+          <div class="stage-node sn-4 sn-dim">
+            <div class="node-icon">🔍</div>
+            <div class="node-stage">自检</div>
+            <div class="node-skill">规范校验</div>
+            <div class="node-num">专项四</div>
+          </div>
+          <div class="stage-node sn-5 sn-dim">
+            <div class="node-icon">✅</div>
+            <div class="node-stage">测试</div>
+            <div class="node-skill">自动化测试</div>
+            <div class="node-num">专项五</div>
+          </div>
+          <div class="stage-node sn-6 sn-dim">
+            <div class="node-icon">🚀</div>
+            <div class="node-stage">部署</div>
+            <div class="node-skill">提交上线</div>
+            <div class="node-num">专项六</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：辅助卡（专项2 三步骤） -->
+    <div class="tut-region tut-pl-aux" data-reveal="5" data-reveal-dir="left">
+      <div class="aux-card purple">
+        <div class="aux-tag grad-gold-bg-inline">专项二 · 做什么</div>
+        <div class="aux-text"><span class="grad-purple">优先复用</span>已有接口 · 避免重复开发</div>
+        <div class="aux-flow">
+          <span class="aux-chip purple">📐 按接口规范规划</span>
+          <span class="aux-sep">→</span>
+          <span class="aux-chip purple">♻️ 优先复用已有</span>
+          <span class="aux-sep">→</span>
+          <span class="aux-chip purple">🚫 避免重复开发</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
+</div>

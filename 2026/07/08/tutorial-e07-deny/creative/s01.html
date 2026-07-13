@@ -1,0 +1,153 @@
+<!-- 场景: seg1 | 时长: ~31.7s | bg: scan_grid | 权限 deny：终端窗 + deny 高亮 + AI 被拒 X + 铁律卡 + 金句 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 多色静态光晕（蓝终端/绿铁律/金金句；脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:22%;left:30%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:52%;right:8%;width:420px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,60%,52%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-pulse" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:760px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:42%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(215,75%,60%,0.85);box-shadow:0 0 14px hsla(215,70%,54%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:10%;width:10px;height:10px;border-radius:50%;background:hsla(150,65%,58%,0.85);box-shadow:0 0 14px hsla(150,60%,52%,0.55)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(43,90%,60%,0.75);box-shadow:0 0 14px hsla(43,85%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：1 场景 + 6 region + data-reveal（不切 phase） -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（data-reveal=0，dir=fade） -->
+    <div class="tut-region tut-deny-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="mt-eyebrow">E07 · 权限 deny</div>
+      <h1 class="mt-h1"><span class="grad-gold">settings.json</span> · 权限 deny</h1>
+      <div class="title-sub">第二层防护 · 框架硬拦截</div>
+    </div>
+
+    <!-- 主体两栏：终端窗（左）+ 铁律卡（右） -->
+    <div class="tut-deny-main">
+
+    <!-- 区域 2：终端窗口（data-reveal=5，dir=top）—— 含标题栏 + 头部注释 -->
+    <div class="tut-region tut-deny-terminal" data-reveal="5" data-reveal-dir="top">
+      <div class="term-window">
+        <div class="term-titlebar">
+          <span class="term-dot term-dot-red"></span>
+          <span class="term-dot term-dot-yellow"></span>
+          <span class="term-dot term-dot-green"></span>
+          <span class="term-title-name">settings.json</span>
+          <span class="term-path">.claude/</span>
+        </div>
+        <div class="term-body">
+          <!-- 头部：注释行（region 2 一同 reveal） -->
+          <div class="term-line">
+            <span class="line-num">1</span>
+            <span class="c-comment">// .claude/settings.json</span>
+          </div>
+
+          <!-- permissions 键（data-reveal=12） -->
+          <div class="term-line code-block" data-reveal="12" data-reveal-dir="fade">
+            <span class="line-num">2</span>
+            <span class="c-key">{</span>
+          </div>
+          <div class="term-line code-block" data-reveal="12" data-reveal-dir="fade">
+            <span class="line-num">3</span>
+            <span class="c-indent"></span><span class="c-key">"permissions"</span><span class="c-colon">:</span> <span class="c-brace">{</span>
+          </div>
+          <div class="term-line code-block" data-reveal="12" data-reveal-dir="fade">
+            <span class="line-num">4</span>
+            <span class="c-indent"></span><span class="c-indent"></span><span class="c-key">"deny"</span><span class="c-colon">:</span> <span class="c-brace">[</span>
+          </div>
+
+          <!-- deny 项 1：Write test 目录（data-reveal=16，金色高亮） -->
+          <div class="term-line code-block deny-line" data-reveal="16" data-reveal-dir="fade">
+            <span class="line-num">5</span>
+            <span class="c-indent"></span><span class="c-indent"></span><span class="c-indent"></span><span class="c-deny">"Write(test&#47;&#42;&#42;)"</span><span class="c-comma">,</span>
+          </div>
+
+          <!-- deny 项 2：Edit test 目录（data-reveal=20，金色高亮） -->
+          <div class="term-line code-block deny-line" data-reveal="20" data-reveal-dir="fade">
+            <span class="line-num">6</span>
+            <span class="c-indent"></span><span class="c-indent"></span><span class="c-indent"></span><span class="c-deny">"Edit(test&#47;&#42;&#42;)"</span><span class="c-comma">,</span>
+          </div>
+
+          <!-- deny 项 3：Write 星 test.ts（data-reveal=24，金色高亮） -->
+          <div class="term-line code-block deny-line" data-reveal="24" data-reveal-dir="fade">
+            <span class="line-num">7</span>
+            <span class="c-indent"></span><span class="c-indent"></span><span class="c-indent"></span><span class="c-deny">"Write(&#42;&#42;&#47;&#42;.test.ts)"</span>
+          </div>
+
+          <div class="term-line code-block" data-reveal="26" data-reveal-dir="fade">
+            <span class="line-num">8</span>
+            <span class="c-indent"></span><span class="c-indent"></span><span class="c-brace">]</span>
+          </div>
+          <div class="term-line code-block" data-reveal="27" data-reveal-dir="fade">
+            <span class="line-num">9</span>
+            <span class="c-indent"></span><span class="c-brace">}</span>
+          </div>
+          <div class="term-line code-block" data-reveal="28" data-reveal-dir="fade">
+            <span class="line-num">10</span>
+            <span class="c-key">}</span>
+          </div>
+
+          <!-- AI 被拒动画（data-reveal=32，dir=fade）—— 终端底部 AI 尝试改测试被拒 -->
+          <div class="term-reject" data-reveal="32" data-reveal-dir="fade">
+            <div class="reject-cmd">
+              <span class="prompt">&gt;</span>
+              <span class="cmd-text">AI 尝试 Write test/foo.test.ts</span>
+            </div>
+            <div class="reject-result">
+              <span class="reject-x">✕</span>
+              <span class="reject-msg">Permission denied · 框架硬拦截</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：铁律卡（data-reveal=48，dir=left） -->
+    <div class="tut-region tut-deny-iron" data-reveal="48" data-reveal-dir="left">
+      <div class="iron-card">
+        <div class="iron-tag grad-green-bg-inline">铁律</div>
+        <div class="iron-formula">
+          <span class="if-left">不靠 AI 自觉</span>
+          <span class="if-arrow">→</span>
+          <span class="if-right grad-green">靠框架强制</span>
+        </div>
+        <div class="iron-compare">
+          <div class="compare-row compare-weak">
+            <span class="cmp-mark cmp-weak">✗</span>
+            <span class="cmp-label">提示词劝阻</span>
+            <span class="cmp-note">靠 AI 自觉 · 会被绕过</span>
+          </div>
+          <div class="compare-row compare-strong">
+            <span class="cmp-mark cmp-strong">✓</span>
+            <span class="cmp-label">权限硬拦截</span>
+            <span class="cmp-note">框架强制 · 改不了</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>  <!-- /tut-deny-main -->
+
+    <!-- 区域 4：金句（data-reveal=62，dir=top） -->
+    <div class="tut-region tut-deny-quote" data-reveal="62" data-reveal-dir="top">
+      <div class="quote-tag grad-gold-bg-inline">绕不过</div>
+      <div class="quote-main">
+        <span class="quote-text">AI 再聪明</span>
+      </div>
+      <div class="quote-correct">
+        <span class="qc-mark">→</span>
+        也绕不过 <span class="qc-strong grad-gold">权限层</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

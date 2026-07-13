@@ -1,0 +1,98 @@
+<!-- 场景: scene-1 | 时长: 27.0s | bg: diamond_lattice | 为什么度量难：Co-authored-by 定义 + Copilot 自动加 trailer 大坑 + 双卡对比 + 更准算法收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；金定义+红误标+绿真实；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:30%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:76%;left:50%;transform:translateX(-50%);width:920px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先；红为警示允许） -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:46%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(0,90%,62%,0.85);box-shadow:0 0 14px hsla(0,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:80%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:80%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:50%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 why-scene">
+  <!-- phase-1 (0-8.6s): 为什么度量难 + Co-authored-by 定义 -->
+  <div class="region-top">
+    <div class="w-stage-tag"><span class="dot"></span>E10 · 度量实操 · 为什么度量难</div>
+  </div>
+  <div class="region-mid why-def-block">
+    <div class="w-title">为什么 <span class="grad-gold">度量难</span></div>
+    <div class="w-def-card">
+      <div class="w-def-label">Co-authored-by 是什么</div>
+      <div class="w-def-text">commit message 里标记 <span class="kw-gold">AI 工具</span> 的署名行</div>
+      <div class="w-def-code">
+        <div class="code-line"><span class="code-cmt"># AI 写的代码会带上</span></div>
+        <div class="code-line trailer">Co-authored-by: <span class="code-ai">Copilot</span>&lt;noreply@github.com&gt;</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / why · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+<div class="phase phase-2 why-scene">
+  <!-- phase-2 (8.6-24.3s): Copilot 自动加 trailer 大坑 + 手写被算 AI + 占比虚高警示 -->
+  <div class="region-top">
+    <div class="w-stage-tag"><span class="dot"></span>E10 · 度量实操 · 为什么度量难</div>
+  </div>
+  <div class="region-mid why-trap-block">
+    <div class="w-trap-title">但 <span class="grad-red">只数它不行</span></div>
+    <div class="w-trap-row">
+      <div class="w-trap-code">
+        <div class="code-line"><span class="code-cmt">// 你手写的代码</span></div>
+        <div class="code-line"><span class="code-fn">commit</span>(<span class="code-str">"feat: 修 bug"</span>)</div>
+        <div class="code-line trailer">Co-authored-by: <span class="code-ai">Copilot</span> <span class="code-red">← 自动加上</span></div>
+        <div class="code-line red-line">手写 → 被算成 AI <span class="code-x">✗</span></div>
+      </div>
+      <div class="w-trap-inflate">
+        <div class="inflate-label">VS Code Copilot 机制</div>
+        <div class="inflate-key grad-red">占比虚高</div>
+        <div class="inflate-arrow">↑↑↑</div>
+        <div class="inflate-note">真 AI + 假 AI 混一起</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / why · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+<div class="phase phase-3 why-scene">
+  <!-- phase-3 (24.3-27s): 双卡对比（✗ 虚高 / ✓ 三层真实）+ 更准的算法收尾 -->
+  <div class="region-top">
+    <div class="w-stage-tag"><span class="dot"></span>E10 · 度量实操 · 为什么度量难</div>
+  </div>
+  <div class="region-mid why-resolve-block">
+    <div class="w-resolve-title">要真实度量 · 需要 <span class="grad-gold">更准的算法</span></div>
+    <div class="w-compare-row">
+      <div class="w-compare-card bad">
+        <div class="w-cmp-mark">✗</div>
+        <div class="w-cmp-name">只数 Co-authored-by</div>
+        <div class="w-cmp-result grad-red">占比虚高</div>
+      </div>
+      <div class="w-compare-card good">
+        <div class="w-cmp-mark">✓</div>
+        <div class="w-cmp-name">识别真 AI vs 误标</div>
+        <div class="w-cmp-result grad-green">真实度量</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E10 / why · ai-metrics 度量实操 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

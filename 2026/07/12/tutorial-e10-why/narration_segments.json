@@ -1,0 +1,19 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 50,
+    "emotion": "问题剖析——为什么度量难 + Co-authored-by 定义 + Copilot 自动加 trailer 大坑 + 占比虚高 + 更准算法收尾",
+    "text": "先说为什么度量难。Co-authored-by 是 commit message 里标记 AI 工具的署名行，AI 写的代码会带上。但只数它不行——VS Code Copilot 有个机制，对你手写的代码也自动加 trailer，于是手写代码被算成 AI，占比虚高。要真实度量，必须识别哪些 Co-authored-by 是真 AI 写的，哪些是误标。这就需要更准的算法。",
+    "narration": "先说为什么度量难。Co-authored-by 是 commit message 里标记 AI 工具的署名行，AI 写的代码会带上。但只数它不行——VS Code Copilot 有个机制，对你手写的代码也自动加 trailer，于是手写代码被算成 AI，占比虚高。要真实度量，必须识别哪些 Co-authored-by 是真 AI 写的，哪些是误标。这就需要更准的算法。",
+    "hook_anchors": ["为什么度量难", "Co-authored-by 是 commit message 里标记 AI 工具的署名行", "AI 写的代码会带上", "只数它不行", "VS Code Copilot 有个机制", "对你手写的代码也自动加 trailer", "手写代码被算成 AI", "占比虚高", "必须识别哪些 Co-authored-by 是真 AI 写的", "哪些是误标", "需要更准的算法"],
+    "visual_type": "tutorial_why",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "大字提问「为什么度量难」+ Co-authored-by 定义卡（commit message 署名行 + AI 写的代码会带上）", "duration_share": 0.24, "narration_anchor": {"start_sentence": 0, "end_sentence": 1}},
+      {"phase": 2, "start_offset": 12, "focus": "Copilot 自动加 trailer 大坑示意（commit trailer 代码块 + 手写代码被算 AI 红✗）+ 占比虚高警示", "duration_share": 0.32, "narration_anchor": {"start_sentence": 2, "end_sentence": 3}},
+      {"phase": 3, "start_offset": 28, "focus": "双卡对比（✗ 只数 Co-authored-by 虚高 / ✓ 三层识别真实）+ 必须识别真 AI vs 误标 → 更准的算法收尾", "duration_share": 0.44, "narration_anchor": {"start_sentence": 4, "end_sentence": 5}}
+    ],
+    "bg_component": "diamond_lattice"
+  }
+]

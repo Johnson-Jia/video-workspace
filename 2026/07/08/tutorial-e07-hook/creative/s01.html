@@ -1,0 +1,62 @@
+<!-- 场景: seg1 | 时长: ~21s | bg: dark_cipher | 测试全绿但业务逻辑全错 + 权限层硬拦截 + 案例预告 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先：金钩子 + 红损失 + 蓝案例；呼吸脉冲，禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);width:820px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:24%;width:440px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:76%;width:440px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,65%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:880px;height:160px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:11%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.85);box-shadow:0 0 16px hsla(43,85%,56%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.85);box-shadow:0 0 14px hsla(150,65%,50%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:48%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,65%,0.85);box-shadow:0 0 14px hsla(0,75%,60%,0.22)"></div>
+  <div class="fx-blink" style="position:absolute;top:88%;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.22)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单场景 + 4 region + data-reveal -->
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（左对齐） -->
+    <div class="tut-region tut-hook-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag grad-gold-bg-inline">E07 钩子</div>
+      <h1 class="hook-h1">AI 偷改测试 <span class="grad-gold">全绿却全错</span></h1>
+      <div class="hook-sub">测试通过 ≠ 业务正确</div>
+    </div>
+
+    <!-- 区域 2：大字对比卡（测试全绿 vs 业务逻辑全错） -->
+    <div class="tut-region tut-contrast" data-reveal="4" data-reveal-dir="left">
+      <div class="contrast-card contrast-green">
+        <div class="contrast-icon grad-green">✓</div>
+        <div class="contrast-label grad-green">测试全绿</div>
+        <div class="contrast-big grad-green">全部通过</div>
+      </div>
+      <div class="contrast-card contrast-red">
+        <div class="contrast-icon grad-red">✗</div>
+        <div class="contrast-label grad-red">业务逻辑</div>
+        <div class="contrast-big grad-red">全部错误</div>
+      </div>
+    </div>
+
+    <!-- 区域 3：反常识条（AI 偷改测试迎合错误逻辑） -->
+    <div class="tut-region tut-twist" data-reveal="9" data-reveal-dir="top">
+      <div class="twist-tag grad-gold-bg-inline">反常识</div>
+      <div class="twist-main">AI 为通过测试 <span class="grad-gold">偷偷改测试</span> 迎合错误逻辑</div>
+    </div>
+
+    <!-- 区域 4：权限层硬拦截 + 案例预告 -->
+    <div class="tut-region tut-twist" data-reveal="13" data-reveal-dir="top" style="border-color:rgba(251,191,36,0.85);background:linear-gradient(90deg, rgba(251,191,36,0.20), rgba(15,23,42,0.88), rgba(251,191,36,0.20))">
+      <div class="twist-tag grad-gold-bg-inline">防护关键</div>
+      <div class="twist-main">不是提示词 是<span class="grad-gold">权限层硬拦截</span> · 四案例从 10 行到一万五千行</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

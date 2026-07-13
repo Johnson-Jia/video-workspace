@@ -1,0 +1,166 @@
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-gold: #FBBF24;
+  --tut-green: #34D399;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.si-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.si-pl-main { width: 100%; display: flex; justify-content: stretch; }
+.si-pl-closer { width: 100%; display: flex; justify-content: flex-start; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.si-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.si-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.si-h1 { font-family: 'Inter'; font-size: 88px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.si-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 mini 循环 —— */
+.si-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.si-loop-mini { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.si-lm-node {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800;
+  color: var(--tut-blue-white);
+  padding: 8px 18px; border-radius: 10px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(15,23,42,0.72));
+  border: 2px solid rgba(96,165,250,0.45);
+}
+.si-lm-1 { border-color: rgba(96,165,250,0.65); }
+.si-lm-2 { border-color: rgba(167,139,250,0.65); }
+.si-lm-3 { border-color: rgba(251,191,36,0.65); box-shadow: 0 0 22px rgba(251,191,36,0.20); }
+.si-lm-4 { border-color: rgba(52,211,153,0.65); }
+.si-lm-arrow { font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; color: rgba(251,191,36,0.80); }
+
+/* —— phase-2 主行：循环大图 + 侧栏 —— */
+.si-main-row {
+  width: 100%;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px;
+  align-items: stretch;
+}
+
+/* —— 循环大图 —— */
+.si-loop-big {
+  position: relative;
+  width: 100%; height: 560px;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at center, rgba(251,191,36,0.06) 0%, transparent 70%);
+  border: 2px solid rgba(251,191,36,0.25);
+}
+.si-center {
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 20px 28px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(251,191,36,0.16), rgba(15,23,42,0.92));
+  border: 2.5px solid rgba(251,191,36,0.70);
+  box-shadow: 0 0 36px rgba(251,191,36,0.22);
+  text-align: center;
+}
+.si-center-icon { font-size: 56px; line-height: 1; }
+.si-center-name { font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; letter-spacing: 0.02em; }
+.si-center-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); }
+
+.si-orbit {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.78));
+  border: 2.5px solid;
+  min-width: 140px;
+}
+.si-orbit-1 { top: 6%; left: 50%; transform: translateX(-50%); border-color: rgba(96,165,250,0.70); box-shadow: 0 0 22px rgba(96,165,250,0.20); }
+.si-orbit-2 { top: 50%; right: 4%; transform: translateY(-50%); border-color: rgba(167,139,250,0.70); box-shadow: 0 0 22px rgba(167,139,250,0.20); }
+.si-orbit-3 { bottom: 6%; left: 50%; transform: translateX(-50%); border-color: rgba(251,191,36,0.75); box-shadow: 0 0 26px rgba(251,191,36,0.24); }
+.si-orbit-4 { top: 50%; left: 4%; transform: translateY(-50%); border-color: rgba(52,211,153,0.70); box-shadow: 0 0 22px rgba(52,211,153,0.20); }
+.si-orb-icon { font-size: 38px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+.si-orb-name { font-family: 'Inter'; font-size: 34px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+.si-loop-mark {
+  position: absolute;
+  font-family: 'JetBrains Mono'; font-size: 36px; font-weight: 900;
+  color: rgba(251,191,36,0.75);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.si-loop-mark-1 { top: 32%; right: 28%; }
+.si-loop-mark-2 { bottom: 32%; right: 28%; }
+.si-loop-mark-3 { bottom: 32%; left: 28%; }
+.si-loop-mark-4 { top: 32%; left: 28%; }
+
+/* —— 侧栏：柱状 + 书厚对比 —— */
+.si-side {
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.90), rgba(15,23,42,0.78));
+  border: 2px solid rgba(96,165,250,0.40);
+}
+.si-side-title { font-family: 'Inter'; font-size: 36px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.si-bars { display: flex; align-items: flex-end; gap: 16px; height: 240px; padding: 0 8px; }
+.si-bar { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+.si-bar-fill {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, rgba(96,165,250,0.85), rgba(59,130,246,0.55));
+  border: 1.5px solid rgba(96,165,250,0.65);
+}
+.si-bar-1 .si-bar-fill { height: 25%; }
+.si-bar-2 .si-bar-fill { height: 50%; }
+.si-bar-3 .si-bar-fill { height: 75%; background: linear-gradient(180deg, rgba(167,139,250,0.85), rgba(139,92,246,0.55)); border-color: rgba(167,139,250,0.65); }
+.si-bar-4 .si-bar-fill { height: 95%; background: linear-gradient(180deg, rgba(251,191,36,0.90), rgba(245,158,11,0.55)); border-color: rgba(251,191,36,0.70); box-shadow: 0 0 18px rgba(251,191,36,0.30); }
+.si-bar-label { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: var(--tut-blue-white); }
+
+.si-book-compare { display: flex; align-items: center; gap: 14px; justify-content: center; }
+.si-book { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.si-book-spine {
+  width: 24px; height: 80px;
+  background: linear-gradient(180deg, rgba(96,165,250,0.70), rgba(59,130,246,0.50));
+  border-radius: 4px;
+  border: 1px solid rgba(96,165,250,0.55);
+}
+.si-book-spine-thick {
+  width: 56px; height: 110px;
+  background: linear-gradient(180deg, rgba(251,191,36,0.80), rgba(245,158,11,0.55));
+  border-color: rgba(251,191,36,0.70);
+  box-shadow: 0 0 18px rgba(251,191,36,0.25);
+}
+.si-book-label { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800; color: var(--tut-blue-white); }
+.si-book-arrow { font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; color: rgba(251,191,36,0.80); }
+
+/* —— phase-3 升华金句 —— */
+.si-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; justify-content: center; }
+.si-closer-h1 { font-family: 'Inter'; font-size: 76px; font-weight: 900; line-height: 1.05; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.si-closer-sub { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-blue-white); }

@@ -1,0 +1,72 @@
+<!-- 场景: psmux | 时长: 5.23s | bg: diamond_lattice | 卡2: psmux 一个终端驱动多 Agent 并行（终端辐射多端） -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <div class="fx-aura" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1180px;height:560px;border-radius:50%;background:radial-gradient(ellipse,hsla(260,85%,70%,0.18) 0%,transparent 70%);filter:blur(75px);opacity:0.75"></div>
+  <div class="fx-aura" style="position:absolute;top:22%;left:78%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse,hsla(260,85%,70%,0.14) 0%,transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:78%;left:18%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse,hsla(260,85%,70%,0.12) 0%,transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:14%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:80%;left:88%;width:9px;height:9px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+  <div class="fx-pulse-ring" style="top:calc(50% - 110px);left:calc(50% - 110px);width:220px;height:220px;border:2px solid rgba(167,139,250,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="ps-grid">
+    <!-- 顶部：标签 + 标题 -->
+    <div class="ps-header" data-reveal="0" data-reveal-dir="fade">
+      <div class="ps-tag-row">
+        <span class="ps-skill-tag">终端复用器</span>
+      </div>
+      <div class="ps-subtitle">玩法二</div>
+      <h1 class="ps-title">psmux · <span class="ps-title-grad">一个终端驱动多端并行</span></h1>
+    </div>
+
+    <!-- 终端辐射多端可视化 -->
+    <div class="ps-card" data-reveal="1" data-reveal-dir="bottom">
+      <div class="ps-left">
+        <div class="ps-badge">
+          <div class="ps-badge-icon">PS</div>
+          <div class="ps-badge-name">psmux</div>
+        </div>
+        <div class="ps-term">
+          <div class="ps-term-bar"><span class="ps-dot ps-dot-r"></span><span class="ps-dot ps-dot-y"></span><span class="ps-dot ps-dot-g"></span><span class="ps-term-title">一个终端</span></div>
+          <div class="ps-term-body">$ psmux<br><span class="ps-cursor">▋</span></div>
+        </div>
+        <div class="ps-pill-row">
+          <span class="ps-pill">统一调度入口</span>
+        </div>
+      </div>
+
+      <!-- 辐射连线区 -->
+      <div class="ps-ends">
+        <div class="ps-conn ps-conn-1"></div>
+        <div class="ps-conn ps-conn-2"></div>
+        <div class="ps-conn ps-conn-3"></div>
+        <div class="ps-conn ps-conn-4"></div>
+        <div class="ps-ends-grid">
+          <div class="ps-end"><div class="ps-end-icon">📱</div><div class="ps-end-name">小程序</div><div class="ps-end-sub">前端</div></div>
+          <div class="ps-end"><div class="ps-end-icon">🌐</div><div class="ps-end-name">Web</div><div class="ps-end-sub">前端</div></div>
+          <div class="ps-end"><div class="ps-end-icon">📲</div><div class="ps-end-name">App</div><div class="ps-end-sub">客户端</div></div>
+          <div class="ps-end"><div class="ps-end-icon">⚙️</div><div class="ps-end-name">后端</div><div class="ps-end-sub">服务端</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部要点 -->
+    <div class="ps-foot" data-reveal="2" data-reveal-dir="bottom">
+      <span class="ps-foot-item"><span class="ps-foot-dot"></span>一个终端 · 统一调度</span>
+      <span class="ps-foot-sep">·</span>
+      <span class="ps-foot-item"><span class="ps-foot-dot"></span>多 Agent 同时在线</span>
+      <span class="ps-foot-sep">·</span>
+      <span class="ps-foot-item"><span class="ps-foot-dot"></span>前后端并行推进</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

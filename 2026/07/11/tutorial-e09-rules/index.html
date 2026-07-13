@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  --tut-blue: #3B82F6;
+  --tut-purple: #A78BFA;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial E09 rules — 三条红线独立卡 + 终端代码 + AI加载
+ * bg: scan_grid · 3红线卡横排(终端代码块) + AI自动加载流程 + 强制/宽容
+ * 布局：顶/中/底三带 space-between 撑满 1080
+ * ============================================ */
+.tut-scene {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  padding: 60px 120px 60px;
+}
+.tut-grid {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: stretch;
+  gap: 14px;
+}
+.tut-region, [data-reveal] { opacity: 0; will-change: opacity, transform; }
+[data-reveal="0"] { opacity: 1; }
+.rl-pl-title { text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.rl-pl-cards { width: 100%; display: flex; justify-content: stretch; }
+.rl-pl-autoload { width: 100%; display: flex; justify-content: stretch; }
+
+/* —— 渐变文字 —— */
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#3B82F6 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#10B981 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-gold-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#FBBF24 0%,#FCD34D 100%);
+  color: #1E293B; -webkit-text-fill-color: #1E293B;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+.grad-blue-bg-inline {
+  display: inline-block;
+  background-image: linear-gradient(92deg,#60A5FA 0%,#93C5FD 100%);
+  color: #0F172A; -webkit-text-fill-color: #0F172A;
+  padding: 5px 18px; border-radius: 8px;
+  font-family: 'JetBrains Mono';
+}
+
+/* —— 标题块 —— */
+.rl-title-block { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rl-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.08em; }
+.rl-h1 { font-family: 'Inter'; font-size: 92px; font-weight: 900; line-height: 1.04; text-shadow: 0 2px 6px rgba(30,41,59,0.08); margin: 0; }
+.rl-sub { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: var(--tut-blue-white); letter-spacing: 0.04em; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— phase-1 预告 —— */
+.rl-intro { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 24px; }
+.rl-preview { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: nowrap; }
+.rl-prev-num { font-family: 'JetBrains Mono'; font-size: 56px; font-weight: 900; line-height: 1; }
+.rl-prev-num-1 { color: #FCA5A5; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-num-2 { color: #F87171; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-num-3 { color: #FCA5A5; text-shadow: 0 2px 6px rgba(30,41,59,0.32); }
+.rl-prev-name { font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 800; color: var(--tut-blue-white); }
+.rl-prev-sep { font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 800; color: rgba(251,191,36,0.65); }
+
+/* —— phase-2 三红线卡横排 —— */
+.rl-cards { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rl-card {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(15,23,42,0.80));
+  border: 2.5px solid;
+}
+.rl-card-1 { border-color: rgba(252,165,165,0.70); box-shadow: 0 0 24px rgba(252,165,165,0.20); }
+.rl-card-2 { border-color: rgba(248,113,113,0.70); box-shadow: 0 0 24px rgba(248,113,113,0.20); }
+.rl-card-3 { border-color: rgba(252,165,165,0.70); box-shadow: 0 0 24px rgba(252,165,165,0.20); }
+.rl-card-head { display: flex; align-items: center; gap: 12px; }
+.rl-card-num { font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 900; color: #FCA5A5; line-height: 1; }
+.rl-card-title { font-family: 'Inter'; font-size: 38px; font-weight: 900; color: var(--tut-blue-white); text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* —— 终端代码块 —— */
+.rl-terminal {
+  background: #0D1117;
+  border-radius: 8px;
+  border: 1.5px solid rgba(248,113,113,0.40);
+  overflow: hidden;
+}
+.rl-term-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  background: rgba(248,113,113,0.12);
+  border-bottom: 1px solid rgba(248,113,113,0.25);
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #F87171; }
+.dot-yellow { background: #FBBF24; }
+.dot-green { background: #34D399; }
+.rl-term-title { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.65); margin-left: 8px; }
+.rl-code {
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: rgba(224,231,255,0.92);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.code-kw { color: #60A5FA; }
+.code-str { color: #34D399; }
+.code-comment { color: rgba(148,163,184,0.70); font-style: italic; }
+.rl-card-note { display: flex; align-items: center; gap: 10px; }
+.rl-note-label {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: #FCA5A5;
+  padding: 2px 10px; border-radius: 6px;
+  background: rgba(248,113,113,0.14);
+  border: 1px solid rgba(248,113,113,0.32);
+}
+.rl-card-note { font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700; color: rgba(224,231,255,0.82); }
+
+/* —— AI 自动加载流程 —— */
+.rl-autoload {
+  width: 100%;
+  border-radius: 14px; padding: 16px 28px;
+  border: 2.5px solid rgba(96,165,250,0.60);
+  background: linear-gradient(95deg, rgba(96,165,250,0.10), rgba(15,23,42,0.92));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+}
+.rl-al-tag { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; letter-spacing: 0.06em; }
+.rl-al-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.rl-al-node {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800;
+  color: rgba(224,231,255,0.88);
+  padding: 4px 14px; border-radius: 6px;
+  background: rgba(96,165,250,0.12);
+  border: 1px solid rgba(96,165,250,0.32);
+}
+.rl-al-end {
+  background: rgba(52,211,153,0.18);
+  border-color: rgba(52,211,153,0.50);
+  color: #6EE7B7;
+}
+.rl-al-arrow { font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 800; color: rgba(96,165,250,0.80); }
+.rl-al-strict { display: flex; align-items: center; gap: 14px; }
+.rl-strict-badge {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 800;
+  padding: 4px 16px; border-radius: 8px;
+}
+.rl-strict-new {
+  color: #34D399;
+  background: rgba(52,211,153,0.16);
+  border: 1.5px solid rgba(52,211,153,0.50);
+}
+.rl-strict-old {
+  color: #60A5FA;
+  background: rgba(96,165,250,0.14);
+  border: 1.5px solid rgba(96,165,250,0.45);
+}
+
+/* —— phase-3 收尾 —— */
+.rl-closer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; height: 100%; justify-content: center; }
+.rl-closer-h1 { font-family: 'Inter'; font-size: 80px; font-weight: 900; line-height: 1.05; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.rl-closer-sub { font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800; color: var(--tut-blue-white); }
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes scanLine2 { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:0.4} 50%{opacity:0.7} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes gridNodeBlink { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
+@keyframes cornerPulse { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+@keyframes dataFlow { 0%{transform:translateX(-100%);opacity:0} 50%{opacity:0.7} 100%{transform:translateX(100%);opacity:0} }
+@keyframes tickFade { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="23.30" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.38" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="23.30">
+<!-- 场景: seg1 | 时长: 23.3s | bg: scan_grid | 三条红线：标题→3红线独立卡横排(终端代码+违规/后果)→AI加载流程+强制/宽容 -->
+<div class="layer-bg" data-bg-types="glow,gradient,grid,particles,scan">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.1);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),rgba(0,255,200,0.6),rgba(0,229,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>| 00</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(200,0,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx 冷色+警示红光晕（禁划过类） -->
+  <div class="fx-aura" style="position:absolute;top:8%;left:50%;transform:translateX(-50%);width:1100px;height:150px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,80%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:20%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;left:50%;transform:translateX(-50%);width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,75%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:48%;right:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,78%,60%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:86%;left:50%;transform:translateX(-50%);width:1100px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,65%,55%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- 红线脉冲锚点（3卡对齐） -->
+  <div class="fx-blink" style="position:absolute;top:50%;left:18%;width:12px;height:12px;border-radius:50%;background:hsla(0,80%,62%,0.9);box-shadow:0 0 16px hsla(0,75%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,78%,60%,0.9);box-shadow:0 0 16px hsla(0,73%,54%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:18%;width:12px;height:12px;border-radius:50%;background:hsla(0,82%,62%,0.9);box-shadow:0 0 16px hsla(0,77%,56%,0.5)"></div>
+  <div class="fx-particle" style="position:absolute;top:18%;left:86%;width:9px;height:9px;background:rgba(252,165,165,0.85);box-shadow:0 0 12px rgba(252,165,165,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:82%;left:14%;width:8px;height:8px;background:rgba(96,165,250,0.8);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+
+<!-- 单 tut-scene：标题/三条红线卡/AI自动加载收尾 同屏 reveal，不切 phase -->
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <!-- 区域 1：标题（reveal 0，fade）—— 顶部锚点 -->
+    <div class="tut-region rl-pl-title" data-reveal="0" data-reveal-dir="fade">
+      <div class="rl-tag grad-gold-bg-inline">E09 · 三条红线</div>
+      <h1 class="rl-h1">规范资产化 · <span class="grad-gold">三条红线</span></h1>
+      <div class="rl-sub">写进 <span class="grad-blue">rules</span> 目录 · AI 自动加载</div>
+    </div>
+
+    <!-- 区域 2：三条红线卡横排（reveal 3，bottom）—— 中部核心 -->
+    <div class="tut-region rl-pl-cards" data-reveal="3" data-reveal-dir="bottom">
+      <div class="rl-cards">
+        <!-- 红线1：租户隔离 -->
+        <div class="rl-card rl-card-1">
+          <div class="rl-card-head">
+            <div class="rl-card-num">①</div>
+            <div class="rl-card-title">租户隔离</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">sql-rule.md</span></div>
+            <div class="rl-code">SELECT * FROM t_order<br>WHERE <span class="code-kw">corp_id</span> = ?<br><span class="code-comment">// 每表必带 corp_id</span></div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>所有 SQL</div>
+        </div>
+        <!-- 红线2：MQ finally 清理 -->
+        <div class="rl-card rl-card-2">
+          <div class="rl-card-head">
+            <div class="rl-card-num">②</div>
+            <div class="rl-card-title">finally 清理</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">mq-rule.md</span></div>
+            <div class="rl-code"><span class="code-kw">try</span> { send(msg); }<br><span class="code-kw">finally</span> {<br>  Context.clear();<br>}</div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>MQ / 定时任务</div>
+        </div>
+        <!-- 红线3：事务管理器 -->
+        <div class="rl-card rl-card-3">
+          <div class="rl-card-head">
+            <div class="rl-card-num">③</div>
+            <div class="rl-card-title">事务管理器</div>
+          </div>
+          <div class="rl-terminal">
+            <div class="rl-term-bar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="rl-term-title">tx-rule.md</span></div>
+            <div class="rl-code">@Transactional<br>(<span class="code-str">"orderTxManager"</span>)<br><span class="code-comment">// 必须指定管理器</span></div>
+          </div>
+          <div class="rl-card-note"><span class="rl-note-label">触发</span>所有事务</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 3：AI 自动加载流程 + 强制/宽容收尾（reveal 14，left）—— 底部 -->
+    <div class="tut-region rl-pl-autoload" data-reveal="14" data-reveal-dir="left">
+      <div class="rl-autoload">
+        <div class="rl-al-tag grad-blue-bg-inline">AI 自动加载</div>
+        <div class="rl-al-flow">
+          <div class="rl-al-node">rules/</div>
+          <div class="rl-al-arrow">→</div>
+          <div class="rl-al-node">AI 启动扫描</div>
+          <div class="rl-al-arrow">→</div>
+          <div class="rl-al-node rl-al-end">自动遵守</div>
+        </div>
+        <div class="rl-al-strict">
+          <span class="rl-strict-badge rl-strict-new">新代码 · 强制</span>
+          <span class="rl-strict-badge rl-strict-old">旧代码 · 宽容</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="layer-cinema">
+  <div class="cinema-vignette" style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.32) 100%);pointer-events:none"></div>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.to('#s01 [data-reveal="0"]', {opacity:1,duration:0.5}, 0.00);
+tl.to('#s01 [data-reveal="3"]', {opacity:1,duration:0.5}, 3.00);
+tl.fromTo('#s01 [data-reveal="14"]', {opacity:0,x:-40}, {opacity:1,x:0,duration:0.5}, 14.00);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:23.30,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

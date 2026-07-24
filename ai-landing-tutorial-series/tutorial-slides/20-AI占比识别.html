@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>20-AI占比识别 · 阶段5</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-top:6px solid #2563eb;border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-top-color:#16a34a;}
+.card:nth-child(3){border-top-color:#f59e0b;}
+.card .layer{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#94a3b8;margin-bottom:8px;}
+.card .ctitle{font-size:27px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card .cdesc{font-size:19px;color:#475569;line-height:1.6;flex:1;}
+.card .ckey{font-size:17px;font-weight:600;color:#2563eb;margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;}
+.card:nth-child(2) .ckey{color:#16a34a;}
+.card:nth-child(3) .ckey{color:#f59e0b;}
+.formularow{background:#f0f7ff;border:1px solid #bcd9ff;border-radius:12px;padding:18px 28px;margin-bottom:24px;font-size:19px;color:#1e3a8a;line-height:1.6;display:flex;gap:24px;align-items:center;}
+.formularow strong{color:#1057cb;}
+.formularow .fitem{flex:1;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段5 · 度量算法</div>
+    <div class="num">AI 战略转型方法论 · <strong>20/30</strong></div>
+  </div>
+  <h1>三层识别,<span class="hl">防伪造</span></h1>
+  <div class="subtitle">自研 Go 工具,通过 Git 提交元数据识别 AI 代码——最可靠信号 + 风格学第二道防线 + 注册表</div>
+  <div class="quote">最可靠信号是 <span class="em">Co-authored-by trailer</span>(AI 工具默认埋点),再加风格学第二道防线防伪造——应对 VS Code Copilot 误标 bug。</div>
+  <div class="cards">
+    <div class="card"><div class="layer">第 1 层</div><div class="ctitle">Co-authored-by 检测</div><div class="cdesc">解析 commit message 的 trailer,按工具名优先级匹配(claude/copilot/cursor/chatgpt/codeium/gemini),命中即置信度 1.0</div><div class="ckey">→ AI 工具默认埋点,最可靠</div></div>
+    <div class="card"><div class="layer">第 2 层</div><div class="ctitle">风格学反伪造</div><div class="cdesc">作者历史 n-gram TF-IDF 余弦相似度复核:越像本人手写 → AI 署名可信度越低(1.0 - s,下限 0.1)</div><div class="ckey">→ 防 VS Code Copilot 误标</div></div>
+    <div class="card"><div class="layer">第 3 层</div><div class="ctitle">双口径统计</div><div class="cdesc">提交占比 + 行数占比(后者更真实);支持按作者/模块/周下钻趋势</div><div class="ckey">→ 四维度:code/quality/cost/agent</div></div>
+  </div>
+  <div class="formularow">
+    <div class="fitem"><strong>事前估算</strong>:AI 占比 =(AI 生成核心 + AI 辅助优化)÷ 总代码量。简单 CRUD ~90% / 复杂业务 ~70% / 平均约 75%</div>
+    <div class="fitem"><strong>事后统计</strong>:git 元数据真实占比(实测 76.6%,落在估算区间内)——估算给方向,统计给真相</div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage5 §3「效果度量:AI 代码占比」(coauthored.go + 风格学 ConfidenceFromSimilarity)+ §3 事前估算法表。四维度升级见 ai-metrics demo</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!-- 场景: scene-1 | 时长: 26.28s | bg: diamond_lattice | 实跑演示·终端：装依赖准备 + 跑用例通过2失败0 + 第四条跳过零AI确定性收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝命令 + 绿通过 + 灰跳过 + 金汇总 + 青确定性；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:32%;left:50%;transform:translateX(-50%);width:900px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.10) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:60%;left:30%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.10) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:60%;left:70%;width:480px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.10) 0%, transparent 65%);filter:blur(55px);opacity:0.50"></div>
+  <div class="fx-aura" style="position:absolute;top:40%;left:50%;transform:translateX(-50%);width:700px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(188,90%,52%,0.10) 0%, transparent 65%);filter:blur(55px);opacity:0.50"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:30%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:62%;left:30%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,52%,0.9);box-shadow:0 0 14px hsla(150,65%,48%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:62%;left:70%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.9);box-shadow:0 0 14px hsla(43,85%,52%,0.30)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:24%;left:22%;width:8px;height:8px;background:rgba(96,165,250,0.80);box-shadow:0 0 12px rgba(96,165,250,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:78%;width:8px;height:8px;background:rgba(52,211,153,0.80);box-shadow:0 0 12px rgba(52,211,153,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:34%;width:8px;height:8px;background:rgba(34,211,238,0.80);box-shadow:0 0 12px rgba(34,211,238,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:66%;width:8px;height:8px;background:rgba(251,191,36,0.80);box-shadow:0 0 12px rgba(251,191,36,0.55)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 rd-scene">
+  <!-- phase-1 (0-8.76s): 开箱跑 装依赖装浏览器内核准备 -->
+  <div class="region-top">
+    <div class="rd-stage-tag"><span class="dot"></span>E13 · 实跑演示 · 装依赖准备</div>
+  </div>
+  <div class="region-mid">
+    <div class="rd-prep">
+      <div class="rd-prep-title">开箱跑 · <span class="grad-blue">装依赖</span> 装浏览器内核</div>
+      <div class="rd-terminal rd-term-blue">
+        <div class="rd-term-head">
+          <span class="rd-term-dot r"></span><span class="rd-term-dot y"></span><span class="rd-term-dot g"></span>
+          <span class="rd-term-title blue">终端 · ai-test-frame</span>
+        </div>
+        <div class="rd-term-line"><span class="prompt">$</span> <span class="cmd">cd</span> demos/ai-test-frame</div>
+        <div class="rd-term-line"><span class="prompt">$</span> <span class="cmd">pip install</span> -r requirements.txt</div>
+        <div class="rd-term-line"><span class="prompt">$</span> <span class="cmd">playwright install</span> chromium <span class="cm">  # 装浏览器内核</span></div>
+        <div class="rd-term-line"><span class="cm">  ↓ 依赖就绪 · 开箱即跑</span></div>
+      </div>
+      <div class="rd-prep-note">装依赖 · 装浏览器内核 · 开箱跑通</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 实跑演示准备 —</div>
+  </div>
+</div>
+<div class="phase phase-2 rd-scene">
+  <!-- phase-2 (8.76-17.52s): python main.py 跑 Playwright 打开商品页 新增商品验证 通过2失败0 -->
+  <div class="region-top">
+    <div class="rd-stage-tag"><span class="dot"></span>E13 · 跑用例 · 通过两个失败零个</div>
+  </div>
+  <div class="region-mid">
+    <div class="rd-run">
+      <div class="rd-run-title">跑 main · <span class="grad-green">通过两个</span> 失败零个</div>
+      <div class="rd-run-flow">
+        <div class="rd-flow-node page">
+          <div class="rd-flow-label">打开商品页</div>
+          <div class="rd-flow-sub">Playwright</div>
+        </div>
+        <div class="rd-flow-arrow">→</div>
+        <div class="rd-flow-node add">
+          <div class="rd-flow-label">新增商品</div>
+          <div class="rd-flow-sub">按用例跑</div>
+        </div>
+        <div class="rd-flow-arrow">→</div>
+        <div class="rd-flow-node assert">
+          <div class="rd-flow-label">验证列表</div>
+          <div class="rd-flow-sub">软断言</div>
+        </div>
+      </div>
+      <div class="rd-terminal rd-term-green">
+        <div class="rd-term-head">
+          <span class="rd-term-dot r"></span><span class="rd-term-dot y"></span><span class="rd-term-dot g"></span>
+          <span class="rd-term-title green">终端 · 断言汇总</span>
+        </div>
+        <div class="rd-term-line"><span class="prompt">$</span> <span class="cmd">python</span> main.py</div>
+        <div class="rd-term-line"><span class="pass">[通过]</span> 新增商品验证列表出现</div>
+        <div class="rd-term-line"><span class="pass">[通过]</span> 删除商品验证列表消失</div>
+        <div class="rd-term-line"><span class="fail">[失败]</span> <span class="cm">(0 个)</span></div>
+        <div class="rd-term-line"><span class="ok">汇总: 通过 2 失败 0</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 跑用例通过2失败0 —</div>
+  </div>
+</div>
+<div class="phase phase-3 rd-scene">
+  <!-- phase-3 (17.52-26.28s): 第四条用例开关关闭自动跳过 运行期零AI确定性执行 收尾 -->
+  <div class="region-top">
+    <div class="rd-stage-tag"><span class="dot"></span>E13 · 第四条跳过 · 运行期零 AI</div>
+  </div>
+  <div class="region-mid">
+    <div class="rd-finale">
+      <div class="rd-finale-title">第四条跳过 · <span class="grad-cyan">运行期零 AI</span></div>
+      <div class="rd-terminal rd-term-cyan">
+        <div class="rd-term-head">
+          <span class="rd-term-dot r"></span><span class="rd-term-dot y"></span><span class="rd-term-dot g"></span>
+          <span class="rd-term-title cyan">终端 · 第四条用例</span>
+        </div>
+        <div class="rd-term-line"><span class="skip">[跳过]</span> 第四条用例 <span class="cm">enable=false</span></div>
+        <div class="rd-term-line"><span class="cm">  开关关闭 · 自动跳过</span></div>
+        <div class="rd-term-line"><span class="kw">运行期</span> <span class="ok">零 AI</span> <span class="cm">· 确定性执行</span></div>
+      </div>
+      <div class="rd-finale-sub">整个流程 · 确定性执行 · 没有 AI 插手</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 零AI确定性收尾 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

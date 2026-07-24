@@ -1,0 +1,201 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --accent-gold: #f5c244;
+  --accent-cyan: #4dd6e8;
+  --accent-emerald: #34d399;
+  --accent-violet: #a78bfa;
+  --accent-amber: #fbbf24;
+  --text: #f5f5f5;
+  --text2: rgba(245,245,245,0.62);
+  --text3: rgba(245,245,245,0.42);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 自定义组件层（assemble 不注入，须手补）
+ * ============================================ */
+
+/* ── 渐变文字类（background-image 独立属性，禁 background 简写）
+   两端亮色高饱和，禁白端点 / 禁暗端；text-shadow 同色系 alpha≤0.32 ── */
+.grad-gold{background-image:linear-gradient(120deg,#fde68a 0%,#f5c244 50%,#f9a825 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(245,194,68,0.45),0 4px 14px rgba(245,194,68,0.22);}
+.grad-cyan{background-image:linear-gradient(120deg,#a5f3fc 0%,#4dd6e8 50%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(77,214,232,0.45),0 4px 14px rgba(77,214,232,0.22);}
+.grad-emerald{background-image:linear-gradient(120deg,#a7f3d0 0%,#34d399 50%,#10b981 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(52,211,153,0.45),0 4px 14px rgba(52,211,153,0.22);}
+.grad-violet{background-image:linear-gradient(120deg,#ddd6fe 0%,#a78bfa 50%,#8b5cf6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(167,139,250,0.45),0 4px 14px rgba(167,139,250,0.22);}
+.grad-amber{background-image:linear-gradient(120deg,#fde68a 0%,#fbbf24 50%,#f59e0b 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(251,191,36,0.45),0 4px 14px rgba(245,158,11,0.22);}
+.grad-teal{background-image:linear-gradient(120deg,#99f6e4 0%,#2dd4bf 50%,#14b8a6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:0 3px 14px rgba(45,212,191,0.45),0 4px 14px rgba(45,212,191,0.22);}
+
+/* 纯色文字 text-shadow（非渐变可用深色） */
+.shadow-deep{text-shadow:0 4px 18px rgba(0,0,0,0.65),0 2px 6px rgba(30,41,59,0.4);}
+
+/* ============================================
+ * ProjectFullCard（assemble 不注入，须手补）
+ * ⛔ position:absolute + inset 安全区，禁 height:100% 撑满 padding-box 溢出
+ * ⛔ pfc-name 独占行 width:100% word-break:break-word（禁 nowrap）
+ * ⛔ 卡片背景 alpha≥0.7 挡 fx 光晕（透明底白字消失）
+ * ============================================ */
+.project-full-card{
+  position:absolute; inset:180px 90px 220px 90px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  z-index:3;
+}
+.pfc-card-bg{
+  position:absolute; inset:-20px -30px; border-radius:28px;
+  background:rgba(13,9,5,0.88);
+  border:1.5px solid rgba(255,255,255,0.10);
+  box-shadow:0 24px 80px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.08);
+  z-index:0;
+}
+.pfc-card-bg.cool-tint{background:rgba(5,12,18,0.88);}
+.pfc-card-bg.violet-tint{background:rgba(10,6,18,0.89);}
+.pfc-card-bg.amber-tint{background:rgba(18,12,4,0.88);}
+.pfc-card-bg.emerald-tint{background:rgba(4,16,12,0.88);}
+
+/* 顶部带：排名 + 类别 + 用途胶囊 + 项目名 */
+.pfc-top{position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;width:100%;}
+.pfc-header-row{display:flex;align-items:baseline;gap:28px;}
+.pfc-rank{font-size:84px;font-weight:900;line-height:0.9;font-family:'JetBrains Mono',monospace;color:#f5c244;text-shadow:0 3px 14px rgba(245,194,68,0.45);}
+.pfc-rank.cool{color:#4dd6e8;text-shadow:0 3px 14px rgba(77,214,232,0.45);}
+.pfc-rank.violet{color:#a78bfa;text-shadow:0 3px 14px rgba(167,139,250,0.45);}
+.pfc-rank.emerald{color:#34d399;text-shadow:0 3px 14px rgba(52,211,153,0.45);}
+.pfc-rank.amber{color:#fbbf24;text-shadow:0 3px 14px rgba(251,191,36,0.45);}
+.pfc-category{font-size:32px;font-weight:600;letter-spacing:0.10em;color:rgba(245,245,245,0.7);text-transform:uppercase;}
+/* 用途胶囊：纯色禁 grad clip:text（胶囊+clip:text 文字+边框透明消失）*/
+.pfc-use{font-size:42px;font-weight:800;line-height:1.12;padding:8px 22px;border-radius:12px;background:rgba(0,0,0,0.55);border:1.5px solid rgba(245,194,68,0.45);color:#f5c244;align-self:flex-start;letter-spacing:0.02em;}
+.pfc-use.cool{border-color:rgba(77,214,232,0.5);color:#4dd6e8;}
+.pfc-use.violet{border-color:rgba(167,139,250,0.5);color:#a78bfa;}
+.pfc-use.emerald{border-color:rgba(52,211,153,0.5);color:#34d399;}
+.pfc-use.amber{border-color:rgba(251,191,36,0.5);color:#fbbf24;}
+
+/* 项目名独占行：完整 owner/repo，word-break 长名换行禁 nowrap */
+.pfc-name{width:100%;text-align:center;font-family:'JetBrains Mono',monospace;line-height:1.1;letter-spacing:-0.005em;word-break:break-word;margin-top:4px;}
+.pfc-owner{font-size:32px;font-weight:500;color:rgba(245,245,245,0.5);letter-spacing:0.04em;}
+.pfc-repo{font-size:56px;font-weight:800;color:#f5f5f5;}
+
+/* 中部带：avatar 锚点 + 描述 + 涨星数据 */
+.pfc-mid{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:32px;width:100%;}
+.pfc-avatar-wrap{position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;}
+.pfc-avatar-ring{position:absolute;inset:-16px;border-radius:50%;background:conic-gradient(from 0deg,#f5c244,#4dd6e8,#f5c244);filter:blur(14px);opacity:0.5;}
+.pfc-avatar-ring.cool{background:conic-gradient(from 0deg,#4dd6e8,#a78bfa,#4dd6e8);}
+.pfc-avatar-ring.violet{background:conic-gradient(from 0deg,#a78bfa,#4dd6e8,#a78bfa);}
+.pfc-avatar-ring.emerald{background:conic-gradient(from 0deg,#34d399,#a5f3fc,#34d399);}
+.pfc-avatar-ring.amber{background:conic-gradient(from 0deg,#fbbf24,#f5c244,#fbbf24);}
+.pfc-avatar{position:relative;z-index:1;width:200px;height:200px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.85);box-shadow:0 0 50px rgba(0,0,0,0.5);}
+.pfc-desc{font-size:36px;font-weight:600;line-height:1.35;color:#f5f5f5;text-align:center;max-width:720px;}
+.pfc-star-row{display:flex;align-items:baseline;gap:16px;justify-content:center;}
+.pfc-star-num{font-size:84px;font-weight:900;font-family:'JetBrains Mono',monospace;line-height:1;color:#f5c244;text-shadow:0 3px 16px rgba(245,194,68,0.5);}
+.pfc-star-num.cool{color:#4dd6e8;text-shadow:0 3px 16px rgba(77,214,232,0.5);}
+.pfc-star-num.violet{color:#a78bfa;text-shadow:0 3px 16px rgba(167,139,250,0.5);}
+.pfc-star-num.emerald{color:#34d399;text-shadow:0 3px 16px rgba(52,211,153,0.5);}
+.pfc-star-num.amber{color:#fbbf24;text-shadow:0 3px 16px rgba(251,191,36,0.5);}
+.pfc-star-unit{font-size:36px;font-weight:700;color:rgba(245,245,245,0.6);}
+.pfc-today{font-size:34px;font-weight:700;color:#f5c244;font-family:'JetBrains Mono',monospace;}
+.pfc-today.cool{color:#4dd6e8;}
+.pfc-today.violet{color:#a78bfa;}
+.pfc-today.emerald{color:#34d399;}
+.pfc-today.amber{color:#fbbf24;}
+
+/* 底部带：三词卖点 + 评语 */
+.pfc-bottom{position:relative;z-index:2;display:flex;flex-direction:column;gap:20px;width:100%;}
+.pfc-selling{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+.pfc-sell-item{font-size:32px;font-weight:600;padding:8px 22px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:rgba(245,245,245,0.85);}
+.pfc-commentary{font-size:34px;font-weight:600;line-height:1.4;color:rgba(245,245,245,0.78);text-align:center;font-style:italic;}
+
+/* ============================================
+ * Hook 场景（s01）专用
+ * ⛔ 大字 ≤200px + justify-content:center + white-space:nowrap 防溢出安全区
+ * ============================================ */
+.hook-stage{
+  height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px;
+}
+.hook-topbar{display:flex;align-items:center;gap:18px;}
+.hook-date{font-size:34px;font-weight:600;color:rgba(245,245,245,0.70);letter-spacing:0.10em;font-family:'JetBrains Mono',monospace;}
+.hook-dot{width:8px;height:8px;border-radius:50%;background:rgba(77,214,232,0.7);box-shadow:0 0 12px rgba(77,214,232,0.6);}
+.hook-eyebrow{font-size:32px;font-weight:600;color:rgba(77,214,232,0.85);letter-spacing:0.14em;font-family:'JetBrains Mono',monospace;}
+.hook-numblock{display:flex;flex-direction:column;align-items:center;gap:18px;}
+.hook-label{font-size:40px;font-weight:700;color:#f5c244;letter-spacing:0.10em;text-shadow:0 3px 14px rgba(245,194,68,0.35);}
+.hook-num-row{display:flex;align-items:baseline;justify-content:center;gap:18px;width:100%;white-space:nowrap;}
+.hook-big-num{font-size:180px;font-weight:900;font-family:'JetBrains Mono',monospace;line-height:0.9;letter-spacing:-0.03em;white-space:nowrap;}
+.hook-num-unit{font-size:52px;font-weight:700;color:#f5c244;letter-spacing:0.06em;text-shadow:0 3px 14px rgba(245,194,68,0.4);}
+.hook-tagline{font-size:54px;font-weight:800;color:#f5f5f5;letter-spacing:0.04em;text-shadow:0 3px 14px rgba(30,41,59,0.6);text-align:center;}
+.hook-tagline .accent-gold{color:#f5c244;font-weight:900;}
+.hook-subline{font-size:36px;font-weight:600;color:rgba(245,245,245,0.75);letter-spacing:0.06em;text-align:center;}
+.hook-badge{
+  margin-top:4px; font-size:32px; font-weight:700; letter-spacing:0.06em;
+  padding:10px 26px; border-radius:999px;
+  background:rgba(77,214,232,0.10); border:1px solid rgba(77,214,232,0.40); color:#4dd6e8;
+  font-family:'Noto Sans SC',sans-serif;
+}
+
+/* ============================================
+ * 双卡并排（s05 hallmark + exercises-dataset）
+ * ============================================ */
+.dual-stack{
+  position:absolute; inset:180px 80px 220px 80px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  gap:18px; z-index:3;
+}
+.dual-card{
+  position:relative; flex:1; border-radius:24px; padding:28px 32px;
+  display:flex; flex-direction:column; justify-content:space-between; gap:14px;
+  background:rgba(13,9,5,0.88);
+  border:1.5px solid rgba(255,255,255,0.10);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow:hidden;
+}
+.dual-card.violet{border-color:rgba(167,139,250,0.50);background:rgba(12,8,20,0.90);}
+.dual-card.emerald{border-color:rgba(52,211,153,0.50);background:rgba(4,18,14,0.90);}
+.dual-card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.dual-tag{font-size:32px;font-weight:700;padding:8px 22px;border-radius:999px;letter-spacing:0.04em;}
+.dual-tag.violet{background:rgba(167,139,250,0.16);border:1px solid rgba(167,139,250,0.45);color:#a78bfa;}
+.dual-tag.emerald{background:rgba(52,211,153,0.16);border:1px solid rgba(52,211,153,0.45);color:#34d399;}
+.dual-lang{font-size:32px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;padding:6px 18px;border-radius:10px;}
+.dual-lang.violet{background:rgba(167,139,250,0.08);color:rgba(167,139,250,0.85);border:1px solid rgba(167,139,250,0.28);}
+.dual-lang.emerald{background:rgba(52,211,153,0.08);color:rgba(52,211,153,0.85);border:1px solid rgba(52,211,153,0.28);}
+.dual-name{font-family:'JetBrains Mono',monospace;font-weight:800;line-height:1.1;word-break:break-word;text-align:left;}
+.dual-owner{font-size:32px;font-weight:500;color:rgba(245,245,245,0.55);display:block;}
+.dual-repo{font-size:46px;font-weight:800;display:block;margin-top:4px;}
+.dual-desc{font-size:32px;font-weight:500;color:rgba(245,245,245,0.82);line-height:1.35;}
+.dual-data-row{display:flex;align-items:baseline;gap:14px;}
+.dual-star{font-size:56px;font-weight:900;font-family:'JetBrains Mono',monospace;line-height:1;}
+.dual-star.violet{color:#a78bfa;}
+.dual-star.emerald{color:#34d399;}
+.dual-star-unit{font-size:32px;font-weight:700;color:rgba(245,245,245,0.6);}
+.dual-today{font-size:32px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-left:auto;}
+.dual-today.violet{color:#a78bfa;}
+.dual-today.emerald{color:#34d399;}
+.dual-sep{
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:700;color:rgba(245,245,245,0.5);letter-spacing:0.18em;
+  height:36px;flex-shrink:0;font-family:'JetBrains Mono',monospace;
+}
+
+/* ============================================
+ * CTA 场景（s06）专用
+ * ============================================ */
+.cta-box{
+  width:100%; max-width:840px;
+  background:rgba(13,9,5,0.85); border:2px solid rgba(245,194,68,0.4);
+  border-radius:24px; padding:36px 40px;
+  display:flex; flex-direction:column; gap:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+.cta-rank-row{display:flex;align-items:baseline;gap:22px;justify-content:center;}
+.cta-rank{font-size:72px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#fbbf24;text-shadow:0 3px 14px rgba(251,191,36,0.45);line-height:0.9;}
+.cta-lang{font-size:32px;font-weight:700;font-family:'JetBrains Mono',monospace;color:rgba(245,245,245,0.7);letter-spacing:0.06em;padding:6px 18px;border-radius:10px;background:rgba(245,158,11,0.10);border:1px solid rgba(251,191,36,0.32);}
+.cta-name{width:100%;text-align:center;font-family:'JetBrains Mono',monospace;line-height:1.1;word-break:break-word;}
+.cta-owner{font-size:32px;font-weight:500;color:rgba(245,245,245,0.5);}
+.cta-repo{font-size:52px;font-weight:800;color:#f5f5f5;}
+.cta-use{font-size:40px;font-weight:800;line-height:1.12;padding:8px 22px;border-radius:12px;background:rgba(0,0,0,0.5);border:1.5px solid rgba(251,191,36,0.5);color:#fbbf24;align-self:center;letter-spacing:0.02em;}
+.cta-desc{font-size:34px;font-weight:500;line-height:1.4;color:#f5f5f5;text-align:center;}
+.cta-star-row{display:flex;align-items:baseline;gap:14px;justify-content:center;}
+.cta-star{font-size:64px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#fbbf24;line-height:1;text-shadow:0 3px 16px rgba(251,191,36,0.45);}
+.cta-star-unit{font-size:32px;font-weight:700;color:rgba(245,245,245,0.6);}
+.cta-question{font-size:44px;font-weight:800;text-align:center;line-height:1.25;color:#f5f5f5;letter-spacing:0.04em;}
+.cta-question .accent-gold{color:#f5c244;}
+.cta-question .accent-cyan{color:#4dd6e8;}
+.cta-follow{font-size:34px;font-weight:700;color:rgba(77,214,232,0.9);text-align:center;letter-spacing:0.10em;font-family:'JetBrains Mono',monospace;}

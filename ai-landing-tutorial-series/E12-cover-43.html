@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E12 汇报材料 AI 生成 · 4:3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1440px;height:1080px;padding:56px 72px 48px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#15233D 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,191,36,0.07) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.glow-gold{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);filter:blur(100px);top:-200px;right:-140px;pointer-events:none;}
+.glow-blue{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.18),transparent 70%);filter:blur(90px);bottom:-140px;left:-90px;pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:110px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:76px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:110px;height:3px;background:linear-gradient(270deg,rgba(59,130,246,0.50),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:76px;background:linear-gradient(0deg,rgba(59,130,246,0.50),transparent);}
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:18px;margin-bottom:12px;flex-wrap:wrap;}
+.ep-num{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 28px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#FBBF24;letter-spacing:0.16em;border:1.5px solid rgba(251,191,36,0.45);background:rgba(251,191,36,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.hook-tag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:19px;color:#34D399;border:1.5px solid rgba(16,185,129,0.55);background:rgba(16,185,129,0.10);padding:7px 16px;border-radius:999px;font-weight:600;}
+.title-row{position:relative;z-index:2;display:flex;align-items:flex-end;gap:24px;margin-top:4px;}
+.title{font-size:64px;font-weight:900;line-height:1.04;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#FCD34D 50%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.18);}
+.title-num{font-family:'JetBrains Mono',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.20);margin-left:auto;}
+.subtitle{position:relative;z-index:2;font-size:21px;color:rgba(255,255,255,0.84);margin-top:10px;font-weight:500;line-height:1.4;}
+.subtitle .sub-strong{color:#3B82F6;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 10px;font-weight:400;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+.subtitle .sub-green{color:#34D399;font-weight:700;}
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:22px;align-items:center;}
+.layers-label{font-size:22px;color:#3B82F6;letter-spacing:0.12em;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.layers-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.45),transparent);}
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px;}
+.l-row{display:flex;flex-direction:column;gap:5px;padding:12px 15px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.65);}
+.l-row.k1{border-color:rgba(251,191,36,0.50);background:linear-gradient(140deg,rgba(251,191,36,0.12),rgba(15,23,42,0.65));}
+.l-row.k2{border-color:rgba(59,130,246,0.55);background:linear-gradient(140deg,rgba(59,130,246,0.14),rgba(15,23,42,0.65));}
+.l-row.k3{border-color:rgba(16,185,129,0.55);background:linear-gradient(140deg,rgba(16,185,129,0.14),rgba(15,23,42,0.65));}
+.l-row.k4{border-color:rgba(167,139,250,0.55);background:linear-gradient(140deg,rgba(167,139,250,0.14),rgba(15,23,42,0.65));}
+.l-row.k5{border-color:rgba(248,113,113,0.55);background:linear-gradient(140deg,rgba(248,113,113,0.14),rgba(15,23,42,0.65));grid-column:span 2;}
+.l-top{display:flex;align-items:center;gap:9px;}
+.l-num{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:900;min-width:30px;}
+.l-row.k1 .l-num{color:#FBBF24;}
+.l-row.k2 .l-num{color:#60A5FA;}
+.l-row.k3 .l-num{color:#34D399;}
+.l-row.k4 .l-num{color:#A78BFA;}
+.l-row.k5 .l-num{color:#F87171;}
+.l-name{font-size:19px;font-weight:800;color:#fff;}
+.l-tag{font-size:12px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:auto;letter-spacing:0.06em;}
+.l-row.k1 .l-tag{color:#0F172A;background:#FBBF24;}
+.l-row.k2 .l-tag{color:#0F172A;background:#60A5FA;}
+.l-row.k3 .l-tag{color:#0F172A;background:#34D399;}
+.l-row.k4 .l-tag{color:#0F172A;background:#A78BFA;}
+.l-row.k5 .l-tag{color:#0F172A;background:#F87171;}
+.l-desc{font-size:14px;color:rgba(255,255,255,0.82);font-weight:500;line-height:1.35;}
+.l-row.k1 .l-desc{color:#FCD34D;}
+.l-row.k2 .l-desc{color:#93C5FD;}
+.l-row.k3 .l-desc{color:#6EE7B7;}
+.l-row.k4 .l-desc{color:#C4B5FD;}
+.l-row.k5 .l-desc{color:#FCA5A5;}
+.master-card{background:linear-gradient(160deg,rgba(251,191,36,0.14),rgba(8,12,24,0.94));border-radius:12px;border:1.5px solid rgba(251,191,36,0.50);overflow:hidden;}
+.master-head{background:rgba(11,18,36,0.85);padding:11px 18px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(251,191,36,0.22);}
+.master-head-dot{width:10px;height:10px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.master-head-title{font-size:17px;color:#FBBF24;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.04em;}
+.master-body{padding:14px 18px;display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;}
+.master-line{font-size:16px;font-weight:600;color:#fff;display:flex;align-items:center;gap:10px;}
+.master-prompt{color:#34D399;font-weight:800;}
+.master-cmd{color:#FBBF24;font-weight:700;}
+.master-out{color:rgba(255,255,255,0.74);font-weight:500;}
+.master-out .o-gold{color:#FBBF24;font-weight:700;}
+.master-out .o-blue{color:#60A5FA;font-weight:700;}
+.master-out .o-green{color:#34D399;font-weight:700;}
+.master-out .o-purple{color:#C4B5FD;font-weight:700;}
+.stat-label{font-size:22px;color:#FBBF24;letter-spacing:0.12em;font-weight:700;margin-bottom:12px;}
+.stat-grid{display:flex;flex-direction:column;gap:10px;}
+.stat-item{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:10px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.stat-item.s-gold{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.stat-item.s-blue{border-color:rgba(59,130,246,0.55);background:linear-gradient(92deg,rgba(59,130,246,0.14),rgba(15,23,42,0.55));}
+.stat-item.s-green{border-color:rgba(16,185,129,0.55);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(15,23,42,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:900;min-width:118px;}
+.stat-item.s-gold .stat-num{color:#FBBF24;}
+.stat-item.s-blue .stat-num{color:#60A5FA;}
+.stat-item.s-green .stat-num{color:#34D399;}
+.stat-name{font-size:17px;color:rgba(255,255,255,0.86);font-weight:700;}
+.chip-row{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:14px;color:rgba(255,255,255,0.80);font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.45);font-family:'JetBrains Mono',monospace;}
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid rgba(251,191,36,0.22);}
+.repo{font-size:22px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#FBBF24;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:20px;}
+.repo .repo-path{background:rgba(251,191,36,0.12);padding:4px 12px;border-radius:7px;border:1px solid rgba(251,191,36,0.25);}
+.author{font-size:20px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-blue"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+  <div class="top-row">
+    <div class="ep-num">E12</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E12</div>
+    <div class="hook-tag">◆ 30 秒 · 原生可编辑</div>
+  </div>
+  <div class="title-row">
+    <h1 class="title"><span class="title-grad">汇报材料 AI 生成</span></h1>
+    <div class="title-num">5+1</div>
+  </div>
+  <div class="subtitle">5 类汇报 prompt + ppt-master 原生可编辑 PPT<span class="sub-divider">·</span><span class="sub-strong">战略 PPT / 计划书 / 周报 / 总结 / 度量</span><span class="sub-divider">·</span><span class="sub-green">30 秒出活</span></div>
+  <div class="main">
+    <div>
+      <div class="layers-label">五类汇报模板 · 全周期覆盖</div>
+      <div class="layers">
+        <div class="l-row k1">
+          <div class="l-top"><span class="l-num">01</span><span class="l-name">战略汇报 PPT</span><span class="l-tag">PPTX</span></div>
+          <div class="l-desc">向上汇报争取资源</div>
+        </div>
+        <div class="l-row k2">
+          <div class="l-top"><span class="l-num">02</span><span class="l-name">转型计划书</span><span class="l-tag">文档</span></div>
+          <div class="l-desc">立项审批 + 目标路线</div>
+        </div>
+        <div class="l-row k3">
+          <div class="l-top"><span class="l-num">03</span><span class="l-name">周报</span><span class="l-tag">文档</span></div>
+          <div class="l-desc">关键节点 + 进展风险</div>
+        </div>
+        <div class="l-row k4">
+          <div class="l-top"><span class="l-num">04</span><span class="l-name">阶段总结报告</span><span class="l-tag">文档</span></div>
+          <div class="l-desc">结项 / 晋升述职</div>
+        </div>
+        <div class="l-row k5">
+          <div class="l-top"><span class="l-num">05</span><span class="l-name">效果度量报告</span><span class="l-tag">文档</span></div>
+          <div class="l-desc">数据证明提效，可接 ai-metrics 实测</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="master-card">
+        <div class="master-head">
+          <span class="master-head-dot"></span>
+          <span class="master-head-title">ppt-master · 原生可编辑 PPT</span>
+        </div>
+        <div class="master-body">
+          <div class="master-line"><span class="master-prompt">$</span><span class="master-out">AI 吐 Markdown 汇报</span></div>
+          <div class="master-line"><span class="master-prompt">&gt;</span><span class="master-cmd">ppt-master</span> <span class="master-out">生成 PPT</span></div>
+          <div class="master-line"><span class="master-out"><span class="o-green">✓</span> DrawingML · <span class="o-gold">每元素可编辑</span></span></div>
+          <div class="master-line"><span class="master-out"><span class="o-purple">≠</span> 图片式整张图不能改</span></div>
+        </div>
+      </div>
+      <div class="stat-label" style="margin-top:14px;">数据角标 · 30 秒出活</div>
+      <div class="stat-grid">
+        <div class="stat-item s-gold"><span class="stat-num">5 类</span><span class="stat-name">汇报模板全周期</span></div>
+        <div class="stat-item s-blue"><span class="stat-num">1.6 万星</span><span class="stat-name">ppt-master + 20 套 deck</span></div>
+        <div class="stat-item s-green"><span class="stat-num">30 秒</span><span class="stat-name">占位 → 完整汇报</span></div>
+      </div>
+      <div class="chip-row">
+        <span class="chip">战略PPT</span>
+        <span class="chip">计划书</span>
+        <span class="chip">周报</span>
+        <span class="chip">总结</span>
+        <span class="chip">度量</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 13 集 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

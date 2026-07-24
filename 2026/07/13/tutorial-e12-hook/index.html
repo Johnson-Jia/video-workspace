@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920,height=1080">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1920px;height:1080px;}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1920px;height:1080px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 120px 60px 120px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 hook — 汇报即用开篇：5 类汇报 prompt + ppt-master 原生可编辑 + 三十秒出活 + 向上汇报要资源
+ * phase 切换（单场景类 hook-scene，phase-1/phase-2 依次显示）
+ * ============================================ */
+
+.hook-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+/* —— 阶段标签胶囊 —— */
+.h-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.h-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端，禁白端点 / 禁暗端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 关键词点缀（不透明纯色，可叠阴影） —— */
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+/* —— Phase 1：大字 5 + 1 + ppt-master + 双卡机制 —— */
+.hero-block { flex-direction: column; gap: 18px; width: 100%; }
+.hero-row {
+  display: flex; align-items: center; justify-content: center; gap: 36px;
+}
+.hero-num {
+  font-family: 'Inter'; font-size: 180px; font-weight: 900; line-height: 1;
+  text-shadow: 0 6px 22px rgba(30,41,59,0.32);
+  letter-spacing: 0.01em;
+}
+.hero-x {
+  font-family: 'Inter'; font-size: 96px; font-weight: 800;
+  color: rgba(255,255,255,0.40);
+  line-height: 1;
+}
+.hero-subtitle {
+  font-family: 'Inter'; font-size: 44px; font-weight: 800;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.mech-row {
+  display: flex; gap: 32px; align-items: stretch; justify-content: center; width: 100%;
+  margin-top: 10px;
+}
+.mech-card {
+  flex: 1; max-width: 540px;
+  border-radius: 20px; padding: 22px 26px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
+}
+.mech-card.mech-gold { border-color: rgba(251,191,36,0.55); }
+.mech-card.mech-blue { border-color: rgba(96,165,250,0.55); }
+.mech-icon {
+  font-size: 56px; line-height: 1;
+}
+.mech-name {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 800;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.mech-note {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+
+/* —— Phase 2：三十秒出活 + 价值卡 + prompt+工具=出活 —— */
+.value-block { flex-direction: column; gap: 22px; width: 100%; }
+.thirty-sec {
+  font-family: 'Inter'; font-size: 64px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 14px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.value-card {
+  width: 100%; max-width: 1300px;
+  border-radius: 18px; padding: 24px 36px;
+  background: linear-gradient(165deg, rgba(251,191,36,0.08), rgba(15,23,42,0.92));
+  border: 2px solid rgba(251,191,36,0.45);
+  display: flex; flex-direction: column; gap: 10px; text-align: center;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+}
+.value-label {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.65); letter-spacing: 0.08em;
+}
+.value-text {
+  font-family: 'Inter'; font-size: 48px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.value-note {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+}
+.asset-row {
+  display: flex; gap: 24px; align-items: center; justify-content: center; flex-wrap: wrap;
+}
+.asset-tag {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 800;
+  padding: 12px 28px; border-radius: 14px;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.asset-gold { background: rgba(251,191,36,0.12); border: 2px solid rgba(251,191,36,0.55); }
+.asset-blue { background: rgba(96,165,250,0.12); border: 2px solid rgba(96,165,250,0.55); }
+.asset-green { background: rgba(52,211,153,0.14); border: 2px solid rgba(52,211,153,0.60); }
+.asset-plus, .asset-eq {
+  font-family: 'Inter'; font-size: 44px; font-weight: 900;
+  color: rgba(255,255,255,0.55); line-height: 1;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes waveSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes prismShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.18; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="23.30" data-width="1920" data-height="1080">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.26" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="23.30">
+<!-- 场景: scene-1 | 时长: 23.3s | bg: gradient_mesh | 汇报即用开篇：5 类汇报 prompt + ppt-master 原生可编辑 + 三十秒出活 + 向上汇报要资源 -->
+<div class="layer-bg" data-bg-types="contour,glow,gradient,particles,wave">
+<!-- bg-component: gradient_mesh -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg, var(--bg-dark, #080818) 0%, var(--bg-mid, #001a33) 100%)"></div>
+
+<div style="position:absolute;top:20%;left:0;width:100%;height:300px;
+  background:linear-gradient(90deg,transparent,hsla(220,60%,40%,0.15),transparent);
+  transform:rotate(-8deg);animation:waveSway 20s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:55%;left:0;width:100%;height:250px;
+  background:linear-gradient(90deg,transparent,hsla(250,50%,45%,0.18),transparent);
+  transform:rotate(5deg);animation:waveSway 25s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:38%;left:-5%;width:110%;height:180px;
+  background:linear-gradient(90deg,transparent 15%,hsla(190,55%,45%,0.16),hsla(200,45%,40%,0.10),transparent 85%);
+  filter:blur(30px);animation:waveSway 28s ease-in-out infinite 10s"></div>
+
+<div style="position:absolute;top:25%;left:65%;width:4px;height:4px;border-radius:50%;
+  background:hsla(230,60%,60%,0.5);box-shadow:0 0 8px hsla(230,50%,50%,0.4);animation:floatParticle 7s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:30%;width:3px;height:3px;border-radius:50%;
+  background:hsla(260,50%,55%,0.45);box-shadow:0 0 6px hsla(260,40%,45%,0.35);animation:floatParticle 9s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:70%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(210,55%,58%,0.4);box-shadow:0 0 6px hsla(210,45%,48%,0.3);animation:floatParticle 8s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 40%,rgba(255,255,255,0.03) 60%,transparent 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:45%;left:50%;width:700px;height:700px;border-radius:50%;opacity:0.06;
+  background:repeating-radial-gradient(circle,transparent 0px,transparent 16px,hsla(220,60%,55%,0.10) 16px,hsla(220,60%,55%,0.10) 17px);
+  filter:blur(1.5px);transform:translate(-50%,-50%);animation:waveSway 22s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:-10%;width:120%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,rgba(255,100,100,0.5),rgba(100,255,100,0.5),rgba(100,100,255,0.5),transparent);
+  filter:blur(60px);transform:rotate(-3deg);animation:prismShimmer 10s ease-in-out infinite"></div>
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；金 5 类 prompt + 蓝 ppt-master + 绿三十秒；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:24%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:58%;left:24%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:920px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先） -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:76%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:78%;left:70%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 hook-scene">
+  <!-- phase-1 (0-13s): 大字「5 类汇报 prompt」+ ppt-master 原生可编辑 PPT 标签 + 每个文本框都能改 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E12 · 汇报材料 AI 生成 · 钩子</div>
+  </div>
+  <div class="region-mid hero-block">
+    <div class="hero-row">
+      <div class="hero-num grad-gold">5</div>
+      <div class="hero-x">+</div>
+      <div class="hero-num grad-blue">1</div>
+    </div>
+    <div class="hero-subtitle">五类 <span class="kw-gold">汇报 prompt</span> ＋ <span class="kw-blue">ppt-master</span></div>
+    <div class="mech-row">
+      <div class="mech-card mech-gold">
+        <div class="mech-icon">📝</div>
+        <div class="mech-name">战略汇报 PPT</div>
+        <div class="mech-note">原生可编辑 PPTX</div>
+      </div>
+      <div class="mech-card mech-blue">
+        <div class="mech-icon">✏</div>
+        <div class="mech-name">每个文本框都能改</div>
+        <div class="mech-note">DrawingML 非图片式</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / hook · 汇报材料 AI 生成 —</div>
+  </div>
+</div>
+<div class="phase phase-2 hook-scene">
+  <!-- phase-2 (13-23.3s): 三十秒出活胶囊 + 转型最大卖点向上汇报要资源 + prompt 包加渲染工具 收尾 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E12 · 汇报材料 AI 生成 · 钩子</div>
+  </div>
+  <div class="region-mid value-block">
+    <div class="thirty-sec">三十秒 <span class="grad-green">出活</span></div>
+    <div class="value-card">
+      <div class="value-label">转型最大卖点</div>
+      <div class="value-text">向上汇报 <span class="kw-gold">要资源</span></div>
+      <div class="value-note">你的成果得变成上级看得懂的 <span class="kw-blue">PPT 和报告</span></div>
+    </div>
+    <div class="asset-row">
+      <div class="asset-tag asset-gold">5 类 prompt 包</div>
+      <div class="asset-plus">+</div>
+      <div class="asset-tag asset-blue">渲染工具</div>
+      <div class="asset-eq">=</div>
+      <div class="asset-tag asset-green">三十秒出活</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / hook · 汇报材料 AI 生成 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set('#s01', {opacity:1}, 0);
+tl.set(['#s01 .phase-2'], {opacity:0}, 0.00);
+tl.set('#s01 .phase-2', {opacity:1}, 11.65);
+tl.set(['#s01 .phase-1'], {opacity:0}, 11.65);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:13,yoyo:true,ease:'sine.inOut'}, 0.00);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:23.30,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

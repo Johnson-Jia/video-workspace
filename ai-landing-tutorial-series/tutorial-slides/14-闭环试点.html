@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>14-闭环试点 · 阶段4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#ef4444;}
+.card .clabel{font-size:22px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card:nth-child(3) .clabel{color:#ef4444;}
+.card .ctitle{font-size:28px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card .cdesc{font-size:19px;color:#475569;line-height:1.6;flex:1;}
+.card .ckey{font-size:17px;font-weight:600;margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;}
+.card:nth-child(1) .ckey{color:#2563eb;}
+.card:nth-child(2) .ckey{color:#16a34a;}
+.card:nth-child(3) .ckey{color:#ef4444;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段4 · 核心闭环</div>
+    <div class="num">AI 战略转型方法论 · <strong>14/30</strong></div>
+  </div>
+  <h1>单点用 AI 易,<span class="hl">闭环难</span></h1>
+  <div class="subtitle">把"需求→代码→测试→上线"串成 AI 能端到端跑、且可中断续传的流水线——这是核心章节</div>
+  <div class="quote">用 <span class="em">OpenSpec(管 WHAT/WHY)+ Superpowers(管 HOW)</span> 串成六阶段闭环,配合 SDD 把"发现需求偏差"的成本从改代码左移到改 Markdown。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">🧱 拆三堵墙</div><div class="ctitle">闭环流程解决的痛点</div><div class="cdesc">① AI 初始分析不准(理解偏了);② 上下文断(会话中断前面全丢);③ 需求偏差晚发现(改完代码才发现,返工贵)</div><div class="ckey">→ 闭环就是拆这三堵墙</div></div>
+    <div class="card"><div class="clabel">🎯 SDD 三产物</div><div class="ctitle">spec / plan / tasks 左移纠错</div><div class="cdesc">把"发现需求理解偏差"从改代码(昂贵)左移到改 Markdown(便宜一个数量级);tasks 清单带来断点续传</div><div class="ckey">→ 探索不是浪费,是最高效的慢</div></div>
+    <div class="card"><div class="clabel">🛡️ 防偷改测试</div><div class="ctitle">三层防护(第 2 层关键)</div><div class="cdesc">① CLAUDE.md 提示词;② settings.json deny 硬拦(关键);③ git diff 兜底。不让 Claude 同时写代码和测试</div><div class="ckey">→ TDD 防幻觉铁律</div></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage4.html key-conclusion + §1(三堵墙)+ §2(SDD)+ §5(防偷改测试三层)。新手先看 §2+§3 即可</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

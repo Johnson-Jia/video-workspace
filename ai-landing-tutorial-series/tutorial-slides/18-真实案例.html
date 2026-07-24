@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>18-真实案例 · 阶段4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:28px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 32px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.datarow{display:flex;gap:18px;margin-bottom:14px;}
+.databox{flex:1;text-align:center;background:#f8fafc;border-radius:10px;padding:14px 10px;}
+.databox .big{font-size:46px;font-weight:900;line-height:1;background:linear-gradient(135deg,#fbbf24,#2563eb);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;margin-bottom:4px;}
+.card:nth-child(2) .databox .big{background:linear-gradient(135deg,#fbbf24,#16a34a);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.databox .dlabel{font-size:16px;font-weight:700;color:#475569;}
+.card .ctitle{font-size:26px;font-weight:800;color:#0f172a;margin-bottom:14px;}
+.card .cdesc{font-size:18px;color:#475569;line-height:1.6;flex:1;}
+.card .ckey{font-size:17px;font-weight:600;color:#2563eb;margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;}
+.card:nth-child(2) .ckey{color:#16a34a;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段4 · 真实交付</div>
+    <div class="num">AI 战略转型方法论 · <strong>18/30</strong></div>
+  </div>
+  <h1>不只是小修小补,<span class="hl">撑得住大规模</span></h1>
+  <div class="subtitle">从单点修复到大规模迁移——案例 C/D 证明闭环能撑住大规模重构和前端复杂集成</div>
+  <div class="quote">案例 A 的方案演进最能体现价值:AI 前两版是机械式的(漏/笨),是<span class="em">用户对业务的理解</span>找到了最优解——用户引导是核心,AI 是执行者。</div>
+  <div class="cards">
+    <div class="card"><div class="ctitle">案例 C:个人中心前后端分离重构</div>
+      <div class="datarow">
+        <div class="databox"><div class="big">12</div><div class="dlabel">Controller</div></div>
+        <div class="databox"><div class="big">211</div><div class="dlabel">API</div></div>
+        <div class="databox"><div class="big">~15000</div><div class="dlabel">行</div></div>
+        <div class="databox"><div class="big">110/110</div><div class="dlabel">任务完成</div></div>
+      </div>
+      <div class="cdesc">某业务组用 OpenSpec + Superpowers + tasks 断点续传,把个人中心从前后端耦合重构为分离架构</div>
+      <div class="ckey">→ tasks 清单支撑跨周断点续传,看 [x] 标记接着干</div>
+    </div>
+    <div class="card"><div class="ctitle">案例 D:前端 AI 陪练对话生成</div>
+      <div class="datarow">
+        <div class="databox"><div class="big">8 人日</div><div class="dlabel">5 开发 + 3 修复</div></div>
+        <div class="databox"><div class="big">5289</div><div class="dlabel">生成行数</div></div>
+      </div>
+      <div class="cdesc">某前端团队用 AI 生成对话交互模块,含 React×Vue SDK Monkey Patch、SSE 拦截器等复杂集成</div>
+      <div class="ckey">→ AI 不只能写 CRUD,前端复杂场景也能落地,关键在给足上下文 + 分步验证</div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage4 §6「真实案例」案例 C(12 Controller / 211 API / ~15000 行 / 110 任务)+ 案例 D(8 人日 / 5289 行)。案例 A(form 编辑器,2 文件 ~10 行)、B(API 拆分,7 决策)见原文</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E13 customize — 换你的系统·4 步改造：4 phase 纯切换
+ * （多 phase 用 GSAP timeline 顺序切换，禁 data-reveal，避 phase-2/3/4 不显示）
+ * ============================================ */
+
+.cust-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 60px 120px 60px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 22px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.cust-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.cust-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96,165,250,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-blue  { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-gold  { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-cyan  { background-image: linear-gradient(135deg, #22D3EE, #06B6D4, #67E8F9); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-purple{ background-image: linear-gradient(135deg, #C4B5FD, #A78BFA, #DDD6FE); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 总览：demo 自带商品页用来开箱跑 + 真实用四步改造 === */
+.cust-overview { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.cust-overview-title {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cust-overview-flow {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+}
+.cust-ov-box {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 28px; border-radius: 16px;
+  background: rgba(15,23,42,0.60); border: 2px solid rgba(96,165,250,0.30);
+}
+.cust-ov-box.demo { border-color: rgba(251,191,36,0.42); background: rgba(251,191,36,0.06); }
+.cust-ov-box.real { border-color: rgba(52,211,153,0.42); background: rgba(52,211,153,0.06); }
+.cust-ov-box-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; letter-spacing: 0.04em;
+}
+.cust-ov-box.demo .cust-ov-box-tag { color: #FCD34D; }
+.cust-ov-box.real .cust-ov-box-tag { color: #6EE7B7; }
+.cust-ov-box-body {
+  font-family: var(--font-title); font-size: 36px; font-weight: 800; color: var(--tut-white); text-align: center;
+}
+.cust-ov-arrow {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; color: #60A5FA;
+}
+.cust-overview-four {
+  display: flex; align-items: stretch; justify-content: center; gap: 16px; margin-top: 4px;
+}
+.cust-ov-mini {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 18px; border-radius: 12px;
+  background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.28);
+  min-width: 200px;
+}
+.cust-ov-mini-num {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: #93C5FD;
+}
+.cust-ov-mini-name {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.85); text-align: center;
+}
+
+/* === phase-2/3/4 单步大卡（其一/其二/其三/其四 通用结构）=== */
+.cust-step { display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; }
+.cust-step-head {
+  display: flex; align-items: center; gap: 22px;
+}
+.cust-step-num {
+  display: flex; align-items: center; justify-content: center;
+  width: 92px; height: 92px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(96,165,250,0.08));
+  border: 3px solid rgba(96,165,250,0.55);
+  font-family: var(--font-data); font-size: 42px; font-weight: 800; color: #93C5FD;
+  box-shadow: 0 0 24px rgba(96,165,250,0.25);
+}
+.cust-step-title {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900; color: var(--tut-white);
+}
+.cust-step-card {
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%; max-width: 1400px;
+  padding: 28px 38px; border-radius: 20px;
+  background: rgba(15,23,42,0.62);
+  border: 2px solid rgba(96,165,250,0.32);
+}
+.cust-step-row {
+  display: flex; align-items: center; gap: 20px;
+}
+.cust-step-row-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: #FCD34D;
+  flex-shrink: 0; min-width: 200px;
+}
+.cust-step-row-value {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700; color: #67E8F9;
+}
+.cust-step-row-text {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: rgba(255,255,255,0.88);
+}
+.cust-step-note {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 22px; border-radius: 12px;
+  background: rgba(52,211,153,0.08); border-left: 4px solid rgba(52,211,153,0.55);
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: #6EE7B7;
+}
+
+.cust-file-block {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 20px; border-radius: 10px;
+  background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.35);
+  font-family: var(--font-data); font-size: 34px; font-weight: 700; color: #67E8F9;
+}
+
+/* phase-3 其二+其三 双列 */
+.cust-duo {
+  display: flex; align-items: stretch; justify-content: center; gap: 28px; width: 100%;
+}
+.cust-duo-col {
+  flex: 1; display: flex; flex-direction: column; gap: 16px;
+  padding: 26px 28px; border-radius: 18px;
+  background: rgba(15,23,42,0.62);
+  border: 2px solid rgba(96,165,250,0.30);
+}
+.cust-duo-col.col2 { border-color: rgba(196,181,253,0.38); background: rgba(196,181,253,0.05); }
+.cust-duo-head {
+  display: flex; align-items: center; gap: 16px;
+}
+.cust-duo-num {
+  display: flex; align-items: center; justify-content: center;
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(96,165,250,0.08));
+  border: 3px solid rgba(96,165,250,0.55);
+  font-family: var(--font-data); font-size: 34px; font-weight: 800; color: #93C5FD;
+}
+.cust-duo-col.col2 .cust-duo-num {
+  background: linear-gradient(135deg, rgba(196,181,253,0.22), rgba(196,181,253,0.08));
+  border-color: rgba(196,181,253,0.55); color: #DDD6FE;
+}
+.cust-duo-title {
+  font-family: var(--font-title); font-size: 42px; font-weight: 900; color: var(--tut-white);
+}
+.cust-duo-file {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: #67E8F9;
+  padding: 8px 16px; border-radius: 8px; background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.30);
+  align-self: flex-start;
+}
+.cust-duo-bullets {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.cust-duo-bul {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.86); line-height: 1.35;
+}
+.cust-duo-bul .mark {
+  color: #FCD34D; font-weight: 800; flex-shrink: 0;
+}
+.cust-duo-col.col2 .cust-duo-bul .mark { color: #DDD6FE; }
+
+/* phase-4 其四 data 编用例 + 表格替 JSON 收尾 */
+.cust-cases { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+.cust-cards-pair {
+  display: flex; align-items: stretch; justify-content: center; gap: 24px; width: 100%; max-width: 1400px;
+}
+.cust-cp-card {
+  flex: 1; display: flex; flex-direction: column; gap: 14px;
+  padding: 24px 26px; border-radius: 16px;
+  background: rgba(15,23,42,0.62);
+  border: 2px solid rgba(96,165,250,0.30);
+}
+.cust-cp-card.json { border-color: rgba(251,191,36,0.40); }
+.cust-cp-card.sheet { border-color: rgba(52,211,153,0.42); background: rgba(52,211,153,0.05); }
+.cust-cp-head {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cust-cp-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+  padding: 4px 14px; border-radius: 999px;
+}
+.cust-cp-card.json .cust-cp-tag { color: #FCD34D; background: rgba(251,191,36,0.14); border: 1px solid rgba(251,191,36,0.40); }
+.cust-cp-card.sheet .cust-cp-tag { color: #6EE7B7; background: rgba(52,211,153,0.14); border: 1px solid rgba(52,211,153,0.42); }
+.cust-cp-scene {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.72);
+}
+.cust-cp-code {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.82);
+  background: rgba(0,0,0,0.28); border-radius: 8px; padding: 12px 14px; line-height: 1.45;
+}
+.cust-cp-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-title); font-size: 52px; font-weight: 900; color: #34D399;
+}
+.cust-finale {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 34px; border-radius: 999px;
+  background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.45);
+  font-family: var(--font-title); font-size: 38px; font-weight: 900;
+}
+.cust-finale .icon { color: #34D399; }

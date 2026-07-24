@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>29-落地清单精选 · 总结</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:28px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.stages{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:22px;}
+.stage{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 10px;text-align:center;box-shadow:0 2px 8px rgba(15,23,42,.05);border-top:4px solid #2563eb;}
+.stage:nth-child(2){border-top-color:#3b82f6;}
+.stage:nth-child(3){border-top-color:#16a34a;}
+.stage:nth-child(4){border-top-color:#f59e0b;}
+.stage:nth-child(5){border-top-color:#7c3aed;}
+.stage:nth-child(6){border-top-color:#ef4444;}
+.stage:nth-child(7){border-top-color:#0891b2;}
+.stage .sno{font-size:16px;font-weight:700;color:#94a3b8;}
+.stage .sname{font-size:18px;font-weight:800;color:#0f172a;margin-top:4px;line-height:1.2;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#f59e0b;}
+.card .clabel{font-size:20px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card:nth-child(3) .clabel{color:#f59e0b;}
+.card .ctitle{font-size:24px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card ul{list-style:none;padding:0;margin:0;flex:1;}
+.card li{font-size:17px;color:#334155;line-height:1.5;padding:6px 0 6px 22px;position:relative;border-bottom:1px dashed #f1f5f9;}
+.card li:last-child{border-bottom:none;}
+.card li::before{content:'☐';position:absolute;left:0;top:5px;font-size:17px;font-weight:700;}
+.card li strong{color:#0f172a;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;}
+.src{font-size:18px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>总结 · 清单总览</div>
+    <div class="num">AI 战略转型方法论 · <strong>29/30</strong></div>
+  </div>
+  <h1>7 阶段 · 4 手册 · <span class="hl">2 验收 · 3 交接</span></h1>
+  <div class="subtitle">教程全部落地清单的汇总——每阶段都有"落地清单",照着做就能跑通</div>
+  <div class="quote">这套方法论不是 PPT 口号,是<span class="em">可照做的清单</span>:每个阶段末尾都有"落地清单",配 4 份角色手册 + 2 份验收标准 + 3 份协作模板。</div>
+  <div class="stages">
+    <div class="stage"><div class="sno">阶段 0</div><div class="sname">思想+原理</div></div>
+    <div class="stage"><div class="sno">阶段 1</div><div class="sname">战略启动</div></div>
+    <div class="stage"><div class="sno">阶段 2</div><div class="sname">全员赋能</div></div>
+    <div class="stage"><div class="sno">阶段 3</div><div class="sname">基础设施</div></div>
+    <div class="stage"><div class="sno">阶段 4</div><div class="sname">闭环试点</div></div>
+    <div class="stage"><div class="sno">阶段 5</div><div class="sname">推广度量</div></div>
+    <div class="stage"><div class="sno">阶段 6</div><div class="sname">沉淀复用</div></div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="clabel">👥 4 份角色手册</div><div class="ctitle">开发 / 测试 / 组长 / 产品</div><ul>
+      <li>各读各的「角色定位」</li>
+      <li>开发:精通 Claude Code、写 CLAUDE.md、沉淀 Skill</li>
+      <li>测试:AI 占比度量、防偷改测试、录制转生成</li>
+      <li>组长:牵头立项、带推广、数据汇报</li>
+      <li>产品:用 Codex 做原型、需求讲清</li>
+    </ul></div>
+    <div class="card"><div class="clabel">✅ 2 份验收标准</div><div class="ctitle">试点验收 + 推广验收</div><ul>
+      <li>试点(阶段 4):流程闭环 + 质量 + 度量 + 可复制</li>
+      <li>推广(阶段 5):覆盖 + 效果 + 沉淀</li>
+      <li>数据事后统计,非启动期承诺</li>
+      <li>先质量后速度,对比公允</li>
+    </ul></div>
+    <div class="card"><div class="clabel">🤝 3 份协作模板</div><div class="ctitle">交接 + 审查 + 防伪</div><ul>
+      <li>开发↔测试交接(DoD + 防偷改 + 反馈)</li>
+      <li>代码审查 checklist(正确性/影响/规范/安全/可维护)</li>
+      <li>Code Review 四问(理解/过度工程/真实 API/安全)</li>
+    </ul></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:各 stage 末「落地清单」+ 角色操作手册(开发/测试/组长/产品)+ demos/review-checklists + demos/handover-templates 汇总</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

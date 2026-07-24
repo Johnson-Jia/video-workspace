@@ -1,0 +1,40 @@
+# E13 段3 数据驱动 · 内容就绪
+
+## 段定位
+合集 E13 收官集 · 段3「数据驱动」· 对应 demos ai-test-frame
+分类：tutorial（横屏 16:9，1920x1080）
+时长目标：约 55 秒
+
+## 核心叙事
+数据驱动调度：用例数据与执行代码彻底解耦。用例是纯粹的步骤 JSON，运营在 data 编不碰代码；代码在 handlers 是具体业务实现。调度器 runner 读用例按 type 路由，基础操作走字典，模块操作走注册中心。变量传递下划线 save_as 保存、花括号变量名引用，步骤间用例间都能传。
+
+## 关键数据（来自 runner.py 源码 + cases.json，真实不编）
+- 用例条数：4 条（3 跑 running=是，1 关 running=否）
+- 基础操作 4 类：text / button / app / selector（走字典 → 基类方法）
+- 模块操作：走注册中心 handler_registry.get(type)
+- 变量传递：步骤 _save_as 保存到 ctx，花括号变量名引用
+- 用例结构样例：type 为 addproduct，val 取值实物或虚拟，_save_as 取值 pname
+
+## 视觉方向
+data 目录 cases.json（4 条用例 3 跑 1 关）+ runner 按 type 路由示意（基础操作走字典 / 模块操作走注册中心）+ 变量传递示意（_save_as 保存 + 花括号变量名引用）。深色科技底，冷色 fx。
+
+## 配色
+- 深蓝底 #0F172A
+- data 用例数据绿 #34D399/#6EE7B7
+- 调度器 runner 蓝 #60A5FA/#93C5FD
+- 基础操作字典紫 #C4B5FD/#A78BFA
+- 模块操作注册中心金 #FBBF24/#FCD34D
+- 变量传递青 #22D3EE（下划线 save_as 保存 + 花括号引用）
+
+## 多音字 / 措辞规避
+- 「运营」读 yùn yíng（OK）
+- 「调度器」读 diào（OK，调度器）
+- 「变量」读 liàng（OK）
+- 「路由」读 lù yóu（OK）
+- 无单字多音字风险
+
+## 禁词自查
+正文未使用夸张营销用语；未提及 owner 或 repo 全名；无搜索引导话术。
+
+## 原始素材
+demos ai-test-frame runner.py + data cases.json

@@ -1,0 +1,93 @@
+<!-- 场景: scene-1 | 时长: 27.36s | bg: gradient_mesh | 虚假通过警示开篇：AI 幻觉 + 绿灯翻车 + ai-test-frame 开箱跑 + AI 只生成运行期零 AI + 根治虚假通过 -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（冷色优先；红警示 + 蓝框架 + 绿根治；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:22%;left:50%;transform:translateX(-50%);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,84%,60%,0.20) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:56%;left:22%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:82%;left:50%;transform:translateX(-50%);width:920px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.18) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（冷色优先） -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(0,84%,62%,0.9);box-shadow:0 0 16px hsla(0,84%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:54%;left:82%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:86%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:82%;width:8px;height:8px;background:rgba(239,68,68,0.85);box-shadow:0 0 12px rgba(239,68,68,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:76%;left:30%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:78%;left:70%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 hook-scene">
+  <!-- phase-1 (0-9.12s): 大字「虚假通过」红叉（核心警示，痛点抛出） -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E13 · AI 自动化测试实操 · 钩子</div>
+  </div>
+  <div class="region-mid hero-block">
+    <div class="fake-pass-row">
+      <div class="fake-pass-text grad-red">虚假通过</div>
+      <div class="fake-cross">×</div>
+    </div>
+    <div class="hero-subtitle">AI 写测试最大的坑，是 <span class="kw-red">虚假通过</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / hook · AI 自动化测试实操 —</div>
+  </div>
+</div>
+<div class="phase phase-2 hook-scene">
+  <!-- phase-2 (9.12-18.24s): AI 幻觉看着跑通实际没验证 + 绿灯上线翻车（后果揭示） -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E13 · AI 自动化测试实操 · 钩子</div>
+  </div>
+  <div class="region-mid consequence-block">
+    <div class="consequence-title">以为是绿灯，上线就 <span class="kw-red">翻车</span></div>
+    <div class="mech-row">
+      <div class="mech-card mech-red">
+        <div class="mech-icon">🌫</div>
+        <div class="mech-name">AI 幻觉</div>
+        <div class="mech-note">看着跑通 实际没验证到点子</div>
+      </div>
+      <div class="mech-card mech-amber">
+        <div class="mech-icon">🚦</div>
+        <div class="mech-name">绿灯上线翻车</div>
+        <div class="mech-note">以为是绿灯 上线就翻车</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / hook · AI 自动化测试实操 —</div>
+  </div>
+</div>
+<div class="phase phase-3 hook-scene">
+  <!-- phase-3 (18.24-27.36s): ai-test-frame 开箱跑 + 核心思路（AI 只生成测试代码，运行期全是确定性数据驱动，零 AI）+ 根治虚假通过 -->
+  <div class="region-top">
+    <div class="h-stage-tag"><span class="dot"></span>E13 · AI 自动化测试实操 · 钩子</div>
+  </div>
+  <div class="region-mid value-block">
+    <div class="framework-row">
+      <div class="framework-tag">ai-test-frame</div>
+      <div class="run-pill">开箱就跑</div>
+    </div>
+    <div class="value-card">
+      <div class="value-label">核心思路</div>
+      <div class="value-text">AI 只负责 <span class="kw-blue">生成测试代码</span></div>
+      <div class="value-note">运行期全是 <span class="kw-blue">确定性的数据驱动</span> · 零 AI</div>
+    </div>
+    <div class="rootfix-row">
+      <div class="rootfix-pill rootfix-green">虚假通过</div>
+      <div class="rootfix-arrow">→</div>
+      <div class="rootfix-pill rootfix-green">根治</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / hook · AI 自动化测试实操 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

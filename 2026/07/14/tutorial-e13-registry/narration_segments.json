@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 55,
+    "emotion": "注册中心模式：@register 装饰器登记全局表 + 调度器按 type 取 + 类引用延迟解析 + 自动发现零改代码",
+    "text": "注册中心是这套框架的灵魂。写一个装饰器 register，把方法登记进全局表，调度器按类型自动取。关键细节，类引用延迟解析——装饰器执行时类还没定义完，那时取会拿到空，所以类引用放到调度器创建实例时再解析。好处是，新增一个业务模块，写完注册，调度器自动发现，零改调度器代码。这是企业级测试框架提炼出来的核心模式。",
+    "narration": "注册中心是这套框架的灵魂。写一个装饰器 register，把方法登记进全局表，调度器按类型自动取。关键细节，类引用延迟解析——装饰器执行时类还没定义完，那时取会拿到空，所以类引用放到调度器创建实例时再解析。好处是，新增一个业务模块，写完注册，调度器自动发现，零改调度器代码。这是企业级测试框架提炼出来的核心模式。",
+    "hook_anchors": ["注册中心", "框架的灵魂", "装饰器 register", "登记进全局表", "调度器按类型自动取", "类引用延迟解析", "装饰器执行时", "类还没定义完", "拿到空", "创建实例时再解析", "新增业务模块", "写完注册", "自动发现", "零改调度器代码", "企业级测试框架", "核心模式"],
+    "visual_type": "tutorial_registry",
+    "tutorial_reveal_mode": false,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "注册中心是灵魂 + @register 装饰器代码片段（写装饰器把方法登记进全局表）", "duration_share": 0.26, "narration_anchor": {"start_sentence": 0, "end_sentence": 0}},
+      {"phase": 2, "start_offset": 14, "focus": "调度器按类型自动取（type → registry.get 全局表）", "duration_share": 0.26, "narration_anchor": {"start_sentence": 1, "end_sentence": 1}},
+      {"phase": 3, "start_offset": 28, "focus": "关键细节 类引用延迟解析（装饰器执行时类还没定义完拿到空 → 创建实例时再解析）", "duration_share": 0.26, "narration_anchor": {"start_sentence": 2, "end_sentence": 2}},
+      {"phase": 4, "start_offset": 41, "focus": "好处 自动发现零改调度器代码 收尾（企业级测试框架核心模式）", "duration_share": 0.22, "narration_anchor": {"start_sentence": 3, "end_sentence": 3}}
+    ],
+    "bg_component": "diamond_lattice"
+  }
+]

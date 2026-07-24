@@ -1,0 +1,196 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E13 cta — 合集收官·13 集完结：3 phase 纯切换
+ * （多 phase 用 GSAP timeline 顺序切换，禁 data-reveal，避 phase-2/3 不显示）
+ * ============================================ */
+
+.cta-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 60px 120px 60px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 22px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.cta-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.cta-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96,165,250,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-blue  { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-gold  { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-red   { background-image: linear-gradient(135deg, #FCA5A5, #EF4444, #F87171); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 核心思想收束：AI 只生成·确定性执行·挡幻觉于运行期之外 === */
+.cta-core { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.cta-core-title {
+  font-family: var(--font-title); font-size: 58px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-core-row {
+  display: flex; align-items: stretch; justify-content: center; gap: 18px; width: 100%;
+}
+.cta-core-pill {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 24px; border-radius: 14px; flex: 1; max-width: 440px;
+}
+.cta-core-pill.gen    { background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.45); }
+.cta-core-pill.det    { background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.45); }
+.cta-core-pill.shield { background: rgba(251,191,36,0.10); border: 2px solid rgba(251,191,36,0.45); }
+.cta-core-pill-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+  padding: 4px 16px; border-radius: 999px;
+}
+.cta-core-pill.gen    .cta-core-pill-tag { color: #93C5FD; background: rgba(96,165,250,0.16); border: 1px solid rgba(96,165,250,0.40); }
+.cta-core-pill.det    .cta-core-pill-tag { color: #6EE7B7; background: rgba(52,211,153,0.16); border: 1px solid rgba(52,211,153,0.40); }
+.cta-core-pill.shield .cta-core-pill-tag { color: #FCD34D; background: rgba(251,191,36,0.16); border: 1px solid rgba(251,191,36,0.40); }
+.cta-core-pill-body {
+  font-family: var(--font-title); font-size: 38px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-core-pill-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; text-align: center;
+}
+.cta-core-pill.gen    .cta-core-pill-sub { color: rgba(147,197,253,0.92); }
+.cta-core-pill.det    .cta-core-pill-sub { color: rgba(110,231,183,0.92); }
+.cta-core-pill.shield .cta-core-pill-sub { color: rgba(252,211,77,0.92); }
+.cta-core-foot {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 12px 26px; border-radius: 12px;
+  background: rgba(96,165,250,0.10); border: 1.5px solid rgba(96,165,250,0.38);
+}
+.cta-core-foot-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: #FBBF24;
+}
+.cta-core-foot-name {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: var(--tut-white);
+}
+.cta-core-foot-sep { font-family: var(--font-data); font-size: 32px; color: rgba(255,255,255,0.35); }
+.cta-core-foot-body {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: rgba(147,197,253,0.92);
+}
+
+/* === phase-2 十三集合集完结：13 集完结徽章 + 思想转变→落地实操一条龙 === */
+.cta-finale { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.cta-finale-badge {
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 38px; border-radius: 999px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.14), rgba(245,158,11,0.10));
+  border: 2.5px solid rgba(251,191,36,0.55);
+  box-shadow: 0 0 28px rgba(251,191,36,0.15);
+}
+.cta-finale-badge-num {
+  font-family: var(--font-title); font-size: 88px; font-weight: 900;
+}
+.cta-finale-badge-text {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.cta-finale-badge-line1 {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800; color: #FCD34D;
+}
+.cta-finale-badge-line2 {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: rgba(252,211,77,0.85);
+}
+.cta-finale-title {
+  font-family: var(--font-title); font-size: 54px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-finale-flow {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.cta-finale-node {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 16px 28px; border-radius: 14px; min-width: 260px;
+}
+.cta-finale-node.start { background: rgba(96,165,250,0.12); border: 2px solid rgba(96,165,250,0.45); }
+.cta-finale-node.end   { background: rgba(52,211,153,0.12); border: 2px solid rgba(52,211,153,0.45); }
+.cta-finale-node-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+  padding: 3px 14px; border-radius: 999px;
+}
+.cta-finale-node.start .cta-finale-node-tag { color: #93C5FD; background: rgba(96,165,250,0.18); border: 1px solid rgba(96,165,250,0.40); }
+.cta-finale-node.end   .cta-finale-node-tag { color: #6EE7B7; background: rgba(52,211,153,0.18); border: 1px solid rgba(52,211,153,0.40); }
+.cta-finale-node-body {
+  font-family: var(--font-title); font-size: 40px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-finale-dragon {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-data); font-size: 40px; font-weight: 900; color: rgba(251,191,36,0.70);
+}
+.cta-finale-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(252,211,77,0.95); text-align: center;
+  padding: 10px 24px; border-radius: 10px; background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.32);
+}
+
+/* === phase-3 关注 CTA + 中性互动提问 === */
+.cta-follow { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.cta-follow-cta {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  padding: 20px 44px; border-radius: 999px;
+  background: linear-gradient(135deg, rgba(52,211,153,0.18), rgba(16,185,129,0.12));
+  border: 2.5px solid rgba(52,211,153,0.55);
+  box-shadow: 0 0 30px rgba(52,211,153,0.18);
+}
+.cta-follow-cta-icon {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: #34D399;
+  line-height: 1;
+}
+.cta-follow-cta-text {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900; color: var(--tut-white);
+}
+.cta-follow-repo {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 12px 28px; border-radius: 12px;
+  background: rgba(96,165,250,0.10); border: 1.5px solid rgba(96,165,250,0.38);
+}
+.cta-follow-repo-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: #93C5FD;
+}
+.cta-follow-repo-body {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-white);
+}
+.cta-follow-question {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px 36px; border-radius: 16px;
+  background: rgba(196,181,253,0.10); border: 2px solid rgba(196,181,253,0.42);
+  max-width: 1200px;
+}
+.cta-follow-question-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #DDD6FE;
+  padding: 4px 18px; border-radius: 999px; background: rgba(196,181,253,0.16); border: 1px solid rgba(196,181,253,0.40);
+}
+.cta-follow-question-body {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900; color: var(--tut-white); text-align: center;
+}

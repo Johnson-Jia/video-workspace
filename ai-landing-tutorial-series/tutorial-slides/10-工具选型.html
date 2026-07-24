@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>10-工具选型 · 阶段2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-top:6px solid #2563eb;border-radius:14px;padding:30px 32px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-top-color:#16a34a;}
+.card:nth-child(3){border-top-color:#f59e0b;}
+.card .role{font-size:20px;font-weight:700;color:#94a3b8;letter-spacing:.08em;margin-bottom:6px;}
+.card .tool{font-size:34px;font-weight:900;color:#0f172a;margin-bottom:12px;line-height:1.15;}
+.card .why{font-size:19px;color:#475569;line-height:1.6;flex:1;}
+.card .tag{display:inline-block;font-size:16px;font-weight:700;padding:6px 14px;border-radius:999px;margin-top:14px;align-self:flex-start;}
+.card:nth-child(1) .tag{background:#dbeafe;color:#1e40af;}
+.card:nth-child(2) .tag{background:#dcfce7;color:#166534;}
+.card:nth-child(3) .tag{background:#fef3c7;color:#92400e;}
+.modeline{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 28px;margin-bottom:24px;display:flex;gap:30px;align-items:center;}
+.modeline .mtitle{font-size:20px;font-weight:800;color:#0f172a;white-space:nowrap;}
+.modeline .mitem{font-size:18px;color:#475569;}
+.modeline .mitem strong{color:#2563eb;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段2 · 工具选型</div>
+    <div class="num">AI 战略转型方法论 · <strong>10/30</strong></div>
+  </div>
+  <h1>按角色选,<span class="hl">产出差一个量级</span></h1>
+  <div class="subtitle">"会用"和"用好"的产出差距明显(经验上可达数倍);工具选错是头号损耗</div>
+  <div class="quote">开发者要终端原生、深度集成时 <span class="em">Claude Code 仍首选</span>;云端/ChatGPT 形态对非开发友好,PM 可快速做原型。</div>
+  <div class="cards">
+    <div class="card"><div class="role">开发者 / 工程师</div><div class="tool">Claude Code</div><div class="why">终端原生、自主执行、MCP/Skills/Hooks 生态最完整、上下文管理最强</div><div class="tag">当前最推荐</div></div>
+    <div class="card"><div class="role">产品经理 / 非开发</div><div class="tool">OpenAI Codex</div><div class="why">有云端委托 + ChatGPT 集成形态,不必碰终端,适合做原型、需求验证</div><div class="tag">非开发友好</div></div>
+    <div class="card"><div class="role">底层模型(按场景)</div><div class="tool">GLM-5.2 · Claude 5 · GPT-5.5</div><div class="why">国内便宜:GLM-5.2(智谱,开源 SOTA,1M 无损);有实力:Claude 5 / GPT-5.5(截至 2026 中)</div><div class="tag">国产性价比</div></div>
+  </div>
+  <div class="modeline">
+    <div class="mtitle">💡 选型心法</div>
+    <div class="mitem">工具可换、<strong>方法论不变</strong>——退路:没 Claude Code 也能起步,用 Codex/Cursor/GLM coding 跑通流程</div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage2 §2「工具选型:按角色选」+ tip(底层模型选择建议) + §3(装不上/连不上排查)</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

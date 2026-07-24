@@ -1,0 +1,123 @@
+<!-- 场景: scene-1 | 时长: 35.4s | bg: diamond_lattice | ppt-master 原生 PPT：对比 + 工作流 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝可编辑主调 + 红警示 + 绿勾；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:32%;left:50%;transform:translateX(-50%);width:1000px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:60%;left:25%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,84%,72%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:60%;left:75%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:24%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(0,84%,72%,0.85);box-shadow:0 0 14px hsla(0,80%,65%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:75%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:32%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 pm-scene">
+  <!-- phase-1 (0-8.85s): PPT 类汇报用 ppt-master 生成原生可编辑 PPT 开场 -->
+  <div class="region-top">
+    <div class="pm-stage-tag"><span class="dot"></span>E12 · ppt-master 原生 PPT · 核心段</div>
+  </div>
+  <div class="region-mid">
+    <div class="pm-intro">
+      <div class="pm-intro-title">PPT 类汇报 · <span class="grad-blue">ppt-master 原生</span></div>
+      <div class="pm-intro-sub">生成原生可编辑 PPT（不是图片式）</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / ppt-master 原生 PPT —</div>
+  </div>
+</div>
+<div class="phase phase-2 pm-scene">
+  <!-- phase-2 (8.85-17.7s): 对比卡 图片式 PPT 整张图不能改 ❌ / ppt-master DrawingML 每元素可编辑 ✓ -->
+  <div class="region-top">
+    <div class="pm-stage-tag"><span class="dot"></span>E12 · 对比 · 图片式 vs DrawingML</div>
+  </div>
+  <div class="region-mid">
+    <div class="pm-compare">
+      <div class="pm-card bad">
+        <div class="pm-card-mark">✗</div>
+        <div class="pm-card-type">图片式 PPT</div>
+        <div class="pm-card-body">整张图 · 不能改</div>
+        <div class="pm-card-tag">❌ 元素锁死</div>
+      </div>
+      <div class="pm-vs">VS</div>
+      <div class="pm-card good">
+        <div class="pm-card-mark">✓</div>
+        <div class="pm-card-type"><span class="grad-green">ppt-master</span></div>
+        <div class="pm-card-body">DrawingML · 每元素可编辑</div>
+        <img src="assets/strategy-report-darktech.png" style="max-width:460px;width:460px;height:auto;border-radius:10px;border:2px solid rgba(52,211,153,0.5);box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain">
+        <div style="font-size:32px;color:rgba(110,231,183,0.85);text-align:center;letter-spacing:0.5px">↑ 真实可编辑 PPT 产出样式</div>
+        <div class="pm-card-tag">✓ PowerPoint 里改细节</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 原生 DrawingML 非图片式 —</div>
+  </div>
+</div>
+<div class="phase phase-3 pm-scene">
+  <!-- phase-3 (17.7-26.55s): 工作流 Markdown→ppt-master skill→原生 PPTX -->
+  <div class="region-top">
+    <div class="pm-stage-tag"><span class="dot"></span>E12 · 工作流 · 三步生成</div>
+  </div>
+  <div class="region-mid">
+    <div class="pm-flow">
+      <div class="pm-flow-step">
+        <div class="pm-fnum grad-blue">1</div>
+        <div class="pm-ftitle">AI 生成</div>
+        <div class="pm-fdesc">Markdown 内容</div>
+      </div>
+      <div class="pm-flow-arrow">→</div>
+      <div class="pm-flow-step">
+        <div class="pm-fnum grad-blue">2</div>
+        <div class="pm-ftitle">ppt-master skill</div>
+        <div class="pm-fdesc">Claude Code 里调用</div>
+      </div>
+      <div class="pm-flow-arrow">→</div>
+      <div class="pm-flow-step last">
+        <div class="pm-fnum grad-green">3</div>
+        <div class="pm-ftitle">原生 PPTX</div>
+        <div class="pm-fdesc">可编辑 DrawingML</div>
+      </div>
+    </div>
+    <div class="pm-flow-hint">对它说：用这份汇报内容生成 PPT</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / Markdown → ppt-master → PPTX —</div>
+  </div>
+</div>
+<div class="phase phase-4 pm-scene">
+  <!-- phase-4 (26.55-35.4s): 开源一万六千星 二十多套精美 deck 能参考 收尾 -->
+  <div class="region-top">
+    <div class="pm-stage-tag"><span class="dot"></span>E12 · 开源资源 · 可参考</div>
+  </div>
+  <div class="region-mid">
+    <div class="pm-stats">
+      <div class="pm-stat">
+        <div class="pm-stat-num grad-gold">一万六千星</div>
+        <div class="pm-stat-label">开源 · ppt-master</div>
+      </div>
+      <div class="pm-stat-sep">·</div>
+      <div class="pm-stat">
+        <div class="pm-stat-num grad-blue">二十多套</div>
+        <div class="pm-stat-label">精美 deck · 可参考</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / ppt-master 原生 PPT —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

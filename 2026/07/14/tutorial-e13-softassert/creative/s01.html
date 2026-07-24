@@ -1,0 +1,142 @@
+<!-- 场景: scene-1 | 时长: 27.84s | bg: diamond_lattice | 软断言 vs 硬断言：双卡对比 + 失败即停 + 截图继续 + 纯文本输出 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（红硬断言 + 绿软断言 + 蓝截图 + 金报告；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:38%;left:26%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,60%,0.10) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:38%;left:74%;width:520px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.10) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:900px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.10) 0%, transparent 65%);filter:blur(60px);opacity:0.5"></div>
+  <div class="fx-aura" style="position:absolute;top:66%;left:50%;transform:translateX(-50%);width:700px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.10) 0%, transparent 65%);filter:blur(55px);opacity:0.5"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:30%;left:26%;width:10px;height:10px;border-radius:50%;background:hsla(0,80%,60%,0.9);box-shadow:0 0 14px hsla(0,75%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:30%;left:74%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,52%,0.9);box-shadow:0 0 14px hsla(150,65%,48%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:24%;left:20%;width:8px;height:8px;background:rgba(239,68,68,0.80);box-shadow:0 0 12px rgba(239,68,68,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:80%;width:8px;height:8px;background:rgba(52,211,153,0.80);box-shadow:0 0 12px rgba(52,211,153,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:32%;width:8px;height:8px;background:rgba(96,165,250,0.80);box-shadow:0 0 12px rgba(96,165,250,0.55)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(251,191,36,0.80);box-shadow:0 0 12px rgba(251,191,36,0.55)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 sa-scene">
+  <!-- phase-1 (0-6.96s): 软断言对比硬断言 双卡总览 -->
+  <div class="region-top">
+    <div class="sa-stage-tag"><span class="dot"></span>E13 · 软断言 · 对比硬断言</div>
+  </div>
+  <div class="region-mid">
+    <div class="sa-overview">
+      <div class="sa-overview-title">软断言 · <span class="grad-green">对比</span> 硬断言</div>
+      <div class="sa-dual">
+        <div class="sa-card bad">
+          <div class="sa-card-tag">硬断言 assert</div>
+          <div class="sa-card-body">一条失败<br>立刻停</div>
+          <div class="sa-card-note">❌ 后面跑不到</div>
+        </div>
+        <div class="sa-card good">
+          <div class="sa-card-tag">软断言</div>
+          <div class="sa-card-body">失败截图<br>继续汇总</div>
+          <div class="sa-card-note">✓ 全跑完记报告</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 软断言对比硬断言 —</div>
+  </div>
+</div>
+<div class="phase phase-2 sa-scene">
+  <!-- phase-2 (6.96-13.92s): 硬断言 assert 一条失败立刻停 后面跑不到 -->
+  <div class="region-top">
+    <div class="sa-stage-tag"><span class="dot"></span>E13 · 硬断言 · 失败立刻停</div>
+  </div>
+  <div class="region-mid">
+    <div class="sa-hard">
+      <div class="sa-hard-title">硬断言 · 一条失败 <span class="grad-red">立刻停</span></div>
+      <div class="sa-hard-code">
+        <div class="sa-code-head">
+          <span class="sa-code-dot r"></span><span class="sa-code-dot y"></span><span class="sa-code-dot g"></span>
+          <span class="sa-code-file">assertions.py</span>
+        </div>
+        <div class="sa-code-line"><span class="kw">assert</span> 条件A <span class="cm">  # 通过</span></div>
+        <div class="sa-code-line"><span class="kw">assert</span> 条件B <span class="cm">  # 失败 →</span></div>
+        <div class="sa-code-line fail"><span class="cm">  ↓ 抛异常 立刻停</span></div>
+        <div class="sa-code-line skip"><span class="cm">assert 条件C  # 跑不到</span></div>
+        <div class="sa-code-line skip"><span class="cm">assert 条件D  # 跑不到</span></div>
+      </div>
+      <div class="sa-hard-note">后面的验证 · 全跑不到</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 硬断言失败即停 —</div>
+  </div>
+</div>
+<div class="phase phase-3 sa-scene">
+  <!-- phase-3 (13.92-20.88s): 软断言 失败不中断+截图+收集+全跑完 -->
+  <div class="region-top">
+    <div class="sa-stage-tag"><span class="dot"></span>E13 · 软断言 · 失败截图继续汇总</div>
+  </div>
+  <div class="region-mid">
+    <div class="sa-soft">
+      <div class="sa-soft-title">软断言 · 失败 <span class="grad-green">不中断</span> 截图汇总</div>
+      <div class="sa-soft-flow">
+        <div class="sa-flow-node fail-n">
+          <div class="sa-flow-label">条件B 失败</div>
+          <div class="sa-flow-sub">不抛异常</div>
+        </div>
+        <div class="sa-flow-arrow">→</div>
+        <div class="sa-flow-node shot">
+          <div class="sa-flow-label">自动截图</div>
+          <div class="sa-flow-sub">存现场</div>
+        </div>
+        <div class="sa-flow-arrow">→</div>
+        <div class="sa-flow-node collect">
+          <div class="sa-flow-label">收集结果</div>
+          <div class="sa-flow-sub">继续跑</div>
+        </div>
+        <div class="sa-flow-arrow">→</div>
+        <div class="sa-flow-node report">
+          <div class="sa-flow-label">全记进报告</div>
+          <div class="sa-flow-sub">C/D 也跑</div>
+        </div>
+      </div>
+      <div class="sa-soft-note">一条用例的多个验证 · 都跑完</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 软断言截图汇总 —</div>
+  </div>
+</div>
+<div class="phase phase-4 sa-scene">
+  <!-- phase-4 (20.88-27.84s): 纯文本输出兼容 GBK 不靠表情符号 收尾 -->
+  <div class="region-top">
+    <div class="sa-stage-tag"><span class="dot"></span>E13 · 纯文本输出 · 兼容命令行编码</div>
+  </div>
+  <div class="region-mid">
+    <div class="sa-finale">
+      <div class="sa-finale-title">纯文本标记 <span class="grad-gold">通过失败</span></div>
+      <div class="sa-terminal">
+        <div class="sa-term-head">
+          <span class="sa-term-dot r"></span><span class="sa-term-dot y"></span><span class="sa-term-dot g"></span>
+          <span class="sa-term-file">终端输出</span>
+        </div>
+        <div class="sa-term-line"><span class="pass">[通过]</span> 条件A</div>
+        <div class="sa-term-line"><span class="fail">[失败]</span> 条件B <span class="cm">(已截图)</span></div>
+        <div class="sa-term-line"><span class="pass">[通过]</span> 条件C</div>
+        <div class="sa-term-line"><span class="pass">[通过]</span> 条件D</div>
+        <div class="sa-term-summary"><span class="cm">汇总: 通过 3 失败 1</span></div>
+      </div>
+      <div class="sa-finale-sub">兼容命令行编码 · 不靠表情符号</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 纯文本输出收尾 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

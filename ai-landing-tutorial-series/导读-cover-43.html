@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>导读篇 · 3 分钟看懂 AI 转型 · 4:3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.cover{position:relative;width:1440px;height:1080px;padding:54px 76px 48px;display:flex;flex-direction:column;overflow:hidden;}
+.glow-blue{position:absolute;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.12),transparent 70%);filter:blur(95px);top:-200px;right:-130px;pointer-events:none;}
+.glow-gold{position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.14),transparent 70%);filter:blur(90px);bottom:-160px;left:-110px;pointer-events:none;}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(37,99,235,0.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.corner-tl{position:absolute;top:28px;left:28px;width:104px;height:3px;background:linear-gradient(90deg,rgba(37,99,235,0.55),transparent);}
+.corner-tl-v{position:absolute;top:28px;left:28px;width:3px;height:72px;background:linear-gradient(180deg,rgba(37,99,235,0.55),transparent);}
+.corner-br{position:absolute;bottom:28px;right:28px;width:104px;height:3px;background:linear-gradient(270deg,rgba(251,191,36,0.55),transparent);}
+.corner-br-v{position:absolute;bottom:28px;right:28px;width:3px;height:72px;background:linear-gradient(0deg,rgba(251,191,36,0.55),transparent);}
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#2563eb;letter-spacing:0.10em;border:1.5px solid rgba(37,99,235,0.40);background:#e0e7ff;padding:8px 20px;border-radius:999px;font-weight:700;}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 12px rgba(251,191,36,0.65);}
+.ep-tag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:20px;color:#fbbf24;border:1.5px solid rgba(251,191,36,0.55);background:rgba(251,191,36,0.12);padding:7px 16px;border-radius:999px;font-weight:700;}
+.ep-tag .ep-x{color:#fbbf24;font-weight:900;font-size:22px;}
+.title-wrap{position:relative;z-index:2;margin-top:4px;}
+.title{font-size:84px;font-weight:900;line-height:1.03;letter-spacing:-0.015em;}
+.title-normal{color:#0f172a;}
+.title-hl{background:linear-gradient(135deg,#2563eb 0%,#3b82f6 50%,#2563eb 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.subtitle{font-size:26px;color:#475569;font-weight:600;margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.subtitle .sub-blue{color:#2563eb;font-weight:800;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.6);margin:0 2px;}
+.subtitle .sub-gold{color:#d97706;font-weight:800;}
+.quote{position:relative;z-index:2;background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:22px 30px;border-radius:14px;font-size:27px;font-weight:600;line-height:1.5;margin-top:24px;box-shadow:0 8px 24px rgba(16,87,203,0.20);display:flex;align-items:center;gap:18px;}
+.quote-icon{font-size:40px;line-height:1;flex-shrink:0;}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.stat-row{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:26px;}
+.stat-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:6px;box-shadow:0 5px 16px rgba(15,23,42,0.06);border-top:5px solid #2563eb;}
+.stat-card.gold{border-top-color:#fbbf24;}
+.stat-card.green{border-top-color:#16a34a;}
+.stat-big{font-family:'JetBrains Mono','Consolas',monospace;font-size:46px;font-weight:900;line-height:1;background:linear-gradient(135deg,#fbbf24,#2563eb);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.stat-card.gold .stat-big{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.stat-card.green .stat-big{background:linear-gradient(135deg,#fbbf24,#16a34a);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:21px;font-weight:800;color:#0f172a;}
+.stat-desc{font-size:16px;color:#64748b;font-weight:500;line-height:1.4;}
+.chip-row{position:relative;z-index:2;margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;}
+.chip{font-size:18px;color:#2563eb;font-weight:700;padding:8px 15px;border-radius:999px;border:1px solid rgba(37,99,235,0.25);background:#e0e7ff;font-family:'PingFang SC',sans-serif;}
+.chip.gold{color:#d97706;border-color:rgba(251,191,36,0.40);background:rgba(251,191,36,0.12);}
+.chip.gray{color:#64748b;border-color:#e2e8f0;background:#f1f5f9;}
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid #e2e8f0;gap:14px;flex-wrap:wrap;}
+.repo{font-size:22px;color:#0f172a;font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:10px;}
+.repo .repo-label{color:#2563eb;font-weight:800;font-family:'PingFang SC',sans-serif;font-size:20px;}
+.repo .repo-path{background:#e0e7ff;padding:5px 13px;border-radius:7px;border:1px solid rgba(37,99,235,0.25);color:#1e40af;}
+.author{font-size:20px;color:#64748b;}
+.author .author-name{color:#2563eb;font-weight:800;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-blue"></div><div class="glow-gold"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · 导读篇</div>
+    <div class="ep-tag"><span class="ep-x">▶</span>13 集深度合集入口</div>
+  </div>
+
+  <div class="title-wrap">
+    <h1 class="title"><span class="title-normal">3 分钟看懂 </span><span class="title-hl">AI 转型</span></h1>
+    <div class="subtitle">30 张图概览<span class="sub-divider">·</span><span class="sub-blue">13 集合集入口</span><span class="sub-divider">·</span><span class="sub-gold">引流正片深度合集</span></div>
+  </div>
+
+  <div class="quote">
+    <span class="quote-icon">💡</span>
+    <div>AI 扩展的是<span class="em">会用 AI 的人</span>的能力边界，<span class="em">人是根本</span>。</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-big">+104%</div>
+      <div class="stat-label">人均产出</div>
+      <div class="stat-desc">80 人团队 3 个月翻倍</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-big">76.6%</div>
+      <div class="stat-label">AI 代码占比</div>
+      <div class="stat-desc">从无到有，CRUD 近 9 成</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-big">13 集</div>
+      <div class="stat-label">深度合集</div>
+      <div class="stat-desc">导读概览，正片深讲</div>
+    </div>
+  </div>
+
+  <div class="chip-row">
+    <span class="chip">思想地基</span>
+    <span class="chip">六阶段落地</span>
+    <span class="chip gold">30 张幻灯片快剪</span>
+    <span class="chip gray">每集深讲一阶段</span>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">导读篇 · 3 分钟概览 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

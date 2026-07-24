@@ -1,0 +1,141 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-purple: #C4B5FD;
+  --tut-red: #F87171;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 strategyppt — 战略汇报 PPT 两版本：启动版 vs 成果版
+ * phase 切换（场景类 sppt-scene，phase-1/2/3/4 依次显示）
+ * ============================================ */
+
+.sppt-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 100px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.sppt-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.sppt-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-gold { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 总览：双版本抛出 === */
+.sppt-overview {
+  display: flex; flex-direction: column; align-items: center; gap: 36px;
+}
+.sppt-title {
+  font-family: var(--font-title); font-size: 76px; font-weight: 900;
+  color: var(--tut-white); text-align: center; letter-spacing: 0.02em;
+}
+.sppt-sub {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.70); text-align: center;
+}
+.sppt-version-row {
+  display: flex; align-items: stretch; justify-content: center; gap: 48px;
+}
+.sppt-vtag {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 32px 56px; border-radius: 20px; min-width: 360px;
+}
+.sppt-vtag.launch {
+  background: linear-gradient(160deg, rgba(96,165,250,0.14), rgba(96,165,250,0.04));
+  border: 2px solid rgba(96,165,250,0.45);
+}
+.sppt-vtag.result {
+  background: linear-gradient(160deg, rgba(251,191,36,0.14), rgba(251,191,36,0.04));
+  border: 2px solid rgba(251,191,36,0.45);
+}
+.sppt-vtag .vname { font-family: var(--font-title); font-size: 52px; font-weight: 900; }
+.sppt-vtag .vstage { font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.72); }
+
+/* === phase-2 启动版详情（阶段1）=== */
+.sppt-detail {
+  display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%;
+}
+.sppt-detail-head {
+  display: flex; align-items: center; gap: 22px;
+}
+.sppt-detail-num {
+  font-family: var(--font-title); font-size: 96px; font-weight: 900; line-height: 1;
+}
+.sppt-detail-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white);
+}
+.sppt-detail-stage {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 10px 24px; border-radius: 999px;
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+}
+.sppt-detail-stage.launch { background: rgba(96,165,250,0.14); border: 1px solid rgba(96,165,250,0.40); color: #60A5FA; }
+.sppt-detail-stage.result { background: rgba(251,191,36,0.14); border: 1px solid rgba(251,191,36,0.40); color: #FBBF24; }
+.sppt-argue-list {
+  display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 1400px;
+}
+.sppt-argue {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px 32px; border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border-left: 5px solid rgba(96,165,250,0.6);
+}
+.sppt-argue.result-argue { border-left-color: rgba(251,191,36,0.6); }
+.sppt-argue .akey {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-white);
+  flex-shrink: 0; min-width: 200px;
+}
+.sppt-argue .aval {
+  font-family: var(--font-body); font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.72);
+}
+.sppt-argue .aval .kw-blue { color: #93C5FD; font-weight: 700; }
+.sppt-argue .aval .kw-gold { color: #FCD34D; font-weight: 700; }
+.sppt-no-data {
+  margin-top: 8px; padding: 14px 28px; border-radius: 12px;
+  background: rgba(248,113,113,0.10); border: 1px dashed rgba(248,113,113,0.45);
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: #FCA5A5;
+}
+
+/* === phase-4 收尾 === */
+.sppt-finale {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.sppt-finale-title {
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.sppt-finale-key {
+  font-family: var(--font-body); font-size: 40px; font-weight: 700; color: var(--tut-white); text-align: center;
+}
+.sppt-finale-key .arrow { color: #60A5FA; font-weight: 900; margin: 0 12px; }

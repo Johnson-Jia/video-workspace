@@ -1,0 +1,40 @@
+{
+  "topic_type": "多题材盘点（视频工具/AI技能/安全/设计/游戏/系统）",
+  "topic_pattern": "topic-tool",
+  "date": "2026-07-15",
+  "angle": "今日题材高度多元+单日爆发爆点：OpenCut 单日涨四千三百多颗星（昨日千→今日四千三，4倍加速），4 个新项目上榜（工程师 skill 包/AI 危险命令守卫/开源 Figma/PS5 模拟器）。题材从视频剪辑横跨到系统瘦身，避开 AI Agent 单一赛道疲劳。",
+  "novelty_strategy": {
+    "hook_angle": "数字锚定+反差加速（P-hook-number_anchor / P-hook-action_number）— hook 锁定 OpenCut 单日 4349 涨星的爆发加速（昨日千今日四千三，不是平铺涨星而是加速爆发），不用近期教程的'合集是干什么的''软断言对比硬断言'方法论句式",
+    "diversification": "题材多元是天然新鲜度杠杆：6 项目覆盖视频编辑/工程师技能/AI安全/团队设计/游戏模拟器/系统优化 6 个互不重叠领域，AI 与非 AI 各半（mattpocock skills 与 destructive_command_guard 属 AI 生态周边但非 Agent 本体），打破连续 AI Agent 盘点疲劳",
+    "anti_recent": "近 7 期是教程系列（ai-test-frame 测试方法论），本期 github 盘点主题/句式/数字锚点全部不同：题材从'企业级 AI 转型方法论'换到'开源工具盘点'，hook 从'合集介绍'换到'数字爆发锚定'，叙事从'教程拆解'换到'hyper-pace 多项目盘点'"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": {
+    "summary": "4A普通可用 + 1A玩家向 + 1C开发者向，AI 与非 AI 平衡，6 个互不重叠领域",
+    "breakdown": [
+      {"repo": "OpenCut-app/OpenCut", "domain": "视频编辑", "audience": "A普通可用", "is_ai": false, "star_signal": "+4349 爆发"},
+      {"repo": "mattpocock/skills", "domain": "工程师技能/AI工具链周边", "audience": "A普通可用", "is_ai": false, "star_signal": "+1864 稳涨"},
+      {"repo": "Dicklesworthstone/destructive_command_guard", "domain": "AI安全", "audience": "C开发者向", "is_ai": true, "star_signal": "+481 新榜"},
+      {"repo": "penpot/penpot", "domain": "团队设计协作", "audience": "A普通可用", "is_ai": false, "star_signal": "+264 稳涨"},
+      {"repo": "par274/sharpemu", "domain": "游戏模拟器", "audience": "A玩家向", "is_ai": false, "star_signal": "+448 新榜"},
+      {"repo": "Raphire/Win11Debloat", "domain": "系统瘦身", "audience": "A普通可用", "is_ai": false, "star_signal": "+779 霸榜"}
+    ]
+  },
+  "hook_strategy": {
+    "primary_pattern": "P-hook-number_anchor",
+    "secondary_pattern": "P-hook-action_number",
+    "anchor": "OpenCut 单日 4349 星爆发（加速反差）",
+    "forbidden": ["疑问句式（你知道吗/有没有想过）", "平铺涨星陈述", "教程方法论句式（合集是干什么的）"]
+  },
+  "avoid_recent": [
+    "demos/ai-test-frame",
+    "workspace/ai-landing-tutorial-series",
+    "data/cases.json",
+    "text/button",
+    "app/selector"
+  ]
+}

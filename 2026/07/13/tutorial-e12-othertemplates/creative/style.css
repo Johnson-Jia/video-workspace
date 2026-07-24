@@ -1,0 +1,125 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 othertemplates — 其他 4 模板：四卡片
+ * phase 切换（场景类 ot-scene，phase-1/2/3/4 依次显示）
+ * ============================================ */
+
+.ot-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 100px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 24px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.ot-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.ot-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(147,197,253,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-cyan { background-image: linear-gradient(135deg, #22D3EE, #06B6D4, #67E8F9); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-purple { background-image: linear-gradient(135deg, #C4B5FD, #A78BFA, #DDD6FE); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 开场 === */
+.ot-intro {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.ot-intro-title {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ot-intro-sub {
+  font-family: var(--font-body); font-size: 38px; font-weight: 600; color: rgba(147,197,253,0.85); text-align: center;
+}
+
+/* === phase-2/3 卡片网格 === */
+.ot-cards {
+  display: flex; align-items: stretch; justify-content: center; gap: 48px;
+}
+.ot-card {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 36px 40px; border-radius: 18px;
+  min-width: 420px; max-width: 520px;
+}
+.ot-card.blue { background: rgba(96,165,250,0.08); border: 2px solid rgba(96,165,250,0.40); }
+.ot-card.cyan { background: rgba(34,211,238,0.08); border: 2px solid rgba(34,211,238,0.40); }
+.ot-card.purple { background: rgba(196,181,253,0.08); border: 2px solid rgba(196,181,253,0.40); }
+.ot-card.green { background: rgba(52,211,153,0.08); border: 2px solid rgba(52,211,153,0.40); }
+.ot-card-num {
+  font-family: var(--font-data); font-size: 40px; font-weight: 700;
+  color: rgba(255,255,255,0.45); letter-spacing: 0.05em;
+}
+.ot-card-name {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; text-align: center;
+}
+.ot-card-use {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: var(--tut-white); text-align: center;
+}
+.ot-card-body {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.78); text-align: center;
+}
+.ot-card-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  padding: 10px 22px; border-radius: 12px;
+  margin-top: 6px;
+}
+.ot-card.blue .ot-card-tag { background: rgba(96,165,250,0.10); color: #93C5FD; border: 1px solid rgba(96,165,250,0.30); }
+.ot-card.cyan .ot-card-tag { background: rgba(34,211,238,0.10); color: #67E8F9; border: 1px solid rgba(34,211,238,0.30); }
+.ot-card.purple .ot-card-tag { background: rgba(196,181,253,0.10); color: #DDD6FE; border: 1px solid rgba(196,181,253,0.30); }
+.ot-card.green .ot-card-tag { background: rgba(52,211,153,0.10); color: #6EE7B7; border: 1px solid rgba(52,211,153,0.30); }
+
+/* === phase-4 收尾 === */
+.ot-finale {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.ot-finale-title {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ot-finale-flow {
+  display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap;
+}
+.ot-ftag {
+  padding: 14px 30px; border-radius: 12px;
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  background: rgba(96,165,250,0.10); border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+}
+.ot-fsep {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; color: rgba(255,255,255,0.40);
+}
+.ot-finale-sub {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700; color: rgba(147,197,253,0.85); text-align: center;
+}

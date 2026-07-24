@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>03-七阶段路线 · 全景</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:22px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#f59e0b;}
+.card:nth-child(4){border-left-color:#7c3aed;}
+.card .stage{font-size:20px;font-weight:700;color:#94a3b8;letter-spacing:.1em;margin-bottom:6px;}
+.card .ctitle{font-size:28px;font-weight:800;color:#0f172a;margin-bottom:6px;line-height:1.2;}
+.card .csub{font-size:18px;font-weight:600;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .csub{color:#16a34a;}
+.card:nth-child(3) .csub{color:#f59e0b;}
+.card:nth-child(4) .csub{color:#7c3aed;}
+.card ul{list-style:none;padding:0;margin:0;}
+.card li{font-size:17px;color:#475569;line-height:1.6;padding-left:14px;position:relative;margin-bottom:4px;}
+.card li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:#94a3b8;}
+.grouprow{display:flex;gap:22px;margin-bottom:20px;}
+.grouptag{flex:1;text-align:center;font-size:18px;font-weight:700;padding:10px;border-radius:10px;letter-spacing:.05em;}
+.gt1{background:#dbeafe;color:#1e40af;}
+.gt2{background:#dcfce7;color:#166534;}
+.gt3{background:#fef3c7;color:#92400e;}
+.gt4{background:#ede9fe;color:#6d28d9;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>总纲 · 全景路线</div>
+    <div class="num">AI 战略转型方法论 · <strong>03/30</strong></div>
+  </div>
+  <h1>总纲 + 六阶段,<span class="hl">从思想到全面推广</span></h1>
+  <div class="subtitle">一套经过 80+ 人研发团队、千万级用户平台实战验证的方法论,一份到底</div>
+  <div class="quote">阶段 0 是思想地基(<span class="em">所有人先过这一关</span>),阶段 1-6 是实施落地——分四组:启动 / 实施 / 规模 / 沉淀。</div>
+  <div class="grouprow">
+    <div class="grouptag gt1">地基:阶段 0 总纲</div>
+    <div class="grouptag gt2">启动:阶段 1 战略</div>
+    <div class="grouptag gt3">实施:阶段 2-4</div>
+    <div class="grouptag gt4">规模+沉淀:阶段 5-6</div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="stage">阶段 0</div><div class="ctitle">总纲</div><div class="csub">思想地基·必读</div><ul><li>转变思想、拥抱 AI</li><li>5 条 AI 原理</li><li>人 + AI,人是根本</li></ul></div>
+    <div class="card"><div class="stage">阶段 1</div><div class="ctitle">战略启动</div><div class="csub">Leader 主战场</div><ul><li>目标量化、路线图</li><li>组织保障、风险预案</li><li>预算与 ROI 测算</li></ul></div>
+    <div class="card"><div class="stage">阶段 2-4</div><div class="ctitle">赋能·基建·闭环</div><div class="csub">实施三阶段</div><ul><li>2 全员赋能(工具/培训/规范)</li><li>3 基础设施(可跳过)</li><li>4 流程闭环与试点</li></ul></div>
+    <div class="card"><div class="stage">阶段 5-6</div><div class="ctitle">推广·沉淀</div><div class="csub">规模 + 组织资产</div><ul><li>5 推广与度量</li><li>6 沉淀与复用</li><li>个体经验→组织资产</li></ul></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:index.html「实施六阶段」+ 各 stage 章节标题(阶段是并行交叠的,教程按串行讲为清晰)</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

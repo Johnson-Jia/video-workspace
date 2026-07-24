@@ -1,0 +1,154 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 hook — 汇报即用开篇：5 类汇报 prompt + ppt-master 原生可编辑 + 三十秒出活 + 向上汇报要资源
+ * phase 切换（单场景类 hook-scene，phase-1/phase-2 依次显示）
+ * ============================================ */
+
+.hook-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+/* —— 阶段标签胶囊 —— */
+.h-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.h-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系亮端，禁白端点 / 禁暗端） —— */
+.grad-gold { background-image: linear-gradient(92deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-blue { background-image: linear-gradient(92deg,#60A5FA 0%,#60A5FA 55%,#93C5FD 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.grad-green { background-image: linear-gradient(92deg,#34D399 0%,#34D399 55%,#6EE7B7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* —— 关键词点缀（不透明纯色，可叠阴影） —— */
+.kw-gold { color: #FBBF24; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+.kw-blue { color: #60A5FA; font-weight: 900; text-shadow: 0 2px 8px rgba(30,41,59,0.32); }
+
+/* —— Phase 1：大字 5 + 1 + ppt-master + 双卡机制 —— */
+.hero-block { flex-direction: column; gap: 18px; width: 100%; }
+.hero-row {
+  display: flex; align-items: center; justify-content: center; gap: 36px;
+}
+.hero-num {
+  font-family: var(--font-title); font-size: 180px; font-weight: 900; line-height: 1;
+  text-shadow: 0 6px 22px rgba(30,41,59,0.32);
+  letter-spacing: 0.01em;
+}
+.hero-x {
+  font-family: var(--font-title); font-size: 96px; font-weight: 800;
+  color: rgba(255,255,255,0.40);
+  line-height: 1;
+}
+.hero-subtitle {
+  font-family: var(--font-title); font-size: 44px; font-weight: 800;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.mech-row {
+  display: flex; gap: 32px; align-items: stretch; justify-content: center; width: 100%;
+  margin-top: 10px;
+}
+.mech-card {
+  flex: 1; max-width: 540px;
+  border-radius: 20px; padding: 22px 26px;
+  border: 2px solid;
+  background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(15,23,42,0.88));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
+}
+.mech-card.mech-gold { border-color: rgba(251,191,36,0.55); }
+.mech-card.mech-blue { border-color: rgba(96,165,250,0.55); }
+.mech-icon {
+  font-size: 56px; line-height: 1;
+}
+.mech-name {
+  font-family: var(--font-body); font-size: 36px; font-weight: 800;
+  color: var(--tut-white); letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.mech-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+
+/* —— Phase 2：三十秒出活 + 价值卡 + prompt+工具=出活 —— */
+.value-block { flex-direction: column; gap: 22px; width: 100%; }
+.thirty-sec {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900;
+  color: var(--tut-white); text-align: center;
+  text-shadow: 0 4px 14px rgba(30,41,59,0.32);
+  letter-spacing: 0.02em;
+}
+.value-card {
+  width: 100%; max-width: 1300px;
+  border-radius: 18px; padding: 24px 36px;
+  background: linear-gradient(165deg, rgba(251,191,36,0.08), rgba(15,23,42,0.92));
+  border: 2px solid rgba(251,191,36,0.45);
+  display: flex; flex-direction: column; gap: 10px; text-align: center;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+}
+.value-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: rgba(255,255,255,0.65); letter-spacing: 0.08em;
+}
+.value-text {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900;
+  color: var(--tut-white);
+  text-shadow: 0 3px 12px rgba(30,41,59,0.32);
+}
+.value-note {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.78);
+}
+.asset-row {
+  display: flex; gap: 24px; align-items: center; justify-content: center; flex-wrap: wrap;
+}
+.asset-tag {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800;
+  padding: 12px 28px; border-radius: 14px;
+  color: var(--tut-white);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.32);
+}
+.asset-gold { background: rgba(251,191,36,0.12); border: 2px solid rgba(251,191,36,0.55); }
+.asset-blue { background: rgba(96,165,250,0.12); border: 2px solid rgba(96,165,250,0.55); }
+.asset-green { background: rgba(52,211,153,0.14); border: 2px solid rgba(52,211,153,0.60); }
+.asset-plus, .asset-eq {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900;
+  color: rgba(255,255,255,0.55); line-height: 1;
+}

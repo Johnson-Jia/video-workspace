@@ -1,0 +1,85 @@
+<!-- 场景: scene-1 | 时长: 20.62s | bg: hex_grid | 收官方法论预告：合集收官 E13 + 大字「AI 自动化测试实操」+ 5 关键思想 stagger + 8 文件架构清晰 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金收官 + 蓝5思想 + 绿8文件；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:980px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:66%;left:22%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:66%;left:78%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 16px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:82%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:82%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色优先：蓝/绿/紫） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:16%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:84%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:50%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 intro-scene">
+  <!-- phase-1 (0-10.31s): 合集收官 E13 + 大字「AI 自动化测试实操」+ 收官徽章 + 数据角标（5 思想 / 8 文件） -->
+  <div class="region-top">
+    <div class="i-stage-tag"><span class="dot"></span>E13 · 收官 · AI 自动化测试实操 · intro</div>
+  </div>
+  <div class="region-mid intro-hero">
+    <div class="i-finale-badge">合集 <span class="grad-gold">十三集</span> 收官</div>
+    <div class="i-title">AI 自动化测试 <span class="grad-gold">实操</span></div>
+    <div class="i-subtitle">跑 <span class="kw-gold">ai-test-frame</span> · AI 只生成 <span class="kw-blue">确定性执行</span> · 根治 <span class="kw-red">虚假通过</span></div>
+    <div class="i-data-row">
+      <div class="i-data-chip chip-gold"><span class="num grad-gold">5</span><span class="lab">关键思想</span></div>
+      <div class="i-data-chip chip-blue"><span class="num grad-blue">8</span><span class="lab">文件架构</span></div>
+      <div class="i-data-chip chip-green"><span class="num grad-green">开箱</span><span class="lab">跑通</span></div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / intro · 合集收官 —</div>
+  </div>
+</div>
+<div class="phase phase-2 intro-scene">
+  <!-- phase-2 (10.31-20.62s): 5 关键思想 stagger + 8 文件架构清晰收尾 -->
+  <div class="region-top">
+    <div class="i-stage-tag"><span class="dot"></span>E13 · 收官 · AI 自动化测试实操 · intro</div>
+  </div>
+  <div class="region-mid intro-preview-block">
+    <div class="i-preview-title">这集你能学到 <span class="grad-gold">五个关键思想</span></div>
+    <div class="i-preview-row">
+      <div class="i-preview-card card-gold">
+        <div class="i-card-num grad-gold">01</div>
+        <div class="i-card-name">AI 只生成不执行</div>
+        <div class="i-card-note">编码期产出 handler</div>
+      </div>
+      <div class="i-preview-card card-blue">
+        <div class="i-card-num grad-blue">02</div>
+        <div class="i-card-name">数据与代码解耦</div>
+        <div class="i-card-note">用例 data 代码 handlers</div>
+      </div>
+      <div class="i-preview-card card-gold">
+        <div class="i-card-num grad-gold">03</div>
+        <div class="i-card-name">注册中心模式</div>
+        <div class="i-card-note">装饰器自动发现</div>
+      </div>
+      <div class="i-preview-card card-blue">
+        <div class="i-card-num grad-blue">04</div>
+        <div class="i-card-name">软断言</div>
+        <div class="i-card-note">失败不中断加截图</div>
+      </div>
+      <div class="i-preview-card card-green">
+        <div class="i-card-num grad-green">05</div>
+        <div class="i-card-name">变量传递</div>
+        <div class="i-card-note">步骤间用例间都传</div>
+      </div>
+    </div>
+    <div class="i-finale">对应 <span class="kw-gold">八个文件</span> · 每个文件 <span class="kw-blue">一个核心模块</span> · <span class="grad-green">架构清晰 开箱跑通</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / intro · 合集收官 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

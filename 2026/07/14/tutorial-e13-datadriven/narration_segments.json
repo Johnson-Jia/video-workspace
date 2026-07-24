@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 55,
+    "emotion": "数据驱动：用例 data 与代码 handlers 彻底解耦 + runner 按 type 路由 + 变量传递 + 分工清晰",
+    "text": "数据与代码彻底解耦。用例在 data 目录，是纯粹的步骤 JSON，运营在这里编，不碰代码。代码在 handlers 目录，是具体业务实现。调度器 runner 读用例，按 type 路由，基础操作走字典，模块操作走注册中心。还有变量传递，下划线 save_as 保存，花括号变量名引用，步骤间用例间都能传。运营编步骤，开发写 handler，分工清晰。",
+    "narration": "数据与代码彻底解耦。用例在 data 目录，是纯粹的步骤 JSON，运营在这里编，不碰代码。代码在 handlers 目录，是具体业务实现。调度器 runner 读用例，按 type 路由，基础操作走字典，模块操作走注册中心。还有变量传递，下划线 save_as 保存，花括号变量名引用，步骤间用例间都能传。运营编步骤，开发写 handler，分工清晰。",
+    "hook_anchors": ["数据与代码彻底解耦", "用例在 data 目录", "纯粹的步骤 JSON", "运营在这里编", "不碰代码", "代码在 handlers 目录", "具体业务实现", "调度器 runner", "读用例", "按 type 路由", "基础操作走字典", "模块操作走注册中心", "变量传递", "下划线 save_as 保存", "花括号变量名引用", "步骤间用例间都能传", "运营编步骤", "开发写 handler", "分工清晰"],
+    "visual_type": "tutorial_datadriven",
+    "tutorial_reveal_mode": false,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "数据与代码彻底解耦 + data/cases.json 用例（4 条 3 跑 1 关，纯粹步骤 JSON）+ handlers/ 代码实现", "duration_share": 0.26, "narration_anchor": {"start_sentence": 0, "end_sentence": 2}},
+      {"phase": 2, "start_offset": 14, "focus": "调度器 runner 读用例按 type 路由——基础操作走字典（text/button/app/selector）/ 模块操作走注册中心（handler_registry.get）", "duration_share": 0.26, "narration_anchor": {"start_sentence": 3, "end_sentence": 3}},
+      {"phase": 3, "start_offset": 28, "focus": "变量传递——_save_as 保存到 ctx + 花括号变量名引用 步骤间用例间都能传", "duration_share": 0.26, "narration_anchor": {"start_sentence": 4, "end_sentence": 4}},
+      {"phase": 4, "start_offset": 41, "focus": "分工清晰——运营编步骤，开发写 handler 收尾", "duration_share": 0.22, "narration_anchor": {"start_sentence": 5, "end_sentence": 5}}
+    ],
+    "bg_component": "diamond_lattice"
+  }
+]

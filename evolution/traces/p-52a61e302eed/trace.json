@@ -1,0 +1,42 @@
+[
+  {
+    "id": "T-20260717T020241Z-stage7-delivery",
+    "skill_id": "stage7-delivery",
+    "timestamp": "2026-07-17T02:02:41.123690+00:00",
+    "project_dir": "C:/Users/admin/AppData/Local/Temp/tmp.gkOcSpQQFg",
+    "context": {},
+    "execution": {
+      "steps": [],
+      "path_switches": [],
+      "token_usage": null
+    },
+    "result": {
+      "status": "fail",
+      "gate_report": {
+        "hard_passed": false,
+        "soft_score": 1.0,
+        "hard_violations": [
+          {
+            "rule_id": "gate:file_exists",
+            "details": "文件缺失或为空: final.mp4"
+          },
+          {
+            "rule_id": "gate:cover_layers_present",
+            "details": "R-S7-002: 封面缺少 7 层: 第1层:中文日期（需 class='date' 或包含'年'字）; 第2层:场景标签（需 class='scene-label'）; 第3层:胶囊徽章（需 class='badge'）; 第4层:主标题（需 class='main-title'）; 第5层:渐变分隔线（需 class='divider'）; 第6层:数据说明（需 class='data-subtitle' 或类似）; 第7层:数据卡片（需 class='card'）。参考 stage7-delivery.md §7.1 的 7 层模板"
+          },
+          {
+            "rule_id": "gate:douyin_platforms_complete",
+            "details": "R-S7-006: 缺少平台文案: 抖音, B站, 视频号, 小红书（需 ## 抖音、B站、视频号、小红书）; 缺少评论区自评（需 ## 评论区自评 段落）"
+          },
+          {
+            "rule_id": "gate:no_app_name",
+            "details": "R-G-014: 发现商业 app/软件名（剪映是字节系产品，提它做替代触发封禁；用功能泛化如'视频剪辑工具'）: narration.txt: '剪映'; douyin.md: '剪映'; cover.html: 'CapCut'"
+          }
+        ],
+        "soft_issues": []
+      }
+    },
+    "attribution": null,
+    "performance": null
+  }
+]

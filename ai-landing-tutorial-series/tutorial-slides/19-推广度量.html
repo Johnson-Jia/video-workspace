@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>19-推广度量 · 阶段5</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#f59e0b;}
+.card .clabel{font-size:22px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card:nth-child(3) .clabel{color:#f59e0b;}
+.card .ctitle{font-size:28px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card .cdesc{font-size:19px;color:#475569;line-height:1.6;flex:1;}
+.card .ckey{font-size:17px;font-weight:600;margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;}
+.card:nth-child(1) .ckey{color:#2563eb;}
+.card:nth-child(2) .ckey{color:#16a34a;}
+.card:nth-child(3) .ckey{color:#f59e0b;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段5 · 推广度量</div>
+    <div class="num">AI 战略转型方法论 · <strong>19/30</strong></div>
+  </div>
+  <h1>从试点到全员,<span class="hl">用数据证伪</span></h1>
+  <div class="subtitle">把试点成果放大到全团队,并用数据证明"真的提效了"——不可度量 = 不可管理</div>
+  <div class="quote">多 Agent 并行把单点提效放大为大规模,效果度量用数据证伪。<span class="em">没有度量的转型是玄学,推广不动的转型是孤岛。</span></div>
+  <div class="cards">
+    <div class="card"><div class="clabel">🤖 多 Agent 并行</div><div class="ctitle">规模放大器</div><div class="cdesc">agent-teams(6 步流程 + 4 策略 + 项目注册表);code-review 多 Agent(Haiku 资格检查 + 5 Sonnet 并行 + 置信度阈值 80)</div><div class="ckey">→ Windows 建议 2-3 个(fork 限制)</div></div>
+    <div class="card"><div class="clabel">📊 AI 代码占比</div><div class="ctitle">用数据回答提效多少</div><div class="cdesc">Co-authored-by trailer(AI 工具默认埋点)+ 风格学反伪造;双口径:提交占比 + 行数占比(后者更真实)</div><div class="ckey">→ 最危险:觉得有用但说不清</div></div>
+    <div class="card"><div class="clabel">🎯 13 组共性</div><div class="ctitle">各组落地真实场景</div><div class="cdesc">13 个组各自落地真实场景,提炼共性方法论;推广靠示范案例,度量靠事后统计(推进过程看不到)</div><div class="ckey">→ 先业务覆盖率,再 AI 占比</div></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage5.html key-conclusion + §2(多 Agent 并行)+ §3(AI 代码占比)+ §4(13 组推广)。远期演进:6 专项 Agent 微服务闭环见 §2.1</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

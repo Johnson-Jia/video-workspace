@@ -1,0 +1,181 @@
+<!-- 场景: scene-1 | 时长: 28.87s | bg: diamond_lattice | 换你的系统·4 步改造（改定位/改地址加登录/写handler/编用例） -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝编号 + 金动作 + 青文件 + 绿收尾；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:32%;left:50%;transform:translateX(-50%);width:1200px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.12) 0%, transparent 65%);filter:blur(65px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:22%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(188,85%,55%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:78%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:28%;left:20%;width:380px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <div class="fx-aura" style="position:absolute;top:72%;left:50%;transform:translateX(-50%);width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:22%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:22%;width:10px;height:10px;border-radius:50%;background:hsla(188,85%,55%,0.9);box-shadow:0 0 14px hsla(188,85%,55%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:78%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,52%,0.9);box-shadow:0 0 14px hsla(150,70%,52%,0.30)"></div>
+  <!-- fx-particle 浮动粒子（冷色优先） -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(34,211,238,0.85);box-shadow:0 0 12px rgba(34,211,238,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:34%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:66%;width:8px;height:8px;background:rgba(147,197,253,0.85);box-shadow:0 0 12px rgba(147,197,253,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 cust-scene">
+  <!-- phase-1 (0-7.22s): 总览——demo 自带商品页用来开箱跑 + 真实用四步改造 -->
+  <div class="region-top">
+    <div class="cust-stage-tag"><span class="dot"></span>E13 · 换你的系统 · 四步改造</div>
+  </div>
+  <div class="region-mid">
+    <div class="cust-overview">
+      <div class="cust-overview-title">demo 自带商品页 · <span class="grad-gold">用来开箱跑</span></div>
+      <div class="cust-overview-flow">
+        <div class="cust-ov-box demo">
+          <span class="cust-ov-box-tag">demo</span>
+          <span class="cust-ov-box-body">开箱即跑</span>
+        </div>
+        <div class="cust-ov-arrow">→</div>
+        <div class="cust-ov-box real">
+          <span class="cust-ov-box-tag">真实用</span>
+          <span class="cust-ov-box-body"><span class="grad-green">四步改造</span></span>
+        </div>
+      </div>
+      <div class="cust-overview-four">
+        <div class="cust-ov-mini">
+          <span class="cust-ov-mini-num">其一</span>
+          <span class="cust-ov-mini-name">改 base_page 定位</span>
+        </div>
+        <div class="cust-ov-mini">
+          <span class="cust-ov-mini-num">其二</span>
+          <span class="cust-ov-mini-name">改 main 跳转地址</span>
+        </div>
+        <div class="cust-ov-mini">
+          <span class="cust-ov-mini-num">其三</span>
+          <span class="cust-ov-mini-name">写更多 handler</span>
+        </div>
+        <div class="cust-ov-mini">
+          <span class="cust-ov-mini-num">其四</span>
+          <span class="cust-ov-mini-name">data 编用例</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 换你的系统 —</div>
+  </div>
+</div>
+<div class="phase phase-2 cust-scene">
+  <!-- phase-2 (7.22-14.44s): 其一 改 base_page 定位——匹配你系统界面 + 保持通用定位策略 -->
+  <div class="region-top">
+    <div class="cust-stage-tag"><span class="dot"></span>E13 · 其一 · 改 base_page 定位</div>
+  </div>
+  <div class="region-mid">
+    <div class="cust-step">
+      <div class="cust-step-head">
+        <div class="cust-step-num">01</div>
+        <div class="cust-step-title">其一 · <span class="grad-blue">改 base_page 定位</span></div>
+      </div>
+      <div class="cust-file-block">📁 base_page.py  —  测试基类 · 通用定位</div>
+      <div class="cust-step-card">
+        <div class="cust-step-row">
+          <span class="cust-step-row-label">改什么</span>
+          <span class="cust-step-row-text">改 base_page 的定位</span>
+        </div>
+        <div class="cust-step-row">
+          <span class="cust-step-row-label">匹配</span>
+          <span class="cust-step-row-text">匹配你系统的界面</span>
+        </div>
+        <div class="cust-step-row">
+          <span class="cust-step-row-label">保持</span>
+          <span class="cust-step-row-text">保持通用定位策略</span>
+        </div>
+      </div>
+      <div class="cust-step-note">
+        <span>✓</span><span>换 selector · 不换定位模式</span>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 其一 改定位 —</div>
+  </div>
+</div>
+<div class="phase phase-3 cust-scene">
+  <!-- phase-3 (14.44-21.65s): 其二 改 main 跳转地址 + 其三 照 test_product 写 handler -->
+  <div class="region-top">
+    <div class="cust-stage-tag"><span class="dot"></span>E13 · 其二 改地址 · 其三 写 handler</div>
+  </div>
+  <div class="region-mid">
+    <div class="cust-duo">
+      <div class="cust-duo-col col1">
+        <div class="cust-duo-head">
+          <div class="cust-duo-num">02</div>
+          <div class="cust-duo-title">其二 · <span class="grad-blue">改 main 跳转</span></div>
+        </div>
+        <div class="cust-duo-file">📁 main.py  —  执行入口</div>
+        <div class="cust-duo-bullets">
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>改跳转地址</span></div>
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>指向你的系统</span></div>
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>加登录流程</span></div>
+        </div>
+      </div>
+      <div class="cust-duo-col col2">
+        <div class="cust-duo-head">
+          <div class="cust-duo-num">03</div>
+          <div class="cust-duo-title">其三 · <span class="grad-purple">写 handler</span></div>
+        </div>
+        <div class="cust-duo-file">📁 test_product.py  —  参考写法</div>
+        <div class="cust-duo-bullets">
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>照 test_product 写法</span></div>
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>给你的业务</span></div>
+          <div class="cust-duo-bul"><span class="mark">▸</span><span>写更多 handler</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 其二 其三 —</div>
+  </div>
+</div>
+<div class="phase phase-4 cust-scene">
+  <!-- phase-4 (21.65-28.87s): 其四 data 编用例——生产可用表格替 JSON + 数据驱动思想一致 -->
+  <div class="region-top">
+    <div class="cust-stage-tag"><span class="dot"></span>E13 · 其四 · data 编用例 · 数据驱动</div>
+  </div>
+  <div class="region-mid">
+    <div class="cust-cases">
+      <div class="cust-step-head">
+        <div class="cust-step-num">04</div>
+        <div class="cust-step-title">其四 · <span class="grad-cyan">data 编用例</span></div>
+      </div>
+      <div class="cust-cards-pair">
+        <div class="cust-cp-card json">
+          <div class="cust-cp-head">
+            <span class="cust-cp-tag">JSON</span>
+            <span class="cust-cp-scene">demo 用</span>
+          </div>
+          <div class="cust-cp-code">data/cases.json<br>{"type":"add_product", ...}</div>
+        </div>
+        <div class="cust-cp-arrow">→</div>
+        <div class="cust-cp-card sheet">
+          <div class="cust-cp-head">
+            <span class="cust-cp-tag">表格</span>
+            <span class="cust-cp-scene">生产可用</span>
+          </div>
+          <div class="cust-cp-code">用例表替代 JSON<br>运营编 · 不碰代码</div>
+        </div>
+      </div>
+      <div class="cust-finale">
+        <span class="icon">✓</span><span><span class="grad-green">数据驱动</span> · 思想一致</span>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 其四 data 编用例 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,315 @@
+:root {
+  /* 第30周 GitHub 周榜 — 暗色科技底 + 五组领域色（暖橙/金/青/紫/蓝） */
+  --bg-deep: #0B1226;
+  --bg-mid: #1A1235;
+  --accent-warm: #F9A825;        /* hook/CTA 金琥珀 */
+  --accent-gold: #FBBF24;
+  /* 五分组色环（仅视觉：卡片色环/边框/渐变标题，旁白禁颜色词） */
+  --grp-orange: #FB923C;         /* 创作工具组 */
+  --grp-gold:   #FBBF24;         /* 开发者技能组 */
+  --grp-cyan:   #22D3EE;         /* AI 编程组 */
+  --grp-purple: #A78BFA;         /* AI 应用组 */
+  --grp-blue:   #60A5FA;         /* AI 垂直组 */
+  --text: #F5F5F5;
+  --text2: rgba(245,245,245,0.66);
+  --text3: rgba(245,245,245,0.46);
+  --card-bg: rgba(13,18,38,0.78);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 通用渐变文字（同色系高饱和，禁白色端点/暗端）
+ * text-shadow 用深蓝灰 rgba(30,41,59,0.6) 防 R-S6-023
+ * ============================================ */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FCD34D 0%, #FBBF24 50%, #F59E0B 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-orange {
+  background-image: linear-gradient(135deg, #FDBA74 0%, #FB923C 50%, #F97316 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #67E8F9 0%, #22D3EE 50%, #06B6D4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #C4B5FD 0%, #A78BFA 50%, #8B5CF6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 50%, #3B82F6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 14px rgba(30,41,59,0.45);
+  line-height: 1.1;
+}
+
+/* ============================================
+ * fx 通用元素（每个场景通过 inline 覆盖定位/颜色）
+ * ============================================ */
+.fx-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+}
+.fx-streak {
+  position: absolute; height: 2px; border-radius: 2px;
+  pointer-events: none; opacity: 0.55;
+}
+.fx-anchor {
+  position: absolute; width: 14px; height: 14px;
+  border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 18px currentColor;
+}
+
+/* ============================================
+ * 场景 1 — Hook：第30周 + 涨幅王破万星
+ * ============================================ */
+.hook-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 44px;
+  text-align: center;
+}
+.hook-tag {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent-gold);
+  padding: 10px 28px;
+  border: 1.5px solid rgba(251,191,36,0.45);
+  border-radius: 999px;
+  background: rgba(251,191,36,0.08);
+}
+.hook-main {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 22px;
+}
+.hook-week {
+  font-family: var(--font-data);
+  font-size: 40px; font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+}
+.hook-num-row {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 8px;
+}
+.hook-num {
+  font-family: var(--font-data);
+  font-size: 220px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -0.04em;
+}
+.hook-num-suffix {
+  font-family: var(--font-data);
+  font-size: 96px; font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1.0;
+}
+.hook-project {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 12px;
+  margin-top: 6px;
+}
+.hook-project-name {
+  font-family: var(--font-data);
+  font-size: 64px; font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.hook-project-tag {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 600;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+.hook-headline {
+  font-family: var(--font-title);
+  font-size: 72px; font-weight: 900;
+  line-height: 1.18; letter-spacing: 0.02em;
+  color: var(--text);
+  max-width: 900px;
+}
+
+/* ============================================
+ * 分类卡片组场景（s2-s5, s6 ph1, s6 ph2, s7）
+ * 紧凑布局：flex column + gap，禁 space-between 撑开
+ * ============================================ */
+.cat-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  width: 100%; height: 100%;
+  gap: 48px;
+}
+.cat-header {
+  display: flex; flex-direction: column;
+  gap: 14px; width: 100%;
+}
+.cat-rank-row {
+  display: flex; align-items: baseline; gap: 20px;
+}
+.cat-num {
+  font-family: var(--font-data);
+  font-size: 56px; font-weight: 800;
+  line-height: 0.9;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+}
+.cat-title {
+  font-family: var(--font-title);
+  font-size: 84px; font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+}
+.cat-sub {
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+}
+
+/* 项目卡片组（紧凑 2 卡片纵向排列） */
+.cat-cards {
+  display: flex; flex-direction: column;
+  gap: 24px; width: 100%;
+}
+.cat-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  padding: 24px 28px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  border-left: 6px solid currentColor;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.cat-card-glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(70px); opacity: 0.20;
+  pointer-events: none; z-index: 0;
+  width: 320px; height: 320px;
+  top: -80px; right: -80px;
+}
+.cat-card-row1 {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 18px;
+}
+.cat-card-mini {
+  width: 72px; height: 72px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid currentColor;
+  flex-shrink: 0;
+  box-shadow: 0 0 22px currentColor;
+}
+.cat-card-name {
+  font-family: var(--font-data);
+  font-size: 42px; font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  word-break: break-word;
+  flex: 1; min-width: 0;
+}
+.cat-card-row2 {
+  position: relative; z-index: 1;
+  font-family: var(--font-body);
+  font-size: 36px; font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+}
+.cat-card-row3 {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--font-data);
+}
+.cat-card-stars {
+  font-size: 40px; font-weight: 900;
+  line-height: 1.0;
+  color: currentColor;
+}
+.cat-card-total {
+  font-size: 32px; font-weight: 600;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+ * 五分组色环变体（按 .cat-wrap[data-group] 切换）
+ * ============================================ */
+.cat-wrap[data-group="orange"] { color: var(--grp-orange); }
+.cat-wrap[data-group="gold"]   { color: var(--grp-gold); }
+.cat-wrap[data-group="cyan"]   { color: var(--grp-cyan); }
+.cat-wrap[data-group="purple"] { color: var(--grp-purple); }
+.cat-wrap[data-group="blue"]   { color: var(--grp-blue); }
+
+[data-group="orange"] .cat-card-glow { background: var(--grp-orange); }
+[data-group="gold"]   .cat-card-glow { background: var(--grp-gold); }
+[data-group="cyan"]   .cat-card-glow { background: var(--grp-cyan); }
+[data-group="purple"] .cat-card-glow { background: var(--grp-purple); }
+[data-group="blue"]   .cat-card-glow { background: var(--grp-blue); }
+
+/* ============================================
+ * 场景 7 — CTA 收尾
+ * ============================================ */
+.cta-wrap {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  width: 100%; height: 100%; gap: 40px;
+  text-align: center;
+}
+.cta-week {
+  font-family: var(--font-data);
+  font-size: 40px; font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.10em;
+  padding: 10px 28px;
+  border: 1.5px solid rgba(251,191,36,0.45);
+  border-radius: 999px;
+  background: rgba(251,191,36,0.08);
+}
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 80px; font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  max-width: 880px;
+}
+.cta-question {
+  font-family: var(--font-title);
+  font-size: 64px; font-weight: 800;
+  line-height: 1.2;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+.cta-pill-row {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  max-width: 880px;
+}
+.cta-pill {
+  padding: 12px 26px; border-radius: 999px;
+  font-size: 32px; font-weight: 700;
+  font-family: var(--font-body);
+  background: rgba(245,245,245,0.06);
+  border: 1.5px solid rgba(245,245,245,0.22);
+  color: var(--text);
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>E13 AI 自动化测试实操 · 16:9</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#0F172A;font-family:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:#fff;overflow:hidden;}
+.cover{position:relative;width:1920px;height:1080px;padding:60px 100px 50px;display:flex;flex-direction:column;background:linear-gradient(135deg,#0F172A 0%,#15233D 55%,#0F172A 100%);}
+.grid-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,191,36,0.07) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.glow-gold{position:absolute;width:880px;height:880px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.20),transparent 70%);filter:blur(110px);top:-240px;right:-180px;pointer-events:none;}
+.glow-blue{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.18),transparent 70%);filter:blur(95px);bottom:-160px;left:-120px;pointer-events:none;}
+.glow-green{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.14),transparent 70%);filter:blur(90px);top:38%;left:42%;pointer-events:none;}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse 78%72% at 50% 48%, transparent 0%, rgba(15,23,42,0.38) 75%, rgba(8,12,24,0.58) 100%);pointer-events:none;}
+.corner-tl{position:absolute;top:32px;left:32px;width:130px;height:3px;background:linear-gradient(90deg,rgba(251,191,36,0.55),transparent);}
+.corner-tl-v{position:absolute;top:32px;left:32px;width:3px;height:88px;background:linear-gradient(180deg,rgba(251,191,36,0.55),transparent);}
+.corner-br{position:absolute;bottom:32px;right:32px;width:130px;height:3px;background:linear-gradient(270deg,rgba(59,130,246,0.50),transparent);}
+.corner-br-v{position:absolute;bottom:32px;right:32px;width:3px;height:88px;background:linear-gradient(0deg,rgba(59,130,246,0.50),transparent);}
+
+.top-row{position:relative;z-index:2;display:flex;align-items:center;gap:24px;margin-bottom:14px;}
+.ep-num{font-family:'JetBrains Mono','Consolas',monospace;font-size:84px;font-weight:900;line-height:1;background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(251,191,36,0.20);}
+.badge{display:inline-flex;align-items:center;gap:12px;font-size:26px;color:#FBBF24;letter-spacing:0.20em;border:1.5px solid rgba(251,191,36,0.45);background:rgba(251,191,36,0.10);padding:9px 24px;border-radius:999px;font-weight:600;}
+.badge-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.hook-tag{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#F87171;border:1.5px solid rgba(248,113,113,0.55);background:rgba(248,113,113,0.10);padding:8px 20px;border-radius:999px;font-weight:600;}
+.hook-tag .hook-x{color:#F87171;font-weight:900;font-size:24px;}
+
+.title-row{position:relative;z-index:2;display:flex;align-items:flex-end;gap:32px;margin-top:4px;}
+.title{font-size:96px;font-weight:900;line-height:1.02;letter-spacing:-0.01em;}
+.title-grad{background:linear-gradient(135deg,#FBBF24 0%,#FCD34D 50%,#FBBF24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.18);}
+.title-num{font-family:'JetBrains Mono',monospace;font-size:128px;font-weight:900;line-height:1;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:0 2px 6px rgba(30,41,59,0.20);margin-left:auto;}
+.subtitle{position:relative;z-index:2;font-size:32px;color:rgba(255,255,255,0.84);margin-top:16px;font-weight:500;}
+.subtitle .sub-strong{color:#3B82F6;font-weight:700;}
+.subtitle .sub-divider{color:rgba(148,163,184,0.55);margin:0 14px;font-weight:400;}
+.subtitle .sub-gold{color:#FBBF24;font-weight:700;}
+.subtitle .sub-green{color:#34D399;font-weight:700;}
+
+.main{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr 1fr;gap:40px;margin-top:32px;align-items:center;}
+
+.files-label{font-size:24px;color:#3B82F6;letter-spacing:0.14em;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.files-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.45),transparent);}
+.files{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.f-row{display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-radius:12px;border:1.5px solid;background:rgba(15,23,42,0.65);}
+.f-row.k1{border-color:rgba(251,191,36,0.50);background:linear-gradient(140deg,rgba(251,191,36,0.12),rgba(15,23,42,0.65));}
+.f-row.k2{border-color:rgba(59,130,246,0.55);background:linear-gradient(140deg,rgba(59,130,246,0.14),rgba(15,23,42,0.65));}
+.f-row.k3{border-color:rgba(16,185,129,0.55);background:linear-gradient(140deg,rgba(16,185,129,0.14),rgba(15,23,42,0.65));}
+.f-row.k4{border-color:rgba(167,139,250,0.55);background:linear-gradient(140deg,rgba(167,139,250,0.14),rgba(15,23,42,0.65));}
+.f-row.k5{border-color:rgba(251,191,36,0.50);background:linear-gradient(140deg,rgba(251,191,36,0.10),rgba(15,23,42,0.65));}
+.f-row.k6{border-color:rgba(59,130,246,0.55);background:linear-gradient(140deg,rgba(59,130,246,0.10),rgba(15,23,42,0.65));}
+.f-row.k7{border-color:rgba(16,185,129,0.55);background:linear-gradient(140deg,rgba(16,185,129,0.10),rgba(15,23,42,0.65));}
+.f-row.k8{border-color:rgba(167,139,250,0.55);background:linear-gradient(140deg,rgba(167,139,250,0.10),rgba(15,23,42,0.65));}
+.f-top{display:flex;align-items:center;gap:12px;}
+.f-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;min-width:38px;}
+.f-row.k1 .f-num{color:#FBBF24;}
+.f-row.k2 .f-num{color:#60A5FA;}
+.f-row.k3 .f-num{color:#34D399;}
+.f-row.k4 .f-num{color:#A78BFA;}
+.f-row.k5 .f-num{color:#FBBF24;}
+.f-row.k6 .f-num{color:#60A5FA;}
+.f-row.k7 .f-num{color:#34D399;}
+.f-row.k8 .f-num{color:#A78BFA;}
+.f-name{font-size:23px;font-weight:800;color:#fff;}
+.f-tag{font-size:15px;font-weight:700;padding:2px 10px;border-radius:6px;margin-left:auto;letter-spacing:0.06em;color:#94A3B8;background:rgba(148,163,184,0.15);font-family:'JetBrains Mono',monospace;}
+.f-desc{font-size:16px;color:rgba(255,255,255,0.82);font-weight:500;line-height:1.35;}
+.f-row.k1 .f-desc{color:#FCD34D;}
+.f-row.k2 .f-desc{color:#93C5FD;}
+.f-row.k3 .f-desc{color:#6EE7B7;}
+.f-row.k4 .f-desc{color:#C4B5FD;}
+.f-row.k5 .f-desc{color:#FCD34D;}
+.f-row.k6 .f-desc{color:#93C5FD;}
+.f-row.k7 .f-desc{color:#6EE7B7;}
+.f-row.k8 .f-desc{color:#C4B5FD;}
+
+.master-card{background:linear-gradient(160deg,rgba(251,191,36,0.14),rgba(15,23,42,0.94));border-radius:14px;border:1.5px solid rgba(251,191,36,0.50);overflow:hidden;box-shadow:0 0 36px rgba(251,191,36,0.14);}
+.master-head{background:rgba(11,18,36,0.85);padding:13px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(251,191,36,0.22);}
+.master-head-dot{width:11px;height:11px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px rgba(251,191,36,0.7);}
+.master-head-title{font-size:21px;color:#FBBF24;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.06em;}
+.master-body{padding:18px 22px;display:flex;flex-direction:column;gap:10px;font-family:'JetBrains Mono',monospace;}
+.master-line{font-size:20px;font-weight:600;color:#fff;display:flex;align-items:center;gap:12px;}
+.master-prompt{color:#34D399;font-weight:800;}
+.master-cmd{color:#FBBF24;font-weight:700;}
+.master-out{color:rgba(255,255,255,0.74);font-weight:500;}
+.master-out .o-gold{color:#FBBF24;font-weight:700;}
+.master-out .o-blue{color:#60A5FA;font-weight:700;}
+.master-out .o-green{color:#34D399;font-weight:700;}
+.master-out .o-purple{color:#C4B5FD;font-weight:700;}
+.master-out .o-red{color:#F87171;font-weight:800;}
+
+.stat-label{font-size:24px;color:#FBBF24;letter-spacing:0.14em;font-weight:700;margin-bottom:14px;}
+.stat-grid{display:flex;flex-direction:column;gap:12px;}
+.stat-item{display:flex;align-items:center;gap:16px;padding:14px 20px;border-radius:12px;border:1.5px solid;background:rgba(15,23,42,0.55);}
+.stat-item.s-gold{border-color:rgba(251,191,36,0.50);background:linear-gradient(92deg,rgba(251,191,36,0.12),rgba(15,23,42,0.55));}
+.stat-item.s-blue{border-color:rgba(59,130,246,0.55);background:linear-gradient(92deg,rgba(59,130,246,0.14),rgba(15,23,42,0.55));}
+.stat-item.s-green{border-color:rgba(16,185,129,0.55);background:linear-gradient(92deg,rgba(16,185,129,0.14),rgba(15,23,42,0.55));}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:900;min-width:170px;}
+.stat-item.s-gold .stat-num{color:#FBBF24;}
+.stat-item.s-blue .stat-num{color:#60A5FA;}
+.stat-item.s-green .stat-num{color:#34D399;}
+.stat-name{font-size:22px;color:rgba(255,255,255,0.86);font-weight:700;}
+
+.chip-row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+.chip{font-size:17px;color:rgba(255,255,255,0.80);font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.45);font-family:'JetBrains Mono',monospace;}
+
+.footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(251,191,36,0.22);}
+.repo{font-size:26px;color:rgba(255,255,255,0.85);font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center;gap:12px;}
+.repo .repo-label{color:#FBBF24;font-weight:700;font-family:'Inter','Noto Sans SC',sans-serif;font-size:23px;}
+.repo .repo-path{background:rgba(251,191,36,0.12);padding:5px 14px;border-radius:8px;border:1px solid rgba(251,191,36,0.25);}
+.author{font-size:24px;color:rgba(255,255,255,0.66);}
+.author .author-name{color:#FBBF24;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="grid-bg"></div><div class="glow-gold"></div><div class="glow-blue"></div><div class="glow-green"></div><div class="vignette"></div>
+  <div class="corner-tl"></div><div class="corner-tl-v"></div><div class="corner-br"></div><div class="corner-br-v"></div>
+
+  <div class="top-row">
+    <div class="ep-num">E13</div>
+    <div class="badge"><span class="badge-dot"></span>AI 转型实战 · E13 · 收官</div>
+    <div class="hook-tag"><span class="hook-x">⛔</span> AI 只生成不执行</div>
+  </div>
+
+  <div class="title-row">
+    <h1 class="title"><span class="title-grad">AI 自动化测试实操</span></h1>
+    <div class="title-num">8+5</div>
+  </div>
+  <div class="subtitle">ai-test-frame 开箱跑<span class="sub-divider">·</span><span class="sub-gold">AI 只生成不执行</span>，根治<span class="sub-strong">虚假通过</span><span class="sub-divider">·</span><span class="sub-green">通过 2 失败 0</span></div>
+
+  <div class="main">
+    <div>
+      <div class="files-label">八文件架构 · 一个文件一个核心模块</div>
+      <div class="files">
+        <div class="f-row k1">
+          <div class="f-top"><span class="f-num">01</span><span class="f-name">registry.py</span><span class="f-tag">注册中心</span></div>
+          <div class="f-desc">装饰器登记用例类型，调度器自动发现</div>
+        </div>
+        <div class="f-row k2">
+          <div class="f-top"><span class="f-num">02</span><span class="f-name">assertions.py</span><span class="f-tag">软断言</span></div>
+          <div class="f-desc">失败不中断，截图 + 收集全跑完</div>
+        </div>
+        <div class="f-row k3">
+          <div class="f-top"><span class="f-num">03</span><span class="f-name">base_page.py</span><span class="f-tag">测试基类</span></div>
+          <div class="f-desc">封装通用操作和通用定位</div>
+        </div>
+        <div class="f-row k4">
+          <div class="f-top"><span class="f-num">04</span><span class="f-name">runner.py</span><span class="f-tag">调度器</span></div>
+          <div class="f-desc">数据驱动，读用例按类型路由</div>
+        </div>
+        <div class="f-row k5">
+          <div class="f-top"><span class="f-num">05</span><span class="f-name">handlers/</span><span class="f-tag">处理器</span></div>
+          <div class="f-desc">具体业务实现，商品管理示例</div>
+        </div>
+        <div class="f-row k6">
+          <div class="f-top"><span class="f-num">06</span><span class="f-name">main.py</span><span class="f-tag">入口</span></div>
+          <div class="f-desc">开浏览器跑用例，汇总报告</div>
+        </div>
+        <div class="f-row k7">
+          <div class="f-top"><span class="f-num">07</span><span class="f-name">data/</span><span class="f-tag">用例</span></div>
+          <div class="f-desc">运营在这里编步骤 JSON</div>
+        </div>
+        <div class="f-row k8">
+          <div class="f-top"><span class="f-num">08</span><span class="f-name">site/</span><span class="f-tag">被测页</span></div>
+          <div class="f-desc">自带极简商品页，开箱跑</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="master-card">
+        <div class="master-head">
+          <span class="master-head-dot"></span>
+          <span class="master-head-title">ai-test-frame · 开箱跑通</span>
+        </div>
+        <div class="master-body">
+          <div class="master-line"><span class="master-prompt">$</span><span class="master-out">cd</span> <span class="master-cmd">ai-test-frame</span></div>
+          <div class="master-line"><span class="master-prompt">&gt;</span><span class="master-cmd">python</span> <span class="master-out">main.py</span></div>
+          <div class="master-line"><span class="master-out"><span class="o-green">✓</span> 通过 <span class="o-gold">2</span> · 失败 <span class="o-gold">0</span></span></div>
+          <div class="master-line"><span class="master-out"><span class="o-green">✓</span> 跳过 1（开关关闭）</span></div>
+          <div class="master-line"><span class="master-out"><span class="o-red">⛔</span> 运行期零 AI，根治虚假通过</span></div>
+        </div>
+      </div>
+
+      <div class="stat-label" style="margin-top:18px;">五个关键思想</div>
+      <div class="stat-grid">
+        <div class="stat-item s-gold"><span class="stat-num">① 只生成</span><span class="stat-name">AI 编码期产出，运行期零 AI</span></div>
+        <div class="stat-item s-blue"><span class="stat-num">② 解耦</span><span class="stat-name">数据 data 与代码 handlers 分离</span></div>
+        <div class="stat-item s-green"><span class="stat-num">③ 注册中心</span><span class="stat-name">装饰器登记，调度器自动发现</span></div>
+      </div>
+      <div class="chip-row">
+        <span class="chip">软断言</span>
+        <span class="chip">变量传递</span>
+        <span class="chip">Playwright</span>
+        <span class="chip">确定性执行</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="repo"><span class="repo-label">教程仓库</span><span class="repo-path">Johnson-Jia/ai-landing-tutorial</span></div>
+    <div class="author">合集 13 集完结 · 作者 <span class="author-name">Johnson</span></div>
+  </div>
+</div>
+</body>
+</html>

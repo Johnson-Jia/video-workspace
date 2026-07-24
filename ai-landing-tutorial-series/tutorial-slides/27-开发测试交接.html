@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>27-开发测试交接 · 协作模板</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#ef4444;border-width:8px;}
+.card:nth-child(3){border-left-color:#16a34a;}
+.card .clabel{font-size:22px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .clabel{color:#ef4444;}
+.card:nth-child(3) .clabel{color:#16a34a;}
+.card .ctitle{font-size:26px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card ul{list-style:none;padding:0;margin:0;flex:1;}
+.card li{font-size:18px;color:#334155;line-height:1.5;padding:7px 0 7px 24px;position:relative;border-bottom:1px dashed #f1f5f9;}
+.card li:last-child{border-bottom:none;}
+.card li::before{content:'☐';position:absolute;left:0;top:6px;font-size:18px;font-weight:700;}
+.card:nth-child(1) li::before{color:#2563eb;}
+.card:nth-child(2) li::before{color:#ef4444;}
+.card:nth-child(3) li::before{color:#16a34a;}
+.card li strong{color:#0f172a;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>交接 · 开发↔测试</div>
+    <div class="num">AI 战略转型方法论 · <strong>27/30</strong></div>
+  </div>
+  <h1>交付 DoD,<span class="hl">防伪 + 反馈</span></h1>
+  <div class="subtitle">开发用 AI 生成代码后交付测试的标准——核心矛盾:测试若由同一个 AI 闭环,会写出"验证错误逻辑"的测试</div>
+  <div class="quote">铁律:<span class="em">不让同一个 AI(或同一次会话)既写实现又写测试</span>——AI 会为了让测试通过,写出验证错误逻辑的测试,全绿但实际没测到东西。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">① 开发交付(DoD)</div><div class="ctitle">提测前必须齐备</div><ul>
+      <li>代码已过人工审查(git diff 逐行过眼)</li>
+      <li>自测通过:核心路径 + 边界,附自测记录</li>
+      <li>影响范围说明(跑 detect_changes 或 grep 列调用方)</li>
+      <li>变更对应的 spec / 需求链接</li>
+      <li>已知风险与回滚方案</li>
+    </ul></div>
+    <div class="card"><div class="clabel">② 防偷改测试(关键)</div><div class="ctitle">测试与实现分离编写</div><ul>
+      <li>不让同一个 AI 既写实现又写测试</li>
+      <li>测试由独立人/独立 AI 会话编写,基于 spec 非实现</li>
+      <li>关键场景测试用 Hook 强制(提交前必跑 + 覆盖率门槛)</li>
+      <li>不依赖自觉,权限层硬拦</li>
+    </ul></div>
+    <div class="card"><div class="clabel">③ 测试反馈开发</div><div class="ctitle">基于 spec,可复现</div><ul>
+      <li>缺陷附可复现步骤 + 预期/实际差异(基于 spec)</li>
+      <li>AI 辅助复现:录制操作 → AI 生成复现脚本</li>
+      <li>缺陷分类标注是否"AI 生成代码引入"</li>
+      <li>喂给 ai-metrics 做质量度量</li>
+    </ul></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:demos/handover-templates/开发-测试交接.md(DoD 5 项 + 防偷改 4 项 + 反馈 3 项 + 常见坑)。常见坑:开发让 AI 顺手写测试 / 提测不给影响范围 / 缺陷靠口头</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

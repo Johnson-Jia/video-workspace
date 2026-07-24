@@ -1,0 +1,203 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #EF4444;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E13 softassert — 软断言 vs 硬断言：4 phase 纯切换
+ * （多 phase 用 GSAP timeline 顺序切换，禁 data-reveal，避 phase-2/3 不显示）
+ * ============================================ */
+
+.sa-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 60px 120px 60px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 24px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.sa-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.sa-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96,165,250,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-gold { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-purple { background-image: linear-gradient(135deg, #C4B5FD, #A78BFA, #DDD6FE); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-red { background-image: linear-gradient(135deg, #FCA5A5, #EF4444, #F87171); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 软断言对比硬断言 双卡总览 === */
+.sa-overview {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.sa-overview-title {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.sa-dual {
+  display: flex; align-items: stretch; justify-content: center; gap: 40px;
+}
+.sa-card {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 30px 38px; border-radius: 20px;
+  min-width: 400px; max-width: 500px;
+}
+.sa-card.bad  { background: rgba(239,68,68,0.08);  border: 2px solid rgba(239,68,68,0.42); }
+.sa-card.good { background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.45); }
+.sa-card-tag {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+}
+.sa-card.bad .sa-card-tag  { color: #FCA5A5; }
+.sa-card.good .sa-card-tag { color: #6EE7B7; }
+.sa-card-body {
+  font-family: var(--font-body); font-size: 38px; font-weight: 800; color: rgba(255,255,255,0.88); text-align: center; line-height: 1.4;
+}
+.sa-card-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.72); text-align: center;
+}
+
+/* === phase-2 硬断言 assert 一条失败立刻停 === */
+.sa-hard {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.sa-hard-title {
+  font-family: var(--font-title); font-size: 58px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+/* 代码片段卡（assert 失败立刻停）*/
+.sa-hard-code {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 24px 32px; border-radius: 14px;
+  background: rgba(15,23,42,0.92);
+  border: 1px solid rgba(239,68,68,0.32);
+  box-shadow: 0 0 0 1px rgba(239,68,68,0.08) inset;
+  min-width: 760px; max-width: 920px;
+}
+.sa-code-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.sa-code-dot { width: 12px; height: 12px; border-radius: 50%; }
+.sa-code-dot.r { background: #EF4444; } .sa-code-dot.y { background: #FBBF24; } .sa-code-dot.g { background: #34D399; }
+.sa-code-file {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(252,165,165,0.80); margin-left: 8px;
+}
+.sa-code-line {
+  font-family: var(--font-data); font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.85); line-height: 1.5; white-space: pre;
+}
+.sa-code-line .kw { color: #C4B5FD; }       /* keyword assert */
+.sa-code-line .cm { color: rgba(255,255,255,0.55); } /* comment */
+.sa-code-line.fail { color: #FCA5A5; }
+.sa-code-line.fail .cm { color: rgba(252,165,165,0.80); }
+.sa-code-line.skip { color: rgba(255,255,255,0.32); text-decoration: line-through; }
+.sa-code-line.skip .cm { color: rgba(255,255,255,0.32); }
+.sa-hard-note {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: rgba(252,165,165,0.90); text-align: center;
+  padding: 10px 22px; border-radius: 10px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.30);
+}
+
+/* === phase-3 软断言 失败不中断+截图+收集+全跑完 === */
+.sa-soft {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.sa-soft-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+/* 流程链：失败 → 截图 → 收集 → 报告 */
+.sa-soft-flow {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-top: 4px;
+}
+.sa-flow-node {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  padding: 20px 22px; border-radius: 14px;
+  min-width: 200px; min-height: 120px;
+}
+.sa-flow-node.fail-n  { background: rgba(239,68,68,0.10); border: 2px solid rgba(239,68,68,0.42); }
+.sa-flow-node.shot    { background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.45); }
+.sa-flow-node.collect { background: rgba(196,181,253,0.10); border: 2px solid rgba(167,139,250,0.45); }
+.sa-flow-node.report  { background: rgba(251,191,36,0.10); border: 2px solid rgba(251,191,36,0.45); }
+.sa-flow-label {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; letter-spacing: 0.03em;
+}
+.sa-flow-node.fail-n .sa-flow-label  { color: #FCA5A5; }
+.sa-flow-node.shot .sa-flow-label    { color: #93C5FD; }
+.sa-flow-node.collect .sa-flow-label { color: #DDD6FE; }
+.sa-flow-node.report .sa-flow-label  { color: #FCD34D; }
+.sa-flow-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.70); text-align: center;
+}
+.sa-flow-arrow {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900; color: rgba(255,255,255,0.45);
+}
+.sa-soft-note {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: rgba(110,231,183,0.90); text-align: center;
+  padding: 10px 22px; border-radius: 10px; background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.30);
+}
+
+/* === phase-4 纯文本输出兼容 GBK 收尾 === */
+.sa-finale {
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+.sa-finale-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+/* 终端输出卡（纯文本 [通过]/[失败]，兼容 GBK 不靠 emoji）*/
+.sa-terminal {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 22px 30px; border-radius: 14px;
+  background: rgba(15,23,42,0.94);
+  border: 1px solid rgba(34,211,238,0.32);
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.08) inset;
+  min-width: 720px; max-width: 880px;
+}
+.sa-term-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.sa-term-dot { width: 12px; height: 12px; border-radius: 50%; }
+.sa-term-dot.r { background: #EF4444; } .sa-term-dot.y { background: #FBBF24; } .sa-term-dot.g { background: #34D399; }
+.sa-term-file {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(34,211,238,0.80); margin-left: 8px;
+}
+.sa-term-line {
+  font-family: var(--font-data); font-size: 34px; font-weight: 600;
+  color: rgba(255,255,255,0.85); line-height: 1.5; white-space: pre;
+}
+.sa-term-line .pass { color: #34D399; font-weight: 800; }
+.sa-term-line .fail { color: #FCA5A5; font-weight: 800; }
+.sa-term-line .cm  { color: rgba(255,255,255,0.50); }
+.sa-term-summary {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.60); margin-top: 4px;
+}
+.sa-term-summary .cm { color: rgba(255,255,255,0.60); }
+.sa-finale-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(252,211,77,0.88); text-align: center;
+}

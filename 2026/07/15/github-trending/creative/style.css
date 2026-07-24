@@ -1,0 +1,277 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  /* 领域色（仅视觉层，文字禁写颜色词） */
+  --domain-amber: #f9a825;       /* 视频工具 OpenCut */
+  --domain-cyan: #00f5d4;        /* 工程师/系统 cool */
+  --domain-signal: #ff3b6b;      /* AI 安全 红 */
+  --domain-teal: #14e0c8;        /* 团队设计 penpot */
+  --domain-violet: #b46bff;      /* 游戏 sharpemu */
+}
+
+/* ============================================
+ * ProjectFullCard（s6_assemble 不注入，须手补）
+ * 关键铁律：
+ *  - position:absolute + inset（禁 height:100% 溢出安全区）
+ *  - pfc-name 完整 owner/repo + word-break（禁 nowrap）
+ *  - 卡片背景 alpha≥0.7（挡 fx 光晕）
+ *  - 胶囊纯色禁 grad-* clip:text
+ * ============================================ */
+.project-full-card {
+  position: absolute;
+  inset: 180px 90px 220px 90px;   /* 竖屏安全区，禁 height:100% */
+  display: flex; flex-direction: column;
+  justify-content: space-between; /* 三带撑满，禁 center */
+  z-index: 3;
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 520px; height: 520px; opacity: 0.18;
+  background: var(--pfc-accent, var(--domain-amber));
+  top: 180px; left: -120px;
+}
+.pfc-glow-cool {
+  width: 460px; height: 460px; opacity: 0.16;
+  background: var(--pfc-secondary, var(--domain-cyan));
+  bottom: 280px; right: -100px;
+}
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+
+/* ── 顶部带 ── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 20px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--pfc-accent, var(--domain-amber));
+  /* 渐变/高亮文字禁 0 0 泛光（E04/github 事故），用细微偏移阴影 */
+  text-shadow: 0 2px 6px rgba(30,41,59,0.18);
+  font-family: var(--font-data);
+}
+.pfc-category {
+  font-size: 38px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--pfc-secondary, var(--domain-cyan));
+  text-transform: uppercase;
+}
+.pfc-use {
+  font-size: 52px; font-weight: 800; line-height: 1.1;
+  /* 胶囊纯色，禁 grad-* clip:text */
+  padding: 10px 24px; border-radius: 12px;
+  background: rgba(13,9,5,0.78);  /* alpha≥0.7 挡光晕 */
+  border: 1.5px solid rgba(255,255,255,0.20);
+  color: var(--pfc-accent, var(--domain-amber));
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+/* 项目名独占行（禁 nowrap，owner/repo 完整可搜索） */
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.1; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800;
+  color: #f5f5f5;  /* 降亮禁纯白 */
+}
+
+/* ── 中部带 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 36px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--pfc-accent, var(--domain-amber)), var(--pfc-secondary, var(--domain-cyan)), var(--pfc-accent, var(--domain-amber)));
+  filter: blur(16px); opacity: 0.5;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 50px rgba(0,0,0,0.55);
+}
+.pfc-desc {
+  font-size: 40px; font-weight: 600; line-height: 1.35;
+  color: #f5f5f5; text-align: center; max-width: 800px;
+}
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 14px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label { font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.pfc-bar-val { font-size: 40px; font-weight: 800; color: var(--pfc-accent, var(--domain-amber)); font-family: var(--font-data); }
+.pfc-bar-track {
+  width: 100%; height: 16px; border-radius: 999px;
+  background: rgba(255,255,255,0.1); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--pfc-secondary, var(--domain-cyan)), var(--pfc-accent, var(--domain-amber)));
+  transform-origin: left center;
+}
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; }
+.pfc-topic {
+  font-size: 32px; font-weight: 600; padding: 8px 22px;
+  border-radius: 999px; color: var(--pfc-secondary, var(--domain-cyan));
+  background: rgba(13,9,5,0.72);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ── 底部带 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 24px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item {
+  font-size: 32px; font-weight: 700; padding: 10px 26px;
+  border-radius: 14px; color: #fff;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.20);
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: rgba(255,255,255,0.72);
+  border-left: 4px solid var(--pfc-accent, var(--domain-amber));
+  padding-left: 24px;
+}
+/* 开发者向标记（dcg 专用） */
+.pfc-dev-flag {
+  display: inline-block;
+  font-size: 32px; font-weight: 700;
+  padding: 6px 18px; border-radius: 10px;
+  background: rgba(255,59,107,0.16);
+  border: 1px solid rgba(255,59,107,0.45);
+  color: var(--domain-signal);
+  margin-left: 12px; vertical-align: middle;
+}
+
+/* ============================================
+ * S1 hook — 数字爆发锚定
+ * ============================================ */
+.hk-wrap {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  text-align: center;
+}
+.hk-tag {
+  font-size: 36px; font-weight: 700; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 30px;
+}
+.hk-number {
+  font-family: var(--font-data);
+  font-size: 200px; font-weight: 900; line-height: 1.02;
+  /* 渐变文字：两端亮色高饱和（琥珀金），禁白/暗端点 */
+  background-image: linear-gradient(180deg, #ffd66b 0%, #f9a825 55%, #ff7a18 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* 渐变文字 text-shadow alpha≤0.32，用同色系非黑 */
+  filter: drop-shadow(0 0 28px rgba(249,168,37,0.45));
+  white-space: nowrap;  /* 4349 一行，≤200px 不溢出 safe area */
+}
+.hk-star { font-size: 120px; vertical-align: super; margin-left: 8px; color: var(--domain-amber); }
+.hk-sub {
+  margin-top: 36px;
+  font-size: 56px; font-weight: 800;
+  color: #f5f5f5;
+  line-height: 1.25;
+}
+.hk-sub .hk-em {
+  color: var(--domain-amber);
+}
+.hk-project {
+  margin-top: 28px;
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 700;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+ * S8 CTA — 中性互动
+ * ============================================ */
+.cta-wrap {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  text-align: center;
+}
+.cta-question {
+  font-size: 72px; font-weight: 900; line-height: 1.18;
+  background-image: linear-gradient(135deg, #ffd66b 0%, #f9a825 60%, #ff7a18 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 24px rgba(249,168,37,0.4));
+  max-width: 820px;
+}
+.cta-channel {
+  margin-top: 44px;
+  font-size: 64px; font-weight: 800;
+  color: #f5f5f5;
+  letter-spacing: 0.02em;
+}
+.cta-channel .cta-badge {
+  display: inline-block;
+  font-size: 40px; font-weight: 700;
+  padding: 6px 20px; border-radius: 999px;
+  background: rgba(249,168,37,0.18);
+  border: 1.5px solid rgba(249,168,37,0.5);
+  color: var(--domain-amber);
+  vertical-align: middle; margin-right: 14px;
+}
+.cta-sub {
+  margin-top: 28px;
+  font-size: 38px; font-weight: 500;
+  color: rgba(255,255,255,0.62);
+  max-width: 720px;
+}
+.cta-pills {
+  margin-top: 44px;
+  display: flex; flex-wrap: wrap; gap: 18px;
+  justify-content: center;
+  max-width: 760px;
+}
+.cta-pill {
+  font-size: 32px; font-weight: 600;
+  padding: 10px 26px; border-radius: 999px;
+  background: rgba(13,9,5,0.72);
+  border: 1px solid rgba(255,255,255,0.24);
+  color: #f5f5f5;
+}

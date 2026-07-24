@@ -1,0 +1,80 @@
+<!-- 场景: openinterpreter | 时长: 9.0s | 情绪: build·低成本编程代理 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+<!-- 深蓝底（终端编码氛围） -->
+<div style="position:absolute;inset:0;background:linear-gradient(165deg,#06101a 0%,#0a1a2a 50%,#050d18 100%)"></div>
+<!-- 电青辉光（左上） -->
+<div style="position:absolute;top:-8%;left:-6%;width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,0.28),rgba(0,180,220,0.05),transparent 70%);
+  filter:blur(110px)"></div>
+<!-- 深石板辉光（右下） -->
+<div style="position:absolute;bottom:-12%;right:-8%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(90,160,220,0.18),rgba(60,90,140,0.04),transparent 70%);
+  filter:blur(110px)"></div>
+<!-- 扫描线纹理（上下漂移） -->
+<div style="position:absolute;inset:0;opacity:0.10;
+  background-image:repeating-linear-gradient(0deg,rgba(0,229,255,0.45) 0px,rgba(0,229,255,0.45) 1px,transparent 1px,transparent 6px);
+  animation:scanDrift 8s linear infinite"></div>
+<!-- 网格底纹（终端坐标感） -->
+<div style="position:absolute;inset:0;opacity:0.05;
+  background-image:linear-gradient(rgba(0,229,255,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.4) 1px,transparent 1px);
+  background-size:60px 60px"></div>
+<!-- 代码字符雨（飘字痕迹） -->
+<div style="position:absolute;top:20%;right:6%;font-family:'JetBrains Mono',monospace;font-size:22px;color:rgba(0,229,255,0.20);line-height:1.5;letter-spacing:0.05em;writing-mode:vertical-rl;animation:codeFall 12s linear infinite">
+fn main() let result run async await
+</div>
+<!-- 暗角聚光 -->
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(0,0,0,0.55) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 编码流光（GSAP 横向扫） -->
+  <div class="fx-codesweep" data-fx="oi-sweep" style="position:absolute;top:50%;left:-200px;width:480px;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.85),transparent);box-shadow:0 0 24px rgba(0,229,255,0.6);z-index:2"></div>
+  <!-- 货币解构粒子（省钱视觉） -->
+  <div class="fx-coin" data-fx="oi-coin1" style="position:absolute;top:32%;right:14%;width:48px;height:48px;border-radius:50%;border:2px solid rgba(249,168,37,0.65);display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(249,168,37,0.90);font-family:'JetBrains Mono',monospace;font-weight:700;z-index:2">¥</div>
+  <div class="fx-coin" data-fx="oi-coin2" style="position:absolute;top:62%;right:22%;width:42px;height:42px;border-radius:50%;border:2px solid rgba(249,168,37,0.55);display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(249,168,37,0.82);font-family:'JetBrains Mono',monospace;font-weight:700;z-index:2">$</div>
+  <!-- 终端光标闪烁 -->
+  <div class="fx-cursor" data-fx="oi-cursor" style="position:absolute;top:26%;left:18%;width:18px;height:38px;background:rgba(0,229,255,0.85);box-shadow:0 0 22px rgba(0,229,255,0.7);z-index:2"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="project-full-card">
+  <div class="pfc-glow pfc-glow-cool-strong"></div>
+  <div class="pfc-glow pfc-glow-warm-soft"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#01</span>
+      <span class="pfc-category">编程代理</span>
+    </div>
+    <div class="pfc-use">低成本模型·本地跑 AI 写代码</div>
+    <div class="pfc-name"><span class="pfc-owner">openinterpreter /</span> <span class="pfc-repo">openinterpreter</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/openinterpreter.png" alt="">
+    </div>
+    <div class="pfc-desc">给低成本模型用的编程代理 · Rust 写的本地就能跑</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-bar-head">
+        <span class="pfc-bar-label">今日涨星</span>
+        <span class="pfc-bar-val">+299 ★</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:38%;"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">Rust</span>
+        <span class="pfc-topic">本地编程</span>
+        <span class="pfc-topic">不用充会员</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-stars">
+      <span class="pfc-star-num">6.55<span class="pfc-star-unit">万★</span></span>
+    </div>
+    <div class="pfc-commentary">不用充贵会员就能本地编程</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>

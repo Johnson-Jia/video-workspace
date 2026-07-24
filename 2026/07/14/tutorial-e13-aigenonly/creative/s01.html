@@ -1,0 +1,137 @@
+<!-- 场景: scene-1 | 时长: 31.97s | bg: diamond_lattice | AI 只生成不执行：编码期三步产出 handler / 运行期零 AI 确定性执行 / 根治虚假通过 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝编码 + 金 handler + 绿运行 + 红警示；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:1180px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.12) 0%, transparent 65%);filter:blur(65px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:24%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:76%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:28%;left:20%;width:380px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,85%,62%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <div class="fx-aura" style="position:absolute;top:70%;left:50%;transform:translateX(-50%);width:520px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(188,85%,55%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:22%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,52%,0.9);box-shadow:0 0 14px hsla(150,70%,52%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.30)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(252,165,165,0.85);box-shadow:0 0 12px rgba(252,165,165,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:34%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:66%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 ag-scene">
+  <!-- phase-1 (0-10.66s): 最关键思想——AI 只生成不执行 + 编码期/运行期双带 -->
+  <div class="region-top">
+    <div class="ag-stage-tag"><span class="dot"></span>E13 · 最关键的思想 · AI 只生成不执行</div>
+  </div>
+  <div class="region-mid">
+    <div class="ag-idea">
+      <div class="ag-idea-title">整套框架 <span class="grad-blue">最关键</span> 的思想</div>
+      <div class="ag-idea-core">
+        <div class="ag-idea-gen">
+          <span class="ag-idea-gen-tag">AI</span>
+          <span class="ag-idea-gen-act">只生成</span>
+        </div>
+        <div class="ag-idea-x">×</div>
+        <div class="ag-idea-run">
+          <span class="ag-idea-run-tag">AI</span>
+          <span class="ag-idea-run-act">执行</span>
+        </div>
+      </div>
+      <div class="ag-idea-sub">AI 只负责生成代码 · 运行期零 AI</div>
+      <div class="ag-idea-bands">
+        <div class="ag-band coding">
+          <div class="ag-band-head">编码期</div>
+          <div class="ag-band-body">录制 → AI 转换 → 人审</div>
+        </div>
+        <div class="ag-band run">
+          <div class="ag-band-head">运行期</div>
+          <div class="ag-band-body">数据驱动调度 · 零 AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / AI 只生成不执行 —</div>
+  </div>
+</div>
+<div class="phase phase-2 ag-scene">
+  <!-- phase-2 (10.66-21.31s): 为什么这么设计——规避幻觉 + 虚假通过红叉 -->
+  <div class="region-top">
+    <div class="ag-stage-tag"><span class="dot"></span>E13 · 为什么这么设计 · 规避幻觉</div>
+  </div>
+  <div class="region-mid">
+    <div class="ag-why">
+      <div class="ag-why-title">这样设计的考虑 · <span class="grad-red">规避幻觉</span></div>
+      <div class="ag-why-flow">
+        <div class="ag-why-cause">
+          <span class="ag-why-cause-tag">风险</span>
+          <div class="ag-why-cause-body">AI 直接<br>运行测试</div>
+        </div>
+        <div class="ag-why-arrow">→</div>
+        <div class="ag-fake-pass">
+          <span class="ag-fake-pass-tag">幻觉</span>
+          <div class="ag-fake-pass-body"><span class="grad-red">虚假通过</span></div>
+          <div class="ag-fake-pass-x">✗</div>
+        </div>
+      </div>
+      <div class="ag-why-note">它以为验证了 · 实际没有</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 规避幻觉 —</div>
+  </div>
+</div>
+<div class="phase phase-3 ag-scene">
+  <!-- phase-3 (21.31-31.97s): 根治方案——编码期三步产出 handler + 运行期零 AI 确定性执行 -->
+  <div class="region-top">
+    <div class="ag-stage-tag"><span class="dot"></span>E13 · 根治虚假通过 · 确定性执行</div>
+  </div>
+  <div class="region-mid">
+    <div class="ag-cure">
+      <div class="ag-cure-title">人审通过后 · <span class="grad-green">全确定性执行</span></div>
+      <div class="ag-cure-flow">
+        <div class="ag-cure-phase coding">
+          <div class="ag-cure-phase-head">编码期 · 产出 handler</div>
+          <div class="ag-cure-steps">
+            <div class="ag-cure-step s1">
+              <span class="ag-cure-step-num">01</span>
+              <span class="ag-cure-step-name">录制</span>
+            </div>
+            <div class="ag-cure-step-arrow">→</div>
+            <div class="ag-cure-step s2">
+              <span class="ag-cure-step-num">02</span>
+              <span class="ag-cure-step-name">AI 转换</span>
+            </div>
+            <div class="ag-cure-step-arrow">→</div>
+            <div class="ag-cure-step s3">
+              <span class="ag-cure-step-num">03</span>
+              <span class="ag-cure-step-name">人审</span>
+            </div>
+          </div>
+          <div class="ag-cure-out">
+            <span class="ag-cure-out-tag">产出</span>
+            <span class="ag-cure-out-name">handler</span>
+          </div>
+        </div>
+        <div class="ag-cure-divider">|</div>
+        <div class="ag-cure-runbox">
+          <span class="ag-cure-runbox-tag">运行期</span>
+          <div class="ag-cure-runbox-body">零 AI<br>确定性调度</div>
+        </div>
+      </div>
+      <div class="ag-cure-finale">根治虚假通过 · 运行期全确定性执行</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 根治虚假通过 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

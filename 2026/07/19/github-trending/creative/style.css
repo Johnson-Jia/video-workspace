@@ -1,0 +1,354 @@
+:root {
+  /* 暗色科技风 — 深蓝/紫底 + 橙#FF8C32/金强调 */
+  --bg-deep: #050816;
+  --bg-mid: #0d1230;
+  --accent-warm: #FF8C32;
+  --accent-warm-2: #FDBA74;
+  --accent-warm-3: #FB923C;
+  --accent-gold: #FBBF24;
+  --accent-gold-2: #FCD34D;
+  --accent-cool: #4DA8DA;
+  --accent-cool-2: #93C5FD;
+  --accent-cyan: #22D3EE;
+  --accent-teal: #2DD4BF;
+  --accent-purple: #A78BFA;
+  --text: #FFFFFF;
+  --text-2: rgba(255,255,255,0.72);
+  --text-3: rgba(255,255,255,0.55);
+  --pill-bg: rgba(255,255,255,0.06);
+  --pill-border: rgba(255,255,255,0.14);
+  --card-bg: rgba(13,18,48,0.62);
+  --card-border: rgba(255,255,255,0.10);
+
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================================
+ * 通用文字基线（极淡 drop text-shadow，禁发光）
+ * ============================================================ */
+.t-base { text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* ============================================================
+ * 渐变文字配方（同色系高饱和，禁白端点）
+ * ============================================================ */
+.grad-warm {
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FB923C 50%, #FDBA74 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #FCD34D 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-cool {
+  background-image: linear-gradient(135deg, #4DA8DA 0%, #60A5FA 50%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #22D3EE 0%, #2DD4BF 50%, #67E8F9 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #A78BFA 0%, #818CF8 50%, #C4B5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+
+/* ============================================================
+ * 胶囊小标签 — 纯场景色（禁用 grad-* 防消失）
+ * ============================================================ */
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid var(--pill-border);
+  background: var(--pill-bg);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 600;
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  backdrop-filter: blur(4px);
+}
+.pill-warm { color: var(--accent-warm-2); border-color: rgba(255,140,50,0.42); background: rgba(255,140,50,0.10); }
+.pill-cool { color: var(--accent-cool-2); border-color: rgba(77,168,218,0.42); background: rgba(77,168,218,0.10); }
+.pill-gold { color: var(--accent-gold-2); border-color: rgba(251,191,36,0.42); background: rgba(251,191,36,0.10); }
+.pill-cyan { color: #67E8F9; border-color: rgba(34,211,238,0.42); background: rgba(34,211,238,0.10); }
+.pill-purple { color: #C4B5FD; border-color: rgba(167,139,250,0.42); background: rgba(167,139,250,0.10); }
+
+/* ============================================================
+ * s1 hook — 大字反差 hero（4GB vs 70B）
+ * ============================================================ */
+.hook-label {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--accent-warm);
+  letter-spacing: 4px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hook-num {
+  font-family: var(--font-data);
+  font-size: 220px; font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -4px;
+}
+.hook-vs {
+  font-family: var(--font-data);
+  font-size: 64px; font-weight: 700;
+  color: var(--text-3);
+  line-height: 1;
+}
+.hook-sub {
+  font-family: var(--font-body);
+  font-size: 44px; font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hook-mini {
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 600;
+  color: var(--text-2);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================================
+ * ProjectFullCard 布局（s2/s3/s4 完整版）
+ * —— s6_assemble 不注入 PFC CSS，须手补
+ * ============================================================ */
+.project-full-card {
+  position: absolute;
+  inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  gap: 56px;
+}
+.pfc-top, .pfc-mid, .pfc-bot {
+  display: flex; flex-direction: column;
+  width: 100%;
+}
+.pfc-mid {
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.pfc-rank {
+  font-family: var(--font-data);
+  font-size: 42px; font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-use {
+  display: inline-flex; align-items: center;
+  align-self: flex-start;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 700;
+  color: var(--accent-warm);
+  background: rgba(255,140,50,0.12);
+  border: 1px solid rgba(255,140,50,0.40);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-use.cool { color: var(--accent-cool); background: rgba(77,168,218,0.12); border-color: rgba(77,168,218,0.40); }
+.pfc-use.cyan { color: var(--accent-cyan); background: rgba(34,211,238,0.12); border-color: rgba(34,211,238,0.40); }
+.pfc-name {
+  font-family: var(--font-data);
+  font-size: 52px; font-weight: 700;
+  color: var(--text);
+  word-break: break-word;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.12;
+  width: 100%;
+}
+.pfc-avatar-wrap {
+  align-self: center;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(255,140,50,0.55), rgba(77,168,218,0.55));
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+}
+.pfc-avatar-wrap.cool {
+  background: linear-gradient(135deg, rgba(167,139,250,0.55), rgba(34,211,238,0.55));
+}
+.pfc-avatar-wrap.cyan {
+  background: linear-gradient(135deg, rgba(34,211,238,0.55), rgba(45,212,191,0.55));
+}
+.pfc-avatar-wrap img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.pfc-desc {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 400;
+  color: var(--text-2);
+  line-height: 1.4;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-stars-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px;
+}
+.pfc-stars-today {
+  font-family: var(--font-data);
+  font-size: 92px; font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-stars-total {
+  font-family: var(--font-data);
+  font-size: 36px; font-weight: 600;
+  color: var(--text-2);
+}
+.pfc-bar {
+  width: 100%; height: 12px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.pfc-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-warm), var(--accent-gold));
+  border-radius: 999px;
+}
+.pfc-bar-fill.cool { background: linear-gradient(90deg, var(--accent-cool), var(--accent-cyan)); }
+.pfc-bar-fill.cyan { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-teal)); }
+.pfc-topics {
+  display: flex; flex-wrap: wrap; gap: 14px;
+}
+.pfc-topic {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 600;
+  color: var(--text-2);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--pill-border);
+}
+
+/* ============================================================
+ * s5 ai_engineering_ossie_byx 三项目快切
+ * —— 单卡片快速展示（非完整 PFC，紧凑列表）
+ * ============================================================ */
+.mini-card {
+  width: 100%;
+  padding: 28px 34px;
+  background: rgba(13,18,48,0.68);
+  border: 1px solid var(--card-border);
+  border-left: 6px solid var(--accent-gold);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.mini-card.cool { border-left-color: var(--accent-cyan); }
+.mini-card.purple { border-left-color: var(--accent-purple); }
+.mini-rank-row {
+  display: flex; align-items: baseline; gap: 18px;
+}
+.mini-rank {
+  font-family: var(--font-data);
+  font-size: 42px; font-weight: 700;
+  line-height: 1;
+}
+.mini-rank.gold { color: var(--accent-gold); }
+.mini-rank.cool { color: var(--accent-cyan); }
+.mini-rank.purple { color: var(--accent-purple); }
+.mini-tag {
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 600;
+  color: var(--text-2);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mini-name {
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 700;
+  color: var(--text);
+  word-break: break-word;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+  line-height: 1.1;
+}
+.mini-desc {
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mini-data {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 20px;
+}
+.mini-stars-today {
+  font-family: var(--font-data);
+  font-size: 52px; font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mini-stars-total {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 600;
+  color: var(--text-2);
+}
+
+/* s5 phase-3 一带而过（单行 highlight） */
+.mini-flash {
+  width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+.mini-flash-name {
+  font-family: var(--font-data);
+  font-size: 48px; font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.mini-flash-num {
+  font-family: var(--font-data);
+  font-size: 120px; font-weight: 700;
+  line-height: 1;
+}
+.mini-flash-tag {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================================
+ * s6 CTA — 中性二选一
+ * ============================================================ */
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 92px; font-weight: 900;
+  line-height: 1.1;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-channel {
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 700;
+  color: var(--accent-gold);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}

@@ -1,0 +1,190 @@
+<!-- 场景: scene-1 | 时长: 39.24s | bg: hex_grid | 架构总览：8 文件架构树全景 + 每文件一句话作用 + 五核心思想收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝架构 / 绿五思想 / 紫收官；低 alpha 呼吸，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:1000px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <div class="fx-aura" style="position:absolute;top:68%;left:20%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,55%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.65"></div>
+  <div class="fx-aura" style="position:absolute;top:68%;left:80%;width:560px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,80%,70%,0.16) 0%, transparent 65%);filter:blur(50px);opacity:0.7"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:15%;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 16px hsla(215,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:84%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(255,80%,70%,0.9);box-shadow:0 0 14px hsla(255,75%,65%,0.32)"></div>
+  <!-- fx-particle 浮动粒子（冷色优先：蓝/绿/紫） -->
+  <div class="fx-particle" style="position:absolute;top:22%;left:14%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:24%;left:86%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:74%;left:48%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 arch-scene">
+  <!-- phase-1 (0-7.85s): 架构总览 hero + 8 文件计数 + 标题「框架八个文件全景」+ 架构树根节点 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E13 · 收官 · AI 自动化测试实操 · arch</div>
+  </div>
+  <div class="region-mid arch-hero">
+    <div class="a-hero-badge">架构总览 · <span class="kw-blue">ai-test-frame</span> 框架全景</div>
+    <div class="a-hero-title">框架 <span class="grad-blue">八个文件</span> 全景</div>
+    <div class="a-hero-sub">每个文件 <span class="kw-green">一个核心模块</span> · 架构清晰 <span class="kw-purple">开箱跑通</span></div>
+    <div class="a-root-node"><span class="a-root-icon">📁</span>ai-test-frame/</div>
+    <div class="a-count-row">
+      <div class="a-count-chip chip-blue"><span class="num grad-blue">8</span><span class="lab">文件</span></div>
+      <div class="a-count-chip chip-green"><span class="num grad-green">5</span><span class="lab">核心思想</span></div>
+      <div class="a-count-chip chip-purple"><span class="num grad-purple">1</span><span class="lab">开箱跑通</span></div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / arch · 架构总览 —</div>
+  </div>
+</div>
+<div class="phase phase-2 arch-scene">
+  <!-- phase-2 (7.85-15.70s): registry / assertions / base_page 三文件（核心机制） -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E13 · arch · 核心机制</div>
+  </div>
+  <div class="region-mid arch-files-block">
+    <div class="a-files-title">核心机制 · <span class="grad-blue">注册 / 断言 / 基类</span></div>
+    <div class="a-files-grid">
+      <div class="a-file-card card-blue">
+        <div class="a-file-head">
+          <div class="a-file-num grad-blue">01</div>
+          <div class="a-file-name kw-blue">registry</div>
+        </div>
+        <div class="a-file-role">注册中心</div>
+        <div class="a-file-note">装饰器登记用例类型</div>
+      </div>
+      <div class="a-file-card card-green">
+        <div class="a-file-head">
+          <div class="a-file-num grad-green">02</div>
+          <div class="a-file-name kw-green">assertions</div>
+        </div>
+        <div class="a-file-role">软断言</div>
+        <div class="a-file-note">失败不中断加截图加收集</div>
+      </div>
+      <div class="a-file-card card-blue">
+        <div class="a-file-head">
+          <div class="a-file-num grad-blue">03</div>
+          <div class="a-file-name kw-blue">base_page</div>
+        </div>
+        <div class="a-file-role">测试基类</div>
+        <div class="a-file-note">封装通用操作和通用定位</div>
+      </div>
+    </div>
+    <div class="a-files-footer">装饰器登记 · 失败不中断 · 通用操作</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / arch · 架构总览 —</div>
+  </div>
+</div>
+<div class="phase phase-3 arch-scene">
+  <!-- phase-3 (15.70-23.54s): runner / handlers / main 三文件（业务流程） -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E13 · arch · 业务流程</div>
+  </div>
+  <div class="region-mid arch-files-block">
+    <div class="a-files-title">业务流程 · <span class="grad-green">调度 / 处理 / 入口</span></div>
+    <div class="a-files-grid">
+      <div class="a-file-card card-green">
+        <div class="a-file-head">
+          <div class="a-file-num grad-green">04</div>
+          <div class="a-file-name kw-green">runner</div>
+        </div>
+        <div class="a-file-role">数据驱动调度器</div>
+        <div class="a-file-note">读用例按类型路由</div>
+      </div>
+      <div class="a-file-card card-blue">
+        <div class="a-file-head">
+          <div class="a-file-num grad-blue">05</div>
+          <div class="a-file-name kw-blue">handlers</div>
+        </div>
+        <div class="a-file-role">业务处理器</div>
+        <div class="a-file-note">商品管理一个示例</div>
+      </div>
+      <div class="a-file-card card-green">
+        <div class="a-file-head">
+          <div class="a-file-num grad-green">06</div>
+          <div class="a-file-name kw-green">main</div>
+        </div>
+        <div class="a-file-role">执行入口</div>
+        <div class="a-file-note">开浏览器跑用例汇总</div>
+      </div>
+    </div>
+    <div class="a-files-footer">调度器路由 · handler 示例 · 入口汇总</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / arch · 架构总览 —</div>
+  </div>
+</div>
+<div class="phase phase-4 arch-scene">
+  <!-- phase-4 (23.54-31.39s): data / site 两文件（数据被测）+ 八文件架构树完整呈现 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E13 · arch · 数据被测</div>
+  </div>
+  <div class="region-mid arch-files-block">
+    <div class="a-files-title">数据被测 · <span class="grad-purple">用例 / 被测页</span></div>
+    <div class="a-files-grid">
+      <div class="a-file-card card-purple">
+        <div class="a-file-head">
+          <div class="a-file-num grad-purple">07</div>
+          <div class="a-file-name kw-purple">data</div>
+        </div>
+        <div class="a-file-role">用例数据</div>
+        <div class="a-file-note">运营在这里编步骤</div>
+      </div>
+      <div class="a-file-card card-blue">
+        <div class="a-file-head">
+          <div class="a-file-num grad-blue">08</div>
+          <div class="a-file-name kw-blue">site</div>
+        </div>
+        <div class="a-file-role">被测页</div>
+        <div class="a-file-note">自带极简商品管理页开箱跑</div>
+      </div>
+    </div>
+    <div class="a-files-footer">registry · assertions · base_page · runner · handlers · main · data · site</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / arch · 架构总览 —</div>
+  </div>
+</div>
+<div class="phase phase-5 arch-scene">
+  <!-- phase-5 (31.39-39.24s): 八文件对应五核心思想收尾 -->
+  <div class="region-top">
+    <div class="a-stage-tag"><span class="dot"></span>E13 · arch · 五核心思想</div>
+  </div>
+  <div class="region-mid arch-finale-block">
+    <div class="a-finale-title">八个文件对应 <span class="grad-purple">五个核心思想</span></div>
+    <div class="a-ideas-row">
+      <div class="a-idea-card idea-blue">
+        <div class="a-idea-num grad-blue">01</div>
+        <div class="a-idea-name">AI 只生成不执行</div>
+      </div>
+      <div class="a-idea-card idea-green">
+        <div class="a-idea-num grad-green">02</div>
+        <div class="a-idea-name">数据代码解耦</div>
+      </div>
+      <div class="a-idea-card idea-blue">
+        <div class="a-idea-num grad-blue">03</div>
+        <div class="a-idea-name">注册中心模式</div>
+      </div>
+      <div class="a-idea-card idea-green">
+        <div class="a-idea-num grad-green">04</div>
+        <div class="a-idea-name">软断言</div>
+      </div>
+      <div class="a-idea-card idea-purple">
+        <div class="a-idea-num grad-purple">05</div>
+        <div class="a-idea-name">变量传递</div>
+      </div>
+    </div>
+    <div class="a-finale-hint">架构清晰 · <span class="kw-green">开箱跑通</span> · 根治 <span class="kw-purple">虚假通过</span></div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / arch · 架构总览 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

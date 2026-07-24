@@ -1,0 +1,39 @@
+<!-- 场景: hook | 时长: 3.84s | 数字锚定 1077 + 开源剪映反差 -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+  <!-- 暖金光束从中心放射，深色压暗四角聚焦数字 -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,transparent 30%,rgba(0,0,0,0.45) 75%,rgba(0,0,0,0.88) 100%);z-index:2"></div>
+</div>
+<div class="layer-fx">
+  <!-- fx-aura：单一暖金底辉（顶部，星标锚点光晕）-->
+  <div class="fx-aura" style="top:18%;left:calc(50% - 320px);width:640px;height:640px;background:radial-gradient(circle,rgba(245,194,68,0.32),transparent 62%);border-radius:50%;filter:blur(40px)"></div>
+  <!-- fx-pulse：中心脉冲爆点（数字冲击感）-->
+  <div class="fx-pulse" style="top:38%;left:calc(50% - 180px);width:360px;height:360px;background:radial-gradient(circle,rgba(245,194,68,0.22),transparent 70%);border-radius:50%"></div>
+  <!-- fx-scan：横向细腻扫描线（赛博数据感）-->
+  <div class="fx-scan" style="background:linear-gradient(90deg,transparent,rgba(77,214,232,0.20),transparent)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+  <!-- hook 三段式：顶栏 + 大数字 1077 + tagline（开源版剪映反差）
+       ⛔ 大字 180px ≤200 + justify-center + white-space:nowrap 防溢出安全区 -->
+  <div class="hook-stage">
+    <div class="hook-topbar">
+      <span class="hook-date">2026 · 07 · 14</span>
+      <span class="hook-dot"></span>
+      <span class="hook-eyebrow">GitHub Trending Daily</span>
+    </div>
+    <div class="hook-numblock">
+      <div class="hook-label">今日单日涨星王</div>
+      <div class="hook-num-row">
+        <span class="hook-big-num grad-gold">1077</span>
+        <span class="hook-num-unit">★</span>
+      </div>
+      <div class="hook-badge">单日破千 · 领跑全网</div>
+    </div>
+    <div class="hook-tagline"><span class="accent-gold">开源版剪映</span> 杀入榜单</div>
+  </div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

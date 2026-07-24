@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>28-术语速查 · 附录</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#f59e0b;}
+.card .clabel{font-size:21px;font-weight:700;color:#2563eb;margin-bottom:6px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card:nth-child(3) .clabel{color:#f59e0b;}
+.card .csub{font-size:15px;color:#94a3b8;margin-bottom:12px;font-weight:600;}
+.card .term{margin-bottom:10px;}
+.card .tname{font-size:19px;font-weight:800;color:#0f172a;}
+.card .tdef{font-size:16px;color:#475569;line-height:1.5;margin-top:2px;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>附录 · 术语速查</div>
+    <div class="num">AI 战略转型方法论 · <strong>28/30</strong></div>
+  </div>
+  <h1>资产 · 协议 · 框架,<span class="hl">进实施阶段先认</span></h1>
+  <div class="subtitle">实施阶段(阶段 2-6)会反复用到这些术语——先留个印象,读到时不懵</div>
+  <div class="quote">📘 必学(stage0-2 会用到):上下文窗口 / Agent / REACT / RAG / Skill / MCP / OpenSpec·Superpowers / Co-authored-by;<span class="em">🔧 进阶</span>(stage3-6 / 大型团队):代码图谱 / SDD / HNSW·CrossEncoder。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">📦 资产类</div><div class="csub">AI 能读的团队规范 / 能力</div>
+      <div class="term"><div class="tname">CLAUDE.md</div><div class="tdef">项目根目录的规范文件,AI 每次自动读取——团队规范资产化的载体</div></div>
+      <div class="term"><div class="tname">Skill</div><div class="tdef">可复用工作流/领域知识,两级加载(描述常驻、正文按需)</div></div>
+      <div class="term"><div class="tname">代码知识图谱</div><div class="tdef">代码索引成节点+边的图,供 AI 确定性查询(替代盲读)</div></div>
+    </div>
+    <div class="card"><div class="clabel">🔌 协议类</div><div class="csub">AI 连接外部的标准</div>
+      <div class="term"><div class="tname">MCP</div><div class="tdef">Model Context Protocol,AI 连接外部数据/能力的开放协议</div></div>
+      <div class="term"><div class="tname">Co-authored-by</div><div class="tdef">Git commit trailer,AI 工具默认埋点,用于度量 AI 代码占比</div></div>
+      <div class="term"><div class="tname">Hooks</div><div class="tdef">Claude Code 的事件钩子,自动跑检查/格式化/防护(确定性)</div></div>
+    </div>
+    <div class="card"><div class="clabel">🏗️ 框架类</div><div class="csub">规范驱动 + 自动执行</div>
+      <div class="term"><div class="tname">OpenSpec</div><div class="tdef">规范驱动框架,管 WHAT/WHY(写规范 spec)</div></div>
+      <div class="term"><div class="tname">Superpowers</div><div class="tdef">自动化执行框架,管 HOW(按 spec 干活),与 OpenSpec 互补</div></div>
+      <div class="term"><div class="tname">SDD</div><div class="tdef">规范驱动开发,spec/plan/tasks 三产物,纠错左移到 Markdown</div></div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:appendix.html §A 术语表 + index.html「核心术语速查」。完整定义见附录,技术栈全景(Claude/Milvus/Tree-sitter/OpenSpec 等)见附录 §C</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

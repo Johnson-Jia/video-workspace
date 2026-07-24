@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>26-代码审查 · checklist</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card:nth-child(3){border-left-color:#ef4444;}
+.card .clabel{font-size:21px;font-weight:700;color:#2563eb;margin-bottom:6px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card:nth-child(3) .clabel{color:#ef4444;}
+.card .ctitle{font-size:24px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card ul{list-style:none;padding:0;margin:0;flex:1;}
+.card li{font-size:17px;color:#334155;line-height:1.5;padding:7px 0 7px 26px;position:relative;border-bottom:1px dashed #f1f5f9;}
+.card li:last-child{border-bottom:none;}
+.card li::before{content:'☐';position:absolute;left:0;top:6px;font-size:18px;color:inherit;font-weight:700;}
+.card li strong{color:#0f172a;}
+.principlerow{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:18px 28px;margin-bottom:24px;font-size:20px;color:#78350f;line-height:1.6;}
+.principlerow strong{color:#92400e;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:18px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>审查 · 代码 checklist</div>
+    <div class="num">AI 战略转型方法论 · <strong>26/30</strong></div>
+  </div>
+  <h1>AI 写的代码 ≠ <span class="hl">正确代码</span></h1>
+  <div class="subtitle">合并 AI 生成的代码前,逐项核对——给人把关的清单(给 AI 用的审查 skill 在 code-review)</div>
+  <div class="quote">关键项用 <span class="em">Hook 强制</span>(禁止改测试目录、提交前必跑测试),CLAUDE.md 只是建议,Hook 是确定性的。<strong>不让 AI 自己审自己</strong>。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">一、正确性</div><div class="ctitle">逻辑符合 spec / 需求</div><ul>
+      <li>逻辑符合 spec(不是"能跑"就行)</li>
+      <li>边界情况覆盖(空值、越界、并发、超时)</li>
+      <li>错误处理真实(不是 catch 吞掉假装成功)</li>
+      <li>没有验证错误逻辑的测试</li>
+    </ul></div>
+    <div class="card"><div class="clabel">二、影响范围</div><div class="ctitle">改动影响面已查清</div><ul>
+      <li>有图谱跑 impact,没有用 grep 列调用方</li>
+      <li>没有破坏既有调用方(返回类型/接口签名)</li>
+      <li>提交前跑 detect_changes / git diff 核对</li>
+      <li>符合 CLAUDE.md / rules(命名、分层、提交)</li>
+    </ul></div>
+    <div class="card"><div class="clabel">三、安全 + 可维护</div><div class="ctitle">无注入/越权,改动可回滚</div><ul>
+      <li>敏感操作有授权检查(SQL 写、外部调用)</li>
+      <li>无注入/越权风险(AI 常忽略权限校验)</li>
+      <li>无硬编码(配置、密钥、定制逻辑)</li>
+      <li>关键逻辑有注释,改动可回滚</li>
+    </ul></div>
+  </div>
+  <div class="principlerow"><strong>💡 AI 时代 Code Review 四问</strong>(审核小组红线):① 提交者是否理解这段 AI 代码;② 是否过度工程;③ 调用的 API/库是否真实存在(防幻觉);④ 有无安全隐患——<strong>这四问比"代码能不能跑"更重要</strong>。</div>
+  <div class="foot">
+    <div class="src">来源:demos/review-checklists/代码审查checklist.md(正确性/影响范围/规范/安全/可维护 5 类)+ stage1 §4.2 Code Review 四问</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!-- 场景: maths_cs_ai_compendium | 时长: 9.0s | 情绪: climax·AI 研究工程师知识体系 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+<!-- 深靛底（教科书/知识图谱氛围） -->
+<div style="position:absolute;inset:0;background:linear-gradient(170deg,#0a0e24 0%,#141a3a 50%,#08081c 100%)"></div>
+<!-- 霓虹青绿辉光（左上） -->
+<div style="position:absolute;top:-10%;left:-6%;width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,245,212,0.28),rgba(0,200,180,0.05),transparent 70%);
+  filter:blur(110px)"></div>
+<!-- 知识图谱辉光（右下） -->
+<div style="position:absolute;bottom:-12%;right:-8%;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(120,170,255,0.22),rgba(80,120,220,0.05),transparent 70%);
+  filter:blur(110px)"></div>
+<!-- 六边形蜂窝网格（结构化知识感） -->
+<div style="position:absolute;inset:0;opacity:0.10;
+  background-image:radial-gradient(circle at 50% 50%,rgba(0,245,212,0.35) 1.5px,transparent 2px),
+    radial-gradient(circle at 0% 50%,rgba(0,245,212,0.28) 1.5px,transparent 2px),
+    radial-gradient(circle at 100% 50%,rgba(0,245,212,0.28) 1.5px,transparent 2px);
+  background-size:90px 78px;background-position:0 0,45px 39px,45px 39px;
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+<!-- 节点连线（知识树底纹） -->
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12;pointer-events:none">
+  <line x1="20%" y1="25%" x2="48%" y2="20%" stroke="rgba(0,245,212,0.5)" stroke-width="1.5"/>
+  <line x1="48%" y1="20%" x2="78%" y2="28%" stroke="rgba(120,170,255,0.5)" stroke-width="1.5"/>
+  <line x1="20%" y1="25%" x2="32%" y2="50%" stroke="rgba(0,245,212,0.4)" stroke-width="1.5"/>
+  <line x1="78%" y1="28%" x2="66%" y2="55%" stroke="rgba(120,170,255,0.4)" stroke-width="1.5"/>
+  <line x1="32%" y1="50%" x2="66%" y2="55%" stroke="rgba(170,200,255,0.35)" stroke-width="1.5"/>
+</svg>
+<!-- 玻璃折射层 -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.015) 0%,transparent 35%,transparent 65%,rgba(255,255,255,0.02) 100%);animation:glassShimmer 9s ease-in-out infinite"></div>
+<!-- 暗角聚光 -->
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 32%,rgba(0,0,0,0.55) 100%)"></div>
+</div>
+<div class="layer-fx">
+  <!-- 知识树生长（GSAP 缩放呼吸） -->
+  <div class="fx-tree-pulse" data-fx="ms-ring1" style="position:absolute;top:42%;left:50%;width:680px;height:680px;transform:translate(-50%,-50%);border-radius:50%;border:2px solid rgba(0,245,212,0.40);z-index:2"></div>
+  <div class="fx-tree-pulse" data-fx="ms-ring2" style="position:absolute;top:42%;left:50%;width:960px;height:960px;transform:translate(-50%,-50%);border-radius:50%;border:1.5px solid rgba(120,170,255,0.30);z-index:2"></div>
+  <!-- 学科节点（线代/概率/深度学习/强化学习） -->
+  <div class="fx-node" data-fx="ms-node1" style="position:absolute;top:28%;left:22%;padding:10px 18px;border-radius:12px;background:rgba(0,245,212,0.14);border:1px solid rgba(0,245,212,0.45);color:rgba(180,255,240,0.95);font-family:'Noto Sans SC',sans-serif;font-size:28px;font-weight:700;z-index:2">线代</div>
+  <div class="fx-node" data-fx="ms-node2" style="position:absolute;top:26%;left:55%;padding:10px 18px;border-radius:12px;background:rgba(120,170,255,0.14);border:1px solid rgba(120,170,255,0.45);color:rgba(200,220,255,0.95);font-family:'Noto Sans SC',sans-serif;font-size:28px;font-weight:700;z-index:2">概率统计</div>
+  <div class="fx-node" data-fx="ms-node3" style="position:absolute;top:62%;left:24%;padding:10px 18px;border-radius:12px;background:rgba(0,245,212,0.14);border:1px solid rgba(0,245,212,0.45);color:rgba(180,255,240,0.95);font-family:'Noto Sans SC',sans-serif;font-size:28px;font-weight:700;z-index:2">深度学习</div>
+  <div class="fx-node" data-fx="ms-node4" style="position:absolute;top:64%;left:58%;padding:10px 18px;border-radius:12px;background:rgba(170,200,255,0.14);border:1px solid rgba(170,200,255,0.45);color:rgba(220,230,255,0.95);font-family:'Noto Sans SC',sans-serif;font-size:28px;font-weight:700;z-index:2">强化学习</div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="project-full-card">
+  <div class="pfc-glow pfc-glow-teal-strong"></div>
+  <div class="pfc-glow pfc-glow-indigo-soft"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#03</span>
+      <span class="pfc-category pfc-cat-learner">给学习者的</span>
+    </div>
+    <div class="pfc-use">AI 研究工程师·一本通</div>
+    <div class="pfc-name"><span class="pfc-owner">HenryNdubuaku /</span> <span class="pfc-repo">maths-cs-ai-compendium</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/HenryNdubuaku.png" alt="">
+    </div>
+    <div class="pfc-desc">线代 · 概率 · 深度学习 · 强化学习 四大学科全覆盖</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-bar-head">
+        <span class="pfc-bar-label">今日涨星</span>
+        <span class="pfc-bar-val">+725 ★</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:72%;"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">TypeScript</span>
+        <span class="pfc-topic">知识体系</span>
+        <span class="pfc-topic">学习者向</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-stars">
+      <span class="pfc-star-num">5.9<span class="pfc-star-unit">K★</span></span>
+    </div>
+    <div class="pfc-commentary">AI 研究工程师知识体系一本通</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>

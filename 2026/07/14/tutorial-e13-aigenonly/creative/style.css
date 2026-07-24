@@ -1,0 +1,223 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-red: #FCA5A5;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E13 aigenonly — AI 只生成不执行：3 phase 纯切换
+ * （多 phase 用 GSAP timeline 顺序切换，禁 data-reveal，避 phase-2/3 不显示）
+ * ============================================ */
+
+.ag-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 60px 120px 60px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 22px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.ag-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.ag-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(96,165,250,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-blue  { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-gold  { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-red   { background-image: linear-gradient(135deg, #FCA5A5, #EF4444, #F87171); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 最关键思想总览：AI 只生成不执行 + 编码期/运行期双带 === */
+.ag-idea { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.ag-idea-title {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ag-idea-core {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  padding: 20px 40px; border-radius: 18px;
+  background: rgba(96,165,250,0.08); border: 2px solid rgba(96,165,250,0.42);
+}
+.ag-idea-gen { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ag-idea-gen-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #93C5FD;
+  padding: 4px 16px; border-radius: 999px; background: rgba(96,165,250,0.16); border: 1px solid rgba(96,165,250,0.40);
+}
+.ag-idea-gen-act {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; color: var(--tut-white);
+}
+.ag-idea-x {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: #FCA5A5;
+}
+.ag-idea-run { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ag-idea-run-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #FCA5A5;
+  padding: 4px 16px; border-radius: 999px; background: rgba(252,165,165,0.14); border: 1px solid rgba(252,165,165,0.40);
+}
+.ag-idea-run-act {
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; color: var(--tut-white); text-decoration: line-through; text-decoration-color: #FCA5A5; text-decoration-thickness: 4px;
+}
+.ag-idea-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(147,197,253,0.92); text-align: center;
+}
+.ag-idea-bands { display: flex; align-items: stretch; justify-content: center; gap: 24px; width: 100%; }
+.ag-band {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 24px; border-radius: 14px; flex: 1; max-width: 560px;
+}
+.ag-band.coding { background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.42); }
+.ag-band.run    { background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.42); }
+.ag-band-head {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+}
+.ag-band.coding .ag-band-head { color: #93C5FD; }
+.ag-band.run    .ag-band-head { color: #6EE7B7; }
+.ag-band-body {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.88); text-align: center;
+}
+.ag-band.coding .ag-band-body { color: #93C5FD; }
+.ag-band.run    .ag-band-body { color: #6EE7B7; }
+
+/* === phase-2 为什么这么设计：规避幻觉 + 虚假通过红叉 === */
+.ag-why { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.ag-why-title {
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ag-why-flow {
+  display: flex; align-items: center; justify-content: center; gap: 24px;
+}
+.ag-why-cause {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 28px; border-radius: 16px;
+  background: rgba(252,165,165,0.10); border: 2px solid rgba(252,165,165,0.45);
+  min-width: 360px; max-width: 440px;
+}
+.ag-why-cause-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #FCA5A5;
+  padding: 4px 16px; border-radius: 999px; background: rgba(252,165,165,0.16); border: 1px solid rgba(252,165,165,0.40);
+}
+.ag-why-cause-body {
+  font-family: var(--font-title); font-size: 40px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ag-why-arrow {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900; color: rgba(255,255,255,0.45);
+}
+.ag-fake-pass {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 28px; border-radius: 16px;
+  background: rgba(239,68,68,0.12); border: 3px solid rgba(239,68,68,0.60);
+  min-width: 360px; max-width: 440px;
+  position: relative;
+}
+.ag-fake-pass-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #FCA5A5;
+  padding: 4px 16px; border-radius: 999px; background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.45);
+}
+.ag-fake-pass-body {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900; text-align: center;
+}
+.ag-fake-pass-x {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--font-title); font-size: 140px; font-weight: 900; color: rgba(239,68,68,0.35);
+  pointer-events: none;
+}
+.ag-why-note {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(252,165,165,0.92); text-align: center;
+  padding: 10px 24px; border-radius: 10px; background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.32);
+}
+
+/* === phase-3 根治方案：编码期三步 → handler / 运行期零 AI 确定性执行 === */
+.ag-cure { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.ag-cure-title {
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ag-cure-flow { display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; }
+.ag-cure-phase {
+  display: flex; flex-direction: column; gap: 14px; flex: 1; max-width: 760px;
+}
+.ag-cure-phase-head {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800; text-align: center;
+  padding: 6px 18px; border-radius: 999px; align-self: center;
+}
+.ag-cure-phase.coding .ag-cure-phase-head { color: #93C5FD; background: rgba(96,165,250,0.14); border: 1px solid rgba(96,165,250,0.40); }
+.ag-cure-phase.run    .ag-cure-phase-head { color: #6EE7B7; background: rgba(52,211,153,0.14); border: 1px solid rgba(52,211,153,0.40); }
+.ag-cure-steps { display: flex; align-items: stretch; justify-content: center; gap: 10px; }
+.ag-cure-step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 18px; border-radius: 12px; flex: 1;
+}
+.ag-cure-step.s1 { background: rgba(96,165,250,0.10); border: 1.5px solid rgba(96,165,250,0.40); }
+.ag-cure-step.s2 { background: rgba(34,211,238,0.10); border: 1.5px solid rgba(34,211,238,0.40); }
+.ag-cure-step.s3 { background: rgba(196,181,253,0.10); border: 1.5px solid rgba(196,181,253,0.40); }
+.ag-cure-step-num {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+}
+.ag-cure-step.s1 .ag-cure-step-num { color: #93C5FD; }
+.ag-cure-step.s2 .ag-cure-step-num { color: #67E8F9; }
+.ag-cure-step.s3 .ag-cure-step-num { color: #DDD6FE; }
+.ag-cure-step-name {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800; color: var(--tut-white);
+}
+.ag-cure-step-arrow {
+  font-family: var(--font-data); font-size: 40px; font-weight: 900; color: rgba(255,255,255,0.40); align-self: center;
+}
+.ag-cure-out {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 10px 20px; border-radius: 10px;
+  background: rgba(251,191,36,0.12); border: 1.5px solid rgba(251,191,36,0.45);
+  align-self: center;
+}
+.ag-cure-out-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: #FCD34D;
+}
+.ag-cure-out-name {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: #FBBF24;
+}
+.ag-cure-divider {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900; color: rgba(255,255,255,0.30); align-self: center;
+}
+.ag-cure-runbox {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 18px 26px; border-radius: 14px;
+  background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.45);
+  flex: 1; max-width: 420px; justify-content: center;
+}
+.ag-cure-runbox-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800; color: #6EE7B7;
+  padding: 4px 16px; border-radius: 999px; background: rgba(52,211,153,0.16); border: 1px solid rgba(52,211,153,0.40);
+}
+.ag-cure-runbox-body {
+  font-family: var(--font-title); font-size: 40px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.ag-cure-finale {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(110,231,183,0.92); text-align: center;
+  padding: 10px 24px; border-radius: 10px; background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.32);
+}

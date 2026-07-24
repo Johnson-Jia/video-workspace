@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>04-五条AI原理 · 阶段0</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:18px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-top:6px solid #2563eb;border-radius:14px;padding:24px 22px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-top-color:#16a34a;}
+.card:nth-child(3){border-top-color:#f59e0b;}
+.card:nth-child(4){border-top-color:#7c3aed;}
+.card:nth-child(5){border-top-color:#ef4444;}
+.card .pno{font-size:42px;font-weight:900;color:#2563eb;line-height:1;margin-bottom:8px;}
+.card:nth-child(2) .pno{color:#16a34a;}
+.card:nth-child(3) .pno{color:#f59e0b;}
+.card:nth-child(4) .pno{color:#7c3aed;}
+.card:nth-child(5) .pno{color:#ef4444;}
+.card .ctitle{font-size:24px;font-weight:800;color:#0f172a;margin-bottom:10px;line-height:1.2;}
+.card .cdesc{font-size:17px;color:#475569;line-height:1.55;flex:1;}
+.card .ckey{font-size:15px;color:#94a3b8;margin-top:10px;padding-top:8px;border-top:1px dashed #e2e8f0;font-weight:600;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段0 · AI 原理</div>
+    <div class="num">AI 战略转型方法论 · <strong>04/30</strong></div>
+  </div>
+  <h1>懂 5 条原理,<span class="hl">交互效率天差地别</span></h1>
+  <div class="subtitle">不懂原理就下指令 = 瞎指挥;token 预测 / 上下文 / Agent / REACT / 精准指令</div>
+  <div class="quote">大模型本质是<span class="em">根据上文预测下一个 token</span>——不是"理解"你的代码,而是基于海量模式生成最可能的续写,所以会"一本正经地胡说"(幻觉),必须验证。</div>
+  <div class="cards">
+    <div class="card"><div class="pno">①</div><div class="ctitle">预测下一个 token</div><div class="cdesc">底层逻辑:基于上文生成最可能的续写。生成的是"看起来对"的,不是"验证过对"的</div><div class="ckey">→ 解释幻觉,必须验证</div></div>
+    <div class="card"><div class="pno">②</div><div class="ctitle">上下文窗口 1M</div><div class="cdesc">虽大但仍会填满——大代码库/长会话/MCP 工具定义都撑爆它,填满后性能下降</div><div class="ckey">→ 一切用法的约束原点</div></div>
+    <div class="card"><div class="pno">③</div><div class="ctitle">Agent = 大模型 + 工具</div><div class="cdesc">模型只能输出文字,组装工具后才能感知/改变环境;"先思考再行动"靠系统提示词</div><div class="ckey">→ 非训练,是编排</div></div>
+    <div class="card"><div class="pno">④</div><div class="ctitle">REACT 循环</div><div class="cdesc">Thought(思考)→ Action(调工具)→ Observation(看结果)→ 循环 → Final Answer</div><div class="ckey">→ 最广泛的 Agent 运行模式</div></div>
+    <div class="card"><div class="pno">⑤</div><div class="ctitle">精准下达指令</div><div class="cdesc">给上下文、明目标、定流程、要验证——像给聪明的实习生下指令</div><div class="ckey">→ 模型越强,越需定义清楚</div></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage0.html §3「懂原理:才能精准交互」(3.1-3.5)</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

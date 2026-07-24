@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>25-落地验收 · 验收清单</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 32px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#16a34a;}
+.card .clabel{font-size:22px;font-weight:700;color:#2563eb;margin-bottom:6px;}
+.card:nth-child(2) .clabel{color:#16a34a;}
+.card .csub{font-size:18px;color:#94a3b8;margin-bottom:14px;font-weight:600;}
+.card ul{list-style:none;padding:0;margin:0;flex:1;}
+.card li{font-size:19px;color:#334155;line-height:1.5;padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed #f1f5f9;}
+.card li:last-child{border-bottom:none;}
+.card li::before{content:'☐';position:absolute;left:0;top:7px;font-size:20px;color:#2563eb;font-weight:700;}
+.card:nth-child(2) li::before{color:#16a34a;}
+.card li strong{color:#0f172a;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>验收 · 落地清单</div>
+    <div class="num">AI 战略转型方法论 · <strong>25/30</strong></div>
+  </div>
+  <h1>跑通到什么程度,<span class="hl">两档验收</span></h1>
+  <div class="subtitle">试点验收(单组验证)→ 推广验收(全员铺开)——标准提炼自各阶段落地清单</div>
+  <div class="quote">验收原则:数据<span class="em">事后统计</span>(转型跑完的成果,非启动期承诺);对比公允(不能 100% 算 AI 功劳);先质量后速度(试点没跑通质量闭环,不急着推广)。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">一、试点验收</div><div class="csub">阶段 4 结项 · 单组跑通闭环、可复制</div><ul>
+      <li><strong>流程闭环</strong>:OpenSpec+Superpowers 跑通,断点续传可用,防偷改测试落地</li>
+      <li><strong>质量</strong>:AI 产出 100% 人工审查;改前跑 impact(无图谱用 grep);Bug 率/返工率有记录</li>
+      <li><strong>度量</strong>:AI 代码占比可测(ai-metrics 跑出基线);产出/质量数据已采集</li>
+      <li><strong>可复制</strong>:经验沉淀成文档/Skill;问题有应对方案(写进避坑库)</li>
+    </ul></div>
+    <div class="card"><div class="clabel">二、推广验收</div><div class="csub">阶段 5 评估 · 从单组扩到多组/全员</div><ul>
+      <li><strong>覆盖</strong>:各角色手册培训到位;推广组数达标;规范资产化进 Git</li>
+      <li><strong>效果</strong>:AI 占比达目标区间(参考约 76%);人均产出/Bug 占比/测试时长有同比;数据来自事后统计</li>
+      <li><strong>沉淀</strong>:团队 Skill 仓库成型;避坑库持续更新;自我改进循环跑起来</li>
+    </ul></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:demos/review-checklists/落地验收清单.md(试点验收 4 类 + 推广验收 3 类 + 验收原则 3 条)</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

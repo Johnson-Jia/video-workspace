@@ -1,0 +1,177 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-red: #F87171;
+  --tut-blue-white: #E0E7FF;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E13 intro — 收官方法论预告：合集收官→AI 自动化测试实操 + 5 关键思想 stagger
+ * phase 切换（单场景类 intro-scene，phase-1/phase-2 依次显示）
+ * ============================================ */
+
+.intro-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 110px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+/* —— 阶段标签胶囊（纯场景色，禁 grad clip:text） —— */
+.i-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.i-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+.bottom-hint {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(96, 165, 250, 0.55); letter-spacing: 0.10em;
+}
+
+/* —— 渐变文字（同色系高饱和，禁白端点） —— */
+.grad-gold {
+  background-image: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #FCD34D 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.grad-green {
+  background-image: linear-gradient(135deg, #34D399 0%, #10B981 50%, #6EE7B7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 关键词纯色（胶囊/小标签禁 grad clip:text，用纯场景色） —— */
+.kw-gold { color: #FCD34D; font-weight: 700; }
+.kw-blue { color: #93C5FD; font-weight: 700; }
+.kw-red { color: #FCA5A5; font-weight: 700; }
+
+/* ============================================
+ * phase-1 收官 hero 区
+ * ============================================ */
+.intro-hero {
+  flex-direction: column; gap: 22px;
+}
+
+.i-finale-badge {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  padding: 12px 32px; border-radius: 999px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1.5px solid rgba(251, 191, 36, 0.45);
+  letter-spacing: 0.04em;
+}
+
+.i-title {
+  font-family: 'Inter','Noto Sans SC'; font-weight: 900;
+  font-size: 132px; line-height: 1.08;
+  color: rgba(255,255,255,0.96);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.i-subtitle {
+  font-family: 'Noto Sans SC'; font-size: 38px; font-weight: 600;
+  color: rgba(226, 232, 240, 0.88);
+  text-align: center; max-width: 1500px;
+  line-height: 1.45;
+}
+
+.i-data-row {
+  display: flex; gap: 36px; justify-content: center; flex-wrap: nowrap;
+  margin-top: 8px;
+}
+.i-data-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 22px 40px; border-radius: 22px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1.5px solid rgba(255,255,255,0.10);
+  min-width: 220px;
+}
+.i-data-chip .num {
+  font-family: 'Inter'; font-weight: 900; font-size: 88px; line-height: 1;
+}
+.i-data-chip .lab {
+  font-family: 'Noto Sans SC'; font-size: 32px; font-weight: 700;
+  color: rgba(226, 232, 240, 0.78); letter-spacing: 0.04em;
+}
+.chip-gold { border-color: rgba(251, 191, 36, 0.40); background: rgba(251, 191, 36, 0.06); }
+.chip-blue { border-color: rgba(96, 165, 250, 0.40); background: rgba(96, 165, 250, 0.06); }
+.chip-green { border-color: rgba(52, 211, 153, 0.40); background: rgba(52, 211, 153, 0.06); }
+.chip-green .num { font-size: 56px; }
+
+/* ============================================
+ * phase-2 5 关键思想 stagger 预告区
+ * ============================================ */
+.intro-preview-block {
+  flex-direction: column; gap: 24px;
+  align-items: center;
+}
+
+.i-preview-title {
+  font-family: 'Inter','Noto Sans SC'; font-weight: 900;
+  font-size: 56px; color: rgba(255,255,255,0.96);
+  text-align: center; letter-spacing: -0.01em;
+}
+
+.i-preview-row {
+  display: flex; gap: 24px; justify-content: center; align-items: stretch;
+  flex-wrap: nowrap; width: 100%;
+}
+.i-preview-card {
+  flex: 1; max-width: 320px; min-width: 220px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 28px 20px 26px; border-radius: 22px;
+  background: rgba(15, 23, 42, 0.62);
+  border: 1.5px solid rgba(255,255,255,0.10);
+  text-align: center;
+}
+.i-preview-card .i-card-num {
+  font-family: 'Inter'; font-weight: 900; font-size: 72px; line-height: 1;
+}
+.i-preview-card .i-card-name {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 700;
+  color: rgba(255,255,255,0.96); line-height: 1.25;
+}
+.i-preview-card .i-card-note {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 600;
+  color: rgba(148, 163, 184, 0.82); line-height: 1.3;
+}
+.card-gold { border-color: rgba(251, 191, 36, 0.42); background: rgba(251, 191, 36, 0.07); }
+.card-blue { border-color: rgba(96, 165, 250, 0.42); background: rgba(96, 165, 250, 0.07); }
+.card-green { border-color: rgba(52, 211, 153, 0.42); background: rgba(52, 211, 153, 0.07); }
+
+.i-finale {
+  font-family: 'Noto Sans SC'; font-size: 36px; font-weight: 700;
+  color: rgba(226, 232, 240, 0.90); text-align: center;
+  margin-top: 6px;
+}

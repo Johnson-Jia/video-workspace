@@ -1,0 +1,681 @@
+:root {
+  --bg-deep: #07080f;
+  --bg-mid: #0d1124;
+  --bg-card: rgba(15, 18, 38, 0.86);
+  --accent-purple: #a855f7;
+  --accent-purple-soft: #c084fc;
+  --accent-red: #dc2626;
+  --accent-red-soft: #f87171;
+  --accent-gold: #f59e0b;
+  --accent-gold-soft: #fbbf24;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-blue-soft: #60a5fa;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.72);
+  --text3: rgba(255,255,255,0.50);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 共享：场景 wrap（flex column center 统一垂直居中）
+ * 卡片基础（border-radius 16 统一 + 深色不透明底）
+ * ============================================ */
+.scene-wrap,
+.hk-stage,
+.k3-stage,
+.bench-stage,
+.price-stage,
+.china-stage,
+.market-stage,
+.fire-stage,
+.cta-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* 数据卡片基础 */
+.data-card {
+  width: 100%;
+  padding: 28px 32px;
+  background: var(--bg-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.data-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.55;
+}
+.data-label {
+  font-size: 32px; font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+.data-num {
+  font-family: var(--font-data);
+  font-size: 84px; font-weight: 900; line-height: 1.0;
+  position: relative; z-index: 1;
+  background-image: linear-gradient(135deg, #c084fc 0%, #a855f7 60%, #7c3aed 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,20,60,0.08);
+}
+.data-num.red {
+  background-image: linear-gradient(135deg, #f87171 0%, #dc2626 60%, #991b1b 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.data-num.gold {
+  background-image: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #d97706 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* 通用场景标签胶囊（不要 tag-badge 样式）*/
+.scene-eyebrow {
+  font-size: 32px; font-weight: 700; letter-spacing: 0.16em;
+  padding: 10px 26px; border-radius: 999px;
+  position: relative; z-index: 2;
+}
+.scene-eyebrow.red {
+  color: var(--accent-red-soft);
+  background: rgba(220, 38, 38, 0.12);
+  border: 1.5px solid rgba(220, 38, 38, 0.45);
+}
+.scene-eyebrow.purple {
+  color: var(--accent-purple-soft);
+  background: rgba(168, 85, 247, 0.12);
+  border: 1.5px solid rgba(168, 85, 247, 0.45);
+}
+.scene-eyebrow.gold {
+  color: var(--accent-gold-soft);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
+}
+.scene-eyebrow.cyan {
+  color: var(--accent-cyan);
+  background: rgba(34, 211, 238, 0.12);
+  border: 1.5px solid rgba(34, 211, 238, 0.45);
+}
+
+/* 场景标题（统一 64px）*/
+.scene-title {
+  font-family: var(--font-title);
+  font-size: 64px; font-weight: 900; line-height: 1.15;
+  text-align: center;
+  position: relative; z-index: 2;
+  max-width: 880px;
+  word-break: break-word;
+}
+
+/* ============================================
+ * s1 hook — 2.8万亿 + 开源 + 硅谷焦虑
+ * ============================================ */
+.hk-stage {
+  gap: 36px;
+}
+.hk-bignum {
+  font-family: var(--font-data);
+  font-size: 200px; font-weight: 900; line-height: 1.0;
+  background-image: linear-gradient(135deg, #fca5a5 0%, #dc2626 50%, #7f1d1d 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 4px 16px rgba(60,10,10,0.18);
+  letter-spacing: -0.02em;
+  position: relative; z-index: 2;
+}
+.hk-bignum-unit {
+  font-family: var(--font-title);
+  font-size: 60px; font-weight: 800;
+  color: #ffffff;
+  margin-top: -12px;
+  position: relative; z-index: 2;
+}
+.hk-tags {
+  display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 2;
+}
+.hk-tag {
+  font-size: 34px; font-weight: 700;
+  padding: 12px 30px; border-radius: 14px;
+  letter-spacing: 0.04em;
+}
+.hk-tag.open {
+  color: var(--accent-gold-soft);
+  background: rgba(245, 158, 11, 0.14);
+  border: 2px solid rgba(245, 158, 11, 0.50);
+}
+.hk-tag.alarm {
+  color: var(--accent-red-soft);
+  background: rgba(220, 38, 38, 0.14);
+  border: 2px solid rgba(220, 38, 38, 0.50);
+}
+.hk-tag.anxiety {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+/* ============================================
+ * s2 K3 介绍 — 紫渐变 hero + 时间线
+ * ============================================ */
+.k3-stage {
+  gap: 28px;
+}
+.k3-name {
+  font-family: var(--font-title);
+  font-size: 156px; font-weight: 900; line-height: 1.0;
+  background-image: linear-gradient(135deg, #d8b4fe 0%, #a855f7 50%, #6d28d9 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 4px 14px rgba(60,20,90,0.18);
+  letter-spacing: -0.02em;
+  position: relative; z-index: 2;
+}
+.k3-params-row {
+  display: flex; align-items: baseline; gap: 24px;
+  font-family: var(--font-data);
+  position: relative; z-index: 2;
+}
+.k3-params-big {
+  font-size: 92px; font-weight: 900;
+  background-image: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.k3-params-unit {
+  font-size: 38px; font-weight: 700;
+  color: var(--text2);
+}
+.k3-org {
+  font-size: 36px; font-weight: 700;
+  color: var(--text2);
+  position: relative; z-index: 2;
+}
+.k3-timeline {
+  display: flex; gap: 20px; align-items: stretch; justify-content: center;
+  position: relative; z-index: 2;
+  margin-top: 8px;
+}
+.k3-tl-node {
+  padding: 18px 26px;
+  background: rgba(168, 85, 247, 0.10);
+  border: 1.5px solid rgba(168, 85, 247, 0.40);
+  border-radius: 14px;
+  text-align: center;
+  min-width: 240px;
+}
+.k3-tl-date {
+  font-family: var(--font-data);
+  font-size: 34px; font-weight: 800;
+  color: var(--accent-purple-soft);
+}
+.k3-tl-label {
+  font-size: 32px; font-weight: 600;
+  color: var(--text2);
+  margin-top: 4px;
+}
+.k3-tl-arrow {
+  align-self: center;
+  font-size: 38px; font-weight: 900;
+  color: var(--accent-purple);
+}
+
+/* ============================================
+ * s3 性能对比 — benchmark 卡片 + 14项对决条
+ * ============================================ */
+.bench-stage { gap: 26px; }
+.bench-cards {
+  display: flex; gap: 18px; justify-content: center; width: 100%;
+  position: relative; z-index: 2;
+}
+.bench-card {
+  flex: 1;
+  padding: 22px 24px;
+  background: var(--bg-card);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 16px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.bench-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.18), transparent 60%);
+  opacity: 0.7;
+}
+.bench-card-label {
+  font-size: 32px; font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+  position: relative; z-index: 1;
+}
+.bench-card-score {
+  font-family: var(--font-data);
+  font-size: 72px; font-weight: 900; line-height: 1.0;
+  background-image: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  margin-top: 8px;
+  position: relative; z-index: 1;
+}
+.bench-card-tag {
+  font-size: 32px; font-weight: 600;
+  color: var(--accent-gold-soft);
+  margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.versus-bar {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 20px 26px;
+  position: relative; z-index: 2;
+}
+.versus-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 32px; font-weight: 700;
+  margin-bottom: 12px;
+}
+.versus-bar-head .vbk {
+  color: var(--accent-gold-soft);
+}
+.versus-bar-head .vbc {
+  color: var(--text3);
+  font-family: var(--font-data);
+}
+.versus-bar-track {
+  display: flex; gap: 8px; height: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px; overflow: hidden;
+}
+.versus-bar-fill {
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 800;
+  color: #fff;
+}
+.versus-bar-fill.win {
+  background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
+}
+.versus-bar-fill.lose {
+  background: linear-gradient(90deg, #475569 0%, #334155 100%);
+}
+.versus-extra {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-top: 14px;
+  position: relative; z-index: 2;
+}
+.versus-chip {
+  font-size: 32px; font-weight: 600;
+  padding: 8px 18px; border-radius: 12px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1.5px solid rgba(168, 85, 247, 0.40);
+  color: var(--accent-purple-soft);
+}
+.versus-chip.gray {
+  background: rgba(148, 163, 184, 0.10);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: var(--text2);
+}
+
+/* ============================================
+ * s4 开源价值 — 价格对比 + 四宫格
+ * ============================================ */
+.price-stage { gap: 26px; }
+.price-compare {
+  display: flex; gap: 20px; justify-content: center; align-items: stretch;
+  width: 100%;
+  position: relative; z-index: 2;
+}
+.price-col {
+  flex: 1;
+  padding: 22px 24px;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+}
+.price-col.open {
+  background: rgba(245, 158, 11, 0.12);
+  border: 2px solid rgba(245, 158, 11, 0.55);
+}
+.price-col.closed {
+  background: rgba(100, 116, 139, 0.10);
+  border: 2px solid rgba(148, 163, 184, 0.35);
+}
+.price-col-label {
+  font-size: 32px; font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+}
+.price-col-num {
+  font-family: var(--font-data);
+  font-size: 96px; font-weight: 900; line-height: 1.0;
+  margin-top: 6px;
+}
+.price-col.open .price-col-num {
+  background-image: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.price-col.closed .price-col-num {
+  color: #94a3b8;
+}
+.price-col-unit {
+  font-size: 32px; font-weight: 600;
+  color: var(--text2);
+  margin-top: 4px;
+}
+.price-divider {
+  align-self: center;
+  font-size: 50px; font-weight: 900;
+  color: var(--accent-gold-soft);
+}
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  position: relative; z-index: 2;
+}
+.feat-cell {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  display: flex; align-items: center; gap: 14px;
+}
+.feat-cell .feat-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+}
+.feat-cell.open .feat-icon {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+}
+.feat-cell.gold .feat-icon {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+}
+.feat-cell.warn .feat-icon {
+  background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+}
+.feat-cell.blue .feat-icon {
+  background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+}
+.feat-cell .feat-text {
+  font-size: 32px; font-weight: 700;
+  color: #f5f5f5;
+  line-height: 1.25;
+}
+.feat-cell .feat-sub {
+  font-size: 32px; font-weight: 600;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* ============================================
+ * s5 中美 AI — 时间线 + 出口管制 + 金句
+ * ============================================ */
+.china-stage { gap: 26px; }
+.cn-timeline {
+  display: flex; gap: 14px; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+}
+.cn-node {
+  padding: 14px 22px;
+  background: rgba(245, 158, 11, 0.10);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
+  border-radius: 14px;
+  text-align: center;
+  min-width: 220px;
+}
+.cn-node-date {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 800;
+  color: var(--accent-gold-soft);
+}
+.cn-node-name {
+  font-size: 32px; font-weight: 700;
+  color: #f5f5f5;
+  margin-top: 4px;
+}
+.cn-arrow {
+  font-size: 34px; font-weight: 900;
+  color: var(--accent-gold);
+}
+.export-row {
+  display: flex; gap: 16px; width: 100%;
+  position: relative; z-index: 2;
+}
+.export-card {
+  flex: 1;
+  padding: 18px 22px;
+  background: rgba(220, 38, 38, 0.10);
+  border: 1.5px solid rgba(220, 38, 38, 0.40);
+  border-radius: 14px;
+}
+.export-card-label {
+  font-size: 32px; font-weight: 700;
+  color: var(--accent-red-soft);
+  letter-spacing: 0.04em;
+}
+.export-card-text {
+  font-size: 32px; font-weight: 700;
+  color: #f5f5f5;
+  line-height: 1.3;
+  margin-top: 6px;
+}
+.quote-card {
+  width: 100%;
+  padding: 22px 28px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.14) 0%, rgba(245, 158, 11, 0.10) 100%);
+  border-left: 6px solid var(--accent-gold);
+  border-radius: 14px;
+  position: relative; z-index: 2;
+}
+.quote-mark {
+  font-family: var(--font-title);
+  font-size: 60px; font-weight: 900;
+  color: var(--accent-gold-soft);
+  line-height: 0.6;
+  opacity: 0.7;
+}
+.quote-text {
+  font-size: 36px; font-weight: 700; line-height: 1.4;
+  color: #ffffff;
+  margin-top: 8px;
+  font-style: italic;
+}
+.quote-source {
+  font-size: 32px; font-weight: 600;
+  color: var(--text3);
+  margin-top: 10px;
+}
+
+/* ============================================
+ * s6 市场反应 — 跌幅卡
+ * ============================================ */
+.market-stage { gap: 28px; }
+.market-cards {
+  display: flex; gap: 18px; justify-content: center; width: 100%;
+  position: relative; z-index: 2;
+}
+.market-card {
+  flex: 1;
+  padding: 26px 24px;
+  background: var(--bg-card);
+  border: 1.5px solid rgba(220, 38, 38, 0.45);
+  border-radius: 16px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.market-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 100%, rgba(220, 38, 38, 0.20), transparent 60%);
+  opacity: 0.7;
+}
+.market-card-label {
+  font-size: 32px; font-weight: 700;
+  color: var(--text2);
+  position: relative; z-index: 1;
+}
+.market-card-drop {
+  font-family: var(--font-data);
+  font-size: 92px; font-weight: 900; line-height: 1.0;
+  background-image: linear-gradient(180deg, #fca5a5 0%, #dc2626 70%, #7f1d1d 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  margin-top: 8px;
+  position: relative; z-index: 1;
+}
+.market-card-desc {
+  font-size: 32px; font-weight: 600;
+  color: var(--text2);
+  margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.market-banner {
+  font-size: 34px; font-weight: 800;
+  padding: 14px 28px;
+  background: rgba(220, 38, 38, 0.14);
+  border: 2px solid rgba(220, 38, 38, 0.50);
+  border-radius: 16px;
+  color: var(--accent-red-soft);
+  text-align: center;
+  position: relative; z-index: 2;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+ * s7 火爆反差对比 — 暂停订阅 = 需求炸了
+ * ============================================ */
+.fire-stage { gap: 28px; }
+.fire-row {
+  display: flex; gap: 24px; align-items: stretch; justify-content: center;
+  width: 100%;
+  position: relative; z-index: 2;
+}
+.fire-col {
+  flex: 1;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+}
+.fire-col.cold {
+  background: rgba(100, 116, 139, 0.10);
+  border: 2px solid rgba(148, 163, 184, 0.35);
+}
+.fire-col.hot {
+  background: rgba(245, 158, 11, 0.12);
+  border: 2px solid rgba(245, 158, 11, 0.55);
+}
+.fire-col-label {
+  font-size: 32px; font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+.fire-col-num {
+  font-family: var(--font-data);
+  font-size: 100px; font-weight: 900; line-height: 1.0;
+  margin-top: 8px;
+}
+.fire-col.cold .fire-col-num {
+  color: #94a3b8;
+}
+.fire-col.hot .fire-col-num {
+  background-image: linear-gradient(135deg, #fed7aa 0%, #f59e0b 50%, #c2410c 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.fire-col-text {
+  font-size: 32px; font-weight: 700;
+  color: #f5f5f5;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+.fire-col.cold .fire-col-text {
+  color: var(--text2);
+}
+.fire-equal {
+  align-self: center;
+  font-size: 60px; font-weight: 900;
+  color: var(--accent-gold);
+}
+.fire-tagline {
+  font-size: 36px; font-weight: 800;
+  padding: 14px 32px;
+  background: rgba(245, 158, 11, 0.14);
+  border: 2px solid rgba(245, 158, 11, 0.50);
+  border-radius: 16px;
+  color: var(--accent-gold-soft);
+  text-align: center;
+  position: relative; z-index: 2;
+}
+
+/* ============================================
+ * s8 CTA — 开源 vs 闭源 + 关注
+ * ============================================ */
+.cta-stage { gap: 32px; }
+.cta-vs {
+  display: flex; gap: 18px; justify-content: center; align-items: center;
+  position: relative; z-index: 2;
+}
+.cta-vs-side {
+  padding: 18px 28px;
+  border-radius: 16px;
+  font-size: 40px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.cta-vs-side.open {
+  background: rgba(245, 158, 11, 0.14);
+  border: 2px solid rgba(245, 158, 11, 0.55);
+  color: var(--accent-gold-soft);
+}
+.cta-vs-side.closed {
+  background: rgba(100, 116, 139, 0.10);
+  border: 2px solid rgba(148, 163, 184, 0.40);
+  color: var(--text2);
+}
+.cta-vs-mid {
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 900;
+  color: var(--accent-purple-soft);
+}
+.cta-conclusion {
+  font-family: var(--font-title);
+  font-size: 76px; font-weight: 900; line-height: 1.15;
+  text-align: center;
+  background-image: linear-gradient(135deg, #fbbf24 0%, #a855f7 60%, #22d3ee 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 4px 14px rgba(60,30,80,0.14);
+  max-width: 880px;
+  position: relative; z-index: 2;
+}
+.cta-follow {
+  font-size: 34px; font-weight: 700;
+  color: var(--accent-cyan);
+  padding: 12px 32px; border-radius: 999px;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1.5px solid rgba(34, 211, 238, 0.45);
+  position: relative; z-index: 2;
+}

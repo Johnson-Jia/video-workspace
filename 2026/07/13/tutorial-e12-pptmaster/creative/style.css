@@ -1,0 +1,154 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #34D399;
+  --tut-purple: #C4B5FD;
+  --tut-red: #F87171;
+  --tut-white: rgba(255,255,255,0.90);
+  --term-bg: #0B1220;
+  --term-border: rgba(96,165,250,0.35);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 pptmaster — ppt-master 原生 PPT：对比 + 工作流
+ * phase 切换（场景类 pm-scene，phase-1/2/3/4 依次显示）
+ * ============================================ */
+
+.pm-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 100px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 24px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.pm-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.pm-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(147,197,253,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-gold { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 开场 === */
+.pm-intro {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.pm-intro-title {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.pm-intro-sub {
+  font-family: var(--font-body); font-size: 38px; font-weight: 600; color: rgba(147,197,253,0.85); text-align: center;
+}
+
+/* === phase-2 对比卡 === */
+.pm-compare {
+  display: flex; align-items: stretch; justify-content: center; gap: 40px;
+}
+.pm-card {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  padding: 36px 44px; border-radius: 18px;
+  min-width: 380px;
+}
+.pm-card.bad { background: rgba(248,113,113,0.08); border: 2px solid rgba(248,113,113,0.40); }
+.pm-card.good { background: rgba(52,211,153,0.08); border: 2px solid rgba(52,211,153,0.40); }
+.pm-card-mark {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900;
+  line-height: 1;
+}
+.pm-card.bad .pm-card-mark { color: #F87171; }
+.pm-card.good .pm-card-mark { color: #34D399; }
+.pm-card-type {
+  font-family: var(--font-title); font-size: 44px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.pm-card-body {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: rgba(255,255,255,0.82); text-align: center;
+}
+.pm-card-tag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  padding: 10px 22px; border-radius: 12px;
+}
+.pm-card.bad .pm-card-tag { background: rgba(248,113,113,0.10); color: #FCA5A5; border: 1px solid rgba(248,113,113,0.30); }
+.pm-card.good .pm-card-tag { background: rgba(52,211,153,0.10); color: #6EE7B7; border: 1px solid rgba(52,211,153,0.30); }
+.pm-vs {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-title); font-size: 56px; font-weight: 900;
+  color: rgba(255,255,255,0.55); letter-spacing: 0.05em;
+}
+
+/* === phase-3 工作流 === */
+.pm-flow {
+  display: flex; align-items: stretch; justify-content: center; gap: 24px;
+}
+.pm-flow-step {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 30px 40px; border-radius: 16px;
+  background: rgba(96,165,250,0.08); border: 2px solid rgba(96,165,250,0.35);
+  min-width: 280px;
+}
+.pm-flow-step.last { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.35); }
+.pm-fnum {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900;
+  line-height: 1;
+}
+.pm-ftitle {
+  font-family: var(--font-title); font-size: 38px; font-weight: 800; color: var(--tut-white); text-align: center;
+}
+.pm-fdesc {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(147,197,253,0.85); text-align: center;
+}
+.pm-flow-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; color: #60A5FA;
+}
+.pm-flow-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: rgba(251,191,36,0.85);
+  padding: 14px 28px; border-radius: 12px;
+  background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.30);
+}
+
+/* === phase-4 资源统计 === */
+.pm-stats {
+  display: flex; align-items: center; justify-content: center; gap: 60px;
+}
+.pm-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 40px 60px; border-radius: 18px;
+  background: rgba(96,165,250,0.06); border: 2px solid rgba(96,165,250,0.30);
+}
+.pm-stat-num {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900;
+  line-height: 1.05;
+}
+.pm-stat-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.78); text-align: center;
+}
+.pm-stat-sep {
+  font-family: var(--font-title); font-size: 60px; font-weight: 900; color: rgba(255,255,255,0.35);
+}

@@ -1,0 +1,127 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 cta — CTA + E13 预告
+ * phase 切换（场景类 cta-scene，phase-1/2/3 依次显示）
+ * ============================================ */
+
+.cta-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 100px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 24px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.cta-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.40);
+  color: #93C5FD;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.cta-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60A5FA; box-shadow: 0 0 12px rgba(96,165,250,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(147,197,253,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-gold { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-purple { background-image: linear-gradient(135deg, #C4B5FD, #A78BFA, #DDD6FE); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 收束 === */
+.cta-recap {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.cta-recap-title {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-recap-sub {
+  font-family: var(--font-body); font-size: 38px; font-weight: 600; color: rgba(252,211,77,0.85); text-align: center;
+}
+
+/* === phase-2 E13 预告 === */
+.cta-preview {
+  display: flex; flex-direction: column; align-items: center; gap: 26px;
+  padding: 40px 60px; border-radius: 20px;
+  background: rgba(96,165,250,0.06); border: 2px solid rgba(96,165,250,0.35);
+}
+.cta-preview-badge {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  padding: 10px 28px; border-radius: 999px;
+  background: rgba(96,165,250,0.14); color: #93C5FD;
+  border: 1px solid rgba(96,165,250,0.40);
+  letter-spacing: 0.05em;
+}
+.cta-preview-title {
+  font-family: var(--font-title); font-size: 68px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.cta-preview-tags {
+  display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap;
+}
+.cta-ptag {
+  padding: 14px 28px; border-radius: 12px;
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  background: rgba(96,165,250,0.10); border: 1px solid rgba(96,165,250,0.35);
+  color: #93C5FD;
+}
+
+/* === phase-3 收尾 关注 + 提问 === */
+.cta-finale {
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+.cta-follow {
+  display: flex; align-items: center; gap: 18px;
+}
+.cta-follow-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(251,191,36,0.16); border: 2px solid rgba(251,191,36,0.50);
+  font-family: var(--font-title); font-size: 48px; font-weight: 900; color: #FCD34D;
+  line-height: 1;
+}
+.cta-follow-text {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900;
+}
+.cta-series {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: rgba(255,255,255,0.82); text-align: center;
+}
+.cta-repo {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600; color: rgba(147,197,253,0.85); text-align: center;
+}
+.cta-question {
+  display: flex; align-items: center; gap: 18px;
+  margin-top: 12px;
+  padding: 20px 36px; border-radius: 16px;
+  background: rgba(196,181,253,0.08); border: 2px solid rgba(196,181,253,0.40);
+}
+.cta-q-mark {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; line-height: 1;
+}
+.cta-q-text {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: var(--tut-white);
+}

@@ -1,0 +1,172 @@
+<!-- 场景: scene-1 | 时长: 30.84s | bg: diamond_lattice | 数据驱动：用例 data 与代码 handlers 解耦 + runner 按 type 路由 + 变量传递 + 分工 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（绿数据 + 蓝调度 + 紫字典 + 金注册 + 青变量；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:32%;left:50%;transform:translateX(-50%);width:1180px;height:280px;border-radius:50%;background:radial-gradient(ellipse, hsla(160,70%,52%,0.12) 0%, transparent 65%);filter:blur(65px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:24%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:76%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:20%;width:380px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,80%,72%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <div class="fx-aura" style="position:absolute;top:70%;left:50%;transform:translateX(-50%);width:520px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(188,85%,55%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:22%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(160,70%,52%,0.9);box-shadow:0 0 14px hsla(160,70%,52%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.30)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:34%;width:8px;height:8px;background:rgba(34,211,238,0.85);box-shadow:0 0 12px rgba(34,211,238,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:66%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 dd-scene">
+  <!-- phase-1 (0-7.71s): 数据与代码彻底解耦 + data/cases.json 用例（4 条 3 跑 1 关）+ handlers/ 代码 -->
+  <div class="region-top">
+    <div class="dd-stage-tag"><span class="dot"></span>E13 · 数据驱动 · 数据代码解耦</div>
+  </div>
+  <div class="region-mid">
+    <div class="dd-decouple">
+      <div class="dd-decouple-title">数据与代码 · <span class="grad-green">彻底解耦</span></div>
+      <div class="dd-decouple-cols">
+        <div class="dd-col data">
+          <div class="dd-col-head"><span class="dd-col-ico">data/</span><span class="dd-col-tag">用例数据</span></div>
+          <div class="dd-col-body">
+            <div class="dd-code-line"><span class="cm">// cases.json</span></div>
+            <div class="dd-code-line"><span class="punc">[</span></div>
+            <div class="dd-code-line"><span class="indent"></span><span class="punc">{</span><span class="k">"type"</span><span class="punc">:</span><span class="s">"app"</span><span class="punc">,</span><span class="k">"running"</span><span class="punc">:</span><span class="s">"是"</span><span class="punc">},</span></div>
+            <div class="dd-code-line"><span class="indent"></span><span class="punc">{</span><span class="k">"type"</span><span class="punc">:</span><span class="s">"addproduct"</span><span class="punc">,</span><span class="k">"val"</span><span class="punc">:</span><span class="s">"实物"</span><span class="punc">},</span></div>
+            <div class="dd-code-line"><span class="indent"></span><span class="punc">{</span><span class="k">"type"</span><span class="punc">:</span><span class="s">"addproduct"</span><span class="punc">,</span><span class="k">"val"</span><span class="punc">:</span><span class="s">"虚拟"</span><span class="punc">},</span></div>
+            <div class="dd-code-line"><span class="indent"></span><span class="punc">{</span><span class="k">"type"</span><span class="punc">:</span><span class="s">"app"</span><span class="punc">,</span><span class="k">"running"</span><span class="punc">:</span><span class="s">"否"</span><span class="punc">}</span></div>
+            <div class="dd-code-line"><span class="punc">]</span></div>
+          </div>
+          <div class="dd-col-foot"><span class="dd-run yes">3 跑</span><span class="dd-run no">1 关</span></div>
+        </div>
+        <div class="dd-col code">
+          <div class="dd-col-head"><span class="dd-col-ico">handlers/</span><span class="dd-col-tag">业务代码</span></div>
+          <div class="dd-col-body">
+            <div class="dd-code-line"><span class="cm"># 具体业务实现</span></div>
+            <div class="dd-code-line"><span class="dec">@register</span></div>
+            <div class="dd-code-line"><span class="kw">class</span> <span class="cls">ProductHandler</span>:</div>
+            <div class="dd-code-line"><span class="indent"></span><span class="kw">def</span> <span class="fn">addproduct</span>(...):</div>
+            <div class="dd-code-line"><span class="indent2"></span>...</div>
+          </div>
+          <div class="dd-col-foot"><span class="dd-role">开发写</span></div>
+        </div>
+      </div>
+      <div class="dd-decouple-note">纯粹的步骤 JSON · 运营在 data 编不碰代码</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 数据代码解耦 —</div>
+  </div>
+</div>
+<div class="phase phase-2 dd-scene">
+  <!-- phase-2 (7.71-15.42s): runner 读用例按 type 路由（基础操作走字典 / 模块操作走注册中心） -->
+  <div class="region-top">
+    <div class="dd-stage-tag"><span class="dot"></span>E13 · 调度器 runner · 按 type 路由</div>
+  </div>
+  <div class="region-mid">
+    <div class="dd-route">
+      <div class="dd-route-title">调度器 runner · 读用例 <span class="grad-blue">按 type 路由</span></div>
+      <div class="dd-route-flow">
+        <div class="dd-route-src">
+          <div class="dd-route-label">用例 step</div>
+          <div class="dd-route-code"><span class="punc">{</span><span class="k">"type"</span><span class="punc">:</span><span class="s">"..."</span><span class="punc">}</span></div>
+        </div>
+        <div class="dd-route-arrow">→</div>
+        <div class="dd-route-branch">
+          <div class="dd-branch-row">
+            <div class="dd-branch-card dict">
+              <div class="dd-branch-tag">基础操作 · 走字典</div>
+              <div class="dd-branch-body">
+                <span class="dd-pill">text</span><span class="dd-pill">button</span><span class="dd-pill">app</span><span class="dd-pill">selector</span>
+              </div>
+              <div class="dd-branch-note">→ 基类方法</div>
+            </div>
+          </div>
+          <div class="dd-branch-row">
+            <div class="dd-branch-card reg">
+              <div class="dd-branch-tag">模块操作 · 走注册中心</div>
+              <div class="dd-branch-body"><span class="dd-code-inline">handler_registry.get(type)</span></div>
+              <div class="dd-branch-note">→ 实例方法</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dd-route-note">基础走字典 · 模块走注册中心</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / runner 按 type 路由 —</div>
+  </div>
+</div>
+<div class="phase phase-3 dd-scene">
+  <!-- phase-3 (15.42-23.13s): 变量传递 _save_as 保存 + ${变量名} 引用，步骤间用例间都能传 -->
+  <div class="region-top">
+    <div class="dd-stage-tag"><span class="dot"></span>E13 · 变量传递 · 步骤间用例间</div>
+  </div>
+  <div class="region-mid">
+    <div class="dd-var">
+      <div class="dd-var-title">变量传递 · <span class="grad-cyan">步骤间 / 用例间</span></div>
+      <div class="dd-var-cards">
+        <div class="dd-var-card save">
+          <div class="dd-var-tag">保存</div>
+          <div class="dd-var-body"><span class="dd-code-inline">"_save_as"</span><span class="dd-var-eq">:</span><span class="dd-var-val">"pname"</span></div>
+          <div class="dd-var-note">→ 写入 ctx 上下文</div>
+        </div>
+        <div class="dd-var-card ref">
+          <div class="dd-var-tag">引用</div>
+          <div class="dd-var-body"><span class="dd-var-brace">{</span><span class="dd-var-brace2">{</span><span class="dd-var-name">pname</span><span class="dd-var-brace2">}</span><span class="dd-var-brace">}</span></div>
+          <div class="dd-var-note">→ 从 ctx 取值</div>
+        </div>
+      </div>
+      <div class="dd-var-flow">
+        <span class="dd-var-step">步骤 A · <span class="dd-var-save">save_as</span></span>
+        <span class="dd-var-arrow">→</span>
+        <span class="dd-var-ctx">ctx 池</span>
+        <span class="dd-var-arrow">→</span>
+        <span class="dd-var-step">步骤 B · <span class="dd-var-ref">引用</span></span>
+      </div>
+      <div class="dd-var-summary">下划线 save_as 保存 · 花括号变量名引用</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 变量传递 —</div>
+  </div>
+</div>
+<div class="phase phase-4 dd-scene">
+  <!-- phase-4 (23.13-30.84s): 运营编步骤，开发写 handler，分工清晰 收尾 -->
+  <div class="region-top">
+    <div class="dd-stage-tag"><span class="dot"></span>E13 · 分工清晰 · 运营 / 开发</div>
+  </div>
+  <div class="region-mid">
+    <div class="dd-finale">
+      <div class="dd-finale-title">分工 <span class="grad-gold">清晰</span></div>
+      <div class="dd-finale-row">
+        <div class="dd-finale-card ops">
+          <div class="dd-finale-role">运营</div>
+          <div class="dd-finale-task">编步骤</div>
+          <div class="dd-finale-at">data/</div>
+        </div>
+        <div class="dd-finale-plus">+</div>
+        <div class="dd-finale-card dev">
+          <div class="dd-finale-role">开发</div>
+          <div class="dd-finale-task">写 handler</div>
+          <div class="dd-finale-at">handlers/</div>
+        </div>
+      </div>
+      <div class="dd-finale-sub">数据驱动调度 · 各司其职</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 数据驱动分工 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

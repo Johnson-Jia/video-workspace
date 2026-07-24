@@ -1,0 +1,30 @@
+{
+  "topic_type": "工具/效率（跨圈盘点）",
+  "topic_pattern": "topic-tool",
+  "angle": "反直觉双钩子：用 AI 去除 AI 味（hallmark 跨界反差）+ 免费剪视频（OpenCut 利益翻译），避开近 3 期纯动作+数字 hook",
+  "novelty_strategy": "本期差异化三点：① hook 反优先级1（反直觉/冲突）替代近 3 期优先级2 动作+数字；② 项目维度跨 6 圈（创作工具/AI反差/健身/教育/编程学习/CS课程），近 7 期项目集相似度仅 24%；③ 叙事采用 contrast-arc 而非 hyper-pace，AI 类仅 2/6 不触发 hyper-pace 强制",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "A 普通可用 3/6（OpenCut/DeepTutor/ossu），B 半可用 1/6（build-your-own-x），C 开发者向 2/6（hallmark/exercises-dataset）；AI 类 2/6（hallmark/DeepTutor）≤ 一半，避开 deprecated 的 P-topic-ai",
+  "selected_projects": [
+    {"rank": 1, "owner_repo": "OpenCut-app/OpenCut", "role": "连续霸榜（07-14/15/16 三日连续），快速带过仅报增量", "treatment": "summary"},
+    {"rank": 2, "owner_repo": "Nutlope/hallmark", "role": "反直觉钩子核心，用 AI 去 AI 味", "treatment": "featured"},
+    {"rank": 3, "owner_repo": "hasaneyldrm/exercises-dataset", "role": "近期高频项目，一带而过", "treatment": "brief"},
+    {"rank": 4, "owner_repo": "HKUDS/DeepTutor", "role": "A 档普通人可用 AI 教育", "treatment": "normal"},
+    {"rank": 5, "owner_repo": "codecrafters-io/build-your-own-x", "role": "长青收藏向，编程学习", "treatment": "normal"},
+    {"rank": 6, "owner_repo": "ossu/computer-science", "role": "A 档 CS 教育路径，收藏向", "treatment": "normal"}
+  ],
+  "avoid_recent": [
+    "近 3 期 hook 均为动作+数字（'4个新项目冲上榜单'/'单日炸了四千多颗星'/'一天涨一千颗星杀入榜单'）— 本期禁用纯动作+数字开篇",
+    "OpenCut 近 4 日出现 3 次（07-14/15/16）— 本期仅一句带过增量，不重复功能介绍",
+    "hasaneyldrm/exercises-dataset inject 标记近期高频 — 一带而过"
+  ],
+  "freshness_check": {
+    "recent_hook_similarity": "近 7 期 hook 相似度 0%（主导 project 维度）",
+    "recent_project_jaccard": "24%（OpenCut 霸榜拉高，已用 summary 处理降权）",
+    "recent_narrative_template": "0%"
+  }
+}

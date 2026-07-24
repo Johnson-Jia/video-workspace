@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>13-代码图谱 · 阶段3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:6px solid #2563eb;border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-left-color:#ef4444;}
+.card:nth-child(3){border-left-color:#16a34a;}
+.card .clabel{font-size:22px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .clabel{color:#ef4444;}
+.card:nth-child(3) .clabel{color:#16a34a;}
+.card .ctitle{font-size:27px;font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.2;}
+.card .cdesc{font-size:19px;color:#475569;line-height:1.6;flex:1;}
+.card .ckey{font-size:17px;font-weight:600;color:#2563eb;margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;}
+.card:nth-child(2) .ckey{color:#ef4444;}
+.card:nth-child(3) .ckey{color:#16a34a;}
+.ironrow{display:flex;gap:22px;margin-bottom:24px;}
+.iron{flex:1;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5;border-radius:12px;padding:20px 24px;}
+.iron .itag{font-size:18px;font-weight:800;color:#b91c1c;margin-bottom:6px;letter-spacing:.05em;}
+.iron .itext{font-size:19px;color:#7f1d1d;line-height:1.5;}
+.iron .itext strong{color:#991b1b;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段3 · 代码图谱</div>
+    <div class="num">AI 战略转型方法论 · <strong>13/30</strong></div>
+  </div>
+  <h1>改代码前,<span class="hl">先看影响范围</span></h1>
+  <div class="subtitle">代码知识图谱在索引期就把关系预算好,一次调用拿全——三大价值:可靠 / 省 token / 解放小模型</div>
+  <div class="quote">图谱和 RAG 不是二选一,而是<span class="em">分层共存</span>:确定性关系(CALLS/IMPORTS/EXTENDS)走图查询,语义相似走 BM25 + 向量搜索,各司其职。</div>
+  <div class="cards">
+    <div class="card"><div class="clabel">🔍 理解类工具</div><div class="ctitle">context · route_map · topic_map</div><div class="cdesc">360° 符号视图(含读写/调用链/MQ)、路由→handler→消费方、表外键关系、MQ topic 生产消费</div><div class="ckey">→ 看清结构,LLM 漏不掉上下文</div></div>
+    <div class="card"><div class="clabel">💥 变更类工具</div><div class="ctitle">impact · detect_changes · rename</div><div class="cdesc">爆炸半径 + 风险等级(LOW/MEDIUM/HIGH/CRITICAL)、git diff→受影响符号、安全改名(图+文本双路径)</div><div class="ckey">→ 改前评估影响,提交前验证</div></div>
+    <div class="card"><div class="clabel">✅ 真实案例</div><div class="ctitle">144 个生产 bug 排查</div><div class="cdesc">某团队用代码图谱给 AI 装"代码眼睛",cross-repo-search 定位跨仓库调用链,累计排查 144 个 bug(覆盖率 80.4%)</div><div class="ckey">→ 业务 RAG 让幻觉大幅下降</div></div>
+  </div>
+  <div class="ironrow">
+    <div class="iron"><div class="itag">铁律 ①</div><div class="itext"><strong>NEVER</strong> edit code without first running <strong>impact</strong>——改任何符号前必跑影响分析</div></div>
+    <div class="iron"><div class="itag">铁律 ②</div><div class="itext"><strong>NEVER</strong> commit without running <strong>detect_changes</strong>——提交前必跑变更映射</div></div>
+  </div>
+  <div class="foot">
+    <div class="src">来源:stage3 §3.1-3.4(为什么用图谱/建模/索引管线/MCP 工具)+ 案例(144 bug / 80.4%)+ §3.4 两条铁律。跳过本阶段用 grep + 人审 + git diff 替代</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

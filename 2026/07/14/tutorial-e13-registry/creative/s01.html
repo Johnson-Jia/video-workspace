@@ -1,0 +1,136 @@
+<!-- 场景: scene-1 | 时长: 31.85s | bg: diamond_lattice | 注册中心模式：@register + 调度器按 type 取 + 延迟解析 + 自动发现 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（金注册 + 蓝调度 + 紫延迟解析 + 绿自动发现；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:34%;left:50%;transform:translateX(-50%);width:1100px;height:260px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.12) 0%, transparent 65%);filter:blur(65px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:24%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:76%;width:440px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(255,80%,72%,0.12) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:20%;width:380px;height:180px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.10) 0%, transparent 65%);filter:blur(48px);opacity:0.5"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:22%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:24%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:76%;width:10px;height:10px;border-radius:50%;background:hsla(255,80%,72%,0.9);box-shadow:0 0 14px hsla(255,75%,66%,0.30)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:34%;width:8px;height:8px;background:rgba(196,181,253,0.85);box-shadow:0 0 12px rgba(196,181,253,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:66%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 reg-scene">
+  <!-- phase-1 (0-7.963s): 注册中心是灵魂 + @register 装饰器代码 -->
+  <div class="region-top">
+    <div class="reg-stage-tag"><span class="dot"></span>E13 · 注册中心 · 框架灵魂</div>
+  </div>
+  <div class="region-mid">
+    <div class="reg-soul">
+      <div class="reg-soul-title">注册中心 · <span class="grad-gold">框架的灵魂</span></div>
+      <div class="reg-soul-sub">写一个装饰器 · 把方法登记进全局表</div>
+      <div class="reg-code">
+        <div class="reg-code-head">
+          <span class="reg-code-dot r"></span><span class="reg-code-dot y"></span><span class="reg-code-dot g"></span>
+          <span class="reg-code-file">registry.py</span>
+        </div>
+        <div class="reg-code-line"><span class="dec">@register</span><span class="cm">  # 装饰器登记</span></div>
+        <div class="reg-code-line"><span class="kw">def</span> <span class="fn">register</span>(handler_type):</div>
+        <div class="reg-code-line"><span class="indent"></span><span class="kw">def</span> <span class="fn">wrapper</span>(cls):</div>
+        <div class="reg-code-line"><span class="indent"></span><span class="indent"></span>REGISTRY[handler_type] = cls</div>
+        <div class="reg-code-line"><span class="indent"></span><span class="indent"></span><span class="kw">return</span> cls</div>
+        <div class="reg-code-line"><span class="indent"></span><span class="kw">return</span> wrapper</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 注册中心 · 灵魂 —</div>
+  </div>
+</div>
+<div class="phase phase-2 reg-scene">
+  <!-- phase-2 (7.963-15.925s): 调度器按类型自动取（type → registry.get → 全局表） -->
+  <div class="region-top">
+    <div class="reg-stage-tag"><span class="dot"></span>E13 · 调度器 · 按 type 自动取</div>
+  </div>
+  <div class="region-mid">
+    <div class="reg-disp">
+      <div class="reg-disp-title">调度器按 <span class="grad-blue">类型</span> 自动取</div>
+      <div class="reg-flow">
+        <div class="reg-flow-node type">
+          <div class="reg-flow-label">type</div>
+          <div class="reg-flow-sub">用例里的类型字段</div>
+        </div>
+        <div class="reg-flow-arrow">→</div>
+        <div class="reg-flow-node type">
+          <div class="reg-flow-label">registry.get</div>
+          <div class="reg-flow-sub">按 type 取 handler</div>
+        </div>
+        <div class="reg-flow-arrow">→</div>
+        <div class="reg-flow-node table">
+          <div class="reg-flow-label">REGISTRY 全局表</div>
+          <div class="reg-table-rows">
+            <div class="reg-table-row"><span class="k">"product"</span><span class="v">→ ProductHandler</span></div>
+            <div class="reg-table-row"><span class="k">"order"</span><span class="v">→ OrderHandler</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reg-disp-note">调度器自动路由 · 不写 if/else</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 调度器按 type 取 —</div>
+  </div>
+</div>
+<div class="phase phase-3 reg-scene">
+  <!-- phase-3 (15.925-23.888s): 关键细节 类引用延迟解析 -->
+  <div class="region-top">
+    <div class="reg-stage-tag"><span class="dot"></span>E13 · 关键细节 · 类引用延迟解析</div>
+  </div>
+  <div class="region-mid">
+    <div class="reg-defer">
+      <div class="reg-defer-title">类引用 <span class="grad-purple">延迟解析</span></div>
+      <div class="reg-defer-cards">
+        <div class="reg-defer-card bad">
+          <div class="reg-defer-tag">装饰器执行时取</div>
+          <div class="reg-defer-body">类还没定义完<br>拿到的是空</div>
+          <div class="reg-defer-note">❌ 编码期太早</div>
+        </div>
+        <div class="reg-defer-card good">
+          <div class="reg-defer-tag">创建实例时再解析</div>
+          <div class="reg-defer-body">调度器拿 type<br>现取现用类</div>
+          <div class="reg-defer-note">✓ 运行期延迟</div>
+        </div>
+      </div>
+      <div class="reg-defer-summary">类引用放到调度器创建实例时再解析</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 延迟解析关键细节 —</div>
+  </div>
+</div>
+<div class="phase phase-4 reg-scene">
+  <!-- phase-4 (23.888-31.85s): 好处 自动发现零改调度器代码 收尾 -->
+  <div class="region-top">
+    <div class="reg-stage-tag"><span class="dot"></span>E13 · 好处 · 自动发现 零改代码</div>
+  </div>
+  <div class="region-mid">
+    <div class="reg-finale">
+      <div class="reg-finale-title">新增业务模块 · <span class="grad-green">自动发现</span></div>
+      <div class="reg-finale-row">
+        <span class="reg-finale-tag">写完注册</span>
+        <span class="reg-finale-plus">+</span>
+        <span class="reg-finale-zero">零改调度器代码</span>
+      </div>
+      <div class="reg-finale-sub">企业级测试框架 · 核心模式</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E13 / 注册中心核心模式 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

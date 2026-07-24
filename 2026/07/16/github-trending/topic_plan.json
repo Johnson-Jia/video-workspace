@@ -1,0 +1,39 @@
+{
+  "topic_type": "AI/学习/营销（开发者向多元）",
+  "topic_pattern": "topic-tool",
+  "angle": "今日 trending 4 个新上榜偏 AI/开发者向——低成本编程代理/AI 终身辅导/AI 工程师学习手册/AI 营销技能，加健身动作库差异化 + 工程师技能包榜首带过。钩子用'4 新上榜 + 学习题材'差异化，主动避开 07-14/15 连续霸榜的 OpenCut/awesome-llm-apps/hallmark 保新鲜度",
+  "novelty_strategy": {
+    "hook_anchor": "数字锚定（P-hook-number_anchor，exploit target）+ 动作数字（P-hook-action_number）—— 4 个新上榜 + 首榜 2130 星，强调'新上榜'密度而非单点涨星。避开 07-14 OpenCut 涨星句式（'单日炸了四千多颗星'）和 07-15 skills 句式",
+    "differentiation": "换主题：近 7 期 hook 主题是'AI 提效转型方法论/单日涨星/教程合集'——本期换成'AI 给开发者赋能的多个新方向'（编程/学习/营销），新上榜密度 4/6 作为差异化数字锚点；避开 OpenCut/hallmark/awesome-llm-apps 三个连续霸榜项目",
+    "narrative_shift": "07-14 是 OpenCut 视频剪辑盘点评测，07-15 是 skills 工程师技能包——本期题材分散到 AI 编程代理(openinterpreter) + AI 辅导(DeepTutor) + AI 学习手册(maths-cs-ai) + AI 营销(marketingskills) + 健身数据(exercises-dataset) + 工程师技能(skills 霸榜带过)，避免单一 AI Agent 扎堆"
+  },
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "AI 编程代理 1 (openinterpreter) + AI 教育/辅导 1 (DeepTutor) + AI 学习手册 1 (maths-cs-ai-compendium) + AI 营销技能 1 (marketingskills) + 健身数据 1 (exercises-dataset) + 工程师技能 1 (mattpocock/skills) — 5 个不同方向，AI 占 4 但子方向分散（编程/辅导/学习/营销），加非 AI 健身差异化",
+  "avoid_recent": [
+    "OpenCut-app/OpenCut — 07-14/15 连续霸榜首，本期主动避开选 4 新上榜替代",
+    "Nutlope/hallmark — 07-14/15 连续霸榜，本期不选",
+    "Shubhamsaboo/awesome-llm-apps — 07-14/15 连续霸榜，本期不选",
+    "dicklesworthstone/destructive_command_guard — 近 7 期高频项目，避免重复展开"
+  ],
+  "selected_projects": [
+    {"full_name": "openinterpreter/openinterpreter", "rank": 7, "reason": "新上榜 +299 — 低成本模型编程代理，Rust 写，支持 DeepSeek/Kimi/Qwen，B 半可用钩子潜力（本地跑 AI 编程）", "audience": "B"},
+    {"full_name": "HKUDS/DeepTutor", "rank": 8, "reason": "新上榜 +172 — AI 终身个性化辅导，国内高校团队出品，A 普通可用（学习场景普世）", "audience": "A"},
+    {"full_name": "HenryNdubuaku/maths-cs-ai-compendium", "reason": "新上榜 +725 涨幅明显 — AI/ML 研究工程师学习手册，C 开发者向，给学习者的知识体系", "audience": "C"},
+    {"full_name": "coreyhaines31/marketingskills", "rank": 11, "reason": "新上榜 +340 — AI 营销技能包（转化率/文案/SEO/增长），B 半可用，营销人用 Claude Code", "audience": "B"},
+    {"full_name": "hasaneyldrm/exercises-dataset", "rank": 13, "reason": "非 AI 差异化 +949 — 1324 健身动作数据集带动画，A 普通可用（健身人群看动作指南）", "audience": "A"},
+    {"full_name": "mattpocock/skills", "rank": 3, "reason": "今日榜首 +2130 — 工程师技能合集，A 普通可用，连续霸榜快速带过", "audience": "A"}
+  ],
+  "audience_distribution": {"A": 3, "B": 2, "C": 1},
+  "authenticity_check": {
+    "openinterpreter/openinterpreter": "65.5K★/5.6K fork=11.6:1 正常；Rust 真实项目，topics 完整(deepseek/kimi/qwen/coding-agent)，07-15 pushed 活跃 → 通过",
+    "HKUDS/DeepTutor": "26.3K★/3.6K fork=7.3:1 正常；Python 项目，topics 详尽(ai-tutor/rag/multi-agent)，国内高校团队 → 通过",
+    "HenryNdubuaku/maths-cs-ai-compendium": "5.9K★/742 fork=8:1 正常；TypeScript 学习手册项目，topics 详尽(19个)，07-15 pushed → 通过",
+    "coreyhaines31/marketingskills": "39.8K★/6.3K fork=6.3:1 正常；JS 项目，topics(claude/codex/marketing)，07-15 pushed → 通过",
+    "hasaneyldrm/exercises-dataset": "14.4K★/1.7K fork=8.4:1 正常；HTML 数据集项目，topics 详尽(fitness/dataset/exercise-database) → 通过",
+    "mattpocock/skills": "172.3K★/14.8K fork=11.6:1 正常；Shell 项目，07-14 pushed 活跃，今日榜首 +2130 → 通过"
+  }
+}

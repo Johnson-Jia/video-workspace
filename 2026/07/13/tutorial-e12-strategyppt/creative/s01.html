@@ -1,0 +1,122 @@
+<!-- 场景: scene-1 | 时长: 31.8s | bg: diamond_lattice | 战略汇报 PPT 两版本：启动版(阶段1) vs 成果版(阶段5) -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（蓝启动版 + 金成果版；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:30%;left:25%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:30%;left:75%;width:560px;height:240px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:78%;left:50%;transform:translateX(-50%);width:1100px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(258,90%,72%,0.12) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:24%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.9);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:24%;left:75%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:80%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(258,90%,72%,0.9);box-shadow:0 0 14px hsla(258,85%,66%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:32%;width:8px;height:8px;background:rgba(167,139,250,0.85);box-shadow:0 0 12px rgba(167,139,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(110,231,183,0.85);box-shadow:0 0 12px rgba(110,231,183,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 sppt-scene">
+  <!-- phase-1 (0-5.5s): 战略 PPT 是核心 分两个版本 总览 -->
+  <div class="region-top">
+    <div class="sppt-stage-tag"><span class="dot"></span>E12 · 战略汇报 PPT · 两版本 · 核心段</div>
+  </div>
+  <div class="region-mid sppt-overview">
+    <div class="sppt-title">战略汇报 PPT · <span class="grad-blue">分两个版本</span></div>
+    <div class="sppt-sub">对应转型的两个阶段 · 立论数据不同</div>
+    <div class="sppt-version-row">
+      <div class="sppt-vtag launch">
+        <div class="vname grad-blue">启动版</div>
+        <div class="vstage">阶段 1 · 立项要资源</div>
+      </div>
+      <div class="sppt-vtag result">
+        <div class="vname grad-gold">成果版</div>
+        <div class="vstage">阶段 5 · 推广汇报</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 战略 PPT 两版本 —</div>
+  </div>
+</div>
+<div class="phase phase-2 sppt-scene">
+  <!-- phase-2 (5.5-16.0s): 启动版 阶段1 现状+目标+行业+试点 -->
+  <div class="region-top">
+    <div class="sppt-stage-tag"><span class="dot"></span>E12 · 启动版 · 阶段 1 立项</div>
+  </div>
+  <div class="region-mid sppt-detail">
+    <div class="sppt-detail-head">
+      <div class="sppt-detail-num grad-blue">启动版</div>
+      <div class="sppt-detail-stage launch">阶段一 · 立项要资源</div>
+    </div>
+    <div class="sppt-argue-list">
+      <div class="sppt-argue">
+        <div class="akey">立论 1</div>
+        <div class="aval"><span class="kw-blue">现状痛点</span> + 目标承诺</div>
+      </div>
+      <div class="sppt-argue">
+        <div class="akey">立论 2</div>
+        <div class="aval"><span class="kw-blue">行业参考</span> 数据</div>
+      </div>
+      <div class="sppt-argue">
+        <div class="akey">立论 3</div>
+        <div class="aval"><span class="kw-blue">试点计划</span> 先验证</div>
+      </div>
+    </div>
+    <div class="sppt-no-data">⛔ 还没试点 · 没有验证成果数据</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 启动版 · 阶段 1 —</div>
+  </div>
+</div>
+<div class="phase phase-3 sppt-scene">
+  <!-- phase-3 (16.0-24.0s): 成果版 阶段5 实测+推广 -->
+  <div class="region-top">
+    <div class="sppt-stage-tag"><span class="dot"></span>E12 · 成果版 · 阶段 5 推广</div>
+  </div>
+  <div class="region-mid sppt-detail">
+    <div class="sppt-detail-head">
+      <div class="sppt-detail-num grad-gold">成果版</div>
+      <div class="sppt-detail-stage result">阶段五 · 推广汇报</div>
+    </div>
+    <div class="sppt-argue-list">
+      <div class="sppt-argue result-argue">
+        <div class="akey">立论 1</div>
+        <div class="aval"><span class="kw-gold">实测成果</span> · 已试点完成</div>
+      </div>
+      <div class="sppt-argue result-argue">
+        <div class="akey">立论 2</div>
+        <div class="aval"><span class="kw-gold">有实测数据</span> 撑腰</div>
+      </div>
+      <div class="sppt-argue result-argue">
+        <div class="akey">立论 3</div>
+        <div class="aval"><span class="kw-gold">推广计划</span> 全员铺开</div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 成果版 · 阶段 5 —</div>
+  </div>
+</div>
+<div class="phase phase-4 sppt-scene">
+  <!-- phase-4 (24.0-31.8s): 同一份 PPT 两阶段不同数据 + 先确认阶段再选版本 -->
+  <div class="region-top">
+    <div class="sppt-stage-tag"><span class="dot"></span>E12 · 关键 · 先确认阶段再选版本</div>
+  </div>
+  <div class="region-mid sppt-finale">
+    <div class="sppt-finale-title">同一份 PPT · <span class="grad-blue">不同数据</span> 立论</div>
+    <div class="sppt-finale-key">先确认 <span class="grad-gold">你处于哪个阶段</span> <span class="arrow">→</span> 再选版本</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 战略 PPT 两版本 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

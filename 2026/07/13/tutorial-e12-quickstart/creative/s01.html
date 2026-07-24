@@ -1,0 +1,148 @@
+<!-- 场景: scene-1 | 时长: 31.5s | bg: diamond_lattice | 5 分钟最小可走通：终端演示 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 静态光晕（绿终端主调 + 蓝模板 + 金数据；低 alpha，禁划过类 scan/stream/beam） -->
+  <div class="fx-aura" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:1000px;height:220px;border-radius:50%;background:radial-gradient(ellipse, hsla(150,70%,52%,0.14) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:25%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,90%,62%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <div class="fx-aura" style="position:absolute;top:62%;left:75%;width:480px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,58%,0.14) 0%, transparent 65%);filter:blur(50px);opacity:0.55"></div>
+  <!-- fx-blink 锚点 -->
+  <div class="fx-blink" style="position:absolute;top:24%;left:50%;width:10px;height:10px;border-radius:50%;background:hsla(150,70%,55%,0.9);box-shadow:0 0 14px hsla(150,65%,50%,0.32)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:25%;width:10px;height:10px;border-radius:50%;background:hsla(215,90%,62%,0.85);box-shadow:0 0 14px hsla(215,85%,56%,0.30)"></div>
+  <div class="fx-blink" style="position:absolute;top:60%;left:75%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,62%,0.9);box-shadow:0 0 14px hsla(43,85%,56%,0.32)"></div>
+  <!-- fx-particle 浮动粒子 -->
+  <div class="fx-particle" style="position:absolute;top:28%;left:18%;width:8px;height:8px;background:rgba(52,211,153,0.85);box-shadow:0 0 12px rgba(52,211,153,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:30%;left:82%;width:8px;height:8px;background:rgba(96,165,250,0.85);box-shadow:0 0 12px rgba(96,165,250,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:70%;left:32%;width:8px;height:8px;background:rgba(251,191,36,0.85);box-shadow:0 0 12px rgba(251,191,36,0.6)"></div>
+  <div class="fx-particle" style="position:absolute;top:72%;left:68%;width:8px;height:8px;background:rgba(110,231,183,0.85);box-shadow:0 0 12px rgba(110,231,183,0.6)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 qs-scene">
+  <!-- phase-1 (0-3.7s): 没有真实度量数据也能先跑通 开场 -->
+  <div class="region-top">
+    <div class="qs-stage-tag"><span class="dot"></span>E12 · 5 分钟最小可走通 · 核心段</div>
+  </div>
+  <div class="region-mid">
+    <div class="qs-intro">
+      <div class="qs-intro-title">没有真实度量数据 · <span class="grad-green">也能先跑通</span></div>
+      <div class="qs-intro-sub">手头没数据？占位数据先跑一遍</div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 5 分钟最小可走通 —</div>
+  </div>
+</div>
+<div class="phase phase-2 qs-scene">
+  <!-- phase-2 (3.7-13.2s): 终端 step1-2 打开模板 + 填占位（28天→21天 / Bug率22%）-->
+  <div class="region-top">
+    <div class="qs-stage-tag"><span class="dot"></span>E12 · step 1-2 · 打开模板 + 填占位</div>
+  </div>
+  <div class="region-mid">
+    <div class="qs-terminal">
+      <div class="qs-term-head">
+        <div class="qs-term-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <div class="qs-term-title">战略汇报 · 最小可走通</div>
+      </div>
+      <div class="qs-term-body">
+        <span class="line"><span class="prompt">$</span> <span class="cmd">打开</span> <span class="arg">01-战略汇报PPT.prompt.md</span></span>
+        <span class="line"><span class="out"># 填占位数据（随便编两个数）</span></span>
+        <span class="line"><span class="prompt">&gt;</span> <span class="cmd">交付周期</span> <span class="arg">28天</span> <span class="arrow">→</span> 想压到 <span class="arg">21天</span></span>
+        <span class="line"><span class="prompt">&gt;</span> <span class="cmd">Bug 率</span> <span class="arg">22%</span></span>
+        <span class="line"><span class="ok">✓ 占位数据填好</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / step 1-2 打开 + 填占位 —</div>
+  </div>
+</div>
+<div class="phase phase-3 qs-scene">
+  <!-- phase-3 (13.2-17.2s): 终端 step3 粘到免费 AI（Kimi/通义千问）-->
+  <div class="region-top">
+    <div class="qs-stage-tag"><span class="dot"></span>E12 · step 3 · 粘到免费 AI</div>
+  </div>
+  <div class="region-mid">
+    <div class="qs-terminal">
+      <div class="qs-term-head">
+        <div class="qs-term-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <div class="qs-term-title">粘到免费 AI</div>
+      </div>
+      <div class="qs-term-body">
+        <span class="line"><span class="prompt">$</span> <span class="cmd">粘到免费 AI</span></span>
+        <span class="line"><span class="out">智谱清言 · 或 · 豆包（免费）</span></span>
+        <span class="line"><span class="ok">✓ 都行 · 任意免费 AI</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / step 3 粘免费 AI —</div>
+  </div>
+</div>
+<div class="phase phase-4 qs-scene">
+  <!-- phase-4 (17.2-26.2s): 终端 step4 三十秒出活 AI 吐结构齐全汇报 + 真实产出 PDF 截图 -->
+  <div class="region-top">
+    <div class="qs-stage-tag"><span class="dot"></span>E12 · step 4 · 三十秒出活</div>
+  </div>
+  <div class="region-mid">
+    <div class="qs-terminal">
+      <div class="qs-term-head">
+        <div class="qs-term-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <div class="qs-term-title">三十秒出活 · AI 输出</div>
+      </div>
+      <div class="qs-term-body">
+        <span class="line"><span class="arrow">→</span> <span class="ok">三十秒出活</span></span>
+        <span class="line"><span class="out">AI 直接吐一份 <span class="cmd">结构齐全</span> 的战略汇报</span></span>
+        <div class="qs-output-tags">
+          <span class="qs-otag">背景</span>
+          <span class="qs-otag">目标</span>
+          <span class="qs-otag">现状</span>
+          <span class="qs-otag">行动</span>
+          <span class="qs-otag">预期收益</span>
+        </div>
+        <span class="line" style="margin-top:14px"><span class="ok">✓ 全有</span></span>
+      </div>
+    </div>
+    <!-- 真实产出 PDF 截图：这就是 AI 生成的汇报样式 -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:24px;margin-top:28px;flex-wrap:nowrap">
+      <img src="assets/02-转型计划书-示例.png" style="max-height:380px;height:380px;width:auto;border-radius:12px;border:2px solid rgba(96,165,250,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain">
+      <img src="assets/04-阶段总结报告-示例.png" style="max-height:380px;height:380px;width:auto;border-radius:12px;border:2px solid rgba(52,211,153,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain">
+    </div>
+    <div style="text-align:center;margin-top:12px;font-size:32px;color:rgba(148,163,184,0.85);letter-spacing:0.5px">↑ 真实产出样式 · 转型计划书 / 阶段总结报告</div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / step 4 三十秒出活 —</div>
+  </div>
+</div>
+<div class="phase phase-5 qs-scene">
+  <!-- phase-5 (26.2-31.5s): 先跑通一遍 确认流程没问题 再补真实数据 -->
+  <div class="region-top">
+    <div class="qs-stage-tag"><span class="dot"></span>E12 · 收尾 · 先跑通再补数据</div>
+  </div>
+  <div class="region-mid">
+    <div class="qs-finale">
+      <div class="qs-finale-title">先 <span class="grad-green">跑通一遍</span> · 再补真实数据</div>
+      <div class="qs-finale-flow">
+        <div class="qs-finale-step first">
+          <div class="fnum grad-green">第 1 步</div>
+          <div class="ftext">跑通流程</div>
+        </div>
+        <div class="qs-finale-arrow">→</div>
+        <div class="qs-finale-step second">
+          <div class="fnum grad-gold">第 2 步</div>
+          <div class="ftext">补真实数据</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="region-bottom">
+    <div class="bottom-hint">— tutorial E12 / 5 分钟最小可走通 —</div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

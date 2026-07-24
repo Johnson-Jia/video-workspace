@@ -1,0 +1,246 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-cyan: #22D3EE;
+  --tut-purple: #C4B5FD;
+  --tut-green: #34D399;
+  --tut-gold: #FBBF24;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * Tutorial E13 datadriven — 数据驱动：4 phase 纯切换
+ * （多 phase 用 GSAP timeline 顺序切换，禁 data-reveal，避 phase-2/3/4 不显示）
+ * ============================================ */
+
+.dd-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 60px 120px 60px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; flex-direction: column; gap: 22px; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.dd-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(52,211,153,0.10);
+  border: 1px solid rgba(52,211,153,0.40);
+  color: #6EE7B7;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.dd-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #34D399; box-shadow: 0 0 12px rgba(52,211,153,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(52,211,153,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue  { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-cyan  { background-image: linear-gradient(135deg, #22D3EE, #06B6D4, #67E8F9); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-gold  { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === 代码片段通用（cases.json / runner / handlers）=== */
+.dd-code-line {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(255,255,255,0.85); line-height: 1.5; white-space: pre;
+}
+.dd-code-line .kw   { color: #C4B5FD; }   /* keyword */
+.dd-code-line .cls  { color: #FBBF24; }   /* class */
+.dd-code-line .dec  { color: #FBBF24; }   /* decorator */
+.dd-code-line .fn   { color: #60A5FA; }   /* function */
+.dd-code-line .s    { color: #34D399; }   /* string */
+.dd-code-line .k    { color: #93C5FD; }   /* key */
+.dd-code-line .cm   { color: rgba(255,255,255,0.42); }  /* comment */
+.dd-code-line .punc { color: rgba(255,255,255,0.60); }  /* punctuation */
+.dd-code-line .indent  { display: inline-block; width: 1.5em; }
+.dd-code-line .indent2 { display: inline-block; width: 3em; }
+
+/* === phase-1 数据与代码彻底解耦：双栏 data/ vs handlers/ === */
+.dd-decouple { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.dd-decouple-title {
+  font-family: var(--font-title); font-size: 66px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.dd-decouple-cols { display: flex; align-items: stretch; justify-content: center; gap: 32px; }
+.dd-col {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 20px 24px; border-radius: 16px;
+  min-width: 420px; max-width: 520px;
+}
+.dd-col.data { background: rgba(52,211,153,0.08); border: 2px solid rgba(52,211,153,0.42); }
+.dd-col.code { background: rgba(196,181,253,0.08); border: 2px solid rgba(196,181,253,0.42); }
+.dd-col-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dd-col-ico {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+}
+.dd-col.data .dd-col-ico { color: #6EE7B7; }
+.dd-col.code .dd-col-ico { color: #DDD6FE; }
+.dd-col-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  padding: 4px 14px; border-radius: 999px;
+}
+.dd-col.data .dd-col-tag { background: rgba(52,211,153,0.14); color: #6EE7B7; }
+.dd-col.code .dd-col-tag { background: rgba(196,181,253,0.14); color: #DDD6FE; }
+.dd-col-body {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 14px; border-radius: 10px;
+  background: rgba(15,23,42,0.55);
+}
+.dd-col-foot { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
+.dd-run {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  padding: 4px 14px; border-radius: 8px;
+}
+.dd-run.yes { background: rgba(52,211,153,0.18); color: #6EE7B7; }
+.dd-run.no  { background: rgba(239,68,68,0.16); color: #FCA5A5; }
+.dd-role {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  padding: 4px 14px; border-radius: 8px;
+  background: rgba(196,181,253,0.16); color: #DDD6FE;
+}
+.dd-decouple-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(110,231,183,0.88); text-align: center;
+}
+
+/* === phase-2 runner 按 type 路由：用例 → 字典/注册中心 分流 === */
+.dd-route { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.dd-route-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.dd-route-flow { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.dd-route-src {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 22px 26px; border-radius: 14px;
+  background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.45);
+  min-width: 240px;
+}
+.dd-route-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: #93C5FD;
+}
+.dd-route-code {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.85);
+}
+.dd-route-arrow {
+  font-family: var(--font-data); font-size: 48px; font-weight: 900; color: rgba(255,255,255,0.45);
+}
+.dd-route-branch { display: flex; flex-direction: column; gap: 14px; }
+.dd-branch-row { display: flex; justify-content: center; }
+.dd-branch-card {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 24px; border-radius: 14px;
+  min-width: 440px;
+}
+.dd-branch-card.dict { background: rgba(196,181,253,0.10); border: 2px solid rgba(196,181,253,0.45); }
+.dd-branch-card.reg  { background: rgba(251,191,36,0.10); border: 2px solid rgba(251,191,36,0.45); }
+.dd-branch-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+}
+.dd-branch-card.dict .dd-branch-tag { color: #DDD6FE; }
+.dd-branch-card.reg  .dd-branch-tag { color: #FCD34D; }
+.dd-branch-body { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+.dd-pill {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  padding: 4px 14px; border-radius: 999px;
+  background: rgba(196,181,253,0.16); color: #DDD6FE;
+  border: 1px solid rgba(196,181,253,0.35);
+}
+.dd-code-inline {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600; color: #FCD34D;
+}
+.dd-branch-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.68);
+}
+.dd-route-note {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: rgba(147,197,253,0.90); text-align: center;
+  padding: 8px 22px; border-radius: 10px; background: rgba(96,165,250,0.10); border: 1px solid rgba(96,165,250,0.30);
+}
+
+/* === phase-3 变量传递：_save_as 保存 + ${变量名} 引用 === */
+.dd-var { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.dd-var-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.dd-var-cards { display: flex; align-items: stretch; justify-content: center; gap: 32px; }
+.dd-var-card {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 24px 30px; border-radius: 16px;
+  min-width: 380px; max-width: 480px;
+}
+.dd-var-card.save { background: rgba(34,211,238,0.08); border: 2px solid rgba(34,211,238,0.45); }
+.dd-var-card.ref  { background: rgba(52,211,153,0.08); border: 2px solid rgba(52,211,153,0.45); }
+.dd-var-tag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 800;
+}
+.dd-var-card.save .dd-var-tag { color: #67E8F9; }
+.dd-var-card.ref  .dd-var-tag { color: #6EE7B7; }
+.dd-var-body {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.88); text-align: center;
+}
+.dd-var-eq  { color: rgba(255,255,255,0.55); }
+.dd-var-val { color: #34D399; }
+.dd-var-brace  { color: #22D3EE; font-weight: 900; }
+.dd-var-brace2 { color: #22D3EE; font-weight: 900; }
+.dd-var-name   { color: #6EE7B7; }
+.dd-var-note {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.68); text-align: center;
+}
+.dd-var-flow {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+}
+.dd-var-step { color: rgba(255,255,255,0.82); padding: 8px 18px; border-radius: 10px; background: rgba(34,211,238,0.10); border: 1px solid rgba(34,211,238,0.30); }
+.dd-var-save { color: #67E8F9; }
+.dd-var-ref  { color: #6EE7B7; }
+.dd-var-arrow { color: rgba(255,255,255,0.45); font-weight: 900; }
+.dd-var-ctx { color: #FCD34D; padding: 8px 18px; border-radius: 10px; background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.30); }
+.dd-var-summary {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700; color: rgba(103,232,249,0.90); text-align: center;
+  padding: 10px 22px; border-radius: 10px; background: rgba(34,211,238,0.10); border: 1px solid rgba(34,211,238,0.30);
+}
+
+/* === phase-4 分工清晰：运营编步骤 + 开发写 handler === */
+.dd-finale { display: flex; flex-direction: column; align-items: center; gap: 26px; }
+.dd-finale-title {
+  font-family: var(--font-title); font-size: 66px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.dd-finale-row { display: flex; align-items: stretch; justify-content: center; gap: 24px; }
+.dd-finale-card {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 26px 36px; border-radius: 18px;
+  min-width: 320px;
+}
+.dd-finale-card.ops { background: rgba(52,211,153,0.10); border: 2px solid rgba(52,211,153,0.45); }
+.dd-finale-card.dev { background: rgba(196,181,253,0.10); border: 2px solid rgba(196,181,253,0.45); }
+.dd-finale-role {
+  font-family: var(--font-title); font-size: 40px; font-weight: 900;
+}
+.dd-finale-card.ops .dd-finale-role { color: #6EE7B7; }
+.dd-finale-card.dev .dd-finale-role { color: #DDD6FE; }
+.dd-finale-task {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800; color: rgba(255,255,255,0.92);
+}
+.dd-finale-at {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.62);
+}
+.dd-finale-plus {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: rgba(255,255,255,0.55);
+  align-self: center;
+}
+.dd-finale-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: rgba(252,211,77,0.88); text-align: center;
+}

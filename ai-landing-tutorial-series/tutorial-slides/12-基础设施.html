@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>12-基础设施 · 阶段3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1920px;height:1080px;background:#f8fafc;font-family:'PingFang SC','Microsoft YaHei','Inter',sans-serif;color:#0f172a;overflow:hidden;}
+.poster{width:1920px;height:1080px;padding:60px 96px;display:flex;flex-direction:column;}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.chap{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#2563eb;background:#e0e7ff;padding:8px 22px;border-radius:999px;letter-spacing:.06em;}
+.chap-dot{width:10px;height:10px;border-radius:50%;background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.6);}
+.num{font-family:'JetBrains Mono','Consolas',monospace;font-size:26px;font-weight:600;color:#94a3b8;letter-spacing:.08em;}
+.num strong{color:#2563eb;font-weight:800;}
+h1{font-size:92px;font-weight:900;line-height:1.05;letter-spacing:-.01em;margin-bottom:8px;}
+h1 .hl{color:#2563eb;}
+.subtitle{font-size:30px;color:#475569;font-weight:500;margin-bottom:28px;}
+.quote{background:linear-gradient(135deg,#1057cb 0%,#3d485f 100%);color:#fff;padding:26px 36px;border-radius:14px;font-size:30px;font-weight:600;line-height:1.55;margin-bottom:32px;box-shadow:0 8px 24px rgba(16,87,203,.18);}
+.quote .em{background:linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#7dd3fc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;flex:1;}
+.card{background:#fff;border:1px solid #e2e8f0;border-top:6px solid #2563eb;border-radius:14px;padding:24px 24px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,23,42,.05);}
+.card:nth-child(2){border-top-color:#16a34a;}
+.card:nth-child(3){border-top-color:#f59e0b;}
+.card:nth-child(4){border-top-color:#7c3aed;}
+.card .icon{font-size:40px;margin-bottom:8px;}
+.card .ctitle{font-size:26px;font-weight:800;color:#0f172a;margin-bottom:8px;line-height:1.2;}
+.card .csub{font-size:17px;font-weight:700;color:#2563eb;margin-bottom:10px;}
+.card:nth-child(2) .csub{color:#16a34a;}
+.card:nth-child(3) .csub{color:#f59e0b;}
+.card:nth-child(4) .csub{color:#7c3aed;}
+.card .cdesc{font-size:17px;color:#64748b;line-height:1.55;flex:1;}
+.skipnote{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:18px 26px;margin-bottom:24px;font-size:20px;color:#78350f;line-height:1.6;}
+.skipnote strong{color:#92400e;}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;}
+.src{font-size:19px;color:#94a3b8;}
+.author{font-size:20px;color:#64748b;}
+.author strong{color:#2563eb;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="chap"><span class="chap-dot"></span>阶段3 · 基础设施(可跳过)</div>
+    <div class="num">AI 战略转型方法论 · <strong>12/30</strong></div>
+  </div>
+  <h1>给 AI 装上<span class="hl">"眼睛和记忆"</span></h1>
+  <div class="subtitle">业务知识 RAG、代码知识图谱、Skill 仓库、MCP 网关——四件套让 AI 从"概率性盲读"升级为"确定性查证"</div>
+  <div class="quote">基础设施 = 让 AI 从<span class="em">"概率性盲读"升级为"确定性查证"</span>。四件套是为大代码库/复杂业务准备的,小团队可跳过(CLAUDE.md + grep 就够)。</div>
+  <div class="cards">
+    <div class="card"><div class="icon">📚</div><div class="ctitle">业务知识 RAG</div><div class="csub">让 AI 懂私有知识</div><div class="cdesc">向量库抽象 + 两阶段检索(多路召回→CrossEncoder 重排)+ 多租户隔离;减少业务细节幻觉</div></div>
+    <div class="card"><div class="icon">🕸️</div><div class="ctitle">代码知识图谱</div><div class="csub">改代码前看到爆炸半径</div><div class="cdesc">Tree-sitter → 知识图谱 → MCP 工具(158 语言);一次调用拿全调用链,不用 10 次查询</div></div>
+    <div class="card"><div class="icon">🧰</div><div class="ctitle">Skill 仓库</div><div class="csub">复用团队能力</div><div class="cdesc">两层架构(公共 Skill + 项目级);业务数据入 RAG 不塞 Skill,降 Token;推荐 skillhub(自托管)</div></div>
+    <div class="card"><div class="icon">🔌</div><div class="ctitle">MCP 网关</div><div class="csub">企业服务暴露给 Agent</div><div class="cdesc">基于 Spring AI Alibaba,Nacos 注册的 Dubbo/Spring 服务零代码封装成 MCP 工具;CLI 优先</div></div>
+  </div>
+  <div class="skipnote"><strong>⚠️ 跳过前提</strong>:专为"代码量大、项目多、业务复杂"的团队设计。单仓库几万行内、项目少、业务不复杂——<strong>请直接跳过,CLAUDE.md + grep 就够,强行建基础设施是过度工程</strong>。</div>
+  <div class="foot">
+    <div class="src">来源:stage3.html key-conclusion + §1-5(RAG / 代码图谱 / Skill 仓库 / MCP 网关)+ warn(跳过前提)</div>
+    <div class="author">作者 <strong>Johnson</strong> · 技术总监 / 首席架构师</div>
+  </div>
+</div>
+</body>
+</html>

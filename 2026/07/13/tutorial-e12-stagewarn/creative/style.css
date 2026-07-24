@@ -1,0 +1,166 @@
+:root {
+  --bg-deep: #0F172A;
+  --tut-bg: #0F172A;
+  --tut-blue: #60A5FA;
+  --tut-gold: #FBBF24;
+  --tut-green: #6EE7B7;
+  --tut-purple: #C4B5FD;
+  --tut-red: #F87171;
+  --tut-white: rgba(255,255,255,0.90);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+}
+
+/* ============================================
+ * Tutorial E12 stagewarn — 别用错阶段：启动版禁编造验证数据
+ * phase 切换（场景类 swarn-scene，phase-1/2/3/4 依次显示）
+ * ============================================ */
+
+.swarn-scene {
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: center;
+  width: 100%; height: 100%;
+  padding: 64px 100px 80px;
+  box-sizing: border-box;
+}
+
+.region-top { display: flex; align-items: flex-start; flex-shrink: 0; }
+.region-mid { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 0; }
+.region-bottom { display: flex; align-items: flex-end; justify-content: center; flex-shrink: 0; }
+
+.swarn-stage-tag {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 999px;
+  background: rgba(248,113,113,0.10);
+  border: 1px solid rgba(248,113,113,0.40);
+  color: #FCA5A5;
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.swarn-stage-tag .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #F87171; box-shadow: 0 0 12px rgba(248,113,113,0.7);
+}
+
+.bottom-hint {
+  font-family: var(--font-data); font-size: 32px; font-weight: 600;
+  color: rgba(248,113,113,0.50); letter-spacing: 0.10em;
+}
+
+/* === 渐变文字（同色系高饱和，禁白端点）+ 极淡 drop（非发光，alpha 0.08）=== */
+.grad-gold { background-image: linear-gradient(135deg, #FBBF24, #F59E0B, #FCD34D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-blue { background-image: linear-gradient(135deg, #60A5FA, #3B82F6, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-red { background-image: linear-gradient(135deg, #FCA5A5, #EF4444, #F87171); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+.grad-green { background-image: linear-gradient(135deg, #34D399, #10B981, #6EE7B7); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 6px rgba(30,41,59,0.08); }
+
+/* === phase-1 关键提醒 alert_border 警示 === */
+.swarn-alert {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+  padding: 48px 80px; border-radius: 24px;
+  background: linear-gradient(160deg, rgba(248,113,113,0.10), rgba(248,113,113,0.02));
+  border: 3px solid rgba(248,113,113,0.55);
+  box-shadow: 0 0 60px rgba(248,113,113,0.15);
+  max-width: 1200px;
+}
+.swarn-alert-icon {
+  font-family: var(--font-title); font-size: 120px; font-weight: 900; line-height: 1;
+}
+.swarn-alert-title {
+  font-family: var(--font-title); font-size: 72px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.swarn-alert-sub {
+  font-family: var(--font-body); font-size: 36px; font-weight: 600; color: rgba(252,165,165,0.85); text-align: center;
+}
+
+/* === phase-2 启动版禁编造 详情 === */
+.swarn-fabricate {
+  display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; max-width: 1400px;
+}
+.swarn-fab-head {
+  display: flex; align-items: center; gap: 20px;
+}
+.swarn-fab-stage {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 10px 24px; border-radius: 999px;
+  background: rgba(96,165,250,0.14); border: 1px solid rgba(96,165,250,0.40);
+  color: #60A5FA; font-family: var(--font-data); font-size: 32px; font-weight: 700;
+}
+.swarn-fab-title {
+  font-family: var(--font-title); font-size: 52px; font-weight: 900; color: var(--tut-white);
+}
+.swarn-fab-row {
+  display: flex; align-items: stretch; justify-content: center; gap: 32px; width: 100%;
+}
+.swarn-fab-card {
+  flex: 1; padding: 28px 32px; border-radius: 18px;
+  background: rgba(248,113,113,0.08); border: 2px dashed rgba(248,113,113,0.45);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.swarn-fab-card .flabel {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: #FCA5A5;
+}
+.swarn-fab-card .fdata {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900;
+}
+.swarn-fab-card .ftag {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.55);
+}
+.swarn-fab-warn {
+  margin-top: 12px; padding: 18px 36px; border-radius: 14px;
+  background: rgba(248,113,113,0.12); border-left: 5px solid rgba(248,113,113,0.6);
+  font-family: var(--font-body); font-size: 36px; font-weight: 700; color: #FCA5A5;
+  display: flex; align-items: center; gap: 14px;
+}
+.swarn-fab-warn .ico { font-size: 40px; }
+
+/* === phase-3 翻倍归成果版 === */
+.swarn-belong {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.swarn-belong-flow {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+}
+.swarn-belong-box {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 28px 44px; border-radius: 18px; min-width: 320px;
+}
+.swarn-belong-box.source {
+  background: rgba(251,191,36,0.10); border: 2px solid rgba(251,191,36,0.45);
+}
+.swarn-belong-box.target {
+  background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.45);
+}
+.swarn-belong-box .blabel { font-family: var(--font-data); font-size: 32px; font-weight: 700; }
+.swarn-belong-box .bval { font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); }
+.swarn-belong-arrow {
+  font-family: var(--font-title); font-size: 64px; font-weight: 900; color: #60A5FA;
+}
+.swarn-belong-note {
+  font-family: var(--font-body); font-size: 36px; font-weight: 600; color: rgba(255,255,255,0.72); text-align: center;
+}
+
+/* === phase-4 启动版正确做法 收尾 === */
+.swarn-correct {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.swarn-correct-title {
+  font-family: var(--font-title); font-size: 56px; font-weight: 900; color: var(--tut-white); text-align: center;
+}
+.swarn-correct-row {
+  display: flex; align-items: stretch; justify-content: center; gap: 28px;
+}
+.swarn-correct-card {
+  padding: 24px 36px; border-radius: 16px;
+  background: rgba(96,165,250,0.10); border: 2px solid rgba(96,165,250,0.40);
+  display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 280px;
+}
+.swarn-correct-card .ctag {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700; color: #60A5FA;
+}
+.swarn-correct-card .ctext {
+  font-family: var(--font-body); font-size: 34px; font-weight: 600; color: var(--tut-white);
+}
+.swarn-correct-finale {
+  margin-top: 8px; font-family: var(--font-title); font-size: 44px; font-weight: 900;
+}

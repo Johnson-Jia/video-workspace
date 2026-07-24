@@ -1,0 +1,23 @@
+{
+  "topic_type": "多题材盘点（AI + 非AI 各半）",
+  "topic_pattern": "topic-tool",
+  "angle": "今日两个破千 + AI 与非 AI 各半的多元题材盘点，用单日涨星数字锚定 + 利益翻译（CapCut 开源替代 / 整个项目变成图 / AI 设计去味）",
+  "novelty_strategy": "差异化三层：① 题材角度——近期 7 期是 ai-landing-tutorial-series 教程（战略汇报/prompt包/PPT），本期是 github 盘点，主题完全不同（教程方法论 vs 项目盘点）；② 数字锚点——用两个破千（OpenCut +1077 / graphify +1028）的双钩子，而非近期教程的「砍AI输入/token」单数字；③ 叙事结构——hyper-pace 多项目盘点（标准 5-6 场景），与教程系列的长场景 reveal 段完全不同",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "4A 普通可用（OpenCut 视频剪辑 / awesome-llm-apps AI应用 / hallmark 去AI味 / Win11Debloat 系统瘦身）+ 2C 开发者向（graphify 知识图谱 / exercises-dataset 健身数据）。题材分布：视频工具/AI应用/AI开发/反AI味设计/健身数据/系统工具——AI 占 3 个，非 AI 占 3 个，避免纯 AI 盘点疲劳",
+  "avoid_recent": [
+    "workspace/ai-landing-tutorial-series（近 7 期教程系列，主题完全不同，零重叠）",
+    "chatgpt/claude（近期高频提及，本期不展开）"
+  ],
+  "hook_strategy": {
+    "mode": "action_number + 利益翻译（优先级 2）",
+    "rationale": "本期有两个破千项目（OpenCut +1077 / graphify +1028），数字锚定天然强；OpenCut 是 CapCut 开源替代，利益翻译清晰（免费剪视频不充会员）；动作词用「杀入」配数字",
+    "hook_text": "七月十四 GitHub 杀入几个项目，有个开源剪映一天涨了一千颗星",
+    "hook_anchors_used": ["杀入", "一千颗星", "单日涨"],
+    "freshness_check": "近 7 期 hook 主题：教程方法论（战略汇报/prompt包/PPT）——本期是「项目盘点 + 开源剪映反差」，主题完全不同，hook_sim 预期 <0.3"
+  }
+}

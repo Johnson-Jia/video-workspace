@@ -1,0 +1,31 @@
+{
+  "mode": "weekly",
+  "topic_type": "周汇总·多领域盘点",
+  "topic_pattern": "topic-weekly-digest",
+  "angle": "第31周周榜：按领域分组盘点本周涨星最猛的14个项目（AI编程/开发工具/信息学习/实用建站），用周涨幅数字锚定+领域分布做钩子，区别近期单项目反直觉叙事",
+  "novelty_strategy": "本期差异化三招：① 视角换——近期都是单项目反直觉hook（砍AI输入/断网群聊/登录态白给），本期回到weekly周榜盘点视角（周涨幅排行+领域分组），结构天然新鲜；② 数字锚点换——近期用'砍掉95%''近两千星''两千星'等单项目数字，本期用'周涨近一万六千星（最高一个）''14个项目分四组'等周榜聚合数字；③ 领域分布做钩子——'AI编程助手占了一组''一半能直接用'的利益角度，禁重复'一个接口接住N家服务商'（OmniRoute近7期已用相似句式）",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "14项目分4组：AI编程助手4(jcode/pi/orca/ai-agent-book) + 开发者效率工具4(OmniRoute/code-review-graph/skills/hallmark) + 信息与学习3(worldmonitor/ai-engineering-from-scratch/DeepTutor) + 实用工具3(croc/open-seo/Instatic)。A档普通可用约8个(57%)，C档开发者向5个(36%)",
+  "avoid_recent": [
+    "pumpkin-mc/pumpkin（近期高频，本期不选）",
+    "mattpocock/skills（近期高频，如选只简短提及不展开）",
+    "OmniRoute 不作 hook 主角度（近7期'一个接口接住两百多家服务商'句式已用）"
+  ],
+  "groups": [
+    {"name": "AI编程助手", "count": 4, "color_visual_only": "蓝"},
+    {"name": "开发者效率工具", "count": 4, "color_visual_only": "橙"},
+    {"name": "信息与学习", "count": 3, "color_visual_only": "紫"},
+    {"name": "实用工具", "count": 3, "color_visual_only": "金"}
+  ],
+  "week_context": "第31周（07月20日-07月27日）",
+  "exclusion_applied": ["ruvnet/RuView（永久排除·WiFi感知人体虚假宣传）"],
+  "compliance_notes": [
+    "ai-agent-book 旁白/画面泛化'国内技术作者/资深工程师'，禁提'李博杰'",
+    "DeepTutor 描述含URL，旁白/画面去URL，content_ready内嵌原文锚点保留",
+    "OmniRoute 描述含品牌名(Kimi/Claude/GPT等)，中文翻译/旁白/画面泛化为'AI服务商'，原文锚点保留"
+  ]
+}

@@ -1,0 +1,111 @@
+/* ============================================
+ * weekly 周榜视觉系统 — 第31周
+ * 四组领域色（仅用于色环/边框/标签/渐变标题，画面文字禁颜色词）
+ * ============================================ */
+:root {
+  --bg-deep: #080818;
+  --bg-mid: #0d1117;
+  --accent-warm: #F9A825;
+  --accent-gold: #FBBF24;
+  /* 四组领域色（同色系高饱和，禁白端点） */
+  --grp-blue:   #60A5FA;   /* AI 编程助手 */
+  --grp-blue-d: #1E3A8A;
+  --grp-orange: #FB923C;   /* 开发者工具 */
+  --grp-orange-d: #9A3412;
+  --grp-purple: #A78BFA;   /* 信息与学习 */
+  --grp-purple-d: #5B21B6;
+  --grp-gold:   #FBBF24;   /* 实用工具 */
+  --grp-gold-d: #92400E;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.74);
+  --text3: rgba(255,255,255,0.46);
+  --card-bg: rgba(13,18,38,0.78);
+  --card-bg-strong: rgba(13,18,38,0.88);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ---- 渐变标题文字（background-image 非 background 简写；禁白端点；极淡 shadow 禁发光） ---- */
+.grad-warm   { background-image: linear-gradient(135deg,#F9A825 0%,#FB923C 55%,#FDBA74 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08); line-height:1.04; }
+.grad-blue   { background-image: linear-gradient(135deg,#4DA8DA 0%,#60A5FA 55%,#93C5FD 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08); line-height:1.04; }
+.grad-orange { background-image: linear-gradient(135deg,#FF8C32 0%,#FB923C 55%,#FDBA74 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08); line-height:1.04; }
+.grad-purple { background-image: linear-gradient(135deg,#A78BFA 0%,#C4B5FD 55%,#DDD6FE 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08); line-height:1.04; }
+.grad-gold   { background-image: linear-gradient(135deg,#FBBF24 0%,#F59E0B 55%,#FCD34D 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08); line-height:1.04; }
+
+/* ============================================
+ * 分组卡片区（紧凑多卡，每组 currentColor = 领域色）
+ * ============================================ */
+.grp-head { display:flex; flex-direction:column; gap:10px; width:100%; margin:0 auto; }
+.grp-head-row { display:flex; align-items:baseline; gap:18px; }
+.grp-tag { font-family:var(--font-data); font-size:32px; font-weight:700; color:var(--text3); letter-spacing:0.08em; }
+.grp-pulse { width:14px; height:14px; border-radius:50%; background:currentColor; box-shadow:0 0 18px currentColor; flex-shrink:0; }
+.grp-title { font-family:var(--font-title); font-size:82px; font-weight:900; line-height:1.0; letter-spacing:0.01em; }
+
+.wcards { display:flex; flex-direction:column; gap:20px; width:100%; margin:0 auto; }
+.wcard {
+  position:relative; display:flex; flex-direction:column; gap:11px;
+  padding:22px 26px; background:var(--card-bg); border-radius:16px;
+  border-left:6px solid currentColor;
+  box-shadow:0 8px 26px rgba(0,0,0,0.34);
+  overflow:hidden;
+}
+.wcard-glow { position:absolute; top:-40%; right:-20%; width:60%; height:180%;
+  background:radial-gradient(circle, currentColor 0%, transparent 70%); opacity:0.10; pointer-events:none; }
+.wcard-row1 { position:relative; z-index:1; display:flex; align-items:center; gap:16px; }
+.wcard-avatar { width:68px; height:68px; border-radius:50%; object-fit:cover;
+  border:3px solid currentColor; flex-shrink:0; background:#0d1117; }
+.wcard-name { font-family:var(--font-data); font-size:42px; font-weight:700; color:var(--text);
+  word-break:break-word; line-height:1.16; flex:1; min-width:0; }
+.wcard-badge { font-family:var(--font-body); font-size:32px; font-weight:800; color:#0d1117;
+  background:currentColor; padding:6px 16px; border-radius:16px; flex-shrink:0; letter-spacing:0.02em; }
+.wcard-row2 { position:relative; z-index:1; font-family:var(--font-body); font-size:36px; font-weight:500;
+  color:var(--text2); line-height:1.3; }
+.wcard-row3 { position:relative; z-index:1; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  font-family:var(--font-data); }
+.wcard-stars { font-size:40px; font-weight:900; color:currentColor; line-height:1.0; }
+.wcard-total { font-size:32px; font-weight:600; color:var(--text3); }
+
+/* ============================================
+ * hook / summary / cta 专用
+ * ============================================ */
+.week-badge { display:inline-flex; align-items:center; gap:14px; padding:9px 22px; border-radius:30px;
+  background:rgba(249,168,37,0.14); border:1.5px solid rgba(249,168,37,0.5);
+  font-family:var(--font-data); font-size:32px; font-weight:700; color:var(--accent-warm); letter-spacing:0.06em; }
+.hook-title { font-family:var(--font-title); font-size:78px; font-weight:900; color:var(--text); line-height:1.05; letter-spacing:0.01em; }
+.hook-num { font-family:var(--font-data); font-size:156px; font-weight:900; line-height:0.95; letter-spacing:-0.02em; }
+.hook-num::before { content:attr(data-count-prefix); }
+.hook-sub { font-family:var(--font-body); font-size:40px; font-weight:600; color:var(--text2); line-height:1.3; }
+.hook-pill { display:inline-flex; align-items:center; gap:10px; padding:10px 24px; border-radius:30px;
+  background:rgba(96,165,250,0.14); border:1.5px solid rgba(96,165,250,0.5);
+  font-family:var(--font-body); font-size:32px; font-weight:600; color:#93C5FD; }
+
+.sum-title { font-family:var(--font-title); font-size:74px; font-weight:900; line-height:1.05; }
+.sum-bars { display:flex; flex-direction:column; gap:18px; width:100%; margin:0 auto; }
+.sum-bar { display:flex; align-items:center; gap:18px; }
+.sum-bar-label { font-family:var(--font-body); font-size:34px; font-weight:700; color:var(--text); width:260px; flex-shrink:0; }
+.sum-bar-track { flex:1; height:34px; background:rgba(255,255,255,0.07); border-radius:17px; overflow:hidden; }
+.sum-bar-fill { height:100%; border-radius:17px; background:currentColor; box-shadow:0 0 16px currentColor; }
+.sum-bar-num { font-family:var(--font-data); font-size:34px; font-weight:800; color:var(--text); width:96px; text-align:right; flex-shrink:0; }
+.sum-callout { display:inline-flex; align-items:center; gap:14px; padding:14px 28px; border-radius:16px;
+  background:rgba(251,191,36,0.12); border:1.5px solid rgba(251,191,36,0.45);
+  font-family:var(--font-body); font-size:36px; font-weight:700; color:var(--accent-gold); margin:0 auto; }
+
+.cta-title { font-family:var(--font-title); font-size:96px; font-weight:900; line-height:1.02; }
+.cta-q { font-family:var(--font-body); font-size:48px; font-weight:700; color:var(--text); line-height:1.3; }
+.cta-meta { display:flex; align-items:center; gap:20px; font-family:var(--font-data); font-size:32px; color:var(--text2); }
+.cta-channel { font-family:var(--font-body); font-size:36px; font-weight:800; color:var(--accent-warm); }
+.cta-pills { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+.cta-pill { padding:9px 22px; border-radius:24px; background:rgba(255,255,255,0.08);
+  font-family:var(--font-body); font-size:32px; font-weight:600; color:var(--text2); }

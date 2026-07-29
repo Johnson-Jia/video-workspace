@@ -1,28 +1,51 @@
 {
   "best_hour_bucket": "evening",
-  "best_avg_reach": 0.558,
-  "market_avg_reach": 0.478,
+  "best_avg_reach": 0.575,
+  "market_avg_reach": 0.483,
   "confidence": "high",
   "evidence": {
     "early_morning": {
-      "count": 42,
+      "count": 49,
       "avg_reach": 0.475
     },
     "midday": {
-      "count": 38,
-      "avg_reach": 0.503
+      "count": 41,
+      "avg_reach": 0.51
     },
     "afternoon": {
-      "count": 19,
-      "avg_reach": 0.427
+      "count": 20,
+      "avg_reach": 0.429
     },
     "evening": {
       "count": 11,
-      "avg_reach": 0.558
+      "avg_reach": 0.575
     }
   },
-  "coverage_hour": "110/114",
-  "note": "建议在 evening 时段发布（关联非因果，基于 110/114 含时分记录）",
-  "generated_at": "2026-07-23T16:09:54.407986+00:00",
+  "coverage_hour": "121/125",
+  "note": "建议在 evening 时段发布（关联非因果，基于 121/125 含时分记录）",
+  "recent_drift": {
+    "enabled": true,
+    "window": "14d",
+    "recent_n": 17,
+    "generated_at": "2026-07-29",
+    "timing": {
+      "best_slot": "evening",
+      "drift": true,
+      "recent_ratio": 0.0,
+      "baseline_ratio": 0.091,
+      "recent_n": 17,
+      "advice": "近17条 evening 占比 0%（全期 9%），建议下个发布窗口调 evening"
+    },
+    "c5s": {
+      "current_month": "2026-07",
+      "previous_month": "2026-06",
+      "current": 0.32,
+      "previous": 0.4,
+      "drop": 0.199,
+      "flag": true,
+      "advice": "5s完播 0.40→0.32（-20%），开头吸引力退化，检查 hook 文案/封面"
+    }
+  },
+  "generated_at": "2026-07-29T08:00:00.668920+00:00",
   "coverage_note": "基于含时分的发布记录（视频号无时分，4/5 平台覆盖）"
 }

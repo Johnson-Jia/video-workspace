@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-28",
+  "mode": "standard",
+  "topic_type": "工具/效率（AI能力扩展为主）",
+  "topic_pattern": "topic-tool",
+  "angle": "AI能力扩展——让AI做以前做不到的事（自己看懂视频/跨平台查资料/陪玩家打游戏），配GIS地图与CI/CD基建，区别于近期的断网群聊/AI审美/AI队友/企业转型主题",
+  "novelty_strategy": "近期hook主题为「断网群聊/AI审美套路/AI队友/企业AI转型/周榜AI编程」，本期换「AI能力扩展」主线：3个AI项目分别是看视频/查资料/陪玩3个不同方向，避免单一Agent盘点疲劳；数字锚点用「6个项目」+反直觉「让AI自己看懂视频」（claude-video项目名含品牌，旁白用类别表达不点品牌）；叙事模板换list-arc避近期contrast-arc/mystery-box",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "AI伴侣(airi) + GIS地图(GeoLibre) + AI视频理解(claude-video) + AI跨平台调研(last30days-skill) + CI/CD基建(jenkins) + 蓝牙通讯快报(bitchat) = 6方向，AI与非AI各半",
+  "avoid_recent": [
+    "permissionlesstech/bitchat（连续3天霸榜，今日最多快报位一带而过，不展开）",
+    "pbakaus/impeccable（0727展开，避免）",
+    "yorukot/superfile（0727展开，避免）",
+    "alibaba/open-code-review（0726/0727展开，避免）",
+    "shiyu-coder/Kronos（0727 weekly展开+inactive，避免）"
+  ],
+  "exclusion_hard": [
+    "amnezia-vpn/amnezia-client（VPN客户端，国内平台违法风险，零容忍排除）",
+    "NanmiCoder/MediaCrawler（多平台爬虫，灰色敏感，排除）"
+  ],
+  "selected_projects": [
+    {"full_name": "moeru-ai/airi", "tier": "A", "role": "core", "reason": "自托管AI伴侣，macOS/Windows桌面端，反直觉：数据在自己手里+陪聊+陪玩游戏"},
+    {"full_name": "opengeos/GeoLibre", "tier": "A", "role": "core", "reason": "云原生GIS地图，浏览器/桌面/移动多端，普通人可用"},
+    {"full_name": "bradautomates/claude-video", "tier": "B", "role": "hook+core", "reason": "让AI看懂任何视频，反直觉角度强；项目名含品牌，旁白用类别表达"},
+    {"full_name": "mvanhorn/last30days-skill", "tier": "B", "role": "core", "reason": "AI跨平台主题研究，Reddit/X/YouTube等聚合调研"},
+    {"full_name": "jenkinsci/jenkins", "tier": "C", "role": "core", "reason": "老牌CI/CD自动化服务器新上榜，给做运维的开发者"},
+    {"full_name": "permissionlesstech/bitchat", "tier": "A", "role": "quickbrief", "reason": "连续霸榜，快报位内容化表达，不展开"}
+  ],
+  "hook_draft": "7月28日6个项目杀进GitHub，有个能让AI自己看懂视频",
+  "hook_check": {
+    "<=12字_core": "7月28日6个项目杀进GitHub",
+    "action_word": "杀进",
+    "number_anchor": "6个/7月28日",
+    "contrarian": "让AI自己看懂视频（AI通常生成视频，现在能看视频=反直觉）",
+    "no_question": true,
+    "no_project_name_in_5s": true,
+    "topic_differs_recent": "AI能力扩展≠近期断网群聊/AI审美/AI队友/企业转型/周榜AI编程"
+  }
+}

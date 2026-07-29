@@ -1,0 +1,48 @@
+# GitHub Trending 中文素材 — 2026-07-26（入选 6 项）
+
+> 数据源: raw_trending.json（18 项目，gh api 6/6 真实性核实，代理 172.21.0.102:7890）
+> 选题方向：去中心化通信 + 离线隐私主轴（topic_plan.json angle）。近 3 期（23/24/25）连续 AI Agent/接口题材，本期强制轮换，以蓝牙 mesh 离线聊天为反直觉核心
+> 永久排除：1 个历史核实不可实现的 WiFi 感知项目（本期未上榜无影响）
+> 活跃过滤：2 个 last push >30 天的项目（金融时序基础模型、大模型教程书）active=false 不入选
+> avoid_recent 遵守：5 个 25 期已展开项目（AI 浏览器/技能包/建站/数据库客户端/终端文件管理）+ 1 个主题撞 23 期的多 AI 服务商统一接口，均不入选
+> 连续霸榜一带而过：block/buzz、Automattic/harper、Pumpkin-MC/Pumpkin（24 期已展开，本期 3-4s 提增量，harper 深化「离线隐私」新角度呼应主题）
+> 真实性核实：6 项均 gh api 核实（owner 成熟、watcher 比例正常、多贡献者、0 HARD；palmier-pro 1 警告 watcher 0.3% 可接受）
+> 受众配比：A 档 4（bitchat/palmier-pro/harper/Pumpkin）/ B 档 2（buzz/open-code-review）—— A 档 4/6 超半，C 档 0，合规
+> 跨领域：去中心化通信 / 本地创作 / 离线隐私 / 开发者基建 / 游戏自托管，5 个方向
+
+1. permissionlesstech/bitchat | Swift | 28.8K★ (+1720今日) | 蓝牙 mesh 群聊工具，IRC 那种老派味道。手机对手机用蓝牙低功耗中继传消息，断网、无 SIM 卡、无 WiFi 也能群聊；联网时走 Nostr 协议全球可达。无账号、无手机号、无中心服务器，端到端加密，支持 IRC 风格命令，iOS/macOS 原生 app，App Store 上架（原: bluetooth mesh chat, IRC vibes）
+   受众: A普通可用（iOS/macOS 手机 app）
+   用途: 断网也能群聊
+   avatar: assets/avatars/permissionlesstech.png
+   反直觉钩子: 拔掉网线、拔掉 SIM 卡，手机对手机还能群聊——蓝牙 mesh 多跳中继，抗议/灾难/偏远地区能用
+   技术细节: 蓝牙 LE mesh 最多 7 跳中继 + Nostr 协议 290+ relay，Noise Protocol 端到端加密，三连击紧急清空所有数据
+
+2. palmier-io/palmier-pro | Swift | 12.2K★ (+412今日) | 为 AI 而生的 macOS 视频编辑器，苹果电脑原生桌面应用，本地跑剪辑流程（原: macOS video editor built for AI）
+   受众: A普通可用（macOS 桌面 app）
+   用途: Mac 上 AI 剪视频
+   avatar: assets/avatars/palmier-io.png
+   反直觉钩子: 不用联网的云端剪辑，AI 能力直接装进苹果电脑本地
+
+3. Automattic/harper | Rust | 13.4K★ (+503今日) | 离线、隐私优先的语法检查器，运行快速、开源、Rust 驱动。文字在本机检查不上传云端，浏览器扩展和桌面都能用（原: Offline, privacy-first grammar checker. Fast, open-source, Rust-powered）
+   受众: A普通可用（浏览器扩展/桌面，即开即用）
+   用途: 离线查语病
+   avatar: assets/avatars/Automattic.png
+   反直觉钩子: 写过的字全程不出本机——离线 Rust 引擎在本地查语法，隐私不外传
+
+4. alibaba/open-code-review | Go | 13.0K★ (+431今日) | 开源免费、在阿里规模下经过实战检验的代码审查工具：确定性流水线加 AI 智能体混合架构，精确到行级评论，内置精调规则集（空指针、线程安全、跨站脚本、SQL 注入），兼容主流大模型接口（原: Open-source & free — Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.）
+   受众: B半可用（研发团队配置使用）
+   用途: AI 帮审代码
+   avatar: assets/avatars/alibaba.png
+   反直觉钩子: 大厂把内部代码审查工具开源了——确定性规则 + AI 双引擎，阿里规模实战检验
+
+5. block/buzz | Rust | 12.0K★ (+2491今日·榜首) | 蜂群思维通信平台，人和 AI 在同一个工作区协作。底层是自托管 Nostr relay，每条消息都是签名事件（原: A hive mind communication platform）
+   受众: B半可用（需自托管部署）
+   用途: 自托管协作区
+   avatar: assets/avatars/block.png
+   反直觉钩子: 24 期讲过它「AI 队友」一面，本期只提一句——它和 bitchat 底层都用 Nostr 去中心化协议，今日单日冲上两千四百星居榜首
+
+6. Pumpkin-MC/Pumpkin | Rust | 9.7K★ (+358今日) | 让每个人都能托管快速高效的 Minecraft 服务器（原: Empowering everyone to host fast and efficient Minecraft servers.）
+   受众: A普通可用（Docker 一键部署）
+   用途: 自建游戏服务器
+   avatar: assets/avatars/Pumpkin-MC.png
+   反直觉钩子: 24 期提过，本期一带而过——Rust 重写的 Minecraft 服务器，自己一台机器就能托管，又涨了三百多星

@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**72 天 · 154 条视频 · 6 个系列 · 全自动**
+**78 天 · 161 条视频 · 6 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -62,19 +62,19 @@
 
 | 日期 | 作品 |
 |:---|:---|
-| 7月24日 | [GitHub 每日热门](2026/07/24/github-trending/) |
-| 7月23日 | [GitHub 每日热门](2026/07/23/github-trending/) |
-| 7月22日 | [GitHub 每日热门](2026/07/22/github-trending/) |
-| 7月21日 | [GitHub 每日热门](2026/07/21/github-trending/) |
-| 7月19日 | [GitHub 每日热门](2026/07/19/github-trending/) |
+| 7月30日 | [GitHub 每日热门](2026/07/30/github-trending/) |
+| 7月29日 | [GitHub 每日热门](2026/07/29/github-trending/) |
+| 7月28日 | [GitHub 每日热门](2026/07/28/github-trending/) |
+| 7月27日 | [GitHub 每日热门](2026/07/27/github-trending/) |
+| 7月26日 | [GitHub 每日热门](2026/07/26/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 7月27日 | [GitHub 周度热门汇总](2026/07/27/github-trending-weekly/) |
 | 7月20日 | [GitHub 周度热门汇总](2026/07/20/github-trending-weekly/) |
 | 7月13日 | [GitHub 周度热门汇总](2026/07/13/github-trending-weekly/) |
-| 7月6日 | [GitHub 周度热门汇总](2026/07/06/github-trending-weekly/) |
 
 ### 深度解析
 
@@ -86,7 +86,7 @@
 | 7月5日 | [AI转型 E03：战略启动总览](2026/07/05/tutorial-e03-intro/) |
 | 6月28日 | [PowerToys：30+ Windows 效率工具](2026/06/28/powertoys-deep-dive/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 154 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 161 条视频。
 <!-- END RECENT -->
 
 ---

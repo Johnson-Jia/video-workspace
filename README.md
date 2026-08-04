@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**79 天 · 162 条视频 · 6 个系列 · 全自动**
+**83 天 · 171 条视频 · 7 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -48,6 +48,7 @@
 
 | 月份 | 链接 |
 |:---|:---|
+| 2026 年 8 月 | [GitHub Trending 8 月榜单](sources/github-trending/2026-08.md) |
 | 2026 年 7 月 | [GitHub Trending 7 月榜单](sources/github-trending/2026-07.md) |
 | 2026 年 6 月 | [GitHub Trending 6 月榜单](sources/github-trending/2026-06.md) |
 | 2026 年 5 月 | [GitHub Trending 5 月榜单](sources/github-trending/2026-05.md) |
@@ -62,31 +63,31 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 8月4日 | [GitHub 每日热门](2026/08/04/github-trending/) |
+| 8月3日 | [GitHub 每日热门](2026/08/03/github-trending/) |
+| 8月2日 | [GitHub 每日热门](2026/08/02/github-trending/) |
+| 8月1日 | [GitHub 每日热门](2026/08/01/github-trending/) |
 | 7月31日 | [GitHub 每日热门](2026/07/31/github-trending/) |
-| 7月30日 | [GitHub 每日热门](2026/07/30/github-trending/) |
-| 7月29日 | [GitHub 每日热门](2026/07/29/github-trending/) |
-| 7月28日 | [GitHub 每日热门](2026/07/28/github-trending/) |
-| 7月27日 | [GitHub 每日热门](2026/07/27/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 8月3日 | [GitHub 周度热门汇总](2026/08/03/github-trending-weekly/) |
 | 7月27日 | [GitHub 周度热门汇总](2026/07/27/github-trending-weekly/) |
 | 7月20日 | [GitHub 周度热门汇总](2026/07/20/github-trending-weekly/) |
-| 7月13日 | [GitHub 周度热门汇总](2026/07/13/github-trending-weekly/) |
 
 ### 深度解析
 
 | 日期 | 作品 |
 |:---|:---|
+| 8月4日 | [AI 风向标：团队共用记忆脑等 5 个项目](2026/08/04/ai-wind/) |
+| 8月3日 | [AI 风向标：8 个项目 4 个钻进命令行](2026/08/03/ai-wind/) |
+| 8月2日 | [AI 风向标：4GB 显卡跑 70B 大模型](2026/08/02/ai-wind/) |
+| 8月1日 | [编程猫：双减一纸令 95% 营收违法](2026/08/01/goldminer/) |
 | 7月21日 | [Kimi K3：2.8万亿参数开源](2026/07/21/kimi-k3/) |
-| 7月18日 | [火花思维：5.93亿美金烧光](2026/07/18/goldminer/) |
-| 7月11日 | [沪江：1.87亿美金烧光](2026/07/11/goldminer/) |
-| 7月5日 | [AI转型 E03：战略启动总览](2026/07/05/tutorial-e03-intro/) |
-| 7月4日 | [AI转型 E01：7阶段方法论](2026/07/04/tutorial-e01-intro/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 162 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 171 条视频。
 <!-- END RECENT -->
 
 ---

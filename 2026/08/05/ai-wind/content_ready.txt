@@ -1,0 +1,76 @@
+# AI 风向标 内容素材 — 2026-08-05
+
+数据源：raw_trending.json（ai_trending.py 独立 AI 源，9 个 AI 项目，gh API 三源验证 + avatar 已下载）
+模式：标准盘点（5 项目入选，跨 AI 工具/大模型/安全/记忆/视频 5 子方向，约 50-55s）
+分类：ai-wind（暗色电紫科技风，hyper-pace，YunjianNeural +25%）
+
+## 选题策略（新鲜度 + 新门禁 + 降重叠）
+- 今日 9 个 AI 项目，池子经「近2天同频道(ai-wind)禁连续入选」新门禁(project_no_consecutive_repeat) + 敏感剔除后，可选新面孔仅 superpowers / uber-ADR / video-use 三个，加 top3 爆款例外(airllm/TencentDB)凑齐 5 个跨方向。
+- 主推两个近2天未入选的新面孔：superpowers（266K 总星王者，agentic 方法论）+ uber-ADR（Uber 企业 AI 安全，AI 安全新方向）。
+- airllm（今日 +1711 top2）/ TencentDB（今日 +1111 top3）近2天 ai-wind 已入选，但今日 stars_today 进 raw top3，走 exempt 例外放行，一句带过增量不展开，各换第 4 角度。
+- video-use 方向新颖（AI 自己剪视频）但 push 34 天 inactive，快速带过。
+- hook「26万星，让AI自己干活」—— AI 自主性主题，全榜最高总星 266K(superpowers) 做数字锚 + agentic 利益，避开近2期已用的「记忆/不健忘」「命令行」锚点。
+
+## 入选项目（5 个，按讲解顺序）
+
+1. obra/superpowers | Shell | 266458★ (+653今日) | 一个 agentic 技能框架加软件开发方法论，让 AI 学会一整套干活技能、按流程自己完成开发，是目前很受欢迎的 AI 自主干活框架（原: An agentic skills framework &amp; software development methodology that works.）
+   - avatar: assets/avatars/obra.png
+   - 用途: 让AI自己干开发
+   - 受众: A 普通可用（agentic 技能框架，配合 AI 编程客户端即用，266K 星很受欢迎；开发者方法论普通人可懂「让 AI 自己干活」）
+   - 子方向: AI 工具/方法论
+   - contrarian_angle: 不是单个 AI 工具，而是给 AI 装一整套「职业技能包」+ 开发方法论，让 AI 按流程自己干完整套活——反直觉「AI 自己干活」（agentic skills 框架，全榜总星最高 266K）
+   - 数据锚点: 266458★（全榜总星最高）/ 23825 fork / 单日 +653（obra 真实开发者，Star/Fork 11.2:1 + topics 含 sdlc/skills ✓）
+   - 合规: 中文泛化「AI 编程客户端」不裸报具体品牌；本地自主主题
+   - 重叠说明: 综合 github-trending 今日也在榜，但 ai-wind 首次展开换 AI 自主性深度视角
+
+2. lyogavin/airllm | Jupyter Notebook | 28354★ (+1711今日) | 单张 4GB 显存就能推理 70B 超大模型，让你在自己电脑上本地跑通常要云端专业显卡集群的大模型（原: AirLLM 70B inference with single 4GB GPU）
+   - avatar: assets/avatars/lyogavin.png
+   - 用途: 本地跑大模型
+   - 受众: A 普通可用（本地平民化视角：4GB 显存普通电脑就能跑大模型，数据不外传）
+   - 子方向: 大模型
+   - contrarian_angle: 大模型通常要传云端专业显卡集群，这个让你用普通电脑 4GB 显存就能本地跑 70B 超大模型——本地平民化极致（第 4 角度「单卡 4GB 极致平民化」，区别 08-02 数字/08-03 机制/08-04 隐私）
+   - 数据锚点: 28354★ / 3059 fork / 单日 +1711（今日 raw top2 爆款；老账号 2011 + 68 repos + Star/Fork 9.3:1 真实性 ✓）
+   - 合规: 本地平民化角度，避开近 3 期已用的数字/机制/隐私锚点
+   - 重叠说明: 连续 4 期 ai-wind（08-02/03/04/05），近2天已入选；今日 top2 爆款走 exempt 例外一句带过，第 4 角度「单卡 4GB 极致平民化」
+
+3. uber/ADR | Python | 669★ (+148今日) | 通过可观测性、安全基准测试和威胁检测为企业 AI agent 保驾护航，已在 Uber 落地部署（原: ADR secures enterprise AI agents through observability, security benchmarking, and threat detection. Deployed at Uber.）
+   - avatar: assets/avatars/uber.png
+   - 用途: 给AI agent上安全锁
+   - 受众: C 开发者向（企业 AI agent 安全监控，需集成部署；措辞「给做企业 AI 的开发者」）
+   - 子方向: AI 安全（新方向，近 7 期 ai-wind 未用）
+   - contrarian_angle: AI agent 普遍裸奔（没人看着它干活，越权/注入风险高），这个从可观测、安全基准、威胁检测三方面给 AI agent 上安全锁，Uber 已经在用——AI 安全新方向（反直觉「给 AI agent 装监控」）
+   - 数据锚点: 669★ / 68 fork / 单日 +148（uber 真实 org + topics 含 agent-security/prompt-injection/threat-detection ✓；新项目 fork 低但 Uber 背书真实）
+   - 合规: 中文泛化「企业 AI agent 安全」，不裸报底层品牌；Uber 部署属事实陈述非商业推广
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+4. TencentCloud/TencentDB-Agent-Memory | TypeScript | 13539★ (+1111今日) | 腾讯开源的 AI agent 团队级记忆中枢，把对话、文档和代码变成四类可复用的记忆资产，在多个 agent 和框架之间统一治理和共享（原: TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.）
+   - avatar: assets/avatars/TencentCloud.png
+   - 用途: 给AI团队装共享脑
+   - 受众: B 半可用（团队级记忆中枢，部署后团队多 agent 共用，偏运维/产品向）
+   - 子方向: Agent 记忆
+   - contrarian_angle: AI agent 普遍金鱼记忆（每次对话重新说），这个给整个团队多个 AI 装共享大脑，谁学到的大家都懂——反直觉「团队 AI 共享一个脑」（第 4 角度「团队共享脑」，区别 08-02 记忆资产/08-04 不健忘通用介绍）
+   - 数据锚点: 13539★ / 1271 fork / 单日 +1111（今日 raw top3；腾讯开源老 org + Star/Fork 10.7:1 ✓）
+   - 合规: 中文泛化「团队记忆中枢」，不裸报底层模型品牌
+   - 重叠说明: 连续 4 期 ai-wind（08-02/03/04/05），近2天已入选；今日 top3 爆款走 exempt 例外一句带过，第 4 角度「团队共享脑」
+
+5. browser-use/video-use | Python | 19304★ (+320今日) | 用编程 agent 来剪辑视频，让 AI 写代码的方式自动完成视频剪辑（原: Edit videos with coding agents）
+   - avatar: assets/avatars/browser-use.png
+   - 用途: AI自己剪视频
+   - 受众: A 普通可用（coding agent 自动剪视频，输出视频结果普通人可用；需 coding agent 配合，边界 A 偏 B）
+   - 子方向: AI 视频
+   - contrarian_angle: 剪视频通常要手动操作剪辑软件一帧帧调，这个让 AI 用写代码的方式自动剪——反直觉「AI 自己剪视频」（非常规手段：用编程 agent 干剪辑的活）
+   - 数据锚点: 19304★ / 2405 fork / 单日 +320（browser-use org 真实 + Star/Fork 8.0:1 ✓；push 34 天 inactive，谨慎快速带过）
+   - 合规: 中文泛化「编程 agent 剪视频」，不提具体剪辑软件名
+   - 重叠说明: ai-wind 新面孔，近2天未入选；方向新颖但 inactive 快速带过
+
+## 未入选说明
+
+本期 raw 共 9 个 AI 项目，其余 4 个未入选原因（泛化表述，非项目推介）：
+
+- 一个涉及逆向工程/渗透测试的敏感安全技能路由项目（PowerShell 语言，raw 描述含「逆向/渗透」字样且中英混排超长）：触及安全敏感方向 + ai-wind 规则对 raw 描述大于 200 字符项目降权，本期剔除。虽今日单日涨星居 raw 前列，但安全/合规风险高不展开。
+
+- 一个 DeepSeek 原生的终端 AI 编程 agent（Go 语言）：近 2 天 ai-wind 已展开，非今日 raw top3，新门禁下本期换血。
+
+- 一个大厂出品的 21 课生成式 AI 入门教程（Jupyter Notebook）：近 2 天 ai-wind 已入选，教程类新鲜度低，非今日 top3，本期不重复。
+
+- 一个实时语音 AI agent 框架（Python，含语音/视频话题）：昨日 ai-wind(08-04) 刚展开「实时语音」方向，非今日 raw top3，本期轮换避免连续同子方向。

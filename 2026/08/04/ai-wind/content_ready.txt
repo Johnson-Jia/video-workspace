@@ -1,0 +1,76 @@
+# AI 风向标 内容素材 — 2026-08-04
+
+数据源：raw_trending.json（ai_trending.py 独立 AI 源，9 个 AI 项目，gh API 三源验证，主 agent 全量核验 9/9 无 HARD 剔除）
+模式：标准盘点（5 项目入选，跨 Agent/语音/大模型 3 子方向，约 45-55s）
+分类：ai-wind（暗色电紫科技风，hyper-pace，YunjianNeural +25%）
+
+## 选题策略（与昨日/综合今天差异化）
+- 今日 9 AI 项目，5 主推中 4 个与综合 github-trending 重叠（TencentDB/Agent-Reach/airllm/livekit），1 个独占（voicebox）。DeepSeek-Reasonix 综合已展开→排除（避免重叠达 3）。
+- airllm/Agent-Reach 与昨日 ai-wind(08/03) 及 08/02 连续重叠：本期换第 3 角度（airllm 隐私平民化 / Agent-Reach 自主调研），强化 livekit+voicebox 两个语音新项目做新鲜血液。
+- hook「AI 居然不健忘，团队共用一个脑」—— AI 自主性/记忆主题，近 2 期未用（08/02 大模型数字 / 08/03 命令行场景）。
+
+## 入选项目（5 个，按讲解顺序）
+
+1. TencentCloud/TencentDB-Agent-Memory | TypeScript | 12.1K★ (+1090今日) | 腾讯开源的 AI agent 团队级记忆中枢，把对话、文档和代码变成四类可复用的记忆资产，在多个 agent 和框架之间统一治理和共享（原: TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.）
+   - avatar: assets/avatars/TencentCloud.png
+   - 用途: 给AI团队共享记忆
+   - 受众: B 半可用（团队级记忆中枢，部署后团队共用，偏运维/产品向而非纯写代码；与综合重叠换 AI 深度视角）
+   - 子方向: Agent
+   - contrarian_angle: AI agent 普遍是金鱼记忆（每次对话重新说），这个给整个团队多个 AI 装共享大脑，谁学到的大家都懂——反直觉"AI 不健忘 + 团队共用一个脑"
+   - 数据锚点: 12137★ / 1147 fork / 单日 +1090（腾讯开源，老 org + 真实性 gh API 核验✓）
+   - 重叠说明: 综合 github-trending 今日也在榜 + 08/02 ai-wind 已选；本期角度"团队共享记忆/AI不健忘"区别于 08/02"团队级记忆资产"通用介绍
+
+2. Panniantong/Agent-Reach | Python | 65.7K★ (+1057今日) | 给你的 AI agent 装上眼睛，让它读遍全网——能读取和搜索 Twitter、Reddit、YouTube、GitHub、Bilibili、小红书，一个命令行搞定，零接口费用（原: Give your AI agent eyes to see the entire internet. Read &amp; search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.）
+   - avatar: assets/avatars/Panniantong.png
+   - 用途: AI自己搜全网资料
+   - 受众: B 半可用（CLI 一行命令零接口费，需基础配置）
+   - 子方向: Agent
+   - contrarian_angle: 传统 AI 只能等你喂资料，这个让 AI 自己去六大平台翻资料汇总——AI 自主调研能力（反直觉"AI 自己干活"，第 3 角度区别于 08/02"长眼睛"/08/03"零接口费"）
+   - 数据锚点: 65744★ / 5457 fork / 单日 +1057（昨日已核验：Star/Fork 12:1 + 290 真实提交，2 警告边界非刷星 ✓）
+   - 合规: 中文泛化「六大平台」，raw 原文锚点保留平台名（保真）；与综合重叠换"AI 自主调研"视角
+   - 重叠说明: 连续 3 期 ai-wind（08/02/03/04）+ 综合 github-trending 今日在榜；本期第 3 角度"AI 自主调研"
+
+3. livekit/agents | Python | 12.0K★ (+148今日) | 一个用来搭建实时语音 AI agent 的框架，让 AI 能实时开口对话（原: A framework for building realtime voice AI agents 🤖🎙️📹）
+   - avatar: assets/avatars/livekit.png
+   - 用途: AI实时开口对话
+   - 受众: C 开发者向（实时语音 agent 框架，需写代码集成，措辞「给做实时语音 AI 的开发者」）
+   - 子方向: 语音（新方向，近 7 期 ai-wind 未用）
+   - contrarian_angle: 传统 AI 对话要打字（异步等回复），这个让 AI 实时开口说话、边听边答——实时语音 AI（反直觉"AI 实时开口不用打字"，新项目新方向）
+   - 数据锚点: 12002★ / 3458 fork / 单日 +148（livekit org 真实性 gh API 核验✓，rank 9 新上榜，涨星基数低但方向新颖）
+   - 合规: 中文泛化「实时语音 AI 框架」，不裸报品牌
+   - 重叠说明: 综合 github-trending 今日在榜；本期角度"实时语音/不用打字"，与综合通用介绍区分
+
+4. lyogavin/airllm | Jupyter Notebook | 27.2K★ (+1085今日) | 单张 4GB 显存就能推理 70B 超大模型，让你在自己电脑上本地跑通常要云端专业显卡集群的大模型（原: AirLLM 70B inference with single 4GB GPU）
+   - avatar: assets/avatars/lyogavin.png
+   - 用途: 本地跑大模型数据不出门
+   - 受众: A 普通可用（本地平民化视角：普通人也能在自己电脑跑大模型，数据不外传；沿用 08/02 A 档判断）
+   - 子方向: 大模型
+   - contrarian_angle: 大模型 traditionally 要传云端（数据泄露风险 + 要专业显卡），这个让你在自己电脑本地跑、数据不出门——本地大模型平民化（隐私 + 平民化 AI 视角，第 3 角度区别于 08/02"4G/70B 数字"/08/03"层流式机制"）
+   - 数据锚点: 27166★ / 2976 fork / 单日 +1085（老账号 2011 + 68 repos + Star/Fork 9.1:1 真实性 ✓）
+   - 合规: 本地隐私角度，避开近 2 期已用的数字/机制锚点；与综合重叠换"数据不出门/平民化"AI 视角
+   - 重叠说明: 连续 3 期 ai-wind（08/02/03/04）+ 综合 github-trending 今日在榜；本期第 3 角度"本地平民化/隐私"
+
+5. jamiepine/voicebox | TypeScript | 48.7K★ (+412今日) | 开源的 AI 语音工作室，能克隆声音、语音听写、声音创作，带图形界面普通人也能用（原: The open-source AI voice studio. Clone, dictate, create.）
+   - avatar: assets/avatars/jamiepine.png
+   - 用途: 开源AI语音工作室
+   - 受众: A 普通可用（开源 GUI 语音工作室，带界面普通人可操作，A 档独占新鲜血液）
+   - 子方向: 语音（新方向，新项目独占未重叠）
+   - contrarian_angle: AI 语音克隆/听写 traditionally 要付费 SaaS 或专业软件，这个开源 + GUI 普通人本地就能克隆声音、听写、创作——平民化 AI 语音（反直觉"开源免费语音工作室"，新项目独占）
+   - 数据锚点: 48694★ / 5994 fork / 单日 +412（jamiepine 真实开发者，Star/Fork 8.1:1 + qwen3-tts-ui 等 topics ✓）
+   - 合规: 中文泛化「AI 语音工作室」，不裸报底层模型品牌
+   - 重叠说明: 不在综合 github-trending 前 15（独占），近 7 期 ai-wind 首次入选，新鲜血液
+
+## 受众分布
+A 档（普通可用）2 个约 40%：airllm（本地平民化）、voicebox（GUI 工作室）
+B 档（半可用）2 个约 40%：TencentDB（团队级部署）、Agent-Reach（CLI）
+C 档（开发者向）1 个约 20%：livekit/agents（框架）
+A 档约半 ✓ / C 档 ≤1/3（20%）✓
+
+## 跨子方向
+Agent(2: TencentDB + Agent-Reach) + 语音(2: livekit + voicebox) + 大模型(1: airllm) = 3 子方向 ✓
+
+## 排除项目（raw 原文锚点，证明排除决策基于真实描述）
+- zhaoxuya520/reverse-skill：题材敏感（逆向/渗透/安全）+ raw description 中英混排 >200 字符（ai-wind 规则降权剔除）（原: Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端）
+- esengine/DeepSeek-Reasonix：今日综合 github-trending 已展开，避免重叠达 3（原: DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.）
+- microsoft/AI-For-Beginners：08/02/03 ai-wind 频繁出现，新鲜度低（原: 12 Weeks, 24 Lessons, AI for All!）
+- microsoft/generative-ai-for-beginners：08/02 ai-wind 已选，新鲜度低（原: 21 Lessons, Get Started Building with Generative AI）

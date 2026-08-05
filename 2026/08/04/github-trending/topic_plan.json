@@ -1,0 +1,23 @@
+{
+  "topic_type": "工具/效率（跨题材：本地大模型推理 + AI语音 + 文档工具 + AI编程 + 项目管理）",
+  "topic_pattern": "topic-tool",
+  "angle": "反直觉钩子方向：4G显存跑700亿参数大模型，打破'跑大模型必须烧钱买顶级显卡'的常识；辅以 antirez(Redis作者)新推理引擎、开源AI语音工作室、Rust PDF解析、终端AI编程agent 补题材多样性",
+  "novelty_strategy": "① 钩子用'极小资源跑超大模型'的反差（数字4G vs 700亿参数），避开近期'不用联网/不用读'句式与纯数字锚定堆叠（P-hook-number_anchor declining）；② 题材避免 AI-Agent/记忆/语音助手 套路扎堆（P-topic-ai declining），项目管理 kaneo 补非AI多样性；③ 6项目里5个近5期未出现，最大化 project_jaccard 差异化；④ antirez 明星作者项目是新钩子角度",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "本地大模型推理×2(airllm/ds4) + AI语音工作室×1(voicebox) + 文档工具×1(pdf-inspector) + AI编程agent×1(DeepSeek-Reasonix) + 项目管理×1(kaneo，非AI补多样性)",
+  "avoid_recent": [
+    "TencentCloud/TencentDB-Agent-Memory (08-03昨日刚详细展开，今日剔除)",
+    "Panniantong/Agent-Reach (08-03榜首已选)",
+    "microsoft/AI-For-Beginners (08-01/02/03连续三期)",
+    "iv-org/invidious (08-02已选)",
+    "zhaoxuya520/reverse-skill (08-01/03已选+逆向题材风险)",
+    "build-your-own-x (08-03已选)",
+    "last30days-skill (07-31/08-01连续)",
+    "PowerToys (07-31已选)",
+    "bytedance/deer-flow (08-02已选)"
+  ]
+}

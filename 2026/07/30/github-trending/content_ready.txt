@@ -1,0 +1,55 @@
+# 2026-07-30 GitHub Trending 内容素材（标准模式 5 项目）
+
+数据来源：raw_trending.json（python_requests + gh_api 采集，17 项目）+ gh api repos/users 交叉真实性验证
+选题方向：知识/资源形态转换提效（topic-tool）
+真实性验证：5 个入选项目均 0 HARD（watcher 比、owner 账龄、仓库规模均健康）
+剔除 1 个 inactive 量化交易类项目（553 天未更新）；已避开 6 个近期已展开的连续霸榜项目（明细见 content.md）
+
+---
+
+1. virgiliojr94/book-to-skill | Python | 12.7K★ (+1428 今日) | 把任何技术书的 PDF 变成 AI 编程助手的技能——能学习、参考，工作中随用（原: Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.）
+   avatar: assets/avatars/virgiliojr94.png
+   用途: 技术书变技能
+   受众: B 半可用（需 Python 与 AI 编程助手环境）
+   反直觉角度: 技术书不再只能读，PDF 压成可调用的技能模块，知识形态从「线性阅读」转成「按需调用」
+   验证: owner 2016 年老号 / 48 公开仓库；watcher 65（占比 0.51%）/ size 754KB
+
+2. obra/superpowers | Shell | 263.3K★ (+686 今日) | 一套能落地的 AI 技能框架和软件开发方法论（原: An agentic skills framework &amp; software development methodology that works.）
+   avatar: assets/avatars/obra.png
+   用途: AI 技能框架
+   受众: C 开发者向（框架需集成，给做工程化的开发者）
+   反直觉角度: 不是单点工具，是把开发经验固化成可复用技能，让 AI 按方法论干活
+   验证: owner 2009 年资深账号 / 224 仓库 / 7887 followers；watcher 993（26 万星大项目 watcher 比偏低为常态）
+
+3. 1jehuang/jcode | Rust | 13.4K★ (+652 今日) | 最省内存的 AI 编程工具（原: The most RAM efficient harness）
+   avatar: assets/avatars/1jehuang.png
+   用途: 省内存的 AI 终端
+   受众: A 普通可用（提供 win/mac/linux 预编译二进制，下载即用）
+   反直觉角度: 同样跑 AI 编程，内存占用是同类工具的零头，老电脑也带得动
+   验证: owner 2021 年 / 53 仓库；releases v0.61.1 全平台二进制；watcher 70（0.52%）
+
+4. microsoft/VibeVoice | Python | 51.2K★ (+332 今日) | 开源的前沿语音 AI（原: Open-Source Frontier Voice AI）
+   avatar: assets/avatars/microsoft.png
+   用途: 开源语音 AI
+   受众: A 普通可用（有 ASR Playground 与 Colab 在线试玩，浏览器即开）
+   反直觉角度: 大厂开源的语音 AI，语音转文字能处理 60 分钟长音频，免部署在线试用
+   验证: owner 官方组织 / 8228 仓库；watcher 254（0.50%）
+
+5. grokability/snipe-it | PHP | 14.4K★ (+197 今日) | 免费开源的 IT 资产和软件授权管理系统（原: A free open source IT asset/license management system）
+   avatar: assets/avatars/grokability.png
+   用途: 管公司 IT 资产
+   受众: A 普通可用（Web 应用，Docker 一键部署，浏览器即开）
+   反直觉角度: 公司电脑和软件授权一个系统全管完，免费开源做到了企业级
+   验证: 2013 年成熟项目（13 年）/ owner 2016 年组织 / 22 仓库；watcher 338（2.34%，健康）；AGPL-3.0
+
+---
+
+## 受众配比
+A 普通可用 3 个（jcode / VibeVoice / snipe-it，60%）+ B 半可用 1 个（book-to-skill）+ C 开发者向 1 个（superpowers，20%）
+满足 audience_filter「A 档约一半」「C 档 ≤ 1/3」
+
+## 语言/方向多样性
+Python / Rust / Shell / Python / PHP（4 种语言）；知识工具 / 技能框架 / AI 编程 / 语音 AI / IT 运维（5 方向，非全 AI Agent）
+
+## hook 锚点（stage3 用）
+主锚：book-to-skill +1428 今日榜首 / 「技术书不用读，上千页压成 AI 技能」（反直觉 + 数字「上千页」+ 冲突词「不用」+ 行动「压成」）

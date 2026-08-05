@@ -1,0 +1,32 @@
+{
+  "date": "2026-08-04",
+  "album": "ai-wind",
+  "topic_type": "AI 自主性盘点（记忆+搜全网+开口说话）",
+  "topic_pattern": "topic-ai",
+  "angle": "AI 自主性跃迁：从'人喂资料'到'AI 自己记事、自己搜、自己开口'——反直觉打破 AI 健忘/打字/云端三刻板",
+  "novelty_strategy": "近 2 期 hook 分别是 '4G 显卡 70B'(08/02 数字) 和 '命令行 AI'(08/03 场景)。本期换'AI 自主性'主题：记忆(TencentDB)+语音(livekit/voicebox)是近 7 期未用方向。airllm 连续 3 期换第 3 角度(隐私/数据不出门)，Agent-Reach 连续 3 期换第 3 角度(AI 自己调研的自主性)。强化 2 个语音新项目(livekit/voicebox)做新鲜血液。",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "Agent(2: TencentDB/Agent-Reach) + 语音(2: livekit/voicebox) + 大模型(1: airllm)，跨 3 子方向",
+  "overlap_diff_strategy": {
+    "vs_github_trending_today": "5 主推中 4 个与综合 github-trending 重叠（TencentDB/Agent-Reach/airllm/livekit），1 个独占（voicebox）。每个重叠项目换 AI 深度视角，不重复综合通用介绍",
+    "vs_aiwind_0802_0803": "airllm 连续 3 期(08/02 数字/08/03 机制/本期隐私平民化)；Agent-Reach 连续 3 期(08/02 长眼睛/08/03 零接口费/本期自主调研)。均为 AI 榜常客不可避免，靠角度轮换 + 强化新项目保新鲜"
+  },
+  "audience_mix": "A 档(airllm/voicebox 普通可用) 2 个约 40% + B 档(Agent-Reach/TencentDB 半可用) 2 个约 40% + C 档(livekit 框架) 1 个约 20%。C 档 ≤1/3 达标",
+  "hook_direction": "反直觉优先：'AI 居然不健忘，团队共用一个脑'(14字)——打破 AI 金鱼记忆刻板 + 团队共享冲突具象，对应主推 TencentDB，近 2 期未用记忆/自主主题",
+  "avoid_recent": [
+    "esengine/DeepSeek-Reasonix（今日综合 github-trending 已选展开，本期排除避免重叠达 3）",
+    "microsoft/AI-For-Beginners + generative-ai-for-beginners（08/02/03 ai-wind 频繁出现，新鲜度低）",
+    "zhaoxuya520/reverse-skill（题材敏感 逆向/渗透 + raw description 中英混排 >200 字符，ai-wind 规则降权剔除）"
+  ],
+  "selected_projects": [
+    "TencentCloud/TencentDB-Agent-Memory",
+    "Panniantong/Agent-Reach",
+    "livekit/agents",
+    "lyogavin/airllm",
+    "jamiepine/voicebox"
+  ]
+}

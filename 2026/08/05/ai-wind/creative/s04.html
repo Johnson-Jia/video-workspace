@@ -1,0 +1,49 @@
+<!-- 场景: uber_adr | 时长: 9.98s | climax 1.0 | 2 phase: 裸奔vs上锁 / 安全三件套 -->
+<div class="layer-bg">
+  <!-- bg-component: dark_cipher -->
+</div>
+<div class="layer-fx">
+  <!-- 告警电闪（橙红）-->
+  <div class="fx-bolt" style="background:radial-gradient(circle at 50% 30%,rgba(255,107,53,0.5),transparent 60%);"></div>
+  <!-- 锁定光环（紫）-->
+  <div class="fx-ring" style="border-color:rgba(168,85,247,0.6);top:calc(50% - 160px);left:calc(50% - 160px);width:320px;height:320px;"></div>
+  <div class="fx-ring" style="border-color:rgba(0,212,255,0.45);top:calc(50% - 110px);left:calc(50% - 110px);width:220px;height:220px;animation-delay:1.6s;"></div>
+  <!-- 监控粒子 -->
+  <div class="fx-particle" style="background:#FF6B35;top:22%;left:18%;width:11px;height:11px;"></div>
+  <div class="fx-particle" style="background:#A855F7;top:68%;left:78%;width:10px;height:10px;animation-delay:1s;"></div>
+  <div class="fx-particle" style="background:#C084FC;top:80%;left:22%;width:9px;height:9px;animation-delay:2s;"></div>
+  <div class="fx-aura" style="width:420px;height:420px;background:#A855F7;opacity:0.26;top:38%;left:30%;"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="lock-wrap">
+  <div class="lock-title"><span style="color:#fff;">uber 的 </span><span class="grad-purple">ADR</span><span style="color:#fff;"> 给 AI 上安全锁</span></div>
+  <div class="lock-row">
+    <div class="lock-col lock-danger">
+      <div class="lock-col-tag">裸奔</div>
+      <div class="lock-col-txt">AI agent<br>没人盯着干活</div>
+      <div class="lock-status">越权 · 注入</div>
+    </div>
+    <div class="lock-col lock-safe">
+      <div class="lock-col-tag">上锁</div>
+      <div class="lock-col-txt">可观测 · 基准<br>威胁检测</div>
+      <div class="lock-status grad-purple">安全 locked</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="phase phase-2">
+<div class="safe-list">
+  <div class="safe-title"><span class="grad-pc">安全三件套</span></div>
+  <div class="safe-items">
+    <div class="safe-item"><span class="safe-item-num">01</span><span class="safe-item-txt">威胁检测 · 注入越权全拦</span></div>
+    <div class="safe-item"><span class="safe-item-num">02</span><span class="safe-item-txt">安全基准 · 行为有标尺</span></div>
+    <div class="safe-item"><span class="safe-item-num">03</span><span class="safe-item-txt">可观测 · 干啥都被盯着</span></div>
+  </div>
+  <div class="safe-foot">Uber 自己已在用</div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+  <div class="cinema-vignette"></div>
+</div>

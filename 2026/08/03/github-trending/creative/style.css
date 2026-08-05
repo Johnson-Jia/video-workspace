@@ -1,0 +1,329 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 场景色系（每场景独立 --accent，破同质化）
+ * phase 加场景 class 注入变量；pfc/content 用 var()，fx 内联硬编码
+ * ============================================ */
+.sc-hook { --accent-warm: #FF8C32; --accent-cool: #FDBA74; }      /* s1 暖橙冲击 */
+.sc-agent { --accent-warm: #00F5D4; --accent-cool: #00D4FF; }     /* s2 霓虹青·AI 感知 */
+.sc-reverse { --accent-warm: #34D399; --accent-cool: #10B981; }   /* s3 翡翠·安全审计 */
+.sc-tencent { --accent-warm: #C4B5FD; --accent-cool: #A78BFA; }   /* s4 紫罗兰·记忆连接 */
+.sc-build { --accent-warm: #FBBF24; --accent-cool: #F59E0B; }     /* s5 金色·climax */
+.sc-champions { --accent-warm: #FBBF24; --accent-cool: #00D4FF; } /* s6 金+青·霸榜平衡 */
+.sc-cta { --accent-warm: #FF8C32; --accent-cool: #FDBA74; }       /* s7 暖橙·收束呼应 */
+
+/* ============================================
+ * ProjectFullCard 布局（s6_assemble 不注入 pfc CSS，须手补）
+ * position:absolute inset:安全区 锚定定位（禁 height:100% 溢出，避双重 padding）
+ * 纵向三带 justify-content:space-between 撑满 1520 安全区
+ * ============================================ */
+.project-full-card {
+  position: absolute;
+  inset: 180px 90px 220px 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-warm {
+  width: 520px; height: 520px; opacity: 0.20;
+  background: var(--accent-warm);
+  top: 180px; left: -120px;
+}
+.pfc-glow-cool {
+  width: 460px; height: 460px; opacity: 0.18;
+  background: var(--accent-cool);
+  bottom: 280px; right: -100px;
+}
+
+/* ── 顶部带：排名+类别同行 + 用途胶囊 + 项目名（owner/repo 完整独占行）── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 28px; }
+.pfc-rank {
+  font-size: 92px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  font-family: var(--font-data);
+  text-shadow: 0 3px 10px rgba(0,0,0,0.32);
+}
+.pfc-category {
+  font-size: 36px; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  /* 用途胶囊：纯场景色文字 + 深色不透明胶囊底（禁 grad clip:text 组合，防胶囊消失）*/
+  font-size: 48px; font-weight: 800; line-height: 1.1;
+  padding: 8px 24px; border-radius: 14px;
+  background: rgba(13,9,18,0.78);
+  border: 1.5px solid rgba(255,255,255,0.20);
+  color: var(--accent-warm);
+  align-self: flex-start;
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.08; letter-spacing: -0.01em;
+  word-break: break-word;            /* 长名换行完整显示，禁 nowrap+ellipsis */
+  margin-top: 4px;
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.48);
+  letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 58px; font-weight: 800;
+  color: #f5f5f5;                    /* 降一档防 OLED 过曝 */
+}
+
+/* ── 中部带：avatar 锚点 + 描述 + 涨星数据条 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 30px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative;
+  width: 200px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(14px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 200px; height: 200px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-size: 40px; font-weight: 600; line-height: 1.35;
+  color: #f5f5f5; text-align: center; max-width: 820px;
+}
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 14px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label { font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.62); }
+.pfc-bar-val {
+  font-size: 44px; font-weight: 800; color: var(--accent-warm);
+  font-family: var(--font-data);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.28);
+}
+.pfc-bar-track {
+  width: 100%; height: 14px; border-radius: 999px;
+  background: rgba(255,255,255,0.10); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+  transform-origin: left center;
+}
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.pfc-topic {
+  font-size: 32px; font-weight: 600; padding: 7px 20px;
+  border-radius: 999px; color: var(--accent-cool);
+  background: rgba(13,9,18,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ── 底部带：三词卖点 + 评语 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 22px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.pfc-sell-item {
+  font-size: 32px; font-weight: 700; padding: 9px 24px;
+  border-radius: 14px; color: #fff;
+  background: rgba(13,9,18,0.72);
+  border: 1px solid rgba(255,255,255,0.20);
+}
+.pfc-commentary {
+  font-size: 36px; font-weight: 500; line-height: 1.4;
+  color: rgba(255,255,255,0.75);
+  border-left: 4px solid var(--accent-warm); padding-left: 22px;
+}
+
+/* ============================================
+ * s1 hook 大字悬念（暖橙冲击，hyper-pace · 让 AI 长眼睛隐喻）
+ * ============================================ */
+.hook-eyebrow {
+  font-size: 32px; font-weight: 600; letter-spacing: 0.32em;
+  color: rgba(255,255,255,0.62); margin-bottom: 24px;
+}
+.hook-title {
+  font-size: 108px; font-weight: 900; line-height: 1.04;
+  text-align: center;
+  background-image: linear-gradient(135deg, #FF8C32, #FDBA74);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 5px 16px rgba(120,60,20,0.38);
+  margin-bottom: 30px;
+}
+.hook-title .num {
+  font-family: var(--font-data);
+}
+.hook-sub {
+  font-size: 44px; font-weight: 700; line-height: 1.35;
+  color: #F1F5F9; text-align: center;
+  max-width: 820px;
+}
+.hook-sub .hi {
+  color: #FF8C32;
+  text-shadow: 0 3px 10px rgba(120,60,20,0.30);
+}
+.eye-mark {
+  margin-top: 44px;
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+}
+.eye-shape {
+  position: relative;
+  width: 130px; height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255,140,50,0.22), transparent 70%);
+}
+.eye-iris {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FDBA74, #FF8C32 70%);
+  box-shadow: 0 0 26px rgba(255,140,50,0.65);
+}
+.eye-lid-top, .eye-lid-bot {
+  position: absolute; left: 0; width: 100%; height: 40%;
+  background: #080818;
+}
+.eye-lid-top { top: 0; }
+.eye-lid-bot { bottom: 0; }
+
+/* ============================================
+ * s6 霸榜双卡（AI-For-Beginners + kaneo 并列提增量）
+ * ============================================ */
+.champ-wrap {
+  position: absolute; inset: 180px 90px 220px 90px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+}
+.champ-title {
+  font-size: 76px; font-weight: 900; line-height: 1.1;
+  text-align: center;
+  background-image: linear-gradient(135deg, #FBBF24, #00D4FF);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 4px 14px rgba(40,60,90,0.40);
+}
+.champ-cards {
+  display: flex; gap: 28px; width: 100%;
+}
+.champ-card {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 18px; padding: 30px 18px;
+  border-radius: 22px;
+  background: rgba(13,9,18,0.62);
+  border: 1.5px solid rgba(255,255,255,0.16);
+}
+.champ-card.left { border-top: 4px solid #FBBF24; }
+.champ-card.right { border-top: 4px solid #00D4FF; }
+.champ-avatar-wrap {
+  position: relative; width: 120px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+}
+.champ-avatar-ring {
+  position: absolute; inset: -10px; border-radius: 50%;
+  background: conic-gradient(from 0deg, #FBBF24, #00D4FF, #FBBF24);
+  filter: blur(12px); opacity: 0.5;
+}
+.champ-avatar {
+  position: relative; z-index: 1;
+  width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+  border: 2.5px solid rgba(255,255,255,0.82);
+}
+.champ-name {
+  font-family: var(--font-data);
+  text-align: center; line-height: 1.12;
+  word-break: break-word;
+}
+.champ-owner { display: block; font-size: 32px; font-weight: 500; color: rgba(255,255,255,0.48); }
+.champ-repo { display: block; font-size: 38px; font-weight: 800; color: #f5f5f5; margin-top: 2px; }
+.champ-delta {
+  font-family: var(--font-data);
+  font-size: 60px; font-weight: 900; line-height: 1;
+}
+.champ-card.left .champ-delta {
+  background-image: linear-gradient(135deg, #FBBF24, #F59E0B);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 3px 12px rgba(140,90,10,0.40);
+}
+.champ-card.right .champ-delta { color: #00D4FF; text-shadow: 0 3px 12px rgba(0,80,100,0.40); }
+.champ-desc {
+  font-size: 38px; font-weight: 500; line-height: 1.3;
+  color: rgba(255,255,255,0.72); text-align: center;
+}
+.champ-tag {
+  font-size: 32px; font-weight: 700; padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.20);
+}
+.champ-card.left .champ-tag { color: #FBBF24; border-color: rgba(251,191,36,0.45); }
+.champ-card.right .champ-tag { color: #00D4FF; border-color: rgba(0,212,255,0.45); }
+.champ-foot {
+  font-size: 38px; font-weight: 600; line-height: 1.4;
+  color: rgba(255,255,255,0.70); text-align: center;
+}
+
+/* ============================================
+ * s7 cta 互动收束（暖橙呼应 hook）
+ * ============================================ */
+.cta-title {
+  font-size: 96px; font-weight: 900; line-height: 1.12;
+  text-align: center;
+  background-image: linear-gradient(135deg, #FF8C32, #FDBA74);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 5px 16px rgba(120,60,20,0.36);
+  margin-bottom: 30px;
+}
+.cta-choices {
+  display: flex; flex-direction: column; gap: 18px; align-items: center;
+}
+.cta-choice {
+  font-size: 42px; font-weight: 700; line-height: 1.3;
+  padding: 14px 36px; border-radius: 16px;
+  background: rgba(13,9,18,0.72);
+  border: 1.5px solid rgba(255,255,255,0.20);
+  color: #F1F5F9; text-align: center;
+}
+.cta-choice .accent { color: #FF8C32; }
+.cta-follow {
+  margin-top: 40px;
+  font-size: 40px; font-weight: 700;
+  color: rgba(255,255,255,0.78); text-align: center;
+  letter-spacing: 0.04em;
+}
+.cta-follow .hi { color: #FF8C32; }

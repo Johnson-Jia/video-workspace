@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Inter', sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    position: relative;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(48,54,61,.22) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48,54,61,.22) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at 72% 28%, #000 35%, transparent 78%);
+            mask-image: radial-gradient(ellipse at 72% 28%, #000 35%, transparent 78%);
+  }
+  .glow1 { position: absolute; width: 920px; height: 920px; border-radius: 50%;
+    right: -220px; top: -260px;
+    background: radial-gradient(circle, rgba(0,229,160,.18), transparent 60%); filter: blur(18px); }
+  .glow2 { position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    left: -160px; bottom: -220px;
+    background: radial-gradient(circle, rgba(240,136,62,.15), transparent 60%); filter: blur(18px); }
+  .wrap { position: relative; z-index: 2; padding: 72px 110px; height: 100%;
+    display: flex; flex-direction: column; }
+  .badge { display: inline-flex; align-items: center; gap: 14px; font-size: 25px; font-weight: 600;
+    color: #00e5a0; border: 1.5px solid rgba(0,229,160,.4); padding: 11px 26px; border-radius: 40px;
+    width: fit-content; background: rgba(0,229,160,.06);
+    font-family: 'JetBrains Mono', 'Consolas', monospace; letter-spacing: 1px; }
+  .week { margin-top: 26px; font-size: 28px; color: #8b949e;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; letter-spacing: 2px; }
+  .week b { color: #f0f6fc; font-weight: 700; }
+  h1 { margin-top: 14px; font-size: 72px; font-weight: 800; color: #f0f6fc;
+    line-height: 1.14; letter-spacing: -1px; }
+  h1 .accent { background: linear-gradient(135deg, #00e5a0, #34d399); -webkit-background-clip: text;
+    background-clip: text; -webkit-text-fill-color: transparent; }
+  .theme { margin-top: 18px; font-size: 28px; color: #f0883e; font-weight: 600; }
+  .cards { margin-top: 46px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .card { background: #161b22; border: 1.5px solid #30363d; border-radius: 20px;
+    padding: 30px 30px; position: relative; }
+  .card.top1 { border-color: #00e5a0;
+    box-shadow: 0 0 0 1px rgba(0,229,160,.25), 0 0 48px rgba(0,229,160,.12); }
+  .rank { font-size: 20px; color: #8b949e;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; letter-spacing: 2px; }
+  .card.top1 .rank { color: #00e5a0; }
+  .name { margin-top: 12px; font-size: 36px; font-weight: 700; color: #f0f6fc;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; word-break: break-all; line-height: 1.15; }
+  .gain { margin-top: 16px; font-size: 50px; font-weight: 800; color: #f0883e;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; line-height: 1; }
+  .gain small { font-size: 22px; color: #8b949e; font-weight: 500; margin-left: 6px; }
+  .stat { margin-top: auto; display: flex; border-top: 1.5px solid #21262d; padding-top: 30px; }
+  .stat .it { flex: 1; text-align: center; border-right: 1.5px solid #21262d; }
+  .stat .it:last-child { border-right: 0; }
+  .stat .num { font-size: 44px; font-weight: 800; color: #f0f6fc;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; line-height: 1; }
+  .stat .num .star { color: #f0883e; }
+  .stat .lab { margin-top: 10px; font-size: 22px; color: #8b949e; }
+  .foot { position: absolute; right: 110px; bottom: 34px; font-size: 20px; color: #6e7681;
+    font-family: 'JetBrains Mono', 'Consolas', monospace; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <div class="wrap">
+    <div class="badge">◆ GITHUB · 每周开源盘点</div>
+    <div class="week">2026 年 8 月 · <b>第 31 周</b> ｜ 7 月 27 日 - 8 月 2 日</div>
+    <h1>GitHub 热门开源<br>项目 <span class="accent">周榜盘点</span></h1>
+    <div class="theme">⚡ AI Agent · Skills 生态集体爆发</div>
+    <div class="cards">
+      <div class="card top1">
+        <div class="rank">TOP 1 · 本周涨星王</div>
+        <div class="name">bojieli/<br>ai-agent-book</div>
+        <div class="gain">+9,298<small>★/周</small></div>
+      </div>
+      <div class="card">
+        <div class="rank">TOP 2</div>
+        <div class="name">block/buzz</div>
+        <div class="gain">+9,003<small>★/周</small></div>
+      </div>
+      <div class="card">
+        <div class="rank">TOP 3</div>
+        <div class="name">diegosouzapw/<br>OmniRoute</div>
+        <div class="gain">+7,259<small>★/周</small></div>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="it"><div class="num"><span class="star">+75,239★</span></div><div class="lab">本周总涨星</div></div>
+      <div class="it"><div class="num">19</div><div class="lab">个上榜项目</div></div>
+      <div class="it"><div class="num">4</div><div class="lab">大技术方向</div></div>
+    </div>
+  </div>
+  <div class="foot">@ GitHub 星探</div>
+</body>
+</html>

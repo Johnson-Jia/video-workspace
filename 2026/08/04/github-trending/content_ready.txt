@@ -1,0 +1,47 @@
+# 2026-08-04 GitHub Trending 日榜 — 内容整理
+
+> 选取 6 个项目（5 个全新展开 + 1 个连续霸榜快速带过），题材跨"本地大模型推理 + AI语音 + 文档工具 + AI编程 + 项目管理"五方向。
+> A 档 3 个（约一半）：airllm/voicebox/kaneo；B 档 2 个：ds4/DeepSeek-Reasonix；C 档 1 个：pdf-inspector（≤1/3）。
+> 按旁白叙事顺序排列（airllm 为反直觉钩子核心，排首位展开）。
+
+## 1. lyogavin/airllm（反直觉钩子核心 · A 档 · 全新）
+lyogavin/airllm | Jupyter Notebook | 27.1K★ (+1085) | 单 4G 显存 GPU 跑 70B 大模型推理（原: AirLLM 70B inference with single 4GB GPU）
+avatar: assets/avatars/lyogavin.png
+受众: A 普通可用（Jupyter Notebook 形式，浏览器/Colab 即开，免本地高端显卡）
+用途: 低配显卡跑大模型
+反直觉角度: 常识里跑 700 亿参数大模型要几十 G 顶级显卡，它一张 4G 老卡就能跑——靠分层流式加载，把模型当"流水线"逐层算，显存只装一层。普通人不用买几万块的显卡。
+
+## 2. antirez/ds4（明星作者新作 · B 档 · 全新）
+antirez/ds4 | C | 20.3K★ (+384) | 大模型本地推理引擎，支持苹果 Metal、N卡 CUDA、A卡 ROCm 三大平台（原: DeepSeek 4 Flash and PRO local inference engine for Metal, CUDA and ROCm）
+avatar: assets/avatars/antirez.png
+受众: B 半可用（C 语言引擎，本地编译/命令行跑，门槛中等）
+用途: 本地跑大模型
+反直觉角度: 作者是 antirez——写过 Redis 的那位开源老兵，这次亲手用 C 给大模型写本地推理引擎，同时打通苹果/N卡/A卡三大阵营，不依赖 Python 生态那一套。
+
+## 3. jamiepine/voicebox（A 档 GUI · 全新）
+jamiepine/voicebox | TypeScript | 48.6K★ (+412) | 开源 AI 语音工作室，能克隆声音、语音听写、内容创作（原: The open-source AI voice studio. Clone, dictate, create.）
+avatar: assets/avatars/jamiepine.png
+受众: A 普通可用（桌面 GUI 应用，有界面，普通人可用）
+用途: 自己做语音克隆
+反直觉角度: 声音克隆这类能力通常锁在闭源商业软件里、按次收费，它做成开源工作室，克隆/听写/创作一条龙，数据留在本地。
+
+## 4. firecrawl/pdf-inspector（C 档 Rust 库 · 全新）
+firecrawl/pdf-inspector | Rust | 8.2K★ (+1699) | 快速的 Rust PDF 解析库，做 PDF 检查、分类、文本提取，能智能识别扫描件还是文本件做路由（原: Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.）
+avatar: assets/avatars/firecrawl.png
+受众: C 开发者向（Rust 库，无界面，需写代码集成，给做文档处理的开发者用）
+用途: 给开发者解析PDF
+反直觉角度: PDF 解析的痛点是"扫描件 vs 文本件"要用不同方案，它一步智能识别自动路由，Rust 写的运行特别快。今日涨星第二高（+1699）。
+
+## 5. esengine/DeepSeek-Reasonix（B 档 CLI · 全新）
+esengine/DeepSeek-Reasonix | Go | 29.9K★ (+883) | 终端里的大模型编程 agent，围绕前缀缓存稳定性设计，能常驻后台一直跑（原: DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.）
+avatar: assets/avatars/esengine.png
+受众: B 半可用（CLI 工具，终端跑，需少量配置）
+用途: 终端里AI编程
+反直觉角度: 多数 AI 编程助手问一句答一句、上下文容易丢，它围绕前缀缓存做稳定性，能常驻后台一直挂着不崩，适合长时间编程。
+
+## 6. usekaneo/kaneo（连续霸榜 · A 档 · 08-02/03 已介绍，今日快速带过增量）
+usekaneo/kaneo | TypeScript | 6.8K★ (+665) | 开源项目管理工具，只留你需要的、不臃肿（原: 🎯 All you need. Nothing you don't. Open source project management that works for you, not against you.）
+avatar: assets/avatars/usekaneo.png
+受众: A 普通可用（web app，self-hosted，Docker 可部署）
+用途: 自己部署项目管理
+处理: 连续霸榜，08-02/03 已详细介绍功能，今日仅一句带过增量（"还在涨"），不重复展开功能。

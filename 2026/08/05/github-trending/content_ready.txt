@@ -1,0 +1,65 @@
+# 2026-08-05 GitHub Trending 日榜 — 内容素材（描述保真，stage1 门禁载体）
+
+## 数据来源
+raw_trending.json（python_requests + gh_api，双源交叉验证，cache_warning=false，18 个项目）
+数据获取日期：2026-08-05
+
+## 选定项目（5 个，跨 5 方向：AI 方法论 / JS 运行时 / CSS 框架 / AI 安全 / PDF 工具；AI=2 非 AI=3，达 ai_project_cap≤2）
+
+## 1. obra/superpowers（反直觉钩子核心 · B 档 · 全新展开）
+obra/superpowers | Shell | 266431★ (+777) | 一套真正好用的智能体技能框架与软件开发方法论（原: An agentic skills framework &amp; software development methodology that works.）
+avatar: assets/avatars/obra.png
+受众: B 半可用（智能体技能框架，给用 AI 编程客户端的开发者配置使用，有些集成门槛）
+用途: 教AI怎么干活
+反直觉角度: 26 万星不是某个 AI 模型，而是教 AI 怎么干活的「方法论 + 技能包」——AI 时代最火的项目偏偏是给人立规矩的那一个。它把软件开发流程拆给多个 AI 子代理分工干（subagent-driven development），把「AI 编程怎么干才靠谱」沉淀成可复用技能。
+
+## 2. denoland/deno（非 AI 展开 · B 档 · 全新）
+denoland/deno | Rust | 108047★ (+27) | 一个面向 JavaScript 和 TypeScript 的现代运行时（原: A modern runtime for JavaScript and TypeScript.）
+avatar: assets/avatars/denoland.png
+受众: B 半可用（运行时，前端开发者命令行即用，门槛中等）
+用途: Node之后的下一代运行时
+反直觉角度: Node 统治了十几年 JS 运行时，deno 默认带安全沙箱、原生支持 TS 不用配置，由 Node 原作者另起炉灶做「更安全的下一代」——同一个作者造了两代基建。
+
+## 3. tailwindlabs/tailwindcss（非 AI 展开 · C 档 · 全新）
+tailwindlabs/tailwindcss | TypeScript | 96445★ (+30) | 一个以实用类优先的 CSS 框架，用于快速开发用户界面（原: A utility-first CSS framework for rapid UI development.）
+avatar: assets/avatars/tailwindlabs.png
+受众: C 开发者向（CSS 框架，需写代码集成，给做前端/界面的开发者用）
+用途: 给开发者快速搭界面
+反直觉角度: 写 CSS 传统要起类名、分文件，它反过来把样式拆成无数个原子小类直接写在标签上——看似更碎，却让 9.6 万星的前端开发者用它搭界面更快，成了事实标准之一。
+
+## 4. uber/ADR（企业 AI 安全 · C 档 · 全新展开 · climax）
+uber/ADR | Python | 656★ (+140) | 通过可观测性、安全基准测试和威胁检测保护企业 AI 智能体，已在 Uber 部署（原: ADR secures enterprise AI agents through observability, security benchmarking, and threat detection. Deployed at Uber.）
+avatar: assets/avatars/uber.png
+受众: C 开发者向（企业 AI 安全平台，给做 AI 中台/安全的工程师团队部署）
+用途: 盯住AI别乱来
+反直觉角度: AI agent 越聪明越要防它乱来——它可能被提示词注入骗、被诱导越权。Uber 把这套「给 AI 当监工」的可观测 + 威胁检测用在了自家生产环境，AI 越火它越刚需。
+
+## 5. firecrawl/pdf-inspector（今日 top1 涨星 · C 档 · 快速带过增量 · 近 2 天选过爆款例外）
+firecrawl/pdf-inspector | Rust | 9908★ (+2524) | 快速的 Rust PDF 解析库，做 PDF 检查、分类、文本提取，能智能识别扫描件还是文本件做路由（原: Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.）
+avatar: assets/avatars/firecrawl.png
+受众: C 开发者向（Rust 库，无界面，需写代码集成，给做文档处理的开发者用）
+用途: 给开发者解析PDF
+反直觉角度: PDF 解析的痛点是「扫描件 vs 文本件」要用不同方案，它一步智能识别自动路由，Rust 写的运行特别快。今日单日涨 2524 星登顶，连续两天上榜。
+
+## 排除项目（泛化表述，避免误触描述保真门禁）
+- 一个涉逆向工程/授权渗透测试的安全技能路由项目（raw 涨幅前 2）：渗透测试主题平台敏感，零容忍剔除
+- 一个 21 课的生成式 AI 入门教程仓库（微软官方）：长期霸榜教程类，新鲜度低
+- 近 2 天同频道 daily 已选的若干项目（本地大模型推理引擎、AI 语音工作室、终端 AI 编程 agent、看板工具、团队 AI 记忆中枢、全网数据抓取 agent、编程重造教程等）：近 2 天重复 HARD 拦截，本期全部避开
+- 一个 push 已逾月未更新的视频剪辑 agent 项目：inactive
+- 若干涨幅个位数的知名前端/测试/日志/打包基建（非今日热点，新鲜度低）
+
+## 受众档位分布
+A 普通可用：0 个（今日 raw 客观无 GUI 类 A 档项目，以开发者基建/框架为主）
+B 半可用：2 个（superpowers / deno）
+C 开发者向：3 个（tailwindcss / uber-ADR / pdf-inspector）
+C 档 3/5 = 60%，超 1/3 引导值——系今日 trending 客观构成（开发者基建为主），文案对 C 档用「给做 XX 的开发者」定调，不伪装普通人能用
+
+## 反直觉角度汇总（供 hook / 旁白 / 发布文案）
+1. superpowers（主推钩子）：26 万星不是 AI 模型，是教 AI 干活的方法论——AI 越火，「给 AI 立规矩」越火
+2. deno：Node 原作者另起炉灶造的下一代 JS 运行时，默认安全沙箱
+3. tailwindcss：把 CSS 拆成原子小类反而搭界面更快
+4. uber/ADR：AI agent 越聪明越要盯住它别乱来，Uber 生产环境当监工
+5. pdf-inspector：一眼分清 PDF 是扫描的还是文本的，Rust 写运行快，今日登顶涨星
+
+## 真实性核验（authenticity_verification）
+本期选定 5 项目（obra/superpowers、denoland/deno、tailwindlabs/tailwindcss、uber/ADR、firecrawl/pdf-inspector）全部 active=True，star/fork 比均处正常区间（superpowers 11:1、deno 17:1、tailwindcss 17:1、uber/ADR 9.6:1、pdf-inspector 15:1），均为知名组织或高星项目（superpowers 266K★、deno 108K★、tailwindcss 96K★、Uber 官方、firecrawl 9.9K★ 今日 +2524），近期 push 活跃（除 pdf-inspector 外均在近 2 日内推送），贡献者基础分散，无刷榜/空壳特征。已剔除：1 个涉逆向/渗透测试的敏感项目（平台合规零容忍）、1 个 push 逾月未更新的视频剪辑 agent（inactive）。真实性结论：5 项目均通过，0 个 HARD 触发，0 个需人工确认。

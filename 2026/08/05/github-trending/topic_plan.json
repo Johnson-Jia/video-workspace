@@ -1,0 +1,33 @@
+{
+  "date": "2026-08-05",
+  "album": "github-trending",
+  "topic_type": "工具/效率（AI 方法论 + 非 AI 多元基建）",
+  "topic_pattern": "topic-tool",
+  "angle": "反直觉钩子方向：26 万星的 superpowers 不是 AI 模型，而是教 AI 干活的方法论框架——AI 时代最火的项目偏偏是「给 AI 立规矩」的那一个；配 Rust 写的 PDF 智能分类库（一眼分清扫描件还是文本件）做第二反差点。daily 回归多元，AI 深度交 ai-wind 专项。",
+  "novelty_strategy": "本期差异化三层：① hook 避纯数字堆叠（P-hook-number_anchor declining）——不裸报「N 个项目杀入榜单」，改用 superpowers「方法论 that works」认知反差 + 26 万星单数字锚定；② 题材避纯 AI（P-topic-ai declining，且 ai-wind 专项同日承接 AI 深度），daily 回归多元——2 AI + 3 非 AI 跨 5 方向（AI 方法论 / PDF 工具 / JS 运行时 / AI 安全 / CSS 框架）；③ 叙事模板用 contrast-arc，避开近 5 期 hook 句式（近期多「4G 显存跑 700 亿」「几十块芯片做安全研究」等数字+硬件钩子，本期换「方法论比模型火」的认知反差）。",
+  "target_freshness": {
+    "hook_sim_max": 0.6,
+    "project_jaccard_max": 0.5,
+    "template_sim_max": 0.7
+  },
+  "project_type_mix": "5 个项目跨 5 方向：obra/superpowers(AI 方法论·Shell·B 档) + firecrawl/pdf-inspector(PDF 工具·Rust·C 档) + denoland/deno(JS/TS 运行时·Rust·B 档) + uber/ADR(AI 安全·Python·C 档) + tailwindlabs/tailwindcss(CSS 框架·TypeScript·C 档)。AI=2（superpowers+uber-ADR，达 ai_project_cap≤2），非 AI=3（pdf-inspector/deno/tailwindcss）。",
+  "avoid_recent": [
+    "lyogavin/airllm（08-04 daily 展开）",
+    "antirez/ds4（08-04 daily 展开）",
+    "jamiepine/voicebox（08-04 daily 展开）",
+    "esengine/DeepSeek-Reasonix（08-04 daily 展开）",
+    "usekaneo/kaneo（08-04 daily 展开）",
+    "Panniantong/Agent-Reach（08-03 daily 展开）",
+    "TencentCloud/TencentDB-Agent-Memory（08-03 daily 展开）",
+    "codecrafters-io/build-your-own-x（08-03 daily 展开）",
+    "firecrawl/pdf-inspector（08-04 daily 展开过——本期仅因今日 stars_today +2524 进 raw top1 例外一句带过增量，不展开）"
+  ],
+  "ai_project_cap_note": "2 AI + 3 非 AI。AI 判定（ai_trending.py 同款 topics/description）：superpowers(topics 含 ai)/uber-ADR(topics 含 ai-agents，description 含 AI agents) = 2 AI；pdf-inspector(ocr-routing 不等于 ocr，不命中)/deno/tailwindcss = 非 AI。",
+  "selected_projects": [
+    {"full_name": "obra/superpowers", "role": "反直觉钩子核心·主推展开", "audience": "B"},
+    {"full_name": "denoland/deno", "role": "非 AI 展开·JS/TS 运行时", "audience": "B"},
+    {"full_name": "tailwindlabs/tailwindcss", "role": "非 AI 展开·CSS 框架", "audience": "C"},
+    {"full_name": "uber/ADR", "role": "climax·企业 AI 安全", "audience": "C"},
+    {"full_name": "firecrawl/pdf-inspector", "role": "快速带过·近 2 天选过 top1 爆款例外", "audience": "C"}
+  ]
+}

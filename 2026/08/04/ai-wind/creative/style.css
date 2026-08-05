@@ -1,0 +1,176 @@
+:root {
+  /* AI 电紫赛博主题（design.md color_direction 优先）*/
+  --bg-deep: #0a0a14;
+  --bg-mid: #1a0a2e;
+  --accent-warm: #FF6B35;        /* 暖橙点缀（hook/CTA 强对比）*/
+  --accent-cool: #00D4FF;        /* 霓虹青辅色 */
+  --accent-purple: #A855F7;      /* 电紫主色 */
+  --accent-purple-light: #C084FC;
+  --accent-purple-soft: #E9D5FF;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.4);
+  --font-title: 'JetBrains Mono','Noto Sans SC','PingFang SC',monospace;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 800;
+}
+
+/* ============================================
+ * 渐变文字（电紫/青/暖，禁白端点；background-image 非 background 简写）
+ * 渐变文字用电紫/青同色系光晕（drop-shadow），禁黑色 text-shadow
+ * ============================================ */
+.grad-purple{
+  background-image:linear-gradient(135deg,#A855F7 0%,#C084FC 50%,#E9D5FF 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+.grad-cyan{
+  background-image:linear-gradient(135deg,#00D4FF 0%,#60A5FA 55%,#93C5FD 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+.grad-cyber{
+  background-image:linear-gradient(120deg,#A855F7 0%,#C084FC 40%,#00D4FF 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+.grad-warm{
+  background-image:linear-gradient(135deg,#FF6B35 0%,#FF9A5A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+/* 纯色文字轻微可读阴影（非渐变文字可用）*/
+.txt-shadow-soft{text-shadow:0 2px 8px rgba(10,10,20,0.55);}
+
+/* ============================================
+ * ProjectFullCard（s2-s6 单项目卡）
+ * 单层 padding 铁律：组件不带 padding，由 .phase(180px 90px 220px 90px) 提供
+ * 纵向分带 space-between 填满 1920（顶/中/底三带）
+ * ============================================ */
+.project-full-card{
+  position:relative;width:100%;flex:1 1 auto;min-height:0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.pfc-glow{display:none;}
+.pfc-glow-purple{width:540px;height:540px;opacity:0.22;background:var(--accent-purple);top:160px;left:-140px;}
+.pfc-glow-cyan{width:460px;height:460px;opacity:0.18;background:var(--accent-cool);bottom:280px;right:-120px;}
+.pfc-glow-warm{width:480px;height:480px;opacity:0.16;background:var(--accent-warm);top:200px;right:-120px;}
+.pfc-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.05) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.pfc-top{position:relative;z-index:2;display:flex;flex-direction:column;gap:22px;width:100%;padding-top:36px;}
+.pfc-header-row{display:flex;align-items:baseline;gap:32px;}
+.pfc-rank{
+  font-size:96px;font-weight:900;line-height:0.9;color:var(--accent-purple);
+  font-family:var(--font-data);filter:drop-shadow(0 0 22px rgba(168,85,247,0.5));
+}
+.pfc-category{font-size:38px;font-weight:600;letter-spacing:0.08em;color:var(--accent-cool);}
+.pfc-use{
+  font-size:50px;font-weight:800;line-height:1.1;align-self:flex-start;letter-spacing:0.02em;
+  padding:8px 24px;border-radius:12px;color:var(--accent-purple-light);
+  background:rgba(26,10,46,0.6);border:1.5px solid rgba(168,85,247,0.4);
+}
+.pfc-name{
+  width:100%;text-align:center;font-family:var(--font-data);
+  line-height:1.08;letter-spacing:-0.01em;word-break:break-word;
+}
+.pfc-owner{font-size:32px;font-weight:500;color:rgba(255,255,255,0.45);letter-spacing:0.04em;}
+.pfc-repo{font-size:60px;font-weight:800;color:#f5f5f5;}
+.pfc-mid{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:34px;width:100%;}
+.pfc-avatar-wrap{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center;}
+.pfc-avatar-ring{display:none;}
+.pfc-avatar{
+  position:relative;z-index:1;width:220px;height:220px;border-radius:50%;object-fit:cover;
+  border:3px solid rgba(255,255,255,0.85);box-shadow:0 0 50px rgba(0,0,0,0.5);
+}
+.pfc-desc{font-size:40px;font-weight:600;line-height:1.35;color:#f5f5f5;text-align:center;max-width:820px;}
+.pfc-data-bar{width:100%;max-width:820px;display:flex;flex-direction:column;gap:16px;}
+.pfc-bar-head{display:flex;justify-content:space-between;align-items:baseline;}
+.pfc-bar-label{font-size:32px;font-weight:500;color:rgba(255,255,255,0.6);}
+.pfc-bar-val{font-size:40px;font-weight:800;color:var(--accent-cool);font-family:var(--font-data);}
+.pfc-bar-track{width:100%;height:16px;border-radius:999px;background:rgba(255,255,255,0.1);overflow:hidden;}
+.pfc-bar-fill{height:100%;border-radius:999px;background-image:linear-gradient(90deg,var(--accent-cool),var(--accent-purple));}
+.pfc-topics{display:flex;flex-wrap:wrap;gap:14px;}
+.pfc-topic{
+  font-size:32px;font-weight:600;padding:8px 22px;border-radius:999px;color:var(--accent-cool);
+  background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);
+}
+.pfc-bottom{position:relative;z-index:2;display:flex;flex-direction:column;gap:26px;width:100%;padding-bottom:36px;}
+.pfc-selling{display:flex;flex-wrap:wrap;gap:16px;}
+.pfc-sell-item{
+  font-size:32px;font-weight:700;padding:10px 26px;border-radius:14px;color:#fff;
+  background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.35);
+}
+.pfc-commentary{
+  font-size:36px;font-weight:500;line-height:1.4;color:rgba(255,255,255,0.72);
+  border-left:4px solid var(--accent-purple);padding-left:24px;
+}
+
+/* ============================================
+ * s1 hook — AI 不健忘 / 团队共用一个脑（共享大脑网络视觉）
+ * 中央大脑核心 + 5 个团队 AI 节点 + 连接线 = 多 AI 共用一个脑
+ * ============================================ */
+.hook-wrap{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:30px;}
+.hook-badge{
+  font-size:32px;font-weight:700;letter-spacing:0.18em;padding:10px 28px;border-radius:999px;
+  color:var(--accent-purple-light);background:rgba(26,10,46,0.55);
+  border:1.5px solid rgba(168,85,247,0.5);font-family:var(--font-data);
+}
+.brain-network{
+  position:relative;width:680px;height:520px;display:flex;align-items:center;justify-content:center;
+}
+.brain-links{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.brain-links line{stroke:rgba(0,212,255,0.45);stroke-width:2;}
+.brain-links line.warm{stroke:rgba(168,85,247,0.5);}
+.brain-core{
+  position:relative;z-index:2;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#E9D5FF 0%,#C084FC 28%,#A855F7 62%,#7E22CE 100%);
+  box-shadow:0 0 60px rgba(168,85,247,0.65),0 0 120px rgba(168,85,247,0.35),inset 0 0 30px rgba(233,213,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-size:54px;font-weight:900;color:#fff;
+  text-shadow:0 2px 12px rgba(126,34,206,0.8);
+}
+.brain-node{
+  position:absolute;z-index:2;width:74px;height:74px;border-radius:50%;
+  background:#60A5FA;
+  box-shadow:0 0 22px rgba(0,212,255,0.65),inset 0 0 12px rgba(255,255,255,0.25);
+  border:2px solid rgba(147,197,253,0.7);
+}
+.brain-node.purple{
+  background:#C084FC;
+  box-shadow:0 0 22px rgba(168,85,247,0.65),inset 0 0 12px rgba(255,255,255,0.25);
+  border:2px solid rgba(192,132,252,0.7);
+}
+.hook-title{
+  font-size:104px;font-weight:900;line-height:1.0;text-align:center;color:#f5f5f5;
+  font-family:var(--font-title);letter-spacing:0.02em;
+}
+.hook-title .em{filter:drop-shadow(0 0 24px rgba(168,85,247,0.5));}
+.hook-sub{font-size:42px;font-weight:600;color:var(--text2);text-align:center;letter-spacing:0.06em;font-family:var(--font-data);}
+
+/* ============================================
+ * s7 CTA — 中性二选一互动 + 关注（自己跑的 AI vs 开口聊的 AI）
+ * ============================================ */
+.cta-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:44px;width:100%;}
+.cta-versus{display:flex;align-items:center;justify-content:center;gap:26px;width:100%;}
+.cta-side{
+  display:flex;flex-direction:column;align-items:center;gap:14px;flex:1;
+  padding:30px 18px;border-radius:22px;
+}
+.cta-side-local{background:rgba(168,85,247,0.15);border:2px solid rgba(168,85,247,0.5);}
+.cta-side-voice{background:rgba(0,212,255,0.12);border:2px solid rgba(0,212,255,0.5);}
+.cta-icon{font-size:90px;line-height:1;font-family:var(--font-data);font-weight:900;}
+.cta-side-label{font-size:38px;font-weight:800;font-family:var(--font-title);text-align:center;}
+.cta-vs{font-size:60px;font-weight:900;color:var(--accent-warm);font-family:var(--font-data);
+  filter:drop-shadow(0 0 16px rgba(255,107,53,0.5));}
+.cta-question{font-size:58px;font-weight:900;text-align:center;color:#f5f5f5;font-family:var(--font-title);line-height:1.15;}
+.cta-question .em{color:var(--accent-purple-light);}
+.cta-follow{
+  font-size:42px;font-weight:800;padding:16px 40px;border-radius:999px;
+  color:#0a0a14;background-image:linear-gradient(135deg,var(--accent-purple),var(--accent-cool));
+  font-family:var(--font-title);letter-spacing:0.08em;
+}
+.cta-tags{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.cta-tag{
+  font-size:32px;font-weight:600;padding:8px 20px;border-radius:999px;
+  color:var(--accent-cool);background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);
+}

@@ -1,0 +1,479 @@
+:root {
+  --bg-deep: #07071a;
+  --accent-warm: #f59e0b;
+  --accent-cool: #22d3ee;
+  --accent-purple: #c084fc;
+  --accent-teal: #2dd4bf;
+  --accent-green: #4ade80;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.40);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 自定义组件 CSS（hook / ProjectFullCard / highlight / mini-card / cta）
+ * padding 由 .phase 统一提供（单层原则），组件不再加 padding
+ * ============================================ */
+
+/* ---------- 渐变文字（铁律：background-image 非 background 简写，禁白端点，同色系 shadow） ---------- */
+.grad-gold {
+  background-image: linear-gradient(135deg, #ffd54a 0%, #f59e0b 55%, #c2410c 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(245,158,11,0.32);
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #7af5e0 0%, #22d3ee 50%, #0e7490 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(34,211,238,0.32);
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #e0c4ff 0%, #c084fc 50%, #7c3aed 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(192,132,252,0.32);
+}
+.grad-teal {
+  background-image: linear-gradient(135deg, #a7f3d0 0%, #2dd4bf 50%, #0d9488 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(45,212,191,0.32);
+}
+
+/* ---------- 通用文字（纯色极淡 drop，design shadow_note） ---------- */
+.t-title { font-family: var(--font-title); font-weight: var(--title-weight); color: var(--text); }
+.t-body  { font-family: var(--font-body); color: var(--text); }
+.t-data  { font-family: var(--font-data); font-weight: 700; }
+.t-mute  { color: var(--text2); }
+
+/* ============================================================
+ * s1 hook · hero 反直觉钩子（技术书 / 上千页 / 不用读 / 压成AI技能）
+ * ============================================================ */
+.hook-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+.hook-eyebrow {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--accent-cool);
+  letter-spacing: 10px;
+  padding: 12px 34px;
+  border: 2px solid rgba(34,211,238,0.50);
+  border-radius: 999px;
+  background: rgba(34,211,238,0.08);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.hook-num {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 210px;
+  line-height: 0.90;
+  letter-spacing: -4px;
+}
+.hook-pivot {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 104px;
+  line-height: 1.0;
+  letter-spacing: 6px;
+  color: var(--text);
+  position: relative;
+  text-shadow: 0 4px 14px rgba(0,0,0,0.45);
+}
+.hook-pivot::after {
+  content: "";
+  position: absolute;
+  left: 6%; right: 6%; bottom: 18%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #ef4444 20%, #ef4444 80%, transparent);
+  border-radius: 3px;
+  opacity: 0.85;
+}
+.hook-result {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 78px;
+  line-height: 1.1;
+  letter-spacing: 3px;
+  margin-top: 6px;
+}
+
+/* ============================================================
+ * ProjectFullCard · 纵向三带 space-between 填满安全区
+ * 数据源：content_ready.txt（avatar/用途/卖点）+ raw_trending（星数）
+ * ============================================================ */
+.pfc {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.pfc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.pfc-rank {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 38px;
+  color: var(--text2);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.pfc-rank-num { font-size: 64px; color: var(--accent-warm); margin-right: 10px; }
+.pfc-cat {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 8px 24px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+.pfc-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+.pfc-avatar-wrap {
+  width: 172px;
+  height: 172px;
+  border-radius: 50%;
+  padding: 6px;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  box-shadow: 0 0 50px rgba(245,158,11,0.30), 0 0 90px rgba(34,211,238,0.18);
+  flex-shrink: 0;
+}
+.pfc-avatar-wrap.cool-ring { background: conic-gradient(from 0deg, var(--accent-cool), var(--accent-purple), var(--accent-cool)); box-shadow: 0 0 50px rgba(34,211,238,0.30), 0 0 90px rgba(192,132,252,0.18); }
+.pfc-avatar-wrap.teal-ring { background: conic-gradient(from 0deg, var(--accent-teal), var(--accent-warm), var(--accent-teal)); box-shadow: 0 0 50px rgba(45,212,191,0.30), 0 0 90px rgba(245,158,11,0.18); }
+.pfc-avatar-wrap img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #0a0e1a;
+}
+.pfc-name {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 62px;
+  line-height: 1.1;
+  color: var(--text);
+  width: 100%;
+  text-align: center;
+  word-break: break-word;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.40);
+}
+.pfc-use {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.pfc-desc {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+.pfc-bot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+.pfc-stars {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+.pfc-stars-num {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 1;
+  color: var(--accent-warm);
+  text-shadow: 0 3px 12px rgba(245,158,11,0.32);
+}
+.pfc-stars-num.cool { color: var(--accent-cool); text-shadow: 0 3px 12px rgba(34,211,238,0.32); }
+.pfc-stars-num.teal { color: var(--accent-teal); text-shadow: 0 3px 12px rgba(45,212,191,0.32); }
+.pfc-stars-delta {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--accent-green);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.pfc-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 18px;
+  width: 100%;
+}
+.pfc-point {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 10px 26px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.16);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+/* ============================================================
+ * s2 phase-2 · highlight 结论（读 → 用）
+ * ============================================================ */
+.hl-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+.hl-eyebrow {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 6px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.hl-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+.hl-from {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 130px;
+  line-height: 1;
+  color: var(--text3);
+  text-decoration: line-through;
+  text-decoration-color: rgba(239,68,68,0.6);
+  text-decoration-thickness: 6px;
+  letter-spacing: 4px;
+}
+.hl-arrow {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 96px;
+  color: var(--accent-cool);
+  line-height: 1;
+  text-shadow: 0 3px 12px rgba(34,211,238,0.40);
+}
+.hl-to {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 150px;
+  line-height: 1;
+  letter-spacing: 4px;
+}
+.hl-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+/* ============================================================
+ * s3/s4 phase-2 · 紧凑项目卡（双项目第二屏，5s 快速可读）
+ * ============================================================ */
+.pmc {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
+.pmc-head {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  justify-content: center;
+}
+.pmc-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 5px;
+  background: conic-gradient(from 0deg, var(--accent-purple), var(--accent-cool), var(--accent-purple));
+  flex-shrink: 0;
+}
+.pmc-avatar.teal-ring { background: conic-gradient(from 0deg, var(--accent-teal), var(--accent-warm), var(--accent-teal)); }
+.pmc-avatar img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #0a0e1a;
+}
+.pmc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pmc-name {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.1;
+  color: var(--text);
+  word-break: break-word;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.40);
+}
+.pmc-use {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.pmc-stats {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+.pmc-stars {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--accent-purple);
+  text-shadow: 0 3px 12px rgba(192,132,252,0.32);
+}
+.pmc-stars.teal { color: var(--accent-teal); text-shadow: 0 3px 12px rgba(45,212,191,0.32); }
+.pmc-delta {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--accent-green);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.pmc-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 18px;
+  width: 100%;
+  max-width: 880px;
+}
+.pmc-point {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 10px 24px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.16);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+/* ============================================================
+ * s5 CTA · highlight 互动引导（先试哪个 + 关注）
+ * ============================================================ */
+.cta-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+.cta-eyebrow {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 4px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-main {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 100px;
+  line-height: 1.08;
+  letter-spacing: 3px;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  max-width: 880px;
+}
+.cta-pill {
+  font-family: var(--font-data);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: rgba(245,158,11,0.12);
+  border: 1.5px solid rgba(245,158,11,0.48);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-follow {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent-warm);
+  letter-spacing: 3px;
+  margin-top: 8px;
+  text-shadow: 0 3px 10px rgba(245,158,11,0.30);
+}

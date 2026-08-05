@@ -1,0 +1,430 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #ff8c32;
+  --accent-gold: #fbbf24;
+  --accent-cool: #4da8da;
+  --accent-blue: #60a5fa;
+  --accent-purple: #a855f7;
+  --accent-teal: #2dd4bf;
+  --accent-green: #4ade80;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.40);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 自定义组件 CSS（hook / ProjectFullCard / mini-card / CTA）
+ * padding 由 .phase 统一提供（单层原则），组件不再加 padding
+ * text-shadow 极淡 0.08 禁发光（design.md 约束）
+ * 渐变文字同色系禁白端点，background-image 非 background 简写
+ * ============================================ */
+
+/* ---------- 渐变文字（铁律：background-image 分写，禁白端点，同色系 shadow） ---------- */
+.grad-orange {
+  background-image: linear-gradient(135deg, #ff8c32 0%, #fb923c 50%, #fdba74 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(255,140,50,0.32);
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #4da8da 0%, #60a5fa 50%, #93c5fd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(77,168,218,0.32);
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, #fcd34d 0%, #fbbf24 50%, #f59e0b 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(251,191,36,0.32);
+}
+.grad-purple {
+  background-image: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(168,85,247,0.32);
+}
+.grad-teal {
+  background-image: linear-gradient(135deg, #5eead4 0%, #2dd4bf 50%, #0d9488 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 3px 12px rgba(45,212,191,0.32);
+}
+
+/* ---------- 通用文字（纯色极淡 drop） ---------- */
+.t-title { font-family: var(--font-title); font-weight: var(--title-weight); color: var(--text); }
+.t-body  { font-family: var(--font-body); color: var(--text); }
+.t-data  { font-family: var(--font-data); font-weight: 700; }
+.t-mute  { color: var(--text2); }
+
+/* ============================================================
+ * s1 hook · hero 反直觉钩子（语音助手 / 不用联网）
+ * 黄金 3 秒：字号最大、对比最高、首帧即冲击
+ * ============================================================ */
+.hook-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+}
+.hook-eyebrow {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--accent-cool);
+  letter-spacing: 10px;
+  padding: 12px 34px;
+  border: 2px solid rgba(77,168,218,0.50);
+  border-radius: 999px;
+  background: rgba(77,168,218,0.08);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.hook-main {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 168px;
+  line-height: 0.92;
+  letter-spacing: 4px;
+  position: relative;
+}
+.hook-main::after {
+  content: "";
+  position: absolute;
+  left: 8%; right: 8%; bottom: 14%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #ff8c32 20%, #ff8c32 80%, transparent);
+  border-radius: 3px;
+  opacity: 0.80;
+}
+.hook-sub {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 1.1;
+  letter-spacing: 3px;
+  color: var(--text);
+  text-shadow: 0 4px 14px rgba(0,0,0,0.45);
+}
+
+/* ============================================================
+ * ProjectFullCard · 纵向三带 space-between 填满 1920 安全区
+ * 数据源：content_ready.txt（avatar/用途）+ raw_trending（星数）
+ * ============================================================ */
+.pfc {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.pfc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.pfc-rank {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 38px;
+  color: var(--text2);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.pfc-rank-num { font-size: 64px; color: var(--accent-warm); margin-right: 10px; }
+.pfc-rank-num.cool { color: var(--accent-cool); }
+.pfc-rank-num.purple { color: var(--accent-purple); }
+.pfc-rank-num.teal { color: var(--accent-teal); }
+.pfc-cat {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 8px 24px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+.pfc-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+.pfc-avatar-wrap {
+  width: 172px;
+  height: 172px;
+  border-radius: 50%;
+  padding: 6px;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-gold), var(--accent-warm));
+  box-shadow: 0 0 50px rgba(255,140,50,0.30), 0 0 90px rgba(251,191,36,0.18);
+  flex-shrink: 0;
+}
+.pfc-avatar-wrap.cool-ring { background: conic-gradient(from 0deg, var(--accent-cool), var(--accent-blue), var(--accent-cool)); box-shadow: 0 0 50px rgba(77,168,218,0.30), 0 0 90px rgba(96,165,250,0.18); }
+.pfc-avatar-wrap.purple-ring { background: conic-gradient(from 0deg, var(--accent-purple), var(--accent-cool), var(--accent-purple)); box-shadow: 0 0 50px rgba(168,85,247,0.30), 0 0 90px rgba(77,168,218,0.18); }
+.pfc-avatar-wrap.teal-ring { background: conic-gradient(from 0deg, var(--accent-teal), var(--accent-cool), var(--accent-teal)); box-shadow: 0 0 50px rgba(45,212,191,0.30), 0 0 90px rgba(77,168,218,0.18); }
+.pfc-avatar-wrap img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #0a0e1a;
+}
+.pfc-name {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 1.1;
+  color: var(--text);
+  width: 100%;
+  text-align: center;
+  word-break: break-word;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.40);
+}
+.pfc-use {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.pfc-desc {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+.pfc-bot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+.pfc-stars {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+.pfc-stars-num {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 1;
+  color: var(--accent-gold);
+  text-shadow: 0 3px 12px rgba(251,191,36,0.32);
+}
+.pfc-stars-num.cool { color: var(--accent-cool); text-shadow: 0 3px 12px rgba(77,168,218,0.32); }
+.pfc-stars-num.purple { color: var(--accent-purple); text-shadow: 0 3px 12px rgba(168,85,247,0.32); }
+.pfc-stars-num.teal { color: var(--accent-teal); text-shadow: 0 3px 12px rgba(45,212,191,0.32); }
+.pfc-stars-delta {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--accent-green);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.pfc-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 18px;
+  width: 100%;
+}
+.pfc-point {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 10px 26px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.16);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+
+/* ============================================================
+ * s6 phase-1 · 双项目紧凑卡（tuicr + PowerToys 并列）
+ * ============================================================ */
+.dual-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+}
+.dual-head {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.dual-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.mini-card {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  padding: 22px 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.mini-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  padding: 5px;
+  background: conic-gradient(from 0deg, var(--accent-purple), var(--accent-cool), var(--accent-purple));
+  flex-shrink: 0;
+}
+.mini-avatar.gold-ring { background: conic-gradient(from 0deg, var(--accent-gold), var(--accent-warm), var(--accent-gold)); }
+.mini-avatar img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #0a0e1a;
+}
+.mini-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.mini-name {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 1.1;
+  color: var(--text);
+  word-break: break-word;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.40);
+}
+.mini-use {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.mini-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.mini-stars {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+}
+.mini-delta {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--accent-green);
+}
+.mini-lang {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text2);
+  padding: 6px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+/* ============================================================
+ * s6 phase-2 · CTA 互动引导（最想试哪个 + 关注）
+ * ============================================================ */
+.cta-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+.cta-eyebrow {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 4px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-main {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 1.1;
+  letter-spacing: 3px;
+}
+.cta-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  max-width: 880px;
+}
+.cta-pill {
+  font-family: var(--font-data);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: rgba(255,140,50,0.12);
+  border: 1.5px solid rgba(255,140,50,0.48);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.10);
+}
+.cta-follow {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--accent-warm);
+  letter-spacing: 3px;
+  margin-top: 8px;
+  text-shadow: 0 3px 10px rgba(255,140,50,0.30);
+}

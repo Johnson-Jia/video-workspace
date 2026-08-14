@@ -1,0 +1,76 @@
+# 8月12日 AI 风向标 · 5 个 AI 开源项目（AI 子方向：智能体工具+管理+技能）
+
+> 选题方向：智能体工程化落地——工具/管理/技能三件套。今日 AI 榜 13 个项目，过滤近2天 ai-wind 已选 4 个 + daily 已选 2 个后，7 个候选全在「智能体」子方向，反映今日 AI 开源主线：从"炫技"到"工程化干活"。
+> 子方向分布：Agent 工具 2（orca / DeepTutor）+ Agent 管理 1（paperclip）+ Agent 技能 2（agent-skills / anthropics-skills）—— 覆盖 Agent 全栈
+> 受众配比：A档3（orca 桌面+手机 / DeepTutor 网页版 / paperclip 桌面应用）/ B档1（agent-skills CLI 装）/ C档1（anthropics/skills 开发者库）
+> 真实性：5 项目全部通过 gh API 核验（owner 真实、星叉比 4-15 正常、watchers 充足、近期 pushed）
+
+数据来源：raw_trending.json（ai_trending + gh_api，2026-08-11 采集）+ gh api 实时核验。
+
+## 入选项目
+
+## 1. orca（GitHub: stablyai/orca）| TypeScript | 42.7K★ (+875 单日) | 受众: A 普通可用
+- 中文描述：智能体的 ADE（智能体开发环境），并行管一群 AI 帮你写代码，桌面/手机/VPS 都能跑（原: Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and VPS.）
+- avatar: assets/avatars/stablyai.png
+- 用途: 一群AI并行干活
+- 反直觉角度: 用 AI 写代码不用守在电脑前等——它让一群智能体并行干活，你出门用手机也能看进度
+- 类别标签: 智能体并行
+- 三词卖点: 并行干活·多端可用·自己的订阅
+- 感性评语: AI 编程的指挥中心
+- 核心指标: 42.7K ★ +875 单日
+- 受众说明: 桌面/手机/VPS 都能跑，用自己的订阅就行
+
+## 2. DeepTutor（GitHub: HKUDS/DeepTutor）| Python | 34.7K★ (+812 单日) | 受众: A 普通可用
+- 中文描述：终身个性化 AI 导师，陪你长期学习（原: DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/.）
+- avatar: assets/avatars/HKUDS.png
+- 用途: AI私人家教
+- 反直觉角度: AI 辅导不用每节课重新交代背景——它记得你学过的所有东西，像个真人家教越教越懂你
+- 类别标签: AI 导师
+- 三词卖点: 终身陪伴·个性化·记忆学习
+- 感性评语: 越长越懂你的 AI 老师
+- 核心指标: 34.7K ★ +812 单日
+- 受众说明: 网页版直接打开用
+
+## 3. paperclip（GitHub: paperclipai/paperclip）| TypeScript | 77.1K★ (+748 单日) | 受众: A 普通可用
+- 中文描述：管理工作中 AI 智能体的开源应用（原: The open-source app everyone uses to manage agents at work）
+- avatar: assets/avatars/paperclipai.png
+- 用途: 管AI团队一个面板
+- 反直觉角度: 用多个 AI 不用来回切窗口——一个面板统管所有智能体，看它们各自的进度和产出
+- 类别标签: 智能体管理
+- 三词卖点: 统一面板·进度可视·开源免费
+- 感性评语: AI 团队的控制塔
+- 核心指标: 77.1K ★ +748 单日
+- 受众说明: 开源桌面应用，下载即用
+
+## 4. agent-skills（GitHub: addyosmani/agent-skills）| JavaScript | 86.2K★ (+578 单日) | 受众: B 半可用
+- 中文描述：给 AI 编程智能体用的生产级工程技能集（原: Production-grade engineering skills for AI coding agents.）
+- avatar: assets/avatars/addyosmani.png
+- 用途: AI工作技能包
+- 反直觉角度: 让 AI 干活不用从零教——把工程师的实战经验打包成技能集，AI 拿来就用
+- 类别标签: 智能体技能
+- 三词卖点: 生产级·实战技能·即装即用
+- 感性评语: 谷歌工程师的 AI 秘籍
+- 核心指标: 86.2K ★ +578 单日
+- 受众说明: 命令行装到 AI 助手里就用
+
+## 5. skills（GitHub: anthropics/skills）| Python | 168.1K★ (+485 单日) | 受众: C 开发者向
+- 中文描述：智能体技能官方仓库（原: Public repository for Agent Skills）
+- avatar: assets/avatars/anthropics.png
+- 用途: AI官方技能库
+- 反直觉角度: 给 AI 加技能不用自己写——官方仓库里现成的技能包，168K 人收藏
+- 类别标签: 官方技能
+- 三词卖点: 官方出品·168K收藏·持续更新
+- 感性评语: 智能体的官方武器库
+- 核心指标: 168.1K ★ +485 单日（当日总星最高）
+- 受众说明: 给做智能体开发的人，集成到自己项目里
+
+## 本期叙事主线
+
+| 维度 | 5 项目共性 |
+|------|-----------|
+| 主题 | 智能体工程化三件套：用（orca/DeepTutor）→ 管（paperclip）→ 装技能（agent-skills/skills） |
+| 反直觉钩子 | AI 编程不用守电脑前，一群智能体并行干活 |
+| 受众覆盖 | 普通用户（orca/DeepTutor/paperclip）→ 开发者（agent-skills/skills） |
+| 数字锚点 | 168K 总星（skills 榜内最高）/ 86K（agent-skills）/ 77K（paperclip）/ 42K（orca）/ 34K（DeepTutor） |
+
+> 今日综合 daily 走"老工具长青树（manim/awesome-mac/PBL/nvm）"非 AI 多元，ai-wind 走"智能体工程化"AI 专项，两榜差异化定位清晰。

@@ -1,0 +1,65 @@
+# 8月14日 GitHub 热门项目（daily 综合榜 · 隐私自查 + 本地工具专题）
+
+> 选题方向：守住隐私——两个安全自查工具 + 两个本地不上传工具。今日 trending 17 项目中 AI 占 15 个（AI 深度交 ai-wind 专项），daily 按 AI≤2 上限 + 近2天禁选后，选 2 个合法开源安全工具（中性化讲防御/自查）+ 2 个不与昨日重复的本地 AI 工具。
+> AI 占比：2/4（FluidVoice + modly，均为本地不上传型；避开昨日 ai-wind 已讲的 macro/needle/unsloth/ragflow/semantica，无连续重复）
+> 受众配比：A 档 4（spiderfoot 自查网页 / holehe 命令行查邮箱 / FluidVoice Mac 应用 / modly 桌面应用，全普通人可用）
+> 真实性：4 项目全部通过 gh API 核验（owner 真实、星叉比 6-15 正常、watchers 充足，0 HARD）
+
+数据来源：raw_trending.json（python_requests + gh_api，2026-08-14 采集，带代理）+ gh api 实时核验。
+
+## 入选项目
+
+## 1. spiderfoot（GitHub: smicallef/spiderfoot）| Python | 20.7K★ (+278 单日) | 受众: A 普通可用
+- 中文描述：自动化 OSINT 开源情报工具，用于威胁情报和攻击面测绘（原: SpiderFoot automates OSINT for threat intelligence and mapping your attack surface.）
+- avatar: assets/avatars/smicallef.png
+- 用途: 自查信息暴露面
+- 反直觉角度: 不用等被攻击才发现泄露——输入自己的名字/域名/邮箱，它帮你把网上能查到的暴露面全扫一遍，提前堵漏洞
+- 类别标签: 攻击面自查
+- 三词卖点: 自动扫描·暴露面可视化·提前防御
+- 感性评语: 给自己做个安全体检
+- 核心指标: 20.7K ★ +278 单日
+- 受众说明: 网页界面打开就用，输入信息出报告
+
+## 2. holehe（GitHub: megadose/holehe）| Python | 12.4K★ (+166 单日) | 受众: B 半可用
+- 中文描述：检查邮箱在哪些网站注册过（通过忘记密码功能反查），支持 twitter、instagram 等（原: holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.）
+- avatar: assets/avatars/megadose.png
+- 用途: 自查邮箱注册痕迹
+- 反直觉角度: 忘了自己邮箱注册过哪些网站——一个命令查出来，1.2 万人用来做隐私自查
+- 类别标签: 邮箱痕迹自查
+- 三词卖点: 一键反查·注册痕迹·隐私自查
+- 感性评语: 翻出你忘了的注册记录
+- 核心指标: 12.4K ★ +166 单日（经典老工具，维护趋缓但功能稳定）
+- 受众说明: 命令行工具，输入邮箱查注册过的平台
+
+## 3. FluidVoice（GitHub: altic-dev/FluidVoice）| Swift | 9.9K★ (+76 单日) | 受众: A 普通可用
+- 中文描述：Mac 上最快的离线听写应用，设备端语音识别 + 自训练 AI 增强模型（原: Fastest and only macOS Dictation app with on-device STT and custom trained AI enhancement model. A local Wispr Flow alternative. ⭐ helps a ton :) Windows &amp; iOS waitlist open. Linux soon.）
+- avatar: assets/avatars/altic-dev.png
+- 用途: Mac离线语音打字
+- 反直觉角度: 语音打字不用把录音传到云端——Mac 本地直接转文字，说的内容不外传
+- 类别标签: 离线语音听写
+- 三词卖点: 本地识别·数据不外传·Mac最快
+- 感性评语: 开口就有字
+- 核心指标: 9.9K ★ +76 单日
+- 受众说明: Mac 用户装应用就用，说话变文字
+
+## 4. modly（GitHub: lightningpixel/modly）| TypeScript | 5.5K★ (+118 单日) | 受众: A 普通可用
+- 中文描述：桌面应用用本地 AI 把图片生成 3D 模型，完全跑在你自己的显卡上（原: Desktop app to generate 3D models from images using local AI — runs entirely on your GPU）
+- avatar: assets/avatars/lightningpixel.png
+- 用途: 图片变3D模型
+- 反直觉角度: 做 3D 模型不用上传照片到云端——丢张图进本地 AI，显卡直接算出 3D，照片不外传
+- 类别标签: 本地图生 3D
+- 三词卖点: 图片变3D·本地显卡跑·数据不外传
+- 感性评语: 照片立起来
+- 核心指标: 5.5K ★ +118 单日
+- 受众说明: 桌面应用打开就用，丢图片出 3D
+
+## 本期叙事主线
+
+| 维度 | 4 项目共性 |
+|------|-----------|
+| 主题 | 守住隐私——两个安全自查（spiderfoot 攻击面 / holehe 邮箱痕迹）+ 两个本地不上传（FluidVoice 语音 / modly 图生3D） |
+| 反直觉钩子 | 查查你的信息漏了多少（spiderfoot+holehe 隐私自查切入） |
+| 受众覆盖 | 关心隐私的普通用户（spiderfoot/holehe 自查）/ Mac 用户（FluidVoice）/ 做 3D（modly） |
+| 数字锚点 | 20.7K（spiderfoot）/ 12.4K（holehe）/ 9.9K（FluidVoice）/ 5.5K（modly） |
+
+> 本期 AI 仅 2 个（FluidVoice+modly，均为本地不上传型，与"隐私"主线呼应），避开昨日 ai-wind 已讲的 5 个 AI 项目，无连续重复。2 个安全工具中性化讲"自查/防御"（非攻击向），属合法开源安全科普。

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>GitHub Weekly Cover</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  :root{
+    --bg:#0d1117;
+    --bg-card:#161b22;
+    --border:#30363d;
+    --border-soft:#21262d;
+    --fg:#e6edf3;
+    --fg-mid:#c9d1d9;
+    --fg-dim:#8b949e;
+    --accent:#00e5a0;
+    --star:#f0883e;
+    --blue:#58a6ff;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden}
+  body{
+    font-family:'Inter','PingFang SC','Microsoft YaHei','Segoe UI',system-ui,sans-serif;
+    background:var(--bg);color:var(--fg);position:relative;
+  }
+
+  .grid-bg{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(48,54,61,.35) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(48,54,61,.35) 1px,transparent 1px);
+    background-size:60px 60px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 40%,transparent 100%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 40%,transparent 100%);
+  }
+  .glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+  .glow.green{width:760px;height:760px;background:#00e5a0;top:-260px;left:-180px;opacity:.20}
+  .glow.orange{width:680px;height:680px;background:#f0883e;bottom:-240px;right:-160px;opacity:.18}
+
+  .corner-dots{position:absolute;top:34px;right:100px;display:flex;gap:9px}
+  .corner-dots i{width:11px;height:11px;border-radius:50%;display:block}
+  .corner-dots i:nth-child(1){background:#f85149}
+  .corner-dots i:nth-child(2){background:#d29922}
+  .corner-dots i:nth-child(3){background:#2ea043}
+
+  .wrap{
+    position:relative;z-index:2;
+    width:100%;height:100%;
+    padding:58px 100px 50px;
+    display:flex;flex-direction:column;
+  }
+
+  .top-row{display:flex;align-items:center;justify-content:space-between;height:44px;flex:0 0 auto}
+  .badge{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono','Consolas',monospace;
+    font-size:22px;font-weight:700;letter-spacing:.18em;color:var(--accent);
+  }
+  .badge .slash{color:var(--fg-dim);font-weight:500}
+  .badge .sub{color:var(--fg-mid);font-weight:600}
+  .week-pill{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:11px 26px;border-radius:999px;
+    background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.45);
+    font-family:'JetBrains Mono','Consolas',monospace;
+    font-size:20px;font-weight:700;color:var(--accent);letter-spacing:.06em;
+  }
+  .week-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+
+  .title-block{margin-top:38px;flex:0 0 auto}
+  .kicker{font-size:28px;font-weight:600;color:var(--fg-dim);letter-spacing:.04em;margin-bottom:12px}
+  .kicker b{color:var(--star);font-weight:700}
+  h1{font-size:92px;line-height:1.08;font-weight:800;letter-spacing:-.01em;color:var(--fg);white-space:nowrap}
+  h1 .hl{
+    background:linear-gradient(100deg,var(--accent) 0%,#3fbf8f 45%,var(--blue) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{margin-top:20px;font-size:26px;color:var(--fg-mid);font-weight:500;max-width:1520px;line-height:1.42}
+  .lede .em{color:var(--star);font-weight:700}
+
+  .top3{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;flex:0 0 auto}
+  .card{
+    position:relative;
+    background:linear-gradient(160deg,var(--bg-card) 0%,#0f141b 100%);
+    border:1px solid var(--border);border-radius:22px;
+    padding:26px 32px 24px;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+  .card.c1::before{background:linear-gradient(var(--star),#d97706)}
+  .card.c2::before{background:linear-gradient(var(--accent),#2ea043)}
+  .card.c3::before{background:linear-gradient(var(--blue),#6e7ec8)}
+  .card .rank-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .card .rank{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--fg-dim);letter-spacing:.1em}
+  .card .trend{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;padding:5px 12px;border-radius:999px;
+  }
+  .card.c1 .trend{background:rgba(240,136,62,.12);color:var(--star)}
+  .card.c2 .trend{background:rgba(0,229,160,.12);color:var(--accent)}
+  .card.c3 .trend{background:rgba(88,166,255,.12);color:var(--blue)}
+  .card .name{
+    font-family:'JetBrains Mono','Consolas',monospace;
+    font-size:42px;font-weight:700;color:var(--fg);
+    letter-spacing:-.01em;margin-bottom:4px;
+    white-space:nowrap;overflow:hidden;
+  }
+  .card .owner{font-size:21px;color:var(--fg-dim);font-weight:500;margin-bottom:18px}
+  .card .stars{display:flex;align-items:baseline;gap:10px;font-family:'JetBrains Mono',monospace}
+  .card .stars .num{font-size:56px;font-weight:800;line-height:1}
+  .card.c1 .stars .num{color:var(--star)}
+  .card.c2 .stars .num{color:var(--accent)}
+  .card.c3 .stars .num{color:var(--blue)}
+  .card .stars .unit{font-size:24px;color:var(--fg-dim);font-weight:600}
+  .card .label{font-size:19px;color:var(--fg-dim);font-weight:500;margin-top:4px}
+
+  .stats{margin-top:30px;border-top:1px solid var(--border-soft);padding-top:22px;display:flex;align-items:center;flex:0 0 auto}
+  .stat{flex:1;display:flex;flex-direction:column;gap:5px;padding-right:32px}
+  .stat:not(:last-child){border-right:1px solid var(--border-soft);margin-right:32px}
+  .stat .v{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:800;color:var(--fg);line-height:1}
+  .stat .v .accent{color:var(--accent)}
+  .stat .v .star-c{color:var(--star)}
+  .stat .k{font-size:19px;color:var(--fg-dim);font-weight:600;letter-spacing:.04em}
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow green"></div>
+  <div class="glow orange"></div>
+  <div class="corner-dots"><i></i><i></i><i></i></div>
+
+  <div class="wrap">
+    <div class="top-row">
+      <div class="badge">
+        <span>GITHUB</span><span class="slash">/</span><span class="sub">TRENDING WEEKLY</span>
+      </div>
+      <div class="week-pill"><span class="dot"></span>WEEK 32 · 2026年8月</div>
+    </div>
+
+    <div class="title-block">
+      <div class="kicker">2026年8月第32周 · 开源项目周榜盘点</div>
+      <h1>GitHub 热门<span class="hl">开源项目</span>盘点</h1>
+      <div class="lede">AI Agent 基建<span class="em">持续霸榜</span>，安全研究工具与文档解析强势回归，<span class="em">14 个项目</span>本周累计涨星超 5.6 万。</div>
+    </div>
+
+    <div class="top3">
+      <div class="card c1">
+        <div class="rank-row"><span class="rank">TOP 1</span><span class="trend">▲ 涨星榜首</span></div>
+        <div class="name">reverse-skill</div>
+        <div class="owner">zhaoxuya520</div>
+        <div class="stars"><span class="num">+9,635</span><span class="unit">★ / 周</span></div>
+        <div class="label">授权安全研究 · 技能路由包</div>
+      </div>
+      <div class="card c2">
+        <div class="rank-row"><span class="rank">TOP 2</span><span class="trend">▲ 新面孔</span></div>
+        <div class="name">pdf-inspector</div>
+        <div class="owner">firecrawl</div>
+        <div class="stars"><span class="num">+8,846</span><span class="unit">★ / 周</span></div>
+        <div class="label">Rust 高速 PDF 分类提取</div>
+      </div>
+      <div class="card c3">
+        <div class="rank-row"><span class="rank">TOP 3</span><span class="trend">▲ 新面孔</span></div>
+        <div class="name">TencentDB-Agent-Memory</div>
+        <div class="owner">TencentCloud</div>
+        <div class="stars"><span class="num">+8,046</span><span class="unit">★ / 周</span></div>
+        <div class="label">团队级 AI Agent 记忆中枢</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="v"><span class="star-c">56,542</span> ★</div>
+        <div class="k">本周累计涨星（14 项目）</div>
+      </div>
+      <div class="stat">
+        <div class="v"><span class="accent">14</span> 个</div>
+        <div class="k">入选项目</div>
+      </div>
+      <div class="stat">
+        <div class="v"><span class="accent">5</span> 大类</div>
+        <div class="k">覆盖分类方向</div>
+      </div>
+      <div class="stat">
+        <div class="v">2026 / W32</div>
+        <div class="k">数据时点 · 08-09</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

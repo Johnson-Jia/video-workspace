@@ -1,0 +1,21 @@
+{
+  "topic_type": "周汇总/多领域盘点",
+  "topic_pattern": "topic-weekly-roundup",
+  "mode": "weekly",
+  "week_number": 33,
+  "week_range": "8月3日-8月9日",
+  "angle": "第33周 GitHub 周榜回顾：以本地跑大模型（4G显存跑700亿参数）的反直觉亮点统领，按领域分4组盘点13个项目（AI智能体/本地大模型/文档工具/安全学习）",
+  "novelty_strategy": "三维度差异化：①hook 换主题——从近期的砍token/单日涨星/个人vs大厂/AI攒经验，换成'本地跑大模型'反直觉主题（优先级1反直觉钩子，4G vs 700亿参数强冲突）；②叙事用 weekly 周榜回顾+领域分组，非日榜盘点疲劳；③数字锚点用周涨幅+显存参数对比，避开单日涨星",
+  "target_freshness": {"hook_sim_max": 0.6, "project_jaccard_max": 0.5, "template_sim_max": 0.7},
+  "project_type_mix": "AI智能体3 + 本地大模型3 + 文档工具4 + 安全学习3 = 13个；纯AI约占46%（weekly回顾属性合理），非AI工具/安全/学习占多半数平衡，避免重蹈6月纯AI Agent盘点崩盘",
+  "groups": [
+    {"name": "AI 智能体", "color_hint": "#4DA8DA", "color_note": "仅视觉用，旁白禁说颜色词", "projects": ["TencentCloud/TencentDB-Agent-Memory", "google/skills", "unclebob/swarm-forge"]},
+    {"name": "本地大模型", "color_hint": "#7B2FBE", "color_note": "仅视觉用，旁白禁说颜色词", "projects": ["lyogavin/airllm", "esengine/DeepSeek-Reasonix", "Comfy-Org/ComfyUI"]},
+    {"name": "文档工具", "color_hint": "#FF8C32", "color_note": "仅视觉用，旁白禁说颜色词", "projects": ["firecrawl/pdf-inspector", "virgiliojr94/book-to-skill", "drawdb-io/drawdb", "usekaneo/kaneo"]},
+    {"name": "安全学习", "color_hint": "#00D4FF", "color_note": "仅视觉用，旁白禁说颜色词", "projects": ["zhaoxuya520/reverse-skill", "goauthentik/authentik", "microsoft/AI-For-Beginners"]}
+  ],
+  "avoid_recent": ["primeintellect-ai/prime-agent", "连续泛AI Agent盘点（6月崩盘主因）"],
+  "hook_anchor": "第33周周榜，4G显存跑起七百亿大模型",
+  "ending_question": "这周的项目你最想试哪个（中性互动，禁站队）",
+  "camera_move_plan": "hook=推（hero居中）；分类1-4=固定（PFC，避scale致顶带溢出）；总结=固定；CTA=固定"
+}

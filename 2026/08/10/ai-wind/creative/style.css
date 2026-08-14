@@ -1,0 +1,286 @@
+/* ============================================
+ * AI 风向标 2026-08-10 — 暗色电紫科技风
+ * 主色 电紫 #A855F7 · 辅青 #00D4FF · 暖点缀橙 #FF6B35
+ * bg 由组件库提供（深紫底），fx/content 自由创作
+ * ============================================ */
+:root {
+  --bg-deep: #0a0a14;
+  --bg-mid: #1a0a2e;
+  --accent-warm: #A855F7;   /* 电紫主色（rank/数字锚/卖点强调）*/
+  --accent-cool: #00D4FF;   /* 辅青（类别/topics/数据）*/
+  --accent-orange: #FF6B35; /* 暖点缀橙（克制，核心数字）*/
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.42);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * 渐变文字工具（content 层纯文字元素专用，禁胶囊组合）
+ * 禁 background 简写；禁白端点；同色系高饱和
+ * ============================================ */
+.grad-purple {
+  background-image: linear-gradient(135deg, #E9D5FF 0%, #C084FC 42%, #A855F7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 45%, #00D4FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+}
+.grad-orange {
+  background-image: linear-gradient(135deg, #FFD9A8 0%, #FF8C42 50%, #FF6B35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+}
+
+/* ============================================
+ * s01 HOOK — 电紫跨界冲击（hero，≤3 元素）
+ * ============================================ */
+.hook-wrap {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 56px; text-align: center;
+}
+.hook-badge {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  letter-spacing: 0.32em; color: var(--accent-cool);
+  padding: 10px 30px; border-radius: 999px;
+  background: rgba(0,212,255,0.08); border: 1.5px solid rgba(0,212,255,0.35);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hook-title {
+  font-family: var(--font-title); font-weight: 900;
+  font-size: 168px; line-height: 1.0; letter-spacing: -0.02em;
+}
+.hook-industries {
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  gap: 22px;
+}
+.hook-ind {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 34px; border-radius: 22px;
+  background: rgba(168,85,247,0.10); border: 1.5px solid rgba(168,85,247,0.38);
+  backdrop-filter: blur(4px);
+}
+.hook-ind-num {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  color: var(--accent-cool); letter-spacing: 0.1em;
+}
+.hook-ind-label {
+  font-family: var(--font-body); font-size: 44px; font-weight: 800;
+  color: #f5f5f5; letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================
+ * s02-s05 ProjectFullCard — 电紫变体（纵向三带 space-between）
+ * assemble 不注入 PFC CSS，手补到此
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;     /* 三带撑满 1520px 安全区 */
+  padding: 180px 90px 220px 90px;     /* 竖屏安全区单层 */
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-purple {
+  width: 520px; height: 520px; opacity: 0.20;
+  background: var(--accent-warm);
+  top: 200px; left: -130px;
+}
+.pfc-glow-cyan {
+  width: 460px; height: 460px; opacity: 0.16;
+  background: var(--accent-cool);
+  bottom: 300px; right: -110px;
+}
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(168,85,247,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.045) 1px, transparent 1px);
+  background-size: 46px 46px; pointer-events: none;
+}
+
+/* ── 顶部带：排名+类别 / 用途 / 项目名（owner+repo 完整）── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 22px; width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 30px; }
+.pfc-rank {
+  font-family: var(--font-data); font-weight: 900;
+  font-size: 92px; line-height: 0.9; letter-spacing: -0.02em;
+}
+.pfc-category {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--accent-cool);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-use {
+  font-family: var(--font-body); font-size: 50px; font-weight: 800;
+  line-height: 1.1; color: var(--accent-warm);
+  padding: 8px 24px; border-radius: 12px; align-self: flex-start;
+  background: rgba(168,85,247,0.12);
+  border: 1.5px solid rgba(168,85,247,0.45);
+  letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.1; letter-spacing: -0.01em;
+  word-break: break-word;            /* 长名换行完整显示，禁 nowrap+ellipsis */
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.46); letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800; color: #f5f5f5;  /* 降一档防 OLED 过曝 */
+}
+
+/* ── 中部带：avatar 锚点 + 描述 + 总星标数据条 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 38px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative; width: 230px; height: 230px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -18px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 230px; height: 230px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-family: var(--font-body); font-size: 40px; font-weight: 600;
+  line-height: 1.38; color: #f5f5f5; text-align: center; max-width: 820px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.6); letter-spacing: 0.04em;
+}
+.pfc-bar-val {
+  font-family: var(--font-data); font-size: 46px; font-weight: 800;
+  color: var(--accent-cool); letter-spacing: -0.01em;
+}
+.pfc-bar-track {
+  width: 100%; height: 16px; border-radius: 999px;
+  background: rgba(255,255,255,0.10); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+}
+.pfc-bar-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  margin-top: 4px;
+}
+.pfc-today {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  color: var(--accent-orange); letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.pfc-topic {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  padding: 7px 20px; border-radius: 999px; color: var(--accent-cool);
+  background: rgba(0,212,255,0.10); border: 1px solid rgba(0,212,255,0.32);
+}
+
+/* ── 底部带：三词卖点 + 评语 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 26px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  padding: 10px 26px; border-radius: 14px; color: #fff;
+  background: rgba(168,85,247,0.14); border: 1px solid rgba(168,85,247,0.40);
+}
+.pfc-commentary {
+  font-family: var(--font-body); font-size: 36px; font-weight: 500;
+  line-height: 1.4; color: rgba(255,255,255,0.74);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+
+/* ============================================
+ * s06 CTA — 中性互动收束（highlight）
+ * ============================================ */
+.cta-wrap {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 52px; text-align: center;
+}
+.cta-question {
+  font-family: var(--font-title); font-weight: 900;
+  font-size: 96px; line-height: 1.12; letter-spacing: -0.01em;
+  max-width: 880px;
+}
+.cta-question .em { display: inline-block; }
+.cta-dirs {
+  display: flex; flex-direction: row; justify-content: center; gap: 22px;
+}
+.cta-dir {
+  font-family: var(--font-body); font-size: 40px; font-weight: 700;
+  padding: 16px 36px; border-radius: 999px;
+  color: #f5f5f5; letter-spacing: 0.04em;
+  background: rgba(168,85,247,0.12); border: 1.5px solid rgba(168,85,247,0.42);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-follow {
+  font-family: var(--font-body); font-size: 38px; font-weight: 600;
+  color: rgba(255,255,255,0.72); letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-follow .cta-heart { color: var(--accent-orange); margin: 0 6px; }
+
+/* ============================================
+ * fx 层元素视觉样式（动画由约定 class fx-pulse/fx-drift/fx-spin/fx-blink
+ * 经 assemble 自动注入 GSAP；此处只定义外观）
+ * ============================================ */
+/* 通用：fx 元素默认可见（opacity≥0.3），pointer-events:none 由 .layer-fx 提供 */
+.fx-ring {
+  position: absolute; border-radius: 50%; border-style: solid; border-width: 2px;
+  pointer-events: none;
+}
+.fx-dot {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+.fx-beam {
+  position: absolute; pointer-events: none;
+  transform-origin: center;
+}
+.fx-bar {
+  position: absolute; border-radius: 4px; pointer-events: none;
+}
+.fx-chip {
+  position: absolute; border-radius: 8px; pointer-events: none;
+}

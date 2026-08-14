@@ -1,0 +1,63 @@
+# AI 风向标 内容素材 — 2026-08-07
+
+数据源：raw_trending.json（ai_trending.py 独立 AI 源，9 个 AI 项目，gh API 三源验证 + avatar 已下载）
+模式：标准盘点（4 项目入选，跨 Agent 操作/记忆/技能/自主 4 子能力维度，约 50-55s）
+分类：ai-wind（暗色电紫科技风，hyper-pace，YunjianNeural +25%）
+
+## 选题策略（新鲜度 + 重复门禁 + 子方向分布受限说明）
+
+- 今日 9 个 AI 项目，经「近2天同频道(ai-wind)禁连续入选」门禁(project_no_consecutive_repeat) + 与综合当天降重叠后，可用候选枯竭：5 个项目因近2天 ai-wind 已展开或今日综合榜已展开被剔除（详见未入选说明），剩 4 个项目全部入选。
+- 子方向分布受限（数据源局限，非制作缺陷）：raw 9 个项目中 6 个属 agent-skills/coding-agent/agent-framework 类，全 Agent 大类，无大模型/语音/视觉子方向。本期尽力区分 4 个 Agent 子能力维度——操作实体电脑 / 团队共享记忆 / 工程技能包 / 自主拆解任务。
+- A 档约一半难满足（数据池局限）：4 项目全开发者工具（B 档），无浏览器即开/手机端的 A 档 AI 应用。C 档文案措辞「给做 AI 的开发者」，不伪装普通人能用。
+- 第二个入选项目 08-05 ai-wind 曾以 top3 exempt 例外一句带过，今日 stars_today 再进 raw top3，gate project_no_consecutive_repeat 依 exempt 规则放行；本期换「团队共享脑」角度继续展开（gate 不区分展开/带过，只校验项目是否进 top3）。
+- hook「单日涨六千星，AI 居然自己干活」——数字锚（4 项目单日合计约六千星）+ 反直觉冲突（居然/自己干），避开昨日「给AI配了台电脑」单点主题 + 「AI agent 炸场九个集体进化」集体句式。
+
+## 入选项目（4 个，按讲解顺序）
+
+1. cloudflare/computer | TypeScript | 4775★ (+2802今日, raw top1) | 给 AI agent 配一台能操作的电脑，让它像人一样点鼠标、开网页、填表单（原: Give your agent a computer 👾）
+   - avatar: assets/avatars/cloudflare.png
+   - 用途: AI替你操作电脑
+   - 受众: B 半可用（给 agent 配电脑操作的 SDK，需技术集成；cloudflare 大厂背书可信，偏开发者）
+   - 子方向: Agent 操作实体电脑（computer-use 维度）
+   - contrarian_angle: AI agent 通常只能在聊天框里回话，这个给它配了台真电脑，能像人一样点鼠标开网页填表单——反直觉「AI 像人一样操作电脑」（cloudflare 大厂背书，今日 raw top1）
+   - 数据锚点: 4775★ / 242 fork / 单日 +2802（今日 raw top1；cloudflare 真实 org 2010 年 + 573 repos + 15K followers ✓；repo 2026-06 新项目 2 个月，大厂新项目 star/fork 19.7 偏高属正常）
+   - 合规: 中文泛化「AI agent」「大厂 cloudflare 出品」；computer-use 主题
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+2. TencentCloud/TencentDB-Agent-Memory | TypeScript | 16338★ (+1057今日, raw top3) | 腾讯开源的 AI agent 团队级记忆中枢，把对话、文档和代码变成四类可复用记忆资产，在多个 agent 和框架之间统一治理共享（原: TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.）
+   - avatar: assets/avatars/TencentCloud.png
+   - 用途: 给AI团队装共享脑
+   - 受众: B 半可用（团队级记忆中枢，部署后团队多 agent 共用，偏运维/产品向）
+   - 子方向: Agent 团队记忆（memory 维度）
+   - contrarian_angle: AI agent 普遍金鱼记忆（每个 agent 各学各的、换一个就忘），这个给整个团队多个 agent 装一个共享脑，谁学到的技能和资料大家都懂——反直觉「团队 AI 共享一个脑」（腾讯开源背书）
+   - 数据锚点: 16338★ / 1473 fork / 单日 +1057（今日 raw top3；腾讯开源真实 org 2016 年 + 200 repos ✓；Star/Fork 11.1:1 健康）
+   - 合规: 中文泛化「团队记忆中枢」「腾讯开源」，不裸报底层模型品牌
+   - 重叠说明: 08-05 ai-wind 曾以 top3 exempt 例外一句带过（团队共享脑角度），今日再进 raw top3，gate exempt 放行，本期继续展开团队记忆维度
+
+3. mattpocock/skills | Shell | 206983★ (+1873今日, raw top2) | 给真正工程师的 AI 技能包，直接来自作者本人的 .agents 目录（原: Skills for Real Engineers. Straight from my .agents directory.）
+   - avatar: assets/avatars/mattpocock.png
+   - 用途: AI工程技能包
+   - 受众: B 半可用（AI 工程技能包，配合 AI 编程客户端即用；TypeScript 圈知名作者整理，偏开发者）
+   - 子方向: Agent 工程技能（skills 维度）
+   - contrarian_angle: AI 编程 agent 普遍只会写代码不会按工程流程干，这个是 TypeScript 圈老兵把自己 .agents 目录里实战检验过的工程技能包开源出来，二十万星说明真工程师都在用——反直觉「真工程师的 AI 技能包」（同属 agent skills 大类，但本项是个人 .agents 目录实战包，差异化于方法论框架/工程级技能库）
+   - 数据锚点: 206983★ / 17876 fork / 单日 +1873（今日 raw top2；mattpocock 真实用户 2017 年 + 222 repos + 36K followers，TypeScript 教育大 IP ✓；Star/Fork 11.6:1 健康；watchers 1200 高真实）
+   - 合规: 中文泛化「AI 工程技能包」「TypeScript 圈作者」，不点底层 AI 品牌
+   - 重叠说明: ai-wind 新面孔（个人 .agents 实战包，区别近2天的方法论框架与工程级技能库）
+
+4. Significant-Gravitas/AutoGPT | Python | 185996★ (+37今日) | 一个自主 AI agent 的愿景：让所有人都能用、都能在它之上构建，把工具备好，让人专注真正重要的事（原: AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.）
+   - avatar: assets/avatars/Significant-Gravitas.png
+   - 用途: AI自己跑全套流程
+   - 受众: B 半可用（自主 AI agent 平台，需配置部署；186K 星 2023 年爆款老项目）
+   - 子方向: Agent 自主完成任务（autonomous 维度）
+   - contrarian_angle: 多数 AI 工具是你问一句它答一句，这个让 AI 自己把大目标拆成小任务、自己跑完整套流程不用人盯——反直觉「AI 自己分解任务跑全套」（自主 agent 老前辈，186K 星）
+   - 数据锚点: 185996★ / 46055 fork / 单日 +37（Significant-Gravitas org 2023 年 + 28 repos ✓；2023 年爆款老项目 fork 46K 真实；Star/Fork 4.0:1 偏低但历史属性大量 fork 真实使用；watchers 1547 高真实；今日 +37 涨星低但 186K 总星数字锚点强）
+   - 合规: 中文泛化「自主 AI agent」「AI 自己分解任务」，项目名 AutoGPT 保留（项目名必报），中文功能描述不点底层 GPT 品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+## 未入选说明（本期 raw 共 9 个，5 个未入选，均用泛化表述）
+
+- 一个 DeepSeek 原生的终端 AI 编程 agent（Go 语言，今日 +888）：08-06 ai-wind 已展开，近2天禁选门禁拦截，本期换血。
+- 一个 267K 星的 AI agent 技能开发方法论框架（Shell，今日 +858）：08-05/06 ai-wind 连续两期展开，近2天禁选门禁拦截。
+- 一个长跑 AI agent 团队的循环工程内核（Python，今日 +847）：08-06 ai-wind 已展开，近2天禁选门禁拦截。
+- 一个生产级 AI 编程技能库（JavaScript，今日 +593）：08-06 ai-wind 已展开，近2天禁选门禁拦截。
+- 一个本地优先的代码知识图谱工具（Python，今日 +237）：今日综合 github-trending 已展开，ai-wind 避开降重叠。

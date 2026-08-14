@@ -1,0 +1,60 @@
+# AI 风向标 内容素材 — 2026-08-10
+
+数据源：raw_trending.json（ai_trending.py 独立 AI 源，8 个 AI 项目，gh API 三源验证 + avatar 已下载）
+模式：标准盘点（4 项目入选，跨 Agent集合/视觉创意/金融/法律 4 个 AI 子方向，约 50-55s）
+分类：ai-wind（暗色电紫科技风，hyper-pace，YunjianNeural +25%）
+
+## 选题策略（新鲜度 + 重复门禁 + 子方向分布）
+
+- 今日 8 个 AI 项目，经「近2天同频道(ai-wind)禁连续入选」HARD 门禁(project_no_consecutive_repeat)剔除 2 个（8-8 ai-wind 已选的两个项目：一个自我迭代的编程智能体、一家搜索引擎大厂的官方智能体技能包），剩 6 个可用。禁选明细见 content.md（泛化记录）。
+- 再经降重叠(SOFT)与题材疲劳规避：一个 AI 编程客户端工程技能集合（与 8-8 skills 题材同质，疲劳降权）、一个代码知识图谱 RAG（8-10 daily 已展开，降重叠 SOFT）不选；最终入选 4 个，跨 4 个非编程 AI 子方向。
+- **子方向突破**（vs 8-8）：8-8 受 raw 数据池限制全 agent 编程向（自我迭代/官方技能/可追溯基建/多智能体），本期 raw 恰好提供 3 个非编程跨界子方向（视觉创意/金融/法律），主动选用打破 agent 题材疲劳，子方向分布显著优于 8-8。
+- A 档约一半难满足（数据池局限）：仅 ComfyUI 为 A 档（桌面 GUI 即开），其余 agency-agents(B/C,需配置)、daily_stock(B,零成本定时运行)、harvey-labs(C,法律基准)为 B/C 档。C 档文案措辞「给做 AI 的开发者/专业人士」，不伪装普通人能用。
+- hook「AI 居然去画图、炒股、打官司了」——hook_anchor「居然」+ 行业具象（画图/炒股/打官司三行业，对应 ComfyUI/daily_stock/harvey）+ 反直觉冲突（AI 跨界）。与 8-8「单日三千星，AI 不再单干」完全不同主题（8-8 数字+协同 / 本期 跨界+反直觉），避开近7期 hook 主题（单日涨星/技能包/转型方法论/开源天气/烧光）。
+- 结尾中性二选一「AI 跨界的这几个方向，你最想试哪一个？」——与 8-8「你最看好哪个」句式差异化（看好 / 想试）。
+
+## 入选项目（4 个，按讲解顺序）
+
+1. msitarzewski/agency-agents | Shell | 140636★ (+858今日, raw 总星最高) | 把一整套 AI 团队打包进一个项目的智能体集合，从前端、社区运营到审核校验，每个角色都是各司其职的专业智能体（原: A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.）
+   - avatar: assets/avatars/msitarzewski.png
+   - 用途: AI组团干活
+   - 受众: B/C 半可用（Shell 脚本集合，需配置集成）
+   - 子方向: Agent 团队集合（meta-agent，模拟整支公司团队）
+   - contrarian_angle: 多数 AI agent 一次只干一件事，这个把一整套公司角色（前端/运营/审核）打包成开箱即用的智能体团队——反直觉「AI 模拟整支团队」
+   - 数据锚点: 140636★ / 22976 fork / 1043 watchers（owner 账号 2012 年注册 14年老号 + 35 repos + 6151 followers ✓；30+ contributors + 近4周 305 commits 活跃；Star/Fork 6.1:1 可接受；watchers 1043 高真实；raw 总星最高作 hook 数字锚）
+   - 合规: 中文泛化「智能体集合」「AI 团队」，项目名 agency-agents 保留，不点底层模型品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+2. Comfy-Org/ComfyUI | Python | 125479★ (+365今日) | 功能强大、模块化的扩散模型图形界面与后端，采用图节点界面（原: The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.）
+   - avatar: assets/avatars/Comfy-Org.png
+   - 用途: 节点式AI画图
+   - 受众: A 普通可用（桌面 GUI，专业画师与爱好者都在用；4 个项目唯一 A 档）
+   - 子方向: AI 视觉/创意（节点式生图工作流）
+   - contrarian_angle: 多数 AI 画图输文字出图一条龙，这个把生成流程拆成一个个节点，像接电路一样换模型、拼流程，精细到每一步都能调——反直觉「把 AI 画图拆成零件」（与 8-10 daily「搭积木」角度差异化，本期用「接电路/拆零件」节点工作流角度）
+   - 数据锚点: 125479★ / 14839 fork / 775 watchers（Comfy-Org 官方 org 2024-04 + 77 repos ✓；3.5年老牌项目；Star/Fork 8.5:1 健康；watchers 775 高真实；行业知名项目）
+   - 合规: 中文泛化「扩散模型图形界面」「节点式画图」，项目名 ComfyUI 保留，不点底层模型品牌
+   - 重叠说明: 与 8-10 github-trending daily 同日展开，daily 浅带过（节点式画图一句话），ai-wind 深度展开（节点工作流反直觉），降重叠 SOFT；选它补足视觉创意子方向 + 唯一 A 档
+
+3. ZhuLinsen/daily_stock_analysis | Python | 61167★ (+306今日) | AI 驱动的多市场股票数据分析系统，汇总多源行情和实时新闻，整理成决策看板，零成本定时运行（原: LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs.）
+   - avatar: assets/avatars/ZhuLinsen.png
+   - 用途: 整理股市数据
+   - 受众: B 半可用（Python，零成本定时运行，有决策看板；面向关注行情数据整理的用户）
+   - 子方向: 金融 AI（多源行情+新闻自动汇总）
+   - contrarian_angle: 股市信息通常要手工盯盘+逐条查消息，这个用 AI 自动汇总多源行情和实时新闻、整理成数据看板，零成本定时跑——反直觉「AI 帮你把散落信息归拢」（金融中性化：只讲数据整理，不荐股、不承诺收益、不用极限排名类用语）
+   - 数据锚点: 61167★ / 51991 fork / 238 watchers（owner 账号 2018 年注册 8年老号 + 37 repos + 1567 followers ✓；30+ contributors（top3: 445/159/61 多人贡献非纯单人）+ 近4周 880 commits 极度活跃；Star/Fork 1.18:1 偏低但 fork 高源于「零成本定时运行」工具属性——用户 fork 部署运行，非刷榜；watchers 238 对工具类合理；金融工具如实呈现，不夸张收益）
+   - 合规: 中文泛化「股票数据分析系统」（中性化，禁夸大宣传/荐股/收益承诺），项目名 daily_stock_analysis 保留，不点底层模型品牌，不暗示收益
+   - 重叠说明: ai-wind 新面孔，近2天未入选；金融跨界子方向独家
+
+4. harveyai/harvey-labs | Python | 818★ (+47今日) | 评估和提升智能体辅助法律工作能力的基准测试（原: A benchmark built to evaluate and improve agent capabilities for supporting legal work.）
+   - avatar: assets/avatars/harveyai.png
+   - 用途: 考AI法律能力
+   - 受众: C 开发者向/专业向（法律 AI 能力基准，面向 AI 法律应用开发者与研究者）
+   - 子方向: 法律 AI（agent 能力基准测试）
+   - contrarian_angle: 法律 AI 多是客服式问答，这个是给 AI 出的一整套法律能力考卷，倒逼 AI 真正学会辅助办案而不是只会聊天——反直觉「给 AI 出的法律考试」
+   - 数据锚点: 818★ / 176 fork / 10 watchers（harveyai org 2022-11 + 7 repos ✓；Harvey AI 为法律 AI 领域知名团队，org 真实；Star/Fork 4.6:1 健康；size 2.1GB 为 benchmark 数据集体量合理；单日 +47 对 818 总星比例真实；watchers 10 偏低但 benchmark 类项目正常）
+   - 合规: 中文泛化「法律工作能力基准」，项目名 harvey-labs 保留（Harvey 作 org 名），不提具体公司/人名，不点底层模型品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选；法律跨界子方向独家，总星虽低但角度新颖补足子方向多样性
+
+## 未入选说明
+
+见 content.md（用泛化表述记录禁选/降重叠/剔除原因，不在此处展开）。

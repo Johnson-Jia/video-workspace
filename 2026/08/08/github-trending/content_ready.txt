@@ -1,0 +1,48 @@
+## 今日 GitHub 热门盘点 · 2026年8月8日（自进化 AI + 开发者效率工具 · AI 仅 2 个）
+
+选题方向：8-7 做「多元基建回归 / 一半不是 AI」计数比例框架，本期主动差异化——钩子换成单项目数字锚（单日涨两千七）+ 反直觉（AI 自己进化），项目集 0 重复，5 个方向互不重叠。AI ≤ 2（gate ai_project_cap）：prime-agent + MiroFish；非 AI 3 个：witr（进程追踪）+ mise（环境一统）+ celld（自托管基建）。
+
+## 1. PrimeIntellect-ai/prime-agent
+会自己进化的编码 agent，跑长任务不忘事，能复盘自己的工作轨迹把好用经验沉淀成技能，子 agent 还能并行干活（原: A self-improving RLM agent for coding workflows and long-running autonomous tasks.）。
+语言：TypeScript · 今日 +2271 ★（当日 raw 涨星靠前）· 总 6.4K ★ · 协议 MIT · watchers 22
+avatar: assets/avatars/PrimeIntellect-ai.png
+用途: AI自己攒经验
+受众: C开发者向（编码 agent，终端/编程式调用，需集成）
+真实性：PrimeIntellect-ai（2023 年账号，60 repos，1102 followers），2026-05 建仓，size 48MB，star/fork 12.5:1 健康，活跃 pushed 2026-08-07，铁真
+反直觉：AI 不靠人喂——自己复盘工作、把经验固化成可复用技能，harness 能 `/refine` 自我精炼（不改基础 prompt，可回滚）
+
+## 2. 666ghj/MiroFish
+群体智能预测引擎，号称预测万物。上传材料、用大白话描述需求，它造一个数字世界跑多 agent 模拟，返回一份预测报告，浏览器开 demo 就能玩（原: A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物）。
+语言：Python · 今日 +126 ★ · 总 70.5K ★ · 协议 AGPL-3.0 · watchers 431 · 有在线 demo
+avatar: assets/avatars/666ghj.png
+用途: 模拟预测未来
+受众: A普通可用（浏览器在线 demo 即开，上传材料 + 自然语言提需求）
+真实性：666ghj（2022 年账号，8 repos，4394 followers，盛大背书），2025-11 建仓，size 16MB，star/fork 6.4:1，watchers/stars 0.61% 健康，铁真
+反直觉：用数字沙盘预演现实——几千个有独立性格和记忆的 agent 在沙盘里互动涌现，给决策零风险试错
+
+## 3. pranshuparmar/witr
+进程追根溯源工具。一句命令，把任何进程、端口、容器或文件追到最初是谁启动的，排查问题不用瞎猜（原: Why is this running? Trace any process, port, container, or file back to what started it - CLI + TUI.）。
+语言：Go · 今日 +308 ★ · 总 19.7K ★ · 协议 Apache-2.0 · watchers 43
+avatar: assets/avatars/pranshuparmar.png
+用途: 一句命令揪源头
+受众: B半可用（CLI + TUI，开发者向但单二进制安装门槛中等）
+真实性：pranshuparmar（2013 年老账号，18 repos，185 followers），2025-12 建仓，size 7.5MB，star/fork 31:1，活跃 pushed 2026-07-31，铁真
+反直觉：进程/端口/容器的「族谱」一键追出来——替代运维反复 ps/lsof 的瞎猜流程
+
+## 4. jdx/mise
+开发环境一统工具。node、python、ruby 等运行时版本，环境变量，任务脚本，一个工具全管，Rust 写的跑得快（原: dev tools, env vars, task runner）。
+语言：Rust · 今日 +130 ★ · 总 32K ★ · 协议 MIT · watchers 45
+avatar: assets/avatars/jdx.png
+用途: 一统开发环境
+受众: B半可用（CLI 工具，单二进制，开发者日常用，门槛中等）
+真实性：jdx（2010 年老账号，623 repos，4075 followers，知名维护者 Jeff Dickey），2023-01 建仓，size 83MB，star/fork 24:1，活跃 pushed 2026-08-07，铁真
+反直觉：一个工具替掉 nvm/pyenv/rbenv/direnv/make 一整套——开发环境管理的「瑞士军刀」
+
+## 5. denoland/celld
+deno 团队的开源基建。把云端的状态化对象（Durable Objects）搬到自己的服务器上跑，自托管、分布式，不依赖大厂云（原: self-hosted, distributed Durable Objects）。
+语言：Rust · 今日 +546 ★ · 总 2.2K ★ · 协议 Apache-2.0 · watchers 9
+avatar: assets/avatars/denoland.png
+用途: 自托管云端对象
+受众: C开发者向（分布式基建，需自部署，给做后端的开发者）
+真实性：denoland（Deno 官方，2018 年账号，234 repos，5962 followers），2025-04 建仓，size 1MB，star/fork 36:1（新项目正常），活跃 pushed 2026-08-05，铁真
+反直觉：把大厂云端专属的状态化对象搬回自家服务器——开源版自托管 Durable Objects

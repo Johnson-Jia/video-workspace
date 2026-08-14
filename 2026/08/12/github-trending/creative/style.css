@@ -1,0 +1,212 @@
+/* ============================================
+ * 2026-08-12 github-trending daily — 暗色科技·老工具长青树
+ * 四项目分色：manim 冷蓝 / awesome-mac 暖橙 / PBL 金+蓝 / nvm 终端琥珀
+ * ============================================ */
+
+:root {
+  /* 暗色基底（design.md：深蓝 #1E293B / 深紫 #2A1B4E） */
+  --bg-deep: #0A0E1C;
+  --bg-mid: #131A2E;
+  /* 主强调色（design.md color_direction） */
+  --orange-1: #FFB84D;
+  --orange-2: #FF8C32;
+  --orange-glow: rgba(255,140,50,0.42);
+  --blue-1: #7CC7F0;
+  --blue-2: #4DA8DA;
+  --blue-glow: rgba(77,168,218,0.40);
+  --gold-1: #FFE08A;
+  --gold-2: #FFD34D;
+  --amber-1: #FFC95C;
+  --amber-2: #FFB000;
+  /* 文字 */
+  --text: #F5F7FA;
+  --text-2: rgba(229,234,242,0.62);
+  --text-3: rgba(229,234,242,0.40);
+  /* 兼容 fx 原语默认色（被各场景 inline 覆盖） */
+  --accent-warm: var(--orange-2);
+  --accent-cool: var(--blue-2);
+  /* 字体（fonts.json 三层） */
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  /* 极淡 drop（github 分类规则：禁发光，blur≤16） */
+  --shadow-flat: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================
+ * 渐变文字（background-image 独立属性·禁白端点·禁 background 简写）
+ * 渐变文字不加 text-shadow（R-S6-023），纯色字才用 --shadow-flat
+ * ============================================ */
+.grad-orange {
+  background-image: linear-gradient(135deg, var(--orange-1) 0%, var(--orange-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, var(--blue-1) 0%, var(--blue-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-2) 55%, var(--orange-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-dual {
+  background-image: linear-gradient(90deg, var(--orange-2) 0%, var(--orange-1) 40%, var(--blue-1) 65%, var(--blue-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+
+/* ============================================
+ * PFC phase 覆盖：.phase 默认带安全区 padding，PFC 自带 padding → 覆盖为 0
+ * ============================================ */
+.phase-pfc { padding: 0 !important; }
+
+/* ============================================
+ * ProjectFullCard（content 组件，CSS 手动维护）
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 180px 90px 220px 90px;
+}
+.pfc-glow { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
+.pfc-glow-warm { width: 540px; height: 540px; opacity: 0.20; background: var(--accent-warm); top: 160px; left: -130px; }
+.pfc-glow-cool { width: 480px; height: 480px; opacity: 0.18; background: var(--accent-cool); bottom: 260px; right: -110px; }
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+/* 顶部带 */
+.pfc-top { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 22px; width: 100%; }
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: var(--shadow-flat);
+  font-family: var(--font-data);
+}
+.pfc-category {
+  font-size: 38px; font-weight: 700; letter-spacing: 0.10em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  font-size: 50px; font-weight: 800; line-height: 1.15;
+  padding: 10px 26px; border-radius: 14px;
+  background: rgba(10,14,28,0.62);
+  border: 1.5px solid rgba(255,255,255,0.16);
+  color: var(--accent-warm);
+  align-self: flex-start; letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.10; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner { font-size: 34px; font-weight: 500; color: var(--text-3); letter-spacing: 0.04em; }
+.pfc-repo { font-size: 62px; font-weight: 800; color: #F2F4F8; }
+/* 中部带 */
+.pfc-mid { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 36px; width: 100%; }
+.pfc-avatar-wrap { position: relative; width: 228px; height: 228px; display: flex; align-items: center; justify-content: center; }
+.pfc-avatar-ring {
+  position: absolute; inset: -18px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+  animation: pfcRingPulse 3.6s ease-in-out infinite;
+}
+@keyframes pfcRingPulse { 0%,100%{transform:scale(1);opacity:0.45;} 50%{transform:scale(1.10);opacity:0.70;} }
+.pfc-avatar { position: relative; z-index: 1; width: 228px; height: 228px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.82); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.pfc-desc { font-size: 40px; font-weight: 600; line-height: 1.35; color: #F2F4F8; text-align: center; max-width: 800px; text-shadow: var(--shadow-flat); }
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-bar-head { display: flex; justify-content: space-between; align-items: baseline; }
+.pfc-bar-label { font-size: 32px; font-weight: 500; color: var(--text-2); }
+.pfc-bar-val { font-size: 42px; font-weight: 800; color: var(--accent-warm); font-family: var(--font-data); }
+.pfc-bar-track { width: 100%; height: 16px; border-radius: 999px; background: rgba(255,255,255,0.10); overflow: hidden; }
+.pfc-bar-fill { height: 100%; border-radius: 999px; background-image: linear-gradient(90deg, var(--accent-cool), var(--accent-warm)); transform-origin: left center; }
+.pfc-total-row { display: flex; justify-content: space-between; align-items: baseline; }
+.pfc-total-num { font-size: 54px; font-weight: 900; color: var(--text); font-family: var(--font-data); }
+.pfc-total-note { font-size: 32px; font-weight: 600; color: var(--text-2); }
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; }
+.pfc-topic { font-size: 32px; font-weight: 600; padding: 8px 22px; border-radius: 999px; color: var(--accent-cool); background: rgba(12,18,34,0.55); border: 1px solid rgba(255,255,255,0.18); }
+/* 底部带 */
+.pfc-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item { font-size: 32px; font-weight: 700; padding: 10px 26px; border-radius: 14px; color: #fff; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); }
+.pfc-commentary { font-size: 36px; font-weight: 500; line-height: 1.4; color: var(--text-2); border-left: 4px solid var(--accent-warm); padding-left: 24px; }
+/* 场景特色小件 */
+.pfc-extra-chip {
+  align-self: center; font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  color: var(--accent-warm); padding: 10px 30px; border-radius: 12px;
+  background: rgba(10,14,28,0.66); border: 1.5px solid rgba(255,255,255,0.16);
+  letter-spacing: 0.02em;
+}
+.pfc-badge {
+  font-size: 32px; font-weight: 800; padding: 6px 20px; border-radius: 999px;
+  color: #0A0E1C; background-image: linear-gradient(135deg, var(--gold-1), var(--orange-2));
+}
+
+/* —— PFC 四项目分色（容器变量覆盖）—— */
+#s02 .project-full-card { --accent-warm: var(--blue-1); --accent-cool: var(--blue-2); }
+#s03 .project-full-card { --accent-warm: var(--orange-1); --accent-cool: var(--orange-2); }
+#s04 .project-full-card { --accent-warm: var(--gold-2); --accent-cool: var(--blue-2); }
+#s05 .project-full-card { --accent-warm: var(--amber-1); --accent-cool: var(--amber-2); }
+/* PBL 长项目名：repo 字号收紧保证独占一行 */
+#s04 .pfc-repo { font-size: 46px; }
+#s04 .pfc-owner { font-size: 32px; }
+
+/* ============================================
+ * s01 hook — 四个老项目冲上57万星（数字锚定 + count-up）
+ * ============================================ */
+.hook-wrap { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; gap: 36px; }
+.hook-eyebrow {
+  font-size: 34px; font-weight: 700; letter-spacing: 0.22em;
+  color: var(--orange-1); padding: 8px 28px;
+  border: 1.5px solid rgba(255,140,50,0.45); border-radius: 999px;
+  background: rgba(255,140,50,0.06);
+}
+.hook-title {
+  font-family: var(--font-title); font-weight: 900;
+  font-size: 96px; line-height: 1.05; letter-spacing: -0.01em;
+  color: var(--text); text-shadow: var(--shadow-flat);
+}
+.hook-num-row { display: flex; align-items: baseline; justify-content: center; gap: 26px; font-family: var(--font-data); }
+.hook-verb { font-size: 64px; font-weight: 900; color: var(--orange-2); letter-spacing: 0.02em; }
+.hook-num { font-size: 188px; font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; }
+.hook-unit { font-size: 72px; font-weight: 900; color: var(--gold-2); }
+.hook-chips { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.hook-chip {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--text-2); padding: 8px 22px; border-radius: 999px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);
+}
+
+/* ============================================
+ * s06 cta — 二选一互动 + 关注引导 + 四项目回顾
+ * ============================================ */
+.cta-wrap { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 40px; text-align: center; }
+.cta-eyebrow { font-size: 34px; font-weight: 700; letter-spacing: 0.20em; color: var(--text-2); }
+.cta-title { font-family: var(--font-title); font-weight: 900; font-size: 100px; line-height: 1.08; letter-spacing: -0.01em; }
+.cta-recap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; max-width: 880px; }
+.cta-recap-item {
+  display: flex; align-items: baseline; gap: 14px;
+  font-size: 34px; font-weight: 700; padding: 14px 28px; border-radius: 16px;
+  color: var(--text); background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.18);
+}
+.cta-recap-item .rc-stars { font-family: var(--font-data); font-size: 32px; font-weight: 800; color: var(--orange-1); }
+.cta-sub { font-size: 48px; font-weight: 800; color: var(--text); text-shadow: var(--shadow-flat); letter-spacing: 0.04em; }
+.cta-follow {
+  font-size: 40px; font-weight: 700; color: var(--orange-1);
+  padding: 12px 34px; border-radius: 999px;
+  background: rgba(255,140,50,0.10); border: 1.5px solid rgba(255,140,50,0.42);
+}

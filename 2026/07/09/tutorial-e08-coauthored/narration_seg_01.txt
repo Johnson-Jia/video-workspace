@@ -1,1 +1,0 @@
-度量靠 AI 代码占比。最可靠的信号是 Co-authored-by——AI 工具默认会在 commit 末尾埋 trailer。首层初筛：解析 commit message，匹配六个 AI 工具名：克劳德、副驾驶、cursor、ChatGPT、codeium、Gemini。命中就判 AI，置信度一点零。但这层有个缺陷：VS Code 副驾驶 会对手写代码也自动加 trailer，会误标。所以光靠首层，占比会虚高。

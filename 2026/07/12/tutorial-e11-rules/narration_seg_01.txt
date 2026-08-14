@@ -1,1 +1,0 @@
-十三条团队规范按职能分五层。入口是 team-conventions 总纲，克劳德.md 用 at 符号引用所有 rule，AI 自动加载。其一接口层，api-response 统一响应模型，service-dao 接口实现分离，事务归 Service。其二质量稳定层，error-handling 异常处理禁空 catch，logging 日志级别脱敏，testing 用 Given-When-Then。其三数据层，database 表设计向后兼容；batch 批量代替循环。其四并发层，async 线程池上下文传递，distributed-lock 用 Redisson 控粒度。其五工程规范层，git-branch 走 Conventional Commits 命名，naming 类后缀方法动词目录分层。五层覆盖团队开发全流程。

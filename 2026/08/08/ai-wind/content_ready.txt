@@ -1,0 +1,59 @@
+# AI 风向标 内容素材 — 2026-08-08
+
+数据源：raw_trending.json（ai_trending.py 独立 AI 源，9 个 AI 项目，gh API 三源验证 + avatar 已下载）
+模式：标准盘点（4 项目入选，跨 自进化/官方技能/基建治理/多智能体协作 4 个 agent 子方向，约 50-55s）
+分类：ai-wind（暗色电紫科技风，hyper-pace，YunjianNeural +25%）
+
+## 选题策略（新鲜度 + 重复门禁 + 子方向分布受限说明）
+
+- 今日 9 个 AI 项目，经「近2天同频道(ai-wind)禁连续入选」HARD 门禁(project_no_consecutive_repeat)剔除 5 个（详见 content.md 未入选说明），剩 4 个全部入选。
+- 子方向分布受限（数据源局限，非制作缺陷）：raw 9 个项目几乎全 agent 大类（agent-skills/coding-agent/agent-framework/agent-coordination），无大模型/语音/视觉独立子方向。本期尽力区分 4 个 agent 子能力维度——自我迭代 / 大厂官方技能 / 可追溯基建 / 多智能体协作。
+- A 档约一半难满足（数据池局限）：4 项目全 C/B 档开发者向（agent 工具/框架/基建），无浏览器即开或手机端的 A 档 AI 应用。C 档文案措辞「给做 AI 的开发者」，不伪装普通人能用。
+- 入选项目 1（prime-agent）与今日综合 github-trending 降重叠 SOFT（综合榜同日已展开），但因 HARD 禁选后可用 pool 仅 4 个、且该项目为 raw top1 单日 +2293 是唯一强数字锚，选用以支撑 hook 数据冲击（降重叠非硬拦，freshness 仅 ai-wind 同频道近 N 期校验，该项目近2天未入选）。
+- hook「单日三千星，AI 不再单干」——数字锚（4 项目单日合计约两千八）+ 反直觉冲突（不再单干→走向协同），与 8-7「自己干活」走反方向（单干→协同），避开 8-6「给AI配电脑」单点主题与「集体进化」集体句式。
+
+## 入选项目（4 个，按讲解顺序）
+
+1. PrimeIntellect-ai/prime-agent | TypeScript | 6457★ (+2293今日, raw top1) | 一个能自我迭代的编程智能体，跑长任务时一边干一边优化自己的策略（原: A self-improving RLM agent for coding workflows and long-running autonomous tasks.）
+   - avatar: assets/avatars/PrimeIntellect-ai.png
+   - 用途: AI给自己打补丁
+   - 受众: C 开发者向（自我迭代编程 agent，需技术集成）
+   - 子方向: 自进化编程 agent（RLM 自我迭代维度）
+   - contrarian_angle: 多数 AI 编程工具你给什么它写什么，这个能自己改自己的策略、越跑越聪明——反直觉「AI 能给自己打补丁」（单日 +2293 raw top1）
+   - 数据锚点: 6457★ / 515 fork / 单日 +2293（PrimeIntellect-ai org 2023 年 + 61 repos + 1106 followers ✓；repo 2026-05 新项目 3 个月；Star/Fork 12.5:1 健康；今日 raw top1）
+   - 合规: 中文泛化「自我迭代编程智能体」，项目名 prime-agent 保留（项目名必报），不点底层模型品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选（与今日综合 github-trending 降重叠 SOFT，因可用 pool 枯竭仍选作 hook 数字锚）
+
+2. google/skills | Python | 16240★ (+327今日) | Google 官方整理的自家产品智能体技能开源包（原: Agent Skills for Google products and technologies）
+   - avatar: assets/avatars/google.png
+   - 用途: 大厂官方AI技能
+   - 受众: C 开发者向（agent 技能包，配合 AI 编程客户端；Google 官方大厂背书）
+   - 子方向: 大厂官方 agent 技能（skills 维度）
+   - contrarian_angle: 多数 agent 技能包是个人开发者实战经验整理，这个是 Google 官方出品、配自家产品线——反直觉「大厂官方亲自下场做 agent 技能」
+   - 数据锚点: 16240★ / 1289 fork / 单日 +327（Google 官方 org 2012 年 + 2890 repos + 76K followers ✓；Star/Fork 12.6:1 健康；watchers 107 高真实）
+   - 合规: 中文泛化「官方智能体技能包」「Google 官方」，Google 作 org 名保留（同 cloudflare 大厂背书用法），不点底层 AI 品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+3. semantica-agi/semantica | Python | 2341★ (+122今日) | 给 AI 装可追溯的知识图谱基建，把上下文、记忆和决策变成有出处的网（原: Graph-Native Infrastructure for Context and Accountable AI Systems）
+   - avatar: assets/avatars/semantica-agi.png
+   - 用途: 让AI决策有出处
+   - 受众: C 开发者向（AI 基建/治理框架，需写代码集成）
+   - 子方向: 图原生 AI 基建/可追溯治理（infrastructure/governance 维度）
+   - contrarian_angle: 大模型普遍是黑盒张嘴胡编，这个给 AI 装知识图谱基建让每个决策都能查到出处——反直觉「让 AI 能查到出处的基建」
+   - 数据锚点: 2341★ / 305 fork / 单日 +122（semantica-agi org 2025-05 新 + 3 repos + 53 followers，org 偏新但项目 2025-06 至今 13 个月稳涨；Star/Fork 7.7:1 可接受；20+ 技术主题 agent-memory/ai-governance/provenance 真实；pushed 今日活跃）
+   - 合规: 中文泛化「知识图谱基建」「可追溯治理」，不点底层模型品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+4. unclebob/swarm-forge | Clojure | 1827★ (+81今日) | 让多个 AI 智能体协同干活的轻量协调工具（原: A simple tool for coordinating several AI agents.）
+   - avatar: assets/avatars/unclebob.png
+   - 用途: 让多个AI分工
+   - 受众: C 开发者向（多 agent 协调工具，需写代码集成；owner 老牌高信誉账号）
+   - 子方向: 多智能体协作编排（orchestration 维度）
+   - contrarian_angle: 多 AI 协作通常要上重型框架，这个轻量工具简单配置就能让多个智能体自动分工——反直觉「轻量协调多个 AI」（编程圈资深从业者出品，不提具体姓名）
+   - 数据锚点: 1827★ / 200 fork / 单日 +81（owner 账号 2008 年注册 + 93 repos + 15.9K followers，老牌高信誉 ✓；Star/Fork 9.1:1 健康；pushed 今日活跃；今日 +81 涨星不高但总星 1827 + 老牌背书含金量足）
+   - 合规: 中文泛化「编程圈资深从业者」（不提具体姓名，触发隐私审核），「多智能体协作」，不点底层 AI 品牌
+   - 重叠说明: ai-wind 新面孔，近2天未入选
+
+## 未入选说明
+
+见 content.md（用泛化表述记录禁选/弃选原因，不在此处展开）。

@@ -1,0 +1,36 @@
+# content_ready.txt — 2026-08-11 GitHub Trending 入选项目（daily 综合榜）
+
+本期入选 2 个项目（均为 AI 基建方向）。受 ai_project_cap≤2 硬约束 + 非 AI 池枯竭双重限制，详见 content.md 池约束说明。
+
+数据来源：raw_trending.json（python_requests + gh_api，2026-08-10 采集）+ gh api 实时核验（stars/forks/watchers/owner 账号年龄均通过真实性校验）。
+
+## 入选项目
+
+1. PrimeIntellect-ai/prime-agent | TypeScript | 12.9K★ (+2655 单日，当日 raw 涨星最高) | 受众: B 半可用 | MIT | 会自我进化的 AI 编程 agent，能复盘自己的工作轨迹、把常用套路存成可复用技能，后台常驻断终端还在跑（原: A self-improving RLM agent for coding workflows and long-running autonomous tasks.）
+   avatar: assets/avatars/PrimeIntellect-ai.png
+   用途: AI帮自己变聪明
+   反直觉角度: 编程 AI 不是被动等你喂提示——它会用 /refine 复盘刚做的工作，把管用的记忆和技能写回自己的状态，越用越顺手；还能 spawn 子 agent 并行干活，互相对话不走你的终端
+   类别标签: 自我进化
+   三词卖点: 自我进化·后台常驻·并行干活
+   感性评语: 越用越聪明的 AI
+   核心指标: +2655 ★ 单日（当日最高）
+
+2. semantica-agi/semantica | Python | 4.0K★ (+967 单日) | 受众: C 开发者向 | MIT | 给 AI 装上可追溯记忆图谱的基础设施，让 AI 的每个决策都能回答"为什么"（原: Graph-Native Infrastructure for Context and Accountable AI Systems）
+   avatar: assets/avatars/semantica-agi.png
+   用途: 让AI决策说得清
+   反直觉角度: 多数 AI 像黑盒——存的是向量不是意义，决策说不清为什么；semantica 在 LLM 之下铺一层确定性图谱基建，构建图谱和推理都不需要 LLM 参与，每个决定留痕可审计（金融/医疗/法务等强监管场景的"为什么这个 AI 这么判"）
+   类别标签: 决策可溯
+   三词卖点: 决策可追溯·图谱记忆·自托管
+   感性评语: 让 AI 不再是黑盒
+   核心指标: +967 ★ 单日
+
+## 本期双项目对比叙事
+
+| 维度 | prime-agent | semantica |
+|------|-------------|-----------|
+| AI 基建切入点 | autonomy（让 AI 自己变强） | accountability（让 AI 决策可追溯） |
+| 反直觉 | AI 会自我进化 | AI 决策不再黑盒 |
+| 单日涨星 | +2655（最高） | +967 |
+| 受众 | B 半可用（CLI 一键装） | C 开发者向（企业基建库） |
+
+> 旁白与画面禁用 semantica tagline 中的品牌名（开源版 Palantir）——用"企业级数据情报平台"类泛化表述，遵守 shared-rules 不点品牌名。

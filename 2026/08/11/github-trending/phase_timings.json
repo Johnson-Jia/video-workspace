@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "voice": "zh-CN-YunjianNeural",
+    "rate": "+25%",
+    "bgm_source": "monochrome-2.mp3",
+    "bgm_volume": 0.41,
+    "bgm_volume_source": "formula",
+    "bgm_mean_db": -20.2,
+    "bgm_max_db": -3.9,
+    "bgm_narr_max_db": -1.2,
+    "bgm_gap_target": 11,
+    "bgm_peak_tier": "flat",
+    "bgm_tier_basis": "lra",
+    "bgm_lra": 1.5,
+    "bgm_peak_spread": 16.3,
+    "bgm_mean_gap": 11,
+    "bgm_peak_gap": 8,
+    "calibration_source": "edge-tts-srt"
+  },
+  "stats": {
+    "total_scenes": 2,
+    "total_phases": 4,
+    "anchor_calibrated": 0,
+    "auto_split": 4
+  },
+  "scenes": [
+    {
+      "scene": "prime_agent",
+      "segment_index": 1,
+      "global_start": 3.6,
+      "duration": 14.14,
+      "phases": [
+        {
+          "phase": 1,
+          "start_offset": 0.0,
+          "end_offset": 7.07,
+          "sentences": [
+            0,
+            1
+          ],
+          "calibration": "time-equal-split"
+        },
+        {
+          "phase": 2,
+          "start_offset": 7.07,
+          "end_offset": 14.14,
+          "sentences": [],
+          "calibration": "time-equal-split"
+        }
+      ]
+    },
+    {
+      "scene": "semantica",
+      "segment_index": 2,
+      "global_start": 17.74,
+      "duration": 19.18,
+      "phases": [
+        {
+          "phase": 1,
+          "start_offset": 0.0,
+          "end_offset": 9.59,
+          "sentences": [
+            0,
+            1,
+            2
+          ],
+          "calibration": "time-equal-split"
+        },
+        {
+          "phase": 2,
+          "start_offset": 9.59,
+          "end_offset": 19.18,
+          "sentences": [
+            3
+          ],
+          "calibration": "time-equal-split"
+        }
+      ]
+    }
+  ]
+}

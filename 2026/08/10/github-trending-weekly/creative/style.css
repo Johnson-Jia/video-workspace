@@ -1,0 +1,219 @@
+:root {
+  --bg-deep: #080818;
+  --accent-warm: #f9a825;
+  --accent-cool: #00f5d4;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 领域色（content 层用：标题渐变/边框/标签/色环；bg 组件提供氛围底色）
+   * 4 组领域色仅用于视觉分组，画面文字禁说颜色词，用领域名分组 */
+  --grp1: #4DA8DA;   /* 组1 AI 智能体 — 蓝 */
+  --grp1-2: #60A5FA;
+  --grp2: #7B2FBE;   /* 组2 本地大模型 — 紫 */
+  --grp2-2: #A855F7;
+  --grp3: #FF8C32;   /* 组3 文档工具 — 橙 */
+  --grp3-2: #FB923C;
+  --grp4: #00D4FF;   /* 组4 安全学习 — 青 */
+  --grp4-2: #67E8F9;
+  --hook-gold: #FBBF24;
+  --hook-orange: #FF8C32;
+  --card-bg: rgba(18,22,38,0.94);
+  --card-bg-2: rgba(10,12,24,0.94);
+}
+
+/* ============================================
+ * 组件 CSS（领域色用于视觉，画面文字禁颜色词）
+ * 字号取严：正文≥38 标注≥32 数字≥46（render-safety §3.1）
+ * ============================================ */
+
+/* —— 通用容器（.phase 由 BASE_CSS 提供安全区 padding + flex column center）—— */
+.stage{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;}
+.stage--tight{gap:18px;}
+
+/* —— 组标题（领域色渐变文字，禁白端点，禁黑阴影，text-shadow 极淡 0.08）—— */
+.grp-title{
+  font-family:var(--font-title);
+  font-weight:900;
+  font-size:80px;
+  line-height:1.08;
+  text-align:center;
+  letter-spacing:1px;
+  background-image:linear-gradient(92deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.grp-sub{
+  font-family:var(--font-body);
+  font-size:34px;
+  font-weight:600;
+  color:var(--text2);
+  letter-spacing:3px;
+  text-align:center;
+}
+/* 组色环装饰（领域标识，纯视觉）*/
+.grp-ring{
+  width:120px;height:8px;border-radius:6px;
+  background-image:linear-gradient(90deg,var(--c1),var(--c2));
+  box-shadow:0 0 18px var(--c1);
+}
+
+/* —— 项目卡（深色不透明底 + 领域色边框；禁透明卡与 bg 冲突）—— */
+.proj-card{
+  background:linear-gradient(160deg,var(--card-bg),var(--card-bg-2));
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-left:6px solid var(--accent);
+  border-radius:22px;
+  padding:28px 28px;
+  box-shadow:0 10px 36px rgba(0,0,0,0.42);
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* hero 卡（phase1 首项目，纵向大卡）*/
+.proj-card--hero{
+  max-width:780px;
+  margin:0 auto;
+  padding:32px 32px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  border:2px solid var(--accent);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset, 0 14px 44px rgba(0,0,0,0.5), 0 0 32px var(--glow);
+}
+
+/* mini 卡（紧凑横向，单项目 phase 用）*/
+.proj-card--mini{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;flex-direction:row;align-items:center;gap:24px;
+  padding:22px 26px;
+  border-left:6px solid var(--accent);
+}
+
+/* 用途利益标签（领域色药丸，禁渐变文字组合）*/
+.pfc-use{
+  display:inline-block;
+  font-family:var(--font-body);
+  font-size:34px;font-weight:700;
+  color:var(--accent);
+  background:var(--use-bg);
+  border:1.5px solid var(--accent);
+  padding:8px 22px;border-radius:999px;
+  letter-spacing:1px;white-space:nowrap;
+}
+
+/* avatar 圆形头像（领域色环）*/
+.pfc-avatar{
+  border-radius:50%;
+  border:3px solid var(--accent);
+  box-shadow:0 0 18px var(--glow);
+  object-fit:cover;
+  flex-shrink:0;
+  background:#0a0c18;
+}
+.pfc-avatar--hero{width:128px;height:128px;}
+.pfc-avatar--mini{width:104px;height:104px;}
+
+/* 项目名（owner 小 + repo 大，独占行 word-break，禁 nowrap/ellipsis）*/
+.pfc-name{
+  font-family:var(--font-data);
+  word-break:break-word;
+  line-height:1.14;
+  width:100%;
+  text-align:center;
+}
+.pfc-owner{font-size:32px;color:var(--text2);font-weight:500;}
+.pfc-repo{font-size:50px;color:#f5f5f5;font-weight:800;}
+.proj-card--mini .pfc-owner{font-size:32px;}
+.proj-card--mini .pfc-repo{font-size:44px;}
+
+/* 星数行（领域色数字）*/
+.pfc-stars{
+  font-family:var(--font-data);
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center;
+}
+.pfc-star-num{font-size:48px;font-weight:800;color:var(--accent);}
+.proj-card--mini .pfc-star-num{font-size:40px;}
+.pfc-star-unit{font-size:34px;color:var(--text2);font-weight:600;}
+.pfc-badge{
+  font-size:32px;font-weight:700;color:var(--accent);
+  border:1.5px solid var(--accent);border-radius:8px;
+  padding:4px 14px;
+}
+.proj-card--mini .pfc-badge{font-size:32px;}
+
+/* 中文描述 */
+.pfc-desc{
+  font-family:var(--font-body);
+  font-size:38px;font-weight:500;
+  color:#e6e9f2;line-height:1.32;
+  text-align:center;
+}
+.proj-card--mini .pfc-desc{font-size:34px;}
+
+/* mini 卡信息列 */
+.pfc-info{display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;}
+
+/* —— hook 数字爆点（暖金，禁白端点）—— */
+.hero-week{font-family:var(--font-data);font-size:38px;font-weight:600;color:var(--text2);letter-spacing:6px;text-align:center;}
+.hero-tag{
+  font-family:var(--font-body);font-size:46px;font-weight:700;color:#fff;
+  background-image:linear-gradient(92deg,#FF8C32,#FBBF24);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:2px;line-height:1.1;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.hero-vs{font-family:var(--font-data);font-size:64px;font-weight:800;color:var(--text2);letter-spacing:4px;}
+.hero-num{
+  font-family:var(--font-title);
+  font-size:260px;font-weight:900;line-height:1.0;text-align:center;letter-spacing:-2px;
+  background-image:linear-gradient(180deg,#FFD27A,#FF8C32 60%,#FF6A00);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.hero-num-unit{font-size:88px;font-weight:800;}
+.hero-sub{font-family:var(--font-body);font-size:42px;font-weight:600;color:#e6e9f2;letter-spacing:1px;text-align:center;line-height:1.3;}
+
+/* —— s6 总结（三大信号，领域色标识）—— */
+.sum-title{
+  font-family:var(--font-title);font-size:76px;font-weight:900;line-height:1.1;text-align:center;
+  background-image:linear-gradient(92deg,#FBBF24,#FF8C32);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.signal-stack{width:100%;max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
+.signal-row{
+  display:flex;flex-direction:row;align-items:center;gap:24px;
+  background:linear-gradient(160deg,var(--card-bg),var(--card-bg-2));
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-left:6px solid var(--accent);
+  border-radius:18px;
+  padding:22px 28px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.4);
+}
+.signal-num{
+  font-family:var(--font-data);font-size:58px;font-weight:900;line-height:1.0;
+  background-image:linear-gradient(180deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  flex-shrink:0;width:100px;text-align:center;
+}
+.signal-text{font-family:var(--font-body);font-size:40px;font-weight:600;color:#e6e9f2;line-height:1.3;}
+
+/* —— s7 CTA（暖金收尾）—— */
+.cta-q{font-family:var(--font-body);font-size:46px;font-weight:600;color:#fff;text-align:center;line-height:1.3;}
+.cta-title{
+  font-family:var(--font-title);font-size:84px;font-weight:900;line-height:1.12;text-align:center;
+  background-image:linear-gradient(92deg,#FBBF24,#FF8C32);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-channel{
+  font-family:var(--font-data);font-size:42px;font-weight:700;color:#FBBF24;
+  border:2.5px solid #FBBF24;border-radius:16px;padding:14px 34px;letter-spacing:2px;
+  box-shadow:0 0 24px rgba(251,191,36,0.3);
+}
+.cta-week{font-family:var(--font-body);font-size:38px;font-weight:600;color:var(--text2);letter-spacing:4px;}

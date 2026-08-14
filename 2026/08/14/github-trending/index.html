@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080,height=1920">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url('file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2') format('woff2'); }
+
+/* === ClipForge 基础层（自动生成，勿手改）=== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;overflow:hidden;width:1080px;height:1920px;}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;}
+.clip{position:absolute;top:0;left:0;width:1080px;height:1920px;overflow:hidden;}
+.layer-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.layer-fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.layer-content{position:relative;z-index:3;height:100%;color:#fff;font-size:48px;}
+.layer-cinema{position:absolute;top:0;left:0;width:100%;height:100%;z-index:4;pointer-events:none;}
+.phase{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:180px 90px 220px 90px;opacity:0;}
+.phase:first-child{opacity:1;}
+/* 兜底：.phase 内文本居中容器的直接块级子元素水平居中（根治 max-width 块缺 margin:0 auto 导致整块偏左；text-align 只居中行内内容不居中块盒子）*/
+.phase [style*="text-align:center"] > div,.phase [style*="text-align: center"] > div{margin-left:auto;margin-right:auto;}
+audio{display:none;}
+.fx-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.fx-line{position:absolute;height:1px;pointer-events:none;}
+.fx-dot{position:absolute;border-radius:50%;pointer-events:none;}
+/* === fx 原语库（CSS animation 循环态，0%帧可见/移动型，HyperFrames 安全）===
+   LLM 在 .layer-fx 内用 <div class="fx-xxx"> 直接引用，无需写 CSS；
+   颜色默认半透明白，可 inline 覆盖（style="background:var(--accent-warm)"）。
+   情绪→原语：ambient→aura / focus→ring,pulse-ring / calm→particle / tech→scan,stream,grid /
+   climax→beam / shock→bolt / energy→orbit。R-R-008 要求 ≥2 种不同 fx class。 */
+@keyframes fxAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.1)}}
+@keyframes fxRingExp{0%,100%{opacity:.3;transform:scale(.92)}50%{opacity:.65;transform:scale(1.25)}}
+@keyframes fxFloat{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-22px);opacity:1}}
+@keyframes fxScanMove{0%,100%{top:18%}50%{top:82%}}
+@keyframes fxBeamSweep{0%{left:-60%;opacity:0}10%,90%{opacity:.6}50%{left:50%}100%{left:120%;opacity:0}}
+@keyframes fxStreamFall{0%{top:-50%;opacity:0}15%{opacity:.5}100%{top:120%;opacity:0}}
+@keyframes fxBolt{0%,88%,100%{opacity:0}90%,94%{opacity:.85}91%{opacity:.2}}
+@keyframes fxGridPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+@keyframes fxOrbit{from{transform:rotate(0) translateX(160px) rotate(0)}to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}}
+@keyframes fxPulseRing{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+.fx-aura{position:absolute;border-radius:50%;filter:blur(70px);animation:fxAura 4.5s ease-in-out infinite;}
+.fx-ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxRingExp 5s ease-in-out infinite;}
+.fx-particle{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.7);animation:fxFloat 4s ease-in-out infinite;}
+.fx-scan{position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.55),transparent);opacity:.5;animation:fxScanMove 6s ease-in-out infinite;}
+.fx-beam{position:absolute;top:40%;width:80%;height:50px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.45),transparent);filter:blur(6px);mix-blend-mode:screen;animation:fxBeamSweep 5s ease-in-out infinite;}
+.fx-stream{position:absolute;width:3px;height:35%;background:linear-gradient(180deg,transparent,rgba(94,234,212,.5),transparent);animation:fxStreamFall 3s linear infinite;}
+.fx-bolt{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 30%,rgba(94,234,212,.4),transparent 60%);animation:fxBolt 5s steps(1) infinite;}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,234,212,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.09) 1px,transparent 1px);background-size:50px 50px;animation:fxGridPulse 8s ease-in-out infinite;}
+.fx-orbit{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 10px rgba(255,255,255,.5);animation:fxOrbit 6s linear infinite;}
+.fx-pulse-ring{position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);width:200px;height:200px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:fxPulseRing 3s ease-out infinite;}
+/* === cinema 后处理原语库（全帧签名层 z:4，LLM 在 .layer-cinema 内用 <div class="cinema-xxx"> 引用，无需写 CSS）===
+   每视频选 1-2 个签名（Cinema 测试：移除效果帧是否丢签名？都不丢→剪）。快速播报可选，非每场景必需。
+   情绪→原语：聚焦/收紧→vignette / 胶片质感→grain / 论点落地冲击→lightflash(GSAP 控 opacity 闪) / 暖光签名→halation / 数据失真科技感→aberration。*/
+.cinema-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,0.55) 100%);pointer-events:none;}
+.cinema-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");pointer-events:none;}
+.cinema-halation{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 62%,rgba(255,180,90,0.16),transparent 68%);pointer-events:none;}
+.cinema-lightflash{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,228,180,0.55),transparent 62%);pointer-events:none;}
+.cinema-aberration{position:absolute;inset:0;filter:drop-shadow(1.5px 0 rgba(255,40,90,0.45)) drop-shadow(-1.5px 0 rgba(40,200,255,0.45));pointer-events:none;}
+.pfc-use[class*="grad-"]{background-image:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#f5f5f5;color:#f5f5f5;} /* 全局兜底：胶囊禁 grad clip:text（feedback-bgclip-text-capsule-conflict），SubAgent 误用 grad-* 时强制纯色可见；项目级 .pfc-use.grad-xxx 可覆盖分色 */
+.tut-scene{display:flex;flex-direction:column;justify-content:center;align-items:stretch;width:100%;height:100%;} /* 教程横屏：撑满 phase content box（phase padding 管安全区），align-items:stretch 让 region 水平撑满（根治偏右，不缩中间）*/
+.tut-grid{width:100%;height:100%;}
+/* === LLM 自定义组件层（来自 creative/style.css）=== */
+
+/* ============================================
+ * 2026-08-14 github-trending daily — 守住隐私·四个开源工具
+ * 配色：深蓝 #0A0E1C / 深紫 #131A2E 底 + 橙 #FF8C32 + 蓝 #4DA8DA 双光晕
+ * 四项目分色：spiderfoot 橙(警觉) / holehe 蓝(分析) / FluidVoice 金(温暖) / modly 紫(创意)
+ * spiderfoot/holehe 中性化：只展示"自查防御"，禁攻击性视觉
+ * ============================================ */
+
+:root {
+  /* 暗色基底（design.md：深蓝/深紫暗调） */
+  --bg-deep: #0A0E1C;
+  --bg-mid: #131A2E;
+  /* 主强调色（github 分类 color_bias） */
+  --orange-1: #FB923C;
+  --orange-2: #FF8C32;
+  --orange-glow: rgba(255,140,50,0.40);
+  --blue-1: #60A5FA;
+  --blue-2: #4DA8DA;
+  --blue-glow: rgba(77,168,218,0.38);
+  --gold-1: #FDBA74;
+  --gold-2: #F59E0B;
+  --violet-1: #A78BFA;
+  --violet-2: #8B5CF6;
+  --amber-1: #FCD34D;
+  --amber-2: #FBBF24;
+  /* 文字 */
+  --text: #F5F7FA;
+  --text-2: rgba(229,234,242,0.66);
+  --text-3: rgba(229,234,242,0.42);
+  /* 兼容 fx 原语默认色（被各场景 inline 覆盖） */
+  --accent-warm: var(--orange-2);
+  --accent-cool: var(--blue-2);
+  /* 字体（fonts.json 三层） */
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  /* 极淡 drop（github 分类规则：禁发光，blur≤16） */
+  --shadow-flat: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================
+ * 渐变文字（background-image 独立属性·禁白端点·禁 background 简写）
+ * 渐变文字不加 text-shadow（R-S6-023），纯色字才用 --shadow-flat
+ * ============================================ */
+.grad-orange {
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FB923C 55%, #FDBA74 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #4DA8DA 0%, #60A5FA 55%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, #FBBF24 0%, #FCD34D 50%, #FB923C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-dual {
+  background-image: linear-gradient(90deg, #FF8C32 0%, #FB923C 38%, #60A5FA 65%, #4DA8DA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+
+/* ============================================
+ * PFC phase 覆盖：.phase 默认带安全区 padding，PFC 自带 padding → 覆盖为 0
+ * ============================================ */
+.phase-pfc { padding: 0 !important; }
+
+/* ============================================
+ * ProjectFullCard（content 组件，CSS 手动维护）
+ * 纵向分带 space-between：顶/中/底三带填满 1920 安全区
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 180px 90px 220px 90px;
+}
+.pfc-glow { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
+.pfc-glow-warm { width: 540px; height: 540px; opacity: 0.22; background: var(--accent-warm); top: 160px; left: -130px; }
+.pfc-glow-cool { width: 480px; height: 480px; opacity: 0.18; background: var(--accent-cool); bottom: 260px; right: -110px; }
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+/* 顶部带 */
+.pfc-top { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 22px; width: 100%; }
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: var(--shadow-flat);
+  font-family: 'JetBrains Mono';
+}
+.pfc-category {
+  font-size: 38px; font-weight: 700; letter-spacing: 0.10em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  font-size: 50px; font-weight: 800; line-height: 1.15;
+  padding: 10px 26px; border-radius: 14px;
+  background: rgba(10,14,28,0.62);
+  border: 1.5px solid rgba(255,255,255,0.16);
+  color: var(--accent-warm);
+  align-self: flex-start; letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: 'JetBrains Mono';
+  line-height: 1.10; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner { font-size: 34px; font-weight: 500; color: var(--text-3); letter-spacing: 0.04em; }
+.pfc-repo { font-size: 62px; font-weight: 800; color: #F2F4F8; }
+/* 中部带 */
+.pfc-mid { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 36px; width: 100%; }
+.pfc-avatar-wrap { position: relative; width: 228px; height: 228px; display: flex; align-items: center; justify-content: center; }
+.pfc-avatar-ring {
+  position: absolute; inset: -18px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+  animation: pfcRingPulse 3.6s ease-in-out infinite;
+}
+@keyframes pfcRingPulse { 0%,100%{transform:scale(1);opacity:0.45;} 50%{transform:scale(1.10);opacity:0.70;} }
+.pfc-avatar { position: relative; z-index: 1; width: 228px; height: 228px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.82); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.pfc-desc { font-size: 40px; font-weight: 600; line-height: 1.35; color: #F2F4F8; text-align: center; max-width: 800px; text-shadow: var(--shadow-flat); }
+.pfc-extra-chip {
+  align-self: center; font-family: 'JetBrains Mono'; font-size: 34px; font-weight: 700;
+  color: var(--accent-warm); padding: 10px 30px; border-radius: 12px;
+  background: rgba(10,14,28,0.66); border: 1.5px solid rgba(255,255,255,0.16);
+  letter-spacing: 0.02em;
+}
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-total-row { display: flex; justify-content: space-between; align-items: baseline; }
+.pfc-total-num { font-size: 54px; font-weight: 900; color: var(--text); font-family: 'JetBrains Mono'; }
+.pfc-total-note { font-size: 32px; font-weight: 600; color: var(--text-2); }
+.pfc-bar-track { width: 100%; height: 16px; border-radius: 999px; background: rgba(255,255,255,0.10); overflow: hidden; }
+.pfc-bar-fill { height: 100%; border-radius: 999px; background-image: linear-gradient(90deg, var(--accent-cool), var(--accent-warm)); transform-origin: left center; }
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; }
+.pfc-topic { font-size: 32px; font-weight: 600; padding: 8px 22px; border-radius: 999px; color: var(--accent-cool); background: rgba(12,18,34,0.55); border: 1px solid rgba(255,255,255,0.18); }
+/* 底部带 */
+.pfc-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item { font-size: 32px; font-weight: 700; padding: 10px 26px; border-radius: 14px; color: #fff; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); }
+.pfc-commentary { font-size: 36px; font-weight: 500; line-height: 1.4; color: var(--text-2); border-left: 4px solid var(--accent-warm); padding-left: 24px; }
+
+/* —— PFC 四项目分色（容器变量覆盖）—— */
+#s02 .project-full-card { --accent-warm: var(--orange-2); --accent-cool: var(--blue-2); }
+#s03 .project-full-card { --accent-warm: var(--blue-1); --accent-cool: var(--blue-2); }
+#s04 .project-full-card { --accent-warm: var(--gold-2); --accent-cool: var(--orange-2); }
+#s05 .project-full-card { --accent-warm: var(--violet-1); --accent-cool: var(--blue-1); }
+
+/* ============================================
+ * s01 hook — 反直觉对比："你以为安全" vs "信息漏光"
+ * 中性化：盾牌+漏出粒子（防御向，非攻击）
+ * ============================================ */
+.hook-wrap { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; gap: 44px; }
+.hook-eyebrow {
+  font-size: 34px; font-weight: 700; letter-spacing: 0.22em;
+  color: var(--blue-1); padding: 8px 28px;
+  border: 1.5px solid rgba(96,165,250,0.45); border-radius: 999px;
+  background: rgba(96,165,250,0.06);
+}
+.hook-pair { display: flex; flex-direction: column; gap: 24px; align-items: center; }
+.hook-line-safe {
+  font-family: 'Inter'; font-weight: 900;
+  font-size: 88px; line-height: 1.05; letter-spacing: -0.01em;
+  color: var(--text); text-shadow: var(--shadow-flat);
+}
+.hook-line-leak {
+  font-family: 'Inter'; font-weight: 900;
+  font-size: 112px; line-height: 1.02; letter-spacing: -0.02em;
+}
+.hook-chips { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; max-width: 880px; }
+.hook-chip {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--text-2); padding: 8px 22px; border-radius: 999px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);
+}
+
+/* ============================================
+ * s05 尾部 CTA 带组件（与 modly PFC 同屏，PFC 占顶/中带，CTA 占底带）
+ * ============================================ */
+.pfc-tail-cta {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column; gap: 18px; width: 100%;
+  padding: 22px 28px; border-radius: 18px;
+  background: rgba(10,14,28,0.66); border: 1.5px solid rgba(167,139,250,0.32);
+  margin-top: 18px;
+}
+.cta-recap-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.cta-recap-pill {
+  font-family: 'JetBrains Mono'; font-size: 32px; font-weight: 700;
+  color: var(--text); padding: 8px 20px; border-radius: 999px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
+  letter-spacing: 0.02em;
+}
+.cta-question {
+  font-family: 'Inter'; font-size: 46px; font-weight: 900;
+  line-height: 1.18; text-align: center; letter-spacing: -0.005em;
+}
+.cta-follow {
+  font-size: 36px; font-weight: 700; color: var(--violet-1);
+  text-align: center; letter-spacing: 0.04em;
+}
+/* === bg 组件 @keyframes（自动注入，来自 components/bg/）=== */
+@keyframes beamRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes beamBreath {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes scanLine { 0%{top:-10%} 100%{top:110%} }
+@keyframes scanLine2 { 0%{top:-10%} 100%{top:110%} }
+@keyframes gridPulse { 0%,100%{opacity:0.4} 50%{opacity:0.7} }
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes gridNodeBlink { 0%,100%{opacity:0.3;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
+@keyframes cornerPulse { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+@keyframes dataFlow { 0%{transform:translateX(-100%);opacity:0} 50%{opacity:0.7} 100%{transform:translateX(100%);opacity:0} }
+@keyframes tickFade { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+
+@keyframes glassShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.20} }
+@keyframes contourPulse { 0%,100%{opacity:0.7} 50%{opacity:0.9} }
+@keyframes contourShift { 0%,100%{background-position:0% 50%} 50%{background-position:3% 48%} }
+@keyframes glowPulse { 0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)} 50%{opacity:0.9;transform:translate(-50%,-50%) scale(1.05)} }
+@keyframes beamBreath { 0%,100%{opacity:0.5} 50%{opacity:0.8} }
+@keyframes starDot { 0%,100%{opacity:0.3} 50%{opacity:0.6} }
+@keyframes prismShimmer { 0%,100%{opacity:0.15} 50%{opacity:0.18} }
+@keyframes annotationPulse { 0%,100%{opacity:0.5;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.1)} }
+@keyframes terrainRise { 0%,100%{transform:translate(0,0)} 50%{transform:translate(8px,-6px)} }
+@keyframes tickFade { 0%,100%{opacity:0.2} 50%{opacity:0.55} }
+
+@keyframes auroraFlow {
+  0%, 100% { transform: translateX(-8%) scaleY(1); }
+  50% { transform: translateX(8%) scaleY(1.12); }
+}
+@keyframes auroraCurtain {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.5; }
+  50% { transform: scaleY(1.15) translateY(-10px); opacity: 0.8; }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes vignettePulse {
+  0%, 100% { opacity: 0.10; }
+  50% { opacity: 0.16; }
+}
+@keyframes warmBreath {
+  0%, 100% { transform: scale(1); opacity: 0.10; }
+  50% { transform: scale(1.06); opacity: 0.18; }
+}
+@keyframes warmRing {
+  0% { transform: scale(0.9); opacity: 0.15; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes lightStreak {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-50px) translateX(8px); opacity: 0.7; }
+}
+@keyframes glassShimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="48.66" data-width="1080" data-height="1920">
+<audio id="narration" src="narration.mp3" data-volume="1" data-track="1" data-start="0"></audio>
+<audio id="bgm" src="bgm.wav" data-volume="0.2" data-track="2" data-start="0"></audio>
+
+<div class="clip" id="s01" data-start="0.00" data-duration="2.66">
+<!-- 场景: hook | 时长: 2.66s -->
+<div class="layer-bg" data-bg-types="beams,glow,gradient,particles,vignette">
+<!-- bg-component: radial_beams -->
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0800,#1a1200,#0a0800)"></div>
+
+<div style="position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:25% 17.5%;animation:beamRotate 60s linear infinite;
+  background:repeating-conic-gradient(from 0deg,transparent 0deg,rgba(255,200,0,0.05) 2deg,transparent 4deg,transparent 28deg)"></div>
+
+<div style="position:absolute;top:15%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,200,0,0.25) 0%,transparent 60%);filter:blur(80px);
+  animation:glowPulse 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:30%;left:55%;width:4px;height:4px;border-radius:50%;
+  background:hsla(45,90%,65%,0.6);box-shadow:0 0 10px hsla(45,80%,55%,0.5);animation:floatParticle 6s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:35%;width:3px;height:3px;border-radius:50%;
+  background:hsla(38,85%,60%,0.5);box-shadow:0 0 8px hsla(38,75%,50%,0.4);animation:floatParticle 8s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:65%;left:60%;width:3px;height:3px;border-radius:50%;
+  background:hsla(50,80%,62%,0.45);box-shadow:0 0 7px hsla(50,70%,52%,0.35);animation:floatParticle 7s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1.5px solid hsla(40,80%,55%,0.12);animation:warmRing 5s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(35% - 60px);left:calc(35% - 60px);width:120px;height:120px;border-radius:50%;
+  border:1px solid hsla(45,70%,50%,0.08);animation:warmRing 5s ease-out infinite 2.5s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(255,255,255,0.03) 0%,transparent 25%,transparent 75%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:5%;left:15%;width:700px;height:700px;border-radius:50%;opacity:0.025;
+  background:conic-gradient(from 0deg,rgba(255,50,50,0.5),rgba(255,200,50,0.4),rgba(50,255,100,0.5),rgba(50,100,255,0.5),rgba(200,50,255,0.4),rgba(255,50,50,0.5));
+  filter:blur(60px);animation:beamBreath 12s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 35%,transparent 30%,rgba(0,0,0,0.5) 100%)"></div>
+</div>
+<div class="layer-fx">
+<div class="fx-pulse" style="position:absolute;top:38%;left:50%;width:680px;height:680px;margin:-340px 0 0 -340px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,50,0.36),rgba(255,140,50,0.12),transparent 70%);filter:blur(60px)"></div>
+<div class="fx-pulse" style="position:absolute;top:62%;left:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(77,168,218,0.28),transparent 70%);filter:blur(64px)"></div>
+<div class="fx-spin" style="position:absolute;top:50%;left:50%;width:820px;height:820px;margin:-410px 0 0 -410px;border-radius:50%;border:2px dashed rgba(255,184,77,0.22)"></div>
+<div class="fx-blink" style="position:absolute;top:14%;left:18%;width:12px;height:12px;border-radius:50%;background:#FFB84D;box-shadow:0 0 14px rgba(255,184,77,0.85)"></div>
+<div class="fx-blink" style="position:absolute;top:74%;left:84%;width:14px;height:14px;border-radius:50%;background:#FF8C32;box-shadow:0 0 16px rgba(255,140,50,0.85)"></div>
+<div class="fx-drift" style="position:absolute;top:22%;left:78%;width:10px;height:10px;border-radius:50%;background:#60A5FA;box-shadow:0 0 12px rgba(96,165,250,0.75)"></div>
+<div class="fx-drift" style="position:absolute;top:80%;left:22%;width:10px;height:10px;border-radius:50%;background:#FCD34D;box-shadow:0 0 12px rgba(252,211,77,0.75)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1">
+<div class="hook-wrap">
+  <span class="hook-eyebrow">守住隐私 · 四个开源工具</span>
+  <div class="hook-pair">
+    <div class="hook-line-safe">你以为安全</div>
+    <div class="hook-line-leak"><span class="grad-orange">信息居然漏光</span></div>
+  </div>
+  <div class="hook-chips">
+    <span class="hook-chip">spiderfoot</span>
+    <span class="hook-chip">holehe</span>
+    <span class="hook-chip">FluidVoice</span>
+    <span class="hook-chip">modly</span>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>
+</div>
+
+<div class="clip" id="s02" data-start="2.66" data-duration="10.15">
+<!-- 场景: spiderfoot | 时长: 10.15s -->
+<div class="layer-bg" data-bg-types="glow,gradient,grid,particles,scan">
+<!-- bg-component: scan_grid -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#040810,#0a1520,#040810)"></div>
+
+<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.05) 1px,transparent 1px);background-size:80px 80px;animation:gridPulse 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,229,255,0.5),rgba(0,229,255,0.3),transparent);box-shadow:0 0 20px rgba(0,229,255,0.3);animation:scanLine 8s linear infinite"></div>
+
+<div style="position:absolute;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),rgba(0,200,255,0.35),transparent);animation:scanLine2 11s linear infinite 3s"></div>
+
+<div style="position:absolute;top:40%;left:50%;width:400px;height:400px;border-radius:50%;background:rgba(0,150,200,0.1);filter:blur(100px);transform:translate(-50%,-50%)"></div>
+
+<div style="position:absolute;top:30%;left:40%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,229,255,0.9);box-shadow:0 0 14px rgba(0,229,255,0.7);
+  animation:gridNodeBlink 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:55%;left:65%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,220,255,0.85);box-shadow:0 0 12px rgba(0,220,255,0.6);
+  animation:gridNodeBlink 4s ease-in-out infinite 1s"></div>
+<div style="position:absolute;top:70%;left:30%;width:11px;height:11px;border-radius:50%;
+  background:rgba(0,235,255,0.8);box-shadow:0 0 13px rgba(0,235,255,0.65);
+  animation:gridNodeBlink 3.5s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:42%;left:75%;width:9px;height:9px;border-radius:50%;
+  background:rgba(0,225,255,0.85);box-shadow:0 0 11px rgba(0,225,255,0.6);
+  animation:gridNodeBlink 4.5s ease-in-out infinite 0.5s"></div>
+
+<div style="position:absolute;top:50%;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),rgba(0,255,200,0.6),rgba(0,229,255,0.4),transparent);
+  filter:blur(1px);animation:dataFlow 7s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:120px;left:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite"></div>
+<div style="position:absolute;top:120px;right:90px;width:42px;height:42px;
+  border-top:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;bottom:160px;left:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-left:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 3s"></div>
+<div style="position:absolute;bottom:160px;right:90px;width:42px;height:42px;
+  border-bottom:2px solid rgba(0,229,255,0.45);border-right:2px solid rgba(0,229,255,0.45);
+  animation:cornerPulse 5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;left:60px;display:flex;flex-direction:column;gap:30px;opacity:0.5;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,229,255,0.4);font-size:14px;
+  animation:tickFade 6s ease-in-out infinite">
+  <span>| 00</span><span>| 25</span><span>| 50</span><span>| 75</span><span>| 99</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(96,165,250,0.015) 0%,transparent 30%,transparent 70%,rgba(96,165,250,0.02) 100%);
+  animation:glassShimmer 8s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:60%;right:-8%;width:50%;height:200px;opacity:0.15;
+  background:linear-gradient(90deg,rgba(0,255,200,0.5),rgba(200,0,255,0.4),rgba(0,200,255,0.5));
+  filter:blur(70px);border-radius:50%"></div>
+</div>
+<div class="layer-fx">
+<div class="fx-pulse" style="position:absolute;top:22%;left:18%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,50,0.32),transparent 70%);filter:blur(70px)"></div>
+<div class="fx-pulse" style="position:absolute;top:74%;left:80%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(77,168,218,0.28),transparent 70%);filter:blur(66px)"></div>
+<div class="fx-spin" style="position:absolute;top:42%;left:82%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:2px dashed rgba(255,184,77,0.32)"></div>
+<div class="fx-blink" style="position:absolute;top:18%;left:62%;width:10px;height:10px;border-radius:50%;background:#FFB84D;box-shadow:0 0 12px rgba(255,184,77,0.80)"></div>
+<div class="fx-drift" style="position:absolute;top:56%;left:84%;width:9px;height:9px;border-radius:50%;background:#FF8C32;box-shadow:0 0 11px rgba(255,140,50,0.75)"></div>
+<div class="fx-drift" style="position:absolute;top:84%;left:38%;width:8px;height:8px;border-radius:50%;background:#60A5FA;box-shadow:0 0 10px rgba(96,165,250,0.70)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 phase-pfc">
+<div class="project-full-card">
+  <div class="pfc-glow pfc-glow-warm"></div>
+  <div class="pfc-glow pfc-glow-cool"></div>
+  <div class="pfc-grid"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#01</span>
+      <span class="pfc-category">暴露面自查</span>
+    </div>
+    <div class="pfc-use">输入信息扫暴露面</div>
+    <div class="pfc-name"><span class="pfc-owner">smicallef /</span> <span class="pfc-repo">spiderfoot</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/smicallef.png" alt="">
+    </div>
+    <div class="pfc-desc">输入自己的名字域名或邮箱，扫一遍网上能查到的暴露面，提前发现哪里漏了</div>
+    <div class="pfc-extra-chip">两万星 · 自查防御</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-total-row">
+        <span class="pfc-total-num">20.7K ★</span>
+        <span class="pfc-total-note">今日 +278 · 榜内涨幅最高</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:100%"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">Python</span>
+        <span class="pfc-topic">自查</span>
+        <span class="pfc-topic">暴露面</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">自动扫描</span>
+      <span class="pfc-sell-item">暴露面可视化</span>
+      <span class="pfc-sell-item">提前防御</span>
+    </div>
+    <div class="pfc-commentary">给自己做个安全排查</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>
+</div>
+
+<div class="clip" id="s03" data-start="12.81" data-duration="10.32">
+<!-- 场景: holehe | 时长: 10.32s -->
+<div class="layer-bg" data-bg-types="contour,glow,gradient,particles">
+<!-- bg-component: contour_lines -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,#080818 0%,#0a1520 50%,#080818 100%)"></div>
+
+<div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 30% 40%,transparent 0px,transparent 78px,rgba(0,200,200,0.06) 78px,rgba(0,200,200,0.06) 80px);animation:contourPulse 8s ease-in-out infinite,terrainRise 12s ease-in-out infinite"></div>
+
+<div style="position:absolute;inset:0;opacity:0.5;background:repeating-radial-gradient(circle at 32% 42%,transparent 0px,transparent 120px,rgba(0,180,200,0.03) 120px,rgba(0,180,200,0.03) 122px);animation:contourShift 20s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:40%;left:30%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,180,200,0.12) 0%,transparent 70%);filter:blur(80px);
+  animation:glowPulse 10s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:0;left:30%;width:2px;height:100%;
+  background:linear-gradient(transparent 10%,rgba(0,200,200,0.08) 50%,transparent 90%);
+  animation:beamBreath 6s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:0;left:68%;width:1.5px;height:100%;
+  background:linear-gradient(transparent 20%,rgba(0,200,200,0.05) 50%,transparent 80%);
+  animation:beamBreath 8s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:38%;left:28%;width:16px;height:16px;border-radius:50%;
+  background:rgba(0,255,220,0.9);box-shadow:0 0 16px rgba(0,255,220,0.6);
+  animation:annotationPulse 4s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:38%;left:28%;width:120px;height:2px;
+  background:linear-gradient(90deg,rgba(0,255,220,0.5),transparent);
+  transform:rotate(-25deg);transform-origin:left center"></div>
+
+<div style="position:absolute;top:52%;left:42%;width:12px;height:12px;border-radius:50%;
+  background:rgba(0,240,200,0.85);box-shadow:0 0 14px rgba(0,240,200,0.5);
+  animation:annotationPulse 5s ease-in-out infinite 1.5s"></div>
+
+<div style="position:absolute;top:30%;left:55%;width:10px;height:10px;border-radius:50%;
+  background:rgba(0,230,210,0.8);box-shadow:0 0 12px rgba(0,230,210,0.45);
+  animation:annotationPulse 6s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:38%;left:28%;width:4px;height:4px;border-radius:50%;
+  background:hsla(180,70%,60%,0.5);box-shadow:0 0 8px hsla(180,60%,50%,0.4);animation:starDot 3s ease-in-out infinite"></div>
+<div style="position:absolute;top:52%;left:42%;width:3px;height:3px;border-radius:50%;
+  background:hsla(190,65%,55%,0.4);box-shadow:0 0 6px hsla(190,55%,45%,0.3);animation:starDot 4s ease-in-out infinite 2s"></div>
+<div style="position:absolute;top:30%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(175,60%,58%,0.45);box-shadow:0 0 7px hsla(175,50%,48%,0.35);animation:starDot 3.5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:200px;right:70px;display:flex;flex-direction:column;gap:35px;opacity:0.45;
+  font-family:'JetBrains Mono',monospace;color:rgba(0,200,200,0.4);font-size:13px;
+  animation:tickFade 7s ease-in-out infinite">
+  <span>100m</span><span>80m</span><span>60m</span><span>40m</span><span>20m</span>
+</div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.02) 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:20%;left:-10%;width:120%;height:150px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,rgba(0,255,200,0.4),rgba(200,100,255,0.4),rgba(0,150,255,0.4),transparent);
+  filter:blur(60px);transform:rotate(2deg);animation:prismShimmer 11s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+<div class="fx-pulse" style="position:absolute;top:20%;left:20%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,0.32),transparent 70%);filter:blur(72px)"></div>
+<div class="fx-pulse" style="position:absolute;top:72%;left:80%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(77,168,218,0.28),transparent 70%);filter:blur(66px)"></div>
+<div class="fx-spin" style="position:absolute;top:38%;left:82%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:2px dashed rgba(96,165,250,0.32)"></div>
+<div class="fx-blink" style="position:absolute;top:18%;left:62%;width:10px;height:10px;border-radius:50%;background:#60A5FA;box-shadow:0 0 12px rgba(96,165,250,0.80)"></div>
+<div class="fx-drift" style="position:absolute;top:56%;left:84%;width:9px;height:9px;border-radius:50%;background:#4DA8DA;box-shadow:0 0 11px rgba(77,168,218,0.75)"></div>
+<div class="fx-drift" style="position:absolute;top:82%;left:38%;width:8px;height:8px;border-radius:50%;background:#FFB84D;box-shadow:0 0 10px rgba(255,184,77,0.70)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 phase-pfc">
+<div class="project-full-card">
+  <div class="pfc-glow pfc-glow-warm"></div>
+  <div class="pfc-glow pfc-glow-cool"></div>
+  <div class="pfc-grid"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#02</span>
+      <span class="pfc-category">邮箱痕迹自查</span>
+    </div>
+    <div class="pfc-use">一个命令反查邮箱</div>
+    <div class="pfc-name"><span class="pfc-owner">megadose /</span> <span class="pfc-repo">holehe</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/megadose.png" alt="">
+    </div>
+    <div class="pfc-desc">一个命令反查自己邮箱注册过哪些网站，忘了的注册记录一下全翻出来</div>
+    <div class="pfc-extra-chip">一万两千星 · 隐私自查</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-total-row">
+        <span class="pfc-total-num">12.4K ★</span>
+        <span class="pfc-total-note">今日 +166</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:60%"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">Python</span>
+        <span class="pfc-topic">邮箱</span>
+        <span class="pfc-topic">自查</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">一键反查</span>
+      <span class="pfc-sell-item">注册痕迹</span>
+      <span class="pfc-sell-item">隐私自查</span>
+    </div>
+    <div class="pfc-commentary">翻出忘了的注册记录</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>
+</div>
+
+<div class="clip" id="s04" data-start="23.13" data-duration="11.59">
+<!-- 场景: fluidvoice | 时长: 11.59s -->
+<div class="layer-bg" data-bg-types="glow,gradient,particles">
+<!-- bg-component: aurora_flow -->
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,hsl(200,30%,5%),hsl(180,25%,8%))"></div>
+
+<div style="position:absolute;top:15%;left:-10%;width:120%;height:180px;
+  background:linear-gradient(90deg,transparent 5%,hsla(150,70%,45%,0.18),hsla(160,55%,40%,0.12),transparent 95%);
+  filter:blur(45px);animation:auroraFlow 22s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:35%;left:-10%;width:120%;height:150px;
+  background:linear-gradient(90deg,transparent 10%,hsla(180,60%,50%,0.16),hsla(170,50%,45%,0.10),transparent 90%);
+  filter:blur(50px);animation:auroraFlow 26s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:55%;left:-10%;width:120%;height:160px;
+  background:linear-gradient(90deg,transparent 8%,hsla(280,50%,50%,0.16),hsla(260,45%,40%,0.10),transparent 92%);
+  filter:blur(55px);animation:auroraFlow 20s ease-in-out infinite 8s"></div>
+
+<div style="position:absolute;top:72%;left:-10%;width:120%;height:120px;
+  background:linear-gradient(90deg,transparent 15%,hsla(155,60%,42%,0.15),transparent 85%);
+  filter:blur(40px);animation:auroraFlow 28s ease-in-out infinite 12s"></div>
+
+<div style="position:absolute;top:-15%;left:15%;width:70%;height:250px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 100%,hsla(155,65%,45%,0.18),hsla(170,50%,40%,0.08),transparent 70%);
+  filter:blur(60px);animation:auroraCurtain 14s ease-in-out infinite"></div>
+
+<div style="position:absolute;top:0;left:20%;width:2px;height:65%;
+  background:linear-gradient(180deg,hsla(155,70%,55%,0.25),hsla(155,60%,48%,0.08) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 8s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:0;left:28%;width:1.5px;height:55%;
+  background:linear-gradient(180deg,hsla(160,65%,50%,0.20),hsla(160,55%,45%,0.06) 45%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 9s ease-in-out infinite 1s"></div>
+
+<div style="position:absolute;top:0;left:38%;width:2.5px;height:70%;
+  background:linear-gradient(180deg,hsla(170,70%,52%,0.28),hsla(170,60%,45%,0.10) 35%,transparent 100%);
+  filter:blur(1.5px);animation:auroraCurtain 7s ease-in-out infinite 2s"></div>
+
+<div style="position:absolute;top:0;left:50%;width:2px;height:60%;
+  background:linear-gradient(180deg,hsla(180,65%,50%,0.22),hsla(180,55%,42%,0.07) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 10s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:0;left:60%;width:1.5px;height:50%;
+  background:linear-gradient(180deg,hsla(175,60%,48%,0.18),hsla(175,50%,40%,0.05) 45%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 8.5s ease-in-out infinite 4s"></div>
+
+<div style="position:absolute;top:0;left:72%;width:2px;height:58%;
+  background:linear-gradient(180deg,hsla(270,55%,50%,0.20),hsla(270,45%,42%,0.06) 40%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 9.5s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:0;left:82%;width:1.5px;height:45%;
+  background:linear-gradient(180deg,hsla(280,50%,48%,0.16),hsla(280,40%,38%,0.05) 50%,transparent 100%);
+  filter:blur(1px);animation:auroraCurtain 11s ease-in-out infinite 6s"></div>
+
+<div style="position:absolute;top:18%;left:37%;width:5px;height:5px;border-radius:50%;
+  background:hsla(165,70%,60%,0.4);box-shadow:0 0 12px hsla(165,70%,55%,0.5);animation:starTwinkle 3s ease-in-out infinite 0s"></div>
+<div style="position:absolute;top:30%;left:50%;width:4px;height:4px;border-radius:50%;
+  background:hsla(180,65%,58%,0.35);box-shadow:0 0 10px hsla(180,65%,50%,0.4);animation:starTwinkle 4s ease-in-out infinite 1.5s"></div>
+<div style="position:absolute;top:12%;left:72%;width:4px;height:4px;border-radius:50%;
+  background:hsla(270,55%,55%,0.35);box-shadow:0 0 10px hsla(270,55%,48%,0.4);animation:starTwinkle 3.5s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 40%,rgba(255,255,255,0.03) 60%,transparent 100%);
+  animation:glassShimmer 9s ease-in-out infinite"></div>
+
+<div style="position:absolute;bottom:10%;left:-10%;width:120%;height:160px;opacity:0.15;
+  background:linear-gradient(90deg,transparent,hsla(150,60%,50%,0.4),hsla(180,50%,45%,0.3),hsla(280,40%,45%,0.4),transparent);
+  filter:blur(60px)"></div>
+</div>
+<div class="layer-fx">
+<div class="fx-pulse" style="position:absolute;top:20%;left:20%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(252,211,77,0.32),transparent 70%);filter:blur(72px)"></div>
+<div class="fx-pulse" style="position:absolute;top:72%;left:80%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,50,0.28),transparent 70%);filter:blur(66px)"></div>
+<div class="fx-spin" style="position:absolute;top:38%;left:82%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:2px dashed rgba(252,211,77,0.32)"></div>
+<div class="fx-blink" style="position:absolute;top:18%;left:62%;width:10px;height:10px;border-radius:50%;background:#FCD34D;box-shadow:0 0 12px rgba(252,211,77,0.80)"></div>
+<div class="fx-drift" style="position:absolute;top:56%;left:84%;width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 11px rgba(251,191,36,0.75)"></div>
+<div class="fx-drift" style="position:absolute;top:82%;left:38%;width:8px;height:8px;border-radius:50%;background:#FB923C;box-shadow:0 0 10px rgba(251,146,60,0.70)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 phase-pfc">
+<div class="project-full-card">
+  <div class="pfc-glow pfc-glow-warm"></div>
+  <div class="pfc-glow pfc-glow-cool"></div>
+  <div class="pfc-grid"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#03</span>
+      <span class="pfc-category">离线语音听写</span>
+    </div>
+    <div class="pfc-use">说话直接变文字</div>
+    <div class="pfc-name"><span class="pfc-owner">altic-dev /</span> <span class="pfc-repo">FluidVoice</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/altic-dev.png" alt="">
+    </div>
+    <div class="pfc-desc">开口说话直接变文字，全程本地处理，录音不传云端，不用联网也能用</div>
+    <div class="pfc-extra-chip">近一万星 · 本地识别</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-total-row">
+        <span class="pfc-total-num">9.9K ★</span>
+        <span class="pfc-total-note">今日 +76</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:27%"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">Swift</span>
+        <span class="pfc-topic">离线</span>
+        <span class="pfc-topic">本地</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">本地识别</span>
+      <span class="pfc-sell-item">数据不外传</span>
+      <span class="pfc-sell-item">开口就有字</span>
+    </div>
+    <div class="pfc-commentary">说的内容不外漏</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>
+</div>
+
+<div class="clip" id="s05" data-start="34.72" data-duration="13.94">
+<!-- 场景: modly | 时长: 13.94s | 尾部 CTA 同屏 -->
+<div class="layer-bg" data-bg-types="glow,gradient,particles,vignette">
+<!-- bg-component: vignette_glow -->
+<div style="position:absolute;inset:0;
+  background:linear-gradient(170deg, #0c0c14 0%, #141420 50%, #0a0a12 100%)"></div>
+
+<div style="position:absolute;top:30%;left:25%;width:600px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(38,70%,55%,0.15),hsla(25,50%,40%,0.05),transparent 70%);
+  filter:blur(100px);animation:warmBreath 10s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(42% - 80px);left:calc(42% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1.5px solid hsla(38,70%,55%,0.10);animation:warmRing 6s ease-out infinite 0s"></div>
+
+<div style="position:absolute;top:calc(42% - 80px);left:calc(42% - 80px);width:160px;height:160px;border-radius:50%;
+  border:1px solid hsla(42,60%,50%,0.07);animation:warmRing 6s ease-out infinite 3s"></div>
+
+<div style="position:absolute;top:38%;left:-20%;width:40%;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,hsla(40,60%,55%,0.15),hsla(42,70%,60%,0.20),hsla(40,60%,55%,0.15),transparent);
+  filter:blur(3px);animation:lightStreak 18s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:35%;left:55%;width:3px;height:3px;border-radius:50%;
+  background:hsla(40,80%,65%,0.5);box-shadow:0 0 8px hsla(40,70%,55%,0.4);animation:floatParticle 8s ease-in-out infinite 0s"></div>
+
+<div style="position:absolute;top:50%;left:40%;width:3px;height:3px;border-radius:50%;
+  background:hsla(45,75%,60%,0.4);box-shadow:0 0 6px hsla(45,65%,50%,0.3);animation:floatParticle 10s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;top:55%;left:65%;width:2px;height:2px;border-radius:50%;
+  background:hsla(38,70%,58%,0.35);box-shadow:0 0 5px hsla(38,60%,48%,0.25);animation:floatParticle 7s ease-in-out infinite 5s"></div>
+
+<div style="position:absolute;top:0;left:0;width:100%;height:90px;background:linear-gradient(180deg,#000 55%,transparent)"></div>
+<div style="position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(0deg,#000 55%,transparent)"></div>
+
+<div style="position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(0,0,0,0.55) 80%,rgba(0,0,0,0.75) 100%)"></div>
+
+<div style="position:absolute;top:35%;left:30%;width:480px;height:360px;border-radius:50%;
+  background:radial-gradient(ellipse,hsla(45,80%,65%,0.08),transparent 60%);
+  filter:blur(60px);animation:vignettePulse 8s ease-in-out infinite 3s"></div>
+
+<div style="position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,220,150,0.015) 0%,transparent 40%,rgba(255,200,120,0.02) 60%,transparent 100%);
+  animation:glassShimmer 10s ease-in-out infinite"></div>
+</div>
+<div class="layer-fx">
+<div class="fx-pulse" style="position:absolute;top:32%;left:50%;width:580px;height:580px;margin:-290px 0 0 -290px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,0.30),rgba(167,139,250,0.10),transparent 70%);filter:blur(60px)"></div>
+<div class="fx-pulse" style="position:absolute;top:70%;left:80%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,0.26),transparent 70%);filter:blur(66px)"></div>
+<div class="fx-spin" style="position:absolute;top:50%;left:50%;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;border:1.5px dashed rgba(167,139,250,0.22)"></div>
+<div class="fx-blink" style="position:absolute;top:16%;left:22%;width:11px;height:11px;border-radius:50%;background:#A78BFA;box-shadow:0 0 13px rgba(167,139,250,0.85)"></div>
+<div class="fx-blink" style="position:absolute;top:64%;left:80%;width:12px;height:12px;border-radius:50%;background:#8B5CF6;box-shadow:0 0 14px rgba(139,92,246,0.85)"></div>
+<div class="fx-drift" style="position:absolute;top:24%;left:76%;width:9px;height:9px;border-radius:50%;background:#60A5FA;box-shadow:0 0 11px rgba(96,165,250,0.70)"></div>
+<div class="fx-drift" style="position:absolute;top:78%;left:24%;width:10px;height:10px;border-radius:50%;background:#FF8C32;box-shadow:0 0 12px rgba(255,140,50,0.75)"></div>
+</div>
+<div class="layer-content">
+<div class="phase phase-1 phase-pfc">
+<div class="project-full-card pfc-with-cta">
+  <div class="pfc-glow pfc-glow-warm"></div>
+  <div class="pfc-glow pfc-glow-cool"></div>
+  <div class="pfc-grid"></div>
+  <div class="pfc-top">
+    <div class="pfc-header-row">
+      <span class="pfc-rank">#04</span>
+      <span class="pfc-category">本地图生 3D</span>
+    </div>
+    <div class="pfc-use">照片本地算 3D</div>
+    <div class="pfc-name"><span class="pfc-owner">lightningpixel /</span> <span class="pfc-repo">modly</span></div>
+  </div>
+  <div class="pfc-mid">
+    <div class="pfc-avatar-wrap">
+      <div class="pfc-avatar-ring"></div>
+      <img class="pfc-avatar" src="assets/avatars/lightningpixel.png" alt="">
+    </div>
+    <div class="pfc-desc">丢张图片进去，本地显卡直接算出 3D 模型，照片全程不上传</div>
+    <div class="pfc-extra-chip">五千星 · 本地显卡</div>
+    <div class="pfc-data-bar">
+      <div class="pfc-total-row">
+        <span class="pfc-total-num">5.5K ★</span>
+        <span class="pfc-total-note">今日 +118</span>
+      </div>
+      <div class="pfc-bar-track"><div class="pfc-bar-fill" style="width:42%"></div></div>
+      <div class="pfc-topics">
+        <span class="pfc-topic">TypeScript</span>
+        <span class="pfc-topic">本地</span>
+        <span class="pfc-topic">3D</span>
+      </div>
+    </div>
+  </div>
+  <div class="pfc-bottom">
+    <div class="pfc-selling">
+      <span class="pfc-sell-item">图片变 3D</span>
+      <span class="pfc-sell-item">本地显卡跑</span>
+      <span class="pfc-sell-item">数据不外传</span>
+    </div>
+    <div class="pfc-commentary">照片立起来</div>
+    <div class="pfc-tail-cta">
+      <div class="cta-recap-row">
+        <span class="cta-recap-pill">spiderfoot</span>
+        <span class="cta-recap-pill">holehe</span>
+        <span class="cta-recap-pill">FluidVoice</span>
+        <span class="cta-recap-pill">modly</span>
+      </div>
+      <div class="cta-question"><span class="grad-dual">这四个守住隐私的工具你最想试哪个？</span></div>
+      <div class="cta-follow">关注我 · 下期见</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="layer-cinema">
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script>
+var tl = gsap.timeline({ paused: true });
+const EASE={standard:'power2.out',tension:'back.out(1.4)',resolve:'power3.out',ambient:'sine.inOut'}; // 运动预设 motion-presets.md，禁裸 linear/power0
+tl.set(['#s02', '#s03', '#s04', '#s05'], {opacity:0}, 0);
+tl.set('#s01', {opacity:1}, 0);
+tl.set('#s01',{opacity:0},2.66);
+tl.set('#s02',{opacity:1},2.66);
+tl.set('#s02',{opacity:0},12.81);
+tl.set('#s03',{opacity:1},12.81);
+tl.set('#s03',{opacity:0},23.13);
+tl.set('#s04',{opacity:1},23.13);
+tl.set('#s04',{opacity:0},34.72);
+tl.set('#s05',{opacity:1},34.72);
+tl.to('#s01 .fx-blink', {opacity:0.25,duration:1.6,repeat:0,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-drift', {y:-30,duration:3.2,repeat:0,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-pulse', {scale:1.18,duration:2.4,repeat:0,yoyo:true,ease:'sine.inOut'}, 0.00);
+tl.to('#s01 .fx-spin', {rotation:360,duration:9,repeat:0,ease:'none'}, 0.00);
+tl.to('#s02 .fx-blink', {opacity:0.25,duration:1.6,repeat:5,yoyo:true,ease:'sine.inOut'}, 2.66);
+tl.to('#s02 .fx-drift', {y:-30,duration:3.2,repeat:2,yoyo:true,ease:'sine.inOut'}, 2.66);
+tl.to('#s02 .fx-pulse', {scale:1.18,duration:2.4,repeat:3,yoyo:true,ease:'sine.inOut'}, 2.66);
+tl.to('#s02 .fx-spin', {rotation:360,duration:9,repeat:0,ease:'none'}, 2.66);
+tl.to('#s03 .fx-blink', {opacity:0.25,duration:1.6,repeat:5,yoyo:true,ease:'sine.inOut'}, 12.81);
+tl.to('#s03 .fx-drift', {y:-30,duration:3.2,repeat:2,yoyo:true,ease:'sine.inOut'}, 12.81);
+tl.to('#s03 .fx-pulse', {scale:1.18,duration:2.4,repeat:3,yoyo:true,ease:'sine.inOut'}, 12.81);
+tl.to('#s03 .fx-spin', {rotation:360,duration:9,repeat:0,ease:'none'}, 12.81);
+tl.to('#s04 .fx-blink', {opacity:0.25,duration:1.6,repeat:6,yoyo:true,ease:'sine.inOut'}, 23.13);
+tl.to('#s04 .fx-drift', {y:-30,duration:3.2,repeat:2,yoyo:true,ease:'sine.inOut'}, 23.13);
+tl.to('#s04 .fx-pulse', {scale:1.18,duration:2.4,repeat:3,yoyo:true,ease:'sine.inOut'}, 23.13);
+tl.to('#s04 .fx-spin', {rotation:360,duration:9,repeat:0,ease:'none'}, 23.13);
+tl.to('#s05 .fx-blink', {opacity:0.25,duration:1.6,repeat:7,yoyo:true,ease:'sine.inOut'}, 34.72);
+tl.to('#s05 .fx-drift', {y:-30,duration:3.2,repeat:3,yoyo:true,ease:'sine.inOut'}, 34.72);
+tl.to('#s05 .fx-pulse', {scale:1.18,duration:2.4,repeat:4,yoyo:true,ease:'sine.inOut'}, 34.72);
+tl.to('#s05 .fx-spin', {rotation:360,duration:9,repeat:0,ease:'none'}, 34.72);
+window.__timelines=window.__timelines||{};
+window.__timelines["main"]=tl;
+window.__hf={duration:48.66,seek:function(ms){tl.seek(ms/1000);}};
+</script>
+</body>
+</html>

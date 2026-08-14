@@ -1,0 +1,79 @@
+:root {
+  --bg-deep: #080818;
+  --bg-mid: #0d0d24;
+  --accent-warm: #f9a825;
+  --accent-warm2: #ff6b35;
+  --accent-cool: #00f5d4;
+  --accent-cool2: #4a90e2;
+  --accent-gold: #fbbf24;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --font-title: 'Noto Serif SC','Source Han Serif SC','PingFang SC','Microsoft YaHei',serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+.tshadow { text-shadow: 0 2px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.45); }
+
+/* ===== 渐变文字（同色系高饱和，禁白端点；禁 background 简写；禁黑 text-shadow）===== */
+.grad-warm { background-image:linear-gradient(135deg,#f9a825 0%,#ff6b35 100%); -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.grad-cool { background-image:linear-gradient(135deg,#00f5d4 0%,#4a90e2 100%); -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.grad-gold { background-image:linear-gradient(135deg,#fbbf24 0%,#f9a825 100%); -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.grad-cool2 { background-image:linear-gradient(135deg,#4a90e2 0%,#7dd3fc 100%); -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+
+/* ===== 通用容器（撑满 phase，padding 由 .phase 提供，单层 padding 铁律）===== */
+.wrap { width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;text-align:center;}
+.wrap-tight { width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;text-align:center;}
+.wrap-left { width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:24px;}
+
+/* ===== hero ===== */
+.eyebrow { font-size:34px;font-weight:600;letter-spacing:0.14em;color:var(--text2);text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.eyebrow-warm { font-size:34px;font-weight:700;letter-spacing:0.10em;color:var(--accent-warm);text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.eyebrow-cool { font-size:34px;font-weight:700;letter-spacing:0.10em;color:var(--accent-cool);text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.hero-title { font-family:var(--font-title);font-weight:900;line-height:1.12;letter-spacing:-0.01em;font-size:108px;max-width:900px;}
+.hero-sub { font-family:var(--font-title);font-size:50px;font-weight:700;line-height:1.32;max-width:860px;color:#f3f3f3;text-shadow:0 2px 10px rgba(0,0,0,0.55),0 1px 3px rgba(0,0,0,0.45);}
+.hero-num { font-family:var(--font-data);font-weight:900;line-height:0.92;letter-spacing:-0.03em;font-size:230px;}
+
+/* ===== data（百分比/对比数字）===== */
+.data-num { font-family:var(--font-data);font-weight:900;line-height:0.92;letter-spacing:-0.03em;font-size:210px;}
+
+/* ===== compare（双栏对比 冷左暖右）===== */
+.compare { display:flex;flex-direction:row;gap:0;width:100%;align-items:stretch;}
+.compare-card { flex:1;display:flex;flex-direction:column;gap:16px;padding:34px 26px;border-radius:20px;}
+.compare-l { background:rgba(74,144,226,0.12);border:1.5px solid rgba(74,144,226,0.40);}
+.compare-r { background:rgba(249,168,37,0.12);border:1.5px solid rgba(249,168,37,0.44);}
+.compare-tag { font-size:32px;font-weight:800;letter-spacing:0.06em;text-shadow:0 2px 6px rgba(0,0,0,0.4);}
+.compare-tag-l { color:var(--accent-cool2);}
+.compare-tag-r { color:var(--accent-warm);}
+.compare-val { font-family:var(--font-data);font-size:42px;font-weight:800;line-height:1.25;word-break:break-word;color:#f5f5f5;text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.compare-note { font-size:32px;font-weight:600;color:var(--text2);text-shadow:0 2px 6px rgba(0,0,0,0.4);}
+
+/* ===== timeline（三段分块）===== */
+.tl { display:flex;flex-direction:column;gap:16px;width:100%;align-items:flex-start;}
+.tl-step { display:flex;flex-direction:row;align-items:center;gap:22px;padding:20px 26px;border-radius:16px;background:rgba(255,255,255,0.05);border-left:6px solid var(--accent-warm);width:100%;}
+.tl-step.cool { border-left-color:var(--accent-cool);}
+.tl-step.gold { border-left-color:var(--accent-gold);}
+.tl-pct { font-family:var(--font-data);font-size:46px;font-weight:900;color:var(--accent-gold);min-width:130px;text-shadow:0 2px 8px rgba(0,0,0,0.45);}
+.tl-body { display:flex;flex-direction:column;gap:4px;}
+.tl-who { font-size:32px;font-weight:700;color:var(--text2);letter-spacing:0.04em;text-shadow:0 2px 6px rgba(0,0,0,0.4);}
+.tl-label { font-size:34px;font-weight:700;color:#f5f5f5;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+
+/* ===== highlight（结论强调 暖/冷；纯色容器加 shadow）===== */
+.hl { display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 40px;border-radius:18px;background:rgba(249,168,37,0.10);border:1.5px solid rgba(249,168,37,0.38);max-width:900px;}
+.hl-cool { background:rgba(0,245,212,0.08);border-color:rgba(0,245,212,0.36);}
+.hl-text { font-family:var(--font-title);font-size:52px;font-weight:800;line-height:1.3;text-align:center;color:#f5f5f5;text-shadow:0 2px 10px rgba(0,0,0,0.55);}
+
+/* ===== list（护城河三样 / 要点）===== */
+.lst { display:flex;flex-direction:column;gap:18px;width:100%;align-items:flex-start;}
+.lst-item { display:flex;flex-direction:row;align-items:center;gap:22px;padding:20px 26px;border-radius:14px;background:rgba(255,255,255,0.05);width:100%;}
+.lst-num { font-family:var(--font-data);font-size:42px;font-weight:900;color:var(--accent-gold);min-width:56px;text-shadow:0 2px 8px rgba(0,0,0,0.45);}
+.lst-text { font-size:38px;font-weight:700;color:#f5f5f5;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,0.5);}
+
+/* ===== CTA ===== */
+.cta-title { font-family:var(--font-title);font-size:96px;font-weight:900;line-height:1.1;letter-spacing:-0.01em;}
+.cta-q { font-family:var(--font-title);font-size:54px;font-weight:800;line-height:1.3;max-width:860px;color:#f5f5f5;text-shadow:0 2px 10px rgba(0,0,0,0.55),0 1px 3px rgba(0,0,0,0.45);}
+.cta-tags { display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
+.cta-tag { font-size:32px;font-weight:700;padding:10px 26px;border-radius:999px;color:var(--accent-warm);background:rgba(249,168,37,0.10);border:1px solid rgba(249,168,37,0.36);}
+
+/* ===== strike（划掉）===== */
+.strike { text-decoration:line-through;text-decoration-color:rgba(255,107,53,0.75);text-decoration-thickness:5px;color:var(--text2);}

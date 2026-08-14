@@ -1,0 +1,203 @@
+/* ai-wind 8-8 电紫赛博主题（覆盖默认 hyper-pace 暖金） */
+:root {
+  --bg-deep: #0a0a14;
+  --bg-mid: #1a0a2e;
+  --accent-warm: #A855F7;     /* 电紫主色 */
+  --accent-hot: #d946ef;      /* 品红高光 */
+  --accent-cool: #00D4FF;     /* 电青辅色 */
+  --accent-violet: #a78bfa;   /* 浅紫 */
+  --text: #ffffff;
+  --text2: rgba(233,213,255,0.62);
+  --card-bg: rgba(26,10,46,0.82);
+  --card-border: rgba(168,85,247,0.32);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* === 6 场景 bg 紫化（hue-rotate 把组件默认青蓝/绿拉到电紫主题）=== */
+#s01 .layer-bg { filter: hue-rotate(85deg) saturate(1.12); }   /* ElectricPulse 青蓝→紫红 */
+#s02 .layer-bg { filter: hue-rotate(82deg) saturate(1.12); }   /* VirtualUniverse 青蓝→紫 */
+#s03 .layer-bg { filter: hue-rotate(18deg) saturate(1.18); }   /* NebulaCloud 本色紫微提 */
+#s04 .layer-bg { filter: hue-rotate(58deg) saturate(1.18); }   /* FrostCrystal 冰蓝→紫品红 */
+#s05 .layer-bg { filter: hue-rotate(85deg) saturate(1.12); }   /* ContourLines 青蓝→紫 */
+#s06 .layer-bg { filter: hue-rotate(72deg) saturate(1.15); }   /* AuroraFlow 极光→紫品红 */
+
+/* === 通用文字：极淡 text-shadow（禁发光）=== */
+.hero-title, .hero-num, .hero-sub, .cta-title, .cta-sub, .pfc-owner, .pfc-repo,
+.pfc-rank, .pfc-num, .pfc-today, .pfc-desc, .pfc-cat, .pfc-use, .pfc-lang,
+.pfc-bar-label, .pfc-vintage {
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* === 渐变文字（电紫，禁白端点，line-height≥1.0 防 ascender 截断）=== */
+.grad-violet {
+  background-image: linear-gradient(135deg, #A855F7 0%, #C084FC 50%, #E9D5FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-magenta {
+  background-image: linear-gradient(135deg, #d946ef 0%, #A855F7 60%, #a78bfa 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #00D4FF 0%, #60A5FA 60%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+
+/* ============================================
+ * s1 hook — 电紫 hero 钩子（单日三千星 AI不再单干）
+ * ============================================ */
+.hero-wrap {
+  width: 100%; flex: 1 1 auto; min-height: 0; align-self: stretch;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; gap: 40px;
+}
+.hero-badge {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  letter-spacing: 8px; color: var(--accent-cool);
+  padding: 10px 28px; border: 1.5px solid rgba(0,212,255,0.42);
+  border-radius: 999px; background: rgba(0,212,255,0.06);
+}
+.hero-num {
+  font-family: var(--font-data); font-size: 168px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -2px;
+}
+.hero-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 400;
+  color: var(--text2); letter-spacing: 2px; margin-top: -8px;
+}
+.hero-title {
+  font-family: var(--font-title); font-size: 92px; font-weight: 900;
+  line-height: 1.12; letter-spacing: 2px; color: var(--text);
+}
+.hero-title .accent { color: var(--accent-hot); }
+
+/* ============================================
+ * s2-s5 ProjectFullCard — 纵向三带填满安全区
+ * ============================================ */
+.pfc {
+  width: 100%; flex: 1 1 auto; min-height: 0; align-self: stretch;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+/* 顶带：排名 + 类别 + 用途标签 */
+.pfc-top {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+.pfc-rank-row { display: flex; align-items: baseline; gap: 22px; }
+.pfc-rank {
+  font-family: var(--font-data); font-size: 56px; font-weight: 900;
+  color: var(--accent-hot); line-height: 1.0;
+}
+.pfc-rank-label { font-family: var(--font-body); font-size: 32px; color: var(--text2); letter-spacing: 2px; }
+.pfc-cat {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--accent-cool); letter-spacing: 3px;
+}
+.pfc-use {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--text); padding: 10px 30px;
+  background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(217,70,239,0.16));
+  border: 1.5px solid var(--card-border); border-radius: 12px;
+  box-sizing: border-box;
+}
+/* 中带：avatar + 项目名（owner 小 + repo 大，独占整行 word-break）+ 语言 */
+.pfc-mid {
+  display: flex; flex-direction: column; align-items: center; gap: 26px;
+}
+.pfc-avatar-wrap {
+  width: 168px; height: 168px; border-radius: 50%;
+  padding: 5px; background: conic-gradient(from 0deg, #A855F7, #00D4FF, #d946ef, #A855F7);
+  box-shadow: 0 0 38px rgba(168,85,247,0.38);
+}
+.pfc-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; background: #1a0a2e; }
+.pfc-name {
+  width: 100%; text-align: center;
+  display: flex; align-items: baseline; justify-content: center; gap: 14px;
+  flex-wrap: wrap; word-break: break-word;
+}
+.pfc-owner {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--text2); letter-spacing: 0.5px;
+}
+.pfc-repo {
+  font-family: var(--font-title); font-size: 62px; font-weight: 900;
+  color: #f5f5f5; line-height: 1.05; letter-spacing: -0.5px;
+  word-break: break-word;
+}
+.pfc-lang {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--accent-violet); padding: 6px 22px;
+  border: 1px solid rgba(167,139,250,0.4); border-radius: 999px;
+  background: rgba(167,139,250,0.08);
+}
+/* 底带：星数 + 涨星进度条 + 描述 */
+.pfc-bot {
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+.pfc-stars { display: flex; align-items: baseline; gap: 16px; }
+.pfc-num {
+  font-family: var(--font-data); font-size: 76px; font-weight: 900;
+  line-height: 1.0; letter-spacing: -1px;
+}
+.pfc-unit { font-size: 40px; color: var(--accent-hot); }
+.pfc-today {
+  font-family: var(--font-data); font-size: 32px; font-weight: 700;
+  color: var(--accent-cool); padding: 5px 18px;
+  background: rgba(0,212,255,0.10); border-radius: 8px;
+}
+.pfc-bar {
+  width: 86%; height: 14px; border-radius: 999px;
+  background: rgba(168,85,247,0.14); overflow: hidden;
+  border: 1px solid rgba(168,85,247,0.24);
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #A855F7, #d946ef, #00D4FF);
+  box-shadow: 0 0 12px rgba(217,70,239,0.5);
+}
+.pfc-bar-label {
+  font-family: var(--font-body); font-size: 32px; color: var(--text2); letter-spacing: 1px;
+}
+.pfc-desc {
+  font-family: var(--font-body); font-size: 36px; font-weight: 400;
+  line-height: 1.42; color: #f0e8ff; text-align: center; max-width: 96%;
+}
+/* 老牌徽章（s5 swarm-forge 涨星低用总星+信誉强调）*/
+.pfc-vintage {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  color: var(--accent-hot); padding: 8px 26px;
+  border: 1.5px solid rgba(217,70,239,0.42); border-radius: 10px;
+  background: rgba(217,70,239,0.10); letter-spacing: 1px;
+}
+
+/* ============================================
+ * s6 CTA — 电紫收束（这几个方向你最看好哪个）
+ * ============================================ */
+.cta-wrap {
+  width: 100%; flex: 1 1 auto; min-height: 0; align-self: stretch;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; gap: 46px;
+}
+.cta-title {
+  font-family: var(--font-title); font-size: 88px; font-weight: 900;
+  line-height: 1.16; color: var(--text); letter-spacing: 1px;
+}
+.cta-title .accent { color: var(--accent-hot); }
+.cta-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; max-width: 92%; }
+.cta-pill {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700;
+  padding: 12px 28px; border-radius: 999px;
+  background: rgba(168,85,247,0.12); border: 1.5px solid rgba(168,85,247,0.36);
+  color: #f0e8ff;
+}
+.cta-sub {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  color: var(--accent-cool); letter-spacing: 4px;
+}

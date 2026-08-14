@@ -1,0 +1,76 @@
+# 8月14日 AI 风向标 · 5 个 AI 开源项目（AI 子方向：工作区/端侧/本地模型/RAG/图谱基建）
+
+> 选题方向：AI 落地基建——从工作区到端侧到本地模型。今日 AI 榜 13 项目，过滤近2天 ai-wind 已选 6 个后，选 5 个跨子方向（工作区/端侧模型/本地大模型/RAG/图谱基建），规避 Switchyard（LLM 路由，偏开发者中间件）+ obsidian-skills（Agent 技能，与昨日技能库方向重复）+ holaOS/LTX-2/modly/FluidVoice（与"本地离线"主题已昨日 daily 覆盖或与入选方向重复）。
+> 子方向分布：AI 工作区 1（macro）+ 端侧模型 1（needle）+ 本地大模型 1（unsloth）+ RAG 引擎 1（ragflow）+ 图谱基建 1（semantica）—— 覆盖 5 个不同 AI 子方向
+> 受众配比：A 档 2（macro 工作区 / unsloth 本地 UI）/ B 档 2（needle 端侧集成 / ragflow Docker）/ C 档 1（semantica 开发者基建）
+> 真实性：5 项目全部通过 gh API 核验（owner 真实、星叉比 8-15 正常、近期 pushed，0 HARD）
+
+数据来源：raw_trending.json（ai_trending + gh_api，2026-08-14 采集，带代理）+ gh api 实时核验。
+
+## 入选项目
+
+## 1. macro（GitHub: macro-inc/macro）| Rust | 2.6K★ (+1239 单日，当日 AI 涨星最高) | 受众: A 普通可用
+- 中文描述：团队统一工作区：邮件、聊天、文档、任务、智能体、通话、客户管理，@互相关联，共享 AI 记忆（原: Macro is a unified workspace for teams: email, chat, docs, tasks, agents, calls, and CRM — @-linked together with shared AI memory.）
+- avatar: assets/avatars/macro-inc.png
+- 用途: 团队协作一站式
+- 反直觉角度: 干活不用开十几个软件来回切——邮件聊天文档任务全在一个面板里，AI 还记着你们聊过的所有事
+- 类别标签: AI 工作区
+- 三词卖点: 一站式·AI共享记忆·Rust飞快
+- 感性评语: 把碎片工作收进一个盒子
+- 核心指标: 2.6K ★ +1239 单日（当日 AI 涨星最高）
+- 受众说明: 团队协作打开就用，邮件聊天文档都在里面
+
+## 2. needle（GitHub: cactus-compute/needle）| Python | 4.9K★ (+769 单日) | 受众: B 半可用
+- 中文描述：14MB 的基础模型，专为微小设备设计：手机、穿戴、智能家居、机器人（原: 14MB foundation model for tiny devices; phones, wearables, smart home, and robots.）
+- avatar: assets/avatars/cactus-compute.png
+- 用途: 手机直接跑AI模型
+- 反直觉角度: 跑 AI 模型不用云端显卡——14MB 的小模型塞进手机手表，拔掉网线也能用 AI
+- 类别标签: 端侧小模型
+- 三词卖点: 14MB体积·手机能跑·离线可用
+- 感性评语: 塞进口袋的 AI 大脑
+- 核心指标: 4.9K ★ +769 单日（连续两日加速）
+- 受众说明: 给做移动/穿戴应用的开发者，端侧集成
+
+## 3. unsloth（GitHub: unslothai/unsloth）| Python | 71K★ (+328 单日) | 受众: A 普通可用
+- 中文描述：本地界面运行和训练大模型与扩散模型，支持 Qwen、Kimi、MiniMax、Gemma、DeepSeek、FLUX 等（原: Local UI to run and train LLMs and diffusion models, including Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, DeepSeek-V4, FLUX and more.）
+- avatar: assets/avatars/unslothai.png
+- 用途: 自己电脑跑大模型
+- 反直觉角度: 用大模型不用买云端会员——自己电脑装个界面就能跑，还能调教成专属的
+- 类别标签: 本地大模型
+- 三词卖点: 本地运行·免费调教·多模型支持
+- 感性评语: 把 AI 大脑搬回家
+- 核心指标: 71K ★ +328 单日（榜内总星最高）
+- 受众说明: 有电脑的就能装，本地跑不联网
+
+## 4. ragflow（GitHub: infiniflow/ragflow）| Go | 88K★ (+465 单日) | 受众: B 半可用
+- 中文描述：领先的开源 RAG 引擎，融合 RAG 与智能体能力，为大模型打造更优的上下文层（原: RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs）
+- avatar: assets/avatars/infiniflow.png
+- 用途: AI读资料再回答
+- 反直觉角度: 让 AI 回答你的问题不用它凭空编——它先读你的资料再开口，答得有依据
+- 类别标签: RAG 引擎
+- 三词卖点: 先读资料·答有依据·开源免费
+- 感性评语: 让 AI 不瞎编
+- 核心指标: 88K ★ +465 单日
+- 受众说明: 给做知识库问答的团队，Docker 一键起
+
+## 5. semantica（GitHub: semantica-agi/semantica）| Python | 6.6K★ (+713 单日) | 受众: C 开发者向
+- 中文描述：图原生的上下文与可问责 AI 系统基础设施（原: Graph-Native Infrastructure for Context and Accountable AI Systems）
+- avatar: assets/avatars/semantica-agi.png
+- 用途: 让AI决策说得清
+- 反直觉角度: 多数 AI 像黑盒说不清为啥这么答——它在 AI 底下铺一层图谱，每个决定留痕可审计
+- 类别标签: 决策可溯
+- 三词卖点: 决策可追溯·图谱记忆·自托管
+- 感性评语: 让 AI 不再是黑盒
+- 核心指标: 6.6K ★ +713 单日
+- 受众说明: 给做强监管行业（金融/医疗/法务）AI 的开发者
+
+## 本期叙事主线
+
+| 维度 | 5 项目共性 |
+|------|-----------|
+| 主题 | AI 落地基建——从工作区到端侧到本地模型到 RAG 到图谱，覆盖 AI 应用全栈 |
+| 反直觉钩子 | 用大模型不用买会员 / 让 AI 不瞎编（本地+可信主线） |
+| 受众覆盖 | 团队协作（macro）/ 端侧开发（needle）/ 本地跑模型（unsloth）/ 知识库问答（ragflow）/ 强监管 AI（semantica） |
+| 数字锚点 | 88K 总星（ragflow）/ 71K（unsloth）/ 6.6K（semantica +713 加速）/ 4.9K（needle +769 加速）/ 2.6K（macro +1239 当日最高） |
+
+> 本期规避 Switchyard（LLM 路由中间件，偏开发者）+ obsidian-skills（Agent 技能，与昨日技能库方向重复）+ 昨日 daily 已覆盖的"本地离线"主题项目（holaOS/LTX-2/modly/FluidVoice 方向重复）。选 5 个跨子方向基建，与昨日 ai-wind（智能体工程化）差异化。

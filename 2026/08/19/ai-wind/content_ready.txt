@@ -1,0 +1,82 @@
+# 8月19日 AI 风向标（AI 开源项目专项 · 小模型进设备专题）
+
+> 选题方向：AI 装进口袋——当所有人都在卷更大的模型，今天 AI 榜最猛的一批项目在把 AI 做小、塞进设备：14MB 的基础模型跑进手机手表（needle 做钩子主角），Mac 菜单栏一键管大模型（omlx），家里电脑自己训模型（unsloth）。叠加 AI 全网调研技能（last30days-skill）、文档 AI 就绪（docling）、Agent 上下文数据库（OpenViking），六个子方向零同质。
+> 与综合降重叠：今晨综合榜已选 ai-memory + ai-agent-book，本期全部避开；08-17 综合已展开的短视频生成工具与昨日综合的 AI 安全工具（同题材）也避开
+> 上期 ai-wind（08-16）：ToolJet / Soup / CLI-Anything / cloudflare computer / google skills——本期 6 项目零重复
+> 受众配比：A 档 1（unsloth 图形界面装了就用）+ B 档 3（omlx / last30days-skill / docling）+ C 档 2（needle / OpenViking，给做 AI 的开发者）。今日 AI 池 A 档源稀缺（前排均为框架/SDK），按池现实配比未硬凑；C 档 2/6 ≤1/3
+> 真实性：6 项目全部通过 gh API 核验（2026-08-19）。星叉比 11.1-15.5:1 全部正常区间；账龄 unsloth org 2.7 年 / omlx 个人 6 年 / needle org 1.6 年 / OpenViking org 火山引擎官方 6 年 204 仓库 / docling org（IBM 系）2 年 / last30days 个人 16 年 2040 仓库；仓库体积 4.4-343MB 无空壳；watchers 占比 0.28-0.59%，其中 4 个 infra/工具类项目 0.28-0.36% 属该类型常态（forks 配比与账龄健康），无 HARD 触发放行
+> 品牌名雷区（本期货源特有）：unsloth 原描述内嵌 5 个模型品牌名、last30days 原描述内嵌多个平台名——锚点按 stage1 要求保留原文，但中文翻译/旁白/画面/文案一律泛化（「主流开源大模型」「各大社区平台」），零品牌名
+
+数据来源：raw_trending.json（ai_trending.py 主源 7 + Python 扩池 8 = 15 项，gh API 15/15 验证，活跃 14/15）+ gh api repos 实时核验。
+
+## 入选项目
+
+## 1. unsloth（GitHub: unslothai/unsloth）| Python | 7.4万★ (+449 单日) | 受众: A 普通可用
+- 中文描述：在家用电脑上运行和训练大模型的本地图形界面，主流开源大模型和图像生成模型开箱即用（原: Local UI to run and train LLMs and diffusion models, including Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, DeepSeek-V4, FLUX and more.）
+- avatar: assets/avatars/unslothai.png
+- 用途: 家里电脑训AI
+- 反直觉角度: 别人调模型要租云端显卡按小时烧钱，这个工具把整套训练台搬进你家电脑——图形界面点几下，主流开源大模型直接训成你的专属版本；7.4 万人已经在家开课，今天单日再涨 449 星
+- 类别标签: 本地大模型训练
+- 三词卖点: 7.4万星·图形界面·免云租
+- 感性评语: 训练台搬回家
+- 核心指标: 7.4万★ +449 单日
+- 受众说明: 桌面图形界面装了就用，想定制自己 AI 的普通人可上手（旁白按「主流开源大模型」泛化，禁点具体模型品牌名）
+
+## 2. omlx（GitHub: jundot/omlx）| Python | 1.9万★ (+370 单日) | 受众: B 半可用
+- 中文描述：为 Mac 芯片打造的大模型推理服务，从菜单栏一键管理，持续批处理加硬盘缓存（原: LLM inference server with continuous batching &amp; SSD caching for Apple Silicon — managed from the macOS menu bar）
+- avatar: assets/avatars/jundot.png
+- 用途: 菜单栏管大模型
+- 反直觉角度: 服务器级的大模型推理，被做成了菜单栏小图标——点一下，Mac 变成你的私有 AI 机房；别人云端排队等响应，你本地批量跑没人跟你抢；1.9 万星半年长成，今天再涨 370
+- 类别标签: Mac 端大模型推理
+- 三词卖点: 菜单栏·本地推理·批量跑
+- 感性评语: Mac变私人机房
+- 核心指标: 1.9万★ +370 单日
+- 受众说明: Mac 用户装 app 即用，进阶玩法需下载模型文件，属半可用
+
+## 3. needle（GitHub: cactus-compute/needle）| Python | 7.5K★ (+364 单日) | 受众: C 开发者向
+- 中文描述：14MB 的微型基础模型，为手机、手表、智能家居和机器人等小型设备而生（原: 14MB foundation model for tiny devices; phones, wearables, smart home, and robots.）
+- avatar: assets/avatars/cactus-compute.png
+- 用途: 14MB装个AI大脑
+- 反直觉角度: 动辄几百 GB 的时代，这个团队硬把基础模型压到 14MB——不到一首歌的体积，塞进手表、智能家居、机器人里离线跑；AI 不用上云、不用联网，设备自己长脑子；7.5K 星单日再涨 364，小模型的风真的起来了
+- 类别标签: 端侧微型基础模型
+- 三词卖点: 14MB·离线跑·进设备
+- 感性评语: AI装进手表里
+- 核心指标: 7.5K★ +364 单日
+- 受众说明: 给做智能硬件、嵌入式 AI 的开发者集成；普通人属「看趋势」——未来手表家电里就藏着它
+
+## 4. OpenViking（GitHub: volcengine/OpenViking）| Python | 2.9万★ (+213 单日) | 受众: C 开发者向
+- 中文描述：会自我进化的 AI 智能体上下文数据库，统一管理智能体的记忆、知识检索和技能（原: Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.）
+- avatar: assets/avatars/volcengine.png
+- 用途: 给AI装记忆底座
+- 反直觉角度: AI 助手聊天记忆乱成一锅粥、换个会话全失忆——大厂把「AI 的记忆、知识、技能」做成一个会自己进化的数据库统一管；智能体越用越懂你，而不是越聊越糊涂；2.9 万星的开源基建，今天再涨 213
+- 类别标签: Agent 记忆基建
+- 三词卖点: 大厂开源·自进化·统一记忆
+- 感性评语: AI的记忆管家
+- 核心指标: 2.9万★ +213 单日
+- 受众说明: 给做 AI 智能体的开发者搭基建用（云厂商官方开源项目）
+
+## 5. docling（GitHub: docling-project/docling）| Python | 6.5万★ (+152 单日) | 受众: B 半可用
+- 中文描述：把你的文档整理成 AI 就绪格式，喂给生成式 AI 前的文档预处理（原: Get your documents ready for gen AI）
+- avatar: assets/avatars/docling-project.png
+- 用途: 文档变AI口粮
+- 反直觉角度: AI 时代最大的 surprise 不是 AI 多聪明，是你手里的 PDF、表格它根本读不利索——这个老牌团队的项目专治这件事：文档丢进去，转成 AI 张口就能消化的结构化口粮；6.5 万人已在用，今天再涨 152 星
+- 类别标签: 文档 AI 预处理
+- 三词卖点: 6.5万星·全格式·AI就绪
+- 感性评语: 文档先喂对再问AI
+- 核心指标: 6.5万★ +152 单日
+- 受众说明: 命令行工具，常用电脑办公的人按文档可上手，深度用法面向开发者
+
+## 6. last30days-skill（GitHub: mvanhorn/last30days-skill）| Python | 5.9万★ (+144 单日) | 受众: B 半可用
+- 中文描述：一个 AI 智能体技能：跨各大社区、视频平台和全网调研任何话题，然后综合出一份有据可查的摘要（原: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary）
+- avatar: assets/avatars/mvanhorn.png
+- 用途: AI替你做调研
+- 反直觉角度: 问 AI 一个时事，它一本正经胡说八道——这个技能让 AI 先去各大社区、视频平台翻真实讨论，再带着出处写摘要；一次安装，你的 AI 助手从「瞎猜型」变「查证型」；5.9 万人已装，今天再涨 144 星
+- 类别标签: AI 助手调研技能
+- 三词卖点: 全网调研·带出处·一装即用
+- 感性评语: AI从瞎猜变查证
+- 核心指标: 5.9万★ +144 单日
+- 受众说明: 会给 AI 助手装技能的用户即用；旁白按「各大社区平台」泛化，禁点具体平台名
+
+## 选题备注
+
+- 今日落选说明见 content.md（泛化记录，不展开）

@@ -1,0 +1,49 @@
+<!-- 场景: scene-8 | 时长: ~21.5s | bg: clean_slate | 三坑警示卡（错时 reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 警示红光晕（alpha≤0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:1400px;height:460px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,78%,56%,0.17) 0%, transparent 65%);filter:blur(62px);opacity:0.6"></div>
+  <!-- fx-blink 红色锚点（警示强调） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:15%;width:13px;height:13px;border-radius:50%;background:hsla(0,80%,62%,0.85);box-shadow:0 0 16px hsla(0,72%,56%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(0,76%,60%,0.75);box-shadow:0 0 14px hsla(0,68%,54%,0.42)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid pit-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region pit-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="pit-warn-icon">!</div>
+      <h2 class="pit-title-main grad-red">三个最常见的坑</h2>
+    </div>
+
+    <!-- 区域 B：三坑警示卡（错时 reveal，红边卡） -->
+    <div class="pit-cards">
+      <div class="pit-card tut-region" data-reveal="5" data-reveal-dir="top">
+        <div class="pit-num">①</div>
+        <div class="pit-name grad-red">跳过约束上演示</div>
+        <div class="pit-result">数据拿不出 · 模型没法上线</div>
+      </div>
+      <div class="pit-card tut-region" data-reveal="10" data-reveal-dir="top">
+        <div class="pit-num">②</div>
+        <div class="pit-name grad-red">价值假设没对齐</div>
+        <div class="pit-result">目标错位 · 做完不买单</div>
+      </div>
+      <div class="pit-card tut-region" data-reveal="15" data-reveal-dir="top">
+        <div class="pit-num">③</div>
+        <div class="pit-name grad-red">发力点贪大</div>
+        <div class="pit-result">验证周期失控</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

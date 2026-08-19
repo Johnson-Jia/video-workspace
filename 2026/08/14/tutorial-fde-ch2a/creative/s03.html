@@ -1,0 +1,58 @@
+<!-- 场景: scene-3 | 时长: ~27.0s | bg: clean_slate | 需求探索画布六格（教程 reveal：全内容 phase-1 + data-reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: light_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（画布区域后方，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:52%;left:50%;transform:translate(-50%,-50%);width:1300px;height:520px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,50%,0.16) 0%, transparent 65%);filter:blur(65px);opacity:0.6"></div>
+  <!-- fx-blink 金色低 alpha 锚点（呼应画布金边） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:15%;width:12px;height:12px;border-radius:50%;background:hsla(43,88%,58%,0.82);box-shadow:0 0 15px hsla(43,80%,52%,0.45)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:20%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,68%,54%,0.42)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid canvas-grid">
+
+    <!-- 区域 A：常犯错警示（data-reveal=0，红条先出） -->
+    <div class="tut-region canvas-warn" data-reveal="0" data-reveal-dir="fade">
+      <div class="warn-bar warn-bad"><span class="warn-tag">✗ 常犯</span>进场就讲模型、讲技术</div>
+      <div class="warn-bar warn-good"><span class="warn-tag">✓ 正确</span>先摸业务痛点 → 再看 AI 接哪块</div>
+    </div>
+
+    <!-- 区域 B：客户需求探索画布六格（data-reveal=9，2×3 网格撑满） -->
+    <div class="tut-region canvas-board" data-reveal="9" data-reveal-dir="top">
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">①</span><span class="cell-title">业务现状</span></div>
+        <div class="cell-data">客户当前怎么干</div>
+      </div>
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">②</span><span class="cell-title">痛点清单</span></div>
+        <div class="cell-data">卡在哪</div>
+      </div>
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">③</span><span class="cell-title">AI 发力点</span></div>
+        <div class="cell-data">AI 能接哪一块</div>
+      </div>
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">④</span><span class="cell-title">价值假设</span></div>
+        <div class="cell-data">能带来什么收益</div>
+      </div>
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">⑤</span><span class="cell-title">约束</span></div>
+        <div class="cell-data">不能碰什么</div>
+      </div>
+      <div class="canvas-cell">
+        <div class="cell-head"><span class="cell-idx">⑥</span><span class="cell-title">下一步</span></div>
+        <div class="cell-data">最小验证范围</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

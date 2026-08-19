@@ -1,0 +1,51 @@
+<!-- 场景: seg6 | 时长: ~25.6s | bg: gradient_mesh | 技能迁移表 + 结论条 -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 蓝色静态光晕（左卡，alpha 0.16） -->
+  <div class="fx-pulse" style="position:absolute;top:36%;left:30%;transform:translate(-50%,-50%);width:660px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.55"></div>
+  <!-- fx-pulse 金色静态光晕（结论条，alpha 0.20 ≤0.22） -->
+  <div class="fx-pulse" style="position:absolute;top:76%;left:50%;transform:translate(-50%,-50%);width:900px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;right:13%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:20%;left:13%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-mig-scene">
+  <div class="tut-grid mig-grid">
+
+    <!-- 区域 A：迁移标题（data-reveal=0，左对齐锚点） -->
+    <div class="tut-region mig-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">技能迁移 · 好消息</div>
+      <h1 class="scene-title">走过前面十三集，你已有了底子</h1>
+    </div>
+
+    <!-- 区域 B：2×2 迁移表（data-reveal=2，网格均分，蓝强金补 / 金强蓝补） -->
+    <div class="tut-region mig-cards" data-reveal="2" data-reveal-dir="top">
+      <div class="mig-card">
+        <div class="mig-role">开发 · 测试</div>
+        <div class="mig-line"><span class="mig-tag mig-strong-a">技术执行 强</span></div>
+        <div class="mig-line"><span class="mig-arrow">→</span> 要补的是<span class="mig-tag mig-strong-b">客户现场</span></div>
+      </div>
+      <div class="mig-card">
+        <div class="mig-role">组长 · 产品</div>
+        <div class="mig-line"><span class="mig-tag mig-strong-b">客户现场 强</span></div>
+        <div class="mig-line"><span class="mig-arrow">→</span> 要补的是<span class="mig-tag mig-strong-a">技术执行</span></div>
+      </div>
+    </div>
+
+    <!-- 区域 C：结论条 + 注脚（data-reveal=17，底部金边收束） -->
+    <div class="tut-region" data-reveal="17" data-reveal-dir="fade">
+      <div class="conclusion grad-gold">两条腿都得有，先补最拖后腿的那条</div>
+      <div class="conclusion-foot">没技术底子，进得了现场也站不住</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+</div>

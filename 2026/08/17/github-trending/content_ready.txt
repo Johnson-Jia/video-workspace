@@ -1,0 +1,76 @@
+# 8月17日 GitHub 热门项目（daily 综合榜 · 不写代码的清单登顶专题）
+
+> 选题方向：反直觉冲突——GitHub 是写代码的地方，今天日榜登顶的却是一个主业不写代码、只维护免费 API 清单的项目（public-apis 46万星）。以它做钩子主角，叠加 AI 短视频生成（MoneyPrinterTurbo）、前端元框架（cordis）、时序预测模型（timesfm）、命令行音视频常青树（yt-dlp），五个方向零同质。
+> AI 占比：2/5（MoneyPrinterTurbo + timesfm；gate 加权制判 1 个 AI ≤2 通过，宽判定口径 timesfm 计入 AI 名额谨慎处理。避开昨日 ai-wind 已讲 5 个 AI 项目，无连续重复）
+> 受众配比：A 档 2（public-apis 清单网页可看 / MoneyPrinterTurbo 一键出片，普通人可用）+ B 档 1（yt-dlp 命令行）+ C 档 2（cordis / timesfm，给做开发的观众），A 档约一半、C 档未过半
+> 真实性：5 项目全部通过 gh API 核验（2026-08-17）。星叉比 6.6-18:1 全部正常区间；watchers 充足（yt-dlp 912 / public-apis 4669）；仓库体积 2.5MB-535MB 无空壳；owner 账龄最短 2.7 年（cordis org，26 个公开仓库，前端社区知名团队）。cordis watchers/star=0.46% 属 1 个轻微警告（非 HARD），知名社区框架放行
+
+数据来源：raw_trending.json（github_trending.py 主榜 + 语言日榜扩池，2026-08-17 采集）+ gh api repos 实时核验（stars/forks/watchers/created/pushed）。
+
+## 入选项目
+
+## 1. public-apis（GitHub: public-apis/public-apis）| Python | 46.1万★ (+1588 单日) | 受众: A 普通可用
+- 中文描述：免费 API 大全，一份集体维护的免费接口清单（原: A collective list of free APIs）
+- avatar: assets/avatars/public-apis.png
+- 用途: 免费API全收录
+- 反直觉角度: GitHub 是代码托管平台，今天榜首却是一个主业不写代码的项目——它做的事就是把全网免费 API 整理成一份清单，46 万人标星收藏；做开发的想找天气、翻译、地图接口，翻这份清单就能省掉半天搜索
+- 类别标签: 免费资源清单
+- 三词卖点: 46万星·纯清单·免费接口
+- 感性评语: 找接口不用大海捞针
+- 核心指标: 46.1万★ +1588 单日（今日榜首）
+- 受众说明: 清单网页直接看，做开发、做产品的人都能用
+
+## 2. cordis（GitHub: cordiverse/cordis）| TypeScript | 4.7K★ (+720 单日) | 受众: C 开发者向
+- 中文描述：时空可组合的元框架——把时间和空间都做成可组合插件的前端框架（原: Meta-Framework of Spatiotemporal Composability）
+- avatar: assets/avatars/cordiverse.png
+- 用途: 插件化造框架
+- 反直觉角度: 框架多到泛滥的时代，这个团队偏要造"框架的框架"——不绑定时间循环和运行环境，把上下文、插件、作用域全部做成可组合的零件；4.7K 星的项目单日涨 720，是它体量的爆发级涨幅
+- 类别标签: 前端元框架
+- 三词卖点: 元框架·全插件化·Node生态
+- 感性评语: 框架零件随拆随组
+- 核心指标: 4.7K★ +720 单日（爆发涨幅）
+- 受众说明: 给做 Node 服务端、插件系统的前端开发者
+
+## 3. MoneyPrinterTurbo（GitHub: harry0703/MoneyPrinterTurbo）| Python | 10.4万★ (+494 单日) | 受众: A 普通可用
+- 中文描述：利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频（原: 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.）
+- avatar: assets/avatars/harry0703.png
+- 用途: 一键出短视频
+- 反直觉角度: 一条主题或关键词进去，文案、配音、字幕、素材全自动出来——过去一个小团队的内容流水线，现在一个人一台机器就能跑
+- 类别标签: AI 短视频生成
+- 三词卖点: 关键词进·成片出·全自动
+- 感性评语: 内容流水线一个人跑
+- 核心指标: 10.4万★ +494 单日
+- 受众说明: 做短视频、做自媒体的普通人可用（旁白按类别词讲 AI 大模型，不点其他品牌名）
+
+## 4. yt-dlp（GitHub: yt-dlp/yt-dlp）| Python | 18.4万★ (+216 单日) | 受众: B 半可用
+- 中文描述：功能丰富的命令行音视频下载工具（原: A feature-rich command-line audio/video downloader）
+- avatar: assets/avatars/yt-dlp.png
+- 用途: 命令行管音视频
+- 反直觉角度: 不追 AI 风口、界面都没有，纯命令行干了五年多，18 万星常青树——AI 满屏的榜单上，它靠一次次版本更新稳定涨星，今天还在榜
+- 类别标签: 命令行音视频工具
+- 三词卖点: 18万星·常青树·全平台
+- 感性评语: 没界面的常青树
+- 核心指标: 18.4万★ +216 单日
+- 受众说明: 命令行工具，给常用终端的开发者；能力按工具本身中性讲述（合规提醒：旁白/画面禁引导下载版权内容，只讲开源工具的常青与工程能力）
+
+## 5. timesfm（GitHub: google-research/timesfm）| Python | 2.7万★ (+109 单日) | 受众: C 开发者向
+- 中文描述：谷歌研究团队开源的时序预测基础模型，为时间序列预测而生（原: TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting.）
+- avatar: assets/avatars/google-research.png
+- 用途: 时序预测开箱用
+- 反直觉角度: "预测未来"这件事被做成了基础模型——在海量时序数据上预训练后，不用从零建模，拿自己的销量、流量数据微调就能出预测，把统计学家的工作变成调包
+- 类别标签: 时序预测模型
+- 三词卖点: 预训练·时序预测·开箱微调
+- 感性评语: 预测不再靠拍脑袋
+- 核心指标: 2.7万★ +109 单日
+- 受众说明: 给做销量/流量/负载预测的开发者和分析师
+
+## 本期叙事主线
+
+| 维度 | 5 项目共性 |
+|------|-----------|
+| 主题 | 不写代码的清单登顶——GitHub 价值不只代码：清单（public-apis）、自动化（MoneyPrinterTurbo）、框架基建（cordis）、常青工程（yt-dlp）、科研模型（timesfm）五种形态同榜 |
+| 反直觉钩子 | 不写代码，靠清单冲上46万星（冲突"不写代码" + 动作"冲上" + 数字"46万星"，13 字） |
+| 受众覆盖 | 普通人（public-apis 找资源 / MoneyPrinterTurbo 出片）/ 开发者（cordis 框架 / timesfm 预测 / yt-dlp 终端） |
+| 数字锚点 | 46万星+单日1588（public-apis）/ 单日720（cordis）/ 10.4万星（MoneyPrinterTurbo）/ 18.4万星（yt-dlp）/ 2.7万星（timesfm） |
+
+> 本期 AI 恰 2 个（MoneyPrinterTurbo + timesfm，上限 2 非目标），避开昨日 ai-wind 已讲 5 个 AI 项目，零跨频道重叠。yt-dlp 按 team-lead 指示中性化：讲"开源命令行音视频工具/常青树"，禁引导下载版权内容。MoneyPrinterTurbo 描述按原文内嵌"AI 大模型"保真锚点，旁白以类别词表述不点其他品牌名。

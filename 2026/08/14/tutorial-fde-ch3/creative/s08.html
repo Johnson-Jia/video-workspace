@@ -1,0 +1,45 @@
+<!-- 场景: seg7 | 时长: ~20.7s | bg: light_field | Skill 沉淀 + 总结条 + 分界收尾 -->
+<div class="layer-bg">
+  <!-- bg-component: light_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（总结条收束，暖色 alpha 0.20 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:60%;left:50%;transform:translate(-50%,-50%);width:1200px;height:400px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷蓝锚点（左右平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:24%;right:15%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.85);box-shadow:0 0 13px hsla(43,80%,55%,0.20)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-skill-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid skill-grid">
+
+    <!-- 区域 A：Skill 卡（data-reveal=0） -->
+    <div class="tut-region skill-card" data-reveal="0" data-reveal-dir="fade">
+      <div class="sk-left">
+        <span class="sk-en">claude-skills</span>
+        <h1 class="sk-name grad-gold">Skill 沉淀</h1>
+        <div class="sk-when">FDE 自己的工程肌肉</div>
+      </div>
+      <div class="sk-right">把每个客户现场的通用经验沉淀成 Skill<br>下个同行业客户直接复用</div>
+    </div>
+
+    <!-- 区域 B：总结条（data-reveal=6.2，金色主总结） -->
+    <div class="tut-region summary-bar" data-reveal="6.2" data-reveal-dir="top">
+      <div class="summary-main"><span class="grad-gold">主教程沉淀怎么写代码</span> / <span class="grad-blue">FDE 沉淀怎么搞定这类客户</span></div>
+      <div class="sum-examples">行业工单分流的标准口径 · 遗留系统对接的踩坑</div>
+    </div>
+
+    <!-- 区域 C：分界收尾（data-reveal=14.5，金色大字收束） -->
+    <div class="tut-region sum-end" data-reveal="14.5" data-reveal-dir="fade">
+      资深 FDE 与初级 FDE 的效率分界 · 就在这
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

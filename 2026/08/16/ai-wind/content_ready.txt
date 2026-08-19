@@ -1,0 +1,77 @@
+# 8月16日 AI 风向标 · 5 个 AI 开源项目（AI 子方向：AI应用生成/模型微调/Agent基建/Agent运行环境/Agent技能生态）
+
+> 选题方向：AI 双线对决——一条线把造 AI 的门槛砍到地板（平民化：一句话生成应用、一个 YAML 微调、4GB 显卡训 8B），另一条线给 AI 智能体配全套装备（装备线：全软件统一接口、云上真电脑、官方技能库）。
+> 数据构成：daily 池 8 项（今日涨星维度）+ weekly 池 10 项（本周风向维度），共 18 项。daily 项报今日涨星，weekly 项叙事用「本周风向」。
+> 子方向分布：AI 应用生成 1（ToolJet）+ 模型微调 1（Soup）+ Agent 基建 1（CLI-Anything）+ Agent 运行环境 1（computer）+ Agent 技能生态 1（skills）—— 双线覆盖：平民化线 2 + 装备线 3，4 类子方向 ≥3 ✓
+> 受众配比：A 档 1（ToolJet 低代码/Docker 一键/有演示页）/ B 档 3（Soup CLI / computer 云服务 / skills 技能包）/ C 档 1（CLI-Anything 开发者框架），C 档占比 20% ≤ 1/3 ✓
+> 真实性：5 项目全部通过 gh API 核验（仓库年龄 5 月-5 年、星叉比 6.3-18.3 正常、watcher 真实、仓库体积真实、近 3 日有 pushed），0 HARD
+
+数据来源：raw_trending.json（ai_trending + gh_api 三源交叉验证，2026-08-16 采集）+ gh api 实时核验。
+
+## 入选项目
+
+## 1. ToolJet（GitHub: ToolJet/ToolJet）| JavaScript | 39.5K★ (+544 单日，全池可用项今日最高) | 受众: A 普通可用
+- 中文描述：开源低代码平台，也是 AI 企业应用生成底座——搭内部工具、仪表盘、业务应用、工作流和 AI 智能体（原: ToolJet is the open-source foundation of ToolJet AI - the enterprise app generation platform for building internal tools, dashboard, business applications, workflows and AI agents 🚀）
+- avatar: assets/avatars/ToolJet.png
+- 用途: 一句话生成应用
+- 反直觉角度: 以前搭内部管理系统要拖一下午组件——现在说一句话，AI 直接把工具和应用搭出来，开源还能整个自己部署
+- 类别标签: AI 应用工厂
+- 三词卖点: 一句话生成·低代码·可自部署
+- 感性评语: 说话就能搭系统
+- 核心指标: 39.5K ★ +544 单日（全池今日最高）
+- 受众说明: 低代码平台本身就是给不写代码的人用的，Docker 一键起
+
+## 2. Soup（GitHub: MakazhanAlpamys/Soup）| Python | 1.6K★ (+297 单日，新上榜) | 受众: B 半可用
+- 中文描述：一个 YAML 文件就能微调大模型；分层流式训练，让 4GB 显存的笔记本 GPU 也能训 8B 模型（原: Fine-tune LLMs from one YAML. Layer streaming trains an 8B model on a 4 GB laptop GPU.）
+- avatar: assets/avatars/MakazhanAlpamys.png
+- 用途: 旧显卡调教AI
+- 反直觉角度: 训 8B 模型通常默认要云端大显存卡——它用分层流式训练，4GB 显存的旧笔记本就能训，调教数据全程不出本机
+- 类别标签: 单卡微调
+- 三词卖点: 一个YAML·4GB能训·数据不出门
+- 感性评语: 旧笔记本的逆袭
+- 核心指标: 1.6K ★ +297 单日（新上榜，起步即加速）
+- 受众说明: 会跑命令行就能用，需自备数据集，给想把模型调教成专属的人
+
+## 3. CLI-Anything（GitHub: HKUDS/CLI-Anything）| Python | 47.3K★ (+118 单日，榜内总星最高) | 受众: C 开发者向
+- 中文描述：让所有软件都变成 Agent 原生——统一 CLI 入口，AI 智能体可以直接操作各类软件（原: "CLI-Anything: Making ALL Software Agent-Native" -- CLI-Hub: https://clianything.cc/）
+- avatar: assets/avatars/HKUDS.png
+- 用途: AI直接用软件
+- 反直觉角度: AI 干活最大的卡点是大多数软件不对外开放操作口——高校研究团队给软件统一装命令行接口，AI 从此能直接操作各种软件
+- 类别标签: 软件总接口
+- 三词卖点: 全软件可操控·Agent原生·统一接口
+- 感性评语: 给AI配了全服权限
+- 核心指标: 47.3K ★ +118 单日（榜内总星最高）
+- 受众说明: 给做软件和做 Agent 的开发者，集成需要写代码
+
+## 4. computer（GitHub: cloudflare/computer）| TypeScript | 8.2K★ (本周风向，weekly 池) | 受众: B 半可用
+- 中文描述：给你的智能体一台电脑（原: Give your agent a computer 👾）
+- avatar: assets/avatars/cloudflare.png
+- 用途: AI自己开电脑
+- 反直觉角度: 多数 AI 助手只会聊天不会动手——云服务厂商官方开源，直接给 agent 配一台云上真电脑，让它自己动手干活
+- 类别标签: AI 的电脑
+- 三词卖点: 真机环境·云端运行·官方出品
+- 感性评语: AI有了自己的工位
+- 核心指标: 8.2K ★（本周风向，官方项目）
+- 受众说明: 会调 API 就能接入，给想让 agent 动手干活的开发者
+
+## 5. skills（GitHub: google/skills）| Python | 18.3K★ (本周风向，weekly 池) | 受众: B 半可用
+- 中文描述：面向 Google 产品与技术的智能体技能库（原: Agent Skills for Google products and technologies）
+- avatar: assets/avatars/google.png
+- 用途: AI装现成技能
+- 反直觉角度: 教 AI 用新工具不用从头调教——官方把自家产品的操作打包成现成技能，agent 装上直接会用
+- 类别标签: 官方技能库
+- 三词卖点: 官方出品·现成技能·即装即用
+- 感性评语: AI的技能商店
+- 核心指标: 18.3K ★（本周风向，官方项目）
+- 受众说明: 在用 AI 编程工具的人装了就能用
+
+## 本期叙事主线
+
+| 维度 | 5 项目共性 |
+|------|-----------|
+| 主题 | 双线对决：平民化造 AI（门槛砍到地板）vs 给 AI 配装备（接口/电脑/技能） |
+| 反直觉钩子 | 4GB 显卡就能训 8B 大模型（硬件平民化锚点） |
+| 受众覆盖 | 不写代码的（ToolJet）/ 想调教模型的（Soup）/ 软件开发者（CLI-Anything）/ 接 agent 的（computer）/ 用 AI 编程的（skills） |
+| 数字锚点 | 4GB 显卡训 8B（Soup）/ +544 单日全池最高（ToolJet）/ 47.3K 榜内总星最高（CLI-Anything）/ 18.3K 官方技能库 / 8.2K 官方云电脑 |
+
+> 叙事模板：showdown 对决弧（本期弃用连续三期 contrast-arc）——前两个项目平民化线，第三个起转折装备线，结尾收束两条路线对比。与上一期（08-14 基建盘点）项目零重叠，与昨日综合榜 AI 三项零跨频道重复。

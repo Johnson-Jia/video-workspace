@@ -1,0 +1,46 @@
+<!-- 场景: seg5 | 时长: ~11.7s | bg: gradient_mesh | 简历改造：弱化 / 强化对照 -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 蓝色静态光晕（强化方向，右侧，alpha 0.18） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;right:24%;transform:translate(0,-50%);width:720px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-pulse 灰调静态光晕（弱化方向，左侧，alpha 0.15） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:24%;transform:translate(-50%,0);width:600px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,20%,55%,0.15) 0%, transparent 65%);filter:blur(60px);opacity:0.5"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:18%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:18%;left:14%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.78);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene resume-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid resume-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region resume-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">简历改造的核心</div>
+      <h1 class="scene-title">弱化技术量 · 强化业务结果</h1>
+    </div>
+
+    <!-- 区域 B：弱化/强化对照（data-reveal=2，左灰右蓝） -->
+    <div class="tut-region resume-cols" data-reveal="2" data-reveal-dir="top">
+      <div class="r-col r-col-weaken">
+        <div class="r-label">弱 化</div>
+        <div class="r-weaken-line">写了多少代码</div>
+      </div>
+      <div class="r-col r-col-strengthen">
+        <div class="r-label">强 化</div>
+        <div class="r-strong">解决过什么业务问题</div>
+        <div class="r-strong">跨方协调过什么</div>
+        <div class="r-strong">可衡量的业务结果</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

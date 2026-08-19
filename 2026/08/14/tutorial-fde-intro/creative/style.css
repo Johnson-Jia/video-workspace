@@ -1,0 +1,365 @@
+:root {
+  --bg-deep: #0F172A;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程色板（design.md color_direction — 视角声明双色） */
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-blue-2: #60A5FA;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-gold-2: #F59E0B;
+  --tut-gold-3: #FCD34D;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial FDE intro 段 — 视角声明（横屏教程 reveal §6.16）
+ * 单 phase + 多 region + data-reveal 同屏累积，禁竖屏 phase 切换
+ * padding 横屏 70/140/70/140（top≥60 安全区）
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  padding: 72px 140px 72px 140px;
+}
+
+.tut-grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+}
+
+.tut-region {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+/* data-reveal="0" 场景开始即显示 */
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 极淡 drop text-shadow（禁发光 0 0 Xpx）—— */
+.tut-scene h1,
+.tut-scene .switch-title,
+.tut-scene .split-tag,
+.tut-scene .split-body,
+.tut-scene .split-arrow,
+.tut-scene .overlap-text,
+.tut-scene .def-title,
+.tut-scene .def-cn,
+.tut-scene .def-sentence,
+.tut-scene .flow-node-text,
+.tut-scene .flow-tail,
+.tut-scene .position-title,
+.tut-scene .position-side {
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 渐变文字（禁白色端点，同色系高饱和）—— */
+.grad-gold {
+  background-image: linear-gradient(92deg, #FBBF24 0%, #F59E0B 50%, #FCD34D 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+.grad-blue {
+  background-image: linear-gradient(92deg, #60A5FA 0%, #3B82F6 55%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+
+/* —— 通用 eyebrow / 胶囊 —— */
+.con-eyebrow {
+  font-family: var(--font-body);
+  font-size: 34px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.20em;
+}
+.con-en {
+  font-family: var(--font-data);
+  font-size: 34px; font-weight: 600;
+  color: var(--tut-gray);
+  letter-spacing: 0.08em;
+}
+.origin-pill {
+  font-family: var(--font-body);
+  font-size: 32px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.10em;
+  padding: 9px 28px;
+  border: 1.5px solid rgba(59,130,246,0.42);
+  border-radius: 999px;
+  background: rgba(59,130,246,0.10);
+  display: inline-block;
+}
+
+/* ============================================
+ * 场景 1：切换宣告（视角切换 大字）
+ * ============================================ */
+.switch-grid {
+  align-items: center;
+  text-align: center;
+}
+.switch-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.switch-title {
+  font-family: var(--font-title);
+  font-size: 168px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+/* ============================================
+ * 场景 2：甲方乙方分栏对照（左右均衡 + 中轴箭头 + 底部重叠带）
+ * ============================================ */
+.split-grid {
+  justify-content: space-between;
+}
+.split-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+}
+.split-card {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 56px 40px;
+  border-radius: 28px;
+}
+.split-left {
+  border: 1.5px solid rgba(59,130,246,0.50);
+  background: linear-gradient(150deg, rgba(59,130,246,0.14), rgba(15,23,42,0.55));
+}
+.split-right {
+  border: 1.5px solid rgba(251,191,36,0.50);
+  background: linear-gradient(150deg, rgba(251,191,36,0.14), rgba(15,23,42,0.55));
+}
+.split-tag {
+  font-family: var(--font-data);
+  font-size: 44px; font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.split-left .split-tag { color: var(--tut-blue-2); }
+.split-right .split-tag { color: var(--tut-gold); }
+.split-body {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--tut-white);
+  text-align: center;
+  line-height: 1.35;
+}
+/* 中轴：竖线 + 切换箭头 */
+.split-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  gap: 18px;
+}
+.split-divider {
+  width: 2px; height: 220px;
+  background: linear-gradient(180deg, transparent, var(--tut-gray), transparent);
+}
+.split-arrow {
+  font-family: var(--font-title);
+  font-size: 92px; font-weight: 900;
+  color: var(--tut-gold);
+  line-height: 1;
+}
+.overlap-band {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.overlap-text {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.10em;
+  padding: 14px 44px;
+  border-radius: 18px;
+  border-top: 1.5px solid rgba(148,163,184,0.35);
+  border-bottom: 1.5px solid rgba(148,163,184,0.35);
+  background: rgba(148,163,184,0.08);
+}
+
+/* ============================================
+ * 场景 3：FDE 定义卡 + 全流程链
+ * ============================================ */
+.def-grid {
+  gap: 36px;
+}
+.def-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.def-title {
+  font-family: var(--font-title);
+  font-size: 132px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+.def-cn {
+  font-family: var(--font-title);
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+.def-sentence {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 600;
+  color: var(--tut-white);
+  text-align: center;
+  line-height: 1.4;
+  max-width: 1400px;
+}
+/* 全流程链：四节点 + 箭头 */
+.flow-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 280px;
+  padding: 26px 18px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(59,130,246,0.42);
+  background: linear-gradient(150deg, rgba(59,130,246,0.12), rgba(15,23,42,0.55));
+}
+.flow-node-text {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 800;
+  color: var(--tut-blue-white);
+  text-align: center;
+  line-height: 1.25;
+}
+.flow-node-idx {
+  font-family: var(--font-data);
+  font-size: 32px; font-weight: 700;
+  color: var(--tut-gold);
+  letter-spacing: 0.06em;
+}
+.flow-arrow {
+  font-family: var(--font-title);
+  font-size: 54px; font-weight: 900;
+  color: var(--tut-gray);
+  margin: 0 8px;
+  line-height: 1;
+}
+.flow-tail {
+  font-family: var(--font-body);
+  font-size: 36px; font-weight: 800;
+  color: var(--tut-gold);
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+/* ============================================
+ * 场景 4：本集定位（成长地图 + 实战方法论）
+ * ============================================ */
+.position-grid {
+  justify-content: space-between;
+}
+.position-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  text-align: left;
+}
+.position-title {
+  font-family: var(--font-title);
+  font-size: 96px;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+.position-plus {
+  font-family: var(--font-title);
+  font-weight: 900;
+  color: var(--tut-gray);
+  margin: 0 14px;
+}
+.position-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 56px;
+  width: 100%;
+}
+.position-card {
+  flex: 1;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 44px 34px;
+  border-radius: 26px;
+}
+.pc-left {
+  border: 1.5px solid rgba(148,163,184,0.40);
+  background: linear-gradient(150deg, rgba(148,163,184,0.10), rgba(15,23,42,0.55));
+}
+.pc-right {
+  border: 1.5px solid rgba(251,191,36,0.46);
+  background: linear-gradient(150deg, rgba(251,191,36,0.12), rgba(15,23,42,0.55));
+}
+.position-tag {
+  font-family: var(--font-data);
+  font-size: 38px; font-weight: 800;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.06em;
+}
+.pc-right .position-tag { color: var(--tut-gold); }
+.position-side {
+  font-family: var(--font-body);
+  font-size: 38px; font-weight: 700;
+  color: var(--tut-white);
+  text-align: center;
+  line-height: 1.3;
+}

@@ -1,0 +1,43 @@
+<!-- 场景: seg8 | 时长: ~7s | bg: aurora_night | 互动提问卡：你缺哪块（中性二选一）+ 关注引导 -->
+<div class="layer-bg">
+  <!-- bg-component: aurora_night -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-particle 金/蓝漂浮粒子（收尾氛围，alpha ≤ 0.22，禁划过类 fx） -->
+  <div class="fx-particle" style="top:22%;left:16%;width:7px;height:7px;background:hsla(215,70%,62%,0.22);animation-delay:0s"></div>
+  <div class="fx-particle" style="top:30%;left:84%;width:8px;height:8px;background:hsla(43,90%,60%,0.20);animation-delay:1s"></div>
+  <div class="fx-particle" style="top:62%;left:22%;width:6px;height:6px;background:hsla(43,85%,58%,0.18);animation-delay:1.6s"></div>
+  <div class="fx-particle" style="top:68%;left:78%;width:6px;height:6px;background:hsla(215,70%,62%,0.22);animation-delay:0.7s"></div>
+  <div class="fx-particle" style="top:48%;left:50%;width:5px;height:5px;background:hsla(43,90%,62%,0.18);animation-delay:1.3s"></div>
+  <!-- fx-pulse 金色静态光晕（提问区后方，alpha 0.16） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:1000px;height:460px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- 提问（场景开始即显示） -->
+  <div class="tut-region ic-wrap" data-reveal="0" data-reveal-dir="fade">
+    <div class="ic-question grad-gold">你缺哪块？</div>
+  </div>
+  <!-- 两并列选项卡（中性并列，无站队）2.5s reveal -->
+  <div class="tut-region ic-options" data-reveal="2.5" data-reveal-dir="fade">
+    <div class="ic-opt io-blue">
+      <div class="io-tag">A</div>
+      <div class="opt-text">技术执行那块</div>
+    </div>
+    <div class="ic-opt io-gold">
+      <div class="io-tag">B</div>
+      <div class="opt-text">客户现场那块</div>
+    </div>
+  </div>
+  <!-- 关注引导 5s reveal -->
+  <div class="tut-region ic-follow" data-reveal="5" data-reveal-dir="fade" style="text-align:center">
+    <span class="ic-heart">◆</span>点关注不走丢
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

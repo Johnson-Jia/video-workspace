@@ -1,0 +1,46 @@
+<!-- 场景: seg2 | 时长: ~20.8s | bg: hex_grid | 甲方乙方分栏对照 + 中轴箭头 + 重叠带 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:1250px;height:430px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（两栏角落平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:16%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-split-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid split-grid">
+
+    <!-- 区域 A：分栏对照行（左卡 + 中轴 data-reveal=0，右卡 data-reveal=7 先左后右） -->
+    <div class="split-row">
+      <div class="tut-region split-card split-left" data-reveal="0" data-reveal-dir="left">
+        <div class="split-tag">甲方内部</div>
+        <div class="split-body">带自己的研发团队<br>完成 AI 转型</div>
+      </div>
+      <div class="tut-region split-axis" data-reveal="0" data-reveal-dir="fade">
+        <div class="split-divider"></div>
+        <div class="split-arrow">→</div>
+        <div class="split-divider"></div>
+      </div>
+      <div class="tut-region split-card split-right" data-reveal="7" data-reveal-dir="right">
+        <div class="split-tag">乙方 FDE</div>
+        <div class="split-body">进客户业务现场<br>用 AI 创造价值</div>
+      </div>
+    </div>
+
+    <!-- 区域 B：重叠带（data-reveal=15，两套肌肉关系收拢） -->
+    <div class="tut-region overlap-band" data-reveal="15" data-reveal-dir="top">
+      <div class="overlap-text">都用 AI · 都要证明价值 · 立场不同</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

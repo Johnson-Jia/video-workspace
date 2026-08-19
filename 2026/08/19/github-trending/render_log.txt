@@ -1,0 +1,412 @@
+=== Stage 6 渲染管线 ===
+--- Step 1/12: 文件存在性检查 ---
+[OK] 关键文件存在
+--- Step 2/12: 旁白 <audio> 检查 ---
+[OK] 旁白 <audio> 存在 (1 个)
+--- Step 3/12: 渲染前依赖检查 ---
+PASS: ��Ⱦǰ�������ͨ����6 ���ļ���������֤��
+[OK] 依赖检查通过
+--- Step 4/12: 导演门禁 ---
+==================================================
+  导演门禁 — HTML 设计意图验证
+==================================================
+
+── 1. 字号层级 ──
+  [32m✓ 字号层级: 200px / 14px = 14.3x[0m
+  [32m✓ 冲击层字号存在: [200, 168, 104, 98, 96, 92, 84]px[0m
+
+── 1b. 字号绝对值下限（render-safety §3.1）──
+  [32m✓ 所有文本字号 ≥ 32px 最低标准（全量扫描 44 个 class）[0m
+
+── 2. 光晕系统 ──
+  [32m✓ 光晕元素: 5 种[0m
+  [32m✓ 光晕 opacity 范围: 0.50 ~ 0.50[0m
+  [33m⚠ 未检测到标准暖/冷光晕颜色[0m
+
+── 3. 文字可读性 ──
+  [32m✓ text-shadow 使用: 17 处[0m
+  [32m✓ text-shadow 无发光（0 0 Xpx）[0m
+  [32m✓ 渐变无纯白端点（同色系高饱和，手机/深背景都清晰）[0m
+  [32m✓ 无胶囊+clip:text 冲突（胶囊用纯色文字）[0m
+  [32m✓ GSAP 无裸线性 ease（用 EASE 预设或非线性）[0m
+  [32m✓ 无 text-overflow:ellipsis（content 层文字完整显示）[0m
+  [32m✓ 无 .pfc-name nowrap（项目名 word-break 完整显示）[0m
+
+── 4. 场景视觉反差 ──
+  [33m⚠ 场景数不足（0），跳过反差检查[0m
+
+── 5. CSS 变量使用 ──
+  [32m✓ --accent-warm: 使用 18 次[0m
+  [33m⚠ --font-body: 声明了但未使用[0m
+  [33m⚠ --font-data: 声明了但未使用[0m
+  [32m✓ --title-weight: 使用 6 次[0m
+  [32m✓ --accent-cool: 使用 10 次[0m
+  [32m✓ --shadow-drop: 使用 15 次[0m
+  [33m⚠ --text: 声明了但未使用[0m
+  [33m⚠ --font-title: 声明了但未使用[0m
+  [32m✓ --text2: 使用 4 次[0m
+  [33m⚠ --bg-deep: 声明了但未使用[0m
+
+── 6. 四层架构完整性（bg/fx/content 必需 + cinema 可选）──
+  [32m✓ layer-bg: 6 个[0m
+  [32m✓ layer-fx: 6 个[0m
+  [32m✓ layer-content: 6 个[0m
+  [32m✓ layer-cinema: 6 个（后处理签名层，cinema-effects.md）[0m
+  [32m✓ layer-fx 有 6 个含内容的层[0m
+
+── 7. HyperFrames 结构完整性 ──
+  [32m✓ __timelines 是 {} 对象[0m
+  [32m✓ timeline 设置了 paused: true[0m
+  [32m✓ 有 data-composition-id[0m
+  [33m⚠ 内容元素有 2 处 opacity:0（确认不是初始隐藏状态）[0m
+  [32m✓ 未使用 gsap.from()[0m
+
+── 7b. timeline phase 独占（多 phase 同屏）──
+  [32m✓ #s02 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s03 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s04 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s05 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ 全部 4 个多 phase scene timeline 独占校验通过[0m
+
+── 8. 单层 padding 原则 ──
+  [32m✓ 安全区 padding 只在 .phase 一层设置（单层 padding 原则通过）[0m
+
+==================================================
+  导演门禁: 32 通过  0 失败  8 警告
+==================================================
+
+[33m  警告较多（8），建议检查后再渲染[0m
+[OK] 导演门禁通过
+--- Step 5/12: BGM 音量校验 ---
+[OK] BGM 音量正常 (0.39)，已由组装阶段注入 index.html
+--- Step 6/12: renderbak 隔离 ---
+[OK] 非渲染文件已隔离
+[OK] 渲染前僵尸预检完成（仅清 ≥40min 残留，不影响并发活跃渲染）
+--- Step 7/12: HyperFrames lint ---
+npm warn exec The following package was not found and will be installed: hyperframes@0.8.3
+◆  Linting github-trending/index.html
+
+  ⚠ gsap_timeline_set_initial_hide: Initial hidden state for "#s02, #s03, #s04, #s05, #s06" is set via tl.set(...) at position 0 inside the paused timeline. A zero-duration set at 0 does not render while the playhead sits exactly at 0, so frame 0 shows the un-hidden state.
+    Fix: Use gsap.set(...) (immediate, outside the timeline) for initial states, or author the hidden state directly in CSS/attributes.
+  ⚠ composition_file_too_large: This HTML composition file has 764 lines. Smaller sub-compositions are easier to read, iterate on, and diff.
+    Fix: Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently.
+  ⚠ composition_heavy_overlay_count_high: This composition has 65 elements carrying "heavy overlay" CSS (filter:blur, radial-gradient, or clip-path). Field signal: a composition with ~40 such elements — including opacity:0 / visibility:hidden ones — captures solid-black for the first ~half of the render, recovering near the end. Reproduces identically via drawElement, forced screenshot capture, and snapshot, so the capture layer itself is the offender (not encoder/mux). Independent of duration. Presence alone matters; only display:none elements are excluded here.
+    Fix: Split coherent scenes / transitions into separate .html files under compositions/ and concat the pieces (FFmpeg or the runtime's slideshow) so each capture only sees a small subset of heavy overlays at once. Even hidden overlays (opacity:0 / visibility:hidden) contribute — either remove truly unused ones from the source or scope them into their own per-transition sub-composition. If an overlay is genuinely inert for the whole clip, use display:none so it never enters the render tree. Field ref ts=1784040753 (#hyperframes-cli-feedback).
+
+◇  0 error(s), 3 warning(s)
+--- Step 8/12: HyperFrames render ---
+
+◆  Rendering github-trending → D:\AI-Agent\video-clipforge\workspace\2026\08\19\github-trending\output.mp4
+   30fps · standard · 2 workers
+   GPU: browser GPU (auto-detect)
+
+[?25l│
+◇  Browser: cache
+[?25h
+  ⚠ gsap_timeline_set_initial_hide: Initial hidden state for "#s02, #s03, #s04, #s05, #s06" is set via tl.set(...) at position 0 inside the paused timeline. A zero-duration set at 0 does not render while the playhead sits exactly at 0, so frame 0 shows the un-hidden state.
+    Fix: Use gsap.set(...) (immediate, outside the timeline) for initial states, or author the hidden state directly in CSS/attributes.
+  ⚠ composition_file_too_large: This HTML composition file has 764 lines. Smaller sub-compositions are easier to read, iterate on, and diff.
+    Fix: Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently.
+  ⚠ composition_heavy_overlay_count_high: This composition has 65 elements carrying "heavy overlay" CSS (filter:blur, radial-gradient, or clip-path). Field signal: a composition with ~40 such elements — including opacity:0 / visibility:hidden ones — captures solid-black for the first ~half of the render, recovering near the end. Reproduces identically via drawElement, forced screenshot capture, and snapshot, so the capture layer itself is the offender (not encoder/mux). Independent of duration. Presence alone matters; only display:none elements are excluded here.
+    Fix: Split coherent scenes / transitions into separate .html files under compositions/ and concat the pieces (FFmpeg or the runtime's slideshow) so each capture only sees a small subset of heavy overlays at once. Even hidden overlays (opacity:0 / visibility:hidden) contribute — either remove truly unused ones from the source or scope them into their own per-transition sub-composition. If an overlay is genuinely inert for the whole clip, use display:none so it never enters the render tree. Field ref ts=1784040753 (#hyperframes-cli-feedback).
+  Continuing render despite lint issues. Use --strict to block errors.
+
+[INFO] [Render] Pipeline started {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","platform":"win32","arch":"x64","nodeVersion":"v24.11.1","fps":{"num":30,"den":1},"format":"mp4","quality":"standard","browserGpuMode":"auto","forceScreenshot":false,"protocolTimeout":300000,"browserTimeout":120000,"pageNavigationTimeout":60000,"playerReadyTimeout":45000}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"pipeline","status":"checkpoint","elapsedMs":3,"message":"started","format":"mp4","quality":"standard","browserGpuMode":"auto","forceScreenshot":false,"protocolTimeoutMs":300000,"pageNavigationTimeoutMs":60000,"playerReadyTimeoutMs":45000,"requestedWorkers":2}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"compile","status":"start","elapsedMs":4,"needsAlpha":false}
+  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[INFO] [Render] Fast capture: composition uses mix-blend-mode — disabling drawElementImage for this render. Capture uses the platform's baseline route. {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1"}
+[INFO] Compiled composition metadata {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","entryFile":"index.html","staticDuration":56.67,"width":1080,"height":1920,"videoCount":0,"audioCount":2,"renderModeHints":{"recommendScreenshot":false,"reasons":[]}}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"compile","status":"end","elapsedMs":705,"durationMs":701,"needsAlpha":false}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"compile","status":"checkpoint","elapsedMs":705,"message":"composition metadata resolved","width":1080,"height":1920,"videoCount":0,"audioCount":2,"imageCount":4,"deviceScaleFactor":1,"forceScreenshot":false,"compositionHash":"d7b32e9b2b01245d"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"browser_probe","status":"start","elapsedMs":706,"forceScreenshot":false,"stagePhase":"calibrating"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"browser_probe","status":"end","elapsedMs":724,"durationMs":18,"forceScreenshot":false,"stagePhase":"calibrating"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"browser_probe","status":"checkpoint","elapsedMs":724,"message":"duration resolved","durationSeconds":56.67,"totalFrames":1701,"compositionHash":"d7b32e9b2b01245d","beginFrameStalled":false}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"video_extract","status":"start","elapsedMs":724,"videoCount":0}
+  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"video_extract","status":"end","elapsedMs":726,"durationMs":2,"videoCount":0}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"video_extract","status":"checkpoint","elapsedMs":729,"message":"frames resolved","videoCount":0,"extractedVideoCount":0,"totalFramesExtracted":0,"maxFramesPerVideo":0,"avgFramesPerExtractedVideo":null,"vfrPreflightCount":null,"vfrPreflightMs":null,"cacheHits":null,"cacheMisses":null,"transientRetries":null,"minVideoFrameCoverageRatio":null,"authoredTimedClipCount":9}
+[INFO] [Render] No HDR sources detected — rendering SDR {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"hdr_detection","status":"checkpoint","elapsedMs":729,"message":"resolved","requestedHdrMode":"auto","effectiveHdr":"sdr","nativeHdrVideoCount":0,"nativeHdrImageCount":0}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"audio_process","status":"start","elapsedMs":729,"audioCount":2}
+  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"audio_process","status":"end","elapsedMs":1919,"durationMs":1190,"audioCount":2}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"file_server","status":"start","elapsedMs":1919,"reused":false}
+  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"file_server","status":"end","elapsedMs":1924,"durationMs":5}
+[hyperframes] browserGpuMode probe → software (WebGL renderer vendor="Google Inc. (Microsoft)" renderer="ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)")
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_calibration","status":"checkpoint","elapsedMs":2971,"message":"skipped","requestedWorkers":2,"totalFrames":1701,"htmlInCanvasDetected":false,"lowMemoryMode":false,"deInversionEligible":false,"deParallelRouterEligible":false}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"worker_resolution","status":"checkpoint","elapsedMs":2972,"message":"resolved","workerCount":2}
+[INFO] streaming-encode gate {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","enabled":false,"configFlag":true,"outputFormat":"mp4","workerCount":2,"durationSeconds":56.67,"maxDurationSeconds":240}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_strategy","status":"checkpoint","elapsedMs":2972,"message":"resolved","workerCount":2,"forceScreenshot":true,"captureBeyondViewport":null,"useStreamingEncode":false,"useLayeredComposite":false,"usePageSideCompositing":false,"hasHdrContent":false,"hasShaderTransitions":false,"isPngSequence":false}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_disk","status":"start","elapsedMs":2973,"stagePhase":"capturing","needsAlpha":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":0,"captureMode":"screenshot","captureOperation":"captureScreenshot"}
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7928.2, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/inter/900-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/inter/400-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/400-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/noto-sans-sc/700-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/700-normal.woff2
+[Browser:ERROR] Not allowed to load local resource: file:///C:/Users/admin/.cache/hyperframes/fonts/jetbrains-mono/400-normal.woff2
+[HyperFrames] render runtime fps [object Object]
+[HyperFrames] render runtime fps [object Object]
+[initSession:screenshot] page.goto complete (781ms)
+[initSession:screenshot] page.goto complete (787ms)
+[initSession:screenshot] GSAP proxy flush complete (839ms)
+[initSession:screenshot] GSAP proxy flush complete (1005ms)
+[initSession:screenshot] pollHfReady complete (1009ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (1028ms)
+[initSession:screenshot] applyVideoMetadataHints complete (1028ms)
+[initSession:screenshot] media + fonts + tailwind ready (1038ms)
+[initSession:screenshot] static-frame dedup: disabled (running CSS/WAAPI animation) (1049ms)
+[initSession:screenshot] pollHfReady complete (1073ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (1083ms)
+[initSession:screenshot] applyVideoMetadataHints complete (1083ms)
+[initSession:screenshot] media + fonts + tailwind ready (1089ms)
+[initSession:screenshot] static-frame dedup: disabled (running CSS/WAAPI animation) (1094ms)
+  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 30/1701 (2 workers)
+  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 60/1701 (2 workers)
+  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 90/1701 (2 workers)
+  ███████░░░░░░░░░░░░░░░░░░  28%  Capturing frame 120/1701 (2 workers)
+  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 150/1701 (2 workers)
+  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 180/1701 (2 workers)
+  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 210/1701 (2 workers)
+  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 240/1701 (2 workers)
+  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 270/1701 (2 workers)
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_disk","status":"checkpoint","elapsedMs":32973,"message":"stage still running","stagePhase":"capturing","needsAlpha":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":294,"captureMode":"screenshot","captureOperation":"captureScreenshot","heartbeatIndex":1,"stageElapsedMs":30000}
+  ████████░░░░░░░░░░░░░░░░░  33%  Capturing frame 300/1701 (2 workers)
+  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 330/1701 (2 workers)
+  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 360/1701 (2 workers)
+  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 390/1701 (2 workers)
+  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 420/1701 (2 workers)
+  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 450/1701 (2 workers)
+  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 480/1701 (2 workers)
+  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 510/1701 (2 workers)
+  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 540/1701 (2 workers)
+  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 570/1701 (2 workers)
+  ██████████░░░░░░░░░░░░░░░  41%  Capturing frame 600/1701 (2 workers)
+  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 630/1701 (2 workers)
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_disk","status":"checkpoint","elapsedMs":62975,"message":"stage still running","stagePhase":"capturing","needsAlpha":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":637,"captureMode":"screenshot","captureOperation":"captureScreenshot","heartbeatIndex":2,"stageElapsedMs":60002}
+  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 660/1701 (2 workers)
+  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 690/1701 (2 workers)
+  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 720/1701 (2 workers)
+  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 750/1701 (2 workers)
+  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 780/1701 (2 workers)
+  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 810/1701 (2 workers)
+  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 840/1701 (2 workers)
+  ████████████░░░░░░░░░░░░░  48%  Capturing frame 870/1701 (2 workers)
+  ████████████░░░░░░░░░░░░░  49%  Capturing frame 900/1701 (2 workers)
+  ████████████░░░░░░░░░░░░░  50%  Capturing frame 930/1701 (2 workers)
+  ████████████░░░░░░░░░░░░░  50%  Capturing frame 960/1701 (2 workers)
+  ████████████░░░░░░░░░░░░░  51%  Capturing frame 990/1701 (2 workers)
+  █████████████░░░░░░░░░░░░  52%  Capturing frame 1020/1701 (2 workers)
+  █████████████░░░░░░░░░░░░  53%  Capturing frame 1050/1701 (2 workers)
+  █████████████░░░░░░░░░░░░  54%  Capturing frame 1080/1701 (2 workers)
+  █████████████░░░░░░░░░░░░  54%  Capturing frame 1110/1701 (2 workers)
+  █████████████░░░░░░░░░░░░  55%  Capturing frame 1140/1701 (2 workers)
+  ██████████████░░░░░░░░░░░  56%  Capturing frame 1170/1701 (2 workers)
+  ██████████████░░░░░░░░░░░  57%  Capturing frame 1200/1701 (2 workers)
+  ██████████████░░░░░░░░░░░  58%  Capturing frame 1230/1701 (2 workers)
+  ██████████████░░░░░░░░░░░  58%  Capturing frame 1260/1701 (2 workers)
+  ██████████████░░░░░░░░░░░  59%  Capturing frame 1290/1701 (2 workers)
+  ███████████████░░░░░░░░░░  60%  Capturing frame 1320/1701 (2 workers)
+  ███████████████░░░░░░░░░░  61%  Capturing frame 1350/1701 (2 workers)
+  ███████████████░░░░░░░░░░  62%  Capturing frame 1380/1701 (2 workers)
+  ███████████████░░░░░░░░░░  62%  Capturing frame 1410/1701 (2 workers)
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_disk","status":"checkpoint","elapsedMs":122978,"message":"stage still running","stagePhase":"capturing","needsAlpha":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1420,"captureMode":"screenshot","captureOperation":"captureScreenshot","heartbeatIndex":3,"stageElapsedMs":120005}
+  ███████████████░░░░░░░░░░  63%  Capturing frame 1440/1701 (2 workers)
+  ████████████████░░░░░░░░░  64%  Capturing frame 1470/1701 (2 workers)
+  ████████████████░░░░░░░░░  65%  Capturing frame 1500/1701 (2 workers)
+  ████████████████░░░░░░░░░  65%  Capturing frame 1530/1701 (2 workers)
+  ████████████████░░░░░░░░░  66%  Capturing frame 1560/1701 (2 workers)
+  ████████████████░░░░░░░░░  67%  Capturing frame 1590/1701 (2 workers)
+  █████████████████░░░░░░░░  68%  Capturing frame 1620/1701 (2 workers)
+  █████████████████░░░░░░░░  69%  Capturing frame 1650/1701 (2 workers)
+  █████████████████░░░░░░░░  69%  Capturing frame 1680/1701 (2 workers)
+  █████████████████░░░░░░░░  70%  Capturing frame 1701/1701 (2 workers)
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"capture_disk","status":"end","elapsedMs":150751,"durationMs":147778,"stagePhase":"capturing","needsAlpha":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1701,"captureMode":"screenshot","captureOperation":"encode"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"encode","status":"start","elapsedMs":150752,"stagePhase":"capturing","hasAudio":true,"isPngSequence":false,"isGif":false,"chunkedEncode":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1701,"captureMode":"screenshot","captureOperation":"encode"}
+  ██████████████████░░░░░░░  75%  Encoding video
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"encode","status":"end","elapsedMs":160137,"durationMs":9385,"stagePhase":"capturing","hasAudio":true,"isPngSequence":false,"isGif":false,"chunkedEncode":false,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1701,"captureMode":"screenshot","captureOperation":"encode"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"assemble","status":"start","elapsedMs":160138,"stagePhase":"capturing","hasAudio":true,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1701,"captureMode":"screenshot","captureOperation":"encode"}
+  ██████████████████████░░░  90%  Assembling final video
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"assemble","status":"end","elapsedMs":161221,"durationMs":1082,"stagePhase":"capturing","hasAudio":true,"workerCount":2,"forceScreenshot":true,"totalFrames":1701,"framesCompleted":1701,"captureMode":"screenshot","captureOperation":"encode"}
+[INFO] [Render:trace] {"renderJobId":"0a9afb9c-a533-489d-8afb-909b5a42e7b1","phase":"pipeline","status":"checkpoint","elapsedMs":161252,"message":"artifact validated","totalElapsedMs":161222}
+  █████████████████████████  100%  Render complete
+
+◇  D:\AI-Agent\video-clipforge\workspace\2026\08\19\github-trending\output.mp4
+   33.4 MB · 56.7s video · rendered in 2m 43.9s
+[OK] output.mp4 已渲染
+--- Step 9/12: renderbak 恢复 ---
+[OK] 已恢复
+--- Step 10/12: 无 BGM 版本合成 ---
+=== 构建无 BGM 视频 ===
+视频轨时长: 56.700000s
+旁白时长:   56.688000s
+ffmpeg version N-118142-g5ca5bbd462-20241223 Copyright (c) 2000-2024 the FFmpeg developers
+  built with gcc 14.2.0 (crosstool-NG 1.26.0.120_4d36f27)
+  configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --disable-w32threads --enable-pthreads --enable-iconv --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-libxml2 --enable-lzma --enable-fontconfig --enable-libharfbuzz --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth --enable-chromaprint --enable-libdav1d --enable-libdavs2 --enable-libdvdread --enable-libdvdnav --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme --enable-libkvazaar --enable-libaribcaption --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq --enable-lv2 --enable-libvpl --enable-openal --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --enable-vaapi --enable-libvidstab --enable-vulkan --enable-libshaderc --enable-libplacebo --disable-libvvenc --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-libs=-lgomp --extra-ldflags=-pthread --extra-ldexeflags= --cc=x86_64-w64-mingw32-gcc --cxx=x86_64-w64-mingw32-g++ --ar=x86_64-w64-mingw32-gcc-ar --ranlib=x86_64-w64-mingw32-gcc-ranlib --nm=x86_64-w64-mingw32-gcc-nm --extra-version=20241223
+  libavutil      59. 51.100 / 59. 51.100
+  libavcodec     61. 28.100 / 61. 28.100
+  libavformat    61.  9.101 / 61.  9.101
+  libavdevice    61.  4.100 / 61.  4.100
+  libavfilter    10.  6.101 / 10.  6.101
+  libswscale      8. 13.100 /  8. 13.100
+  libswresample   5.  4.100 /  5.  4.100
+  libpostproc    58.  4.100 / 58.  4.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'output.mp4':
+  Metadata:
+    minor_version   : 512
+    major_brand     : isom
+    compatible_brands: isomiso2avc1mp41
+    hyperframes_version: 0.0.0-dev
+    hyperframes_renderer: hyperframes
+    encoder         : Lavf61.9.101
+  Duration: 00:00:56.70, start: 0.000000, bitrate: 4946 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1080x1920 [SAR 1:1 DAR 9:16], 4741 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc61.28.100 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 197 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Input #1, mp3, from 'narration.mp3':
+  Metadata:
+    encoder         : Lavf61.9.101
+  Duration: 00:00:56.69, start: 0.023021, bitrate: 64 kb/s
+  Stream #1:0: Audio: mp3 (mp3float), 48000 Hz, mono, fltp, 64 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+  Stream #1:0 -> #0:1 (mp3 (mp3float) -> aac (native))
+Press [q] to stop, [?] for help
+Output #0, mp4, to 'output_no_bgm.mp4':
+  Metadata:
+    minor_version   : 512
+    major_brand     : isom
+    compatible_brands: isomiso2avc1mp41
+    hyperframes_version: 0.0.0-dev
+    hyperframes_renderer: hyperframes
+    encoder         : Lavf61.9.101
+  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 4741 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc61.28.100 libx264
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, mono, fltp, 192 kb/s
+    Metadata:
+      encoder         : Lavc61.28.100 aac
+frame= 1218 fps=0.0 q=-1.0 size=   24832KiB time=00:00:40.61 bitrate=5008.1kbits/s speed=77.2x    [out#0/mp4 @ 000001ca485e0900] video:32818KiB audio:1113KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.144827%
+frame= 1699 fps=0.0 q=-1.0 Lsize=   33980KiB time=00:00:56.64 bitrate=4914.5kbits/s speed=77.1x    
+[aac @ 000001ca4a940900] Qavg: 52270.922
+PASS: output_no_bgm.mp4 已生成
+输出时长: 56.642000s
+音频: aac, 1 声道
+[OK] output_no_bgm.mp4 已生成
+--- Step 11/12: 渲染后音频验证 ---
+codec_name=aac
+[Parsed_volumedetect_0 @ 0000025b47f80d00] n_samples: 0
+frame= 1082 fps=0.0 q=-0.0 size=N/A time=00:00:36.06 bitrate=N/A speed=68.4x    [Parsed_volumedetect_0 @ 0000025b47f80280] n_samples: 5441536
+[Parsed_volumedetect_0 @ 0000025b47f80280] mean_volume: -17.1 dB
+[Parsed_volumedetect_0 @ 0000025b47f80280] max_volume: -0.8 dB
+[Parsed_volumedetect_0 @ 0000025b47f80280] histogram_0db: 11
+[Parsed_volumedetect_0 @ 0000025b47f80280] histogram_1db: 1730
+[Parsed_volumedetect_0 @ 0000025b47f80280] histogram_2db: 7096
+[OK] 音频验证通过
+--- Step 12/12: Stage 6 完成门禁 ---
+=== Stage 6 完成门禁 ===
+--- 导演门禁 ---
+==================================================
+  导演门禁 — HTML 设计意图验证
+==================================================
+
+── 1. 字号层级 ──
+  [32m✓ 字号层级: 200px / 14px = 14.3x[0m
+  [32m✓ 冲击层字号存在: [200, 168, 104, 98, 96, 92, 84]px[0m
+
+── 1b. 字号绝对值下限（render-safety §3.1）──
+  [32m✓ 所有文本字号 ≥ 32px 最低标准（全量扫描 44 个 class）[0m
+
+── 2. 光晕系统 ──
+  [32m✓ 光晕元素: 5 种[0m
+  [32m✓ 光晕 opacity 范围: 0.50 ~ 0.50[0m
+  [33m⚠ 未检测到标准暖/冷光晕颜色[0m
+
+── 3. 文字可读性 ──
+  [32m✓ text-shadow 使用: 17 处[0m
+  [32m✓ text-shadow 无发光（0 0 Xpx）[0m
+  [32m✓ 渐变无纯白端点（同色系高饱和，手机/深背景都清晰）[0m
+  [32m✓ 无胶囊+clip:text 冲突（胶囊用纯色文字）[0m
+  [32m✓ GSAP 无裸线性 ease（用 EASE 预设或非线性）[0m
+  [32m✓ 无 text-overflow:ellipsis（content 层文字完整显示）[0m
+  [32m✓ 无 .pfc-name nowrap（项目名 word-break 完整显示）[0m
+
+── 4. 场景视觉反差 ──
+  [33m⚠ 场景数不足（0），跳过反差检查[0m
+
+── 5. CSS 变量使用 ──
+  [33m⚠ --font-data: 声明了但未使用[0m
+  [32m✓ --title-weight: 使用 6 次[0m
+  [32m✓ --text2: 使用 4 次[0m
+  [33m⚠ --font-title: 声明了但未使用[0m
+  [33m⚠ --bg-deep: 声明了但未使用[0m
+  [32m✓ --accent-warm: 使用 18 次[0m
+  [33m⚠ --font-body: 声明了但未使用[0m
+  [33m⚠ --text: 声明了但未使用[0m
+  [32m✓ --shadow-drop: 使用 15 次[0m
+  [32m✓ --accent-cool: 使用 10 次[0m
+
+── 6. 四层架构完整性（bg/fx/content 必需 + cinema 可选）──
+  [32m✓ layer-bg: 6 个[0m
+  [32m✓ layer-fx: 6 个[0m
+  [32m✓ layer-content: 6 个[0m
+  [32m✓ layer-cinema: 6 个（后处理签名层，cinema-effects.md）[0m
+  [32m✓ layer-fx 有 6 个含内容的层[0m
+
+── 7. HyperFrames 结构完整性 ──
+  [32m✓ __timelines 是 {} 对象[0m
+  [32m✓ timeline 设置了 paused: true[0m
+  [32m✓ 有 data-composition-id[0m
+  [33m⚠ 内容元素有 2 处 opacity:0（确认不是初始隐藏状态）[0m
+  [32m✓ 未使用 gsap.from()[0m
+
+── 7b. timeline phase 独占（多 phase 同屏）──
+  [32m✓ #s02 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s03 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s04 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ #s05 多 phase 独占校验通过（任意时刻单 phase 可见）[0m
+  [32m✓ 全部 4 个多 phase scene timeline 独占校验通过[0m
+
+── 8. 单层 padding 原则 ──
+  [32m✓ 安全区 padding 只在 .phase 一层设置（单层 padding 原则通过）[0m
+
+==================================================
+  导演门禁: 32 通过  0 失败  8 警告
+==================================================
+
+[33m  警告较多（8），建议检查后再渲染[0m
+--- engine/gate.py 门禁 ---
+{
+  "hard_passed": false,
+  "soft_score": 1.0,
+  "hard_violations": [
+    {
+      "rule_id": "gate:adjacent_bg_diversity",
+      "details": "R-R-010: 1 对相邻同质 (5 种风格/6 场景, 需≥3); s04↔s05",
+      "rule_class": "EXPERIENTIAL"
+    }
+  ],
+  "soft_issues": [],
+  "trace": "D:\\AI-Agent\\video-clipforge\\workspace\\evolution\\traces\\p-e62676484235\\trace.json"
+}
+FAIL: gate.py 门禁未通过
+=== Stage 6 完成门禁失败 ===

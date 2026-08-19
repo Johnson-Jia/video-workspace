@@ -1,0 +1,66 @@
+<!-- 场景: scene-2 | 时长: ~30.5s | bg: contour_lines | 价值翻译对照表：技术指标 → 业务收益 -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1300px;height:480px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（左右对角平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:14%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（对照表左右分栏均衡） -->
+  <div class="tut-grid vt-stage">
+
+    <!-- 区域：场景标题（左对齐建视觉锚点） -->
+    <div class="tut-region sec-head" data-reveal="0" data-reveal-dir="fade">
+      <h1 class="sec-title grad-blue">第三件 · 价值证明</h1>
+      <div class="sec-sub">关键动作：把技术指标翻译成业务收益</div>
+    </div>
+
+    <!-- 区域：对照表（左技术 → 右业务，左右分栏） -->
+    <div class="tut-region vt-table" data-reveal="2" data-reveal-dir="fade">
+      <div class="vt-card vt-card-tech">
+        <span class="vt-tag">技术指标</span>
+        <div class="vt-num grad-blue">96<span class="vt-num-unit">%</span></div>
+        <div class="vt-label">客服分流准确率</div>
+        <div class="vt-label" style="color:var(--tut-gray);font-size:32px">客户听不懂这个</div>
+      </div>
+      <div class="vt-arrow-zone">
+        <div class="big-arrow">→</div>
+        <div class="vt-arrow-cap">翻译</div>
+      </div>
+      <div class="vt-card vt-card-biz">
+        <span class="vt-tag">业务收益</span>
+        <div class="vt-rows">
+          <div class="vt-row">
+            <span class="vt-row-label">分流准确率</span>
+            <span class="vt-row-num grad-gold">82% → 96%</span>
+          </div>
+          <div class="vt-row">
+            <span class="vt-row-label">单条处理</span>
+            <span class="vt-row-num grad-gold">6分钟 → 2分钟</span>
+          </div>
+          <div class="vt-row">
+            <span class="vt-row-label">客服工时</span>
+            <span class="vt-row-num grad-gold">月省 ≈5800 小时</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域：口径胶囊（右下，教程严谨规范） -->
+    <div class="tut-region vt-foot" data-reveal="24" data-reveal-dir="fade">
+      <span class="caveat-pill">示意口径 · 虚构脱敏 · 非真实客户</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

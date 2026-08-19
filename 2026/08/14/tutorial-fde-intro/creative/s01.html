@@ -1,0 +1,30 @@
+<!-- 场景: seg1 | 时长: ~4.8s | bg: clean_slate | 切换宣告：视角切换大字 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 金色静态光晕（切换宣告，alpha 0.18 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:1150px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 冷蓝锚点（暖色预算给光晕，锚点用冷蓝平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:21%;left:16%;width:13px;height:13px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:23%;right:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-switch-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid switch-grid">
+
+    <!-- 区域：切换宣告（data-reveal=0，场景开始即显示） -->
+    <div class="tut-region switch-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">FDE 番外 · 立场变了</div>
+      <h1 class="switch-title grad-gold">视角切换</h1>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

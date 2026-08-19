@@ -1,0 +1,65 @@
+# 8月15日 GitHub 热门项目（daily 综合榜 · 换掉闭源/付费工具专题）
+
+> 选题方向：付费场景→开源平替。剪辑（OpenCut）和远程桌面（rustdesk）两大日常付费场景的开源平替作双主角，叠加 GitHub 官方 spec-kit（规格驱动开发）与 ego-lite（给 AI 的浏览器）。今日 trending 17 项目中 AI 占 12 个（AI 深度交 ai-wind 专项），daily 按 AI≤2 上限 + 近2天禁选后选 4 项目。
+> AI 占比：2/4（spec-kit + ego-lite；避开昨日 ai-wind 已讲的 needle/macro/unsloth/ragflow/semantica，无连续重复）
+> 受众配比：A 档 2（OpenCut 网页剪辑 / rustdesk 全平台客户端，普通人可用）+ B 档 2（spec-kit / ego-lite，给做开发的观众），A 档占一半
+> 真实性：4 项目全部通过 gh API 核验（owner 真实、星叉比 10-20:1 正常、watchers 充足，0 HARD；spec-kit 为 github 官方 2008 年老号）
+
+数据来源：raw_trending.json（python_requests + gh_api，2026-08-15 采集）+ gh api 实时核验。
+
+## 入选项目
+
+## 1. OpenCut（GitHub: OpenCut-app/OpenCut）| TypeScript | 83.1K★ (+238 单日) | 受众: A 普通可用
+- 中文描述：开源的视频剪辑工具，可替代同类商业剪辑软件（原: The open-source CapCut alternative）
+- avatar: assets/avatars/OpenCut-app.png
+- 用途: 免费网页剪视频
+- 反直觉角度: 剪视频不用买会员装大软件——开源剪辑工具浏览器打开就能剪，8 万多人在用
+- 类别标签: 开源视频剪辑
+- 三词卖点: 开源免费·浏览器即剪·8万人用
+- 感性评语: 剪辑不用付费软件
+- 核心指标: 83.1K ★ +238 单日
+- 受众说明: 网页应用打开就用，时间线剪辑出片
+
+## 2. rustdesk（GitHub: rustdesk/rustdesk）| Rust | 120.6K★ (+182 单日) | 受众: A 普通可用
+- 中文描述：开源远程桌面应用，支持自托管，可替代同类商业远控软件（原: An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.）
+- avatar: assets/avatars/rustdesk.png
+- 用途: 免费远程控电脑
+- 反直觉角度: 远程控制不用把会话交给第三方服务器——可以自己搭中继，连接数据自己管，12 万人在用
+- 类别标签: 自托管远程桌面
+- 三词卖点: 开源免费·自托管·全平台
+- 感性评语: 远程控制不求人
+- 核心指标: 120.6K ★ +182 单日
+- 受众说明: Windows/macOS/Linux/安卓/iOS 全平台客户端，装上就能连
+
+## 3. spec-kit（GitHub: github/spec-kit）| Python | 128.5K★ (+1147 单日) | 受众: B 半可用
+- 中文描述：帮你上手规格驱动开发的工具包，GitHub 官方出品（原: 💫 Toolkit to help you get started with Spec-Driven Development）
+- avatar: assets/avatars/github.png
+- 用途: 需求写清再写码
+- 反直觉角度: AI 写码翻车，很多时候不是模型笨，是需求没写清——GitHub 官方出手，教你先把规格写明白再让 AI 照着干；12.8 万星，今日单日涨 1147
+- 类别标签: 规格驱动开发
+- 三词卖点: 官方出品·先写规格·AI照着干
+- 感性评语: 需求写对，代码不废
+- 核心指标: 128.5K ★ +1147 单日（今日涨幅榜前列）
+- 受众说明: 命令行工具，给写代码、用 AI 编程助手的人
+
+## 4. ego-lite（GitHub: citrolabs/ego-lite）| JavaScript | 10.3K★ (+153 单日) | 受众: B 半可用
+- 中文描述：给 AI 智能体用的浏览器，跑浏览器自动化；可把你已登录的浏览器状态共享给自己的 AI 智能体（如编程智能体），不打扰你本人，零成本零配置（原: The fastest browser for AI agents to run browser automation, built for sharing your logged-in browser state with your AI agents, like Codex or Claude Code, without disturbing you. Zero cost, zero config.）
+- avatar: assets/avatars/citrolabs.png
+- 用途: AI替你操作网页
+- 反直觉角度: 让 AI 替你跑网页不用从头教——它直接用你登录过的浏览器状态接着干活，还不打断你正在用的窗口
+- 类别标签: AI 浏览器自动化
+- 三词卖点: 登录态共享·不打扰·零配置
+- 感性评语: AI 替你跑网页
+- 核心指标: 10.3K ★ +153 单日
+- 受众说明: 给折腾 AI 智能体的开发者，命令行启动
+
+## 本期叙事主线
+
+| 维度 | 4 项目共性 |
+|------|-----------|
+| 主题 | 换掉闭源/付费工具——两个日常付费场景平替（OpenCut 剪辑 / rustdesk 远控）+ 两个开发提效（spec-kit 官方规格驱动 / ego-lite AI 浏览器） |
+| 反直觉钩子 | 剪视频控电脑都免费，两个平替居然攒了二十万星（双项目总星合计 20.4 万，新数字形态） |
+| 受众覆盖 | 创作者/普通人（OpenCut 剪辑 / rustdesk 远控）/ 开发者（spec-kit 需求规格 / ego-lite AI 自动化） |
+| 数字锚点 | 8.3万（OpenCut）/ 12万（rustdesk）/ 12.8万+单日1147（spec-kit）/ 1万（ego-lite） |
+
+> 本期 AI 恰 2 个（spec-kit + ego-lite，≤2 上限非目标），避开昨日 ai-wind 已讲 5 个 AI 项目。OpenCut 原文描述含商业 app 名，保真锚点保留原文，中文翻译/旁白/画面/文案已按 R-G-014 泛化为「商业剪辑软件」。ToolJet 因 gate 判定为 AI（描述原文命中）落选，详见 content.md 池约束说明。

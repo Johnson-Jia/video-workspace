@@ -1,0 +1,40 @@
+<!-- 场景: scene-1 | 时长: ~4.6s | bg: clean_slate | 价值 hook 锚点句 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（大字后方脉冲呼吸，alpha 0.18 ≤0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:1100px;height:440px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <!-- fx-blink 冷色锚点（暖预算给光晕，锚点用冷蓝平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:24%;right:14%;width:14px;height:14px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 16px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid hook-grid">
+
+    <div class="hook-hero">
+      <!-- 区域：价值锚点句（hook 场景居中例外，锚点冲击） -->
+      <div class="tut-region" data-reveal="0" data-reveal-dir="fade">
+        <div class="hook-lead">客户买单</div>
+      </div>
+      <div class="tut-region" data-reveal="0.6" data-reveal-dir="fade">
+        <div class="hook-strike">不看技术指标</div>
+      </div>
+      <div class="tut-region" data-reveal="1.2" data-reveal-dir="top">
+        <h1 class="hook-saved grad-gold">看省了多少</h1>
+      </div>
+      <div class="tut-region" data-reveal="2.6" data-reveal-dir="fade">
+        <div class="hook-stamp">价值证明 · 用数据说话</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

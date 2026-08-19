@@ -1,0 +1,70 @@
+<!-- 场景: scene-6 | 时长: ~22.4s | bg: radial_beams | 干系人地图四角色卡 + 受损方案例 -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-ring 受损方红色脉冲环（alpha 0.20 ≤0.22，警示） -->
+  <div class="fx-ring" style="position:absolute;top:26%;left:22%;width:380px;height:230px;border-radius:26px;border:3px solid hsla(0,72%,58%,0.20);animation:skRingPulse 2.4s ease-in-out infinite"></div>
+  <!-- fx-pulse 冷蓝静态光晕（平衡红色警示） -->
+  <div class="fx-pulse" style="position:absolute;top:60%;left:70%;transform:translate(-50%,-50%);width:1000px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,68%,52%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-blink" style="position:absolute;top:20%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid">
+
+    <div class="tut-region sec-head" data-reveal="0" data-reveal-dir="fade">
+      <h1 class="sec-title grad-red">最关键：识别受损方</h1>
+      <div class="sec-sub">不处理 · 项目会在验收阶段被暗箭射死</div>
+    </div>
+
+    <!-- 区域：左右分栏（左 2×2 角色卡 + 右案例金句） -->
+    <div class="tut-region sk-stage" data-reveal="2" data-reveal-dir="fade">
+      <div class="sk-grid">
+        <div class="sk-card sk-benefit">
+          <div class="sk-role-row"><span class="sk-star">★</span><span class="sk-role">业务领导</span></div>
+          <span class="sk-st">受益 · 当推动者</span>
+        </div>
+        <div class="sk-card sk-neutral">
+          <span class="sk-role">IT</span>
+          <span class="sk-st">中立 · 争取背书</span>
+        </div>
+        <div class="sk-card sk-harm">
+          <div class="sk-ring"></div>
+          <span class="sk-role">一线质检</span>
+          <span class="sk-st">受损 · 争取或中和</span>
+        </div>
+        <div class="sk-card sk-block">
+          <span class="sk-role">采购</span>
+          <span class="sk-st">卡流程</span>
+        </div>
+      </div>
+      <div class="sk-right">
+        <div class="case-card">
+          <div class="case-head">质检组长 <span class="case-caveat">（示意案例）</span></div>
+          <div class="case-flow">
+            <span>怕 AI 顶掉工作 · 暗中抵触</span>
+            <span class="case-to">↓ 参与式设计 · 请他提需求</span>
+            <span class="case-to">↓ 新角色：AI 结果复核岗</span>
+          </div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-text grad-gold">AI 是帮你的，不是替你的</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域：决策链小注（底部左对齐） -->
+    <div class="tut-region sk-chain" data-reveal="10" data-reveal-dir="fade">
+      决策链 · <b>谁签字</b> · <b>谁否决</b> · <b>谁批预算</b> · <b>谁定验收</b>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

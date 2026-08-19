@@ -1,0 +1,60 @@
+<!-- 场景: seg3 | 时长: ~21.4s | bg: clean_slate | FDE 定义卡 + 全流程链 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（定义段沉稳氛围，脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:1200px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-def-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid def-grid">
+
+    <!-- 区域 A：定义头（data-reveal=0，大字 + 全称 + 起源胶囊） -->
+    <div class="tut-region def-head" data-reveal="0" data-reveal-dir="fade">
+      <h1 class="def-title grad-blue">FDE<span style="font-size:72px;margin:0 10px;color:var(--tut-gray)">·</span><span class="def-cn grad-blue">前线部署工程师</span></h1>
+      <div class="con-en">Forward Deployed Engineer</div>
+      <span class="origin-pill">概念起源 · Palantir</span>
+    </div>
+
+    <!-- 区域 B：定义句（data-reveal=6） -->
+    <div class="tut-region def-sentence" data-reveal="6" data-reveal-dir="top">
+      把 AI 产品带进客户业务现场 · 按需求设计实现 · 落地扎根
+    </div>
+
+    <!-- 区域 C：全流程链（data-reveal=13 起四节点依次点亮 + 尾标） -->
+    <div class="flow-chain">
+      <div class="tut-region flow-node" data-reveal="13" data-reveal-dir="top">
+        <div class="flow-node-idx">01</div>
+        <div class="flow-node-text">需求探索</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="tut-region flow-node" data-reveal="14.5" data-reveal-dir="top">
+        <div class="flow-node-idx">02</div>
+        <div class="flow-node-text">设计实现</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="tut-region flow-node" data-reveal="16" data-reveal-dir="top">
+        <div class="flow-node-idx">03</div>
+        <div class="flow-node-text">落地扎根</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="tut-region flow-node" data-reveal="17.5" data-reveal-dir="top">
+        <div class="flow-node-idx">04</div>
+        <div class="flow-node-text">生产上线</div>
+      </div>
+      <div class="tut-region flow-tail" data-reveal="19" data-reveal-dir="fade">全流程负责</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

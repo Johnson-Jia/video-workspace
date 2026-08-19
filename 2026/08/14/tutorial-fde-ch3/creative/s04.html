@@ -1,0 +1,41 @@
+<!-- 场景: seg3 | 时长: ~19.2s | bg: scan_grid | RAG 对比：沙盒 vs 真实数据 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（右金卡侧重，暖色 alpha 0.20 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:74%;transform:translate(-50%,-50%);width:760px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷蓝锚点（左卡侧平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 13px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-contrast-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid contrast-grid">
+
+    <!-- 区域 A：对照双卡（data-reveal=0，左右分栏均衡） -->
+    <div class="tut-region ct-cards" data-reveal="0" data-reveal-dir="fade">
+      <div class="ct-card ct-left">
+        <div class="ct-tag">主教程 RAG</div>
+        <div class="ct-body">用示例数据<br>看重排分数评估</div>
+      </div>
+      <div class="ct-card ct-right">
+        <div class="ct-tag">现场版</div>
+        <div class="ct-body">＋ 数据脱敏<br>＋ 权限隔离<br>＋ 结果回写<br>评估换客户业务答准率</div>
+      </div>
+    </div>
+
+    <!-- 区域 B：结论条（data-reveal=10.5，底部金色结论） -->
+    <div class="tut-region ct-conclusion" data-reveal="10.5" data-reveal-dir="top">
+      <span class="grad-gold">一个在自己的沙盒里玩 · 一个要在客户真实数据上跑</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

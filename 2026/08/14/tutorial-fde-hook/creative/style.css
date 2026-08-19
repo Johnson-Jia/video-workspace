@@ -1,0 +1,313 @@
+:root {
+  --bg-deep: #0F172A;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.6);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 教程色板（design.md color_direction — 数据钩子双色） */
+  --tut-bg: #0F172A;
+  --tut-blue: #3B82F6;
+  --tut-blue-2: #60A5FA;
+  --tut-blue-white: #E0E7FF;
+  --tut-gold: #FBBF24;
+  --tut-gold-2: #F59E0B;
+  --tut-gold-3: #FCD34D;
+  --tut-gray: #94A3B8;
+  --tut-white: rgba(255,255,255,0.90);
+}
+
+/* ============================================
+ * Tutorial FDE hook 段 — 数据钩子（横屏教程 reveal §6.16）
+ * 单 phase + 多 region + data-reveal 同屏累积，禁竖屏 phase 切换
+ * padding 横屏 70/140/70/140（top≥60 安全区）
+ * ============================================ */
+
+/* —— 教程场景容器（单 phase + 多 region grid）—— */
+.tut-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 48px;
+  padding: 70px 140px 70px 140px;
+}
+
+.tut-grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 44px;
+}
+
+.tut-region {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* data-reveal="0" 场景开始即显示 */
+.tut-region[data-reveal="0"] { opacity: 1; }
+
+/* —— 极淡 drop text-shadow（禁发光 0 0 Xpx）—— */
+.tut-scene h1,
+.tut-scene .hero-num,
+.tut-scene .hero-unit,
+.tut-scene .title-fde,
+.tut-scene .title-cn,
+.tut-scene .contrast-ne,
+.tut-scene .ratio-num,
+.tut-scene .ratio-pct {
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* —— 渐变文字（禁白色端点，同色系高饱和）—— */
+.grad-gold {
+  background-image: linear-gradient(92deg, #FBBF24 0%, #F59E0B 50%, #FCD34D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.grad-blue {
+  background-image: linear-gradient(92deg, #60A5FA 0%, #3B82F6 55%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* —— 通用 eyebrow 小标签 —— */
+.con-eyebrow {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.20em;
+}
+.con-stamp {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--tut-gray);
+  letter-spacing: 0.12em;
+}
+.con-stamp::before {
+  content: "◆ ";
+  color: var(--tut-gold);
+  margin-right: 8px;
+}
+.con-en {
+  font-family: var(--font-data);
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--tut-gray);
+  letter-spacing: 0.08em;
+}
+
+/* ============================================
+ * 场景 1：数据钩子（42 倍大字）
+ * ============================================ */
+.hook-grid {
+  align-items: center;
+  text-align: center;
+}
+.hook-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.hero-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-num {
+  font-family: var(--font-data);
+  font-size: 260px;
+  font-weight: 900;
+  line-height: 1.0;
+}
+.hero-unit {
+  font-family: var(--font-title);
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1.0;
+}
+.hero-arrow {
+  font-style: normal;
+  margin-left: 6px;
+}
+
+/* ============================================
+ * 场景 2：口径标注 + 40/60 配比双卡
+ * ============================================ */
+.ratio-grid {
+  justify-content: space-between;
+}
+.ratio-caveat-top {
+  display: flex;
+  justify-content: flex-start;
+}
+.ratio-caveat-bot {
+  display: flex;
+  justify-content: flex-end;
+}
+.caveat-pill {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.10em;
+  padding: 10px 30px;
+  border: 1.5px solid rgba(59,130,246,0.42);
+  border-radius: 999px;
+  background: rgba(59,130,246,0.10);
+}
+.ratio-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 64px;
+  width: 100%;
+}
+.ratio-card {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 54px 40px;
+  border-radius: 28px;
+  border: 1.5px solid rgba(251,191,36,0.40);
+  background: linear-gradient(150deg, rgba(251,191,36,0.10), rgba(15,23,42,0.55));
+}
+.ratio-card .ratio-num {
+  font-family: var(--font-data);
+  font-size: 170px;
+  font-weight: 900;
+  line-height: 1.0;
+}
+.ratio-card .ratio-pct {
+  font-family: var(--font-data);
+  font-size: 90px;
+  font-weight: 900;
+  margin-left: -8px;
+}
+.ratio-card .ratio-label {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.06em;
+}
+
+/* ============================================
+ * 场景 3：岗位揭晓（FDE 大字）
+ * ============================================ */
+.title-grid {
+  align-items: center;
+  text-align: center;
+}
+.title-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.title-fde {
+  font-family: var(--font-title);
+  font-size: 240px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.04em;
+}
+.title-cn {
+  font-family: var(--font-title);
+  font-size: 84px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================
+ * 场景 4：差异对照（≠ AI Engineer）
+ * ============================================ */
+.contrast-grid {
+  justify-content: space-between;
+}
+.contrast-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  text-align: left;
+}
+.contrast-ne {
+  font-family: var(--font-title);
+  font-size: 150px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.contrast-sub {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.04em;
+}
+.contrast-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 56px;
+  width: 100%;
+}
+.contrast-card {
+  flex: 1;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 50px 36px;
+  border-radius: 28px;
+}
+.c-card-left {
+  border: 1.5px solid rgba(148,163,184,0.40);
+  background: linear-gradient(150deg, rgba(148,163,184,0.10), rgba(15,23,42,0.55));
+}
+.c-card-right {
+  border: 1.5px solid rgba(59,130,246,0.48);
+  background: linear-gradient(150deg, rgba(59,130,246,0.14), rgba(15,23,42,0.55));
+}
+.cc-tag {
+  font-family: var(--font-data);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--tut-blue-white);
+  letter-spacing: 0.06em;
+}
+.c-card-right .cc-tag {
+  color: var(--tut-gold);
+}
+.cc-body {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--tut-white);
+  text-align: center;
+}

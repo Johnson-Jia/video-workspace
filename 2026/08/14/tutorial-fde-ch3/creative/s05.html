@@ -1,0 +1,37 @@
+<!-- 场景: seg4 | 时长: ~12.0s | bg: diamond_lattice | 多Agent 编排卡 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:1100px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（左右平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.78);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-agent-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid ag-grid">
+
+    <!-- 区域：多Agent 卡（data-reveal=0，整卡 reveal） -->
+    <div class="tut-region ag-card" data-reveal="0" data-reveal-dir="fade">
+      <div class="ag-head">
+        <span class="ag-en">agent-teams</span>
+        <h1 class="ag-name grad-blue">多 Agent 编排</h1>
+      </div>
+      <div class="ag-when">何时用：客户场景复杂 · 一个智能体搞不定</div>
+      <div class="ag-points">
+        <div class="ag-point"><span class="ag-bullet">▸</span>按客户的真实流程拆阶段</div>
+        <div class="ag-point"><span class="ag-bullet">▸</span>职责用客户听得懂的话命名</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

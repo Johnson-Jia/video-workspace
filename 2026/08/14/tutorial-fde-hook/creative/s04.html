@@ -1,0 +1,43 @@
+<!-- 场景: seg4 | 时长: ~8.9s | bg: hex_grid | 差异对照：≠ AI Engineer -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:30%;transform:translate(-50%,-50%);width:900px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-contrast-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid contrast-grid">
+
+    <!-- 区域 A：差异大字 + 副题（data-reveal=0，左对齐建视觉锚点） -->
+    <div class="tut-region contrast-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">岗位差异</div>
+      <h1 class="contrast-ne grad-blue">≠ AI Engineer</h1>
+      <div class="contrast-sub">偏客户现场 · 偏业务落地 · 相对稀缺</div>
+    </div>
+
+    <!-- 区域 B：对照双卡（data-reveal=2.8，左右分栏均衡） -->
+    <div class="tut-region contrast-cards" data-reveal="2.8" data-reveal-dir="top">
+      <div class="contrast-card c-card-left">
+        <div class="cc-tag">AI 工程师</div>
+        <div class="cc-body">偏纯技术</div>
+      </div>
+      <div class="contrast-card c-card-right">
+        <div class="cc-tag">FDE</div>
+        <div class="cc-body">偏客户现场 · 业务落地</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

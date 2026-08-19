@@ -1,0 +1,40 @@
+<!-- 场景: seg6 | 时长: ~16.6s | bg: noise_field | 度量工具 + 基线前置警示 -->
+<div class="layer-bg">
+  <!-- bg-component: noise_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:38%;left:40%;transform:translate(-50%,-50%);width:880px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 金/蓝锚点（基线警示呼应） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:15%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,58%,0.85);box-shadow:0 0 15px hsla(43,80%,55%,0.20)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:16%;width:11px;height:11px;border-radius:50%;background:hsla(215,75%,62%,0.80);box-shadow:0 0 14px hsla(215,70%,56%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-metrics-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid met-grid">
+
+    <!-- 区域 A：度量卡 + 客户在意（data-reveal=0） -->
+    <div class="tut-region met-card" data-reveal="0" data-reveal-dir="fade">
+      <div class="met-left">
+        <span class="met-en">ai-metrics</span>
+        <h1 class="met-name">度量工具</h1>
+        <div class="met-when">何时用：向客户证明回报</div>
+      </div>
+      <div class="met-data grad-gold">客户最在意<br>省了多少人 · 省了多少钱</div>
+    </div>
+
+    <!-- 区域 B：基线前置警示（data-reveal=7.5） -->
+    <div class="tut-region met-warn" data-reveal="7.5" data-reveal-dir="top">
+      <div class="warn-title">基线必须前置 · 演示启动前就采</div>
+      <div class="warn-note">上线后没有对比基准 · 回报算出来客户也不认</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

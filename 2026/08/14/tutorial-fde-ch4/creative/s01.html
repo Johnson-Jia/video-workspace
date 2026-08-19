@@ -1,0 +1,36 @@
+<!-- 场景: seg1 | 时长: ~3.8s | bg: hex_grid | 钩子：FDE 高回报，但代价竟然这么大 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（高回报，左侧，alpha 0.18 ≤0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:36%;transform:translate(-50%,-50%);width:760px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.7"></div>
+  <!-- fx-pulse 蓝色静态光晕（代价，右侧，呼应冲突） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:64%;transform:translate(-50%,-50%);width:760px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:14%;width:13px;height:13px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:20%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 14px hsla(215,70%,56%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene hook-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid hook-grid">
+
+    <!-- 区域：钩子大字（data-reveal=0，场景开始即显示，高回报 vs 代价 冲突） -->
+    <div class="tut-region hook-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">求职与成长 · 第四章</div>
+      <div class="hero-row">
+        <div class="hero-line hero-high grad-gold">FDE 高回报</div>
+        <div class="hero-line hero-but">但代价</div>
+        <div class="hero-line hero-cost grad-gold">竟然这么大</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

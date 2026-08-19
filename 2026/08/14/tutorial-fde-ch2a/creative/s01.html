@@ -1,0 +1,28 @@
+<!-- 场景: scene-1 | 时长: ~4.1s | bg: clean_slate | 钩子锚点：FDE 核心肌肉不在写代码 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（大字后方脉冲呼吸，冷色 alpha≤0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:1150px;height:460px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,75%,55%,0.20) 0%, transparent 65%);filter:blur(60px);opacity:0.7"></div>
+  <!-- fx-blink 锚点（金色低 alpha，平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:24%;right:17%;width:13px;height:13px;border-radius:50%;background:hsla(43,90%,58%,0.85);box-shadow:0 0 16px hsla(43,85%,52%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:26%;left:17%;width:11px;height:11px;border-radius:50%;background:hsla(43,88%,56%,0.78);box-shadow:0 0 14px hsla(43,80%,50%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid hook-grid">
+    <!-- 区域：反差大字（data-reveal=0，场景开始即显示，反直觉钩子） -->
+    <div class="tut-region hook-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="hero-top">最核心的肌肉</div>
+      <div class="hero-bot grad-gold">竟然不在写代码</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

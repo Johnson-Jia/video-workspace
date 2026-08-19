@@ -1,0 +1,56 @@
+<!-- 场景: seg6 | 时长: ~35.6s | bg: radial_beams | 面试三题骨架 -->
+<div class="layer-bg">
+  <!-- bg-component: radial_beams -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 蓝色静态光晕（骨架主色，中上，alpha 0.18） -->
+  <div class="fx-pulse" style="position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:1100px;height:380px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-pulse 金色静态光晕（第三题关键洞察，下方，alpha 0.18 ≤0.22） -->
+  <div class="fx-pulse" style="position:absolute;bottom:14%;left:50%;transform:translate(-50%,0);width:900px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:16%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene iv-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid iv-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region iv-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">面试常被问 · 三题骨架</div>
+    </div>
+
+    <!-- 区域 B：三题卡（data-reveal=2/13/24 依次，骨架卡同屏累积） -->
+    <div class="tut-region iv-cards" data-reveal="2" data-reveal-dir="top">
+      <div class="iv-card">
+        <div class="iv-tag">Q1</div>
+        <div class="iv-body">
+          <div class="iv-q">陌生场景怎么定位 AI 发力点</div>
+          <div class="iv-a">走画布六格 · 先业务后技术 · 主动砍掉 AI 接不了的部分</div>
+        </div>
+      </div>
+      <div class="iv-card">
+        <div class="iv-tag">Q2</div>
+        <div class="iv-body">
+          <div class="iv-q">客户说准确率不够怎么办</div>
+          <div class="iv-a">先问相对什么基线、谁的标准 → 拆数据 / 模型 / 口径 → 给方案设预期</div>
+        </div>
+      </div>
+      <div class="iv-card iv-key">
+        <div class="iv-tag">Q3</div>
+        <div class="iv-body">
+          <div class="iv-q">演示做完客户不买单</div>
+          <div class="iv-a">回到价值假设对齐、验收口径事前书面约定、推动者找对 —— <strong>根子在前期对齐，不是技术</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

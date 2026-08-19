@@ -1,0 +1,227 @@
+/* ============================================
+ * 2026-08-17 github-trending daily — 不写代码的清单登顶专题
+ * hyper-pace 叙事：深蓝暗底 + 橙蓝双轴交替（design.md color_direction）
+ * 五项目分色：public-apis 橙蓝 / cordis 紫蓝 / MoneyPrinterTurbo 橙金 / yt-dlp 青绿终端 / timesfm 蓝靛科研
+ * ============================================ */
+
+:root {
+  /* 暗色基底（design.md：深蓝到深紫暗底接近纯黑） */
+  --bg-deep: #080818;
+  --bg-mid: #101728;
+  /* 暖色强调（hook/数字锚/CTA） */
+  --orange-1: #FB923C;
+  --orange-2: #FF8C32;
+  --gold-1: #FDBA74;
+  --gold-2: #F59E0B;
+  --amber-1: #FCD34D;
+  --amber-2: #FBBF24;
+  /* 冷色强调（清单/框架/科研） */
+  --blue-1: #60A5FA;
+  --blue-2: #4DA8DA;
+  --sky-1: #38BDF8;
+  --cyan-1: #22D3EE;
+  --teal-1: #2DD4BF;
+  --violet-1: #A78BFA;
+  --indigo-1: #818CF8;
+  /* 文字 */
+  --text: #F5F7FA;
+  --text-2: rgba(229,234,242,0.66);
+  --text-3: rgba(229,234,242,0.42);
+  /* 兼容 fx 原语默认色（被各场景 inline 覆盖） */
+  --accent-warm: var(--orange-2);
+  --accent-cool: var(--blue-2);
+  /* 字体（design.md 三层） */
+  --font-title: 'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+  /* 极淡 drop（github 分类规则：禁发光，blur≤16） */
+  --shadow-flat: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================
+ * 渐变文字（background-image 独立属性·禁白端点·禁 background 简写）
+ * 渐变文字不加 text-shadow（R-S6-023），纯色字才用 --shadow-flat
+ * ============================================ */
+.grad-orange {
+  background-image: linear-gradient(135deg, #FF8C32 0%, #FB923C 55%, #FDBA74 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-gold {
+  background-image: linear-gradient(135deg, #FBBF24 0%, #FCD34D 50%, #FB923C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-blue {
+  background-image: linear-gradient(135deg, #4DA8DA 0%, #60A5FA 55%, #93C5FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-dual {
+  background-image: linear-gradient(90deg, #FF8C32 0%, #FB923C 38%, #60A5FA 65%, #4DA8DA 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+.grad-teal {
+  background-image: linear-gradient(135deg, #2DD4BF 0%, #22D3EE 55%, #5EEAD4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.08;
+}
+
+/* ============================================
+ * PFC phase 覆盖：.phase 默认带安全区 padding，PFC 自带 padding → 覆盖为 0
+ * ============================================ */
+.phase-pfc { padding: 0 !important; }
+
+/* ============================================
+ * ProjectFullCard（content 组件，CSS 手动维护）
+ * 纵向三带 space-between 填满 1920：顶（排名/类别/用途/项目名）中（avatar/描述/数据）底（卖点/评语）
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 180px 90px 220px 90px;
+}
+.pfc-glow { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
+.pfc-glow-warm { width: 540px; height: 540px; opacity: 0.22; background: var(--accent-warm); top: 160px; left: -130px; }
+.pfc-glow-cool { width: 480px; height: 480px; opacity: 0.18; background: var(--accent-cool); bottom: 260px; right: -110px; }
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px; pointer-events: none;
+}
+/* 顶部带 */
+.pfc-top { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 22px; width: 100%; }
+.pfc-header-row { display: flex; align-items: baseline; gap: 32px; }
+.pfc-rank {
+  font-size: 96px; font-weight: 900; line-height: 0.9;
+  color: var(--accent-warm);
+  text-shadow: var(--shadow-flat);
+  font-family: var(--font-data);
+}
+.pfc-category {
+  font-size: 38px; font-weight: 700; letter-spacing: 0.10em;
+  color: var(--accent-cool);
+}
+.pfc-use {
+  font-size: 50px; font-weight: 800; line-height: 1.15;
+  padding: 10px 26px; border-radius: 14px;
+  background: rgba(10,14,28,0.62);
+  border: 1.5px solid rgba(255,255,255,0.16);
+  color: var(--accent-warm);
+  align-self: flex-start; letter-spacing: 0.02em;
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.10; letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.pfc-owner { font-size: 34px; font-weight: 500; color: var(--text-3); letter-spacing: 0.04em; }
+.pfc-repo { font-size: 60px; font-weight: 800; color: #F2F4F8; }
+/* 中部带 */
+.pfc-mid { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 36px; width: 100%; }
+.pfc-avatar-wrap { position: relative; width: 228px; height: 228px; display: flex; align-items: center; justify-content: center; }
+.pfc-avatar-ring {
+  position: absolute; inset: -18px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+  animation: pfcRingPulse 3.6s ease-in-out infinite;
+}
+@keyframes pfcRingPulse { 0%,100%{transform:scale(1);opacity:0.45;} 50%{transform:scale(1.10);opacity:0.70;} }
+.pfc-avatar { position: relative; z-index: 1; width: 228px; height: 228px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.82); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.pfc-desc { font-size: 40px; font-weight: 600; line-height: 1.35; color: #F2F4F8; text-align: center; max-width: 800px; text-shadow: var(--shadow-flat); }
+.pfc-extra-chip {
+  align-self: center; font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  color: var(--accent-warm); padding: 10px 30px; border-radius: 12px;
+  background: rgba(10,14,28,0.66); border: 1.5px solid rgba(255,255,255,0.16);
+  letter-spacing: 0.02em;
+}
+.pfc-data-bar { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-total-row { display: flex; justify-content: space-between; align-items: baseline; }
+.pfc-total-num { font-size: 54px; font-weight: 900; color: var(--text); font-family: var(--font-data); }
+.pfc-total-note { font-size: 32px; font-weight: 600; color: var(--text-2); }
+.pfc-bar-track { width: 100%; height: 16px; border-radius: 999px; background: rgba(255,255,255,0.10); overflow: hidden; }
+.pfc-bar-fill { height: 100%; border-radius: 999px; background-image: linear-gradient(90deg, var(--accent-cool), var(--accent-warm)); transform-origin: left center; }
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 14px; }
+.pfc-topic { font-size: 32px; font-weight: 600; padding: 8px 22px; border-radius: 999px; color: var(--accent-cool); background: rgba(12,18,34,0.55); border: 1px solid rgba(255,255,255,0.18); }
+/* 底部带 */
+.pfc-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item { font-size: 32px; font-weight: 700; padding: 10px 26px; border-radius: 14px; color: #fff; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); }
+.pfc-commentary { font-size: 36px; font-weight: 500; line-height: 1.4; color: var(--text-2); border-left: 4px solid var(--accent-warm); padding-left: 24px; }
+
+/* —— PFC 五项目分色（容器变量覆盖，橙蓝双轴交替 design.md contrast_principle）—— */
+#s02 .project-full-card { --accent-warm: var(--orange-2); --accent-cool: var(--blue-2); }
+#s03 .project-full-card { --accent-warm: var(--violet-1); --accent-cool: var(--blue-1); }
+#s04 .project-full-card { --accent-warm: var(--orange-2); --accent-cool: var(--gold-2); }
+#s05 .project-full-card { --accent-warm: var(--teal-1); --accent-cool: var(--cyan-1); }
+#s06 .project-full-card { --accent-warm: var(--sky-1); --accent-cool: var(--indigo-1); }
+
+/* ============================================
+ * s01 hook — 不写代码 / 冲上 46万★ 冲突排版（巨型数字锚）
+ * ============================================ */
+.hook-wrap { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; gap: 30px; }
+.hook-eyebrow {
+  font-size: 34px; font-weight: 700; letter-spacing: 0.22em;
+  color: var(--gold-1); padding: 8px 28px;
+  border: 1.5px solid rgba(251,191,36,0.45); border-radius: 999px;
+  background: rgba(251,191,36,0.06);
+}
+.hook-strike {
+  font-family: var(--font-title); font-weight: 900;
+  font-size: 104px; line-height: 1.05; letter-spacing: -0.01em;
+  color: var(--text); text-shadow: var(--shadow-flat);
+}
+.hook-verb {
+  font-family: var(--font-title); font-weight: 800;
+  font-size: 46px; letter-spacing: 0.30em;
+  color: var(--orange-2);
+}
+.hook-num {
+  font-family: var(--font-data); font-weight: 900;
+  font-size: 156px; line-height: 1.0; letter-spacing: -0.01em;
+}
+.hook-note {
+  font-family: var(--font-data); font-size: 38px; font-weight: 700;
+  color: var(--text-2); letter-spacing: 0.10em;
+}
+
+/* ============================================
+ * s07 CTA — 五项目回顾列表 + 中性提问 + 关注引导
+ * ============================================ */
+.cta-wrap {
+  position: relative; z-index: 3; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 40px; text-align: center;
+}
+.cta-title {
+  font-family: var(--font-title); font-size: 44px; font-weight: 800;
+  color: var(--text-2); letter-spacing: 0.16em;
+}
+.cta-question {
+  font-family: var(--font-title); font-size: 76px; font-weight: 900;
+  line-height: 1.18; letter-spacing: -0.005em;
+}
+.cta-list { display: flex; flex-direction: column; gap: 18px; width: 100%; max-width: 860px; }
+.cta-row {
+  display: flex; align-items: center; gap: 24px;
+  padding: 16px 28px; border-radius: 16px;
+  background: rgba(10,14,28,0.66); border: 1.5px solid rgba(255,255,255,0.14);
+}
+.cta-rank { font-family: var(--font-data); font-size: 34px; font-weight: 800; color: var(--amber-2); width: 56px; text-align: left; }
+.cta-name { font-family: var(--font-data); font-size: 38px; font-weight: 800; color: var(--text); flex: 1; text-align: left; }
+.cta-use { font-size: 32px; font-weight: 600; color: var(--text-2); }
+.cta-follow {
+  font-size: 40px; font-weight: 700; color: var(--gold-1);
+  letter-spacing: 0.06em;
+}

@@ -1,0 +1,43 @@
+<!-- 场景: seg4 | 时长: ~12.5s | bg: scan_grid | 本集定位：成长地图 + 实战方法论 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 蓝金双光晕（定位收束，暖色 alpha 0.20 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:32%;transform:translate(-50%,-50%);width:900px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <div class="fx-pulse" style="position:absolute;top:44%;left:70%;transform:translate(-50%,-50%);width:900px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-position-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid position-grid">
+
+    <!-- 区域 A：定位大字（data-reveal=0，左对齐建视觉锚点） -->
+    <div class="tut-region position-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">一句话定位这集</div>
+      <h1 class="position-title"><span class="grad-blue">成长地图</span><span class="position-plus">+</span><span class="grad-gold">实战方法论</span></h1>
+    </div>
+
+    <!-- 区域 B：对照小卡（data-reveal=6，前面十三集 / 这集） -->
+    <div class="tut-region position-cards" data-reveal="6" data-reveal-dir="top">
+      <div class="position-card pc-left">
+        <div class="position-tag">前面十三集</div>
+        <div class="position-side">技术武器库</div>
+      </div>
+      <div class="position-card pc-right">
+        <div class="position-tag">这一集</div>
+        <div class="position-side">武器在客户现场<br>怎么用</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

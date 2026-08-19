@@ -1,0 +1,70 @@
+<!-- 场景: seg4 | 时长: ~38.2s | bg: diamond_lattice | 入行 4 条路：门槛由低到高阶梯 -->
+<div class="layer-bg">
+  <!-- bg-component: diamond_lattice -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 蓝色静态光晕（路径主色，左侧低阶，alpha 0.18） -->
+  <div class="fx-pulse" style="position:absolute;bottom:30%;left:24%;transform:translate(-50%,0);width:640px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-pulse 金色静态光晕（最高阶开源反馈，右侧，alpha 0.18 ≤0.22） -->
+  <div class="fx-pulse" style="position:absolute;top:24%;right:20%;transform:translate(0,-50%);width:680px;height:320px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:16%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene path-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid path-grid">
+
+    <!-- 区域 A：路径标题（data-reveal=0） -->
+    <div class="tut-region path-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="ph-title-wrap">
+        <div class="con-eyebrow">没现场经验怎么入行 · 四条路</div>
+        <h1 class="scene-title">门槛从低到高</h1>
+      </div>
+      <span class="caveat-pill">越往上越接近真实客户</span>
+    </div>
+
+    <!-- 区域 B：4 级台阶阶梯（data-reveal=4，依次累积，箭头上升） -->
+    <div class="tut-region stair-wrap" data-reveal="4" data-reveal-dir="top">
+      <div class="stair">
+        <div class="stair-block">
+          <div class="stair-num">01</div>
+          <div class="stair-name">内部申请</div>
+          <div class="stair-note">交付 / 售前 / 客户成功岗<br>最近的练兵场</div>
+        </div>
+        <div class="stair-arrow">↗</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block">
+          <div class="stair-num">02</div>
+          <div class="stair-name">兄弟部门落地</div>
+          <div class="stair-note">帮人事筛简历、财务识别票据<br>零风险现场演练</div>
+        </div>
+        <div class="stair-arrow">↗</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block">
+          <div class="stair-num">03</div>
+          <div class="stair-name">厂商初级交付</div>
+          <div class="stair-note">入职 AI 厂商或集成商<br>跟资深 FDE 打下手</div>
+        </div>
+        <div class="stair-arrow">↗</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block">
+          <div class="stair-num">04</div>
+          <div class="stair-name">开源反馈区</div>
+          <div class="stair-note">用户反馈<br>就是客户诉求</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

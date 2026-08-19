@@ -1,0 +1,57 @@
+<!-- 场景: scene-5 | 时长: ~35.5s | bg: clean_slate | 画布四步使用法（4卡+箭头，错时 reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1400px;height:460px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.16) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:15%;width:12px;height:12px;border-radius:50%;background:hsla(43,86%,58%,0.82);box-shadow:0 0 15px hsla(43,78%,52%,0.45)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:20%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,75%,60%,0.75);box-shadow:0 0 14px hsla(215,68%,54%,0.42)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid step-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region step-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="step-title-main">画布怎么用</div>
+      <div class="step-title-sub">四步</div>
+    </div>
+
+    <!-- 区域 B：四步流程卡（错时 reveal，跟旁白四步节奏） -->
+    <div class="step-cards">
+      <div class="step-card tut-region" data-reveal="2" data-reveal-dir="top">
+        <div class="step-idx">①</div>
+        <div class="step-title">访谈填前两格</div>
+        <div class="step-body">和业务一线聊 · 去现场看 · 别只听领导</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card tut-region" data-reveal="12" data-reveal-dir="top">
+        <div class="step-idx">②</div>
+        <div class="step-title">自己填第三格</div>
+        <div class="step-body">看哪些痛点 AI 能接 · 去掉接不了的</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card is-key tut-region" data-reveal="18" data-reveal-dir="top">
+        <div class="step-idx">③</div>
+        <div class="step-title">当面确认四五格</div>
+        <div class="step-body">价值假设 + 约束 · 证明价值的基准</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card tut-region" data-reveal="27" data-reveal-dir="top">
+        <div class="step-idx">④</div>
+        <div class="step-title">定第六格</div>
+        <div class="step-body">圈最小验证范围 · 别铺全量</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

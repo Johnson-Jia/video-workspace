@@ -1,0 +1,262 @@
+:root {
+  --bg-deep: #0d0618;
+  --accent-warm: #FDBA74;
+  --accent-cool: #A78BFA;
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --font-title: 'Noto Serif SC','PingFang SC','Microsoft YaHei',serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+
+  /* 领域色（仅视觉：卡片色环/边框/标签/渐变标题；画面文字禁颜色词，用领域名分组） */
+  --dom1: #60A5FA;   --dom1-2: #93C5FD;   /* 组1 AI Agent 基建 */
+  --dom2: #A78BFA;   --dom2-2: #C4B5FD;   /* 组2 模型本地化 */
+  --dom3: #FDBA74;   --dom3-2: #FED7AA;   /* 组3 开发者效率 */
+  --dom4: #34D399;   --dom4-2: #6EE7B7;   /* 组4 视觉创意与隐私自查 */
+  --hook-gold: #FCD34D;
+  --card-bg: rgba(22,16,38,0.94);
+  --card-bg-2: rgba(12,8,24,0.96);
+}
+
+/* ============================================
+ * 组件 CSS（mystery-box 周刊开箱 · 衬线庄重）
+ * 字号取严：正文≥38 标注≥32 数字≥46（render-safety §3.1）
+ * text-shadow 极淡 0.08 禁发光；渐变禁白端点
+ * ============================================ */
+
+/* —— 通用容器（.phase 由 BASE_CSS 提供安全区 padding + flex column center）—— */
+.stage{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;}
+.stage--tight{gap:18px;}
+.stage--dual{gap:20px;}
+
+/* —— 开箱组头（衬线庄重 · 第 N 箱叙事）—— */
+.grp-head{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.box-tag{
+  font-family:var(--font-data);
+  font-size:34px;font-weight:700;letter-spacing:6px;
+  color:var(--accent);
+  border:1.5px solid var(--accent);
+  border-radius:10px;
+  padding:6px 24px;
+  background:var(--use-bg);
+}
+.grp-title{
+  font-family:var(--font-title);
+  font-weight:900;
+  font-size:78px;
+  line-height:1.1;
+  text-align:center;
+  letter-spacing:2px;
+  background-image:linear-gradient(92deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.grp-sub{
+  font-family:var(--font-body);
+  font-size:34px;
+  font-weight:600;
+  color:var(--text2);
+  letter-spacing:3px;
+  text-align:center;
+}
+.grp-ring{
+  width:130px;height:8px;border-radius:6px;
+  background-image:linear-gradient(90deg,var(--c1),var(--c2));
+  box-shadow:0 0 18px var(--c1);
+}
+
+/* —— 项目卡（深紫不透明底 + 领域色边框）—— */
+.proj-card{
+  background:linear-gradient(160deg,var(--card-bg),var(--card-bg-2));
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-left:6px solid var(--accent);
+  border-radius:22px;
+  padding:28px 28px;
+  box-shadow:0 10px 36px rgba(0,0,0,0.42);
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* hero 卡（每组首个项目，纵向大卡）*/
+.proj-card--hero{
+  max-width:780px;
+  margin:0 auto;
+  padding:30px 32px;
+  display:flex;flex-direction:column;align-items:center;gap:15px;
+  border:2px solid var(--accent);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset, 0 14px 44px rgba(0,0,0,0.5), 0 0 32px var(--glow);
+}
+
+/* mini 卡（紧凑横向，后续项目用）*/
+.proj-card--mini{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;flex-direction:row;align-items:center;gap:24px;
+  padding:22px 26px;
+  border-left:6px solid var(--accent);
+}
+
+/* 用途利益标签（领域色药丸）*/
+.pfc-use{
+  display:inline-block;
+  font-family:var(--font-body);
+  font-size:34px;font-weight:700;
+  color:var(--accent);
+  background:var(--use-bg);
+  border:1.5px solid var(--accent);
+  padding:8px 22px;border-radius:999px;
+  letter-spacing:1px;white-space:nowrap;
+}
+
+/* avatar 圆形头像（领域色环锚点）*/
+.pfc-avatar{
+  border-radius:50%;
+  border:3px solid var(--accent);
+  box-shadow:0 0 18px var(--glow);
+  object-fit:cover;
+  flex-shrink:0;
+  background:#0a0c18;
+}
+.pfc-avatar--hero{width:124px;height:124px;}
+.pfc-avatar--mini{width:104px;height:104px;}
+
+/* 项目名（owner 小 + repo 大，独占行 word-break，禁 nowrap/ellipsis）*/
+.pfc-name{
+  font-family:var(--font-data);
+  word-break:break-word;
+  line-height:1.14;
+  width:100%;
+  text-align:center;
+}
+.pfc-owner{font-size:32px;color:var(--text2);font-weight:500;}
+.pfc-repo{font-size:50px;color:#f5f5f5;font-weight:800;}
+.proj-card--mini .pfc-name{text-align:left;}
+.proj-card--mini .pfc-owner{font-size:32px;}
+.proj-card--mini .pfc-repo{font-size:42px;}
+
+/* 星数行（领域色数字）*/
+.pfc-stars{
+  font-family:var(--font-data);
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center;
+}
+.pfc-star-num{font-size:48px;font-weight:800;color:var(--accent);}
+.proj-card--mini .pfc-star-num{font-size:40px;}
+.pfc-star-unit{font-size:34px;color:var(--text2);font-weight:600;}
+.pfc-badge{
+  font-size:32px;font-weight:700;color:var(--accent);
+  border:1.5px solid var(--accent);border-radius:8px;
+  padding:4px 14px;
+}
+
+/* 中文描述 */
+.pfc-desc{
+  font-family:var(--font-body);
+  font-size:38px;font-weight:500;
+  color:#e6e9f2;line-height:1.32;
+  text-align:center;
+}
+.proj-card--mini .pfc-desc{font-size:34px;text-align:left;}
+
+/* mini 卡信息列 */
+.pfc-info{display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;}
+
+/* —— 数据强调条（14MB 这类核心数字）—— */
+.data-strip{
+  width:100%;max-width:780px;margin:0 auto;
+  display:flex;flex-direction:row;align-items:center;justify-content:center;gap:22px;
+  background:linear-gradient(160deg,var(--card-bg),var(--card-bg-2));
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-left:6px solid var(--accent);
+  border-radius:18px;
+  padding:18px 30px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.4);
+}
+.data-strip-num{
+  font-family:var(--font-data);
+  font-size:72px;font-weight:900;line-height:1.0;
+  background-image:linear-gradient(180deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  flex-shrink:0;
+}
+.data-strip-text{font-family:var(--font-body);font-size:36px;font-weight:600;color:#e6e9f2;line-height:1.3;}
+
+/* —— hook（金琥珀悬念开箱，禁白端点）—— */
+.hero-week{font-family:var(--font-data);font-size:38px;font-weight:600;color:var(--text2);letter-spacing:6px;text-align:center;}
+.hero-box{
+  font-family:var(--font-title);font-size:44px;font-weight:900;color:var(--accent-warm);
+  letter-spacing:8px;line-height:1.1;
+}
+.hero-num{
+  font-family:var(--font-title);
+  font-size:250px;font-weight:900;line-height:1.0;text-align:center;letter-spacing:-2px;
+  background-image:linear-gradient(180deg,#FCD34D,#FDBA74 55%,#F59E0B);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.hero-sub{font-family:var(--font-body);font-size:44px;font-weight:600;color:#e6e9f2;letter-spacing:2px;text-align:center;line-height:1.3;}
+
+/* —— s6 总结（双趋势合流）—— */
+.sum-title{
+  font-family:var(--font-title);font-size:74px;font-weight:900;line-height:1.1;text-align:center;
+  background-image:linear-gradient(92deg,#FCD34D,#FDBA74);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.signal-stack{width:100%;max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:22px;}
+.signal-row{
+  display:flex;flex-direction:row;align-items:center;gap:24px;
+  background:linear-gradient(160deg,var(--card-bg),var(--card-bg-2));
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-left:6px solid var(--accent);
+  border-radius:18px;
+  padding:24px 30px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.4);
+}
+.signal-num{
+  font-family:var(--font-data);font-size:58px;font-weight:900;line-height:1.0;
+  background-image:linear-gradient(180deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  flex-shrink:0;width:100px;text-align:center;
+}
+.signal-text{font-family:var(--font-body);font-size:42px;font-weight:700;color:#e6e9f2;line-height:1.3;}
+.signal-note{font-family:var(--font-body);font-size:34px;font-weight:500;color:var(--text2);line-height:1.3;margin-top:6px;}
+
+/* —— s7 CTA（琥珀暖收尾）—— */
+.cta-q{font-family:var(--font-body);font-size:46px;font-weight:600;color:#fff;text-align:center;line-height:1.3;}
+.cta-title{
+  font-family:var(--font-title);font-size:84px;font-weight:900;line-height:1.12;text-align:center;
+  background-image:linear-gradient(92deg,#FCD34D,#FDBA74);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-channel{
+  font-family:var(--font-data);font-size:42px;font-weight:700;color:#FCD34D;
+  border:2.5px solid #FCD34D;border-radius:16px;padding:14px 34px;letter-spacing:2px;
+  box-shadow:0 0 24px rgba(252,211,77,0.3);
+}
+.cta-week{font-family:var(--font-body);font-size:38px;font-weight:600;color:var(--text2);letter-spacing:4px;}
+
+/* —— 码力角色（s04 explode 出场，视觉彩蛋；定位保持在安全区内）—— */
+.mali-wrap{position:absolute;right:96px;bottom:236px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.mali-bubble{
+  font-family:var(--font-body);font-size:32px;font-weight:700;color:#1a1024;
+  background:linear-gradient(160deg,#FED7AA,#FDBA74);
+  border-radius:16px 16px 16px 4px;
+  padding:8px 18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.35);
+  animation:maliBob 2.6s ease-in-out infinite;
+}
+.mali-svg{animation:maliBob 2.2s ease-in-out infinite;}
+@keyframes maliBob{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+/* —— 盾牌防御视觉（s05 holehe 自查）—— */
+.shield-badge{
+  width:96px;height:108px;flex-shrink:0;
+  filter:drop-shadow(0 0 14px rgba(52,211,153,0.45));
+}

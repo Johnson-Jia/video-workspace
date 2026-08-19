@@ -1,0 +1,64 @@
+[
+  {
+    "id": "seg1",
+    "scene_index": 1,
+    "duration": 5,
+    "emotion": "数据-悬念开场",
+    "text": "有一个岗位，两年招聘增长约四十二倍。",
+    "narration": "有一个岗位，两年招聘增长约四十二倍。",
+    "hook_anchors": ["四十二倍", "岗位", "两年"],
+    "visual_type": "data_burst",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "数字大字区 — 金色渐变大字「42 倍↑」（200px 级）fade-in + scale 1.04→1 + 蓝白小字「一个岗位 · 两年招聘增长」。fx-aura 金色静态光晕脉冲（alpha 0.18，禁划过类）", "duration_share": 1.0}
+    ],
+    "bg_component": "clean_slate"
+  },
+  {
+    "id": "seg2",
+    "scene_index": 2,
+    "duration": 13,
+    "emotion": "口径-严谨克制",
+    "text": "这是媒体转引的数据，置信度中等。它大约百分之四十的时间写代码、百分之六十的时间面向客户，这是经验刻画、不是精确统计。",
+    "narration": "这是媒体转引的数据，置信度中等。它大约百分之四十的时间写代码、百分之六十的时间面向客户，这是经验刻画、不是精确统计。",
+    "hook_anchors": ["媒体转引", "置信度中等", "百分之四十", "百分之六十", "经验刻画", "非精确统计"],
+    "visual_type": "dual_stats",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "口径标注区 — 蓝白小字胶囊「媒体转引 · 置信度中等」reveal，承接上场景 42 倍数字的严谨说明", "duration_share": 0.23},
+      {"phase": 2, "start_offset": 3, "focus": "配比双卡区 — 金色数据卡「40% 写代码」「60% 面向客户」左右并排 reveal + 第二个口径胶囊「经验刻画 · 非精确统计」。fx-blink 锚点角落点缀", "duration_share": 0.77}
+    ],
+    "bg_component": "clean_slate"
+  },
+  {
+    "id": "seg3",
+    "scene_index": 3,
+    "duration": 5,
+    "emotion": "揭晓-收束",
+    "text": "这个岗位叫 FDE，前线部署工程师。",
+    "narration": "这个岗位叫 FDE，前线部署工程师。",
+    "hook_anchors": ["FDE", "前线部署工程师", "岗位"],
+    "visual_type": "title_reveal",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "FDE 大字区 — 蓝色渐变大字「FDE · 前线部署工程师」reveal + 蓝白小字「Forward Deployed Engineer」。fx-aura 蓝色静态光晕脉冲", "duration_share": 1.0}
+    ],
+    "bg_component": "clean_slate"
+  },
+  {
+    "id": "seg4",
+    "scene_index": 4,
+    "duration": 10,
+    "emotion": "对照-稀缺悬念",
+    "text": "它和普通的 AI 工程师不一样：AI 工程师偏纯技术，FDE 偏客户现场、偏业务落地，相对稀缺。",
+    "narration": "它和普通的 AI 工程师不一样：AI 工程师偏纯技术，FDE 偏客户现场、偏业务落地，相对稀缺。",
+    "hook_anchors": ["不一样", "偏纯技术", "偏客户现场", "业务落地", "相对稀缺"],
+    "visual_type": "contrast_cards",
+    "tutorial_reveal_mode": true,
+    "visual_phases": [
+      {"phase": 1, "start_offset": 0, "focus": "对照大字区 — 蓝色大字「≠ AI Engineer」reveal + 副题「偏客户现场 · 偏业务落地 · 相对稀缺」", "duration_share": 0.32},
+      {"phase": 2, "start_offset": 4, "focus": "对照小卡区 — 两张并列小卡「AI 工程师｜偏纯技术」「FDE｜偏客户现场」reveal + fx-blink 锚点平衡构图", "duration_share": 0.68}
+    ],
+    "bg_component": "clean_slate"
+  }
+]

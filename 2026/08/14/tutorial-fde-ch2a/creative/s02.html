@@ -1,0 +1,47 @@
+<!-- 场景: scene-2 | 时长: ~14.4s | bg: clean_slate | 章引：进客户现场用 AI + 五件事导航 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:40%;transform:translate(-50%,-50%);width:900px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,52%,0.18) 0%, transparent 65%);filter:blur(58px);opacity:0.6"></div>
+  <!-- fx-blink 冷蓝锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:22%;right:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,78%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,72%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid ch-intro-grid">
+
+    <!-- 区域 A：章节标题（data-reveal=0，左对齐建视觉锚点） -->
+    <div class="tut-region ch-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">第二章 · 前线部署</div>
+      <h2 class="ch-title">进客户现场 <span class="grad-blue">用 AI</span></h2>
+      <div class="ch-sub">FDE 区别于普通 AI 工程师的核心</div>
+    </div>
+
+    <!-- 区域 B：视角对照条（data-reveal=4，左右分栏均衡） -->
+    <div class="tut-region vs-bar" data-reveal="4" data-reveal-dir="top">
+      <div class="vs-side vs-left"><span class="vs-tag">甲方</span>自己团队里用 AI</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs-side vs-right"><span class="vs-tag">乙方</span>进别人的业务用 AI</div>
+    </div>
+
+    <!-- 区域 C：五件事导航条（data-reveal=9，横排撑满，前两件点亮） -->
+    <div class="tut-region nav-strip" data-reveal="9" data-reveal-dir="fade">
+      <div class="nav-pill active"><span class="nav-idx">①</span>需求探索</div>
+      <div class="nav-pill active"><span class="nav-idx">②</span>演示到生产</div>
+      <div class="nav-pill dim"><span class="nav-idx">③</span>价值证明</div>
+      <div class="nav-pill dim"><span class="nav-idx">④</span>干系人</div>
+      <div class="nav-pill dim"><span class="nav-idx">⑤</span>汇报</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

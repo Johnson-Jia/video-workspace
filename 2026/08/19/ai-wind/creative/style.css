@@ -1,0 +1,587 @@
+/* ============================================
+ * AI 风向标 2026-08-19 — 暗色科技风 · mystery-box 悬念揭秘
+ * 叙事：14MB 悬念盒 → 六项目线索链（端侧线电紫 / 靠谱线紫青递进）
+ * 电紫 #A855F7 · 辅青 #00D4FF · 点缀橙 #FF6B35 · 深紫底 #0a0a14→#1a0a2e
+ * bg 由组件库提供，场景级 hue-rotate 换色对齐叙事线
+ * ============================================ */
+:root {
+  --bg-deep: #0a0a14;
+  --bg-mid: #1a0a2e;
+  --accent-warm: #A855F7;   /* 电紫主色（端侧线：rank/用途/卖点强调）*/
+  --accent-cool: #00D4FF;   /* 辅青（靠谱线/数据/topics）*/
+  --accent-orange: #FF6B35; /* 暖点缀橙（涨星数字/CTA，克制）*/
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.62);
+  --text3: rgba(255,255,255,0.42);
+  --font-title: 'Inter','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-data: 'JetBrains Mono','Consolas',monospace;
+  --title-weight: 900;
+}
+
+/* ============================================
+ * bg 组件场景级换色（hue-rotate 对齐双色叙事线，08-16 已验证手法）
+ * s01 cosmic_void 本色品红紫/青，不转（悬念盒深空）
+ * s02 gradient_mesh 底色走 :root 电紫，色带微转偏紫
+ * s03 virtual_universe 本色青蓝（训练台数据流），不转
+ * s04 frost_crystal 冰蓝→电紫（climax 机房能量）
+ * s05 clean_slate 钢蓝→紫青（靠谱线起步，微转）
+ * s06 noise_field 本色深紫底（文档颗粒），不转
+ * s07 aurora_night 绿极光→紫青收束
+ * ============================================ */
+#s02 .layer-bg { filter: hue-rotate(24deg); }
+#s04 .layer-bg { filter: hue-rotate(58deg); }
+#s05 .layer-bg { filter: hue-rotate(18deg); }
+#s07 .layer-bg { filter: hue-rotate(62deg); }
+
+/* ============================================
+ * 渐变文字工具（content 层纯文字元素专用，禁胶囊组合）
+ * 禁 background 简写；禁白端点；同色系高饱和；阴影统一极淡 drop
+ * ============================================ */
+.grad-purple {
+  background-image: linear-gradient(135deg, #E9D5FF 0%, #C084FC 42%, #A855F7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.grad-cyan {
+  background-image: linear-gradient(135deg, #93C5FD 0%, #60A5FA 45%, #00D4FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.grad-orange {
+  background-image: linear-gradient(135deg, #FFD9A8 0%, #FF8C42 50%, #FF6B35 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+/* 紫青递进渐变（靠谱线 category/CTA 提问）：紫→青跨线，两端同色系高饱和无白 */
+.grad-duel {
+  background-image: linear-gradient(135deg, #C084FC 0%, #A855F7 38%, #00D4FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+
+/* ============================================
+ * s01 HOOK — 14MB 巨型数字 × 手表微缩（mystery-box 开盒瞬间）
+ * 尺度张力：微型手表 vs 巨型数字同框
+ * ============================================ */
+.hook-wrap {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 30px; text-align: center;
+}
+.hook-badge {
+  font-family: 'Noto Sans SC'; font-size: 34px; font-weight: 700;
+  letter-spacing: 0.32em; color: var(--accent-cool);
+  padding: 10px 30px; border-radius: 999px;
+  background: rgba(0,212,255,0.08); border: 1.5px solid rgba(0,212,255,0.35);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hook-scale-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 44px; width: 100%;
+}
+.hook-num {
+  font-family: var(--font-data); font-weight: 900;
+  font-size: 218px; line-height: 0.92; letter-spacing: -0.03em;
+  background-image: linear-gradient(135deg, #E9D5FF 0%, #C084FC 42%, #A855F7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+/* 微缩手表（CSS 圆环表盘 + 表带，微缩锚点对照巨型数字；全 flex 流式布局零 absolute） */
+.hook-watch {
+  width: 150px; flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.hook-watch-strap {
+  width: 62px; height: 40px;
+  background: linear-gradient(180deg, rgba(0,212,255,0.32), rgba(0,212,255,0.14));
+  border: 1px solid rgba(0,212,255,0.4); border-radius: 14px;
+}
+.hook-watch-face {
+  width: 128px; height: 128px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, rgba(26,10,46,0.96), rgba(10,10,20,0.98));
+  border: 4px solid rgba(0,212,255,0.62);
+  box-shadow: 0 0 34px rgba(0,212,255,0.32), inset 0 0 22px rgba(168,85,247,0.28);
+  display: flex; align-items: center; justify-content: center;
+}
+.hook-watch-core {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,132,252,0.95), rgba(168,85,247,0.55) 60%, transparent 75%);
+  box-shadow: 0 0 16px rgba(168,85,247,0.75);
+}
+.hook-line {
+  font-family: var(--font-body); font-size: 76px; font-weight: 900;
+  letter-spacing: 0.04em; line-height: 1.15;
+}
+.hook-sub {
+  font-family: var(--font-body); font-size: 42px; font-weight: 700;
+  color: #f5f5f5; letter-spacing: 0.1em; line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.hook-sub .em { color: var(--accent-orange); }
+
+/* ============================================
+ * s02-s06 ProjectFullCard — 纵向三带 space-between
+ * 自带 padding 已移除，安全区由 BASE_CSS .phase 统一提供（单层 padding 铁律）
+ * 端侧线（s02/s03/s04）电紫变体 pfc-edge；靠谱线（s05/s06）紫青递进 pfc-trust
+ * ============================================ */
+.project-full-card {
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: space-between;     /* 三带撑满 900×1520 安全区 */
+}
+.pfc-glow {
+  position: absolute; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0;
+}
+.pfc-glow-purple {
+  width: 520px; height: 520px; opacity: 0.20;
+  background: var(--accent-warm);
+  top: 200px; left: -130px;
+}
+.pfc-glow-cyan {
+  width: 460px; height: 460px; opacity: 0.16;
+  background: var(--accent-cool);
+  bottom: 300px; right: -110px;
+}
+/* 靠谱线变体 glow：青主导 + 蓝辅（紫青递进色彩编码） */
+.pfc-trust .pfc-glow-purple { opacity: 0.16; }
+.pfc-trust .pfc-glow-cyan {
+  background: var(--accent-cool); opacity: 0.20;
+}
+.pfc-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(168,85,247,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.045) 1px, transparent 1px);
+  background-size: 46px 46px; pointer-events: none;
+}
+.pfc-trust .pfc-grid {
+  background-image:
+    linear-gradient(rgba(0,212,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.045) 1px, transparent 1px);
+}
+
+/* ── 顶部带：排名+线别 / 用途 / 项目名（owner+repo 完整）── */
+.pfc-top {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 20px; width: 100%;
+}
+.pfc-header-row { display: flex; align-items: baseline; gap: 30px; flex-wrap: wrap; }
+.pfc-rank {
+  font-family: var(--font-data); font-weight: 900;
+  font-size: 92px; line-height: 0.9; letter-spacing: -0.02em;
+}
+.pfc-category {
+  font-family: var(--font-body); font-size: 38px; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--accent-cool);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+/* 端侧线 category 紫（线色编码）；靠谱线保持青（默认） */
+.pfc-edge .pfc-category { color: #C084FC; }
+.pfc-use {
+  font-family: var(--font-body); font-size: 50px; font-weight: 800;
+  line-height: 1.1; color: var(--accent-warm);
+  padding: 8px 24px; border-radius: 12px; align-self: flex-start;
+  background: rgba(168,85,247,0.12);
+  border: 1.5px solid rgba(168,85,247,0.45);
+  letter-spacing: 0.02em;
+}
+.pfc-trust .pfc-use {
+  color: var(--accent-cool);
+  background: rgba(0,212,255,0.10);
+  border: 1.5px solid rgba(0,212,255,0.45);
+}
+.pfc-name {
+  width: 100%; text-align: center;
+  font-family: var(--font-data);
+  line-height: 1.1; letter-spacing: -0.01em;
+  word-break: break-word;            /* 长名换行完整显示，禁 nowrap+ellipsis */
+}
+.pfc-owner {
+  font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.46); letter-spacing: 0.04em;
+}
+.pfc-repo {
+  font-size: 60px; font-weight: 800; color: #f5f5f5;
+}
+
+/* ── 中部带：可视化 × avatar 锚点 + 描述 + 星标数据条 ── */
+.pfc-mid {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 26px; width: 100%;
+}
+.pfc-avatar-wrap {
+  position: relative; width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pfc-avatar-ring {
+  position: absolute; inset: -18px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-warm), var(--accent-cool), var(--accent-warm));
+  filter: blur(16px); opacity: 0.55;
+}
+.pfc-trust .pfc-avatar-ring {
+  background: conic-gradient(from 0deg, var(--accent-cool), #60A5FA, var(--accent-cool));
+}
+.pfc-avatar {
+  position: relative; z-index: 1;
+  width: 220px; height: 220px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+.pfc-desc {
+  font-family: var(--font-body); font-size: 40px; font-weight: 600;
+  line-height: 1.38; color: #f5f5f5; text-align: center; max-width: 860px;
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.pfc-data-bar { width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 16px; }
+.pfc-bar-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.pfc-bar-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 500;
+  color: rgba(255,255,255,0.6); letter-spacing: 0.04em;
+}
+.pfc-bar-val {
+  font-family: var(--font-data); font-size: 46px; font-weight: 800;
+  color: var(--accent-cool); letter-spacing: -0.01em;
+}
+.pfc-bar-track {
+  width: 100%; height: 16px; border-radius: 999px;
+  background: rgba(255,255,255,0.10); overflow: hidden;
+}
+.pfc-bar-fill {
+  height: 100%; border-radius: 999px;
+  background-image: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+}
+.pfc-trust .pfc-bar-fill {
+  background-image: linear-gradient(90deg, #60A5FA, var(--accent-cool));
+}
+.pfc-bar-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  margin-top: 4px;
+}
+.pfc-today {
+  font-family: var(--font-data); font-size: 34px; font-weight: 700;
+  color: var(--accent-orange); letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.pfc-topics { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.pfc-topic {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  padding: 7px 20px; border-radius: 999px; color: var(--accent-cool);
+  background: rgba(0,212,255,0.10); border: 1px solid rgba(0,212,255,0.32);
+}
+
+/* ── 底部带：三词卖点 + 评语 ── */
+.pfc-bottom {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 24px; width: 100%;
+}
+.pfc-selling { display: flex; flex-wrap: wrap; gap: 16px; }
+.pfc-sell-item {
+  font-family: var(--font-body); font-size: 34px; font-weight: 700;
+  padding: 10px 26px; border-radius: 14px; color: #fff;
+  background: rgba(168,85,247,0.14); border: 1px solid rgba(168,85,247,0.40);
+}
+.pfc-trust .pfc-sell-item {
+  background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.40);
+}
+/* 核心数字卖点暖橙强调变体（如「14MB」） */
+.pfc-sell-item.sell-hot {
+  background: rgba(255,107,53,0.14); border: 1px solid rgba(255,107,53,0.48);
+}
+.pfc-commentary {
+  font-family: var(--font-body); font-size: 36px; font-weight: 500;
+  line-height: 1.4; color: rgba(255,255,255,0.74);
+  border-left: 4px solid var(--accent-warm); padding-left: 24px;
+}
+.pfc-trust .pfc-commentary { border-left-color: var(--accent-cool); }
+
+/* ============================================
+ * 中部带可视化变体（mystery-box 线索链，每屏签名不同）
+ * ============================================ */
+/* s02 needle 体积对比条：14MB vs 一首歌 等比可视化 */
+.pfc-scale {
+  width: 100%; max-width: 860px;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 20px 26px; border-radius: 18px;
+  background: rgba(10,10,20,0.55);
+  border: 1px solid rgba(0,212,255,0.22);
+}
+.pfc-scale-row {
+  display: flex; align-items: center; gap: 20px;
+}
+.pfc-scale-label {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2); white-space: nowrap; width: 190px; text-align: right;
+}
+.pfc-scale-track {
+  flex: 1; height: 34px; border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  overflow: hidden; position: relative;
+}
+.pfc-scale-fill {
+  height: 100%; border-radius: 8px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 14px;
+  font-family: var(--font-data); font-size: 32px; font-weight: 800; color: #fff;
+}
+.pfc-scale-fill.song {
+  width: 100%;
+  background-image: linear-gradient(90deg, rgba(100,116,139,0.34), rgba(147,197,253,0.30));
+}
+.pfc-scale-fill.tiny {
+  width: 35%;
+  background-image: linear-gradient(90deg, #A855F7, #C084FC);
+  box-shadow: 0 0 22px rgba(168,85,247,0.45);
+}
+
+/* s03 unsloth 训练三步条：图形界面点几下 */
+.pfc-steps {
+  width: 100%; max-width: 860px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 18px 22px; border-radius: 18px;
+  background: rgba(10,10,20,0.55);
+  border: 1px solid rgba(168,85,247,0.26);
+}
+.pfc-step {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.pfc-step-num {
+  font-family: var(--font-data); font-size: 32px; font-weight: 800;
+  color: #C084FC;
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(168,85,247,0.16); border: 1.5px solid rgba(168,85,247,0.5);
+}
+.pfc-step-txt {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: #f5f5f5;
+  white-space: nowrap;
+}
+.pfc-step-arrow {
+  font-family: var(--font-data); font-size: 34px; font-weight: 800;
+  color: rgba(192,132,252,0.65); flex-shrink: 0;
+}
+
+/* s04 omlx 菜单栏微缩：机房装进菜单条 */
+.pfc-menu {
+  width: 100%; max-width: 860px;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 22px 28px; border-radius: 18px;
+  background: rgba(10,10,20,0.62);
+  border: 1px solid rgba(0,212,255,0.28);
+}
+.pfc-menu-bar {
+  display: flex; align-items: center; gap: 18px;
+  height: 72px; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(26,10,46,0.9), rgba(16,8,32,0.95));
+  border: 1.5px solid rgba(0,212,255,0.4);
+  padding: 0 24px;
+  box-shadow: 0 0 26px rgba(0,212,255,0.18);
+}
+.pfc-menu-logo {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(255,255,255,0.82); flex-shrink: 0;
+}
+.pfc-menu-item {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2); letter-spacing: 0.06em;
+}
+.pfc-menu-item.active {
+  color: #E9D5FF;
+  padding: 4px 16px; border-radius: 8px;
+  background: rgba(168,85,247,0.28);
+  border: 1px solid rgba(192,132,252,0.55);
+  box-shadow: 0 0 18px rgba(168,85,247,0.4);
+}
+.pfc-menu-batch {
+  margin-left: auto; display: flex; gap: 10px;
+}
+.pfc-menu-dot {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: rgba(0,212,255,0.5);
+  border: 1px solid rgba(0,212,255,0.6);
+}
+.pfc-menu-dot.on {
+  background: rgba(168,85,247,0.85);
+  box-shadow: 0 0 14px rgba(168,85,247,0.7);
+  border-color: rgba(192,132,252,0.9);
+}
+.pfc-menu-cap {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2); text-align: center;
+}
+.pfc-menu-cap .em { color: var(--accent-cool); }
+
+/* s05 last30days 查证对比条：瞎猜→查证 */
+.pfc-verify {
+  width: 100%; max-width: 860px;
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 20px 26px; border-radius: 18px;
+  background: rgba(10,10,20,0.55);
+  border: 1px solid rgba(96,165,250,0.26);
+}
+.pfc-verify-col {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 10px; border-radius: 14px;
+}
+.pfc-verify-col.guess {
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.28);
+}
+.pfc-verify-col.cite {
+  background: rgba(0,212,255,0.10);
+  border: 1px solid rgba(0,212,255,0.45);
+  box-shadow: 0 0 24px rgba(0,212,255,0.16);
+}
+.pfc-verify-tag {
+  font-family: var(--font-body); font-size: 34px; font-weight: 800;
+}
+.pfc-verify-col.guess .pfc-verify-tag { color: rgba(255,255,255,0.55); }
+.pfc-verify-col.cite .pfc-verify-tag { color: var(--accent-cool); }
+.pfc-verify-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2);
+}
+.pfc-verify-arrow {
+  font-family: var(--font-data); font-size: 44px; font-weight: 900;
+  color: #60A5FA; flex-shrink: 0;
+}
+
+/* s06 docling 文档流转条：杂乱输入 → AI 口粮 */
+.pfc-flow {
+  width: 100%; max-width: 860px;
+  display: flex; align-items: stretch; justify-content: center; gap: 16px;
+  padding: 20px 24px; border-radius: 18px;
+  background: rgba(10,10,20,0.55);
+  border: 1px solid rgba(168,85,247,0.24);
+}
+.pfc-flow-box {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 18px 12px; border-radius: 14px;
+}
+.pfc-flow-box.messy {
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.3);
+}
+.pfc-flow-box.ready {
+  background: rgba(168,85,247,0.12);
+  border: 1px solid rgba(168,85,247,0.5);
+  box-shadow: 0 0 24px rgba(168,85,247,0.2);
+}
+.pfc-flow-icon {
+  font-size: 46px; line-height: 1;
+}
+.pfc-flow-txt {
+  font-family: var(--font-body); font-size: 32px; font-weight: 700; color: #f5f5f5;
+  text-align: center; line-height: 1.25;
+}
+.pfc-flow-txt .em2 { color: #C084FC; }
+.pfc-flow-arrow {
+  display: flex; align-items: center;
+  font-family: var(--font-data); font-size: 42px; font-weight: 900;
+  color: rgba(192,132,252,0.75); flex-shrink: 0;
+}
+
+/* ============================================
+ * s07 CTA — 线索链收官（OpenViking 尾灯 + 中性二选一 + 关注）
+ * 与上期 cta-duel 差异化：选择题卡（问号引导，非对峙 VS）
+ * ============================================ */
+.cta-wrap {
+  position: relative; z-index: 2; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 36px; text-align: center;
+}
+.cta-kicker {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.5);
+}
+/* OpenViking 尾灯卡（第六线索，一句带过） */
+.cta-tail {
+  display: flex; align-items: center; gap: 24px;
+  width: 100%; max-width: 880px;
+  padding: 20px 30px; border-radius: 18px;
+  background: rgba(10,10,20,0.58);
+  border: 1px solid rgba(168,85,247,0.34);
+  text-align: left;
+}
+.cta-tail-avatar {
+  width: 84px; height: 84px; border-radius: 50%; object-fit: cover;
+  border: 2.5px solid rgba(192,132,252,0.7); flex-shrink: 0;
+  box-shadow: 0 0 26px rgba(168,85,247,0.35);
+}
+.cta-tail-body { display: flex; flex-direction: column; gap: 6px; }
+.cta-tail-name {
+  font-family: var(--font-data); font-size: 36px; font-weight: 800; color: #f5f5f5;
+}
+.cta-tail-desc {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2); line-height: 1.3;
+}
+.cta-tail-star {
+  margin-left: auto; font-family: var(--font-data);
+  font-size: 34px; font-weight: 800; color: var(--accent-orange);
+  white-space: nowrap;
+}
+/* 二选一选择卡（中性，不站队） */
+.cta-question {
+  font-family: var(--font-body); font-size: 62px; font-weight: 900;
+  line-height: 1.25; letter-spacing: 0.02em;
+}
+.cta-choice {
+  display: flex; align-items: stretch; justify-content: center;
+  width: 100%; max-width: 880px; gap: 26px;
+}
+.cta-card {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 26px 20px; border-radius: 20px;
+}
+.cta-card.a {
+  background: rgba(168,85,247,0.13);
+  border: 1.5px solid rgba(192,132,252,0.5);
+  box-shadow: 0 0 30px rgba(168,85,247,0.16);
+}
+.cta-card.b {
+  background: rgba(0,212,255,0.10);
+  border: 1.5px solid rgba(0,212,255,0.48);
+  box-shadow: 0 0 30px rgba(0,212,255,0.14);
+}
+.cta-card-line {
+  font-family: var(--font-body); font-size: 40px; font-weight: 900;
+  line-height: 1.2;
+}
+.cta-card-sub {
+  font-family: var(--font-body); font-size: 32px; font-weight: 600;
+  color: var(--text2);
+}
+.cta-or {
+  display: flex; align-items: center;
+  font-family: var(--font-data); font-size: 44px; font-weight: 900;
+  color: rgba(255,255,255,0.5); flex-shrink: 0;
+}
+.cta-follow {
+  font-family: var(--font-body); font-size: 44px; font-weight: 800;
+  color: #f5f5f5; letter-spacing: 0.06em;
+  padding: 14px 46px; border-radius: 999px;
+  background-image: linear-gradient(rgba(10,10,20,0.72), rgba(10,10,20,0.72)),
+    conic-gradient(from 140deg, #A855F7, #00D4FF, #A855F7);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 46px rgba(168,85,247,0.30), 0 0 46px rgba(0,212,255,0.22);
+  text-shadow: 0 2px 6px rgba(30,41,59,0.08);
+}
+.cta-follow .em { color: var(--accent-orange); }

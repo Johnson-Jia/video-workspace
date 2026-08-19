@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1920px; height: 1080px; font-family: "Inter", "JetBrains Mono", "PingFang SC", "Microsoft YaHei", sans-serif; background: #0d1117; overflow: hidden; position: relative; }
+
+  /* 网格背景 */
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(240,246,252,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,246,252,0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  /* 渐变光晕 */
+  .glow-1 { position: absolute; width: 900px; height: 900px; left: -200px; top: -300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,160,0.14) 0%, transparent 65%); }
+  .glow-2 { position: absolute; width: 800px; height: 800px; right: -150px; bottom: -250px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,136,62,0.10) 0%, transparent 65%); }
+
+  .wrap { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 100px; }
+
+  .week-label { color: #00e5a0; font-size: 34px; letter-spacing: 6px; font-weight: 600; margin-bottom: 22px; font-family: "JetBrains Mono", monospace; }
+
+  h1 { color: #f0f6fc; font-size: 78px; font-weight: 800; letter-spacing: 2px; margin-bottom: 14px; }
+  h1 .accent { color: #00e5a0; }
+  .subtitle { color: #8b949e; font-size: 30px; letter-spacing: 4px; margin-bottom: 64px; }
+
+  .cards { display: flex; gap: 36px; margin-bottom: 64px; }
+  .card {
+    width: 420px; padding: 34px 36px;
+    background: rgba(22,27,34,0.92);
+    border: 1px solid rgba(240,246,252,0.12);
+    border-radius: 16px;
+    border-top: 3px solid #00e5a0;
+  }
+  .card.rank { color: #f0883e; font-family: "JetBrains Mono", monospace; font-size: 26px; font-weight: 700; letter-spacing: 3px; margin-bottom: 12px; }
+  .card.name { color: #f0f6fc; font-size: 30px; font-weight: 700; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card.name .small { font-size: 22px; color: #8b949e; font-weight: 400; }
+  .card.stars { color: #00e5a0; font-family: "JetBrains Mono", monospace; font-size: 42px; font-weight: 800; }
+  .card.stars .unit { font-size: 24px; color: #8b949e; font-weight: 400; margin-left: 8px; }
+
+  .footer { color: #8b949e; font-size: 26px; letter-spacing: 2px; font-family: "JetBrains Mono", monospace; }
+  .footer b { color: #f0883e; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="wrap">
+    <div class="week-label">2026年8月 第33周 · 08.10 - 08.16</div>
+    <h1>GitHub <span class="accent">热门开源项目</span>盘点</h1>
+    <div class="subtitle">AI AGENT 装备竞赛 · 全链条工具化集中爆发</div>
+    <div class="cards">
+      <div class="card">
+        <div class="rank">TOP 1</div>
+        <div class="name">diagram-design <span class="small">/ Claude Code 图表库</span></div>
+        <div class="stars">+14,735<span class="unit">★ 本周</span></div>
+      </div>
+      <div class="card">
+        <div class="rank">TOP 2</div>
+        <div class="name">prime-agent <span class="small">/ 自改进智能体</span></div>
+        <div class="stars">+8,488<span class="unit">★ 本周</span></div>
+      </div>
+      <div class="card">
+        <div class="rank">TOP 3</div>
+        <div class="name">semantica <span class="small">/ 图原生 AI 基建</span></div>
+        <div class="stars">+5,339<span class="unit">★ 本周</span></div>
+      </div>
+    </div>
+    <div class="footer">本周热度 <b>+55,457★</b> &nbsp;|&nbsp; 16 个项目 &nbsp;|&nbsp; 5 个分类</div>
+  </div>
+</body>
+</html>

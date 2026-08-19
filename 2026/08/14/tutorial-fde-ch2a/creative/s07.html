@@ -1,0 +1,45 @@
+<!-- 场景: scene-7 | 时长: ~11.9s | bg: clean_slate | 五组工程关卡（5节点流水线） -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:1400px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,52%,0.17) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <!-- fx-blink 锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:22%;right:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,78%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:16%;width:11px;height:11px;border-radius:50%;background:hsla(43,86%,58%,0.75);box-shadow:0 0 14px hsla(43,78%,52%,0.42)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid gate-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region gate-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="gate-eyebrow">过了这组 · 五组工程关卡</div>
+    </div>
+
+    <!-- 区域 B：五节点流水线（data-reveal=0.5，横排撑满） -->
+    <div class="tut-region gate-nodes" data-reveal="0.5" data-reveal-dir="top">
+      <div class="gate-node"><div class="gate-idx">①</div><div class="gate-name">数据准备</div></div>
+      <div class="gate-arrow">→</div>
+      <div class="gate-node"><div class="gate-idx">②</div><div class="gate-name">合规审查</div></div>
+      <div class="gate-arrow">→</div>
+      <div class="gate-node"><div class="gate-idx">③</div><div class="gate-name">系统集成</div></div>
+      <div class="gate-arrow">→</div>
+      <div class="gate-node"><div class="gate-idx">④</div><div class="gate-name">验收标准</div></div>
+      <div class="gate-arrow">→</div>
+      <div class="gate-node"><div class="gate-idx">⑤</div><div class="gate-name">上线回滚</div></div>
+    </div>
+
+    <!-- 区域 C：结论条（data-reveal=6，金底强调） -->
+    <div class="tut-region gate-verdict" data-reveal="6" data-reveal-dir="fade">任何一组没过 · 都别上线</div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,31 @@
+<!-- 场景: seg0 | 时长: ~3.8s | bg: hex_grid | hook 锚点：同一套 demo 现场用法全变 -->
+<div class="layer-bg">
+  <!-- bg-component: hex_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:1200px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 金色锚点（呼应武器库金色主线，暖色 box-shadow alpha ≤0.22） -->
+  <div class="fx-blink" style="position:absolute;top:22%;right:15%;width:13px;height:13px;border-radius:50%;background:hsla(43,90%,58%,0.85);box-shadow:0 0 16px hsla(43,80%,55%,0.20)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:24%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(215,75%,62%,0.80);box-shadow:0 0 14px hsla(215,70%,56%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-hook-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid hook-grid">
+
+    <!-- 区域：hook 锚点标题（data-reveal=0，场景开始即显示） -->
+    <div class="tut-region hook-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="hook-tag">技术武器库 · 现场重映射</div>
+      <h1 class="hook-title grad-blue">同一套 demo</h1>
+      <div class="hook-sub">到客户现场 · 用法竟然全变</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

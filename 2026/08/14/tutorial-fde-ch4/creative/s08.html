@@ -1,0 +1,48 @@
+<!-- 场景: seg8 | 时长: ~16.2s | bg: clean_slate | 作品三件套：金边卡收束 -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（证据强调，收束，alpha 0.18 ≤0.22） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1200px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:18%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:18%;right:14%;width:11px;height:11px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene work-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid work-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region work-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">求职最硬的证据 · 是作品不是简历</div>
+    </div>
+
+    <!-- 区域 B：三件套卡（data-reveal=6，金边卡收束） -->
+    <div class="tut-region work-cards" data-reveal="6" data-reveal-dir="top">
+      <div class="work-card">
+        <div class="work-num">01</div>
+        <div class="work-name">需求探索画布</div>
+        <div class="work-prove">证明你会摸业务</div>
+      </div>
+      <div class="work-card">
+        <div class="work-num">02</div>
+        <div class="work-name">跑通的技术 demo</div>
+        <div class="work-prove">证明执行力</div>
+      </div>
+      <div class="work-card">
+        <div class="work-num">03</div>
+        <div class="work-name">效果度量报告</div>
+        <div class="work-prove">证明你会证价值</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,43 @@
+<!-- 场景: scene-6 | 时长: ~26.3s | bg: clean_slate | PoC→生产：残酷事实 + 第0组商务组织前提 -->
+<div class="layer-bg">
+  <!-- bg-component: light_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 警示红光晕（alpha≤0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:1300px;height:480px;border-radius:50%;background:radial-gradient(ellipse, hsla(0,80%,58%,0.18) 0%, transparent 65%);filter:blur(62px);opacity:0.62"></div>
+  <!-- fx-blink 锚点（金+红低 alpha，警示平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;right:15%;width:13px;height:13px;border-radius:50%;background:hsla(0,80%,62%,0.85);box-shadow:0 0 16px hsla(0,72%,56%,0.50)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;left:15%;width:11px;height:11px;border-radius:50%;background:hsla(43,86%,58%,0.75);box-shadow:0 0 14px hsla(43,78%,52%,0.42)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <div class="tut-grid poc-grid">
+
+    <!-- 区域 A：残酷事实（data-reveal=0，红色大字） -->
+    <div class="tut-region poc-hero" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">第二件 · 从演示到生产</div>
+      <h1 class="poc-ne grad-red">干净数据跑通了 ≠ 能上生产</h1>
+      <div class="poc-sub">死在 PoC 阶段的头号原因 · 往往不在工程</div>
+    </div>
+
+    <!-- 区域 B：第 0 组金边清单（data-reveal=10，4项 + 结论） -->
+    <div class="tut-region group0-wrap" data-reveal="10" data-reveal-dir="top">
+      <div class="group0-tag">第 0 组 · 商务组织前提</div>
+      <div class="group0-cards">
+        <div class="g0-card"><div class="g0-idx">①</div><div class="g0-body">预算有没有立项</div></div>
+        <div class="g0-card"><div class="g0-idx">②</div><div class="g0-body">采购流程走到哪</div></div>
+        <div class="g0-card"><div class="g0-idx">③</div><div class="g0-body">推动者在不在位</div></div>
+        <div class="g0-card"><div class="g0-idx">④</div><div class="g0-body">验收口径书面确认</div></div>
+      </div>
+      <div class="poc-verdict">前提没过 · 别谈工程</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

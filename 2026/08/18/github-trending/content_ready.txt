@@ -1,0 +1,76 @@
+# 8月18日 GitHub 热门项目（daily 综合榜 · 本地优先专题）
+
+> 选题方向：本地优先（local-first）——不用账号、不上云、自己的数据自己管。照片搬回家（immich）做钩子主角，叠加外设免登录（OpenLogi）、全能下载器（Motrix）、硬件测模型（llmfit）、AI 安全自查（strix），五个方向零同质。
+> AI 占比：2/5（strix + llmfit，均为内容自然入选非凑数；其余候选 AI 工具留待 ai-wind 专项。一个 Rust 交易引擎因 topics 带机器学习标签按 ai_trending 口径计入 AI 名额，为守上限让位）
+> 受众配比：A 档 2（OpenLogi 下载即用 / Motrix 装了就用）+ B 档 2（immich 自托管部署 / llmfit 命令行）+ C 档 1（strix 开发者向），A 档约一半、C 档未过半
+> 真实性：5 项目全部通过 gh API 核验（2026-08-18）。星叉比 7.7-16.9:1 正常区间；watchers 充足（Motrix 488 / immich 346）；仓库体积 11.7-322MB 无空壳；账龄 immich 4.5 年 / Motrix 7.7 年 / nautilus 级老项目 2 个；轻微警告 2 个（strix 账龄 1 年涨 5.4 万星、OpenLogi 账龄 3 个月涨 8.6 千星——均属工具赛道爆发期常态，forks/watchers 配比在正常区间，放行）
+
+数据来源：raw_trending.json（github_trending.py 新闻页 11 项 + 语言日榜扩池 1 项，2026-08-18 采集）+ gh api repos 实时核验（stars/forks/watchers/created/pushed）。
+
+## 入选项目
+
+## 1. immich（GitHub: immich-app/immich）| TypeScript | 11.1万★ (+175 单日) | 受众: B 半可用
+- 中文描述：高性能自托管的照片和视频管理方案（原: High performance self-hosted photo and video management solution.）
+- avatar: assets/avatars/immich-app.png
+- 用途: 照片自己管
+- 反直觉角度: 云相册要会员、要压缩画质，11 万人干脆把照片搬回自己家——自己一台机器加手机 App 自动备份，照片的钥匙永远在自己手里；今天它单日再涨 175 星，稳居总榜前排
+- 类别标签: 自托管照片管理
+- 三词卖点: 11万星·自托管·照片回家
+- 感性评语: 照片的钥匙自己拿
+- 核心指标: 11.1万★ +175 单日
+- 受众说明: 需一台常开设备部署，手机端装好即用，适合愿意折腾一次的普通人
+
+## 2. OpenLogi（GitHub: AprilNEA/OpenLogi）| Rust | 8.6K★ (+115 单日) | 受众: A 普通可用
+- 中文描述：本地优先的罗技 Options+ 替代品，Rust 编写——改键、调 DPI、SmartShift 滚轮全支持，免账号、零遥测（原: ⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.）
+- avatar: assets/avatars/AprilNEA.png
+- 用途: 免账号调鼠标
+- 反直觉角度: 调个鼠标按键，凭什么要注册账号、挂个后台常驻？这个只做了 3 个月的原生应用把答案写在口号里——免账号、零遥测，改键调 DPI 一个不少，罗技用户直击痛点
+- 类别标签: 外设本地设置
+- 三词卖点: 免账号·零遥测·原生快
+- 感性评语: 鼠标设置不用登录
+- 核心指标: 8.6K★ +115 单日（3 个月新项目）
+- 受众说明: 下载即用，用罗技键鼠的普通人都能上手
+
+## 3. Motrix（GitHub: agalwood/Motrix）| TypeScript | 5.3万★ (+344 单日) | 受众: A 普通可用
+- 中文描述：全功能的下载管理器（原: A full-featured download manager.）
+- avatar: assets/avatars/agalwood.png
+- 用途: 全能下载器
+- 反直觉角度: 不追风口、不讲故事，界面干净得像十年前的软件——7 年常青、5.3 万人收藏，今天还在单日涨 344 星；下载这件事做到极致本身就是护城河（合规提醒：只讲开源工具本身的工程能力，旁白/画面禁引导下载版权内容）
+- 类别标签: 桌面下载管理器
+- 三词卖点: 7年常青·全协议·全平台
+- 感性评语: 下载就交给专业的
+- 核心指标: 5.3万★ +344 单日
+- 受众说明: 桌面端装了就用，普通人可用
+
+## 4. llmfit（GitHub: AlexsJones/llmfit）| Rust | 3.2万★ (+198 单日) | 受众: B 半可用
+- 中文描述：几百个模型和提供商，一条命令找出你的硬件能跑什么（原: Hundreds of models &amp; providers. One command to find what runs on your hardware.）
+- avatar: assets/avatars/AlexsJones.png
+- 用途: 一键测跑啥模型
+- 反直觉角度: 本地跑模型最大的坑不是不会装，是下了 20G 才发现机器带不动——这个工具把试错成本压成一条命令：先测硬件，再选模型，答案直接给你（本期实用收藏点）
+- 类别标签: 本地模型硬件适配
+- 三词卖点: 一条命令·先测后下·不白下载
+- 感性评语: 先测再下不踩坑
+- 核心指标: 3.2万★ +198 单日
+- 受众说明: 命令行工具，给想本地跑大模型的进阶用户
+
+## 5. strix（GitHub: usestrix/strix）| Python | 5.4万★ (+598 单日) | 受众: C 开发者向
+- 中文描述：开源 AI 安全测试工具，帮你找出并修复自己应用的漏洞（原: Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.）
+- avatar: assets/avatars/usestrix.png
+- 用途: AI自查漏洞
+- 反直觉角度: 上线前不知道自己的应用哪里有洞？让 AI 先替它做一遍体检——找出漏洞、给出修复建议，把安全自查从奢侈的事变成开源工具的事（中性化：全程讲开发者给自己应用做体检，不渲染攻击话术）
+- 类别标签: AI 安全自查
+- 三词卖点: 开源·AI体检·找洞修复
+- 感性评语: 上线前先做个体检
+- 核心指标: 5.4万★ +598 单日
+- 受众说明: 给有自己应用/网站的开发者（安全工具按自查视角中性讲述）
+
+## 本期叙事主线
+
+| 维度 | 5 项目共性 |
+|------|-----------|
+| 主题 | 本地优先——不用账号、不上云、自己的数据自己的机器自己管：照片（immich）、外设（OpenLogi）、下载（Motrix）、模型（llmfit）、安全（strix）五个战场同一主张 |
+| 反直觉钩子 | 调个鼠标，凭什么要登录账号（冲突"凭什么登录" + 动作"调鼠标" + 场景具象，观众秒懂） |
+| 受众覆盖 | 普通人（OpenLogi 装即用 / Motrix 装即用）/ 进阶用户（immich 部署 / llmfit 命令行）/ 开发者（strix 自查） |
+| 数字锚点 | 11.1万星+单日175（immich）/ 8.6K星3个月（OpenLogi）/ 5.3万星+单日344（Motrix）/ 3.2万星（llmfit）/ 5.4万星+单日598（strix） |
+
+> 本期 AI 恰 2 个（strix + llmfit，上限 2 非目标），与昨日（08-17）入选五项零重复，与 08-16 ai-wind 已讲五项零跨频道重叠。strix 按 team-lead 指示中性化：全程"给自己应用做体检"自查视角，禁攻击/入侵渲染。Motrix 只讲工具工程能力，禁引导下载版权内容。今日池仅 11+1 项（新闻页无触发自动扩池），语言日榜补采后非 AI 池仍紧，按"扩大 raw 优先于放宽"补采 1 项，总数 5 达标。

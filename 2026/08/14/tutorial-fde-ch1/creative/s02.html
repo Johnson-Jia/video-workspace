@@ -1,0 +1,80 @@
+<!-- 场景: seg2 | 时长: ~26.6s | bg: scan_grid | 能力版图横条 + 配比演化柱（合并） -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 蓝色静态光晕（左，alpha 0.16） -->
+  <div class="fx-pulse" style="position:absolute;top:30%;left:28%;transform:translate(-50%,-50%);width:760px;height:300px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,72%,55%,0.16) 0%, transparent 65%);filter:blur(55px);opacity:0.55"></div>
+  <!-- fx-pulse 金色静态光晕（右，alpha 0.18） -->
+  <div class="fx-pulse" style="position:absolute;top:72%;left:72%;transform:translate(-50%,-50%);width:880px;height:340px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:14%;right:13%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:12%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 15px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-cap-scene">
+  <div class="tut-grid cap-grid">
+
+    <!-- 区域 A：版图标题 + 口径（data-reveal=0） -->
+    <div class="tut-region cap-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">能力版图 · 两大块</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px">
+        <h1 class="scene-title">技术执行 + 客户现场</h1>
+        <span class="caveat-pill">经验刻画 · 非精确统计</span>
+      </div>
+    </div>
+
+    <!-- 区域 B：40/60 双色横条（data-reveal=7） -->
+    <div class="tut-region cap-bar-wrap" data-reveal="7" data-reveal-dir="top">
+      <div class="cap-bar">
+        <div class="cap-bar-a"><span class="cap-bar-num grad-blue">40%</span></div>
+        <div class="cap-bar-b"><span class="cap-bar-num grad-gold">60%</span></div>
+      </div>
+      <div class="cap-notes">
+        <div class="cap-note cap-note-a">
+          <div class="nn-tag">A 技术执行</div>
+          <div class="nn-body">把 AI 方案做出来</div>
+        </div>
+        <div class="cap-note cap-note-b">
+          <div class="nn-tag">B 客户现场</div>
+          <div class="nn-body">在客户那儿落地、让人买单</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区域 C：三组演化柱（data-reveal=15.5） -->
+    <div class="tut-region evo-row" data-reveal="15.5" data-reveal-dir="top">
+      <div class="evo-col">
+        <div class="evo-bars">
+          <div class="seg evo-seg-b" style="height:30%"></div>
+          <div class="seg evo-seg-a" style="height:70%"></div>
+        </div>
+        <div class="evo-label">初级 FDE</div>
+        <div class="evo-foot" style="color:var(--tut-blue-3)">写代码占比高</div>
+      </div>
+      <div class="evo-col">
+        <div class="evo-bars">
+          <div class="seg evo-seg-b" style="height:50%"></div>
+          <div class="seg evo-seg-a" style="height:50%"></div>
+        </div>
+        <div class="evo-label">资深 FDE</div>
+        <div class="evo-foot" style="color:var(--tut-gray)">两块渐趋均衡</div>
+      </div>
+      <div class="evo-col">
+        <div class="evo-bars">
+          <div class="seg evo-seg-b" style="height:85%"></div>
+          <div class="seg evo-seg-a" style="height:15%"></div>
+        </div>
+        <div class="evo-label">Lead FDE</div>
+        <div class="evo-foot">几乎不写代码</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+</div>

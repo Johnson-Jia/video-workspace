@@ -1,0 +1,45 @@
+<!-- 场景: seg3 | 时长: ~22.7s | bg: contour_lines | 代价清单下半：编码锐减 / 验收回款 + 结论 -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 灰调静态光晕（代价冷静延续，alpha 0.15） -->
+  <div class="fx-pulse" style="position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:1100px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,20%,55%,0.15) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <!-- fx-pulse 金色静态光晕（结论条暖光，下方，alpha 0.18 ≤0.22） -->
+  <div class="fx-pulse" style="position:absolute;bottom:14%;left:50%;transform:translate(-50%,0);width:980px;height:200px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 冷色锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:16%;right:15%;width:11px;height:11px;border-radius:50%;background:hsla(43,90%,60%,0.85);box-shadow:0 0 14px hsla(43,85%,55%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene cost-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid cost-grid">
+
+    <!-- 区域 A：代价卡 3-4（data-reveal=0，灰调卡 reveal） -->
+    <div class="tut-region cost-cards" data-reveal="0" data-reveal-dir="top">
+      <div class="cost-card">
+        <div class="cc-tag">代价 03</div>
+        <div class="cc-title">编码锐减</div>
+        <div class="cc-body">百分之四十写代码还含调试、部署、文档，<em>真正写业务代码时间更少</em></div>
+      </div>
+      <div class="cost-card">
+        <div class="cc-tag">代价 04</div>
+        <div class="cc-title">验收回款</div>
+        <div class="cc-body">尾款挂钩验收，<em>拖着不验收、需求蔓延都是常态</em></div>
+      </div>
+    </div>
+
+    <!-- 区域 B：结论条（data-reveal=13，金边收束） -->
+    <div class="tut-region" data-reveal="13" data-reveal-dir="top">
+      <div class="conclusion grad-gold">高回报但高消耗 · 看重纯技术深度、稳定作息的人要慎重</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

@@ -1,0 +1,61 @@
+<!-- 场景: seg2 | 时长: ~16.7s | bg: gradient_mesh | RAG 卡详：三层改造（脱敏/隔离/回写） -->
+<div class="layer-bg">
+  <!-- bg-component: gradient_mesh -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（RAG 重点，暖色 alpha 0.18 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:46%;left:32%;transform:translate(-50%,-50%);width:900px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.18) 0%, transparent 65%);filter:blur(55px);opacity:0.65"></div>
+  <!-- fx-blink 冷蓝锚点（右侧平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:22%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:18%;width:10px;height:10px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 13px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-rag-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid rag-grid">
+
+    <!-- 区域 A：RAG 卡放大 + 三层改造（左右分栏，整体一行 reveal） -->
+    <div class="tut-region rag-row" data-reveal="0" data-reveal-dir="fade">
+      <div class="rag-card-big">
+        <span class="rag-en">rag-service</span>
+        <h1 class="rag-name grad-gold">RAG</h1>
+        <div class="rag-when">何时用：客户文档知识库<br>要用 AI 查答</div>
+      </div>
+
+      <div class="three-block">
+        <div class="three-label">现场版 · 要加三层</div>
+        <div class="three-chips">
+          <div class="chip">
+            <span class="chip-num">1</span>
+            <div>
+              <div class="chip-text">数据脱敏</div>
+              <div class="chip-sub">接客户数据前先脱敏</div>
+            </div>
+          </div>
+          <div class="chip">
+            <span class="chip-num">2</span>
+            <div>
+              <div class="chip-text">权限隔离</div>
+              <div class="chip-sub">不同客户的数据严格隔离</div>
+            </div>
+          </div>
+          <div class="chip">
+            <span class="chip-num">3</span>
+            <div>
+              <div class="chip-text">结果回写</div>
+              <div class="chip-sub">AI 答案写回客户系统留痕</div>
+            </div>
+          </div>
+        </div>
+        <div class="eval-note">评估指标 → 换成客户业务的答准率</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

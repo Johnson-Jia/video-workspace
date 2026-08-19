@@ -1,0 +1,59 @@
+<!-- 场景: seg1 | 时长: ~12.4s | bg: clean_slate | 弹药库定位 + 五卡总览 grid -->
+<div class="layer-bg">
+  <!-- bg-component: clean_slate -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1300px;height:500px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.18) 0%, transparent 65%);filter:blur(60px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（卡区上下平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:16%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-overview-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid overview-grid">
+
+    <!-- 区域 A：弹药库定位条（data-reveal=0） -->
+    <div class="tut-region ov-loc" data-reveal="0" data-reveal-dir="fade">
+      <span class="loc-pill">主教程 demo = 弹药库</span>
+      <div class="loc-sub">本章只讲：现场什么时候用 · 怎么改造适配客户</div>
+    </div>
+
+    <!-- 区域 B：五卡总览 grid（data-reveal=3.7，space-between 撑满宽度，RAG 金边高亮） -->
+    <div class="tut-region five-grid" data-reveal="3.7" data-reveal-dir="top">
+      <div class="five-card card-gold">
+        <span class="five-num">01</span>
+        <div class="five-name">RAG</div>
+        <div class="five-when">客户知识库<br>AI 查答</div>
+      </div>
+      <div class="five-card">
+        <span class="five-num">02</span>
+        <div class="five-name">多 Agent<br>编排</div>
+        <div class="five-when">一个智能体<br>搞不定</div>
+      </div>
+      <div class="five-card">
+        <span class="five-num">03</span>
+        <div class="five-name">测试框架</div>
+        <div class="five-when">防改一处<br>坏一片</div>
+      </div>
+      <div class="five-card">
+        <span class="five-num">04</span>
+        <div class="five-name">度量工具</div>
+        <div class="five-when">向客户证明<br>回报</div>
+      </div>
+      <div class="five-card">
+        <span class="five-num">05</span>
+        <div class="five-name">Skill<br>沉淀</div>
+        <div class="five-when">现场经验<br>复用</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

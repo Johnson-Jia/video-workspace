@@ -1,0 +1,70 @@
+# 8月19日 GitHub 热门项目（daily 综合榜 · 大厂跨界与 AI 记性专题）
+
+> 选题方向：跨界反差——做项目管理的 Basecamp 把 Linux 桌面做上了榜，AI 编程助手最被诟病的"金鱼记忆"有了开源解法。以 omarchy 大厂跨界做钩子主角之一，叠加 AI 长期记忆（ai-memory）、中文 AI 开源书（ai-agent-book）、开源视频剪辑（OpenCut），昨日主角 public-apis 单日再涨千星一句带过，五个方向零同质。
+> AI 占比：2/5（ai-memory + ai-agent-book，均为内容自然入选非凑数；MoneyPrinterTurbo 08-17 已展开、今日虽涨 2,306 星居前3 但 AI 名额已满未带过，其余 AI 工具留待今日 ai-wind 专项）
+> 受众配比：A 档 3（OpenCut 装了就剪 / ai-agent-book 网页直接读 / public-apis 清单直接看）+ B 档 1（omarchy 要装 Linux）+ C 档 1（ai-memory 给用 AI 编程助手的开发者），A 档约一半、C 档未过半
+> 重复豁免：public-apis 为 08-17 已展开项目，今日 +1,139 涨进当日 raw 前 3（第 2），按规则一句带过增量不展开；Motrix 昨日已选且今日排第 5 非前 3，禁选让位
+> 真实性：5 项目全部通过 gh API 核验（2026-08-19）。星叉比 9.1-11.6:1 全部正常区间；账龄 basecamp org 18 年 240 仓库 / akitaonrails 个人 18 年 1.7 万 followers（Ruby 社区知名博主）/ bojieli 14 年 / public-apis org 7 年；仓库体积 8MB-768MB 无空壳（ai-agent-book 含全书 PDF 体积大属合理）。轻微警告 2 个（OpenCut watchers 占比 0.45%、ai-agent-book 0.36%——爆发期项目与书籍类项目 watchers 天然偏低，forks/账龄配比正常，放行）
+
+数据来源：raw_trending.json（github_trending.py 新闻页 13 项，2026-08-19 采集，gh API 13/13 验证）+ gh api repos 实时核验（stars/forks/watchers/created/pushed）。
+
+## 入选项目
+
+## 1. OpenCut（GitHub: OpenCut-app/OpenCut）| TypeScript | 8.5万★ (+288 单日) | 受众: A 普通可用
+- 中文描述：开源的视频剪辑工具，剪片不用再挤订阅（原: The open-source CapCut alternative）
+- avatar: assets/avatars/OpenCut-app.png
+- 用途: 免费剪视频
+- 反直觉角度: 剪视频这件事，大家默认就得用大厂客户端、开会员去水印——8.5 万人用脚投票选了个完全开源的替代品，时间线、多轨道、导出全免费，代码全部摊开在 GitHub 上随便审；今天它单日再涨 288 星
+- 类别标签: 开源视频剪辑
+- 三词卖点: 8.5万星·全开源·免订阅
+- 感性评语: 剪辑自由不花钱
+- 核心指标: 8.5万★ +288 单日
+- 受众说明: 桌面/网页端装了就剪，做短视频的普通人可用（合规提醒：旁白/画面/文案按"开源剪辑工具"泛化表述，不提商业产品名，不讲"替代某 app"）
+
+## 2. omarchy（GitHub: basecamp/omarchy）| Shell | 2.6万★ (+411 单日) | 受众: B 半可用
+- 中文描述：漂亮、现代、有主见的 Linux 桌面系统（原: Beautiful, Modern &amp; Opinionated Linux）
+- avatar: assets/avatars/basecamp.png
+- 用途: 一键装好Linux桌面
+- 反直觉角度: GitHub 日榜常客不是 AI 就是基建，今天杀进来一个"装修队"——做项目管理软件起家的 Basecamp，18 年老牌团队亲手调了一套 Linux 桌面：字体、窗口、快捷键全部替你选好，"有主见"三个字直接写进介绍；2.6 万人为这份审美买单，单日再涨 411 星
+- 类别标签: 大厂出品的 Linux 桌面
+- 三词卖点: Basecamp出品·开箱即用·审美在线
+- 感性评语: 老团队替你调系统
+- 核心指标: 2.6万★ +411 单日
+- 受众说明: 有一台能折腾的电脑、想换 Linux 桌面的普通人；一条命令装好整套环境
+
+## 3. ai-memory（GitHub: akitaonrails/ai-memory）| Rust | 2.7K★ (+730 单日) | 受众: C 开发者向
+- 中文描述：给 AI 编程助手装上长期记忆，还能在不同 AI 之间交接记忆（原: Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors）
+- avatar: assets/avatars/akitaonrails.png
+- 用途: AI助手不忘事
+- 反直觉角度: AI 编程助手最大的坑不是写不好，是"金鱼记忆"——每次开新会话，你的项目背景全忘光，又得从头交代一遍；这个 Rust 小工具把记忆做成外挂硬盘，还顺手解决了一个更少人碰的问题：从 A 家 AI 搬到 B 家，记忆跟着走，不用重新养；2.7K 星的体量单日涨 730，接近三分之一的爆发增速
+- 类别标签: AI 助手长期记忆
+- 三词卖点: 长期记忆·跨AI交接·Rust编写
+- 感性评语: 给AI装个外挂硬盘
+- 核心指标: 2.7K★ +730 单日（爆发增速）
+- 受众说明: 给用 AI 编程助手写代码的开发者；普通人暂用不上，属"看趋势"项目
+
+## 4. ai-agent-book（GitHub: bojieli/ai-agent-book）| Python | 3.9万★ (+556 单日) | 受众: A 普通可用
+- 中文描述：《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库：全书正文、编译版 PDF 与按章配套代码（原: 《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库：全书正文、编译版 PDF 与按章配套代码）
+- avatar: assets/avatars/bojieli.png
+- 用途: AI智能体免费书
+- 反直觉角度: 别人开源代码，这位作者直接开源了一整本书——全书正文、编译好的 PDF、按章节配套的代码全部放进仓库，一分钱不收；3.9 万人先收藏为敬，单日再涨 556 星，想系统搞懂 AI 智能体的人有活干了
+- 类别标签: AI 智能体开源书
+- 三词卖点: 全书开源·免费PDF·配套代码
+- 感性评语: 一本书直接送你
+- 核心指标: 3.9万★ +556 单日
+- 受众说明: 想系统学习 AI 智能体的普通人/开发者，仓库里直接读正文下 PDF
+
+## 5. public-apis（GitHub: public-apis/public-apis）| Python | 46.4万★ (+1,139 单日) | 受众: A 普通可用
+- 中文描述：免费 API 大全，一份集体维护的免费接口清单（原: A collective list of free APIs）
+- avatar: assets/avatars/public-apis.png
+- 用途: 免费接口一页全
+- 反直觉角度: 昨天说过的免费 API 清单还在涨——单日再进账 1,139 星冲到当日第 2，46.4 万星的全站传奇，连着两天霸榜
+- 类别标签: 免费资源清单（连续霸榜·快速带过）
+- 三词卖点: 46万星·纯清单·连续霸榜
+- 感性评语: 老将连着两天霸榜
+- 核心指标: 46.4万★ +1,139 单日（当日第 2）
+- 受众说明: 08-17 已展开介绍，本期只报增量；清单网页直接看
+
+## 选题备注
+
+- 今日落选说明见 content.md（泛化记录，不展开）

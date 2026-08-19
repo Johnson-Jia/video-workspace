@@ -1,0 +1,42 @@
+<!-- 场景: seg6 | 时长: ~28s | bg: contour_lines | 规律条 + 转岗决策二分卡（3 phase reveal） -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（结论区后方，alpha 0.16 ≤ 0.22，禁划过类 fx） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1500px;height:780px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.16) 0%, transparent 65%);filter:blur(60px);opacity:0.7"></div>
+  <div class="fx-blink" style="position:absolute;top:18%;left:12%;width:12px;height:12px;border-radius:50%;background:hsla(215,70%,60%,0.80);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:18%;right:12%;width:12px;height:12px;border-radius:50%;background:hsla(43,80%,58%,0.80);box-shadow:0 0 14px hsla(43,70%,52%,0.45)"></div>
+  <div class="fx-blink" style="position:absolute;top:50%;right:6%;width:10px;height:10px;border-radius:50%;background:hsla(215,70%,60%,0.70);box-shadow:0 0 12px hsla(215,65%,54%,0.4)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene">
+  <!-- phase1 规律条：考核项 → 手段（场景开始 reveal） -->
+  <div class="tut-region rule-wrap" data-reveal="0" data-reveal-dir="fade">
+    <div class="rule-bar">
+      <div class="rule-head">代码质量 · 覆盖率，没有消失</div>
+      <div class="rule-arrow">从「考核项」 → 变成「手段」</div>
+      <div class="rule-scale"><span style="color:var(--tut-gold-3)">客户签字 · 业务收益</span> 才是标尺</div>
+    </div>
+  </div>
+  <!-- 二分卡容器（左右卡独立 reveal） -->
+  <div class="dec-cards" style="flex:none">
+    <div class="dec-card dc-blue tut-region" data-reveal="11" data-reveal-dir="left">
+      <div class="dc-tag">要慎重</div>
+      <div class="dc-item">看重纯技术深度<br>稳定作息 · 自主权</div>
+    </div>
+    <div class="dec-card dc-gold tut-region" data-reveal="18" data-reveal-dir="left">
+      <div class="dc-tag">适合你</div>
+      <div class="dc-item">跟人打交道 · 真实业务<br>能适应出差和不确定性</div>
+    </div>
+  </div>
+  <!-- phase3 收束句（与右卡同拍 reveal） -->
+  <div class="tut-region dec-close" data-reveal="18" data-reveal-dir="fade" style="text-align:center">稀缺性<span class="dc-gold-dot">·</span>对适合的人是实打实的</div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

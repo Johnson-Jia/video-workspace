@@ -1,0 +1,48 @@
+<!-- 场景: seg5 | 时长: ~15.5s | bg: contour_lines | 测试框架 + 阈值双分（可接受/红线） -->
+<div class="layer-bg">
+  <!-- bg-component: contour_lines -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 金色静态光晕（红线 chip 侧重，暖色 alpha 0.20 ≤ 0.22，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:60%;left:74%;transform:translate(-50%,-50%);width:720px;height:360px;border-radius:50%;background:radial-gradient(ellipse, hsla(43,90%,55%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷蓝锚点（左上平衡） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:15%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:22%;right:16%;width:10px;height:10px;border-radius:50%;background:hsla(43,90%,58%,0.85);box-shadow:0 0 13px hsla(43,80%,55%,0.20)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-test-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid test-grid">
+
+    <!-- 区域 A：测试卡头（data-reveal=0） -->
+    <div class="tut-region test-head" data-reveal="0" data-reveal-dir="fade">
+      <span class="test-tag">ai-test-frame</span>
+      <h1 class="test-name">测试框架</h1>
+      <div class="test-when">何时用：防止 AI 改一处坏一片 · 回归用例用客户真实场景</div>
+    </div>
+
+    <!-- 区域 B：阈值双分卡（data-reveal=5.4，可接受 vs 红线） -->
+    <div class="tut-region split-cards" data-reveal="5.4" data-reveal-dir="top">
+      <div class="split-chip split-blue">
+        <div class="split-label">客户能接受</div>
+        <div class="split-main">可接受的误差</div>
+      </div>
+      <div class="split-chip split-gold">
+        <div class="split-label">红线</div>
+        <div class="split-main">金额 · 安全</div>
+      </div>
+    </div>
+
+    <!-- 区域 C：验收标准注（data-reveal=9.5） -->
+    <div class="tut-region split-note" data-reveal="9.5" data-reveal-dir="fade">
+      软断言阈值和客户当面定 · 写进验收标准 · 别上线后扯皮
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

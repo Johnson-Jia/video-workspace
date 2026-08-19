@@ -1,0 +1,52 @@
+<!-- 场景: seg7 | 时长: ~20.1s | bg: noise_field | 常见四个坑：2×2 灰调警示 -->
+<div class="layer-bg">
+  <!-- bg-component: noise_field -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-pulse 灰调静态光晕（警示冷静，alpha 0.15） -->
+  <div class="fx-pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1100px;height:400px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,20%,55%,0.15) 0%, transparent 65%);filter:blur(60px);opacity:0.55"></div>
+  <!-- fx-blink 冷色警示锚点 -->
+  <div class="fx-blink" style="position:absolute;top:16%;left:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;top:16%;right:14%;width:12px;height:12px;border-radius:50%;background:hsla(215,70%,60%,0.78);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:16%;left:14%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.78);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:16%;right:14%;width:11px;height:11px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 14px hsla(215,70%,56%,0.5)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene pit-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal -->
+  <div class="tut-grid pit-grid">
+
+    <!-- 区域 A：标题（data-reveal=0） -->
+    <div class="tut-region pit-head" data-reveal="0" data-reveal-dir="fade">
+      <div class="con-eyebrow">常见四个坑</div>
+      <h1 class="scene-title">这些错几乎人人都踩过</h1>
+    </div>
+
+    <!-- 区域 B：2×2 警示网格（data-reveal=2，灰调卡同屏累积） -->
+    <div class="tut-region pit-box" data-reveal="2" data-reveal-dir="top">
+      <div class="pit-card">
+        <div class="pit-name">重技术轻现场</div>
+        <div class="pit-body">沉迷把模型调到很高准确率，却没搞清客户真正在乎什么</div>
+      </div>
+      <div class="pit-card">
+        <div class="pit-name">跳过对齐就开干</div>
+        <div class="pit-body">需求没对齐就动手，做完客户不买单</div>
+      </div>
+      <div class="pit-card">
+        <div class="pit-name">演示贪大</div>
+        <div class="pit-body">什么都想验证，结果什么都不充分</div>
+      </div>
+      <div class="pit-card">
+        <div class="pit-name">不留痕</div>
+        <div class="pit-body">现场经验没沉淀，下个项目从零开始</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

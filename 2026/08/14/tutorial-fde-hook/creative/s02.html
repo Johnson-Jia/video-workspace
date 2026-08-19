@@ -1,0 +1,48 @@
+<!-- 场景: seg2 | 时长: ~12.1s | bg: scan_grid | 口径标注 + 40/60 精力配比双卡 -->
+<div class="layer-bg">
+  <!-- bg-component: scan_grid -->
+</div>
+
+<div class="layer-fx">
+  <!-- fx-aura 冷蓝静态光晕（脉冲呼吸，禁划过类） -->
+  <div class="fx-pulse" style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:1200px;height:420px;border-radius:50%;background:radial-gradient(ellipse, hsla(215,70%,52%,0.20) 0%, transparent 65%);filter:blur(55px);opacity:0.6"></div>
+  <!-- fx-blink 冷色锚点（平衡构图） -->
+  <div class="fx-blink" style="position:absolute;top:20%;left:16%;width:12px;height:12px;border-radius:50%;background:hsla(215,75%,62%,0.85);box-shadow:0 0 15px hsla(215,70%,56%,0.5)"></div>
+  <div class="fx-blink" style="position:absolute;bottom:22%;right:16%;width:11px;height:11px;border-radius:50%;background:hsla(215,70%,60%,0.75);box-shadow:0 0 14px hsla(215,65%,54%,0.45)"></div>
+</div>
+
+<div class="layer-content">
+<div class="phase phase-1 tut-scene tut-ratio-scene">  <!-- 教程模式：单 phase + 多 region + data-reveal（不切 phase） -->
+  <div class="tut-grid ratio-grid">
+
+    <!-- 区域 A：口径标注 1（data-reveal=0，承接 42 倍数字的严谨说明） -->
+    <div class="tut-region ratio-caveat-top" data-reveal="0" data-reveal-dir="fade">
+      <span class="caveat-pill">媒体转引 · 置信度中等</span>
+    </div>
+
+    <!-- 区域 B：配比双卡（data-reveal=3.5，依次 reveal，同屏累积） -->
+    <div class="tut-region ratio-cards" data-reveal="3.5" data-reveal-dir="top">
+      <div class="ratio-card">
+        <span class="ratio-num grad-gold" data-count-to="40" data-count-at="3.5">0</span>
+        <span class="ratio-pct grad-gold">%</span>
+        <div class="ratio-label">时间写代码</div>
+      </div>
+      <div class="ratio-card">
+        <span class="ratio-num grad-gold" data-count-to="60" data-count-at="4.5">0</span>
+        <span class="ratio-pct grad-gold">%</span>
+        <div class="ratio-label">时间面向客户</div>
+      </div>
+    </div>
+
+    <!-- 区域 C：口径标注 2（data-reveal=9，第二组数据的严谨说明） -->
+    <div class="tut-region ratio-caveat-bot" data-reveal="9" data-reveal-dir="fade">
+      <span class="caveat-pill">经验刻画 · 非精确统计</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="layer-cinema">
+  <!-- 教程类克制，无 cinema 后处理签名 -->
+</div>

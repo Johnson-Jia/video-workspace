@@ -5,7 +5,7 @@
 每天用 AI 把 GitHub 上最火的项目变成 45 秒短视频。
 
 <!-- STATS -->
-**102 天 · 204 条视频 · 7 个系列 · 全自动**
+**103 天 · 206 条视频 · 7 个系列 · 全自动**
 <!-- /STATS -->
 
 数据驱动 · 开源解读 · 行业趋势
@@ -63,19 +63,19 @@
 
 | 日期 | 作品 |
 |:---|:---|
+| 8月24日 | [GitHub 每日热门](2026/08/24/github-trending/) |
 | 8月23日 | [GitHub 每日热门](2026/08/23/github-trending/) |
 | 8月22日 | [GitHub 每日热门](2026/08/22/github-trending/) |
 | 8月20日 | [GitHub 每日热门](2026/08/20/github-trending/) |
 | 8月19日 | [GitHub 每日热门](2026/08/19/github-trending/) |
-| 8月18日 | [GitHub 每日热门](2026/08/18/github-trending/) |
 
 ### 周度汇总 · Weekly
 
 | 日期 | 作品 |
 |:---|:---|
+| 8月24日 | [GitHub 周度热门汇总](2026/08/24/github-trending-weekly/) |
 | 8月17日 | [GitHub 周度热门汇总](2026/08/17/github-trending-weekly/) |
 | 8月10日 | [GitHub 周度热门汇总](2026/08/10/github-trending-weekly/) |
-| 8月3日 | [GitHub 周度热门汇总](2026/08/03/github-trending-weekly/) |
 
 ### 深度解析
 
@@ -87,7 +87,7 @@
 | 8月5日 | [低代码生死局：70/30 里的唯一活路](2026/08/05/lowcode-landscape/) |
 | 7月21日 | [Kimi K3：2.8万亿参数开源](2026/07/21/kimi-k3/) |
 
-> 查看 [`2026/`](2026/) 目录浏览全部 204 条视频。
+> 查看 [`2026/`](2026/) 目录浏览全部 206 条视频。
 <!-- END RECENT -->
 
 ---
